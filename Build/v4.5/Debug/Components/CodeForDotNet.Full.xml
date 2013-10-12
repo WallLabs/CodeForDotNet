@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CodeForDotNet.Full</name>
+    </assembly>
+    <members>
+        <member name="T:CodeForDotNet.Full.Net.NetworkExtensions">
+            <summary>
+            Networking extensions.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Full.Net.NetworkExtensions.GetFullHostName">
+            <summary>
+            Gets the hostname and any domain (the FQDN) of the local computer.
+            </summary>
+        </member>
+    </members>
+</doc>
