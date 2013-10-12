@@ -28,9 +28,9 @@ if %errorlevel% neq 0 goto error
 
 echo.
 echo Copying components...
-robocopy "%~dp0CodeForDotNet\bin\%ConfigurationName%" "%~dp0%ConfigurationName%\Components" *.dll *.xml
+robocopy "%~dp0CodeForDotNet\bin\%ConfigurationName%" "%~dp0%ConfigurationName%\Components" *.dll *.xml /xf *CodeAnalysisLog.xml
 if %errorlevel% gtr 7 goto error
-robocopy "%~dp0CodeForDotNet.Full\bin\%ConfigurationName%" "%~dp0%ConfigurationName%\Components" *.dll *.xml
+robocopy "%~dp0CodeForDotNet.Full\bin\%ConfigurationName%" "%~dp0%ConfigurationName%\Components" *.dll *.xml /xf *CodeAnalysisLog.xml
 if %errorlevel% gtr 7 goto error
 
 echo.
