@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{32956BD0-6695-47DF-9D51-0CB6603E8467}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Code for Windows Release Notes.rtf = Dependencies\Code for Windows Release Notes.rtf
+		Dependencies\Update.cmd = Dependencies\Update.cmd
+		Dependencies\Version.psm1 = Dependencies\Version.psm1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7402DBF0-5BFC-4201-94A5-3C232A5B3B32}"
+	ProjectSection(SolutionItems) = preProject
+		Build.cmd = Build.cmd
+		Code for .NET.snk = Code for .NET.snk
+		Release.cmd = Release.cmd
+		Version.cmd = Version.cmd
+		Version.ps1 = Version.ps1
+		Version.txt = Version.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeForDotNet", "CodeForDotNet\CodeForDotNet.csproj", "{3E6BBB03-D73E-48B3-9428-10B5102C2812}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeForDotNet.Full", "CodeForDotNet.Full\CodeForDotNet.Full.csproj", "{BCBC63BA-73FA-4ACD-8B2D-846BE2FFF48C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{C1C112AF-6EC9-409D-802D-E11F9FEA32FF}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Code for .NET Release Notes.rtf = Documentation\Code for .NET Release Notes.rtf
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs28
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = CodeForDotNet\\CodeForDotNet.csproj
+		SccProjectName1 = CodeForDotNet
+		SccLocalPath1 = CodeForDotNet
+		SccProjectUniqueName2 = CodeForDotNet.Full\\CodeForDotNet.Full.csproj
+		SccProjectName2 = CodeForDotNet.Full
+		SccLocalPath2 = CodeForDotNet.Full
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E6BBB03-D73E-48B3-9428-10B5102C2812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E6BBB03-D73E-48B3-9428-10B5102C2812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E6BBB03-D73E-48B3-9428-10B5102C2812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E6BBB03-D73E-48B3-9428-10B5102C2812}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCBC63BA-73FA-4ACD-8B2D-846BE2FFF48C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCBC63BA-73FA-4ACD-8B2D-846BE2FFF48C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCBC63BA-73FA-4ACD-8B2D-846BE2FFF48C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCBC63BA-73FA-4ACD-8B2D-846BE2FFF48C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
