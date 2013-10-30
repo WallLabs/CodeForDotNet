@@ -1,10 +1,11 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Resources;
 
 // Information
-[assembly: AssemblyTitle("CodeForDotNet.Full")]
-[assembly: AssemblyDescription("Shared components and definitions for applciations and services running on the full framework.")]
+[assembly: AssemblyTitle("CodeForDotNet.Tests")]
+[assembly: AssemblyDescription("Unit tests (XUnit).")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Code Chief")]
 [assembly: AssemblyProduct("Code for .NET")]
@@ -14,11 +15,14 @@ using System.Runtime.InteropServices;
 
 // COM Interop
 [assembly: ComVisible(false)]
-[assembly: Guid("2515a74f-5634-4e1e-8022-8a5476b25cf2")]
+[assembly: Guid("c6d881e5-73cd-411f-8ce1-4f4ed2fe1eb1")]
 
 // Version
 [assembly: AssemblyVersion("4.51.1310.30004")]
 [assembly: AssemblyFileVersion("4.51.1310.30004")]
+
+// Resources
+[assembly: NeutralResourcesLanguageAttribute("en-US")]
 
 // Language Compliance
 [assembly: CLSCompliant(true)]
