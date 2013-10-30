@@ -13,11 +13,6 @@ tfpt scorch "%~dp0..\..\..\..\CodeForWindows\Build\v1" /recursive /diff /nopromp
 if %errorlevel% gtr 1 goto error
 
 echo.
-echo Checking out dependencies...
-tf checkout "%~dp0" /recursive
-if %errorlevel% gtr 1 goto error
-
-echo.
 echo Copying dependencies...
 robocopy "%~dp0..\..\..\..\CodeForWindows\Build\v1\Release\Documentation" "%~dp0." "*Release Notes*"
 if %errorlevel% gtr 7 goto error
