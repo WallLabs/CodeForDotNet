@@ -32,12 +32,8 @@ if %errorlevel% neq 0 goto error
 echo.
 echo Delete old build directory so that old or renamed items are cleaned
 if not exist "%~dp0..\..\Build\v4.51" goto TargetClean
-tf delete "%~dp0..\..\Build\v4.51" /recursive
-if %errorlevel% gtr 1 goto error
 rmdir "%~dp0..\..\Build\v4.51" /s /q
 if %errorlevel% neq 0 goto error
-tf checkin "%~dp0..\..\Build\v4.51" /recursive /noprompt
-if %errorlevel% gtr 1 goto error
 :TargetClean
 
 echo.
