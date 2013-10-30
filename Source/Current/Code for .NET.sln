@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.20827.3
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{32956BD0-6695-47DF-9D51-0CB6603E8467}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Build.cmd = Build.cmd
 		Code for .NET.snk = Code for .NET.snk
 		Release.cmd = Release.cmd
+		Test.runsettings = Test.runsettings
 		Version.cmd = Version.cmd
 		Version.ps1 = Version.ps1
 		Version.txt = Version.txt
@@ -29,9 +30,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		Documentation\Code for .NET Release Notes.rtf = Documentation\Code for .NET Release Notes.rtf
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeForDotNet.Tests", "CodeForDotNet.Tests\CodeForDotNet.Tests.csproj", "{37891F4B-71D9-40C2-ADB7-37AB5701B2FA}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs28
 		SccLocalPath0 = .
@@ -41,6 +44,9 @@ Global
 		SccProjectUniqueName2 = CodeForDotNet.Full\\CodeForDotNet.Full.csproj
 		SccProjectName2 = CodeForDotNet.Full
 		SccLocalPath2 = CodeForDotNet.Full
+		SccProjectUniqueName3 = CodeForDotNet.Tests\\CodeForDotNet.Tests.csproj
+		SccProjectName3 = CodeForDotNet.Tests
+		SccLocalPath3 = CodeForDotNet.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +61,10 @@ Global
 		{BCBC63BA-73FA-4ACD-8B2D-846BE2FFF48C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCBC63BA-73FA-4ACD-8B2D-846BE2FFF48C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCBC63BA-73FA-4ACD-8B2D-846BE2FFF48C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37891F4B-71D9-40C2-ADB7-37AB5701B2FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37891F4B-71D9-40C2-ADB7-37AB5701B2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37891F4B-71D9-40C2-ADB7-37AB5701B2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37891F4B-71D9-40C2-ADB7-37AB5701B2FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
