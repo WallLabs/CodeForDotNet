@@ -438,14 +438,26 @@
             Converts the number to a string of the specified base.
             </summary>
         </member>
+        <member name="M:CodeForDotNet.Numerics.Number.Parse(System.String,System.Int32)">
+            <summary>
+            Converts a string to a signed <see cref="T:CodeForDotNet.Numerics.Number"/> of the specified base.
+            </summary>
+            <exception cref="T:System.FormatException">Thrown when conversion is not possible because the string value has an invalid format.</exception>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.Parse(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Converts a string to a signed or unsigned <see cref="T:CodeForDotNet.Numerics.Number"/> of the specified base.
+            </summary>
+            <exception cref="T:System.FormatException">Thrown when conversion is not possible because the string value has an invalid format.</exception>
+        </member>
         <member name="M:CodeForDotNet.Numerics.Number.TryParse(System.String,System.Int32,CodeForDotNet.Numerics.Number@)">
             <summary>
-            Converts a string to a number of the specified base.
+            Attempts conversion of a string to a signed <see cref="T:CodeForDotNet.Numerics.Number"/> of the specified base.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.TryParse(System.String,System.Int32,CodeForDotNet.Numerics.Number@,System.Boolean)">
             <summary>
-            Converts a string to a number of the specified base.
+            Attempts conversion of a string to a signed or unsigned <see cref="T:CodeForDotNet.Numerics.Number"/> of the specified base.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.Absolute(CodeForDotNet.Numerics.Number)">
@@ -535,6 +547,32 @@
         <member name="M:CodeForDotNet.Numerics.NumberExtensions.ToString(System.UInt64,System.Int32,System.Int32)">
             <summary>
             Converts the number to a string of the specified base.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.NumberParseFormatErrorSigned">
+            <summary>
+              Looks up a localized string similar to Cannot convert &quot;{0}&quot; to a signed number of base {1}..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.NumberParseFormatErrorUnsigned">
+            <summary>
+              Looks up a localized string similar to Cannot convert &quot;{0}&quot; to an unsigned number of base {1}..
             </summary>
         </member>
     </members>
