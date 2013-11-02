@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using CodeForDotNet.Properties;
 
 namespace CodeForDotNet.Numerics
 {
@@ -1324,7 +1326,7 @@ namespace CodeForDotNet.Numerics
         /// </returns>
         public Number ToSigned(bool extend)
         {
-            // Return save value (copy) when already signed
+            // Return same value (copy) when already signed
             if (Signed)
                 return this;
 
@@ -1504,7 +1506,35 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Converts a string to a number of the specified base.
+        /// Converts a string to a signed <see cref="Number"/> of the specified base.
+        /// </summary>
+        /// <exception cref="FormatException">Thrown when conversion is not possible because the string value has an invalid format.</exception>
+        public static Number Parse(string value, int numberBase)
+        {
+            return Parse(value, numberBase, true);
+        }
+
+        /// <summary>
+        /// Converts a string to a signed or unsigned <see cref="Number"/> of the specified base.
+        /// </summary>
+        /// <exception cref="FormatException">Thrown when conversion is not possible because the string value has an invalid format.</exception>
+        public static Number Parse(string value, int numberBase, bool signed)
+        {
+            // Parse number and return when successful
+            Number result;
+            if (TryParse(value, numberBase, out result, signed)) 
+                return result;
+
+            // Throw detailed error message when failed
+            var message = String.Format(CultureInfo.CurrentCulture, signed
+                ? Resources.NumberParseFormatErrorSigned
+                : Resources.NumberParseFormatErrorUnsigned,
+                value, numberBase);
+            throw new FormatException(message);
+        }
+
+        /// <summary>
+        /// Attempts conversion of a string to a signed <see cref="Number"/> of the specified base.
         /// </summary>
         public static bool TryParse(string value, int numberBase, out Number result)
         {
@@ -1512,7 +1542,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Converts a string to a number of the specified base.
+        /// Attempts conversion of a string to a signed or unsigned <see cref="Number"/> of the specified base.
         /// </summary>
         public static bool TryParse(string value, int numberBase, out Number result, bool signed)
         {
@@ -1569,10 +1599,6 @@ namespace CodeForDotNet.Numerics
                     return false;
                 var digitValue = (byte)digitValueIndex;
 
-                // Strip sign bit off first bit based value
-                //if (bitBased && signed)
-                //    digitValue &= 0x7F;
-
                 // Append to result
                 var digitPower = lastDigitIndex - valueIndex;
                 if (bitBased)
@@ -1603,10 +1629,6 @@ namespace CodeForDotNet.Numerics
                         result += digitNumber;
                 }
             }
-
-            // Negate number when negative
-            //if (negative)
-            //    result = Negate(result);
 
             // Return result
             if (bitBased)
