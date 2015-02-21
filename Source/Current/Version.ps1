@@ -31,6 +31,7 @@ Set-VersionFile -File $versionFilePath -Version $newVersion
 Set-VersionInAssemblyInfo -File ($scriptDirectory + "\CodeForDotNet\Properties\AssemblyInfo.cs") -Version $newVersion
 Set-VersionInAssemblyInfo -File ($scriptDirectory + "\CodeForDotNet.Full\Properties\AssemblyInfo.cs") -Version $newVersion
 Set-VersionInAssemblyInfo -File ($scriptDirectory + "\CodeForDotNet.Tests\Properties\AssemblyInfo.cs") -Version $newVersion
+Set-VersionInAssemblyInfo -File ($scriptDirectory + "\CodeForDotNet.Windows\Properties\AssemblyInfo.cs") -Version $newVersion
 
 # Exit successful
 exit 0
