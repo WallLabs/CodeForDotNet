@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{32956BD0-6695-47DF-9D51-0CB6603E8467}"
 	ProjectSection(SolutionItems) = preProject
 		Dependencies\Code for Windows Release Notes.rtf = Dependencies\Code for Windows Release Notes.rtf
+		Dependencies\Interop.Wia.dll = Dependencies\Interop.Wia.dll
+		Dependencies\Interop.Wia.ScanProfiles.dll = Dependencies\Interop.Wia.ScanProfiles.dll
+		Dependencies\Interop.Wia.Video.dll = Dependencies\Interop.Wia.Video.dll
+		Dependencies\MakeInterop.cmd = Dependencies\MakeInterop.cmd
 		Dependencies\Update.cmd = Dependencies\Update.cmd
 		Dependencies\Version.psm1 = Dependencies\Version.psm1
 	EndProjectSection
@@ -14,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Build.cmd = Build.cmd
 		Code for .NET.snk = Code for .NET.snk
+		Dictionary.xml = Dictionary.xml
 		Release.cmd = Release.cmd
 		Test.runsettings = Test.runsettings
 		Version.cmd = Version.cmd
@@ -39,9 +44,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{FF46A5
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeForDotNet.Windows", "CodeForDotNet.Windows\CodeForDotNet.Windows.csproj", "{B4ACB503-D195-4789-8926-D6ABD07E9CCD}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs28
 		SccLocalPath0 = .
@@ -54,6 +61,9 @@ Global
 		SccProjectUniqueName3 = CodeForDotNet.Tests\\CodeForDotNet.Tests.csproj
 		SccProjectName3 = CodeForDotNet.Tests
 		SccLocalPath3 = CodeForDotNet.Tests
+		SccProjectUniqueName4 = CodeForDotNet.Windows\\CodeForDotNet.Windows.csproj
+		SccProjectName4 = CodeForDotNet.Windows
+		SccLocalPath4 = CodeForDotNet.Windows
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +82,10 @@ Global
 		{37891F4B-71D9-40C2-ADB7-37AB5701B2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37891F4B-71D9-40C2-ADB7-37AB5701B2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37891F4B-71D9-40C2-ADB7-37AB5701B2FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4ACB503-D195-4789-8926-D6ABD07E9CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4ACB503-D195-4789-8926-D6ABD07E9CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4ACB503-D195-4789-8926-D6ABD07E9CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4ACB503-D195-4789-8926-D6ABD07E9CCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
