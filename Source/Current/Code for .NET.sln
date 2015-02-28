@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{32956BD0-6695-47DF-9D51-0CB6603E8467}"
 	ProjectSection(SolutionItems) = preProject
 		Dependencies\Code for Windows Release Notes.rtf = Dependencies\Code for Windows Release Notes.rtf
+		Dependencies\CodeForWindows.Version.txt = Dependencies\CodeForWindows.Version.txt
 		Dependencies\Interop.Wia.dll = Dependencies\Interop.Wia.dll
 		Dependencies\Interop.Wia.ScanProfiles.dll = Dependencies\Interop.Wia.ScanProfiles.dll
 		Dependencies\Interop.Wia.Video.dll = Dependencies\Interop.Wia.Video.dll
