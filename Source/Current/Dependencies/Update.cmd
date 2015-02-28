@@ -18,6 +18,8 @@ robocopy "%~dp0..\..\..\..\CodeForWindows\Build\v1\Release\Documentation" "%~dp0
 if %errorlevel% gtr 7 goto error
 robocopy "%~dp0..\..\..\..\CodeForWindows\Build\v1\Release\PowerShell" "%~dp0." Version.psm1
 if %errorlevel% gtr 7 goto error
+robocopy "%~dp0..\..\..\..\CodeForWindows\Build\v1\Release\Version" "%~dp0." *.Version.txt
+if %errorlevel% gtr 7 goto error
 attrib "%~dp0*" -r /s
 if %errorlevel% neq 0 goto error
 

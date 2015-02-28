@@ -18,8 +18,8 @@ using System.Resources;
 [assembly: Guid("c6d881e5-73cd-411f-8ce1-4f4ed2fe1eb1")]
 
 // Version
-[assembly: AssemblyVersion("4.51.1412.9000")]
-[assembly: AssemblyFileVersion("4.51.1412.9000")]
+[assembly: AssemblyVersion("4.51.1502.28003")]
+[assembly: AssemblyFileVersion("4.51.1502.28003")]
 
 // Resources
 [assembly: NeutralResourcesLanguageAttribute("en-US")]
