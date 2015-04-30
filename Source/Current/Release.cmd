@@ -10,11 +10,11 @@ echo.
 echo Update source (and delete extra files)...
 tf undo "%~dp0..\..\Build\v4.51" /recursive /noprompt
 if %errorlevel% gtr 1 goto error
-tfpt scorch "%~dp0..\..\Build\v4.51" /recursive /diff /noprompt
+tf scorch "%~dp0..\..\Build\v4.51" /recursive /diff /noprompt
 if %errorlevel% gtr 1 goto error
 tf get "%~dp0" /recursive /noprompt
 if %errorlevel% gtr 1 goto error
-tfpt scorch "%~dp0" /recursive /diff /noprompt
+tf scorch "%~dp0" /recursive /diff /noprompt
 if %errorlevel% gtr 1 goto error
 
 echo.

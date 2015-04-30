@@ -14,8 +14,8 @@ using System.Reflection;
 [assembly: NeutralResourcesLanguage("en")]
 
 // Version
-[assembly: AssemblyVersion("4.51.1502.28003")]
-[assembly: AssemblyFileVersion("4.51.1502.28003")]
+[assembly: AssemblyVersion("4.51.1504.30005")]
+[assembly: AssemblyFileVersion("4.51.1504.30005")]
 
 // Language Compliance
 [assembly: CLSCompliant(true)]
