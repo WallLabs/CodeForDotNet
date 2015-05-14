@@ -7,13 +7,13 @@ namespace CodeForDotNet.Tests
     /// <summary>
     /// Tests the numerics classes and extension.
     /// </summary>
-    public class NumericsTests
+    public static class NumericsFacts
     {
         /// <summary>
         /// Tests the various <see cref="Number"/> constructors.
         /// </summary>
         [Fact]
-        public void NumberTestConstructors()
+        public static void NumberTestConstructors()
         {
             // Default constructor
             var number = new Number();
@@ -233,7 +233,7 @@ namespace CodeForDotNet.Tests
         /// Tests the <see cref="Number.CompareTo"/> method.
         /// </summary>
         [Fact]
-        public void NumberTestCompareTo()
+        public static void NumberTestCompareTo()
         {
             // Test positive and negative ones and zeros
             Assert.Equal(0, Number.Zero.CompareTo(Number.Zero));
@@ -287,7 +287,7 @@ namespace CodeForDotNet.Tests
         /// Tests the <see cref="Number"/> comparison operators (&gt; &gt;= == &lt;= &lt;).
         /// </summary>
         [Fact]
-        public void NumberTestComparisonOperators()
+        public static void NumberTestComparisonOperators()
         {
             // Avoid warning of constant result
             var otherZero = Number.Zero;
@@ -322,7 +322,7 @@ namespace CodeForDotNet.Tests
         /// Tests the <see cref="Number"/> signed and unsigned effects.
         /// </summary>
         [Fact]
-        public void NumberTestSign()
+        public static void NumberTestSign()
         {
             // Test comparison of signed and unsigned
             var signedMin = new Number(new byte[] { 0xff, 0xff, 0xff, 0xff }, true);
@@ -335,7 +335,7 @@ namespace CodeForDotNet.Tests
         /// Tests the <see cref="Number.Negate"/> method and operator.
         /// </summary>
         [Fact]
-        public void NumberTestNegate()
+        public static void NumberTestNegate()
         {
             // Test negate
             var one = new Number(1);
@@ -356,7 +356,7 @@ namespace CodeForDotNet.Tests
         /// Tests the <see cref="Number.Add"/> method and operator.
         /// </summary>
         [Fact]
-        public void NumberTestAdd()
+        public static void NumberTestAdd()
         {
             // Test simple addition
             var one = (Number)1;
@@ -409,7 +409,7 @@ namespace CodeForDotNet.Tests
         /// Tests the <see cref="Number.Subtract"/> method and operator.
         /// </summary>
         [Fact]
-        public void NumberTestSubtract()
+        public static void NumberTestSubtract()
         {
             // Test simple subtraction
             var two = (Number)2;
@@ -466,7 +466,7 @@ namespace CodeForDotNet.Tests
         /// Tests the <see cref="Number.Multiply"/> method and operator.
         /// </summary>
         [Fact]
-        public void NumberTestMultiply()
+        public static void NumberTestMultiply()
         {
             // Test simple multiplication
             var zero = Number.Zero;
@@ -503,7 +503,7 @@ namespace CodeForDotNet.Tests
         /// Tests the <see cref="Number.Divide(Number, Number, out Number)"/> method and operator.
         /// </summary>
         [Fact]
-        public void NumberTestDivide()
+        public static void NumberTestDivide()
         {
             // Test simple division
             var zero = Number.Zero;
@@ -534,7 +534,7 @@ namespace CodeForDotNet.Tests
         /// Tests the <see cref="Number.Power"/> method.
         /// </summary>
         [Fact]
-        public void NumberTestPower()
+        public static void NumberTestPower()
         {
             Assert.Equal(0, Number.Power(1, 0));
             Assert.Equal(1, Number.Power(1, 1));
@@ -560,7 +560,7 @@ namespace CodeForDotNet.Tests
         /// Tests the <see cref="Number.LeftShift"/> method and operator.
         /// </summary>
         [Fact]
-        public void NumberTestLeftShift()
+        public static void NumberTestLeftShift()
         {
             Assert.Equal(0xffffffff, new Number(0xffffffff) << 0);
             Assert.Equal(0x01fffffffe, new Number(0xffffffff) << 1);
@@ -589,7 +589,7 @@ namespace CodeForDotNet.Tests
         /// Tests the <see cref="Number.RightShift"/> method and operator.
         /// </summary>
         [Fact]
-        public void NumberTestRightShift()
+        public static void NumberTestRightShift()
         {
             Assert.Equal(0xffffffff, new Number(0xffffffff) >> 0);
             Assert.Equal(0x7fffffff, new Number(0xffffffff) >> 1);
@@ -620,7 +620,7 @@ namespace CodeForDotNet.Tests
         /// Tests the conversion to and from strings of different bases.
         /// </summary>
         [Fact]
-        public void NumberTestConvertStringAndBase()
+        public static void NumberTestConvertStringAndBase()
         {
             // Test big integers (positive, negative and unsigned)
             Number number = 255;

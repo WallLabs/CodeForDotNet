@@ -98,6 +98,21 @@ namespace CodeForDotNet.Windows.Imaging
             return wiaImageFile != null ? new WiaImageFile(wiaImageFile) : null;
         }
 
+        /// <summary>
+        /// Displays a dialog box that enables the user to select a hardware device for image acquisition.
+        /// </summary>
+        /// <param name="deviceType">Device type.</param>
+        /// <param name="alwaysSelect">Option to always show the select device dialog box</param>
+        /// <param name="required">Option to generate an error if the user cancels the dialog box.</param>
+        /// <returns>Selected <see cref="WiaDevice"/> or null when no selection made.</returns>
+        public WiaDevice ShowSelectDevice(WiaDeviceType deviceType, bool alwaysSelect, bool required)
+        {
+            var wiaDevice = _wiaCommonDialog.ShowSelectDevice(
+                (Interop.Wia.WiaDeviceType)(int)deviceType,
+                alwaysSelect, required);
+            return wiaDevice != null ? new WiaDevice(wiaDevice) : null;
+        }
+
         #endregion
     }
 }

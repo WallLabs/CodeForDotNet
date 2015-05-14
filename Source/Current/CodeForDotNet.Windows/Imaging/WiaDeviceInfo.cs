@@ -1,11 +1,13 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
     /// Encapsulates a <see cref="Interop.Wia.DeviceInfo"/> in managed code.
     /// </summary>
-    public class WiaDeviceInfo
+    public class WiaDeviceInfo : IDisposable
     {
         #region Lifetime
 
@@ -16,6 +18,54 @@ namespace CodeForDotNet.Windows.Imaging
         {
             _wiaDeviceInfo = deviceInfo;
         }
+
+        #region IDisposable
+
+        /// <summary>
+        /// Calls dispose during finalization (if it has not been called already).
+        /// </summary>
+        ~WiaDeviceInfo()
+        {
+            Dispose(false);
+        }
+
+        /// <summary>
+        /// Proactively frees resources.
+        /// </summary>
+        public void Dispose()
+        {
+            // Dispose
+            Dispose(true);
+
+            // Suppress finalization (it is no longer necessary)
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Frees resources.
+        /// </summary>
+        /// <param name="disposing">
+        /// True when called from <see cref="Dispose()"/>, 
+        /// false when called during finalization.</param>
+        void Dispose(bool disposing)
+        {
+            try
+            {
+                // Dispose managed resources
+                if (disposing)
+                {
+                    if (_properties != null) _properties.Dispose();
+                }
+            }
+            finally
+            {
+                // Dispose unmanaged resources
+                if (_wiaDeviceInfo != null)
+                    Marshal.ReleaseComObject(_wiaDeviceInfo);
+            }
+        }
+
+        #endregion
 
         #endregion
 

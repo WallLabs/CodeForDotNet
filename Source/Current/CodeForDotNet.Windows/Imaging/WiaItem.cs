@@ -48,8 +48,22 @@ namespace CodeForDotNet.Windows.Imaging
         /// false when called during finalization.</param>
         void Dispose(bool disposing)
         {
-            // Dispose unmanaged resources
-            Marshal.ReleaseComObject(_wiaItem);
+            try
+            {
+                // Dispose managed resources
+                if (disposing)
+                {
+                    if (_properties != null) _properties.Dispose();
+                    if (_formats != null) _formats.Dispose();
+                    if (_commands != null) _commands.Dispose();
+                }
+            }
+            finally
+            {
+                // Dispose unmanaged resources
+                if (_wiaItem != null)
+                    Marshal.ReleaseComObject(_wiaItem);
+            }
         }
 
         #endregion

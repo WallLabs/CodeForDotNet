@@ -75,8 +75,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Facts\WiaFacts.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="NumericsTests.cs" />
+    <Compile Include="Facts\NumericsFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +87,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CodeForDotNet.Full\CodeForDotNet.Full.csproj">
+      <Project>{bcbc63ba-73fa-4acd-8b2d-846be2fff48c}</Project>
+      <Name>CodeForDotNet.Full</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeForDotNet.Windows\CodeForDotNet.Windows.csproj">
+      <Project>{b4acb503-d195-4789-8926-d6abd07e9ccd}</Project>
+      <Name>CodeForDotNet.Windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CodeForDotNet\CodeForDotNet.csproj">
       <Project>{3e6bbb03-d73e-48b3-9428-10b5102c2812}</Project>
       <Name>CodeForDotNet</Name>
@@ -93,6 +102,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\Dictionary.xml">
+      <Link>Dictionary.xml</Link>
+    </CodeAnalysisDictionary>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
