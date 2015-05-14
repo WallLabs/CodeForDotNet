@@ -1,243 +1,86 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
     /// Managed <see cref="Interop.Wia.DeviceEvents"/>.
     /// </summary>
-    public class WiaDeviceEventCollection : ICollection<WiaDeviceEvent>
+    public class WiaDeviceEventCollection : Collection<WiaDeviceEvent>, IDisposable
     {
         #region Lifetime
+
+        /// <summary>
+        /// Creates an empty instance.
+        /// </summary>
+        public WiaDeviceEventCollection()
+        {
+        }
 
         /// <summary>
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
-        internal WiaDeviceEventCollection(Interop.Wia.DeviceEvents deviceEvents)
-        {
-            _wiaDeviceEvents = deviceEvents;
-        }
-
-        #endregion
-
-        #region Private Fields
-
-        /// <summary>
-        /// Unmanaged <see cref="Interop.Wia.DeviceEvents"/>.
-        /// </summary>
-        readonly Interop.Wia.DeviceEvents _wiaDeviceEvents;
-
-        #endregion
-
-        #region ICollection Members
-
-        /// <summary>
-        /// Indicates whether this list is read-only.
-        /// Returns true because WIA device events cannot be added (they are provided by the driver).
-        /// </summary>
-        public bool IsReadOnly { get { return true; } }
-
-        /// <summary>
-        /// Not implemented, this collection is read-only.
-        /// </summary>
-        public void Add(WiaDeviceEvent item)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Not implemented, this collection is read-only.
-        /// </summary>
-        public void Clear()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Checks if the member exists.
-        /// </summary>
-        public bool Contains(WiaDeviceEvent item)
-        {
-            // Search all items (1 based array)
-            using (var enumerator = GetEnumerator())
-            {
-                while (enumerator.MoveNext())
-                {
-                    if (enumerator.Current == item)
-                        return true;
-                }
-
-                // Not found
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Copies items from this collection to an array.
-        /// </summary>
-        /// <param name="array">Target array.</param>
-        /// <param name="arrayIndex">Target zero based index.</param>
-        public void CopyTo(WiaDeviceEvent[] array, int arrayIndex)
+        [CLSCompliant(false)]
+        public WiaDeviceEventCollection(Interop.Wia.DeviceEvents interopCollection)
         {
             // Validate
-            if (array == null) throw new ArgumentNullException("array");
+            if (interopCollection == null) throw new ArgumentNullException("interopCollection");
 
-            // Copy
-            for (int i = 1; i <= _wiaDeviceEvents.Count; i++)
-            {
-                object item = _wiaDeviceEvents[i];
-                array.SetValue(item, arrayIndex + i - 1);
-            }
+            // Add unmanaged collection items with managed wrappers
+            foreach (Interop.Wia.DeviceEvent interopItem in interopCollection)
+                Add(new WiaDeviceEvent(interopItem));
         }
-
-        /// <summary>
-        /// Not implemented, this collection is read-only.
-        /// </summary>
-        public bool Remove(WiaDeviceEvent item)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Number of items in the collection.
-        /// </summary>
-        public int Count { get { return _wiaDeviceEvents.Count; } }
-
-        /// <summary>
-        /// Indicates that the collection is synchronized (thread safe).
-        /// </summary>
-        public bool IsSynchronized { get { return true; } }
-
-        /// <summary>
-        /// Thread synchronization object.
-        /// </summary>
-        public object SyncRoot { get { return _syncRoot; } }
-        static readonly object _syncRoot = new object();
-
-        #endregion
-
-        #region IEnumerable Members
-
-        /// <summary>
-        /// Gets an enumerator for this collection.
-        /// </summary>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        /// <summary>
-        /// Gets an enumerator for this collection.
-        /// </summary>
-        public IEnumerator<WiaDeviceEvent> GetEnumerator()
-        {
-            return new WiaDeviceEventEnumerator(_wiaDeviceEvents.GetEnumerator());
-        }
-
-        #endregion
-    }
-
-    /// <summary>
-    /// Managed enumerator for <see cref="Interop.Wia.DeviceEvent" /> items.
-    /// </summary>
-    public class WiaDeviceEventEnumerator : IEnumerator<WiaDeviceEvent>
-    {
-        #region Lifetime
-
-        /// <summary>
-        /// Creates the object.
-        /// </summary>
-        public WiaDeviceEventEnumerator(IEnumerator deviceEventEnumerator)
-        {
-            _wiaDeviceEventEnumerator = deviceEventEnumerator;
-        }
-
+ 
         #region IDisposable
 
         /// <summary>
-        /// Disposes unmanaged resources during finalization.
+        /// Calls dispose during finalization (if it has not been called already).
         /// </summary>
-        ~WiaDeviceEventEnumerator()
+        ~WiaDeviceEventCollection()
         {
-            // Unmanaged only dispose
             Dispose(false);
         }
 
         /// <summary>
-        /// Proactively frees resources owned by this object.
+        /// Proactively frees resources.
         /// </summary>
         public void Dispose()
         {
+            // Dispose
+            Dispose(true);
+
+            // Suppress finalization (it is no longer necessary)
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Frees resources.
+        /// </summary>
+        /// <param name="disposing">
+        /// True when called from <see cref="Dispose()"/>, 
+        /// false when called during finalization.</param>
+        void Dispose(bool disposing)
+        {
             try
             {
-                // Full managed dispose
-                Dispose(true);
+                // Dispose managed resources
+                if (disposing)
+                {
+                    foreach (var item in Items)
+                        item.Dispose();
+                }
             }
             finally
             {
-                // Suppress finalization as no longer necessary
-                GC.SuppressFinalize(this);
+                // Release references to aid garbage collection
+                Clear();
             }
         }
 
-        /// <summary>
-        /// Frees resources owned by this object.
-        /// </summary>
-        /// <param name="disposing">True when called via <see cref="Dispose()"/>.</param>
-        void Dispose(bool disposing)
-        {
-            // Nothing to release
-        }
-
         #endregion
-
-        #endregion
-
-        #region Private Fields
-
-        /// <summary>
-        /// WIA property enumerator.
-        /// </summary>
-        readonly IEnumerator _wiaDeviceEventEnumerator;
-
-        #endregion
-
-        #region IEnumerator Members
-
-        /// <summary>
-        /// Item at the current position.
-        /// </summary>
-        object IEnumerator.Current { get { return Current; } }
-
-        /// <summary>
-        /// Item at the current position.
-        /// </summary>
-        public WiaDeviceEvent Current
-        {
-            get
-            {
-                var property = (Interop.Wia.DeviceEvent)_wiaDeviceEventEnumerator.Current;
-                return new WiaDeviceEvent(property);
-            }
-        }
-
-        /// <summary>
-        /// Moves to the next item if available.
-        /// </summary>
-        /// <returns>True when moved, false when no more items exist.</returns>
-        public bool MoveNext()
-        {
-            return _wiaDeviceEventEnumerator.MoveNext();
-        }
-
-        /// <summary>
-        /// Moves to the beginning of the collection.
-        /// </summary>
-        public void Reset()
-        {
-            _wiaDeviceEventEnumerator.Reset();
-        }
 
         #endregion
     }

@@ -52,9 +52,20 @@ namespace CodeForDotNet.Windows.Imaging
         /// <param name="disposing">True when called via <see cref="Dispose()"/>.</param>
         void Dispose(bool disposing)
         {
-            // Dispose unmanaged resources
-            if (_wiaImageFile != null)
-                Marshal.ReleaseComObject(_wiaImageFile);
+            try
+            {
+                // Dispose managed resources
+                if (disposing)
+                {
+                    if (_properties != null) _properties.Dispose();
+                }
+            }
+            finally
+            {
+                // Dispose unmanaged resources
+                if (_wiaImageFile != null)
+                    Marshal.ReleaseComObject(_wiaImageFile);
+            }
         }
 
         #endregion

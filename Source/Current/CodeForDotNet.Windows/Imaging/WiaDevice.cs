@@ -48,8 +48,23 @@ namespace CodeForDotNet.Windows.Imaging
         /// false when called during finalization.</param>
         private void Dispose(bool disposing)
         {
-            // Dispose unmanaged resources
-            Marshal.ReleaseComObject(_wiaDevice);
+            try
+            {
+                // Dispose managed resources
+                if (disposing)
+                {
+                    if (_item != null) _item.Dispose();
+                    if (_items != null) _items.Dispose();
+                    if (_properties != null) _properties.Dispose();
+                    if (_events != null) _events.Dispose();
+                    if (_commands != null) _commands.Dispose();
+                }
+            }
+            finally
+            {
+                // Dispose unmanaged resources
+                Marshal.ReleaseComObject(_wiaDevice);
+            }
         }
 
         #endregion
@@ -178,7 +193,25 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Item.
         /// </summary>
-        public object Item { get { return _wiaDevice.WiaItem; } }
+        public WiaItem Item 
+        {
+            get
+            {
+                // Create wrapper first time
+                if (_item == null)
+                {
+                    lock (_syncRoot)
+                    {
+                        if (_item == null)
+                            _item = new WiaItem((Interop.Wia.Item)_wiaDevice.WiaItem);
+                    }
+                }
+
+                // Return wrapped value
+                return _item;
+            }
+        }        
+        private WiaItem _item;
 
         #endregion
 
