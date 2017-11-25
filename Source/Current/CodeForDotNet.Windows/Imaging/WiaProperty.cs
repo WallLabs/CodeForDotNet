@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Interop.Wia;
+using System;
 using System.Runtime.InteropServices;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="Interop.Wia.Property"/>.
+    /// Managed <see cref="Property"/>.
     /// </summary>
     public class WiaProperty : IDisposable
     {
@@ -13,7 +14,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
-        internal WiaProperty(Interop.Wia.Property property)
+        internal WiaProperty(Property property)
         {
             _wiaProperty = property;
         }
@@ -44,7 +45,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// Frees resources.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>, 
+        /// True when called from <see cref="Dispose()"/>,
         /// false when called during finalization.</param>
         private void Dispose(bool disposing)
         {
@@ -59,9 +60,9 @@ namespace CodeForDotNet.Windows.Imaging
         #region Private Fields
 
         /// <summary>
-        /// Unmanaged <see cref="Interop.Wia.Property"/>.
+        /// Unmanaged <see cref="Property"/>.
         /// </summary>
-        readonly Interop.Wia.Property _wiaProperty;
+        readonly Property _wiaProperty;
 
         #endregion
 

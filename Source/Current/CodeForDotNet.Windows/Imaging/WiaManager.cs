@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using Interop.Wia;
+using System;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace CodeForDotNet.Windows.Imaging
 {
@@ -70,7 +67,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// WIA device manager.
         /// </summary>
-        Interop.Wia.DeviceManager _wiaManager;
+        DeviceManager _wiaManager;
 
         #endregion
 

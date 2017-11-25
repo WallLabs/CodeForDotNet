@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Interop.Wia;
+using System;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="Interop.Wia.Formats"/>.
+    /// Managed <see cref="Formats"/>.
     /// </summary>
     public class WiaFormatCollection : Collection<object>, IDisposable
     {
@@ -33,7 +32,7 @@ namespace CodeForDotNet.Windows.Imaging
             foreach (object interopItem in interopCollection)
                 Add(interopItem);
         }
- 
+
         #region IDisposable
 
         /// <summary>
@@ -60,7 +59,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// Frees resources.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>, 
+        /// True when called from <see cref="Dispose()"/>,
         /// false when called during finalization.</param>
         void Dispose(bool disposing)
         {

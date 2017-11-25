@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interop.Wia;
+using System;
 using System.Runtime.InteropServices;
 
 namespace CodeForDotNet.Windows.Imaging
@@ -13,7 +14,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
-        internal WiaImageFile(Interop.Wia.ImageFile vector)
+        internal WiaImageFile(ImageFile vector)
         {
             _wiaImageFile = vector;
         }
@@ -75,9 +76,9 @@ namespace CodeForDotNet.Windows.Imaging
         #region Private Fields
 
         /// <summary>
-        /// Unmanaged <see cref="Interop.Wia.ImageFile"/>.
+        /// Unmanaged <see cref="ImageFile"/>.
         /// </summary>
-        readonly Interop.Wia.ImageFile _wiaImageFile;
+        readonly ImageFile _wiaImageFile;
 
         #endregion
 

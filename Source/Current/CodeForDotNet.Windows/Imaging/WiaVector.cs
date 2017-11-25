@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Interop.Wia;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -6,7 +7,7 @@ using System.Runtime.InteropServices;
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="Interop.Wia.Vector"/>.
+    /// Managed <see cref="Vector"/>.
     /// </summary>
     public class WiaVector : IList
     {
@@ -15,7 +16,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
-        internal WiaVector(Interop.Wia.Vector vector)
+        internal WiaVector(Vector vector)
         {
             _wiaVector = vector;
         }
@@ -25,9 +26,9 @@ namespace CodeForDotNet.Windows.Imaging
         #region Private Fields
 
         /// <summary>
-        /// Unmanaged <see cref="Interop.Wia.Vector"/>.
+        /// Unmanaged <see cref="Vector"/>.
         /// </summary>
-        readonly Interop.Wia.Vector _wiaVector;
+        readonly Vector _wiaVector;
 
         #endregion
 
@@ -103,7 +104,7 @@ namespace CodeForDotNet.Windows.Imaging
         }
 
         /// <summary>
-        /// Gets the data as unicode string.
+        /// Gets the data as Unicode string.
         /// </summary>
         /// <returns>String value.</returns>
         public string GetString()
@@ -114,7 +115,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Gets the data as string.
         /// </summary>
-        /// <param name="unicode">True when the string bytes are unicode.</param>
+        /// <param name="unicode">True when the string bytes are Unicode.</param>
         /// <returns>String value.</returns>
         public string GetString(bool unicode)
         {
@@ -122,7 +123,7 @@ namespace CodeForDotNet.Windows.Imaging
         }
 
         /// <summary>
-        /// Sets the data from a string as resizable unicode.
+        /// Sets the data from a string as re-sizable Unicode.
         /// </summary>
         /// <param name="value">String value.</param>
         public void SetString(string value)
@@ -135,7 +136,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// </summary>
         /// <param name="value">String value.</param>
         /// <param name="resizable">True if the string buffer can be re-sized.</param>
-        /// <param name="unicode">True when the string requires unicode.</param>
+        /// <param name="unicode">True when the string requires Unicode.</param>
         public void SetString(string value, bool resizable, bool unicode)
         {
             _wiaVector.SetFromString(value, resizable, unicode);
@@ -219,7 +220,7 @@ namespace CodeForDotNet.Windows.Imaging
 
         /// <summary>
         /// Indicates whether this list is read-only.
-        /// Returns false because WIA vectors are writeable.
+        /// Returns false because WIA vectors are writable.
         /// </summary>
         public bool IsReadOnly { get { return false; } }
 
@@ -341,7 +342,7 @@ namespace CodeForDotNet.Windows.Imaging
     }
 
     /// <summary>
-    /// Managed enumerator for <see cref="Interop.Wia.Vector" /> items.
+    /// Managed enumerator for <see cref="Vector" /> items.
     /// </summary>
     public class WiaVectorEnumerator : IEnumerator<WiaVector>
     {
@@ -420,7 +421,7 @@ namespace CodeForDotNet.Windows.Imaging
         {
             get
             {
-                var vector = (Interop.Wia.Vector)_wiaVectorEnumerator.Current;
+                var vector = (Vector)_wiaVectorEnumerator.Current;
                 return new WiaVector(vector);
             }
         }

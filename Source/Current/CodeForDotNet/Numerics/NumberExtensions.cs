@@ -26,7 +26,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Converts the number to a string of the specified base.
         /// </summary>
-        [CLSCompliant(false)]
         public static string ToString(this ulong value, int numberBase)
         {
             return ToString(value, numberBase, 0);
@@ -35,7 +34,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Converts the number to a string of the specified base.
         /// </summary>
-        [CLSCompliant(false)]
         public static string ToString(this ulong value, int numberBase, int minWidth)
         {
             return ((Number)value).ToString(numberBase, minWidth);

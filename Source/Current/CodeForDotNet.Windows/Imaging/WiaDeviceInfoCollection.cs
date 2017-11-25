@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Interop.Wia;
+using System;
 using System.Collections.ObjectModel;
-using System.Runtime.InteropServices;
-using System.Threading;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="Interop.Wia.DeviceInfos"/>.
+    /// Managed <see cref="DeviceInfos"/>.
     /// </summary>
     public class WiaDeviceInfoCollection : Collection<WiaDeviceInfo>, IDisposable
     {
@@ -25,16 +22,16 @@ namespace CodeForDotNet.Windows.Imaging
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
         [CLSCompliant(false)]
-        public WiaDeviceInfoCollection(Interop.Wia.DeviceInfos interopCollection)
+        public WiaDeviceInfoCollection(DeviceInfos interopCollection)
         {
             // Validate
             if (interopCollection == null) throw new ArgumentNullException("interopCollection");
 
             // Add unmanaged collection items with managed wrappers
-            foreach (Interop.Wia.DeviceInfo interopItem in interopCollection)
+            foreach (DeviceInfo interopItem in interopCollection)
                 Add(new WiaDeviceInfo(interopItem));
         }
- 
+
         #region IDisposable
 
         /// <summary>
@@ -61,7 +58,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// Frees resources.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>, 
+        /// True when called from <see cref="Dispose()"/>,
         /// false when called during finalization.</param>
         void Dispose(bool disposing)
         {

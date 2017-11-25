@@ -1,7 +1,7 @@
 ﻿namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="Interop.Wia.WiaImageIntent"/>.
+    /// Managed <see cref="WiaImageIntent"/>.
     /// </summary>
     public enum WiaImageIntent
     {

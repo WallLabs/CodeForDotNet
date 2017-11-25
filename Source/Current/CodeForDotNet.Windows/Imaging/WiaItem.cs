@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Interop.Wia;
+using System;
 using System.Runtime.InteropServices;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Encapsulates a <see cref="Interop.Wia.Item"/> in managed code.
+    /// Encapsulates a <see cref="Item"/> in managed code.
     /// </summary>
     public class WiaItem : IDisposable
     {
@@ -13,7 +14,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
-        internal WiaItem(Interop.Wia.Item item)
+        internal WiaItem(Item item)
         {
             _wiaItem = item;
         }
@@ -44,7 +45,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// Frees resources.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>, 
+        /// True when called from <see cref="Dispose()"/>,
         /// false when called during finalization.</param>
         void Dispose(bool disposing)
         {
@@ -73,9 +74,9 @@ namespace CodeForDotNet.Windows.Imaging
         #region Private Fields
 
         /// <summary>
-        /// Unmanaged <see cref="Interop.Wia.Item"/>.
+        /// Unmanaged <see cref="Item"/>.
         /// </summary>
-        readonly Interop.Wia.Item _wiaItem;
+        readonly Item _wiaItem;
 
         #endregion
 

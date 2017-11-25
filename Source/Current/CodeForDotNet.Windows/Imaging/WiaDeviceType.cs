@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace CodeForDotNet.Windows.Imaging
+﻿namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="Interop.Wia.WiaDeviceType"/>
+    /// Managed <see cref="WiaDeviceType"/>
     /// </summary>
     public enum WiaDeviceType
     {

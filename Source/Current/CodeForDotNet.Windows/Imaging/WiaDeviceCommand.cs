@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Interop.Wia;
+using System;
 using System.Runtime.InteropServices;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="Interop.Wia.DeviceCommand"/>.
+    /// Managed <see cref="DeviceCommand"/>.
     /// </summary>
     public class WiaDeviceCommand : IDisposable
     {
@@ -13,7 +14,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
-        internal WiaDeviceCommand(Interop.Wia.DeviceCommand deviceCommand)
+        internal WiaDeviceCommand(DeviceCommand deviceCommand)
         {
             _wiaDeviceCommand = deviceCommand;
         }
@@ -44,7 +45,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// Frees resources.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>, 
+        /// True when called from <see cref="Dispose()"/>,
         /// false when called during finalization.</param>
         void Dispose(bool disposing)
         {
@@ -59,9 +60,9 @@ namespace CodeForDotNet.Windows.Imaging
         #region Private Fields
 
         /// <summary>
-        /// Unmanaged <see cref="Interop.Wia.DeviceCommand"/>.
+        /// Unmanaged <see cref="DeviceCommand"/>.
         /// </summary>
-        readonly Interop.Wia.DeviceCommand _wiaDeviceCommand;
+        readonly DeviceCommand _wiaDeviceCommand;
 
         #endregion
 

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Interop.Wia;
+using System;
 using System.Runtime.InteropServices;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Encapsulates a <see cref="Interop.Wia.Device"/> in managed code.
+    /// Encapsulates a <see cref="Device"/> in managed code.
     /// </summary>
     public class WiaDevice : IDisposable
     {
@@ -13,7 +14,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
-        internal WiaDevice(Interop.Wia.Device device)
+        internal WiaDevice(Device device)
         {
             _wiaDevice = device;
         }
@@ -44,7 +45,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// Frees resources.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>, 
+        /// True when called from <see cref="Dispose()"/>,
         /// false when called during finalization.</param>
         private void Dispose(bool disposing)
         {
@@ -74,9 +75,9 @@ namespace CodeForDotNet.Windows.Imaging
         #region Private Fields
 
         /// <summary>
-        /// Unmanaged <see cref="Interop.Wia.Device"/>.
+        /// Unmanaged <see cref="Device"/>.
         /// </summary>
-        readonly Interop.Wia.Device _wiaDevice;
+        readonly Device _wiaDevice;
 
         #endregion
 
@@ -193,7 +194,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Item.
         /// </summary>
-        public WiaItem Item 
+        public WiaItem Item
         {
             get
             {
@@ -203,14 +204,14 @@ namespace CodeForDotNet.Windows.Imaging
                     lock (_syncRoot)
                     {
                         if (_item == null)
-                            _item = new WiaItem((Interop.Wia.Item)_wiaDevice.WiaItem);
+                            _item = new WiaItem((Item)_wiaDevice.WiaItem);
                     }
                 }
 
                 // Return wrapped value
                 return _item;
             }
-        }        
+        }
         private WiaItem _item;
 
         #endregion

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Interop.Wia;
+using System;
 using System.Runtime.InteropServices;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Encapsulates a <see cref="Interop.Wia.CommonDialog"/> in managed code.
+    /// Encapsulates a <see cref="CommonDialog"/> in managed code.
     /// </summary>
     public class WiaCommonDialog : IDisposable
     {
@@ -15,7 +16,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// </summary>
         public WiaCommonDialog()
         {
-            _wiaCommonDialog = new Interop.Wia.CommonDialog();
+            _wiaCommonDialog = new CommonDialog();
         }
 
         #region IDisposable
@@ -44,7 +45,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// Frees resources.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>, 
+        /// True when called from <see cref="Dispose()"/>,
         /// false when called during finalization.</param>
         private void Dispose(bool disposing)
         {
@@ -59,9 +60,9 @@ namespace CodeForDotNet.Windows.Imaging
         #region Private Fields
 
         /// <summary>
-        /// Unmanaged <see cref="Interop.Wia.CommonDialog"/>.
+        /// Unmanaged <see cref="CommonDialog"/>.
         /// </summary>
-        readonly Interop.Wia.CommonDialog _wiaCommonDialog;
+        readonly CommonDialog _wiaCommonDialog;
 
         #endregion
 
@@ -70,7 +71,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Shows the common "Acquire Image" dialog to acquire an image.
         /// </summary>
-        /// <returns>Image file or null when cancelled.</returns>
+        /// <returns>Image file or null when canceled.</returns>
         public WiaImageFile ShowAcquireImage()
         {
             // Call overloaded method with defaults
@@ -86,8 +87,8 @@ namespace CodeForDotNet.Windows.Imaging
         /// <param name="formatId">Image format ID.</param>
         /// <param name="alwaysSelectDevice">Always prompt to select device.</param>
         /// <param name="useCommonUI">Use common UI.</param>
-        /// <param name="cancelError">Generate error if cancelled.</param>
-        /// <returns>Image file or null when cancelled.</returns>
+        /// <param name="cancelError">Generate error if canceled.</param>
+        /// <returns>Image file or null when canceled.</returns>
         public WiaImageFile ShowAcquireImage(WiaDeviceType deviceType, WiaImageIntent intent, WiaImageBias bias, string formatId, bool alwaysSelectDevice, bool useCommonUI, bool cancelError)
         {
             var wiaImageFile = _wiaCommonDialog.ShowAcquireImage(

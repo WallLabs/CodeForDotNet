@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="Interop.Wia.WiaImageBias"/>.
+    /// Managed <see cref="WiaImageBias"/>.
     /// </summary>
     public enum WiaImageBias
     {
