@@ -2,6 +2,8 @@
 /.vs/
 bin/
 obj/
+/Debug/
+/Release/
 /packages/
 /TestResults/
 *.user
