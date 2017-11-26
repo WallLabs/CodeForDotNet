@@ -4,6 +4,480 @@
         <name>CodeForDotNet.Windows</name>
     </assembly>
     <members>
+        <member name="T:CodeForDotNet.Install.ConfigurationFileInstaller">
+            <summary>
+            Processes configuration files upon installation.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.ConfigurationFileInstaller.#ctor">
+            <summary>
+            Creates the object.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.ConfigurationFileInstaller.ConditionArgument">
+            <summary>
+            Condition required to activate this feature.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.ConfigurationFileInstaller.FileNames">
+            <summary>
+            FileNames to process, relative to the installing assembly path.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.ConfigurationFileInstaller.Variables">
+            <summary>
+            Variables to replace.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.ConfigurationFileInstaller.DeleteAtUninstall">
+            <summary>
+            Indicates whether to delete the files at uninstall.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.ConfigurationFileInstaller.ExpandVariables">
+            <summary>
+            Expands all environment variables in the files. Occurs at the last step so any replacements made by Variables will also be expanded if they are set to %variables%.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.ConfigurationFileInstaller.GetAllParameters">
+            <summary>
+            Checks all installers in the stack for the specified parameter.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.ConfigurationFileInstaller.GetParameterValue(System.String)">
+            <summary>
+            Checks all installers in the stack for the specified parameter.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.ConfigurationFileInstaller.IsParameterTrue(System.String)">
+            <summary>
+            Checks all installers in the stack for the specified parameter and checks it's boolean value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.ConfigurationFileInstaller.Install(System.Collections.IDictionary)">
+            <summary>
+            Installs the component.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.ConfigurationFileInstaller.Uninstall(System.Collections.IDictionary)">
+            <summary>
+            Uninstalls the component.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Install.ConfigurationFileInstaller.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.ConfigurationFileInstaller.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CodeForDotNet.Install.ConfigurationFileInstaller.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Install.DesktopShortcutInstaller">
+            <summary>
+            Generates native images on assemblies and their assemblyList during setup to decrease start-up times and increase performance.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Install.DesktopShortcutInstaller.ShortcutFileExtension">
+            <summary>
+            Shell shortcut file extension including dot.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.DesktopShortcutInstaller.#ctor">
+            <summary>
+            Creates the component.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.DesktopShortcutInstaller.TargetDirectory">
+            <summary>
+            Target path for the desktop shortcut.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.DesktopShortcutInstaller.ConditionArgument">
+            <summary>
+            Condition required to activate the feature.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.DesktopShortcutInstaller.ShortcutName">
+            <summary>
+            Name for the desktop shortcut.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.DesktopShortcutInstaller.ShortcutDescription">
+            <summary>
+            Description for the desktop shortcut.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.DesktopShortcutInstaller.ShortcutPath">
+            <summary>
+            Path for the desktop shortcut. Use %AssemblyDir% for the setup target folder. %AllUsersDesktop%, %CurrentUserDesktop%, %AllUsersPrograms%, %CurrentUserPrograms%, %MyDocuments%, or any other environment variable.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.DesktopShortcutInstaller.ShortcutArguments">
+            <summary>
+            Arguments for the desktop shortcut.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.DesktopShortcutInstaller.ShortcutWorkingDirectory">
+            <summary>
+            Working directory for the desktop shortcut.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.DesktopShortcutInstaller.ShortcutShowCommand">
+            <summary>
+            Window show style for the desktop shortcut.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.DesktopShortcutInstaller.IsParameterTrue(System.String)">
+            <summary>
+            Checks all installers in the stack for the specified parameter.
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CodeForDotNet.Install.DesktopShortcutInstaller.Install(System.Collections.IDictionary)">
+            <summary>
+            Installs the component.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.DesktopShortcutInstaller.Uninstall(System.Collections.IDictionary)">
+            <summary>
+            Uninstalls the component.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.DesktopShortcutInstaller.ExpandVariables(System.String)">
+            <summary>
+            Expands all supported special variables and all user and system environment variables in the input text.
+            </summary>
+            <param name="input">Input text with any variables.</param>
+            <returns>Output text with all supported variables expanded.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Install.DesktopShortcutInstaller.GetSpecialFolderPath(System.Int32)">
+            <summary>
+            Gets the path to a system special folder. If the folder does not exist, it is NOT created.
+            </summary>
+            <param name="nFolder">CSIDL of the special folder.</param>
+            <returns>Path to the special folder, if it exists.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Install.DesktopShortcutInstaller.GetSpecialFolderPath(System.Int32,System.Boolean)">
+            <summary>
+            Gets the path to a system special folder. If the folder does not exist, it can be created (optional).
+            </summary>
+            <param name="nFolder">CSIDL of the special folder.</param>
+            <param name="create">Set true to create the special folder if it does not exist.</param>
+            <returns>Path to the special folder, if it exists.</returns>
+        </member>
+        <member name="F:CodeForDotNet.Install.DesktopShortcutInstaller.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.DesktopShortcutInstaller.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:CodeForDotNet.Install.DesktopShortcutInstaller.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Install.ShowWindowOption">
+            <summary>
+            Options for the ShortcutShowCommand.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Install.ShowWindowOption.None">
+            <summary>
+            None specified.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Install.ShowWindowOption.Default">
+            <summary>
+            Default.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Install.ShowWindowOption.Minimized">
+            <summary>
+            Minimized.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Install.ShowWindowOption.Maximized">
+            <summary>
+            Maximized.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Install.NativeCodeGeneratorInstaller">
+            <summary>
+            Generates native images on assemblies and their assemblyList during setup to decrease start-up times and increase performance.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Install.NativeCodeGeneratorInstaller._components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.#ctor">
+            <summary>
+            Creates the component.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.NativeCodeGeneratorInstaller.ConditionArgument">
+            <summary>
+            Condition required to activate the feature.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Install.NativeCodeGeneratorInstaller.AssemblyList">
+            <summary>
+            List of assemblies referenced by the application, so must should also have native images cached to decrease start-up times and increase performance. Make a list of filenames without path (e.g. MyAssembly.dll).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.IsParameterTrue(System.String)">
+            <summary>
+            Checks all installers in the stack for the specified parameter.
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.Install(System.Collections.IDictionary)">
+            <summary>
+            Installs the component.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.Uninstall(System.Collections.IDictionary)">
+            <summary>
+            Uninstalls the component.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Native.ClipboardHelper">
+            <summary>
+            Provides helper functions for the Windows clipboard.
+            For metafile functions, see source article: http://www.dotnet247.com/247reference/msgs/23/118514.aspx
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.ClipboardHelper.GetMetafileFromClipboard(System.IntPtr)">
+            <summary>
+            Retrieves a .NET <see cref="T:System.Drawing.Imaging.Metafile"/> from the clipboard correctly.
+            </summary>
+            <returns>.NET <see cref="T:System.Drawing.Imaging.Metafile"/> or null when no EMF is on the clipboard.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.ClipboardHelper.PutMetafileOnClipboard(System.IntPtr,System.Drawing.Imaging.Metafile)">
+            <summary>
+            Places a .NET <see cref="T:System.Drawing.Imaging.Metafile"/> onto the clipboard correctly, otherwise it is not visible by other applications
+            due to the new format used in .NET.
+            </summary>
+            <param name="windowHandle">Form.Handle used as owner of Clipboard data.</param>
+            <param name="metafile">.NET <see cref="T:System.Drawing.Imaging.Metafile"/> to copy to clipboard.</param>
+            <returns>TRUE when successful.</returns>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Native.NativeCodeGenerator">
+            <summary>
+            Helper class that executes NGEN on target assemblies.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.NativeCodeGenerator.GetNgenPath">
+            <summary>
+            Gets the path to the .Net Framework.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.NativeCodeGenerator.Install(System.String,System.String@,System.String@)">
+            <summary>
+            Installs the specified assembly into the native image cache, including all dependencies.
+            </summary>
+            <param name="assemblyPath">Fully qualified local file system path to the target assembly.</param>
+            <param name="consoleOutput">Any console output. Use to obtain error text.</param>
+            <param name="assemblyFullName">Assembly FullName which was queued for install into the cache.</param>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.NativeCodeGenerator.Remove(System.String,System.String@)">
+            <summary>
+            Removes an assembly from the cache.
+            </summary>
+            <param name="assemblyName">Assembly name, partial or fully qualified.</param>
+            <param name="consoleOutput">Console output (if any) during execution.</param>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.NativeCodeGenerator.ExecuteProgram(System.String,System.String,System.String,System.Int32,System.String@)">
+            <summary>
+            Executes a program with the specified parameters and working directory, waits for exit and
+            </summary>
+            <param name="programPath">Path of the program to execute.</param>
+            <param name="parameters">Parameters to pass to the program.</param>
+            <param name="workingDirectory">Working directory in which to execute.</param>
+            <param name="timeout">Maximum time to allow the program to execute, before terminating with -1 return code.</param>
+            <param name="consoleOutput">Console output (if any) during execution.</param>
+            <returns>Return code, 0 = success, -1 = timeout or other error, other values are program specific.</returns>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Native.SafeNativeMethods">
+            <summary>
+            Native method calls which are safe to call without a stack walk.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA">
+            <summary>
+            Managed interface to the Windows shell IShellLink COM interface.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetPath(System.Text.StringBuilder,System.Int32,CodeForDotNet.Windows.Native.SafeNativeMethods._WIN32_FIND_DATAW@,System.UInt32)">
+            <summary>
+            Retrieves the path and filename of a shell link object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetIDList(System.IntPtr@)">
+            <summary>
+            Retrieves the list of shell link item identifiers.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetIDList(System.IntPtr)">
+            <summary>
+            Sets the list of shell link item identifiers.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetDescription(System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Retrieves the shell link description string.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetDescription(System.String)">
+            <summary>
+            Sets the shell link description string.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetWorkingDirectory(System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Retrieves the name of the shell link working directory.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetWorkingDirectory(System.String)">
+            <summary>
+            Sets the name of the shell link working directory.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetArguments(System.Text.StringBuilder,System.Int32)">
+            <summary>
+            Retrieves the shell link command-line arguments.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetArguments(System.String)">
+            <summary>
+            Sets the shell link command-line arguments.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetHotkey(System.Int16@)">
+            <summary>
+            Retrieves the shell link hot key.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetHotkey(System.Int16)">
+            <summary>
+            Sets the shell link hot key.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetShowCmd(System.UInt32@)">
+            <summary>
+            Retrieves the shell link show command.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetShowCmd(System.UInt32)">
+            <summary>
+            Sets the shell link show command.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.GetIconLocation(System.Text.StringBuilder,System.Int32,System.Int32@)">
+            <summary>
+            Retrieves the location (path and index) of the shell link icon.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetIconLocation(System.String,System.Int32)">
+            <summary>
+            Sets the location (path and index) of the shell link icon.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetRelativePath(System.String,System.UInt32)">
+            <summary>
+            Sets the shell link relative path.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.Resolve(System.IntPtr,System.UInt32)">
+            <summary>
+            Resolves a shell link. The system searches for the shell link object and updates the shell link path and its list of identifiers (if necessary).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IShellLinkA.SetPath(System.String)">
+            <summary>
+            Sets the shell link path and filename.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Native.SafeNativeMethods.Shortcut">
+            <summary>
+            Managed class to the Windows shell ShellLink COM object class.
+            Provided by: http://www.vbaccelerator.com/home/NET/Code/Libraries/Shell_Projects/Creating_and_Modifying_Shortcuts/article.asp
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile">
+            <summary>
+            Managed interface to the Windows shell IPersistFile COM interface.
+            Provided by: http://www.vbaccelerator.com/home/NET/Code/Libraries/Shell_Projects/Creating_and_Modifying_Shortcuts/article.asp
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.GetClassID(System.Guid@)">
+            <summary>
+            Can't get this to go if I extend IPersist, so put it here.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.IsDirty">
+            <summary>
+            Checks for changes since last file write.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.Load(System.String,System.UInt32)">
+            <summary>
+            Opens the specified file and initializes the object from its contents.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.Save(System.String,System.Boolean)">
+            <summary>
+            Saves the object into the specified file.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.SaveCompleted(System.String)">
+            <summary>
+            Notifies the object that save is completed.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.IPersistFile.GetCurFile(System.String@)">
+            <summary>
+            Gets the current name of the file associated with the object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.Shell32.SHGetSpecialFolderPath(System.IntPtr,System.Text.StringBuilder,System.Int32,System.Boolean)">
+            <summary>
+            BOOL SHGetSpecialFolderPath(          HWND hwndOwner,
+            	LPTSTR lpszPath,
+            	int nFolder,
+            	BOOL fCreate
+            );
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.Windows.Imaging.WiaCommonDialog">
             <summary>
             Encapsulates a <see cref="T:Interop.Wia.CommonDialog"/> in managed code.
@@ -501,7 +975,7 @@
         </member>
         <member name="T:CodeForDotNet.Windows.Imaging.WiaImageBias">
             <summary>
-            Managed <see cref="T:CodeForDotNet.Windows.Imaging.WiaImageBias"/>.
+            Managed <see cref="T:Interop.Wia.WiaImageBias"/>.
             </summary>
         </member>
         <member name="F:CodeForDotNet.Windows.Imaging.WiaImageBias.MinimizeSize">
@@ -695,7 +1169,7 @@
         </member>
         <member name="F:CodeForDotNet.Windows.Imaging.WiaItem._wiaItem">
             <summary>
-            Unmanaged <see cref="P:CodeForDotNet.Windows.Imaging.WiaItem.Item"/>.
+            Unmanaged <see cref="T:Interop.Wia.Item"/>.
             </summary>
         </member>
         <member name="P:CodeForDotNet.Windows.Imaging.WiaItem.SyncRoot">
@@ -913,7 +1387,7 @@
         </member>
         <member name="T:CodeForDotNet.Windows.Imaging.WiaPropertyCollection">
             <summary>
-            Managed <see cref="T:Interop.Wia.Properties"/>.
+            Managed <see cref="N:CodeForDotNet.Windows.Properties"/>.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Windows.Imaging.WiaPropertyCollection.#ctor">
@@ -1080,7 +1554,7 @@
             <summary>
             Inserts a value at the specified index.
             </summary>
-            <param name="index">Index to insert at, zero basd.</param>
+            <param name="index">Index to insert at, zero based.</param>
             <param name="value">Value to insert.</param>
         </member>
         <member name="P:CodeForDotNet.Windows.Imaging.WiaVector.IsFixedSize">
@@ -1198,6 +1672,122 @@
         <member name="M:CodeForDotNet.Windows.Imaging.WiaVectorEnumerator.Reset">
             <summary>
             Moves to the beginning of the collection.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.ErrorComPlusApplicationNameUnconfirmed">
+            <summary>
+              Looks up a localized string similar to COM Application Name {0} was not found after installation..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.ErrorMissingConditionProperty">
+            <summary>
+              Looks up a localized string similar to Please specify a unique {0}.ConditionArgument, it is required to store uninstall information in the saved state..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusCommtitingChanges">
+            <summary>
+              Looks up a localized string similar to Committing changes....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusConfigureComPlusApplication">
+            <summary>
+              Looks up a localized string similar to Configuring COM+ application {0}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusDeletedService">
+            <summary>
+              Looks up a localized string similar to Deleted service..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusDeletingFile">
+            <summary>
+              Looks up a localized string similar to Deleting file {0}.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGacInstallComponent">
+            <summary>
+              Looks up a localized string similar to lnstalling component {0} into the GAC....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGaclnstallDependency">
+            <summary>
+              Looks up a localized string similar to lnstalling dependency {0} into the GAC....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGacRemoveComponent">
+            <summary>
+              Looks up a localized string similar to Removing component {0} from the GAC....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGacRemoveDependency">
+            <summary>
+              Looks up a localized string similar to Removing dependency {0} from the GAC....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusInstall">
+            <summary>
+              Looks up a localized string similar to {0} installer performing install action for condition {1}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusLoadingFile">
+            <summary>
+              Looks up a localized string similar to Loading file {0}.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusMigratingDotNetConfigToLocalManifest">
+            <summary>
+              Looks up a localized string similar to Migrating local .NET application config to COM manifest (application.manifest and application.config)....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusRegisterComPlusComponent">
+            <summary>
+              Looks up a localized string similar to Registering COM+ component {0}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusRemovingComPlusApplication">
+            <summary>
+              Looks up a localized string similar to Removing COM+application {0}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusRemovingComPlusApplicationInstance">
+            <summary>
+              Looks up a localized string similar to Removing COM+ application {0} instance {1}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusShutdownServices">
+            <summary>
+              Looks up a localized string similar to Shutting down services....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusSkippingMissingFile">
+            <summary>
+              Looks up a localized string similar to Skipping missing file {0}.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusUninstall">
+            <summary>
+              Looks up a localized string similar to {0} installer performing uninstall action for condition {1}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusUnregisterComPlusComponent">
+            <summary>
+              Looks up a localized string similar to Unregistering COM+ component {0}....
             </summary>
         </member>
     </members>

@@ -1,6 +1,6 @@
-﻿using Interop.Wia;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
+using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
@@ -22,13 +22,13 @@ namespace CodeForDotNet.Windows.Imaging
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
         [CLSCompliant(false)]
-        public WiaPropertyCollection(Properties interopCollection)
+        public WiaPropertyCollection(Wia.Properties interopCollection)
         {
             // Validate
             if (interopCollection == null) throw new ArgumentNullException("interopCollection");
 
             // Add unmanaged collection items with managed wrappers
-            foreach (Property interopProperty in interopCollection)
+            foreach (Wia.Property interopProperty in interopCollection)
                 Add(new WiaProperty(interopProperty));
         }
 

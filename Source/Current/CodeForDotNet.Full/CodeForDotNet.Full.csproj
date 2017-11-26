@@ -16,6 +16,8 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,11 +48,15 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\Code for .NET.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Common\Code for .NET.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="netstandard" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,16 +64,96 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\AssemblyInfoCore.cs">
+      <Link>Properties\AssemblyInfoCore.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\AssemblyInfoGlobal.cs">
+      <Link>Properties\AssemblyInfoGlobal.cs</Link>
+    </Compile>
+    <Compile Include="ComponentModel\BigIntegerConverter.cs" />
+    <Compile Include="ComponentModel\GenericBindingList.cs" />
+    <Compile Include="ComponentModel\IViewObject.cs" />
+    <Compile Include="ComponentModel\ViewObject.cs" />
+    <Compile Include="ComponentModel\ViewObjectParentChangedEventArgs.cs" />
+    <Compile Include="Configuration\IApplicationSettingsBase.cs" />
+    <Compile Include="Configuration\RegistrySettingsProvider.cs" />
+    <Compile Include="Data\Adapters\ErrorReportDataAdapter.cs" />
+    <Compile Include="Data\Adapters\GuidDataKeyAdapter.cs" />
+    <Compile Include="Data\DataReaderExtensions.cs" />
+    <Compile Include="Data\DataSetChangeLog.cs" />
+    <Compile Include="Data\DataSetExtensions.cs" />
+    <Compile Include="Data\SqlDataAccessLayer.cs" />
+    <Compile Include="Data\SqlExtensions.cs" />
+    <Compile Include="Diagnostics\ActivityIdTraceFilter.cs" />
+    <Compile Include="Diagnostics\FileWriterTraceListener.cs" />
+    <Compile Include="Diagnostics\ProcessExtensions.cs" />
+    <Compile Include="Diagnostics\ProcessResult.cs" />
+    <Compile Include="Drawing\ColorCollection.cs" />
+    <Compile Include="Drawing\ColorExtensions.cs" />
+    <Compile Include="Drawing\ImageExtensions.cs" />
+    <Compile Include="Drawing\LogicalBrush.cs" />
+    <Compile Include="Drawing\LogicalBrushType.cs" />
+    <Compile Include="Drawing\LogicalFont.cs" />
+    <Compile Include="Drawing\PointExtensions.cs" />
+    <Compile Include="Drawing\Printing\PageSettingsData.cs" />
+    <Compile Include="Drawing\Printing\PrinterSettingsData.cs" />
+    <Compile Include="Drawing\Quadrant.cs" />
+    <Compile Include="Drawing\Vector2.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IO\FileExtensions.cs" />
+    <Compile Include="IO\FileExtensionsProgressEventArgs.cs" />
     <Compile Include="Net\NetworkExtensions.cs" />
+    <Compile Include="Numerics\BigIntegerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reflection\AppDomainExtensions.cs" />
+    <Compile Include="Xml\PrivateXPathFunctions.cs" />
+    <Compile Include="Xml\W3cXPathFunctions.cs" />
+    <Compile Include="Xml\XmlAnyDocument.cs" />
+    <Compile Include="Xml\XmlFormatOptions.cs" />
+    <Compile Include="Xml\XmlFullExtensions.cs" />
+    <Compile Include="Xml\XmlSerializerNamespacesExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Code for .NET.snk">
+    <None Include="..\Common\Code for .NET.snk">
       <Link>Code for .NET.snk</Link>
     </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\Common\Dictionary.xml">
+      <Link>Dictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Xml\FormatXmlAnonymous.xslt" />
+    <Content Include="Xml\FormatXmlCopy.xslt" />
+    <Content Include="Xml\FormatXmlTrim.xslt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeForDotNet\CodeForDotNet.csproj">
+      <Project>{3e6bbb03-d73e-48b3-9428-10b5102c2812}</Project>
+      <Name>CodeForDotNet</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -1,9 +1,9 @@
-﻿using Interop.Wia;
+﻿using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="WiaImageBias"/>.
+    /// Managed <see cref="Wia.WiaImageBias"/>.
     /// </summary>
     public enum WiaImageBias
     {

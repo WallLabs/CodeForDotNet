@@ -1,13 +1,13 @@
-﻿using Interop.Wia;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="Vector"/>.
+    /// Managed <see cref="Wia.Vector"/>.
     /// </summary>
     public class WiaVector : IList
     {
@@ -16,7 +16,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
-        internal WiaVector(Vector vector)
+        internal WiaVector(Wia.Vector vector)
         {
             _wiaVector = vector;
         }
@@ -26,9 +26,9 @@ namespace CodeForDotNet.Windows.Imaging
         #region Private Fields
 
         /// <summary>
-        /// Unmanaged <see cref="Vector"/>.
+        /// Unmanaged <see cref="Wia.Vector"/>.
         /// </summary>
-        readonly Vector _wiaVector;
+        readonly Wia.Vector _wiaVector;
 
         #endregion
 
@@ -205,7 +205,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Inserts a value at the specified index.
         /// </summary>
-        /// <param name="index">Index to insert at, zero basd.</param>
+        /// <param name="index">Index to insert at, zero based.</param>
         /// <param name="value">Value to insert.</param>
         public void Insert(int index, object value)
         {
@@ -342,7 +342,7 @@ namespace CodeForDotNet.Windows.Imaging
     }
 
     /// <summary>
-    /// Managed enumerator for <see cref="Vector" /> items.
+    /// Managed enumerator for <see cref="Wia.Vector" /> items.
     /// </summary>
     public class WiaVectorEnumerator : IEnumerator<WiaVector>
     {
@@ -421,7 +421,7 @@ namespace CodeForDotNet.Windows.Imaging
         {
             get
             {
-                var vector = (Vector)_wiaVectorEnumerator.Current;
+                var vector = (Wia.Vector)_wiaVectorEnumerator.Current;
                 return new WiaVector(vector);
             }
         }

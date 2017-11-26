@@ -1,9 +1,9 @@
-﻿using Interop.Wia;
+﻿using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="WiaSubType"/>.
+    /// Managed <see cref="Wia.WiaSubType"/>.
     /// </summary>
     public enum WiaSubtype
     {

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-GB" original="CodeForDotNet.WindowsUniversal._Multilingual.prilog.xml" tool-id="MultilingualAppToolkit" product-name="CodeForDotNet.WindowsUniversal" product-version="Version 1" build-num="1.0.0.0">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="1.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="Resources">
+        <trans-unit id="Resources\ErrorReportDialogCaption" translate="yes" xml:space="preserve">
+          <source>Report Errors</source>
+          <target state="new">Report Errors</target>
+        </trans-unit>
+        <trans-unit id="Resources\ErrorReportDialogDiscardButtonText" translate="yes" xml:space="preserve">
+          <source>Discard</source>
+          <target state="new">Discard</target>
+        </trans-unit>
+        <trans-unit id="Resources\ErrorReportDialogLaterButtonText" translate="yes" xml:space="preserve">
+          <source>Later</source>
+          <target state="new">Later</target>
+        </trans-unit>
+        <trans-unit id="Resources\ErrorReportDialogNowButtonText" translate="yes" xml:space="preserve">
+          <source>Now</source>
+          <target state="new">Now</target>
+        </trans-unit>
+        <trans-unit id="Resources\ErrorReportDialogText" translate="yes" xml:space="preserve">
+          <source>Errors were logged and should be sent to support for attention. Send via email now?</source>
+          <target state="new">Errors were logged and should be sent to support for attention. Send via email now?</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

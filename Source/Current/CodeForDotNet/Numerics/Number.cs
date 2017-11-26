@@ -50,6 +50,7 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Creates a value based on an existing <see cref="SByte"/>.
         /// </summary>
+        [CLSCompliant(false)]
         public Number(sbyte value)
             : this()
         {
@@ -70,6 +71,7 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Creates a value based on an existing <see cref="UInt16"/>.
         /// </summary>
+        [CLSCompliant(false)]
         public Number(ushort value)
             : this()
         {
@@ -90,6 +92,7 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Creates a value based on an existing <see cref="UInt32"/>.
         /// </summary>
+        [CLSCompliant(false)]
         public Number(uint value)
             : this()
         {
@@ -110,6 +113,7 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Creates a value based on an existing <see cref="UInt64"/>.
         /// </summary>
+        [CLSCompliant(false)]
         public Number(ulong value)
             : this()
         {
@@ -382,6 +386,7 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Implicitly converts an (signed) <see cref="SByte"/> to a <see cref="Number"/>.
         /// </summary>
+        [CLSCompliant(false)]
         public static implicit operator Number(sbyte value)
         {
             return new Number(value);
@@ -390,6 +395,7 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Implicitly converts an (unsigned) <see cref="UInt16"/> to a <see cref="Number"/>.
         /// </summary>
+        [CLSCompliant(false)]
         public static implicit operator Number(ushort value)
         {
             return new Number(value);
@@ -406,6 +412,7 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Implicitly converts an (unsigned) <see cref="UInt32"/> to a <see cref="Number"/>.
         /// </summary>
+        [CLSCompliant(false)]
         public static implicit operator Number(uint value)
         {
             return new Number(value);
@@ -422,6 +429,7 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Implicitly converts an (unsigned) <see cref="UInt64"/> to a <see cref="Number"/>.
         /// </summary>
+        [CLSCompliant(false)]
         public static implicit operator Number(ulong value)
         {
             return new Number(value);
@@ -476,6 +484,7 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Explicitly converts a <see cref="Number"/> to a <see cref="SByte"/> (signed).
         /// </summary>
+        [CLSCompliant(false)]
         public static explicit operator sbyte(Number value)
         {
             var byteLength = value.ByteSize;
@@ -503,6 +512,7 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Explicitly converts a <see cref="Number"/> to a <see cref="UInt16"/> (unsigned).
         /// </summary>
+        [CLSCompliant(false)]
         public static explicit operator ushort(Number value)
         {
             var byteLength = value.ByteSize;
@@ -533,6 +543,7 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Explicitly converts a <see cref="Number"/> to a <see cref="UInt32"/> (unsigned).
         /// </summary>
+        [CLSCompliant(false)]
         public static explicit operator uint(Number value)
         {
             var byteLength = value.ByteSize;
@@ -563,6 +574,7 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Explicitly converts a <see cref="Number"/> to a <see cref="UInt64"/> (unsigned).
         /// </summary>
+        [CLSCompliant(false)]
         public static explicit operator ulong(Number value)
         {
             var byteLength = value.ByteSize;

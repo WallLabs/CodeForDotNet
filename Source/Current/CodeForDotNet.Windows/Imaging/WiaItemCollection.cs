@@ -1,11 +1,11 @@
-﻿using Interop.Wia;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
+using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="Items"/>.
+    /// Managed <see cref="Wia.Items"/>.
     /// </summary>
     public class WiaItemCollection : Collection<WiaItem>, IDisposable
     {
@@ -22,13 +22,13 @@ namespace CodeForDotNet.Windows.Imaging
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
         [CLSCompliant(false)]
-        public WiaItemCollection(Items interopCollection)
+        public WiaItemCollection(Wia.Items interopCollection)
         {
             // Validate
             if (interopCollection == null) throw new ArgumentNullException("interopCollection");
 
             // Add unmanaged collection items with managed wrappers
-            foreach (Item interopItem in interopCollection)
+            foreach (Wia.Item interopItem in interopCollection)
                 Add(new WiaItem(interopItem));
         }
 

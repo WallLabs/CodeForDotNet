@@ -1,11 +1,11 @@
-﻿using Interop.Wia;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Encapsulates a <see cref="CommonDialog"/> in managed code.
+    /// Encapsulates a <see cref="Wia.CommonDialog"/> in managed code.
     /// </summary>
     public class WiaCommonDialog : IDisposable
     {
@@ -16,7 +16,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// </summary>
         public WiaCommonDialog()
         {
-            _wiaCommonDialog = new CommonDialog();
+            _wiaCommonDialog = new Wia.CommonDialog();
         }
 
         #region IDisposable
@@ -60,9 +60,9 @@ namespace CodeForDotNet.Windows.Imaging
         #region Private Fields
 
         /// <summary>
-        /// Unmanaged <see cref="CommonDialog"/>.
+        /// Unmanaged <see cref="Wia.CommonDialog"/>.
         /// </summary>
-        readonly CommonDialog _wiaCommonDialog;
+        readonly Wia.CommonDialog _wiaCommonDialog;
 
         #endregion
 

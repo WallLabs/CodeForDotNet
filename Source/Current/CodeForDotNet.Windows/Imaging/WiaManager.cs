@@ -1,6 +1,6 @@
-﻿using Interop.Wia;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
@@ -16,7 +16,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// </summary>
         public WiaManager()
         {
-            _wiaManager = new Interop.Wia.DeviceManager();
+            _wiaManager = new Wia.DeviceManager();
         }
 
         #region IDisposable
@@ -67,7 +67,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// WIA device manager.
         /// </summary>
-        DeviceManager _wiaManager;
+        Wia.DeviceManager _wiaManager;
 
         #endregion
 

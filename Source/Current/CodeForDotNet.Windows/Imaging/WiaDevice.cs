@@ -1,11 +1,11 @@
-﻿using Interop.Wia;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Encapsulates a <see cref="Device"/> in managed code.
+    /// Encapsulates a <see cref="Wia.Device"/> in managed code.
     /// </summary>
     public class WiaDevice : IDisposable
     {
@@ -14,7 +14,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
-        internal WiaDevice(Device device)
+        internal WiaDevice(Wia.Device device)
         {
             _wiaDevice = device;
         }
@@ -75,9 +75,9 @@ namespace CodeForDotNet.Windows.Imaging
         #region Private Fields
 
         /// <summary>
-        /// Unmanaged <see cref="Device"/>.
+        /// Unmanaged <see cref="Wia.Device"/>.
         /// </summary>
-        readonly Device _wiaDevice;
+        readonly Wia.Device _wiaDevice;
 
         #endregion
 
@@ -204,7 +204,7 @@ namespace CodeForDotNet.Windows.Imaging
                     lock (_syncRoot)
                     {
                         if (_item == null)
-                            _item = new WiaItem((Item)_wiaDevice.WiaItem);
+                            _item = new WiaItem((Wia.Item)_wiaDevice.WiaItem);
                     }
                 }
 

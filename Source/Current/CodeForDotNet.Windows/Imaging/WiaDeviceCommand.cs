@@ -1,11 +1,11 @@
-﻿using Interop.Wia;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="DeviceCommand"/>.
+    /// Managed <see cref="Wia.DeviceCommand"/>.
     /// </summary>
     public class WiaDeviceCommand : IDisposable
     {
@@ -14,7 +14,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
-        internal WiaDeviceCommand(DeviceCommand deviceCommand)
+        internal WiaDeviceCommand(Wia.DeviceCommand deviceCommand)
         {
             _wiaDeviceCommand = deviceCommand;
         }
@@ -60,9 +60,9 @@ namespace CodeForDotNet.Windows.Imaging
         #region Private Fields
 
         /// <summary>
-        /// Unmanaged <see cref="DeviceCommand"/>.
+        /// Unmanaged <see cref="Wia.DeviceCommand"/>.
         /// </summary>
-        readonly DeviceCommand _wiaDeviceCommand;
+        readonly Wia.DeviceCommand _wiaDeviceCommand;
 
         #endregion
 

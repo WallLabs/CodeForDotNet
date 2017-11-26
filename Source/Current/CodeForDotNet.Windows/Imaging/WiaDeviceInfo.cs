@@ -1,12 +1,12 @@
-﻿using Interop.Wia;
-using System;
+﻿using System;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Encapsulates a <see cref="DeviceInfo"/> in managed code.
+    /// Encapsulates a <see cref="Wia.DeviceInfo"/> in managed code.
     /// </summary>
     public class WiaDeviceInfo : IDisposable
     {
@@ -15,7 +15,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
-        internal WiaDeviceInfo(DeviceInfo deviceInfo)
+        internal WiaDeviceInfo(Wia.DeviceInfo deviceInfo)
         {
             _wiaDeviceInfo = deviceInfo;
         }
@@ -73,9 +73,9 @@ namespace CodeForDotNet.Windows.Imaging
         #region Private Fields
 
         /// <summary>
-        /// Unmanaged <see cref="DeviceInfo"/>.
+        /// Unmanaged <see cref="Wia.DeviceInfo"/>.
         /// </summary>
-        readonly DeviceInfo _wiaDeviceInfo;
+        readonly Wia.DeviceInfo _wiaDeviceInfo;
 
         #endregion
 

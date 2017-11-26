@@ -1,12 +1,12 @@
-﻿using Interop.Wia;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
+using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="Formats"/>.
+    /// Managed <see cref="Wia.Formats"/>.
     /// </summary>
     public class WiaFormatCollection : Collection<object>, IDisposable
     {
@@ -23,7 +23,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
         [CLSCompliant(false)]
-        public WiaFormatCollection(Interop.Wia.Formats interopCollection)
+        public WiaFormatCollection(Wia.Formats interopCollection)
         {
             // Validate
             if (interopCollection == null) throw new ArgumentNullException("interopCollection");

@@ -104,4 +104,139 @@
   <data name="NumberParseFormatErrorUnsigned" xml:space="preserve">
     <value>Cannot convert "{0}" to an unsigned number of base {1}.</value>
   </data>
+  <data name="AsyncCompleteCalledTwice" xml:space="preserve">
+    <value>Asynchronous operation attempted to complete twice.</value>
+  </data>
+  <data name="AsyncEndCalledTwice" xml:space="preserve">
+    <value>Asynchronous operation already ended.</value>
+  </data>
+  <data name="DataObjectChangePropertyStateInvalid" xml:space="preserve">
+    <value>Cannot change properties of a data object when it's current state is deleted.</value>
+  </data>
+  <data name="DataObjectCreateStateInvalid" xml:space="preserve">
+    <value>Cannot create a data object when it's current state indicates it exists or is pending deletion.</value>
+  </data>
+  <data name="DataObjectDeleteStateInvalid" xml:space="preserve">
+    <value>Cannot delete a data object when it's current state is not current or changed.</value>
+  </data>
+  <data name="DataObjectReadStateInvalid" xml:space="preserve">
+    <value>Cannot read a data object when it's current state is deleted.</value>
+  </data>
+  <data name="DataObjectUpdateStateInvalid" xml:space="preserve">
+    <value>Cannot update a data object when it's current state is not changed.</value>
+  </data>
+  <data name="DaysOfWeekFriday" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="DaysOfWeekMonday" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="DaysOfWeekSaturday" xml:space="preserve">
+    <value>Saturday</value>
+  </data>
+  <data name="DaysOfWeekSunday" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="DaysOfWeekThursday" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="DaysOfWeekTuesday" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="DaysOfWeekWednesday" xml:space="preserve">
+    <value>Wednesday</value>
+  </data>
+  <data name="ScheduleItemCollectionToStringFormat" xml:space="preserve">
+    <value>{0} instance(s); {1}</value>
+    <comment>0 = count, 1 = separated list of item strings.</comment>
+  </data>
+  <data name="ScheduleItemCollectionToStringSeparator" xml:space="preserve">
+    <value>, </value>
+  </data>
+  <data name="ScheduleItemOffsetFirst" xml:space="preserve">
+    <value>first</value>
+  </data>
+  <data name="ScheduleItemOffsetLast" xml:space="preserve">
+    <value>last</value>
+  </data>
+  <data name="ScheduleItemOffsetSecond" xml:space="preserve">
+    <value>second</value>
+  </data>
+  <data name="ScheduleItemOffsetThird" xml:space="preserve">
+    <value>third</value>
+  </data>
+  <data name="ScheduleItemToStringDailyFixedEnd" xml:space="preserve">
+    <value>every {3} day(s) starting on {0:d} at {0:t} for {2} minute(s) until {4} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Interval, 4 = Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringDailyNoEnd" xml:space="preserve">
+    <value>every {3} day(s) starting on {0:d} at {0:t} for {2} minutes</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Interval.</comment>
+  </data>
+  <data name="ScheduleItemToStringDayOfWeekSeparator" xml:space="preserve">
+    <value> or </value>
+  </data>
+  <data name="ScheduleItemToStringHourlyFixedEnd" xml:space="preserve">
+    <value>every {3} hour(s) starting on {0:d} at {0:t} for {2} minute(s) until {4} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Interval, 4= Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringHourlyNoEnd" xml:space="preserve">
+    <value>every {3} hour(s) starting on {0:d} at {0:t} for {2} minute(s)</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Interval.</comment>
+  </data>
+  <data name="ScheduleItemToStringMonthlyDayFixedEnd" xml:space="preserve">
+    <value>every {3} month(s) starting on {0:d} at {0:t} for {2} minute(s) until {4} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration,  3 = Interval, 4 = Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringMonthlyDayNoEnd" xml:space="preserve">
+    <value>every {3} month(s) starting on {0:d} at {0:t} for {2} minute(s)</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Interval.</comment>
+  </data>
+  <data name="ScheduleItemToStringMonthlyOffsetNoEnd" xml:space="preserve">
+    <value>every {4} month(s) on the {3} {0:dddd} starting on {0:d} at {0:t} for {2} minute(s)</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Offset, 4 = Interval.</comment>
+  </data>
+  <data name="ScheduleItemToStringMonthlyOffsetRecurring" xml:space="preserve">
+    <value>every {4} month(s) on the {3} {0:dddd} starting on {0:d} at {0:t} for {2} minute(s) until {5} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration,  3 = Offset, 4 = Interval, 5 = Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringOnce" xml:space="preserve">
+    <value>once on {0:d} at {0:t} for {1} minute(s)</value>
+    <comment>0 = Start, Duration.</comment>
+  </data>
+  <data name="ScheduleItemToStringWeeklyFixedEnd" xml:space="preserve">
+    <value>every {4} week(s) on {3} starting on {0:d} at {0:t} for {2} minute(s) until {5} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration,  3 = DaysOfWeek separated, 4 = Interval, 5 = Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringWeeklyNoEnd" xml:space="preserve">
+    <value>every {4} week(s) on {3} starting on {0:d} at {0:t} for {2} minute(s)</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = DaysOfWeek separated, 4 = Interval.</comment>
+  </data>
+  <data name="ScheduleItemToStringYearlyDayFixedEnd" xml:space="preserve">
+    <value>every {3} year(s) starting on {0:d} at {0:t} for {2} minute(s) until {4} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration,  3 = Interval, 4 = Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringYearlyDayNoEnd" xml:space="preserve">
+    <value>every {3} year(s) starting on {0:d} at {0:t} for {2} minute(s)</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Interval.</comment>
+  </data>
+  <data name="ScheduleItemToStringYearlyOffsetFixedEnd" xml:space="preserve">
+    <value>every {4} year(s) on the {3} {0:dddd} starting on {0:d} at {0:t} for {2} minute(s) until {5} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration,  3 = Offset, 4 = Interval, 5 = Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringYearlyOffsetNoEnd" xml:space="preserve">
+    <value>every {4} year(s) on the {3} {0:dddd} starting on {0:d} at {0:t} for {2} minute(s)</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Offset, 4 = Inteval.</comment>
+  </data>
+  <data name="ScheduleToStringFormatIncludesAndExcludes" xml:space="preserve">
+    <value>Includes {0}. Excludes {1}.</value>
+    <comment>0 = Includes string, 1 = excludes string.</comment>
+  </data>
+  <data name="ScheduleToStringFormatIncludesOnly" xml:space="preserve">
+    <value>Includes {0}.</value>
+    <comment>0 = Includes string.</comment>
+  </data>
+  <data name="ScheduleToStringFormatNone" xml:space="preserve">
+    <value>Never.</value>
+  </data>
 </root>

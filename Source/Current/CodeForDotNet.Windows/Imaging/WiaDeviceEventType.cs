@@ -1,9 +1,9 @@
-﻿using Interop.Wia;
+﻿using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
-    /// Managed <see cref="WiaEventFlag"/>.
+    /// Managed <see cref="Wia.WiaEventFlag"/>.
     /// </summary>
     public enum WiaDeviceEventType
     {

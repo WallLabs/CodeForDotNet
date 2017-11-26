@@ -43,6 +43,8 @@ robocopy "%~dp0CodeForDotNet.Full\bin\%ConfigurationName%" "%~dp0%ConfigurationN
 if %errorlevel% gtr 7 goto Error
 robocopy "%~dp0CodeForDotNet.Windows\bin\%ConfigurationName%" "%~dp0%ConfigurationName%\Components" *.dll *.pdb *.xml /xf *CodeAnalysisLog.xml
 if %errorlevel% gtr 7 goto Error
+robocopy "%~dp0CodeForDotNet.WindowsUniversal\bin\%ConfigurationName%" "%~dp0%ConfigurationName%\Components" *.dll *.pdb *.xml *.pri /xf *CodeAnalysisLog.xml
+if %errorlevel% gtr 7 goto Error
 
 echo.
 echo Copying documentation...
