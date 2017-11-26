@@ -9,7 +9,7 @@ namespace CodeForDotNet.Full.Net
     public static class NetworkExtensions
     {
         /// <summary>
-        /// Gets the hostname and any domain (the FQDN) of the local computer.
+        /// Gets the host name and any domain (the FQDN) of the local computer.
         /// </summary>
         public static string GetFullHostName()
         {

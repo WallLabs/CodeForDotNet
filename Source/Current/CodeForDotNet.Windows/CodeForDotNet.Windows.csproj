@@ -49,17 +49,15 @@
     <AssemblyOriginatorKeyFile>..\Code for .NET.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.Wia">
-      <HintPath>..\Dependencies\Interop.Wia.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+    <Reference Include="Interop.Wia, Version=1.0.0.0, Culture=neutral, PublicKeyToken=36a3da6b7af265ff, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Dependencies\WIA\Interop.Wia.dll</HintPath>
     </Reference>
-    <Reference Include="Interop.Wia.ScanProfiles">
-      <HintPath>..\Dependencies\Interop.Wia.ScanProfiles.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="Interop.Wia.Video">
-      <HintPath>..\Dependencies\Interop.Wia.Video.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+    <Reference Include="Interop.Wia.ScanProfiles, Version=1.0.0.0, Culture=neutral, PublicKeyToken=36a3da6b7af265ff, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Dependencies\WIA\Interop.Wia.ScanProfiles.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

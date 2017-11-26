@@ -7,12 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencie
 	ProjectSection(SolutionItems) = preProject
 		Dependencies\Code for Windows Release Notes.rtf = Dependencies\Code for Windows Release Notes.rtf
 		Dependencies\CodeForWindows.Version.txt = Dependencies\CodeForWindows.Version.txt
-		Dependencies\Interop.Wia.dll = Dependencies\Interop.Wia.dll
-		Dependencies\Interop.Wia.ScanProfiles.dll = Dependencies\Interop.Wia.ScanProfiles.dll
-		Dependencies\Interop.Wia.Video.dll = Dependencies\Interop.Wia.Video.dll
-		Dependencies\MakeInterop.cmd = Dependencies\MakeInterop.cmd
 		Dependencies\Update.cmd = Dependencies\Update.cmd
-		Dependencies\Version.psm1 = Dependencies\Version.psm1
+		Dependencies\Variables.cmd = Dependencies\Variables.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7402DBF0-5BFC-4201-94A5-3C232A5B3B32}"
@@ -41,6 +37,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeForDotNet.Tests", "Code
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeForDotNet.Windows", "CodeForDotNet.Windows\CodeForDotNet.Windows.csproj", "{B4ACB503-D195-4789-8926-D6ABD07E9CCD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PowerShell", "PowerShell", "{8D05AF50-08EE-43CB-8EB1-6C67F0C56FC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeForWindows.PowerShell.VisualStudio", "CodeForWindows.PowerShell.VisualStudio", "{E7C4CC3F-63E2-4A3D-8F8D-FE994429C63C}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\PowerShell\CodeForWindows.PowerShell.VisualStudio\CodeForWindows.PowerShell.VisualStudio.psd1 = Dependencies\PowerShell\CodeForWindows.PowerShell.VisualStudio\CodeForWindows.PowerShell.VisualStudio.psd1
+		Dependencies\PowerShell\CodeForWindows.PowerShell.VisualStudio\CodeForWindows.PowerShell.VisualStudio.Version.psm1 = Dependencies\PowerShell\CodeForWindows.PowerShell.VisualStudio\CodeForWindows.PowerShell.VisualStudio.Version.psm1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WIA", "WIA", "{B2BC6A86-7972-4C44-9AAC-B5B1E3E9724B}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\WIA\Interop.Wia.dll = Dependencies\WIA\Interop.Wia.dll
+		Dependencies\WIA\Interop.Wia.ScanProfiles.dll = Dependencies\WIA\Interop.Wia.ScanProfiles.dll
+		Dependencies\WIA\MakeInterop.cmd = Dependencies\WIA\MakeInterop.cmd
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +77,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8D05AF50-08EE-43CB-8EB1-6C67F0C56FC3} = {32956BD0-6695-47DF-9D51-0CB6603E8467}
+		{E7C4CC3F-63E2-4A3D-8F8D-FE994429C63C} = {8D05AF50-08EE-43CB-8EB1-6C67F0C56FC3}
+		{B2BC6A86-7972-4C44-9AAC-B5B1E3E9724B} = {32956BD0-6695-47DF-9D51-0CB6603E8467}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8EFA9AB-A701-421A-9542-C10FF1F9308F}
