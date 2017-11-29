@@ -166,7 +166,7 @@ namespace CodeForDotNet.Threading
             }
             else
             {
-                // Set completed during asychronous operation
+                // Set completed during asynchronous operation
                 lock (Lock)
                 {
                     IsCompleted = true;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeForDotNet.Properties;
+using System;
 using System.Collections.Generic;
 
 namespace CodeForDotNet
@@ -38,13 +39,13 @@ namespace CodeForDotNet
         public static string[] ToStringArray(this DaysOfWeek days)
         {
             var results = new List<string>();
-            if ((days & DaysOfWeek.Monday) != 0) results.Add(Properties.Resources.DaysOfWeekMonday);
-            if ((days & DaysOfWeek.Tuesday) != 0) results.Add(Properties.Resources.DaysOfWeekTuesday);
-            if ((days & DaysOfWeek.Wednesday) != 0) results.Add(Properties.Resources.DaysOfWeekWednesday);
-            if ((days & DaysOfWeek.Thursday) != 0) results.Add(Properties.Resources.DaysOfWeekThursday);
-            if ((days & DaysOfWeek.Friday) != 0) results.Add(Properties.Resources.DaysOfWeekFriday);
-            if ((days & DaysOfWeek.Saturday) != 0) results.Add(Properties.Resources.DaysOfWeekSaturday);
-            if ((days & DaysOfWeek.Sunday) != 0) results.Add(Properties.Resources.DaysOfWeekSunday);
+            if ((days & DaysOfWeek.Monday) != 0) results.Add(Resources.DaysOfWeekMonday);
+            if ((days & DaysOfWeek.Tuesday) != 0) results.Add(Resources.DaysOfWeekTuesday);
+            if ((days & DaysOfWeek.Wednesday) != 0) results.Add(Resources.DaysOfWeekWednesday);
+            if ((days & DaysOfWeek.Thursday) != 0) results.Add(Resources.DaysOfWeekThursday);
+            if ((days & DaysOfWeek.Friday) != 0) results.Add(Resources.DaysOfWeekFriday);
+            if ((days & DaysOfWeek.Saturday) != 0) results.Add(Resources.DaysOfWeekSaturday);
+            if ((days & DaysOfWeek.Sunday) != 0) results.Add(Resources.DaysOfWeekSunday);
             return results.ToArray();
         }
 

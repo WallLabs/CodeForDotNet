@@ -79,6 +79,69 @@ namespace CodeForDotNet.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scale is only valid for Texture brush types..
+        /// </summary>
+        internal static string BrushScaleOnlyForTextures {
+            get {
+                return ResourceManager.GetString("BrushScaleOnlyForTextures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single color brushes do not have an angle..
+        /// </summary>
+        internal static string BrushSingleColorHasNoAngle {
+            get {
+                return ResourceManager.GetString("BrushSingleColorHasNoAngle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Textures do not have a color setting..
+        /// </summary>
+        internal static string BrushTextureHasNoColor {
+            get {
+                return ResourceManager.GetString("BrushTextureHasNoColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TextureWrapMode property is only valid for Textures!.
+        /// </summary>
+        internal static string BrushTextureWrapModeOnlyForTextures {
+            get {
+                return ResourceManager.GetString("BrushTextureWrapModeOnlyForTextures", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current brush type does not have an End color..
+        /// </summary>
+        internal static string BrushTypeHasNoEndColor {
+            get {
+                return ResourceManager.GetString("BrushTypeHasNoEndColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current brush type does not have a texture..
+        /// </summary>
+        internal static string BrushTypeHasNoTexture {
+            get {
+                return ResourceManager.GetString("BrushTypeHasNoTexture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error creating or opending registry key &quot;{0}&quot;..
+        /// </summary>
+        internal static string CreateOpenRegistryKeyError {
+            get {
+                return ResourceManager.GetString("CreateOpenRegistryKeyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot change properties of a data object when it&apos;s current state is deleted..
         /// </summary>
         internal static string DataObjectChangePropertyStateInvalid {
@@ -187,6 +250,33 @@ namespace CodeForDotNet.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot parse source string to DxDy! Should be #;# format..
+        /// </summary>
+        internal static string DxDyStringInvalid {
+            get {
+                return ResourceManager.GetString("DxDyStringInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copying directory {0}....
+        /// </summary>
+        internal static string FileExtensionsCopyDirectoryCreateDirectory {
+            get {
+                return ResourceManager.GetString("FileExtensionsCopyDirectoryCreateDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copying file {0}....
+        /// </summary>
+        internal static string FileExtensionsCopyDirectoryFile {
+            get {
+                return ResourceManager.GetString("FileExtensionsCopyDirectoryFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot convert &quot;{0}&quot; to a signed number of base {1}..
         /// </summary>
         internal static string NumberParseFormatErrorSigned {
@@ -201,6 +291,15 @@ namespace CodeForDotNet.Properties {
         internal static string NumberParseFormatErrorUnsigned {
             get {
                 return ResourceManager.GetString("NumberParseFormatErrorUnsigned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The property &quot;{0}&quot; is required..
+        /// </summary>
+        internal static string PropertyRequired {
+            get {
+                return ResourceManager.GetString("PropertyRequired", resourceCulture);
             }
         }
         
@@ -426,6 +525,15 @@ namespace CodeForDotNet.Properties {
         internal static string ScheduleToStringFormatNone {
             get {
                 return ResourceManager.GetString("ScheduleToStringFormatNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XML validation error at line {0} character {1}. {2}.
+        /// </summary>
+        internal static string XmlValdiationError {
+            get {
+                return ResourceManager.GetString("XmlValdiationError", resourceCulture);
             }
         }
     }

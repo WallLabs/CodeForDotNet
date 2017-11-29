@@ -117,89 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BrushScaleOnlyForTextures" xml:space="preserve">
-    <value>Scale is only valid for Texture brush types.</value>
-  </data>
-  <data name="BrushSingleColorHasNoAngle" xml:space="preserve">
-    <value>Single color brushes do not have an angle.</value>
-  </data>
-  <data name="BrushTextureHasNoColor" xml:space="preserve">
-    <value>Textures do not have a color setting.</value>
-  </data>
-  <data name="BrushTextureWrapModeOnlyForTextures" xml:space="preserve">
-    <value>TextureWrapMode property is only valid for Textures!</value>
-  </data>
-  <data name="BrushTypeHasNoEndColor" xml:space="preserve">
-    <value>Current brush type does not have an End color.</value>
-  </data>
-  <data name="BrushTypeHasNoTexture" xml:space="preserve">
-    <value>Current brush type does not have a texture.</value>
-  </data>
-  <data name="CreateOpenRegistryKeyError" xml:space="preserve">
-    <value>Error creating or opening registry key "{0}".</value>
-    <comment>0 = registry key.</comment>
-  </data>
-  <data name="DxDyStringInvalid" xml:space="preserve">
-    <value>Cannot parse source string to DxDy! Should be #;# format.</value>
-  </data>
-  <data name="FileExtensionsCopyDirectoryCreateDirectory" xml:space="preserve">
-    <value>Copying directory {0}...</value>
-    <comment>0 = directory name</comment>
-  </data>
-  <data name="FileExtensionsCopyDirectoryFile" xml:space="preserve">
-    <value>Copying file {0}...</value>
-    <comment>0 = file name</comment>
-  </data>
   <data name="PropertyRequired" xml:space="preserve">
     <value>The property "{0}" is required.</value>
     <comment>0 = property name.</comment>
-  </data>
-  <data name="WorkerGroupAbortedWorker" xml:space="preserve">
-    <value>Worker {0} in group {1} was aborted.</value>
-    <comment>0 = worker name, 1 = group name.</comment>
-  </data>
-  <data name="WorkerGroupAborting" xml:space="preserve">
-    <value>Worker group {0} aborted.</value>
-    <comment>0 = group name.</comment>
-  </data>
-  <data name="WorkerGroupAbortingWorker" xml:space="preserve">
-    <value>Aborting worker {0} in group {1}.</value>
-    <comment>0 = worker name, 1 = group name.</comment>
-  </data>
-  <data name="WorkerGroupAlreadyRunning" xml:space="preserve">
-    <value>Worker group "{0}" is already running.</value>
-    <comment>0 = group name.</comment>
-  </data>
-  <data name="WorkerGroupError" xml:space="preserve">
-    <value>Worker {0} ({1}) had an error: {2}.</value>
-    <comment>0 = worker name, 1 = group name; 2 = error.</comment>
-  </data>
-  <data name="WorkerGroupStarting" xml:space="preserve">
-    <value>Starting worker group {0}.</value>
-    <comment>0 = group name.</comment>
-  </data>
-  <data name="WorkerGroupStartingRunTimer" xml:space="preserve">
-    <value>Started run timer for worker {0} of group {1} with timeout of {2} seconds.</value>
-    <comment>0 = worker name, 1 = group name; 2 = timeout.</comment>
-  </data>
-  <data name="WorkerGroupStartingStopTimer" xml:space="preserve">
-    <value>Started stop timer for worker {0} of group {1} with timeout of {2} seconds.</value>
-    <comment>0 = worker name, 1 = group name; 2 = timeout.</comment>
-  </data>
-  <data name="WorkerGroupStartingWorker" xml:space="preserve">
-    <value>Starting worker {0} in group {1}.</value>
-    <comment>0 = worker name, 1 = group name.</comment>
-  </data>
-  <data name="WorkerGroupStopping" xml:space="preserve">
-    <value>Stopping worker group {0}.</value>
-    <comment>0 = group name.</comment>
-  </data>
-  <data name="WorkerGroupStoppingWorker" xml:space="preserve">
-    <value>Stopping worker {0} in group {1}.</value>
-    <comment>0 = worker name, 1 = group name.</comment>
-  </data>
-  <data name="XmlValdiationError" xml:space="preserve">
-    <value>XML validation error at line {0} character {1}. {2}</value>
-    <comment>0 = line number, 1 = character number, 2 = error message.</comment>
   </data>
 </root>

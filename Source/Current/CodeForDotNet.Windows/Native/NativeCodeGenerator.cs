@@ -31,7 +31,7 @@ namespace CodeForDotNet.Windows.Native
         /// <param name="assemblyPath">Fully qualified local file system path to the target assembly.</param>
         /// <param name="consoleOutput">Any console output. Use to obtain error text.</param>
         /// <param name="assemblyFullName">Assembly FullName which was queued for install into the cache.</param>
-        static public bool Install(string assemblyPath, out string consoleOutput, out string assemblyFullName)
+        public static bool Install(string assemblyPath, out string consoleOutput, out string assemblyFullName)
         {
             // Execute NGEN to install the assembly
             var parameters = "install \"" + assemblyPath + "\" /nologo /silent";
@@ -54,7 +54,7 @@ namespace CodeForDotNet.Windows.Native
         /// </summary>
         /// <param name="assemblyName">Assembly name, partial or fully qualified.</param>
         /// <param name="consoleOutput">Console output (if any) during execution.</param>
-        static public bool Remove(string assemblyName, out string consoleOutput)
+        public static bool Remove(string assemblyName, out string consoleOutput)
         {
             // Validate
             if (String.IsNullOrEmpty(assemblyName))

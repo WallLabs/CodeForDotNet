@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeForDotNet.Full.Properties
-{
-
-
+namespace CodeForDotNet.Full.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -61,209 +61,11 @@ namespace CodeForDotNet.Full.Properties
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scale is only valid for Texture brush types..
-        /// </summary>
-        internal static string BrushScaleOnlyForTextures {
-            get {
-                return ResourceManager.GetString("BrushScaleOnlyForTextures", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Single color brushes do not have an angle..
-        /// </summary>
-        internal static string BrushSingleColorHasNoAngle {
-            get {
-                return ResourceManager.GetString("BrushSingleColorHasNoAngle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Textures do not have a color setting..
-        /// </summary>
-        internal static string BrushTextureHasNoColor {
-            get {
-                return ResourceManager.GetString("BrushTextureHasNoColor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to TextureWrapMode property is only valid for Textures!.
-        /// </summary>
-        internal static string BrushTextureWrapModeOnlyForTextures {
-            get {
-                return ResourceManager.GetString("BrushTextureWrapModeOnlyForTextures", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Current brush type does not have an End color..
-        /// </summary>
-        internal static string BrushTypeHasNoEndColor {
-            get {
-                return ResourceManager.GetString("BrushTypeHasNoEndColor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Current brush type does not have a texture..
-        /// </summary>
-        internal static string BrushTypeHasNoTexture {
-            get {
-                return ResourceManager.GetString("BrushTypeHasNoTexture", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error creating or opening registry key &quot;{0}&quot;..
-        /// </summary>
-        internal static string CreateOpenRegistryKeyError {
-            get {
-                return ResourceManager.GetString("CreateOpenRegistryKeyError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot parse source string to DxDy! Should be #;# format..
-        /// </summary>
-        internal static string DxDyStringInvalid {
-            get {
-                return ResourceManager.GetString("DxDyStringInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Copying directory {0}....
-        /// </summary>
-        internal static string FileExtensionsCopyDirectoryCreateDirectory {
-            get {
-                return ResourceManager.GetString("FileExtensionsCopyDirectoryCreateDirectory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Copying file {0}....
-        /// </summary>
-        internal static string FileExtensionsCopyDirectoryFile {
-            get {
-                return ResourceManager.GetString("FileExtensionsCopyDirectoryFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The property &quot;{0}&quot; is required..
         /// </summary>
         internal static string PropertyRequired {
             get {
                 return ResourceManager.GetString("PropertyRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Worker {0} in group {1} was aborted..
-        /// </summary>
-        internal static string WorkerGroupAbortedWorker {
-            get {
-                return ResourceManager.GetString("WorkerGroupAbortedWorker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Worker group {0} aborted..
-        /// </summary>
-        internal static string WorkerGroupAborting {
-            get {
-                return ResourceManager.GetString("WorkerGroupAborting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Aborting worker {0} in group {1}..
-        /// </summary>
-        internal static string WorkerGroupAbortingWorker {
-            get {
-                return ResourceManager.GetString("WorkerGroupAbortingWorker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Worker group &quot;{0}&quot; is already running..
-        /// </summary>
-        internal static string WorkerGroupAlreadyRunning {
-            get {
-                return ResourceManager.GetString("WorkerGroupAlreadyRunning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Worker {0} ({1}) had an error: {2}..
-        /// </summary>
-        internal static string WorkerGroupError {
-            get {
-                return ResourceManager.GetString("WorkerGroupError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Starting worker group {0}..
-        /// </summary>
-        internal static string WorkerGroupStarting {
-            get {
-                return ResourceManager.GetString("WorkerGroupStarting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Started run timer for worker {0} of group {1} with timeout of {2} seconds..
-        /// </summary>
-        internal static string WorkerGroupStartingRunTimer {
-            get {
-                return ResourceManager.GetString("WorkerGroupStartingRunTimer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Started stop timer for worker {0} of group {1} with timeout of {2} seconds..
-        /// </summary>
-        internal static string WorkerGroupStartingStopTimer {
-            get {
-                return ResourceManager.GetString("WorkerGroupStartingStopTimer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Starting worker {0} in group {1}..
-        /// </summary>
-        internal static string WorkerGroupStartingWorker {
-            get {
-                return ResourceManager.GetString("WorkerGroupStartingWorker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Stopping worker group {0}..
-        /// </summary>
-        internal static string WorkerGroupStopping {
-            get {
-                return ResourceManager.GetString("WorkerGroupStopping", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Stopping worker {0} in group {1}..
-        /// </summary>
-        internal static string WorkerGroupStoppingWorker {
-            get {
-                return ResourceManager.GetString("WorkerGroupStoppingWorker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to XML validation error at line {0} character {1}. {2}.
-        /// </summary>
-        internal static string XmlValdiationError {
-            get {
-                return ResourceManager.GetString("XmlValdiationError", resourceCulture);
             }
         }
     }

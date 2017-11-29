@@ -15,7 +15,7 @@ namespace CodeForDotNet.Windows.Native
         /// Retrieves a .NET <see cref="Metafile"/> from the clipboard correctly.
         /// </summary>
         /// <returns>.NET <see cref="Metafile"/> or null when no EMF is on the clipboard.</returns>
-        static public Metafile GetMetafileFromClipboard(IntPtr windowHandle)
+        public static Metafile GetMetafileFromClipboard(IntPtr windowHandle)
         {
             Metafile metafile = null;
             if (SafeNativeMethods.OpenClipboard(windowHandle))
@@ -38,7 +38,7 @@ namespace CodeForDotNet.Windows.Native
         /// <param name="windowHandle">Form.Handle used as owner of Clipboard data.</param>
         /// <param name="metafile">.NET <see cref="Metafile"/> to copy to clipboard.</param>
         /// <returns>TRUE when successful.</returns>
-        static public bool PutMetafileOnClipboard(IntPtr windowHandle, Metafile metafile)
+        public static bool PutMetafileOnClipboard(IntPtr windowHandle, Metafile metafile)
         {
             // Validate arguments
             if (metafile == null)

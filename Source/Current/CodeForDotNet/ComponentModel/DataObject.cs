@@ -1,11 +1,12 @@
-﻿using System;
+﻿using CodeForDotNet.Properties;
+using System;
 using System.Collections.Generic;
 
 namespace CodeForDotNet.ComponentModel
 {
     /// <summary>
     /// CRUD data object with intelligent data change event caching, able to distinguish between instance and store changes,
-    /// e.g. clearing pening instance events when store is read (which would overwrite any pending changes).
+    /// e.g. clearing pending instance events when store is read (which would overwrite any pending changes).
     /// </summary>
     public abstract class DataObject : PropertyObject, IDataObject
     {
@@ -81,7 +82,7 @@ namespace CodeForDotNet.ComponentModel
             {
                 // Assert state
                 if (DataState != DataObjectState.None)
-                    throw new InvalidOperationException(Properties.Resources.DataObjectCreateStateInvalid);
+                    throw new InvalidOperationException(Resources.DataObjectCreateStateInvalid);
 
                 // Suspend events
                 SuspendEvents();
@@ -122,7 +123,7 @@ namespace CodeForDotNet.ComponentModel
                 {
                     // Validate state
                     if (DataState == DataObjectState.Deleted)
-                        throw new InvalidOperationException(Properties.Resources.DataObjectReadStateInvalid);
+                        throw new InvalidOperationException(Resources.DataObjectReadStateInvalid);
 
                     // Call implementor method to read properties
                     _originalProperties = OnRead(_originalProperties);
@@ -159,7 +160,7 @@ namespace CodeForDotNet.ComponentModel
                 {
                     // Validate state
                     if (DataState != DataObjectState.Changed)
-                        throw new InvalidOperationException(Properties.Resources.DataObjectUpdateStateInvalid);
+                        throw new InvalidOperationException(Resources.DataObjectUpdateStateInvalid);
 
                     // Call implementor method to update properties
                     _originalProperties = OnUpdate(_changedProperties, _originalProperties);
@@ -197,7 +198,7 @@ namespace CodeForDotNet.ComponentModel
                     // Validate state
                     if (DataState != DataObjectState.Current &&
                         DataState != DataObjectState.Changed)
-                        throw new InvalidOperationException(Properties.Resources.DataObjectDeleteStateInvalid);
+                        throw new InvalidOperationException(Resources.DataObjectDeleteStateInvalid);
 
                     // Call implementor method to delete object
                     OnDelete(_originalProperties);

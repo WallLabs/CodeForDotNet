@@ -1,5 +1,6 @@
 ﻿using CodeForDotNet.Diagnostics;
 using CodeForDotNet.Drawing;
+using CodeForDotNet.Full.Drawing;
 using CodeForDotNet.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
@@ -58,13 +59,13 @@ namespace CodeForDotNet.Tests.Facts
         public void DrawingTestLogicalFontConversion()
         {
             // Create a test font
-            var font1 = new LogicalFont("Verdana", 10, FontStyle.Regular);
+            var font1 = new LogicalFont("Verdana", 10, (int)FontStyle.Regular);
 
             // Convert to string
-            var font1String = font1.ToString();
+            var font1String = font1.ToFontString();
 
             // Convert from string
-            var font2 = LogicalFont.Parse(font1String);
+            var font2 = FontExtensions.ToLogicalFont(font1String);
 
             // Validate result
             Assert.AreEqual(font1, font2);
