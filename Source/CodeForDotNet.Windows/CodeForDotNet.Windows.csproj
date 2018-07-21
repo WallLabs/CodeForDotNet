@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B4ACB503-D195-4789-8926-D6ABD07E9CCD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CodeForDotNet.Windows</RootNamespace>
+    <AssemblyName>CodeForDotNet.Windows</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Debug\CodeForDotNet.Windows.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Release\CodeForDotNet.Windows.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\Common\Code for .NET.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.Wia, Version=1.0.0.0, Culture=neutral, PublicKeyToken=36a3da6b7af265ff, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Dependencies\WIA\Interop.Wia.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Wia.ScanProfiles, Version=1.0.0.0, Culture=neutral, PublicKeyToken=36a3da6b7af265ff, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Dependencies\WIA\Interop.Wia.ScanProfiles.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Common\AssemblyInfoCore.cs">
+      <Link>Properties\AssemblyInfoCore.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\AssemblyInfoGlobal.cs">
+      <Link>Properties\AssemblyInfoGlobal.cs</Link>
+    </Compile>
+    <Compile Include="Install\ConfigurationFileInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Install\ConfigurationFileInstaller.Designer.cs">
+      <DependentUpon>ConfigurationFileInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Install\DesktopShortcutInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Install\DesktopShortcutInstaller.Designer.cs">
+      <DependentUpon>DesktopShortcutInstaller.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Install\NativeCodeGeneratorInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Native\ClipboardHelper.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Native\NativeCodeGenerator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Imaging\WiaCommonDialog.cs" />
+    <Compile Include="Imaging\WiaConstants.cs" />
+    <Compile Include="Imaging\WiaDevice.cs" />
+    <Compile Include="Imaging\WiaDeviceCommand.cs" />
+    <Compile Include="Imaging\WiaDeviceCommandCollection.cs" />
+    <Compile Include="Imaging\WiaDeviceEvent.cs" />
+    <Compile Include="Imaging\WiaDeviceEventCollection.cs" />
+    <Compile Include="Imaging\WiaDeviceEventType.cs" />
+    <Compile Include="Imaging\WiaDeviceInfo.cs" />
+    <Compile Include="Imaging\WiaDeviceInfoCollection.cs" />
+    <Compile Include="Imaging\WiaDeviceType.cs" />
+    <Compile Include="Imaging\WiaFormatCollection.cs" />
+    <Compile Include="Imaging\WiaImageBias.cs" />
+    <Compile Include="Imaging\WiaImageFile.cs" />
+    <Compile Include="Imaging\WiaImageIntent.cs" />
+    <Compile Include="Imaging\WiaItem.cs" />
+    <Compile Include="Imaging\WiaItemCollection.cs" />
+    <Compile Include="Imaging\WiaManager.cs" />
+    <Compile Include="Imaging\WiaProperty.cs" />
+    <Compile Include="Imaging\WiaPropertyCollection.cs" />
+    <Compile Include="Imaging\WiaSubtype.cs" />
+    <Compile Include="Imaging\WiaVector.cs" />
+    <Compile Include="Native\SafeNativeMethods.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Common\Code for .NET.snk">
+      <Link>Code for .NET.snk</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\Common\Dictionary.xml">
+      <Link>Dictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Install\ConfigurationFileInstallerToolboxIcon.bmp" />
+    <EmbeddedResource Include="Install\DesktopShortcutInstallerToolboxIcon.bmp" />
+    <EmbeddedResource Include="Install\NativeCodeGeneratorInstallerToolboxIcon.bmp" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Install\NativeCodeGeneratorInstaller.resx">
+      <DependentUpon>NativeCodeGeneratorInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

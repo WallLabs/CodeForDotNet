@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AsyncCompleteCalledTwice" xml:space="preserve">
+    <value>Asynchronous operation attempted to complete twice.</value>
+  </data>
+  <data name="AsyncEndCalledTwice" xml:space="preserve">
+    <value>Asynchronous operation already ended.</value>
+  </data>
+  <data name="BrushScaleOnlyForTextures" xml:space="preserve">
+    <value>Scale is only valid for Texture brush types.</value>
+  </data>
+  <data name="BrushSingleColorHasNoAngle" xml:space="preserve">
+    <value>Single color brushes do not have an angle.</value>
+  </data>
+  <data name="BrushTextureHasNoColor" xml:space="preserve">
+    <value>Textures do not have a color setting.</value>
+  </data>
+  <data name="BrushTextureWrapModeOnlyForTextures" xml:space="preserve">
+    <value>TextureWrapMode property is only valid for Textures!</value>
+  </data>
+  <data name="BrushTypeHasNoEndColor" xml:space="preserve">
+    <value>Current brush type does not have an End color.</value>
+  </data>
+  <data name="BrushTypeHasNoTexture" xml:space="preserve">
+    <value>Current brush type does not have a texture.</value>
+  </data>
+  <data name="CreateOpenRegistryKeyError" xml:space="preserve">
+    <value>Error creating or opending registry key "{0}".</value>
+    <comment>0 = registry key.</comment>
+  </data>
+  <data name="DataObjectChangePropertyStateInvalid" xml:space="preserve">
+    <value>Cannot change properties of a data object when it's current state is deleted.</value>
+  </data>
+  <data name="DataObjectCreateStateInvalid" xml:space="preserve">
+    <value>Cannot create a data object when it's current state indicates it exists or is pending deletion.</value>
+  </data>
+  <data name="DataObjectDeleteStateInvalid" xml:space="preserve">
+    <value>Cannot delete a data object when it's current state is not current or changed.</value>
+  </data>
+  <data name="DataObjectReadStateInvalid" xml:space="preserve">
+    <value>Cannot read a data object when it's current state is deleted.</value>
+  </data>
+  <data name="DataObjectUpdateStateInvalid" xml:space="preserve">
+    <value>Cannot update a data object when it's current state is not changed.</value>
+  </data>
+  <data name="DaysOfWeekFriday" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="DaysOfWeekMonday" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="DaysOfWeekSaturday" xml:space="preserve">
+    <value>Saturday</value>
+  </data>
+  <data name="DaysOfWeekSunday" xml:space="preserve">
+    <value>Sunday</value>
+  </data>
+  <data name="DaysOfWeekThursday" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="DaysOfWeekTuesday" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="DaysOfWeekWednesday" xml:space="preserve">
+    <value>Wednesday</value>
+  </data>
+  <data name="DxDyStringInvalid" xml:space="preserve">
+    <value>Cannot parse source string to DxDy! Should be #;# format.</value>
+  </data>
+  <data name="FileExtensionsCopyDirectoryCreateDirectory" xml:space="preserve">
+    <value>Copying directory {0}...</value>
+    <comment>0 = directory name</comment>
+  </data>
+  <data name="FileExtensionsCopyDirectoryFile" xml:space="preserve">
+    <value>Copying file {0}...</value>
+    <comment>0 = file name</comment>
+  </data>
+  <data name="NumberParseFormatErrorSigned" xml:space="preserve">
+    <value>Cannot convert "{0}" to a signed number of base {1}.</value>
+  </data>
+  <data name="NumberParseFormatErrorUnsigned" xml:space="preserve">
+    <value>Cannot convert "{0}" to an unsigned number of base {1}.</value>
+  </data>
+  <data name="PropertyRequired" xml:space="preserve">
+    <value>The property "{0}" is required.</value>
+    <comment>0 = property name.</comment>
+  </data>
+  <data name="ScheduleItemCollectionToStringFormat" xml:space="preserve">
+    <value>{0} instance(s); {1}</value>
+    <comment>0 = count, 1 = separated list of item strings.</comment>
+  </data>
+  <data name="ScheduleItemCollectionToStringSeparator" xml:space="preserve">
+    <value>, </value>
+  </data>
+  <data name="ScheduleItemOffsetFirst" xml:space="preserve">
+    <value>first</value>
+  </data>
+  <data name="ScheduleItemOffsetLast" xml:space="preserve">
+    <value>last</value>
+  </data>
+  <data name="ScheduleItemOffsetSecond" xml:space="preserve">
+    <value>second</value>
+  </data>
+  <data name="ScheduleItemOffsetThird" xml:space="preserve">
+    <value>third</value>
+  </data>
+  <data name="ScheduleItemToStringDailyFixedEnd" xml:space="preserve">
+    <value>every {3} day(s) starting on {0:d} at {0:t} for {2} minute(s) until {4} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Interval, 4 = Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringDailyNoEnd" xml:space="preserve">
+    <value>every {3} day(s) starting on {0:d} at {0:t} for {2} minutes</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Interval.</comment>
+  </data>
+  <data name="ScheduleItemToStringDayOfWeekSeparator" xml:space="preserve">
+    <value> or </value>
+  </data>
+  <data name="ScheduleItemToStringHourlyFixedEnd" xml:space="preserve">
+    <value>every {3} hour(s) starting on {0:d} at {0:t} for {2} minute(s) until {4} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Interval, 4= Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringHourlyNoEnd" xml:space="preserve">
+    <value>every {3} hour(s) starting on {0:d} at {0:t} for {2} minute(s)</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Interval.</comment>
+  </data>
+  <data name="ScheduleItemToStringMonthlyDayFixedEnd" xml:space="preserve">
+    <value>every {3} month(s) starting on {0:d} at {0:t} for {2} minute(s) until {4} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration,  3 = Interval, 4 = Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringMonthlyDayNoEnd" xml:space="preserve">
+    <value>every {3} month(s) starting on {0:d} at {0:t} for {2} minute(s)</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Interval.</comment>
+  </data>
+  <data name="ScheduleItemToStringMonthlyOffsetNoEnd" xml:space="preserve">
+    <value>every {4} month(s) on the {3} {0:dddd} starting on {0:d} at {0:t} for {2} minute(s)</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Offset, 4 = Interval.</comment>
+  </data>
+  <data name="ScheduleItemToStringMonthlyOffsetRecurring" xml:space="preserve">
+    <value>every {4} month(s) on the {3} {0:dddd} starting on {0:d} at {0:t} for {2} minute(s) until {5} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration,  3 = Offset, 4 = Interval, 5 = Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringOnce" xml:space="preserve">
+    <value>once on {0:d} at {0:t} for {1} minute(s)</value>
+    <comment>0 = Start, Duration.</comment>
+  </data>
+  <data name="ScheduleItemToStringWeeklyFixedEnd" xml:space="preserve">
+    <value>every {4} week(s) on {3} starting on {0:d} at {0:t} for {2} minute(s) until {5} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration,  3 = DaysOfWeek separated, 4 = Interval, 5 = Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringWeeklyNoEnd" xml:space="preserve">
+    <value>every {4} week(s) on {3} starting on {0:d} at {0:t} for {2} minute(s)</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = DaysOfWeek separated, 4 = Interval.</comment>
+  </data>
+  <data name="ScheduleItemToStringYearlyDayFixedEnd" xml:space="preserve">
+    <value>every {3} year(s) starting on {0:d} at {0:t} for {2} minute(s) until {4} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration,  3 = Interval, 4 = Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringYearlyDayNoEnd" xml:space="preserve">
+    <value>every {3} year(s) starting on {0:d} at {0:t} for {2} minute(s)</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Interval.</comment>
+  </data>
+  <data name="ScheduleItemToStringYearlyOffsetFixedEnd" xml:space="preserve">
+    <value>every {4} year(s) on the {3} {0:dddd} starting on {0:d} at {0:t} for {2} minute(s) until {5} occurrences ({1:d} at {1:t})</value>
+    <comment>0 = Start, 1 = End, 2 = Duration,  3 = Offset, 4 = Interval, 5 = Occurrences.</comment>
+  </data>
+  <data name="ScheduleItemToStringYearlyOffsetNoEnd" xml:space="preserve">
+    <value>every {4} year(s) on the {3} {0:dddd} starting on {0:d} at {0:t} for {2} minute(s)</value>
+    <comment>0 = Start, 1 = End, 2 = Duration, 3 = Offset, 4 = Inteval.</comment>
+  </data>
+  <data name="ScheduleToStringFormatIncludesAndExcludes" xml:space="preserve">
+    <value>Includes {0}. Excludes {1}.</value>
+    <comment>0 = Includes string, 1 = excludes string.</comment>
+  </data>
+  <data name="ScheduleToStringFormatIncludesOnly" xml:space="preserve">
+    <value>Includes {0}.</value>
+    <comment>0 = Includes string.</comment>
+  </data>
+  <data name="ScheduleToStringFormatNone" xml:space="preserve">
+    <value>Never.</value>
+  </data>
+  <data name="XmlValdiationError" xml:space="preserve">
+    <value>XML validation error at line {0} character {1}. {2}</value>
+    <comment>0 = line number, 1 = character number, 2 = error message.</comment>
+  </data>
+</root>
