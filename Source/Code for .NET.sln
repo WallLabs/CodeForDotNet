@@ -7,7 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencie
 	ProjectSection(SolutionItems) = preProject
 		Dependencies\Code for PowerShell Release Notes.md = Dependencies\Code for PowerShell Release Notes.md
 		Dependencies\Code for Windows Release Notes.md = Dependencies\Code for Windows Release Notes.md
-		Dependencies\Code for Windows Release Notes.rtf = Dependencies\Code for Windows Release Notes.rtf
 		Dependencies\CodeForPowerShell.Version.txt = Dependencies\CodeForPowerShell.Version.txt
 		Dependencies\CodeForWindows.Version.txt = Dependencies\CodeForWindows.Version.txt
 		Dependencies\Update.cmd = Dependencies\Update.cmd
@@ -40,10 +39,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeForDotNet.Windows", "Co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PowerShell", "PowerShell", "{8D05AF50-08EE-43CB-8EB1-6C67F0C56FC3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeForWindows.PowerShell.VisualStudio", "CodeForWindows.PowerShell.VisualStudio", "{E7C4CC3F-63E2-4A3D-8F8D-FE994429C63C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeForPowerShell.VisualStudio", "CodeForPowerShell.VisualStudio", "{E7C4CC3F-63E2-4A3D-8F8D-FE994429C63C}"
 	ProjectSection(SolutionItems) = preProject
-		Dependencies\PowerShell\CodeForWindows.PowerShell.VisualStudio\CodeForWindows.PowerShell.VisualStudio.psd1 = Dependencies\PowerShell\CodeForWindows.PowerShell.VisualStudio\CodeForWindows.PowerShell.VisualStudio.psd1
-		Dependencies\PowerShell\CodeForWindows.PowerShell.VisualStudio\CodeForWindows.PowerShell.VisualStudio.Version.psm1 = Dependencies\PowerShell\CodeForWindows.PowerShell.VisualStudio\CodeForWindows.PowerShell.VisualStudio.Version.psm1
+		Dependencies\PowerShell\CodeForPowerShell.VisualStudio\CodeForPowerShell.VisualStudio.psd1 = Dependencies\PowerShell\CodeForPowerShell.VisualStudio\CodeForPowerShell.VisualStudio.psd1
+		Dependencies\PowerShell\CodeForPowerShell.VisualStudio\CodeForPowerShell.VisualStudio.Version.psm1 = Dependencies\PowerShell\CodeForPowerShell.VisualStudio\CodeForPowerShell.VisualStudio.Version.psm1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WIA", "WIA", "{B2BC6A86-7972-4C44-9AAC-B5B1E3E9724B}"

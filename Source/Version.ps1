@@ -26,7 +26,7 @@ $env:PSModulePath = [Environment]::GetEnvironmentVariable("PSModulePath", "Machi
 $env:PSModulePath = "$env:PSModulePath;$PSScriptRoot\Dependencies\PowerShell";
 
 # Import modules
-Import-Module CodeForWindows.PowerShell.VisualStudio;
+Import-Module CodeForPowerShell.VisualStudio;
 
 
 # ==============================================================================
