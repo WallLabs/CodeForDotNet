@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		Build.cmd = Build.cmd
 		Release.cmd = Release.cmd
+		Solution.gitignore = Solution.gitignore
 		Test.runsettings = Test.runsettings
 		Version.cmd = Version.cmd
 		Version.ps1 = Version.ps1
@@ -30,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeForDotNet.Full", "CodeF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{C1C112AF-6EC9-409D-802D-E11F9FEA32FF}"
 	ProjectSection(SolutionItems) = preProject
-		Documentation\Code for .NET Release Notes.md = Documentation\Code for .NET Release Notes.md
+		Documentation\Release Notes.md = Documentation\Release Notes.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeForDotNet.Tests", "CodeForDotNet.Tests\CodeForDotNet.Tests.csproj", "{37891F4B-71D9-40C2-ADB7-37AB5701B2FA}"

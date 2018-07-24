@@ -6,6 +6,8 @@ echo.
 echo Performs a full build of all configurations then copies the output
 echo to the central build directory for check-in and use by other
 echo components or release.
+echo.
+echo Note: Visual Studio must be closed before running this script to prevent build errors from locked files and caches.
 
 echo.
 echo Initializing Visual Studio environment...
@@ -51,6 +53,11 @@ echo.
 echo Copying output to build directory...
 robocopy "%~dp0Temp\Build" "%~dp0..\Build" /s
 if %errorlevel% gtr 7 goto Error
+
+echo.
+echo Clean temporary files...
+rmdir "%~dp0Temp" /s /q
+if %errorlevel% gtr 1 goto Error
 
 echo.
 echo Build all successful.
