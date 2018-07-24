@@ -1,4 +1,0 @@
-﻿# Note: assumes Visual Studio GIT ignore file is also present in solution.
-
-# Ignore solution specific temporary files.
-/Temp/

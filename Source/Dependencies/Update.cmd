@@ -55,5 +55,7 @@ exit /b 0
 
 :Error
 echo Error %errorlevel%!
+echo.
+echo Note: Visual Studio must be closed before running this script to prevent build errors from locked files and caches.
 endlocal
 exit /b 1

@@ -1,6 +1,6 @@
 @echo off
 rem ==========================================================================
-rem Visual Studio Envrionment Variables
+rem Visual Studio Environment Variables
 rem --------------------------------------------------------------------------
 rem Initializes Visual Studio command line environment variables, to use 
 rem the most recent version of Visual Studio installed. Since 2017 the VSWhere

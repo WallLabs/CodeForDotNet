@@ -6,8 +6,6 @@ echo.
 echo Performs a full build of all configurations then copies the output
 echo to the central build directory for check-in and use by other
 echo components or release.
-echo.
-echo Note: Visual Studio must be closed before running this script to prevent build errors from locked files and caches.
 
 echo.
 echo Initializing Visual Studio environment...
@@ -66,5 +64,7 @@ exit /b 0
 
 :Error
 echo Error %errorlevel%!
+echo.
+echo Note: Visual Studio must be closed before running this script to prevent build errors from locked files and caches.
 endlocal
 exit /b 1
