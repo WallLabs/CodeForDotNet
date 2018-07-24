@@ -18,17 +18,6 @@ if exist "%~dp0Temp\Build" rmdir "%~dp0Temp\Build" /s /q
 if %errorlevel% neq 0 goto Error
 
 echo.
-echo Update source (and delete extra files)...
-git reset "%~dp0" -- "..\Build"
-if %errorlevel% gtr 1 goto Error
-git clean -d -f -x "%~dp0" -- "..\Build"
-if %errorlevel% gtr 1 goto Error
-git pull -f "%~dp0..\..\"
-if %errorlevel% gtr 1 goto Error
-git clean -d -f -x "%~dp0"
-if %errorlevel% gtr 1 goto Error
-
-echo.
 echo Versioning...
 call "%~dp0Version.cmd"
 if %errorlevel% neq 0 goto Error
