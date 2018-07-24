@@ -53,6 +53,25 @@ namespace CodeForDotNet.Tests.Facts
         }
 
         /// <summary>
+        /// Tests the <see cref="LogicalFont"/> XML serialization.
+        /// </summary>
+        [TestMethod]
+        public void DrawingTestLogicalFontXmlSerialize()
+        {
+            // Create a test object and serialize
+            var font1 = new LogicalFont("Verdana", 10, (int)FontStyle.Regular);
+            var font1Xml = font1.SerializeXml();
+
+            // De-serialize the font and check contents match
+            var font2 = XmlSerializerExtensions.DeserializeXml<LogicalFont>(font1Xml);
+            Assert.AreEqual(font1, font2);
+
+            // Serialize again and check the XML matches
+            var font2Xml = font2.SerializeXml();
+            Assert.AreEqual(font1Xml, font2Xml);
+        }
+
+        /// <summary>
         /// Tests the <see cref="LogicalFont"/> type conversion.
         /// </summary>
         [TestMethod]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeForDotNet.Xml;
+using System;
 
 namespace CodeForDotNet.Drawing
 {
@@ -30,25 +31,6 @@ namespace CodeForDotNet.Drawing
 
         #endregion
 
-        #region Public Properties
-
-        /// <summary>
-        /// Font family.
-        /// </summary>
-        public string Family { get; set; }
-
-        /// <summary>
-        /// Font size in "em" points.
-        /// </summary>
-        public float Size { get; set; }
-
-        /// <summary>
-        /// Font style.
-        /// </summary>
-        public LogicalFontStyle Style { get; set; }
-
-        #endregion
-
         #region Operators
 
         /// <summary>
@@ -70,7 +52,6 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Overrides the Equals method to compare by value,
         /// </summary>
-        /// <param name="obj"></param>
         /// <returns></returns>
         public override bool Equals(object obj)
         {
@@ -78,7 +59,7 @@ namespace CodeForDotNet.Drawing
             var other = obj as LogicalFont;
 
             // Check nullability without operator (would cause endless loop)
-            if (ReferenceEquals(other, null))
+            if (other is null)
                 return false;
 
             // Compare values
@@ -97,6 +78,45 @@ namespace CodeForDotNet.Drawing
                 (Family ?? "").GetHashCode() ^
                 Size.GetHashCode() ^
                 Style.GetHashCode();
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// Font family.
+        /// </summary>
+        public string Family { get; set; }
+
+        /// <summary>
+        /// Font size in "em" points.
+        /// </summary>
+        public float Size { get; set; }
+
+        /// <summary>
+        /// Font style.
+        /// </summary>
+        public LogicalFontStyle Style { get; set; }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Converts the brush to an XML string.
+        /// </summary>
+        public override string ToString()
+        {
+            return this.SerializeXml();
+        }
+
+        /// <summary>
+        /// Creates an instance from a string.
+        /// </summary>
+        public static LogicalFont Parse(string value)
+        {
+            return XmlSerializerExtensions.DeserializeXml<LogicalFont>(value);
         }
 
         #endregion

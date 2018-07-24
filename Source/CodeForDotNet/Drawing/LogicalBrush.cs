@@ -220,7 +220,7 @@ namespace CodeForDotNet.Drawing
         {
             // Check type and nullability
             var other = obj as LogicalBrush;
-            if (ReferenceEquals(other, null))
+            if (other is null)
                 return false;
 
             // Compare values
