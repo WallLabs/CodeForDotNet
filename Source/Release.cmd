@@ -44,7 +44,7 @@ if %errorlevel% gtr 7 goto Error
 echo.
 echo Clean temporary files...
 rmdir "%~dp0Temp" /s /q
-if %errorlevel% gtr 1 goto Error
+if %errorlevel% neq 0 goto Error
 
 echo.
 echo Build all successful.

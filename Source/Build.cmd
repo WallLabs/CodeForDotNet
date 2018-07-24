@@ -27,7 +27,7 @@ echo.
 echo Delete old files...
 if exist "%~dp0Temp\Build\%ConfigurationName%" (
 	rmdir "%~dp0Temp\Build\%ConfigurationName%" /s /q
-	if %errorlevel% gtr 1 goto Error
+	if %errorlevel% neq 0 goto Error
 )
 
 echo.
