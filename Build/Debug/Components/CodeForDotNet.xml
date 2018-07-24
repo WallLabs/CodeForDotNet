@@ -3450,6 +3450,27 @@
             Italic.
             </summary>
         </member>
+        <member name="T:CodeForDotNet.Drawing.LogicalStringAlignment">
+            <summary>
+            String alignment disconnected from any API dependencies, useful for
+            future proof serialization and cross-platform.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.LogicalStringAlignment.Near">
+            <summary>
+            Near to the start of the line (according to writing direction).
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.LogicalStringAlignment.Center">
+            <summary>
+            Centered.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.LogicalStringAlignment.Far">
+            <summary>
+            Far from the start of the line (according to writing direction).
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.Drawing.PointExtensions">
             <summary>
             Provides useful extension methods to the <see cref="T:System.Drawing.Point"/> class.
@@ -3725,27 +3746,6 @@
         <member name="F:CodeForDotNet.Drawing.Quadrant.TopLeft">
             <summary>
             270 to 359 degrees
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Drawing.StringAlignment">
-            <summary>
-            String alignment disconnected from any API dependencies, useful for
-            future proof serialization and cross-platform.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.StringAlignment.Near">
-            <summary>
-            Near to the start of the line (according to writing direction).
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.StringAlignment.Center">
-            <summary>
-            Centered.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.StringAlignment.Far">
-            <summary>
-            Far from the start of the line (according to writing direction).
             </summary>
         </member>
         <member name="T:CodeForDotNet.Drawing.Vector2">

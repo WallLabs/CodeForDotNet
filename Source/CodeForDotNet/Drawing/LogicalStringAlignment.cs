@@ -4,7 +4,7 @@
     /// String alignment disconnected from any API dependencies, useful for
     /// future proof serialization and cross-platform.
     /// </summary>
-    public enum StringAlignment
+    public enum LogicalStringAlignment
     {
         /// <summary>
         /// Near to the start of the line (according to writing direction).

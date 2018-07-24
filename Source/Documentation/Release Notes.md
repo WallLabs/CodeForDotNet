@@ -2,6 +2,7 @@
 
 ## Version 4.72.1807.24### (2018.07.24)
 * Migrated almost all code from .NET Full to Standard libraries.
+* Disambiguate Drawing.StringAlignment by renaming to LogicalStringAlignment.
 
 ## Version 4.72.1807.21### (2018.07.21)
 * Upgraded to .NET Standard 2.0 and v4.72.

@@ -7,5 +7,5 @@ using System.Reflection;
 [assembly: AssemblyCopyright("Copyright © Wall Labs")]
 
 // Version
-[assembly: AssemblyVersion("4.72.1807.24014")]
-[assembly: AssemblyFileVersion("4.72.1807.24014")]
+[assembly: AssemblyVersion("4.72.1807.24015")]
+[assembly: AssemblyFileVersion("4.72.1807.24015")]
