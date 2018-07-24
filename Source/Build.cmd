@@ -37,13 +37,13 @@ if %errorlevel% neq 0 goto Error
 
 echo.
 echo Copying components...
-robocopy "%~dp0CodeForDotNet\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" *.dll *.pdb *.xml /xf *CodeAnalysisLog.xml
+robocopy "%~dp0CodeForDotNet\bin\%ConfigurationName%\netstandard2.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet*.dll CodeForDotNet*.pdb CodeForDotNet*.xml /xf *CodeAnalysisLog.xml
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.Full\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" *.dll *.pdb *.xml /xf *CodeAnalysisLog.xml
+robocopy "%~dp0CodeForDotNet.Full\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Full*.dll CodeForDotNet.Full*.pdb CodeForDotNet.Full*.xml /xf *CodeAnalysisLog.xml
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.Windows\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" *.dll *.pdb *.xml /xf *CodeAnalysisLog.xml
+robocopy "%~dp0CodeForDotNet.Windows\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Windows*.dll CodeForDotNet.Windows*.pdb CodeForDotNet.Windows*.xml /xf *CodeAnalysisLog.xml
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.WindowsUniversal\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" *.dll *.pdb *.xml *.pri /xf *CodeAnalysisLog.xml
+robocopy "%~dp0CodeForDotNet.WindowsUniversal\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.WindowsUniversal*.dll CodeForDotNet.WindowsUniversal*.pdb CodeForDotNet.WindowsUniversal*.xml CodeForDotNet.WindowsUniversal*.pri *.xbf /xf *CodeAnalysisLog.xml /s
 if %errorlevel% gtr 7 goto Error
 
 echo.
