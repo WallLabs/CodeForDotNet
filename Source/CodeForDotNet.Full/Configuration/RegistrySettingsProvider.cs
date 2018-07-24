@@ -97,9 +97,11 @@ namespace CodeForDotNet.Configuration
             // Iterate through the settings to be retrieved
             foreach (SettingsProperty setting in collection)
             {
-                SettingsPropertyValue value = new SettingsPropertyValue(setting);
-                value.IsDirty = false;
-                value.SerializedValue = GetRegKey(setting).GetValue(setting.Name);
+                SettingsPropertyValue value = new SettingsPropertyValue(setting)
+                {
+                    IsDirty = false,
+                    SerializedValue = GetRegKey(setting).GetValue(setting.Name)
+                };
                 values.Add(value);
             }
             return values;

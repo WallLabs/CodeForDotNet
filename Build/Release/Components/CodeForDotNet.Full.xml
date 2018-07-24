@@ -201,191 +201,26 @@
             Sub-Key path in which to store the setting. e.g. "Preferences\Display".
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Data.SqlExtensions">
-            <summary>
-            Extensions and helper methods for working with SQL.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Data.SqlExtensions.ParameterCache">
-            <summary>
-            Cache of <see cref="T:System.Data.SqlClient.SqlParameter"/> items for a given command hash-code.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Data.SqlExtensions.BuildConnectionString(System.String,System.String,System.String,System.String)">
-            <summary>
-            Creates an SQL Server connection string from common pieces,
-            e.g. server name, database, user &amp; password (if not integrated security).
-            </summary>
-            <param name="serverName">Database server name or (local) for shared memory local access.</param>
-            <param name="databaseName">Default database name.</param>
-            <param name="userName">User name or null/empty for Windows integrated security.</param>
-            <param name="password">Password or null/empty for Windows integrated security.</param>
-            <returns>SQL connection string.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Data.SqlExtensions.CreateCommandWithParameters(System.Data.SqlClient.SqlConnection,System.String)">
-            <summary>
-            Creates a command object for the specified stored procedure, automatically
-            populating the parameters. Parameter sets are cached for performance.
-            </summary>
-            <param name="connection">Connection used to derive parameters (first time only) or create the command.</param>
-            <param name="procedureName">Name of the stored procedure for which to create the command and parameters.</param>
-        </member>
-        <member name="T:CodeForDotNet.Full.Drawing.BrushExtensions">
-            <summary>
-            Extensions for work with <see cref="T:System.Drawing.Brush"/> types.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Full.Drawing.BrushExtensions.MakeBrush(CodeForDotNet.Drawing.LogicalBrush,System.Drawing.Rectangle)">
-            <summary>
-            Creates a .NET brush based on the current brush specification.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Full.Drawing.BrushExtensions.MakeBrush(CodeForDotNet.Drawing.LogicalBrush,System.Drawing.Rectangle,System.Boolean)">
-            <summary>
-            Creates a .NET brush based on the current brush specification,
-            optionally flipping the start and end colors.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Full.Drawing.FontExtensions">
-            <summary>
-            Extensions for work with <see cref="T:System.Drawing.Font"/> types.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Full.Drawing.FontExtensions.ToFont(CodeForDotNet.Drawing.LogicalFont)">
-            <summary>
-            Creates a <see cref="T:System.Drawing.Font"/> with the current properties.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Full.Drawing.FontExtensions.ToLogicalFont(System.Drawing.Font)">
-            <summary>
-            Creates a <see cref="T:CodeForDotNet.Drawing.LogicalFont"/> based on the parameters of an existing <see cref="T:System.Drawing.Font"/>.
-            </summary>
-            <remarks>
-            The font is not touched by this instance other than to read it's properties
-            and must be disposed as usual by the caller or other owner.
-            </remarks>
-        </member>
-        <member name="M:CodeForDotNet.Full.Drawing.FontExtensions.ToLogicalFont(System.String)">
-            <summary>
-            Creates a <see cref="T:CodeForDotNet.Drawing.LogicalFont"/> from a string.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Full.Drawing.FontExtensions.ToFontString(CodeForDotNet.Drawing.LogicalFont)">
-            <summary>
-            Displays a string representation of the <see cref="T:CodeForDotNet.Drawing.LogicalFont"/>.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Full.Drawing.Printing.PrintingExtensions">
-            <summary>
-            Extensions for work with types in the <see cref="N:System.Drawing.Printing"/> namespace.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Full.Drawing.Printing.PrintingExtensions.ToPrinterSettings(CodeForDotNet.Drawing.Printing.PrinterSettingsData)">
-            <summary>
-            Converts this data to a .NET PrinterSettings class.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Full.Drawing.Printing.PrintingExtensions.ToData(System.Drawing.Printing.PrinterSettings)">
-            <summary>
-            Converts a .NET PrinterSettings class to a data structure of this type.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Full.Drawing.Printing.PrintingExtensions.ToPageSettings(CodeForDotNet.Drawing.Printing.PageSettingsData)">
-            <summary>
-            Converts this data to a .NET PageSettings class.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Full.Drawing.Printing.PrintingExtensions.ToData(System.Drawing.Printing.PageSettings)">
-            <summary>
-            Creates a data structure of this type from .NET PageSettings.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Full.Properties.Resources">
+        <member name="T:CodeForDotNet.Properties.Resources">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Full.Properties.Resources.ResourceManager">
+        <member name="P:CodeForDotNet.Properties.Resources.ResourceManager">
             <summary>
               Returns the cached ResourceManager instance used by this class.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Full.Properties.Resources.Culture">
+        <member name="P:CodeForDotNet.Properties.Resources.Culture">
             <summary>
               Overrides the current thread's CurrentUICulture property for all
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Full.Properties.Resources.PropertyRequired">
+        <member name="P:CodeForDotNet.Properties.Resources.PropertyRequired">
             <summary>
               Looks up a localized string similar to The property &quot;{0}&quot; is required..
             </summary>
-        </member>
-        <member name="T:CodeForDotNet.Drawing.ImageExtensions">
-            <summary>
-            Extensions for working with image classes.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.BmpContentType">
-            <summary>
-            BMP file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.EmfContentType">
-            <summary>
-            EMF file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.WmfContentType">
-            <summary>
-            WMF file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.GifContentType">
-            <summary>
-            GIF file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.TifContentType">
-            <summary>
-            TIF file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.IcoContentType">
-            <summary>
-            ICO file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.PngContentType">
-            <summary>
-            PNG file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.JpgContentType">
-            <summary>
-            JPG file content type.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.ImageExtensions.GetContentType(System.Drawing.Imaging.ImageFormat)">
-            <summary>
-            Gets the MIME content type of an <see cref="T:System.Drawing.Imaging.ImageFormat"/>.
-            </summary>
-            <param name="format">Image format.</param>
-            <returns>Content type or null when not supported.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.ImageExtensions.GetContentType(System.Guid)">
-            <summary>
-            Gets the MIME content type of an <see cref="P:System.Drawing.Imaging.ImageFormat.Guid"/>.
-            </summary>
-            <param name="formatId">Image format Id.</param>
-            <returns>Content type or null when not supported.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.ImageExtensions.GetFormat(System.String)">
-            <summary>
-            Gets the <see cref="T:System.Drawing.Imaging.ImageFormat"/> for a MIME content type.
-            </summary>
-            <param name="contentType">MIME content type.</param>
-            <returns>Image format or null when unsupported.</returns>
         </member>
         <member name="T:CodeForDotNet.Reflection.AppDomainExtensions">
             <summary>

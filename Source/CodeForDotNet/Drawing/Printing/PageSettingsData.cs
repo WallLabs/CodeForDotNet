@@ -8,22 +8,35 @@ namespace CodeForDotNet.Drawing.Printing
     [Serializable]
     public class PageSettingsData
     {
+        #region Lifetime
+
+        /// <summary>
+        /// Initializes an empty instance.
+        /// </summary>
+        public PageSettingsData()
+        {
+            Color = true;
+            Margins = new PageMarginsData();
+        }
+
+        #endregion
+
         #region Properties
 
         /// <summary>
-        /// Page color.
+        /// Page color, defaults to true.
         /// </summary>
         public bool Color { get; set; }
 
         /// <summary>
-        /// Landscape mode, otherwise portrait.
+        /// Landscape mode, otherwise portrait, defaults false.
         /// </summary>
         public bool Landscape { get; set; }
 
         /// <summary>
         /// Margins.
         /// </summary>
-        public string Margins { get; set; }
+        public PageMarginsData Margins { get; set; }
 
         /// <summary>
         /// Paper width.
@@ -49,17 +62,6 @@ namespace CodeForDotNet.Drawing.Printing
         /// Printer name.
         /// </summary>
         public string PrinterName { get; set; }
-
-        /// <summary>
-        /// Default page settings.
-        /// </summary>
-        public static PageSettingsData Default
-        {
-            get
-            {
-                return new PageSettingsData {Color = true, Landscape = true, Margins = "", PaperName = "A4"};
-            }
-        }
 
         #endregion
     }

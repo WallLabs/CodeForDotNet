@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace CodeForDotNet.Data
+namespace CodeForDotNet.Data.Sql
 {
     /// <summary>
     /// Extensions and helper methods for working with SQL.

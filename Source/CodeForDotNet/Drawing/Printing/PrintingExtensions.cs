@@ -1,9 +1,7 @@
-﻿using CodeForDotNet.Drawing.Printing;
-using System;
-using System.ComponentModel;
+﻿using System;
 using System.Drawing.Printing;
 
-namespace CodeForDotNet.Full.Drawing.Printing
+namespace CodeForDotNet.Drawing.Printing
 {
     /// <summary>
     /// Extensions for work with types in the <see cref="System.Drawing.Printing"/> namespace.
@@ -61,8 +59,7 @@ namespace CodeForDotNet.Full.Drawing.Printing
             {
                 Color = source.Color,
                 Landscape = source.Landscape,
-                Margins = (Margins)new MarginsConverter().ConvertFromInvariantString(source.Margins) ??
-                                 new Margins(0, 0, 0, 0),
+                Margins = source.Margins.ToMargins(),
             };
 
             // Find and set paper size when available in system printer settings
@@ -90,7 +87,7 @@ namespace CodeForDotNet.Full.Drawing.Printing
             {
                 Color = source.Color,
                 Landscape = source.Landscape,
-                Margins = TypeDescriptor.GetConverter(typeof(Margins)).ConvertToInvariantString(source.Margins),
+                Margins = source.Margins.ToData(),
                 PaperWidth = source.PaperSize.Width,
                 PaperHeight = source.PaperSize.Height,
                 PaperName = source.PaperSize.PaperName,

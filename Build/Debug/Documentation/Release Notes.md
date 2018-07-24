@@ -1,5 +1,8 @@
 # Code for .NET - Release Notes
 
+## Version 4.72.1807.24### (2018.07.24)
+* Migrated almost all code from .NET Full to Standard libraries.
+
 ## Version 4.72.1807.21### (2018.07.21)
 * Upgraded to .NET Standard 2.0 and v4.72.
 * Added new components for .NET Core, standard, full and Universal Windows.

@@ -1,12 +1,12 @@
 ﻿using CodeForDotNet.Drawing;
-using CodeForDotNet.Full.Properties;
+using CodeForDotNet.Properties;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
 
-namespace CodeForDotNet.Full.Drawing
+namespace CodeForDotNet.Drawing
 {
     /// <summary>
     /// Extensions for work with <see cref="Brush"/> types.

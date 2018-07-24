@@ -2,7 +2,7 @@
 using System;
 using System.Drawing;
 
-namespace CodeForDotNet.Full.Drawing
+namespace CodeForDotNet.Drawing
 {
     /// <summary>
     /// Extensions for work with <see cref="Font"/> types.
@@ -40,26 +40,6 @@ namespace CodeForDotNet.Full.Drawing
                 font.FontFamily.Name,
                 font.SizeInPoints,
                 (LogicalFontStyle)(int)font.Style);
-        }
-
-        /// <summary>
-        /// Creates a <see cref="LogicalFont"/> from a string.
-        /// </summary>
-        public static LogicalFont ToLogicalFont(string value)
-        {
-            var convert = new FontConverter();
-            using (var font = (Font)convert.ConvertFromInvariantString(value))
-                return ToLogicalFont(font);
-        }
-
-        /// <summary>
-        /// Displays a string representation of the <see cref="LogicalFont"/>.
-        /// </summary>
-        public static string ToFontString(this LogicalFont data)
-        {
-            var convert = new FontConverter();
-            using (var font = ToFont(data))
-                return convert.ConvertToInvariantString(font);
         }
 
         #endregion

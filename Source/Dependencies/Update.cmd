@@ -13,8 +13,10 @@ if %errorlevel% neq 0 goto Error
 
 echo.
 echo Updating build outputs from source control...
-if exist "%~dp0Temp" rmdir "%~dp0Temp" /s /q
-if %errorlevel% neq 0 goto Error
+if exist "%~dp0Temp" (
+    rmdir "%~dp0Temp" /s /q
+    if %errorlevel% gtr 1 goto Error
+)
 git clone --branch=master git://github.com/WallLabs/CodeForPowerShell "%~dp0Temp\CodeForPowerShell"
 if %errorlevel% neq 0 goto Error
 git clone --branch=master git://github.com/WallLabs/CodeForWindows "%~dp0Temp\CodeForWindows"
@@ -46,7 +48,7 @@ if %errorlevel% neq 0 goto Error
 echo.
 echo Clean temporary files...
 rmdir "%~dp0Temp" /s /q
-if %errorlevel% neq 0 goto Error
+if %errorlevel% gtr 1 goto Error
 
 echo.
 echo Update successful.

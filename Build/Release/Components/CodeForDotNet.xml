@@ -3032,6 +3032,22 @@
             or released.
             </summary>
         </member>
+        <member name="T:CodeForDotNet.Drawing.BrushExtensions">
+            <summary>
+            Extensions for work with <see cref="T:System.Drawing.Brush"/> types.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushExtensions.MakeBrush(CodeForDotNet.Drawing.LogicalBrush,System.Drawing.Rectangle)">
+            <summary>
+            Creates a .NET brush based on the current brush specification.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushExtensions.MakeBrush(CodeForDotNet.Drawing.LogicalBrush,System.Drawing.Rectangle,System.Boolean)">
+            <summary>
+            Creates a .NET brush based on the current brush specification,
+            optionally flipping the start and end colors.
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.Drawing.ColorCollection">
             <summary>
             Collection of <see cref="T:System.Drawing.Color"/> entries
@@ -3062,6 +3078,91 @@
             <summary>
             Converts the color to a hexadecimal ARGB string, e.g. #AARRGGBB.
             </summary>
+        </member>
+        <member name="T:CodeForDotNet.Drawing.FontExtensions">
+            <summary>
+            Extensions for work with <see cref="T:System.Drawing.Font"/> types.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.FontExtensions.ToFont(CodeForDotNet.Drawing.LogicalFont)">
+            <summary>
+            Creates a <see cref="T:System.Drawing.Font"/> with the current properties.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.FontExtensions.ToLogicalFont(System.Drawing.Font)">
+            <summary>
+            Creates a <see cref="T:CodeForDotNet.Drawing.LogicalFont"/> based on the parameters of an existing <see cref="T:System.Drawing.Font"/>.
+            </summary>
+            <remarks>
+            The font is not touched by this instance other than to read it's properties
+            and must be disposed as usual by the caller or other owner.
+            </remarks>
+        </member>
+        <member name="T:CodeForDotNet.Drawing.ImageExtensions">
+            <summary>
+            Extensions for working with image classes.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.ImageExtensions.BmpContentType">
+            <summary>
+            BMP file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.ImageExtensions.EmfContentType">
+            <summary>
+            EMF file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.ImageExtensions.WmfContentType">
+            <summary>
+            WMF file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.ImageExtensions.GifContentType">
+            <summary>
+            GIF file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.ImageExtensions.TifContentType">
+            <summary>
+            TIF file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.ImageExtensions.IcoContentType">
+            <summary>
+            ICO file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.ImageExtensions.PngContentType">
+            <summary>
+            PNG file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.ImageExtensions.JpgContentType">
+            <summary>
+            JPG file content type.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.ImageExtensions.GetContentType(System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            Gets the MIME content type of an <see cref="T:System.Drawing.Imaging.ImageFormat"/>.
+            </summary>
+            <param name="format">Image format.</param>
+            <returns>Content type or null when not supported.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.ImageExtensions.GetContentType(System.Guid)">
+            <summary>
+            Gets the MIME content type of an <see cref="P:System.Drawing.Imaging.ImageFormat.Guid"/>.
+            </summary>
+            <param name="formatId">Image format Id.</param>
+            <returns>Content type or null when not supported.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.ImageExtensions.GetFormat(System.String)">
+            <summary>
+            Gets the <see cref="T:System.Drawing.Imaging.ImageFormat"/> for a MIME content type.
+            </summary>
+            <param name="contentType">MIME content type.</param>
+            <returns>Image format or null when unsupported.</returns>
         </member>
         <member name="T:CodeForDotNet.Drawing.LogicalBrush">
             <summary>
@@ -3269,6 +3370,27 @@
             Creates an instance with the specified properties.
             </summary>
         </member>
+        <member name="M:CodeForDotNet.Drawing.LogicalFont.op_Equality(CodeForDotNet.Drawing.LogicalFont,CodeForDotNet.Drawing.LogicalFont)">
+            <summary>
+            Overrides the equality operator to compare by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.LogicalFont.op_Inequality(CodeForDotNet.Drawing.LogicalFont,CodeForDotNet.Drawing.LogicalFont)">
+            <summary>
+            Overrides the inequality operator to compare by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.LogicalFont.Equals(System.Object)">
+            <summary>
+            Overrides the Equals method to compare by value,
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.LogicalFont.GetHashCode">
+            <summary>
+            Gets a hash-code for this object based on current values.
+            </summary>
+        </member>
         <member name="P:CodeForDotNet.Drawing.LogicalFont.Family">
             <summary>
             Font family.
@@ -3284,26 +3406,14 @@
             Font style.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.op_Equality(CodeForDotNet.Drawing.LogicalFont,CodeForDotNet.Drawing.LogicalFont)">
+        <member name="M:CodeForDotNet.Drawing.LogicalFont.ToString">
             <summary>
-            Overrides the equality operator to compare by value.
+            Converts the brush to an XML string.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.op_Inequality(CodeForDotNet.Drawing.LogicalFont,CodeForDotNet.Drawing.LogicalFont)">
+        <member name="M:CodeForDotNet.Drawing.LogicalFont.Parse(System.String)">
             <summary>
-            Overrides the inequality operator to compare by value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.Equals(System.Object)">
-            <summary>
-            Overrides the Equals method to compare by value,
-            </summary>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.GetHashCode">
-            <summary>
-            Gets a hash-code for this object based on current values.
+            Creates an instance from a string.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Drawing.LogicalFont.Copy">
@@ -3365,19 +3475,43 @@
             Subtracts a <see cref="T:System.Drawing.PointF"/> from a <see cref="T:System.Drawing.PointF"/>.
             </summary>
         </member>
+        <member name="T:CodeForDotNet.Drawing.Printing.MarginsExtensions">
+            <summary>
+            Extensions for work with <see cref="T:System.Drawing.Printing.Margins"/> types.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.MarginsExtensions.ToMargins(CodeForDotNet.Drawing.PageMarginsData)">
+            <summary>
+            Creates a <see cref="T:System.Drawing.Printing.Margins"/> with the current properties.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.MarginsExtensions.ToData(System.Drawing.Printing.Margins)">
+            <summary>
+            Creates a <see cref="T:CodeForDotNet.Drawing.PageMarginsData"/> based on the parameters of an existing <see cref="T:System.Drawing.Printing.Margins"/>.
+            </summary>
+            <remarks>
+            The font is not touched by this instance other than to read it's properties
+            and must be disposed as usual by the caller or other owner.
+            </remarks>
+        </member>
         <member name="T:CodeForDotNet.Drawing.Printing.PageSettingsData">
             <summary>
             Printer page settings.
             </summary>
         </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PageSettingsData.#ctor">
+            <summary>
+            Initializes an empty instance.
+            </summary>
+        </member>
         <member name="P:CodeForDotNet.Drawing.Printing.PageSettingsData.Color">
             <summary>
-            Page color.
+            Page color, defaults to true.
             </summary>
         </member>
         <member name="P:CodeForDotNet.Drawing.Printing.PageSettingsData.Landscape">
             <summary>
-            Landscape mode, otherwise portrait.
+            Landscape mode, otherwise portrait, defaults false.
             </summary>
         </member>
         <member name="P:CodeForDotNet.Drawing.Printing.PageSettingsData.Margins">
@@ -3408,11 +3542,6 @@
         <member name="P:CodeForDotNet.Drawing.Printing.PageSettingsData.PrinterName">
             <summary>
             Printer name.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Drawing.Printing.PageSettingsData.Default">
-            <summary>
-            Default page settings.
             </summary>
         </member>
         <member name="T:CodeForDotNet.Drawing.Printing.PrinterSettingsData">
@@ -3469,6 +3598,106 @@
         <member name="F:CodeForDotNet.Drawing.Printing.PrinterSettingsDuplex.Vertical">
             <summary>
             Double-sided, vertical printing.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Drawing.Printing.PrintingExtensions">
+            <summary>
+            Extensions for work with types in the <see cref="N:System.Drawing.Printing"/> namespace.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PrintingExtensions.ToPrinterSettings(CodeForDotNet.Drawing.Printing.PrinterSettingsData)">
+            <summary>
+            Converts this data to a .NET PrinterSettings class.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PrintingExtensions.ToData(System.Drawing.Printing.PrinterSettings)">
+            <summary>
+            Converts a .NET PrinterSettings class to a data structure of this type.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PrintingExtensions.ToPageSettings(CodeForDotNet.Drawing.Printing.PageSettingsData)">
+            <summary>
+            Converts this data to a .NET PageSettings class.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PrintingExtensions.ToData(System.Drawing.Printing.PageSettings)">
+            <summary>
+            Creates a data structure of this type from .NET PageSettings.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Drawing.PageMarginsData">
+            <summary>
+            Margins data.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.PageMarginsData.#ctor">
+            <summary>
+            Creates the margins.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.PageMarginsData.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates the margins from specified values.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.PageMarginsData.Left">
+            <summary>
+            Gets or sets the left margin width, in hundredths of an inch.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.PageMarginsData.Right">
+            <summary>
+            Gets or sets the right margin width, in hundredths of an inch.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.PageMarginsData.Top">
+            <summary>
+            Gets or sets the top margin width, in hundredths of an inch.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.PageMarginsData.Bottom">
+            <summary>
+            Gets or sets the bottom margin, in hundredths of an inch.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.PageMarginsData.ToString">
+            <summary>
+            Converts the margins to an XML string.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.PageMarginsData.Parse(System.String)">
+            <summary>
+            Creates an instance from a string.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.PageMarginsData.op_Equality(CodeForDotNet.Drawing.PageMarginsData,CodeForDotNet.Drawing.PageMarginsData)">
+            <summary>
+            Overrides the equality operator to compare by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.PageMarginsData.op_Inequality(CodeForDotNet.Drawing.PageMarginsData,CodeForDotNet.Drawing.PageMarginsData)">
+            <summary>
+            Overrides the inequality operator to compare by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.PageMarginsData.Equals(System.Object)">
+            <summary>
+            Overrides the Equals method to compare by value,
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.PageMarginsData.GetHashCode">
+            <summary>
+            Gets a hash-code for this object based on current values.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.PageMarginsData.Copy">
+            <summary>
+            Copies this margins.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.PageMarginsData.Clone">
+            <summary>
+            Creates a copy of this object.
             </summary>
         </member>
         <member name="T:CodeForDotNet.Drawing.Quadrant">
@@ -3896,12 +4125,12 @@
             When no boundary was found this is set to -1 when no boundary was found.</param>
             <returns>True if the boundary was found, otherwise false.</returns>
         </member>
-        <member name="T:CodeForDotNet.Full.Net.NetworkExtensions">
+        <member name="T:CodeForDotNet.Net.NetworkExtensions">
             <summary>
             Networking extensions.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Full.Net.NetworkExtensions.GetFullHostName">
+        <member name="M:CodeForDotNet.Net.NetworkExtensions.GetFullHostName">
             <summary>
             Gets the host name and any domain (the FQDN) of the local computer.
             </summary>

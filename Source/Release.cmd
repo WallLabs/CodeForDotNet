@@ -14,8 +14,10 @@ if %errorlevel% neq 0 goto Error
 
 echo.
 echo Clean any previous builds...
-if exist "%~dp0Temp\Build" rmdir "%~dp0Temp\Build" /s /q
-if %errorlevel% neq 0 goto Error
+if exist "%~dp0Temp\Build" (
+    rmdir "%~dp0Temp\Build" /s /q
+    if %errorlevel% gtr 1 goto Error
+)
 
 echo.
 echo Versioning...
@@ -44,7 +46,7 @@ if %errorlevel% gtr 7 goto Error
 echo.
 echo Clean temporary files...
 rmdir "%~dp0Temp" /s /q
-if %errorlevel% neq 0 goto Error
+if %errorlevel% gtr 1 goto Error
 
 echo.
 echo Build all successful.

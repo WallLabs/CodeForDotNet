@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.NetworkInformation;
 
-namespace CodeForDotNet.Full.Net
+namespace CodeForDotNet.Net
 {
     /// <summary>
     /// Networking extensions.
