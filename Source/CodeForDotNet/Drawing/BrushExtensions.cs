@@ -13,12 +13,12 @@ namespace CodeForDotNet.Drawing
     /// </summary>
     public static class BrushExtensions
     {
-        #region Logical Brush Conversion
+        #region Brush Conversion
 
         /// <summary>
         /// Creates a .NET brush based on the current brush specification.
         /// </summary>
-        public static Brush MakeBrush(this LogicalBrush data, Rectangle bounds)
+        public static Brush MakeBrush(this BrushData data, Rectangle bounds)
         {
             return MakeBrush(data, bounds, false);
         }
@@ -27,7 +27,7 @@ namespace CodeForDotNet.Drawing
         /// Creates a .NET brush based on the current brush specification,
         /// optionally flipping the start and end colors.
         /// </summary>
-        public static Brush MakeBrush(this LogicalBrush data, Rectangle bounds, bool reverse)
+        public static Brush MakeBrush(this BrushData data, Rectangle bounds, bool reverse)
         {
             // Validate
             if (data == null) throw new ArgumentNullException(nameof(data));
@@ -35,23 +35,23 @@ namespace CodeForDotNet.Drawing
             // Make brush (according to type)
             switch (data.BrushType)
             {
-                case LogicalBrushType.SingleColor:
+                case BrushFillType.SingleColor:
                     {
                         // Single Color
                         if (!data.StartColor.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(LogicalBrush.StartColor)));
+                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.StartColor)));
                         return new SolidBrush(Color.FromArgb(data.StartColor.Value));
                     }
 
-                case LogicalBrushType.TwoColorGradient:
+                case BrushFillType.TwoColorGradient:
                     {
                         // Two color gradient
                         if (!data.StartColor.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(LogicalBrush.StartColor)));
+                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.StartColor)));
                         if (!data.EndColor.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(LogicalBrush.EndColor)));
+                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.EndColor)));
                         if (!data.Angle.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(LogicalBrush.Angle)));
+                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.Angle)));
                         Color startColor, endColor;
                         if (reverse)
                         {
@@ -67,15 +67,15 @@ namespace CodeForDotNet.Drawing
                                                          endColor, Decimal.ToSingle(data.Angle.Value));
                     }
 
-                case LogicalBrushType.Texture:
+                case BrushFillType.Texture:
                     {
                         // Texture
                         if (!data.Angle.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(LogicalBrush.Angle)));
+                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.Angle)));
                         if (!data.WrapMode.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(LogicalBrush.WrapMode)));
+                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.WrapMode)));
                         if (!data.Scale.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(LogicalBrush.Scale)));
+                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.Scale)));
 
                         // Make texture
                         Image image;
@@ -111,6 +111,6 @@ namespace CodeForDotNet.Drawing
             }
         }
 
-        #endregion
+        #endregion Brush Conversion
     }
 }

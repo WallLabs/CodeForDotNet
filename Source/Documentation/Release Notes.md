@@ -1,5 +1,10 @@
 # Code for .NET - Release Notes
 
+## Version 4.72.1809.13### (2018.09.13)
+* Fixed Variables.cmd script dependency to ensure dependency update and build scripts initialize from any command prompt.
+* KeyboardShortcut enumeration added, a platform independent copy of System.Windows.Forms.Shortcut.
+* Logical drawing styles renamed to clean "logical" word and replace with names like "data", which are closer to their purpose.
+
 ## Version 4.72.1807.24### (2018.07.24)
 * Migrated almost all code from .NET Full to Standard libraries.
 * Disambiguate Drawing.StringAlignment by renaming to LogicalStringAlignment.

@@ -9,12 +9,12 @@ namespace CodeForDotNet.Drawing
     /// </summary>
     public static class FontExtensions
     {
-        #region LogicalFont Conversion
+        #region Font Conversion
 
         /// <summary>
         /// Creates a <see cref="Font"/> with the current properties.
         /// </summary>
-        public static Font ToFont(this LogicalFont data)
+        public static Font ToFont(this FontData data)
         {
             // Validate
             if (data == null) throw new ArgumentNullException(nameof(data));
@@ -24,24 +24,24 @@ namespace CodeForDotNet.Drawing
         }
 
         /// <summary>
-        /// Creates a <see cref="LogicalFont"/> based on the parameters of an existing <see cref="Font"/>.
+        /// Creates a <see cref="FontData"/> based on the parameters of an existing <see cref="Font"/>.
         /// </summary>
         /// <remarks>
         /// The font is not touched by this instance other than to read it's properties
         /// and must be disposed as usual by the caller or other owner.
         /// </remarks>
-        public static LogicalFont ToLogicalFont(this Font font)
+        public static FontData ToData(this Font font)
         {
             // Validate
             if (font == null) throw new ArgumentNullException(nameof(font));
 
             // Initialize properties
-            return new LogicalFont(
+            return new FontData(
                 font.FontFamily.Name,
                 font.SizeInPoints,
-                (LogicalFontStyle)(int)font.Style);
+                (FontStyleData)(int)font.Style);
         }
 
-        #endregion
+        #endregion Font Conversion
     }
 }

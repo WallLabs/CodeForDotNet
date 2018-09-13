@@ -14,17 +14,17 @@ namespace CodeForDotNet.Tests.Facts
     public class DrawingTests
     {
         /// <summary>
-        /// Tests the <see cref="LogicalBrush"/> XML serialization.
+        /// Tests the <see cref="BrushData"/> XML serialization.
         /// </summary>
         [TestMethod]
-        public void DrawingTestLogicalBrushXmlSerialize()
+        public void DrawingTestBrushDataXmlSerialize()
         {
             // Create a test object and serialize
-            var brush1 = new LogicalBrush(Color.Black, Color.Blue, 45m);
+            var brush1 = new BrushData(Color.Black, Color.Blue, 45m);
             var brush1Xml = brush1.SerializeXml();
 
             // De-serialize the brush and check contents match
-            var brush2 = XmlSerializerExtensions.DeserializeXml<LogicalBrush>(brush1Xml);
+            var brush2 = XmlSerializerExtensions.DeserializeXml<BrushData>(brush1Xml);
             Assert.AreEqual(brush1, brush2);
 
             // Serialize again and check the XML matches
@@ -33,36 +33,36 @@ namespace CodeForDotNet.Tests.Facts
         }
 
         /// <summary>
-        /// Tests the <see cref="LogicalBrush"/> type conversion.
+        /// Tests the <see cref="BrushData"/> type conversion.
         /// </summary>
         [TestMethod]
-        public void DrawingTestLogicalBrushConversion()
+        public void DrawingTestBrushDataConversion()
         {
             // Create a test brush
-            var brush1 = new LogicalBrush(Color.Yellow);
+            var brush1 = new BrushData(Color.Yellow);
 
             // Convert to string
             var brush1String = brush1.ToString();
 
             // Convert from string
-            var brush2 = LogicalBrush.Parse(brush1String);
+            var brush2 = BrushData.Parse(brush1String);
 
             // Validate result
             Assert.AreEqual(brush1, brush2);
         }
 
         /// <summary>
-        /// Tests the <see cref="LogicalFont"/> XML serialization.
+        /// Tests the <see cref="FontData"/> XML serialization.
         /// </summary>
         [TestMethod]
-        public void DrawingTestLogicalFontXmlSerialize()
+        public void DrawingTestFontDataXmlSerialize()
         {
             // Create a test object and serialize
-            var font1 = new LogicalFont("Verdana", 10, (int)FontStyle.Regular);
+            var font1 = new FontData("Verdana", 10, (int)FontStyle.Regular);
             var font1Xml = font1.SerializeXml();
 
             // De-serialize the font and check contents match
-            var font2 = XmlSerializerExtensions.DeserializeXml<LogicalFont>(font1Xml);
+            var font2 = XmlSerializerExtensions.DeserializeXml<FontData>(font1Xml);
             Assert.AreEqual(font1, font2);
 
             // Serialize again and check the XML matches
@@ -93,7 +93,6 @@ namespace CodeForDotNet.Tests.Facts
                         path.AddLine(lastPoint, currentPoint);
                         vector.Angle += 0.01f;
                         lastPoint = currentPoint;
-
                     } while (vector.Angle < 360);
                     path.CloseFigure();
                     graphics.DrawPath(Pens.Black, path);

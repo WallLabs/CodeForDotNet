@@ -9,32 +9,32 @@ namespace CodeForDotNet.Drawing
     /// <summary>
     /// Brush data.
     /// </summary>
-    public class LogicalBrush : ICloneable
+    public class BrushData : ICloneable
     {
         #region Lifetime
 
         /// <summary>
         /// Creates the brush.
         /// </summary>
-        public LogicalBrush()
+        public BrushData()
         {
         }
 
         /// <summary>
         /// Creates a brush with a single color.
         /// </summary>
-        public LogicalBrush(Color startColor)
+        public BrushData(Color startColor)
         {
-            _brushType = LogicalBrushType.SingleColor;
+            _brushType = BrushFillType.SingleColor;
             StartColor = startColor.ToArgb();
         }
 
         /// <summary>
         /// Creates a brush with a two color gradient.
         /// </summary>
-        public LogicalBrush(Color startColor, Color endColor, Decimal angle)
+        public BrushData(Color startColor, Color endColor, Decimal angle)
         {
-            _brushType = LogicalBrushType.TwoColorGradient;
+            _brushType = BrushFillType.TwoColorGradient;
             StartColor = startColor.ToArgb();
             EndColor = endColor.ToArgb();
             Angle = angle;
@@ -43,23 +43,23 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Creates a brush with a texture.
         /// </summary>
-        public LogicalBrush(byte[] texture, Decimal angle, LogicalBrushWrapMode wrapMode, float scale)
+        public BrushData(byte[] texture, Decimal angle, BrushFillWrapMode wrapMode, float scale)
         {
-            _brushType = LogicalBrushType.Texture;
+            _brushType = BrushFillType.Texture;
             Texture = texture;
             Angle = angle;
             WrapMode = wrapMode;
             Scale = scale;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Properties
 
         /// <summary>
         /// TypeId of brush.
         /// </summary>
-        public LogicalBrushType BrushType
+        public BrushFillType BrushType
         {
             get
             {
@@ -72,7 +72,7 @@ namespace CodeForDotNet.Drawing
                 // Clear existing values and set new brush type
                 switch (value)
                 {
-                    case LogicalBrushType.SingleColor:
+                    case BrushFillType.SingleColor:
                         EndColor = null;
                         TextureId = null;
                         Texture = null;
@@ -81,14 +81,14 @@ namespace CodeForDotNet.Drawing
                         Scale = null;
                         break;
 
-                    case LogicalBrushType.TwoColorGradient:
+                    case BrushFillType.TwoColorGradient:
                         TextureId = null;
                         Texture = null;
                         WrapMode = null;
                         Scale = null;
                         break;
 
-                    case LogicalBrushType.Texture:
+                    case BrushFillType.Texture:
                         StartColor = null;
                         EndColor = null;
                         break;
@@ -96,7 +96,8 @@ namespace CodeForDotNet.Drawing
                 _brushType = value;
             }
         }
-        LogicalBrushType _brushType;
+
+        private BrushFillType _brushType;
 
         /// <summary>
         /// Start color, when relevant for the type.
@@ -152,7 +153,7 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Wrap mode, when relevant for the type, i.e. texture.
         /// </summary>
-        public LogicalBrushWrapMode? WrapMode { get; set; }
+        public BrushFillWrapMode? WrapMode { get; set; }
 
         /// <summary>
         /// Omits the <see cref="WrapMode"/> property from XML serialization when empty.
@@ -171,7 +172,7 @@ namespace CodeForDotNet.Drawing
         [XmlIgnore]
         public bool ScaleSpecified { get { return Scale.HasValue; } }
 
-        #endregion
+        #endregion Properties
 
         #region Public Methods
 
@@ -186,19 +187,19 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Creates an instance from a string.
         /// </summary>
-        public static LogicalBrush Parse(string value)
+        public static BrushData Parse(string value)
         {
-            return XmlSerializerExtensions.DeserializeXml<LogicalBrush>(value);
+            return XmlSerializerExtensions.DeserializeXml<BrushData>(value);
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Operators
 
         /// <summary>
         /// Overrides the equality operator to compare by value.
         /// </summary>
-        public static bool operator ==(LogicalBrush brush1, LogicalBrush brush2)
+        public static bool operator ==(BrushData brush1, BrushData brush2)
         {
             return Equals(brush1, brush2);
         }
@@ -206,7 +207,7 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Overrides the inequality operator to compare by value.
         /// </summary>
-        public static bool operator !=(LogicalBrush brush1, LogicalBrush brush2)
+        public static bool operator !=(BrushData brush1, BrushData brush2)
         {
             return !Equals(brush1, brush2);
         }
@@ -219,7 +220,7 @@ namespace CodeForDotNet.Drawing
         public override bool Equals(object obj)
         {
             // Check type and nullability
-            var other = obj as LogicalBrush;
+            var other = obj as BrushData;
             if (other is null)
                 return false;
 
@@ -248,25 +249,25 @@ namespace CodeForDotNet.Drawing
                 BrushType.GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
         #region ICloneable Members
 
         /// <summary>
         /// Copies this brush.
         /// </summary>
-        public LogicalBrush Copy()
+        public BrushData Copy()
         {
-            return new LogicalBrush
-                       {
-                           BrushType = BrushType,
-                           StartColor = StartColor,
-                           EndColor = EndColor,
-                           Texture = Texture != null ? (byte[])Texture.Clone() : null,
-                           WrapMode = WrapMode,
-                           Angle = Angle,
-                           Scale = Scale
-                       };
+            return new BrushData
+            {
+                BrushType = BrushType,
+                StartColor = StartColor,
+                EndColor = EndColor,
+                Texture = Texture != null ? (byte[])Texture.Clone() : null,
+                WrapMode = WrapMode,
+                Angle = Angle,
+                Scale = Scale
+            };
         }
 
         /// <summary>
@@ -277,6 +278,6 @@ namespace CodeForDotNet.Drawing
             return Copy();
         }
 
-        #endregion
+        #endregion ICloneable Members
     }
 }

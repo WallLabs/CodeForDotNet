@@ -6,7 +6,7 @@ namespace CodeForDotNet.Drawing
     /// Brush type.
     /// </summary>
     [Serializable]
-    public enum LogicalBrushType
+    public enum BrushFillType
     {
         /// <summary>
         /// A simple, single color brush.

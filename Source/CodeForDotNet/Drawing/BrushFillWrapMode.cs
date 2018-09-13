@@ -4,7 +4,7 @@
     /// Defines a texture or gradient wrapping mode agnostic to any API
     /// for future-proof data serialization and cross-platform.
     /// </summary>
-    public enum LogicalBrushWrapMode
+    public enum BrushFillWrapMode
     {
         /// <summary>
         /// The texture or gradient is not tiled.

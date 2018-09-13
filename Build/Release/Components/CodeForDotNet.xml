@@ -3032,20 +3032,210 @@
             or released.
             </summary>
         </member>
+        <member name="T:CodeForDotNet.Drawing.BrushData">
+            <summary>
+            Brush data.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushData.#ctor">
+            <summary>
+            Creates the brush.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushData.#ctor(System.Drawing.Color)">
+            <summary>
+            Creates a brush with a single color.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushData.#ctor(System.Drawing.Color,System.Drawing.Color,System.Decimal)">
+            <summary>
+            Creates a brush with a two color gradient.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushData.#ctor(System.Byte[],System.Decimal,CodeForDotNet.Drawing.BrushFillWrapMode,System.Single)">
+            <summary>
+            Creates a brush with a texture.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.BrushType">
+            <summary>
+            TypeId of brush.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.StartColor">
+            <summary>
+            Start color, when relevant for the type.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.StartColorSpecified">
+            <summary>
+            Omits the <see cref="P:CodeForDotNet.Drawing.BrushData.StartColor"/> property from XML serialization when empty.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.EndColor">
+            <summary>
+            End color, when relevant for the type.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.EndColorSpecified">
+            <summary>
+            Omits the <see cref="P:CodeForDotNet.Drawing.BrushData.EndColor"/> property from XML serialization when empty.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.Angle">
+            <summary>
+            Angle, when relevant for the type.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.AngleSpecified">
+            <summary>
+            Omits the <see cref="P:CodeForDotNet.Drawing.BrushData.Angle"/> property from XML serialization when empty.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.TextureId">
+            <summary>
+            Texture ID, used to correlate with media libraries,
+            enabling re-use of images for performance and to reduce
+            disk space when saved.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.Texture">
+            <summary>
+            Texture, when relevant for the type.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.TextureSpecified">
+            <summary>
+            Omits the <see cref="P:CodeForDotNet.Drawing.BrushData.Texture"/> property from XML serialization when empty.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.WrapMode">
+            <summary>
+            Wrap mode, when relevant for the type, i.e. texture.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.WrapModeSpecified">
+            <summary>
+            Omits the <see cref="P:CodeForDotNet.Drawing.BrushData.WrapMode"/> property from XML serialization when empty.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.Scale">
+            <summary>
+            Scaling factor, when relevant for the type.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.BrushData.ScaleSpecified">
+            <summary>
+            Omits the <see cref="P:CodeForDotNet.Drawing.BrushData.Scale"/> property from XML serialization when empty.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushData.ToString">
+            <summary>
+            Converts the brush to an XML string.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushData.Parse(System.String)">
+            <summary>
+            Creates an instance from a string.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushData.op_Equality(CodeForDotNet.Drawing.BrushData,CodeForDotNet.Drawing.BrushData)">
+            <summary>
+            Overrides the equality operator to compare by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushData.op_Inequality(CodeForDotNet.Drawing.BrushData,CodeForDotNet.Drawing.BrushData)">
+            <summary>
+            Overrides the inequality operator to compare by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushData.Equals(System.Object)">
+            <summary>
+            Overrides the Equals method to compare by value,
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushData.GetHashCode">
+            <summary>
+            Gets a hash-code for this object based on current values.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushData.Copy">
+            <summary>
+            Copies this brush.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.BrushData.Clone">
+            <summary>
+            Creates a copy of this object.
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.Drawing.BrushExtensions">
             <summary>
             Extensions for work with <see cref="T:System.Drawing.Brush"/> types.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.BrushExtensions.MakeBrush(CodeForDotNet.Drawing.LogicalBrush,System.Drawing.Rectangle)">
+        <member name="M:CodeForDotNet.Drawing.BrushExtensions.MakeBrush(CodeForDotNet.Drawing.BrushData,System.Drawing.Rectangle)">
             <summary>
             Creates a .NET brush based on the current brush specification.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.BrushExtensions.MakeBrush(CodeForDotNet.Drawing.LogicalBrush,System.Drawing.Rectangle,System.Boolean)">
+        <member name="M:CodeForDotNet.Drawing.BrushExtensions.MakeBrush(CodeForDotNet.Drawing.BrushData,System.Drawing.Rectangle,System.Boolean)">
             <summary>
             Creates a .NET brush based on the current brush specification,
             optionally flipping the start and end colors.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Drawing.BrushFillType">
+            <summary>
+            Brush type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.BrushFillType.SingleColor">
+            <summary>
+            A simple, single color brush.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.BrushFillType.TwoColorGradient">
+            <summary>
+            A two color brush with a gradient between the start and end color.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.BrushFillType.Texture">
+            <summary>
+            A texture brush.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Drawing.BrushFillWrapMode">
+            <summary>
+            Defines a texture or gradient wrapping mode agnostic to any API
+            for future-proof data serialization and cross-platform.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.BrushFillWrapMode.Clamp">
+            <summary>
+            The texture or gradient is not tiled.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.BrushFillWrapMode.Tile">
+            <summary>
+            Tiles the gradient or texture.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.BrushFillWrapMode.TileFlipX">
+            <summary>
+            Reverses the texture or gradient horizontally and then tiles the texture or gradient.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.BrushFillWrapMode.TileFlipXY">
+            <summary>
+            Reverses the texture or gradient horizontally and vertically and then tiles the texture or gradient.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.BrushFillWrapMode.TileFlipY">
+            <summary>
+            Reverses the texture or gradient vertically and then tiles the texture or gradient.
             </summary>
         </member>
         <member name="T:CodeForDotNet.Drawing.ColorCollection">
@@ -3079,24 +3269,120 @@
             Converts the color to a hexadecimal ARGB string, e.g. #AARRGGBB.
             </summary>
         </member>
+        <member name="T:CodeForDotNet.Drawing.FontData">
+            <summary>
+            Font data, disconnected from any API dependencies, useful for
+            future proof serialization and cross-platform.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.FontData.#ctor">
+            <summary>
+            Creates an empty instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.FontData.#ctor(System.String,System.Single,CodeForDotNet.Drawing.FontStyleData)">
+            <summary>
+            Creates an instance with the specified properties.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.FontData.op_Equality(CodeForDotNet.Drawing.FontData,CodeForDotNet.Drawing.FontData)">
+            <summary>
+            Overrides the equality operator to compare by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.FontData.op_Inequality(CodeForDotNet.Drawing.FontData,CodeForDotNet.Drawing.FontData)">
+            <summary>
+            Overrides the inequality operator to compare by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.FontData.Equals(System.Object)">
+            <summary>
+            Overrides the Equals method to compare by value,
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.FontData.GetHashCode">
+            <summary>
+            Gets a hash-code for this object based on current values.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.FontData.Family">
+            <summary>
+            Font family.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.FontData.Size">
+            <summary>
+            Font size in "em" points.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.FontData.Style">
+            <summary>
+            Font style.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.FontData.ToString">
+            <summary>
+            Converts the brush to an XML string.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.FontData.Parse(System.String)">
+            <summary>
+            Creates an instance from a string.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.FontData.Copy">
+            <summary>
+            Creates a copy of this object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.FontData.Clone">
+            <summary>
+            Creates a copy of this object.
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.Drawing.FontExtensions">
             <summary>
             Extensions for work with <see cref="T:System.Drawing.Font"/> types.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.FontExtensions.ToFont(CodeForDotNet.Drawing.LogicalFont)">
+        <member name="M:CodeForDotNet.Drawing.FontExtensions.ToFont(CodeForDotNet.Drawing.FontData)">
             <summary>
             Creates a <see cref="T:System.Drawing.Font"/> with the current properties.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.FontExtensions.ToLogicalFont(System.Drawing.Font)">
+        <member name="M:CodeForDotNet.Drawing.FontExtensions.ToData(System.Drawing.Font)">
             <summary>
-            Creates a <see cref="T:CodeForDotNet.Drawing.LogicalFont"/> based on the parameters of an existing <see cref="T:System.Drawing.Font"/>.
+            Creates a <see cref="T:CodeForDotNet.Drawing.FontData"/> based on the parameters of an existing <see cref="T:System.Drawing.Font"/>.
             </summary>
             <remarks>
             The font is not touched by this instance other than to read it's properties
             and must be disposed as usual by the caller or other owner.
             </remarks>
+        </member>
+        <member name="T:CodeForDotNet.Drawing.FontStyleData">
+            <summary>
+            Font style, defined separately from any API so it can be used in future proof
+            data serialization and cross-platform applications.
+            </summary>
+            <remarks>
+            Member names and values map directly to the Universal Windows contract.
+            </remarks>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.FontStyleData.Normal">
+            <summary>
+            Normal.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.FontStyleData.Oblique">
+            <summary>
+            Oblique style.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.FontStyleData.Italic">
+            <summary>
+            Italic.
+            </summary>
         </member>
         <member name="T:CodeForDotNet.Drawing.ImageExtensions">
             <summary>
@@ -3164,311 +3450,781 @@
             <param name="contentType">MIME content type.</param>
             <returns>Image format or null when unsupported.</returns>
         </member>
-        <member name="T:CodeForDotNet.Drawing.LogicalBrush">
+        <member name="T:CodeForDotNet.Drawing.KeyboardShortcut">
             <summary>
-            Brush data.
+            Keyboard shortcut data, disconnected from any API dependencies, useful for
+            future proof serialization and cross-platform. A copy of System.Windows.Forms.Shortcut.
+            Specifies shortcut keys that can be used by menu items.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalBrush.#ctor">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.None">
             <summary>
-            Creates the brush.
+            No shortcut key is associated with the menu item.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalBrush.#ctor(System.Drawing.Color)">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ins">
             <summary>
-            Creates a brush with a single color.
+            The shortcut key INSERT.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalBrush.#ctor(System.Drawing.Color,System.Drawing.Color,System.Decimal)">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Del">
             <summary>
-            Creates a brush with a two color gradient.
+            The shortcut key DELETE.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalBrush.#ctor(System.Byte[],System.Decimal,CodeForDotNet.Drawing.LogicalBrushWrapMode,System.Single)">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F1">
             <summary>
-            Creates a brush with a texture.
+            The shortcut key F1.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.BrushType">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F2">
             <summary>
-            TypeId of brush.
+            The shortcut key F2.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.StartColor">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F3">
             <summary>
-            Start color, when relevant for the type.
+            The shortcut key F3.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.StartColorSpecified">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F4">
             <summary>
-            Omits the <see cref="P:CodeForDotNet.Drawing.LogicalBrush.StartColor"/> property from XML serialization when empty.
+            The shortcut key F4.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.EndColor">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F5">
             <summary>
-            End color, when relevant for the type.
+            The shortcut key F5.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.EndColorSpecified">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F6">
             <summary>
-            Omits the <see cref="P:CodeForDotNet.Drawing.LogicalBrush.EndColor"/> property from XML serialization when empty.
+            The shortcut key F6.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.Angle">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F7">
             <summary>
-            Angle, when relevant for the type.
+            The shortcut key F7.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.AngleSpecified">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F8">
             <summary>
-            Omits the <see cref="P:CodeForDotNet.Drawing.LogicalBrush.Angle"/> property from XML serialization when empty.
+            The shortcut key F8.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.TextureId">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F9">
             <summary>
-            Texture ID, used to correlate with media libraries,
-            enabling re-use of images for performance and to reduce
-            disk space when saved.
+            The shortcut key F9.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.Texture">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F10">
             <summary>
-            Texture, when relevant for the type.
+            The shortcut key F10.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.TextureSpecified">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F11">
             <summary>
-            Omits the <see cref="P:CodeForDotNet.Drawing.LogicalBrush.Texture"/> property from XML serialization when empty.
+            The shortcut key F11.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.WrapMode">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.F12">
             <summary>
-            Wrap mode, when relevant for the type, i.e. texture.
+            The shortcut key F12.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.WrapModeSpecified">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftIns">
             <summary>
-            Omits the <see cref="P:CodeForDotNet.Drawing.LogicalBrush.WrapMode"/> property from XML serialization when empty.
+            The shortcut keys SHIFT+INSERT.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.Scale">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftDel">
             <summary>
-            Scaling factor, when relevant for the type.
+            The shortcut keys SHIFT+DELETE.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalBrush.ScaleSpecified">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF1">
             <summary>
-            Omits the <see cref="P:CodeForDotNet.Drawing.LogicalBrush.Scale"/> property from XML serialization when empty.
+            The shortcut keys SHIFT+F1.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalBrush.ToString">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF2">
             <summary>
-            Converts the brush to an XML string.
+            The shortcut keys SHIFT+F2.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalBrush.Parse(System.String)">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF3">
             <summary>
-            Creates an instance from a string.
+            The shortcut keys SHIFT+F3.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalBrush.op_Equality(CodeForDotNet.Drawing.LogicalBrush,CodeForDotNet.Drawing.LogicalBrush)">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF4">
             <summary>
-            Overrides the equality operator to compare by value.
+            The shortcut keys SHIFT+F4.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalBrush.op_Inequality(CodeForDotNet.Drawing.LogicalBrush,CodeForDotNet.Drawing.LogicalBrush)">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF5">
             <summary>
-            Overrides the inequality operator to compare by value.
+            The shortcut keys SHIFT+F5.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalBrush.Equals(System.Object)">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF6">
             <summary>
-            Overrides the Equals method to compare by value,
-            </summary>
-            <param name="obj"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalBrush.GetHashCode">
-            <summary>
-            Gets a hash-code for this object based on current values.
+            The shortcut keys SHIFT+F6.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalBrush.Copy">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF7">
             <summary>
-            Copies this brush.
+            The shortcut keys SHIFT+F7.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalBrush.Clone">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF8">
             <summary>
-            Creates a copy of this object.
+            The shortcut keys SHIFT+F8.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Drawing.LogicalBrushType">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF9">
             <summary>
-            Brush type.
+            The shortcut keys SHIFT+F9.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalBrushType.SingleColor">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF10">
             <summary>
-            A simple, single color brush.
+            The shortcut keys SHIFT+F10.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalBrushType.TwoColorGradient">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF11">
             <summary>
-            A two color brush with a gradient between the start and end color.
+            The shortcut keys SHIFT+F11.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalBrushType.Texture">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.ShiftF12">
             <summary>
-            A texture brush.
+            The shortcut keys SHIFT+F12.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Drawing.LogicalBrushWrapMode">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlIns">
             <summary>
-            Defines a texture or gradient wrapping mode agnostic to any API
-            for future-proof data serialization and cross-platform.
+            The shortcut keys CTRL+INSERT.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalBrushWrapMode.Clamp">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlDel">
             <summary>
-            The texture or gradient is not tiled.
+            The shortcut keys CTRL+DELETE.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalBrushWrapMode.Tile">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl0">
             <summary>
-            Tiles the gradient or texture.
+            The shortcut keys CTRL+0.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalBrushWrapMode.TileFlipX">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl1">
             <summary>
-            Reverses the texture or gradient horizontally and then tiles the texture or gradient.
+            The shortcut keys CTRL+1.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalBrushWrapMode.TileFlipXY">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl2">
             <summary>
-            Reverses the texture or gradient horizontally and vertically and then tiles the texture or gradient.
+            The shortcut keys CTRL+2.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalBrushWrapMode.TileFlipY">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl3">
             <summary>
-            Reverses the texture or gradient vertically and then tiles the texture or gradient.
+            The shortcut keys CTRL+3.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Drawing.LogicalFont">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl4">
             <summary>
-            Logical font disconnected from any API dependencies, useful for
-            future proof serialization and cross-platform.
+            The shortcut keys CTRL+4.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.#ctor">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl5">
             <summary>
-            Creates an empty instance.
+            The shortcut keys CTRL+5.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.#ctor(System.String,System.Single,CodeForDotNet.Drawing.LogicalFontStyle)">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl6">
             <summary>
-            Creates an instance with the specified properties.
+            The shortcut keys CTRL+6.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.op_Equality(CodeForDotNet.Drawing.LogicalFont,CodeForDotNet.Drawing.LogicalFont)">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl7">
             <summary>
-            Overrides the equality operator to compare by value.
+            The shortcut keys CTRL+7.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.op_Inequality(CodeForDotNet.Drawing.LogicalFont,CodeForDotNet.Drawing.LogicalFont)">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl8">
             <summary>
-            Overrides the inequality operator to compare by value.
+            The shortcut keys CTRL+8.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.Equals(System.Object)">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Ctrl9">
             <summary>
-            Overrides the Equals method to compare by value,
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.GetHashCode">
-            <summary>
-            Gets a hash-code for this object based on current values.
+            The shortcut keys CTRL+9.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalFont.Family">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlA">
             <summary>
-            Font family.
+            The shortcut keys CTRL+A.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalFont.Size">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlB">
             <summary>
-            Font size in "em" points.
+            The shortcut keys CTRL+B.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Drawing.LogicalFont.Style">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlC">
             <summary>
-            Font style.
+            The shortcut keys CTRL+C.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.ToString">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlD">
             <summary>
-            Converts the brush to an XML string.
+            The shortcut keys CTRL+D.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.Parse(System.String)">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlE">
             <summary>
-            Creates an instance from a string.
+            The shortcut keys CTRL+E.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.Copy">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF">
             <summary>
-            Creates a copy of this object.
+            The shortcut keys CTRL+F.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.LogicalFont.Clone">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlG">
             <summary>
-            Creates a copy of this object.
+            The shortcut keys CTRL+G.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Drawing.LogicalFontStyle">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlH">
             <summary>
-            Logical font style, defined separately from any API so it can be used in future proof
-            data serialization and cross-platform applications.
-            </summary>
-            <remarks>
-            Member names and values map directly to the Universal Windows contract.
-            </remarks>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalFontStyle.Normal">
-            <summary>
-            Normal.
+            The shortcut keys CTRL+H.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalFontStyle.Oblique">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlI">
             <summary>
-            Oblique style.
+            The shortcut keys CTRL+I.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalFontStyle.Italic">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlJ">
             <summary>
-            Italic.
+            The shortcut keys CTRL+J.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Drawing.LogicalStringAlignment">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlK">
             <summary>
-            String alignment disconnected from any API dependencies, useful for
-            future proof serialization and cross-platform.
+            The shortcut keys CTRL+K.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalStringAlignment.Near">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlL">
             <summary>
-            Near to the start of the line (according to writing direction).
+            The shortcut keys CTRL+L.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalStringAlignment.Center">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlM">
             <summary>
-            Centered.
+            The shortcut keys CTRL+M.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.LogicalStringAlignment.Far">
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlN">
             <summary>
-            Far from the start of the line (according to writing direction).
+            The shortcut keys CTRL+N.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlO">
+            <summary>
+            The shortcut keys CTRL+O.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlP">
+            <summary>
+            The shortcut keys CTRL+P.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlQ">
+            <summary>
+            The shortcut keys CTRL+Q.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlR">
+            <summary>
+            The shortcut keys CTRL+R.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlS">
+            <summary>
+            The shortcut keys CTRL+S.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlT">
+            <summary>
+            The shortcut keys CTRL+T.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlU">
+            <summary>
+            The shortcut keys CTRL+U.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlV">
+            <summary>
+            The shortcut keys CTRL+V.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlW">
+            <summary>
+            The shortcut keys CTRL+W.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlX">
+            <summary>
+            The shortcut keys CTRL+X.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlY">
+            <summary>
+            The shortcut keys CTRL+Y.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlZ">
+            <summary>
+            The shortcut keys CTRL+Z.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF1">
+            <summary>
+            The shortcut keys CTRL+F1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF2">
+            <summary>
+            The shortcut keys CTRL+F2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF3">
+            <summary>
+            The shortcut keys CTRL+F3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF4">
+            <summary>
+            The shortcut keys CTRL+F4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF5">
+            <summary>
+            The shortcut keys CTRL+F5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF6">
+            <summary>
+            The shortcut keys CTRL+F6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF7">
+            <summary>
+            The shortcut keys CTRL+F7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF8">
+            <summary>
+            The shortcut keys CTRL+F8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF9">
+            <summary>
+            The shortcut keys CTRL+F9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF10">
+            <summary>
+            The shortcut keys CTRL+F10.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF11">
+            <summary>
+            The shortcut keys CTRL+F11.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlF12">
+            <summary>
+            The shortcut keys CTRL+F12.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift0">
+            <summary>
+            The shortcut keys CTRL+SHIFT+0.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift1">
+            <summary>
+            The shortcut keys CTRL+SHIFT+1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift2">
+            <summary>
+            The shortcut keys CTRL+SHIFT+2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift3">
+            <summary>
+            The shortcut keys CTRL+SHIFT+3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift4">
+            <summary>
+            The shortcut keys CTRL+SHIFT+4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift5">
+            <summary>
+            The shortcut keys CTRL+SHIFT+5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift6">
+            <summary>
+            The shortcut keys CTRL+SHIFT+6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift7">
+            <summary>
+            The shortcut keys CTRL+SHIFT+7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift8">
+            <summary>
+            The shortcut keys CTRL+SHIFT+8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShift9">
+            <summary>
+            The shortcut keys CTRL+SHIFT+9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftA">
+            <summary>
+            The shortcut keys CTRL+SHIFT+A.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftB">
+            <summary>
+            The shortcut keys CTRL+SHIFT+B.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftC">
+            <summary>
+            The shortcut keys CTRL+SHIFT+C.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftD">
+            <summary>
+            The shortcut keys CTRL+SHIFT+D.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftE">
+            <summary>
+            The shortcut keys CTRL+SHIFT+E.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftG">
+            <summary>
+            The shortcut keys CTRL+SHIFT+G.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftH">
+            <summary>
+            The shortcut keys CTRL+SHIFT+H.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftI">
+            <summary>
+            The shortcut keys CTRL+SHIFT+I.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftJ">
+            <summary>
+            The shortcut keys CTRL+SHIFT+J.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftK">
+            <summary>
+            The shortcut keys CTRL+SHIFT+K.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftL">
+            <summary>
+            The shortcut keys CTRL+SHIFT+L.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftM">
+            <summary>
+            The shortcut keys CTRL+SHIFT+M.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftN">
+            <summary>
+            The shortcut keys CTRL+SHIFT+N.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftO">
+            <summary>
+            The shortcut keys CTRL+SHIFT+O.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftP">
+            <summary>
+            The shortcut keys CTRL+SHIFT+P.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftQ">
+            <summary>
+            The shortcut keys CTRL+SHIFT+Q.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftR">
+            <summary>
+            The shortcut keys CTRL+SHIFT+R.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftS">
+            <summary>
+            The shortcut keys CTRL+SHIFT+S.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftT">
+            <summary>
+            The shortcut keys CTRL+SHIFT+T.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftU">
+            <summary>
+            The shortcut keys CTRL+SHIFT+U.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftV">
+            <summary>
+            The shortcut keys CTRL+SHIFT+V.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftW">
+            <summary>
+            The shortcut keys CTRL+SHIFT+W.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftX">
+            <summary>
+            The shortcut keys CTRL+SHIFT+X.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftY">
+            <summary>
+            The shortcut keys CTRL+SHIFT+Y.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftZ">
+            <summary>
+            The shortcut keys CTRL+SHIFT+Z.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF1">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF2">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF3">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF4">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF5">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF6">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF7">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF8">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF9">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF10">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F10.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF11">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F11.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.CtrlShiftF12">
+            <summary>
+            The shortcut keys CTRL+SHIFT+F12.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltBksp">
+            <summary>
+            The shortcut keys ALT+BACKSPACE.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltLeftArrow">
+            <summary>
+            The shortcut keys ALT+LEFTARROW.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltUpArrow">
+            <summary>
+            The shortcut keys ALT+UPARROW.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltRightArrow">
+            <summary>
+            The shortcut keys ALT+RIGHTARROW.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltDownArrow">
+            <summary>
+            The shortcut keys ALT+DOWNARROW.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt0">
+            <summary>
+            The shortcut keys ALT+0.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt1">
+            <summary>
+            The shortcut keys ALT+1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt2">
+            <summary>
+            The shortcut keys ALT+2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt3">
+            <summary>
+            The shortcut keys ALT+3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt4">
+            <summary>
+            The shortcut keys ALT+4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt5">
+            <summary>
+            The shortcut keys ALT+5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt6">
+            <summary>
+            The shortcut keys ALT+6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt7">
+            <summary>
+            The shortcut keys ALT+7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt8">
+            <summary>
+            The shortcut keys ALT+8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.Alt9">
+            <summary>
+            The shortcut keys ALT+9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF1">
+            <summary>
+            The shortcut keys ALT+F1.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF2">
+            <summary>
+            The shortcut keys ALT+F2.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF3">
+            <summary>
+            The shortcut keys ALT+F3.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF4">
+            <summary>
+            The shortcut keys ALT+F4.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF5">
+            <summary>
+            The shortcut keys ALT+F5.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF6">
+            <summary>
+            The shortcut keys ALT+F6.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF7">
+            <summary>
+            The shortcut keys ALT+F7.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF8">
+            <summary>
+            The shortcut keys ALT+F8.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF9">
+            <summary>
+            The shortcut keys ALT+F9.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF10">
+            <summary>
+            The shortcut keys ALT+F10.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF11">
+            <summary>
+            The shortcut keys ALT+F11.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.KeyboardShortcut.AltF12">
+            <summary>
+            The shortcut keys ALT+F12.
             </summary>
         </member>
         <member name="T:CodeForDotNet.Drawing.PointExtensions">
@@ -3746,6 +4502,27 @@
         <member name="F:CodeForDotNet.Drawing.Quadrant.TopLeft">
             <summary>
             270 to 359 degrees
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Drawing.StringHorizontalAlignment">
+            <summary>
+            String alignment disconnected from any API dependencies, useful for
+            future proof serialization and cross-platform.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.StringHorizontalAlignment.Near">
+            <summary>
+            Near to the start of the line (according to writing direction).
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.StringHorizontalAlignment.Center">
+            <summary>
+            Centered.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Drawing.StringHorizontalAlignment.Far">
+            <summary>
+            Far from the start of the line (according to writing direction).
             </summary>
         </member>
         <member name="T:CodeForDotNet.Drawing.Vector2">

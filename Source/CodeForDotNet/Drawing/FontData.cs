@@ -4,24 +4,24 @@ using System;
 namespace CodeForDotNet.Drawing
 {
     /// <summary>
-    /// Logical font disconnected from any API dependencies, useful for
+    /// Font data, disconnected from any API dependencies, useful for
     /// future proof serialization and cross-platform.
     /// </summary>
-    public class LogicalFont : ICloneable
+    public class FontData : ICloneable
     {
         #region Lifetime
 
         /// <summary>
         /// Creates an empty instance.
         /// </summary>
-        public LogicalFont()
+        public FontData()
         {
         }
 
         /// <summary>
         /// Creates an instance with the specified properties.
         /// </summary>
-        public LogicalFont(string family, float size, LogicalFontStyle style)
+        public FontData(string family, float size, FontStyleData style)
         {
             // Initialize properties
             Family = family;
@@ -29,14 +29,14 @@ namespace CodeForDotNet.Drawing
             Style = style;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Operators
 
         /// <summary>
         /// Overrides the equality operator to compare by value.
         /// </summary>
-        public static bool operator ==(LogicalFont font1, LogicalFont font2)
+        public static bool operator ==(FontData font1, FontData font2)
         {
             return Equals(font1, font2);
         }
@@ -44,7 +44,7 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Overrides the inequality operator to compare by value.
         /// </summary>
-        public static bool operator !=(LogicalFont font1, LogicalFont font2)
+        public static bool operator !=(FontData font1, FontData font2)
         {
             return !Equals(font1, font2);
         }
@@ -56,7 +56,7 @@ namespace CodeForDotNet.Drawing
         public override bool Equals(object obj)
         {
             // Check type
-            var other = obj as LogicalFont;
+            var other = obj as FontData;
 
             // Check nullability without operator (would cause endless loop)
             if (other is null)
@@ -80,7 +80,7 @@ namespace CodeForDotNet.Drawing
                 Style.GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
         #region Public Properties
 
@@ -97,9 +97,9 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Font style.
         /// </summary>
-        public LogicalFontStyle Style { get; set; }
+        public FontStyleData Style { get; set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -114,21 +114,21 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Creates an instance from a string.
         /// </summary>
-        public static LogicalFont Parse(string value)
+        public static FontData Parse(string value)
         {
-            return XmlSerializerExtensions.DeserializeXml<LogicalFont>(value);
+            return XmlSerializerExtensions.DeserializeXml<FontData>(value);
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region ICloneable Members
 
         /// <summary>
         /// Creates a copy of this object.
         /// </summary>
-        public LogicalFont Copy()
+        public FontData Copy()
         {
-            return new LogicalFont(Family, Size, Style);
+            return new FontData(Family, Size, Style);
         }
 
         /// <summary>
@@ -139,6 +139,6 @@ namespace CodeForDotNet.Drawing
             return Copy();
         }
 
-        #endregion
+        #endregion ICloneable Members
     }
 }
