@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,6 +49,12 @@
     <Compile Include="UI\Controls\NumericTextBox.cs" />
     <Compile Include="UI\Controls\NumericTextBoxNumberBase.cs" />
     <Compile Include="UI\Controls\TextBoxExtensions.cs" />
+    <Compile Include="UI\Converters\ByteToHexStringValueConverter.cs" />
+    <Compile Include="UI\Converters\ConvertibleValueConverter.cs" />
+    <Compile Include="UI\Converters\EnumerationValueConverter.cs" />
+    <Compile Include="UI\Converters\IsNullToBooleanValueConverter.cs" />
+    <Compile Include="UI\Models\UIModelApplication.cs" />
+    <Compile Include="UI\Models\UIModelPage.cs" />
     <Compile Include="UI\PageApplicationBase.cs" />
     <Compile Include="UI\PageBase.cs" />
     <Compile Include="UI\PageModelBase.cs" />
@@ -56,13 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.1.7</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.0.180717002-prerelease</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.UI.Xaml.Core.Direct">
-      <Version>2.0.180723002-prerelease</Version>
+      <Version>6.1.9</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -84,13 +84,18 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CodeForDotNet.UI\CodeForDotNet.UI.csproj">
+      <Project>{378E9B01-B3BD-4887-AF40-C22D94281F74}</Project>
+      <Name>CodeForDotNet.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CodeForDotNet\CodeForDotNet.csproj">
       <Project>{3e6bbb03-d73e-48b3-9428-10b5102c2812}</Project>
       <Name>CodeForDotNet</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
-    <VisualStudioVersion>14.0</VisualStudioVersion>
+    <VisualStudioVersion>15.0</VisualStudioVersion>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

@@ -1,11 +1,11 @@
+using CodeForDotNet.Collections;
+using CodeForDotNet.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Serialization;
-using CodeForDotNet.Collections;
-using CodeForDotNet.Properties;
 
 namespace CodeForDotNet.Data
 {
@@ -33,7 +33,7 @@ namespace CodeForDotNet.Data
         /// </summary>
         public const string XmlNamespace = Constants.XmlRootNamespace;
 
-        #endregion
+        #endregion Constants
 
         #region Operators
 
@@ -42,10 +42,7 @@ namespace CodeForDotNet.Data
         /// </summary>
         public static bool operator ==(ScheduleItemCollection scheduleItem1, ScheduleItemCollection scheduleItem2)
         {
-            if (!ReferenceEquals(scheduleItem1, null))
-                return scheduleItem1.Equals(scheduleItem2);
-
-            return ReferenceEquals(scheduleItem2, null);
+            return scheduleItem1?.Equals(scheduleItem2) ?? scheduleItem2 is null;
         }
 
         /// <summary>
@@ -53,35 +50,28 @@ namespace CodeForDotNet.Data
         /// </summary>
         public static bool operator !=(ScheduleItemCollection scheduleItem1, ScheduleItemCollection scheduleItem2)
         {
-            if (!ReferenceEquals(scheduleItem1, null))
-                return !scheduleItem1.Equals(scheduleItem2);
-
-            return !ReferenceEquals(scheduleItem2, null);
+            return !(scheduleItem1?.Equals(scheduleItem2) ?? scheduleItem2 is null);
         }
 
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        public override bool Equals(object obj)
+        public override bool Equals(object other)
         {
             // Compare nullability and type
-            var other = obj as ScheduleItemCollection;
-            if (ReferenceEquals(other, null))
+            if (other is null || !(other is ScheduleItemCollection otherCollection))
                 return false;
 
             // Compare values
-            return ArrayExtensions.AreEqual(this, other);
+            return ArrayExtensions.AreEqual(this, otherCollection);
         }
 
         /// <summary>
         /// Returns a hash-code based on the current value of this object.
         /// </summary>
-        public override int GetHashCode()
-        {
-            return this.GetHashCodeOfItems();
-        }
+        public override int GetHashCode() => ArrayExtensions.GetHashCode(this);
 
-        #endregion
+        #endregion Operators
 
         #region Lifetime
 
@@ -95,7 +85,7 @@ namespace CodeForDotNet.Data
         /// </summary>
         public ScheduleItemCollection(IList<ScheduleItem> list) : base(list) { }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Methods
 
@@ -127,6 +117,6 @@ namespace CodeForDotNet.Data
             return null;
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

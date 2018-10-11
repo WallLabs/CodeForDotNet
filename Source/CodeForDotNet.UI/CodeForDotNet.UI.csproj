@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>C:\Users\tonyw\Source\GitHub\CodeForDotNet\Source\Common\Code for .NET.snk</AssemblyOriginatorKeyFile>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <DocumentationFile>C:\Users\tonyw\Source\GitHub\CodeForDotNet\Source\CodeForDotNet.UI\CodeForDotNet.UI.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <DocumentationFile>C:\Users\tonyw\Source\GitHub\CodeForDotNet\Source\CodeForDotNet.UI\CodeForDotNet.UI.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Common\AssemblyInfoCore.cs" Link="AssemblyInfoCore.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\Common\Dictionary.xml" Link="Dictionary.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Common\Code for .NET.snk" Link="Code for .NET.snk" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeForDotNet\CodeForDotNet.csproj" />
+  </ItemGroup>
+
+</Project>
