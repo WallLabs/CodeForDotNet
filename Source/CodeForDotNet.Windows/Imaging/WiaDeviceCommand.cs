@@ -7,7 +7,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Managed <see cref="Wia.DeviceCommand"/>.
     /// </summary>
-    public class WiaDeviceCommand : IDisposable
+    public class WiaDeviceCommand : DisposableObject
     {
         #region Lifetime
 
@@ -19,52 +19,37 @@ namespace CodeForDotNet.Windows.Imaging
             _wiaDeviceCommand = deviceCommand;
         }
 
-        #region IDisposable
-
         /// <summary>
-        /// Calls dispose during finalization (if it has not been called already).
-        /// </summary>
-        ~WiaDeviceCommand()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources.
-        /// </summary>
-        public void Dispose()
-        {
-            // Dispose
-            Dispose(true);
-
-            // Suppress finalization (it is no longer necessary)
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Frees resources.
+        /// Frees resources owned by this instance.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>,
-        /// false when called during finalization.</param>
-        void Dispose(bool disposing)
+        /// True when called from <see cref="IDisposable.Dispose()"/>,
+        /// false when called during finalization.
+        /// </param>
+        protected override void Dispose(bool disposing)
         {
-            // Dispose unmanaged resources
-            Marshal.ReleaseComObject(_wiaDeviceCommand);
+            try
+            {
+                // Dispose unmanaged resources.
+                Marshal.ReleaseComObject(_wiaDeviceCommand);
+            }
+            finally
+            {
+                // Call base class method to fire events and set status properties.
+                base.Dispose(disposing);
+            }
         }
 
-        #endregion
-
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
         /// <summary>
         /// Unmanaged <see cref="Wia.DeviceCommand"/>.
         /// </summary>
-        readonly Wia.DeviceCommand _wiaDeviceCommand;
+        private readonly Wia.DeviceCommand _wiaDeviceCommand;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -83,6 +68,6 @@ namespace CodeForDotNet.Windows.Imaging
         /// </summary>
         public string Description { get { return _wiaDeviceCommand.Description; } }
 
-        #endregion
+        #endregion Public Properties
     }
 }

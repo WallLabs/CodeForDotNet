@@ -167,7 +167,7 @@ namespace CodeForDotNet.Collections
         /// </summary>
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (array == null) throw new ArgumentNullException("array");
+            if (array == null) throw new ArgumentNullException(nameof(array));
             var arraySize = array.Length;
             foreach (var pair in _collection)
             {

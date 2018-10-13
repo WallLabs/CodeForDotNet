@@ -15,7 +15,7 @@ namespace CodeForDotNet.WindowsUniversal.Input
         /// <returns>String (normally one character) or null when no mapping, e.g. function key.</returns>
         public static string ConvertToString(KeyboardKey key)
         {
-            return ConvertToString(key, false);
+            return ConvertToString(key, false, CultureInfo.InvariantCulture);
         }
 
         /// <summary>

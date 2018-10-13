@@ -9,7 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "CodeForDotNet.Data.Sql/1.0.0": {
         "dependencies": {
-          "CodeForDotNet": "4.72.1810.11001",
+          "CodeForDotNet": "4.72.1810.11002",
           "NETStandard.Library": "2.0.3",
           "System.Data.SqlClient": "4.5.1"
         },
@@ -225,7 +225,7 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "CodeForDotNet/4.72.1810.11001": {
+      "CodeForDotNet/4.72.1810.11002": {
         "dependencies": {
           "System.Drawing.Common": "4.5.1",
           "System.Drawing.Primitives": "4.3.0",
@@ -434,7 +434,7 @@
       "path": "system.threading.tasks/4.3.0",
       "hashPath": "system.threading.tasks.4.3.0.nupkg.sha512"
     },
-    "CodeForDotNet/4.72.1810.11001": {
+    "CodeForDotNet/4.72.1810.11002": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -29,7 +29,7 @@ namespace CodeForDotNet.Data
         /// </summary>
         public const string XmlNamespace = Constants.XmlRootNamespace;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -42,7 +42,7 @@ namespace CodeForDotNet.Data
             Excludes = new ScheduleItemCollection();
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Operators
 
@@ -51,9 +51,7 @@ namespace CodeForDotNet.Data
         /// </summary>
         public static bool operator ==(Schedule schedule1, Schedule schedule2)
         {
-            return !ReferenceEquals(schedule1, null)
-                ? schedule1.Equals(schedule2)
-                : ReferenceEquals(schedule2, null);
+            return schedule1?.Equals(schedule2) ?? schedule2 is null;
         }
 
         /// <summary>
@@ -61,26 +59,23 @@ namespace CodeForDotNet.Data
         /// </summary>
         public static bool operator !=(Schedule schedule1, Schedule schedule2)
         {
-            if (!ReferenceEquals(schedule1, null))
-                return !schedule1.Equals(schedule2);
-            return !ReferenceEquals(schedule2, null);
+            return !(schedule1?.Equals(schedule2) ?? schedule2 is null);
         }
 
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        public override bool Equals(object obj)
+        public override bool Equals(object other)
         {
             // Compare nullability and type
-            var other = obj as Schedule;
-            if (ReferenceEquals(other, null))
+            if (!(other is Schedule otherSchedule))
                 return false;
 
             // Compare values
             return
-                other.Description == Description &&
-                other.Includes == Includes &&
-                other.Excludes == Excludes;
+                otherSchedule.Description == Description &&
+                otherSchedule.Includes == Includes &&
+                otherSchedule.Excludes == Excludes;
         }
 
         /// <summary>
@@ -89,12 +84,12 @@ namespace CodeForDotNet.Data
         public override int GetHashCode()
         {
             return
-                (Description ?? String.Empty).GetHashCode() ^
+                (Description ?? string.Empty).GetHashCode() ^
                 (Includes != null ? Includes.GetHashCode() : 0) ^
                 (Excludes != null ? Excludes.GetHashCode() : 0);
         }
 
-        #endregion
+        #endregion Operators
 
         #region Public Properties
 
@@ -104,10 +99,11 @@ namespace CodeForDotNet.Data
         [XmlElement("description")]
         public string Description
         {
-            get { return !String.IsNullOrEmpty(_description) ? _description : ToString(); }
+            get { return StringExtensions.NullWhenEmpty(_description) ?? ToString(CultureInfo.CurrentCulture); }
             set { _description = value; }
         }
-        string _description;
+
+        private string _description;
 
         /// <summary>
         /// Times at which this schedule occurs. Must be combined with the <see cref="Excludes"/> to decide if it is due at any particular time.
@@ -133,7 +129,7 @@ namespace CodeForDotNet.Data
         [XmlIgnore]
         public bool ExcludesSpecified { get { return Excludes != null && Excludes.Count > 0; } }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -157,19 +153,19 @@ namespace CodeForDotNet.Data
                 if (Excludes != null && Excludes.Count > 0)
                 {
                     // Format string with includes and excludes
-                    return String.Format(culture,
+                    return string.Format(culture,
                         Properties.Resources.ScheduleToStringFormatIncludesAndExcludes,
                         Includes.ToString(culture), Excludes.ToString(culture));
                 }
 
                 // Format string with includes only
-                return String.Format(culture,
+                return string.Format(culture,
                                      Properties.Resources.ScheduleToStringFormatIncludesOnly,
                                      Includes.ToString(culture));
             }
 
             // Format string with no schedule items
-            return String.Format(culture, Properties.Resources.ScheduleToStringFormatNone);
+            return string.Format(culture, Properties.Resources.ScheduleToStringFormatNone);
         }
 
         /// <summary>
@@ -233,6 +229,6 @@ namespace CodeForDotNet.Data
             return next;
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

@@ -7,7 +7,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Encapsulates a WIA source, e.g. scanner or camera.
     /// </summary>
-    public class WiaManager : IDisposable
+    public class WiaManager : DisposableObject
     {
         #region Lifetime
 
@@ -19,57 +19,38 @@ namespace CodeForDotNet.Windows.Imaging
             _wiaManager = new Wia.DeviceManager();
         }
 
-        #region IDisposable
-
         /// <summary>
-        /// Disposes unmanaged resources during finalization.
+        /// Frees resources owned by this instance.
         /// </summary>
-        ~WiaManager()
-        {
-            // Unmanaged only dispose
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources owned by this object.
-        /// </summary>
-        public void Dispose()
+        /// <param name="disposing">
+        /// True when called from <see cref="IDisposable.Dispose()"/>,
+        /// false when called during finalization.
+        /// </param>
+        protected override void Dispose(bool disposing)
         {
             try
             {
-                // Full managed dispose
-                Dispose(true);
+                // Dispose unmanaged resources.
+                if (_wiaManager != null)
+                    Marshal.ReleaseComObject(_wiaManager);
             }
             finally
             {
-                // Suppress finalization as no longer necessary
-                GC.SuppressFinalize(this);
+                // Call base class method to fire events and set status properties.
+                base.Dispose(disposing);
             }
         }
 
-        /// <summary>
-        /// Frees resources owned by this object.
-        /// </summary>
-        /// <param name="disposing">True when called via <see cref="Dispose()"/>.</param>
-        void Dispose(bool disposing)
-        {
-            // Dispose unmanaged resources
-            if (_wiaManager != null)
-                Marshal.ReleaseComObject(_wiaManager);
-        }
-
-        #endregion
-
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
         /// <summary>
         /// WIA device manager.
         /// </summary>
-        Wia.DeviceManager _wiaManager;
+        private Wia.DeviceManager _wiaManager;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Methods
 
@@ -81,6 +62,6 @@ namespace CodeForDotNet.Windows.Imaging
             return new WiaDeviceInfoCollection(_wiaManager.DeviceInfos);
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

@@ -129,7 +129,7 @@ namespace CodeForDotNet.Data
         }
 
         /// <summary>
-        /// Reads a <see cref="String"/> from a record by column name.
+        /// Reads a <see cref="string"/> from a record by column name.
         /// </summary>
         /// <param name="reader"><see cref="IDataRecord"/> to read from.</param>
         /// <param name="column">Column name to read.</param>
@@ -168,7 +168,7 @@ namespace CodeForDotNet.Data
         }
 
         /// <summary>
-        /// Reads an <see cref="Int16"/> from a record by column name.
+        /// Reads an <see cref="short"/> from a record by column name.
         /// </summary>
         /// <param name="reader"><see cref="IDataRecord"/> to read from.</param>
         /// <param name="column">Column name to read.</param>
@@ -207,7 +207,7 @@ namespace CodeForDotNet.Data
         }
 
         /// <summary>
-        /// Reads an <see cref="Int32"/> from a record by column name.
+        /// Reads an <see cref="int"/> from a record by column name.
         /// </summary>
         /// <param name="reader"><see cref="IDataRecord"/> to read from.</param>
         /// <param name="column">Column name to read.</param>
@@ -246,7 +246,7 @@ namespace CodeForDotNet.Data
         }
 
         /// <summary>
-        /// Reads an <see cref="Int64"/> from a record by column name.
+        /// Reads an <see cref="long"/> from a record by column name.
         /// </summary>
         /// <param name="reader"><see cref="IDataRecord"/> to read from.</param>
         /// <param name="column">Column name to read.</param>
@@ -285,7 +285,7 @@ namespace CodeForDotNet.Data
         }
 
         /// <summary>
-        /// Reads a <see cref="Boolean"/> from a record by column name.
+        /// Reads a <see cref="bool"/> from a record by column name.
         /// </summary>
         /// <param name="reader"><see cref="IDataRecord"/> to read from.</param>
         /// <param name="column">Column name to read.</param>
@@ -527,7 +527,7 @@ namespace CodeForDotNet.Data
         }
 
         /// <summary>
-        /// Reads a <see cref="Single"/> from a record by column name.
+        /// Reads a <see cref="float"/> from a record by column name.
         /// </summary>
         /// <param name="reader"><see cref="IDataRecord"/> to read from.</param>
         /// <param name="column">Column name to read.</param>
@@ -566,7 +566,7 @@ namespace CodeForDotNet.Data
         }
 
         /// <summary>
-        /// Reads a <see cref="Double"/> from a record by column name.
+        /// Reads a <see cref="double"/> from a record by column name.
         /// </summary>
         /// <param name="reader"><see cref="IDataRecord"/> to read from.</param>
         /// <param name="column">Column name to read.</param>

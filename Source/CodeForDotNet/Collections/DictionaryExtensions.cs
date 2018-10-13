@@ -16,9 +16,9 @@ namespace CodeForDotNet.Collections
         /// <summary>
         /// Default format string used prefix the key of a dictionary to it's values.
         /// </summary>
-        const string AddKeysToValuesDefaultFormat = "{0} - {1}";
+        private const string AddKeysToValuesDefaultFormat = "{0} - {1}";
 
-        #endregion
+        #endregion Constants
 
         #region Public Methods
 
@@ -45,8 +45,8 @@ namespace CodeForDotNet.Collections
         public static void AddKeysToValues(this IDictionary dictionary, string format)
         {
             // Validate
-            if (dictionary == null) throw new ArgumentNullException("dictionary");
-            if (format == null) throw new ArgumentNullException("format");
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            if (format == null) throw new ArgumentNullException(nameof(format));
 
             // Get a fixed list of keys so we can modify the dictionary
             var keys = dictionary.Keys.Cast<object>().ToArray();
@@ -58,9 +58,10 @@ namespace CodeForDotNet.Collections
                 var value = dictionary[key];
 
                 // Format and set new value with key added
-                dictionary[key] = String.Format(CultureInfo.InvariantCulture, format, key, value);
+                dictionary[key] = string.Format(CultureInfo.InvariantCulture, format, key, value);
             }
         }
+
         /// <summary>
         /// Compares two dictionaries by value.
         /// </summary>
@@ -83,16 +84,13 @@ namespace CodeForDotNet.Collections
             {
                 var item1 = dictionary1Enumerator.Current;
                 var item2 = dictionary2Enumerator.Current;
-                if (!item1.Key.Equals(item2.Key) ||
-                    ((!ReferenceEquals(item1.Value, null) && !item1.Value.Equals(item2.Value)) ||
-                    (ReferenceEquals(item1.Value, null) && !ReferenceEquals(item2.Value, null))))
+                if (!item1.Key.Equals(item2.Key) || !(item1.Value?.Equals(item2.Value) ?? item2.Value == null))
                     return false;
             }
 
             // Return same
             return true;
         }
-
 
         /// <summary>
         /// Gets the hash code of the keys and values of all items in the dictionary, or zero when null.
@@ -108,7 +106,7 @@ namespace CodeForDotNet.Collections
         public static int GetHashCodeOfItems(this IDictionary dictionary)
         {
             // Validate
-            if (dictionary == null) throw new ArgumentNullException("dictionary");
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
 
             // Calculate hash code
             var hash = 0;
@@ -125,7 +123,7 @@ namespace CodeForDotNet.Collections
         public static TValue GetIfExists<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
         {
             // Validate
-            if (dictionary == null) throw new ArgumentNullException("dictionary");
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
 
             // Call overloaded method
             return dictionary.ContainsKey(key) ? dictionary[key] : default(TValue);
@@ -138,7 +136,7 @@ namespace CodeForDotNet.Collections
         public static void Dispose(this IDictionary dictionary)
         {
             // Validate
-            if (dictionary == null) throw new ArgumentNullException("dictionary");
+            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
 
             // Dispose members
             foreach (var disposable in dictionary.Values.Cast<IDisposable>().ToArray())
@@ -148,6 +146,6 @@ namespace CodeForDotNet.Collections
             }
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

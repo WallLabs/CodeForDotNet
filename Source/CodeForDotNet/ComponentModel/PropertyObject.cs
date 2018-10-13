@@ -34,9 +34,9 @@ namespace CodeForDotNet.ComponentModel
         ~PropertyObject()
         {
             // Dispose only once
-            if (_isDisposing || _isDisposed)
+            if (IsDisposing || IsDisposed)
                 return;
-            _isDisposing = true;
+            IsDisposing = true;
 
             // Dispose only un-managed resources
             Dispose(false);
@@ -49,22 +49,23 @@ namespace CodeForDotNet.ComponentModel
         /// </summary>
         /// <remarks>
         /// First fires the Disposing event, which could cancel this operation.
-        /// When not cancelled, calls the Dispose(bool notFinalized) method, which should overrided in inheriting
-        /// classes to release their local resources.
+        /// When not canceled, calls the <see cref="Dispose(bool)"/> method,
+        /// which should be overridden in inheriting classes to release
+        /// their local resources.
         /// Finally fires the Disposed event.
-        /// Use the IsDisposing and IsDisposed properties to avoid using objects that are about to or have been disposed.
+        /// Use the IsDisposing and IsDisposed properties to avoid using objects
+        /// that are about to or have been disposed.
         /// </remarks>
         public void Dispose()
         {
             // Dispose only once
-            if (_isDisposing || _isDisposed)
+            if (IsDisposing || IsDisposed)
                 return;
-            _isDisposing = true;
+            IsDisposing = true;
             try
             {
                 // Fire disposing event
-                if (Disposing != null)
-                    Disposing(this, EventArgs.Empty);
+                Disposing?.Invoke(this, EventArgs.Empty);
             }
             finally
             {
@@ -82,20 +83,21 @@ namespace CodeForDotNet.ComponentModel
         }
 
         /// <summary>
-        /// Inheritors implement the Dipose(bool) method to dispose resources accordingly,
+        /// Inheritors implement the <see cref="Dispose(bool)"/> method to dispose resources accordingly,
         /// depending on whether they have been called proactively or automatically via
         /// the finalizer.
         /// </summary>
         /// <param name="disposing">
         /// True when called proactively, i.e. Not during garbage collection.
         /// Managed resources should not be accessed when this is False,
-        /// just references and unmangaed resources released.</param>
+        /// just references and unmanaged resources released.
+        /// </param>
         protected virtual void Dispose(bool disposing)
         {
             try
             {
                 // Set second flag to indicate Disposed state
-                _isDisposed = true;
+                IsDisposed = true;
 
                 // Dispose properties
                 if (_properties != null)
@@ -110,36 +112,21 @@ namespace CodeForDotNet.ComponentModel
             finally
             {
                 // Fire Disposed event
-                if (Disposed != null)
-                    Disposed(this, EventArgs.Empty);
+                Disposed?.Invoke(this, EventArgs.Empty);
             }
         }
 
         /// <summary>
-        /// Indicates that this object is committed to the process of Disposing.
+        /// Indicates that this object is committed to the process of disposing.
         /// When this flag is TRUE, do not pass any references or queue it for processing.
         /// </summary>
-        public bool IsDisposing
-        {
-            get
-            {
-                return _isDisposing;
-            }
-        }
-        bool _isDisposing;
+        public bool IsDisposing { get; private set; }
 
         /// <summary>
-        /// Indicated that this object has been Disposed.
+        /// Indicated that this object has been disposed.
         /// When this flag is TRUE, do not use this object in any way.
         /// </summary>
-        public bool IsDisposed
-        {
-            get
-            {
-                return _isDisposed;
-            }
-        }
-        bool _isDisposed;
+        public bool IsDisposed { get; private set; }
 
         /// <summary>
         /// Fires when the Dispose method is called on this object (except when garbage collected).
@@ -153,9 +140,9 @@ namespace CodeForDotNet.ComponentModel
         /// </summary>
         public event EventHandler Disposed;
 
-        #endregion
+        #endregion IDisposable
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -177,9 +164,9 @@ namespace CodeForDotNet.ComponentModel
         /// <summary>
         /// List of property IDs which will be automatically disposed when changed or this instance is disposed.
         /// </summary>
-        readonly List<Guid> _disposePropertyIDs;
+        private readonly List<Guid> _disposePropertyIDs;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Methods
 
@@ -219,7 +206,7 @@ namespace CodeForDotNet.ComponentModel
             {
                 if (_properties.ContainsKey(id))
                     return (T)_properties[id];
-                throw new ArgumentOutOfRangeException("id");
+                throw new ArgumentOutOfRangeException(nameof(id));
             }
         }
 
@@ -250,7 +237,7 @@ namespace CodeForDotNet.ComponentModel
             {
                 // Validate
                 if (!_properties.ContainsKey(id))
-                    throw new ArgumentOutOfRangeException("id");
+                    throw new ArgumentOutOfRangeException(nameof(id));
 
                 // Dispose old value if necessary
                 DisposeProperty(id);
@@ -272,7 +259,7 @@ namespace CodeForDotNet.ComponentModel
             lock (SyncRoot)
             {
                 // Validate
-                if (properties == null || properties.Count == 0) throw new ArgumentNullException("properties");
+                if (properties == null || properties.Count == 0) throw new ArgumentNullException(nameof(properties));
 
                 // Suspend events
                 SuspendEvents();
@@ -323,7 +310,7 @@ namespace CodeForDotNet.ComponentModel
             }
         }
 
-        #endregion
+        #endregion Property Access
 
         #region Change Notification
 
@@ -351,9 +338,9 @@ namespace CodeForDotNet.ComponentModel
             }
         }
 
-        #endregion
+        #endregion Change Notification
 
-        #endregion
+        #endregion Public Methods
 
         #region Events
 
@@ -373,11 +360,10 @@ namespace CodeForDotNet.ComponentModel
         protected virtual void OnPropertyChanged(PropertyObjectChangeEventArgs change)
         {
             // Validate
-            if (change == null) throw new ArgumentNullException("change");
+            if (change == null) throw new ArgumentNullException(nameof(change));
 
             // Fire events
-            if (PropertyObjectChanged != null)
-                PropertyObjectChanged(this, change);
+            PropertyObjectChanged?.Invoke(this, change);
             if (PropertyChanged != null)
             {
                 foreach (var propertyId in change.Keys)
@@ -426,7 +412,7 @@ namespace CodeForDotNet.ComponentModel
             }
         }
 
-        #endregion
+        #endregion Events
 
         #region Protected Methods
 
@@ -447,14 +433,14 @@ namespace CodeForDotNet.ComponentModel
             lock (SyncRoot)
             {
                 // Validate
-                if (id == Guid.Empty) throw new ArgumentNullException("id");
-                if (String.IsNullOrWhiteSpace(name)) throw new ArgumentNullException("name");
+                if (id == Guid.Empty) throw new ArgumentNullException(nameof(id));
+                if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
 
                 // Check if already exists
                 if (_properties.ContainsKey(id))
-                    throw new ArgumentOutOfRangeException("id");
+                    throw new ArgumentOutOfRangeException(nameof(id));
                 if (_propertyNames.ContainsValue(name))
-                    throw new ArgumentOutOfRangeException("name");
+                    throw new ArgumentOutOfRangeException(nameof(name));
 
                 // Add new property
                 _properties.Add(id, defaultValue);
@@ -466,7 +452,7 @@ namespace CodeForDotNet.ComponentModel
             }
         }
 
-        #endregion
+        #endregion Protected Methods
 
         #region Private Methods
 
@@ -501,8 +487,7 @@ namespace CodeForDotNet.ComponentModel
             if (_disposePropertyIDs.Contains(id))
             {
                 // Get current value
-                var oldValue = _properties[id] as IDisposable;
-                if (oldValue != null)
+                if (_properties[id] is IDisposable oldValue)
                 {
                     // Dispose when exists
                     oldValue.Dispose();
@@ -511,6 +496,6 @@ namespace CodeForDotNet.ComponentModel
             }
         }
 
-        #endregion
+        #endregion Private Methods
     }
 }

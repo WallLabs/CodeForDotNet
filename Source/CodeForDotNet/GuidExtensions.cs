@@ -40,7 +40,7 @@ namespace CodeForDotNet
         public static bool TryParse(string value, out Guid output)
         {
             // Prevalidate content (avoid exception)
-            if (String.IsNullOrEmpty(value) || (
+            if (string.IsNullOrEmpty(value) || (
                 !Regex.IsMatch(value, GuidNFormat) &&
                 !Regex.IsMatch(value, GuidDFormat) &&
                 !Regex.IsMatch(value, GuidPFormat) &&

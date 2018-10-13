@@ -213,10 +213,10 @@ namespace CodeForDotNet.Threading
         {
             // Validate
             if (result == null)
-                throw new ArgumentNullException("result");
+                throw new ArgumentNullException(nameof(result));
             var asyncResult = result as TAsyncResult;
             if (asyncResult == null)
-                throw new ArgumentOutOfRangeException("result");
+                throw new ArgumentOutOfRangeException(nameof(result));
 
             // Ensure end is only called once
             if (asyncResult._endCalled)

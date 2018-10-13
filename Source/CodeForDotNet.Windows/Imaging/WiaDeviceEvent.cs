@@ -7,7 +7,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Managed <see cref="Wia.DeviceEvent"/>.
     /// </summary>
-    public class WiaDeviceEvent : IDisposable
+    public class WiaDeviceEvent : DisposableObject
     {
         #region Lifetime
 
@@ -19,52 +19,37 @@ namespace CodeForDotNet.Windows.Imaging
             _wiaDeviceEvent = deviceEvent;
         }
 
-        #region IDisposable
-
         /// <summary>
-        /// Calls dispose during finalization (if it has not been called already).
-        /// </summary>
-        ~WiaDeviceEvent()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources.
-        /// </summary>
-        public void Dispose()
-        {
-            // Dispose
-            Dispose(true);
-
-            // Suppress finalization (it is no longer necessary)
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Frees resources.
+        /// Frees resources owned by this instance.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>,
-        /// false when called during finalization.</param>
-        void Dispose(bool disposing)
+        /// True when called from <see cref="IDisposable.Dispose()"/>,
+        /// false when called during finalization.
+        /// </param>
+        protected override void Dispose(bool disposing)
         {
-            // Dispose unmanaged resources
-            Marshal.ReleaseComObject(_wiaDeviceEvent);
+            try
+            {
+                // Dispose unmanaged resources.
+                Marshal.ReleaseComObject(_wiaDeviceEvent);
+            }
+            finally
+            {
+                // Call base class method to fire events and set status properties.
+                base.Dispose(disposing);
+            }
         }
 
-        #endregion
-
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
         /// <summary>
         /// Unmanaged <see cref="Wia.DeviceEvent"/>.
         /// </summary>
-        readonly Wia.DeviceEvent _wiaDeviceEvent;
+        private readonly Wia.DeviceEvent _wiaDeviceEvent;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -91,6 +76,6 @@ namespace CodeForDotNet.Windows.Imaging
         /// </summary>
         public string Description { get { return _wiaDeviceEvent.Description; } }
 
-        #endregion
+        #endregion Public Properties
     }
 }

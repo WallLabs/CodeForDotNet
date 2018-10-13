@@ -51,7 +51,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
             UnhandledException += OnError;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Properties
 
@@ -71,7 +71,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
         /// </summary>
         public Uri ErrorReportUri { get; private set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -86,7 +86,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
                 return;
 
             // Prompt user
-            await ShowSendErrorsDialog();
+            await ShowSendErrorsDialog().ConfigureAwait(false);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
                 page.SaveState(localSettings);
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Protected Methods
 
@@ -194,7 +194,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
                 LocalErrorStore.Remove(errorFileName);
         }
 
-        #endregion
+        #endregion Protected Methods
 
         #region Event Handlers
 
@@ -296,6 +296,6 @@ namespace CodeForDotNet.WindowsUniversal.UI
             LocalErrorStore.Add(@event.Exception);
         }
 
-        #endregion
+        #endregion Event Handlers
     }
 }

@@ -149,8 +149,8 @@ namespace CodeForDotNet.Xml
         public static string FormatXml(this string value, Encoding encoding, XmlFormatOptions options = XmlFormatOptions.Indent | XmlFormatOptions.Trim)
         {
             // Validate
-            if (value == null) throw new ArgumentNullException("value");
-            if (encoding == null) throw new ArgumentNullException("encoding");
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (encoding == null) throw new ArgumentNullException(nameof(encoding));
 
             // Format...
             try
@@ -227,7 +227,7 @@ namespace CodeForDotNet.Xml
         public static void DeleteChildren(this XPathNavigator navigator, XPathNodeType type)
         {
             // Validate
-            if (navigator == null) throw new ArgumentNullException("navigator");
+            if (navigator == null) throw new ArgumentNullException(nameof(navigator));
 
             // Delete...
             foreach (XPathNavigator child in navigator.SelectChildren(type))
@@ -254,7 +254,7 @@ namespace CodeForDotNet.Xml
         public static DateTime ReadElementDateTime(this XmlReader reader, string localName = null, string @namespace = null)
         {
             // Validate
-            if (reader == null) throw new ArgumentNullException("reader");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
 
             // Read element start (moving past any other non-element content)
             // using the appropriate overload depending on parameters passed
@@ -293,10 +293,10 @@ namespace CodeForDotNet.Xml
                 XmlSchemaValidationFlags.ReportValidationWarnings |
                 XmlSchemaValidationFlags.AllowXmlAttributes |
                 XmlSchemaValidationFlags.ProcessIdentityConstraints;
-            settings.ValidationEventHandler += delegate(object sender, ValidationEventArgs args)
+            settings.ValidationEventHandler += delegate (object sender, ValidationEventArgs args)
             {
                 var lineInfo = (IXmlLineInfo)sender;
-                throw new FormatException(String.Format(CultureInfo.CurrentCulture,
+                throw new FormatException(string.Format(CultureInfo.CurrentCulture,
                     Resources.XmlValdiationError, lineInfo.LineNumber, lineInfo.LinePosition,
                     args.Exception.Message), args.Exception);
             };
@@ -313,8 +313,8 @@ namespace CodeForDotNet.Xml
         public static void Merge(this XmlSchemaSet targetSchemas, XmlSchemaSet schemas)
         {
             // Validate
-            if (targetSchemas == null) throw new ArgumentNullException("targetSchemas");
-            if (schemas == null) throw new ArgumentNullException("schemas");
+            if (targetSchemas == null) throw new ArgumentNullException(nameof(targetSchemas));
+            if (schemas == null) throw new ArgumentNullException(nameof(schemas));
 
             // Merge...
             foreach (XmlSchema schema in schemas.Schemas())
@@ -330,7 +330,7 @@ namespace CodeForDotNet.Xml
         public static Dictionary<string, string> GetNamespaces(this XmlSchemaSet schemas)
         {
             // Validate
-            if (schemas == null) throw new ArgumentNullException("schemas");
+            if (schemas == null) throw new ArgumentNullException(nameof(schemas));
 
             // Get namespaces
             var namespaces = new Dictionary<string, string>();
@@ -357,8 +357,8 @@ namespace CodeForDotNet.Xml
         public static void LoadXml(this XslCompiledTransform transform, string xml)
         {
             // Validate
-            if (transform == null) throw new ArgumentNullException("transform");
-            if (xml == null) throw new ArgumentNullException("xml");
+            if (transform == null) throw new ArgumentNullException(nameof(transform));
+            if (xml == null) throw new ArgumentNullException(nameof(xml));
 
             // Load XML...
             using (var xmlReader = XmlReader.Create(new StringReader(xml)))

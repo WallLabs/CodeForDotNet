@@ -32,7 +32,7 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         /// </summary>
         public const string FileNameFormat = "{0:yyyyMMddHHmmssfff} Error.txt";
 
-        #endregion
+        #endregion Constants
 
         #region Public Methods
 
@@ -44,21 +44,21 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static ErrorReportData GenerateReport(Exception error)
         {
             // Validate
-            if (error == null) throw new ArgumentNullException("error");
+            if (error == null) throw new ArgumentNullException(nameof(error));
 
             // Write application and version information at top
             var application = Application.Current;
             var applicationType = application.GetType();
             var report = new ErrorReportData
-                             {
-                                 Id = Guid.NewGuid(),
-                                 SourceId = LoadSourceId(),
-                                 SourceAssemblyName = applicationType.AssemblyQualifiedName,
-                                 EventDate = DateTime.UtcNow,
-                                 Message = error.GetFullMessage(),
-                                 ErrorTypeFullName = error.GetType().Name,
-                                 StackTrace = error.StackTrace
-                             };
+            {
+                Id = Guid.NewGuid(),
+                SourceId = LoadSourceId(),
+                SourceAssemblyName = applicationType.AssemblyQualifiedName,
+                EventDate = DateTime.UtcNow,
+                Message = error.GetFullMessage(),
+                ErrorTypeFullName = error.GetType().Name,
+                StackTrace = error.StackTrace
+            };
 
             // Return result
             return report;
@@ -127,7 +127,7 @@ namespace CodeForDotNet.WindowsUniversal.Storage
             var errorsFolder = storage.CreateFolder(FolderName);
 
             // Generate a unique file name
-            var fileName = String.Format(CultureInfo.InvariantCulture, FileNameFormat, DateTime.UtcNow);
+            var fileName = string.Format(CultureInfo.InvariantCulture, FileNameFormat, DateTime.UtcNow);
 
             // Write error to file
             var file = errorsFolder.CreateFile(fileName);
@@ -205,6 +205,6 @@ namespace CodeForDotNet.WindowsUniversal.Storage
             file.Delete(true);
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

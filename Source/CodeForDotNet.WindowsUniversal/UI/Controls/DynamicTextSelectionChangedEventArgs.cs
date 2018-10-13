@@ -20,9 +20,9 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         public DynamicTextSelectionChangedEventArgs(Control focus, int selectionStart, int selectionLength)
         {
             // Validate
-            if (focus == null) throw new ArgumentNullException("focus");
-            if (selectionStart < 0) throw new ArgumentOutOfRangeException("selectionStart");
-            if (selectionLength < 0) throw new ArgumentOutOfRangeException("selectionLength");
+            if (focus == null) throw new ArgumentNullException(nameof(focus));
+            if (selectionStart < 0) throw new ArgumentOutOfRangeException(nameof(selectionStart));
+            if (selectionLength < 0) throw new ArgumentOutOfRangeException(nameof(selectionLength));
 
             // Initialize members
             Focus = OriginalFocus = focus;
@@ -30,7 +30,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             SelectionLength = OriginalSelectionLength = selectionLength;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Properties
 
@@ -73,6 +73,6 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         /// </summary>
         public int SelectionLength { get; set; }
 
-        #endregion
+        #endregion Properties
     }
 }

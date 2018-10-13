@@ -7,7 +7,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Encapsulates a <see cref="Wia.CommonDialog"/> in managed code.
     /// </summary>
-    public class WiaCommonDialog : IDisposable
+    public class WiaCommonDialog : DisposableObject
     {
         #region Lifetime
 
@@ -19,52 +19,37 @@ namespace CodeForDotNet.Windows.Imaging
             _wiaCommonDialog = new Wia.CommonDialog();
         }
 
-        #region IDisposable
-
         /// <summary>
-        /// Calls dispose during finalization (if it has not been called already).
-        /// </summary>
-        ~WiaCommonDialog()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources.
-        /// </summary>
-        public void Dispose()
-        {
-            // Dispose
-            Dispose(true);
-
-            // Suppress finalization (it is no longer necessary)
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Frees resources.
+        /// Frees resources owned by this instance.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>,
-        /// false when called during finalization.</param>
-        private void Dispose(bool disposing)
+        /// True when called from <see cref="IDisposable.Dispose()"/>,
+        /// false when called during finalization.
+        /// </param>
+        protected override void Dispose(bool disposing)
         {
-            // Dispose unmanaged resources
-            Marshal.ReleaseComObject(_wiaCommonDialog);
+            try
+            {
+                // Dispose unmanaged resources.
+                Marshal.ReleaseComObject(_wiaCommonDialog);
+            }
+            finally
+            {
+                // Call base class method to fire events and set status properties.
+                base.Dispose(disposing);
+            }
         }
 
-        #endregion
-
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
         /// <summary>
         /// Unmanaged <see cref="Wia.CommonDialog"/>.
         /// </summary>
-        readonly Wia.CommonDialog _wiaCommonDialog;
+        private readonly Wia.CommonDialog _wiaCommonDialog;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Methods
 
@@ -114,6 +99,6 @@ namespace CodeForDotNet.Windows.Imaging
             return wiaDevice != null ? new WiaDevice(wiaDevice) : null;
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

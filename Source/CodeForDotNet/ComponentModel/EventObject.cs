@@ -5,7 +5,7 @@ namespace CodeForDotNet.ComponentModel
     /// <summary>
     /// Provides methods and events to implement suspend/resume and caching of events.
     /// Events are cached when they are not relevant until an atomic operation has completed.
-    /// This can give great performance gains, especially on graphics related applications.
+    /// This can give great performance gains, especially in graphics related applications.
     /// </summary>
     public abstract class EventObject : IEventObject
     {
@@ -21,16 +21,16 @@ namespace CodeForDotNet.ComponentModel
             EventsAreEnabled = true;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
         /// <summary>
         /// Reference counter for Suspend/Resume events.
         /// </summary>
-        int _suspendEventsCount;
+        private int _suspendEventsCount;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -51,7 +51,7 @@ namespace CodeForDotNet.ComponentModel
         /// </summary>
         public bool EventsAreEnabled { get; private set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -97,7 +97,7 @@ namespace CodeForDotNet.ComponentModel
             }
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Events
 
@@ -111,7 +111,7 @@ namespace CodeForDotNet.ComponentModel
         /// </summary>
         public event EventHandler EventsResumed;
 
-        #endregion
+        #endregion Events
 
         #region Event Handlers
 
@@ -135,6 +135,6 @@ namespace CodeForDotNet.ComponentModel
             EventsResumed?.Invoke(this, EventArgs.Empty);
         }
 
-        #endregion
+        #endregion Event Handlers
     }
 }

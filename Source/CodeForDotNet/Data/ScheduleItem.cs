@@ -145,7 +145,7 @@ namespace CodeForDotNet.Data
             {
                 // Validate
                 if (value <= 0)
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
 
                 // Set value
                 _duration = value;
@@ -245,32 +245,32 @@ namespace CodeForDotNet.Data
                 {
                     case ScheduleItemRecurrence.None:
                         if (value != 0)
-                            throw new ArgumentOutOfRangeException("value");
+                            throw new ArgumentOutOfRangeException(nameof(value));
                         break;
 
                     case ScheduleItemRecurrence.Hourly:
                         if (value < 0 || value > 23)
-                            throw new ArgumentOutOfRangeException("value");
+                            throw new ArgumentOutOfRangeException(nameof(value));
                         break;
 
                     case ScheduleItemRecurrence.Daily:
                         if (value < 0 || value > 30)
-                            throw new ArgumentOutOfRangeException("value");
+                            throw new ArgumentOutOfRangeException(nameof(value));
                         break;
 
                     case ScheduleItemRecurrence.Weekly:
                         if (value < 0 || value > 51)
-                            throw new ArgumentOutOfRangeException("value");
+                            throw new ArgumentOutOfRangeException(nameof(value));
                         break;
 
                     case ScheduleItemRecurrence.Monthly:
                         if (value < 0 || value > 11)
-                            throw new ArgumentOutOfRangeException("value");
+                            throw new ArgumentOutOfRangeException(nameof(value));
                         break;
 
                     case ScheduleItemRecurrence.Yearly:
                         if (value < 0 || value > 4)
-                            throw new ArgumentOutOfRangeException("value");
+                            throw new ArgumentOutOfRangeException(nameof(value));
                         break;
 
                     default:
@@ -304,7 +304,7 @@ namespace CodeForDotNet.Data
                 if (value != ScheduleItemOffset.None &&
                     Recurrence != ScheduleItemRecurrence.Monthly &&
                     Recurrence != ScheduleItemRecurrence.Yearly)
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
 
                 // Set value
                 _offset = value;
@@ -345,7 +345,7 @@ namespace CodeForDotNet.Data
                     !(value == DaysOfWeek.None && Recurrence != ScheduleItemRecurrence.Weekly) &&
                     !(value != DaysOfWeek.None && Offset != ScheduleItemOffset.None &&
                         (Recurrence == ScheduleItemRecurrence.Monthly || Recurrence == ScheduleItemRecurrence.Yearly)))
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
 
                 // Set value when valid
                 _days = value;
@@ -371,7 +371,7 @@ namespace CodeForDotNet.Data
                 // Validate
                 if (!(value == 1 && Recurrence == ScheduleItemRecurrence.None) &&
                     !((value == null || value > 1) && Recurrence != ScheduleItemRecurrence.None))
-                    throw new ArgumentOutOfRangeException("value");
+                    throw new ArgumentOutOfRangeException(nameof(value));
 
                 // Set value
                 _occurrences = value;
@@ -418,40 +418,40 @@ namespace CodeForDotNet.Data
             switch (Recurrence)
             {
                 case ScheduleItemRecurrence.None:
-                    return String.Format(culture,
+                    return string.Format(culture,
                         Properties.Resources.ScheduleItemToStringOnce, Start, Duration);
 
                 case ScheduleItemRecurrence.Hourly:
-                    return String.Format(culture, Occurrences.HasValue ?
+                    return string.Format(culture, Occurrences.HasValue ?
                         Properties.Resources.ScheduleItemToStringHourlyFixedEnd :
                         Properties.Resources.ScheduleItemToStringHourlyNoEnd,
                         Start, End, Duration, Interval, Occurrences);
 
                 case ScheduleItemRecurrence.Daily:
-                    return String.Format(culture, Occurrences.HasValue ?
+                    return string.Format(culture, Occurrences.HasValue ?
                         Properties.Resources.ScheduleItemToStringDailyFixedEnd :
                         Properties.Resources.ScheduleItemToStringDailyNoEnd,
                         Start, End, Duration, Interval, Occurrences);
 
                 case ScheduleItemRecurrence.Weekly:
-                    return String.Format(culture, Occurrences.HasValue ?
+                    return string.Format(culture, Occurrences.HasValue ?
                         Properties.Resources.ScheduleItemToStringWeeklyFixedEnd :
                         Properties.Resources.ScheduleItemToStringWeeklyNoEnd,
                         Start, End, Duration,
-                        String.Join(Properties.Resources.ScheduleItemToStringDayOfWeekSeparator, Days.ToStringArray()),
+                        string.Join(Properties.Resources.ScheduleItemToStringDayOfWeekSeparator, Days.ToStringArray()),
                         Interval, Occurrences);
 
                 case ScheduleItemRecurrence.Monthly:
                     if (Offset != ScheduleItemOffset.None)
                     {
                         // Month with offset
-                        return String.Format(culture, Occurrences.HasValue ?
+                        return string.Format(culture, Occurrences.HasValue ?
                             Properties.Resources.ScheduleItemToStringMonthlyOffsetRecurring :
                             Properties.Resources.ScheduleItemToStringMonthlyOffsetNoEnd,
                             Start, End, Duration, offset, Interval, Occurrences);
                     }
                     // Month without offset
-                    return String.Format(culture, Occurrences.HasValue
+                    return string.Format(culture, Occurrences.HasValue
                                                       ? Properties.Resources.ScheduleItemToStringMonthlyDayFixedEnd
                                                       : Properties.Resources.ScheduleItemToStringMonthlyDayNoEnd,
                                          Start, End, Duration, Interval, Occurrences);
@@ -460,13 +460,13 @@ namespace CodeForDotNet.Data
                     if (Offset != ScheduleItemOffset.None)
                     {
                         // Yearly with offset
-                        return String.Format(culture, Occurrences.HasValue ?
+                        return string.Format(culture, Occurrences.HasValue ?
                             Properties.Resources.ScheduleItemToStringYearlyOffsetFixedEnd :
                             Properties.Resources.ScheduleItemToStringYearlyOffsetNoEnd,
                             Start, End, Duration, offset, Interval, Occurrences);
                     }
                     // Yearly without offset
-                    return String.Format(culture, Occurrences.HasValue
+                    return string.Format(culture, Occurrences.HasValue
                                                       ? Properties.Resources.ScheduleItemToStringYearlyDayFixedEnd
                                                       : Properties.Resources.ScheduleItemToStringYearlyDayNoEnd,
                                          Start, End, Duration, Interval, Occurrences);

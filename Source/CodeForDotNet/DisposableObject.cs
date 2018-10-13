@@ -15,9 +15,9 @@ namespace CodeForDotNet
         ~DisposableObject()
         {
             // Dispose only once
-            if (_isDisposing || _isDisposed)
+            if (IsDisposing || IsDisposed)
                 return;
-            _isDisposing = true;
+            IsDisposing = true;
 
             // Dispose only unmanaged resources
             Dispose(false);
@@ -40,9 +40,9 @@ namespace CodeForDotNet
         public void Dispose()
         {
             // Dispose only once
-            if (_isDisposing || _isDisposed)
+            if (IsDisposing || IsDisposed)
                 return;
-            _isDisposing = true;
+            IsDisposing = true;
             try
             {
                 // Fire disposing event
@@ -75,44 +75,30 @@ namespace CodeForDotNet
         /// </param>
         protected virtual void Dispose(bool disposing)
         {
-            // Set second flag to indicate Disposed state
-            _isDisposed = true;
+            // Set second flag to indicate disposed state
+            IsDisposed = true;
 
             // Fire Disposed event
             Disposed?.Invoke(this, EventArgs.Empty);
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Public Properties
 
         /// <summary>
-        /// Indicates that this object is committed to the process of Disposing.
+        /// Indicates that this object is committed to the process of disposing.
         /// When this flag is true, do not pass any references or queue it for processing.
         /// </summary>
-        public bool IsDisposing
-        {
-            get
-            {
-                return _isDisposing;
-            }
-        }
-        bool _isDisposing;
+        public bool IsDisposing { get; private set; }
 
         /// <summary>
-        /// Indicated that this object has been Disposed.
+        /// Indicated that this object has been disposed.
         /// When this flag is true, do not use this object in any way.
         /// </summary>
-        public bool IsDisposed
-        {
-            get
-            {
-                return _isDisposed;
-            }
-        }
-        bool _isDisposed;
+        public bool IsDisposed { get; private set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Events
 
@@ -128,6 +114,6 @@ namespace CodeForDotNet
         /// </summary>
         public event EventHandler Disposed;
 
-        #endregion
+        #endregion Events
     }
 }

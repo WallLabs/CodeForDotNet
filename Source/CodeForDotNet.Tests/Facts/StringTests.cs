@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace CodeForDotNet.Tests.Facts
 {
@@ -15,14 +16,14 @@ namespace CodeForDotNet.Tests.Facts
         public void StringTestSplitEscaped()
         {
             var test = @"abc, de\,f, gh\=i".SplitEscaped(',', '\\', false, false);
-            Assert.IsTrue(test[0].Equals(@"abc"));
-            Assert.IsTrue(test[1].Equals(@" de\,f"));
-            Assert.IsTrue(test[2].Equals(@" gh\=i"));
+            Assert.IsTrue(test[0].Equals(@"abc", StringComparison.OrdinalIgnoreCase));
+            Assert.IsTrue(test[1].Equals(@" de\,f", StringComparison.OrdinalIgnoreCase));
+            Assert.IsTrue(test[2].Equals(@" gh\=i", StringComparison.OrdinalIgnoreCase));
 
             test = @"abc, de\,f,, gh\=i".SplitEscaped(',', '\\', true, true);
-            Assert.IsTrue(test[0].Equals(@"abc"));
-            Assert.IsTrue(test[1].Equals(@" de,f"));
-            Assert.IsTrue(test[2].Equals(@" gh=i"));
+            Assert.IsTrue(test[0].Equals(@"abc", StringComparison.OrdinalIgnoreCase));
+            Assert.IsTrue(test[1].Equals(@" de,f", StringComparison.OrdinalIgnoreCase));
+            Assert.IsTrue(test[2].Equals(@" gh=i", StringComparison.OrdinalIgnoreCase));
         }
 
         /// <summary>

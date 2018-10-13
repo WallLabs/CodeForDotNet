@@ -19,7 +19,7 @@ namespace CodeForDotNet.Collections
             _dictionary = new Dictionary<TKey, TValue>();
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Fields
 
@@ -27,8 +27,8 @@ namespace CodeForDotNet.Collections
         /// Underlying dictionary which this class makes observable.
         /// </summary>
         private readonly Dictionary<TKey, TValue> _dictionary;
-        
-        #endregion
+
+        #endregion Fields
 
         #region Properties
 
@@ -87,7 +87,7 @@ namespace CodeForDotNet.Collections
             get { return false; }
         }
 
-        #endregion
+        #endregion Properties
 
         #region Methods
 
@@ -203,7 +203,7 @@ namespace CodeForDotNet.Collections
         /// </summary>
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
-            if (array == null) throw new ArgumentNullException("array");
+            if (array == null) throw new ArgumentNullException(nameof(array));
             var arraySize = array.Length;
             foreach (var pair in _dictionary)
             {
@@ -212,7 +212,7 @@ namespace CodeForDotNet.Collections
             }
         }
 
-        #endregion
+        #endregion Methods
 
         #region Events
 
@@ -229,6 +229,6 @@ namespace CodeForDotNet.Collections
             DictionaryChanged?.Invoke(this, new DictionaryChangedEventArgs<TKey, TValue>(change, key, value));
         }
 
-        #endregion
+        #endregion Events
     }
 }

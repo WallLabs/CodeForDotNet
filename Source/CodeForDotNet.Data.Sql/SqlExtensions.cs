@@ -37,7 +37,7 @@ namespace CodeForDotNet.Data.Sql
                 DataSource = serverName,
                 InitialCatalog = databaseName
             };
-            if (String.IsNullOrEmpty(userName))
+            if (string.IsNullOrEmpty(userName))
             {
                 // Use integrated security when no credentials provided
                 builder.IntegratedSecurity = true;

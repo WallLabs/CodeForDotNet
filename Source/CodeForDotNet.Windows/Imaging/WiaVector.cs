@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
@@ -21,16 +19,16 @@ namespace CodeForDotNet.Windows.Imaging
             _wiaVector = vector;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
         /// <summary>
         /// Unmanaged <see cref="Wia.Vector"/>.
         /// </summary>
-        readonly Wia.Vector _wiaVector;
+        private readonly Wia.Vector _wiaVector;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -43,7 +41,7 @@ namespace CodeForDotNet.Windows.Imaging
             set { _wiaVector.Date = value; }
         }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -142,7 +140,7 @@ namespace CodeForDotNet.Windows.Imaging
             _wiaVector.SetFromString(value, resizable, unicode);
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region IList Members
 
@@ -268,7 +266,7 @@ namespace CodeForDotNet.Windows.Imaging
             }
         }
 
-        #endregion
+        #endregion IList Members
 
         #region ICollection Members
 
@@ -280,7 +278,7 @@ namespace CodeForDotNet.Windows.Imaging
         public void CopyTo(WiaVector array, int index)
         {
             // Validate
-            if (array == null) throw new ArgumentNullException("array");
+            if (array == null) throw new ArgumentNullException(nameof(array));
 
             // Copy
             for (int i = 1; i <= _wiaVector.Count; i++)
@@ -299,7 +297,7 @@ namespace CodeForDotNet.Windows.Imaging
         public void CopyTo(Array array, int index)
         {
             // Validate
-            if (array == null) throw new ArgumentNullException("array");
+            if (array == null) throw new ArgumentNullException(nameof(array));
 
             // Copy
             for (int i = 1; i <= _wiaVector.Count; i++)
@@ -324,9 +322,10 @@ namespace CodeForDotNet.Windows.Imaging
         /// Thread synchronization object.
         /// </summary>
         public object SyncRoot { get { return _syncRoot; } }
-        static readonly object _syncRoot = new object();
 
-        #endregion
+        private static readonly object _syncRoot = new object();
+
+        #endregion ICollection Members
 
         #region IEnumerable Members
 
@@ -338,111 +337,6 @@ namespace CodeForDotNet.Windows.Imaging
             return _wiaVector.GetEnumerator();
         }
 
-        #endregion
-    }
-
-    /// <summary>
-    /// Managed enumerator for <see cref="Wia.Vector" /> items.
-    /// </summary>
-    public class WiaVectorEnumerator : IEnumerator<WiaVector>
-    {
-        #region Lifetime
-
-        /// <summary>
-        /// Creates the object.
-        /// </summary>
-        public WiaVectorEnumerator(IEnumerator vectorEnumerator)
-        {
-            _wiaVectorEnumerator = vectorEnumerator;
-        }
-
-        #region IDisposable
-
-        /// <summary>
-        /// Disposes unmanaged resources during finalization.
-        /// </summary>
-        ~WiaVectorEnumerator()
-        {
-            // Unmanaged only dispose
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources owned by this object.
-        /// </summary>
-        public void Dispose()
-        {
-            try
-            {
-                // Full managed dispose
-                Dispose(true);
-            }
-            finally
-            {
-                // Suppress finalization as no longer necessary
-                GC.SuppressFinalize(this);
-            }
-        }
-
-        /// <summary>
-        /// Frees resources owned by this object.
-        /// </summary>
-        /// <param name="disposing">True when called via <see cref="Dispose()"/>.</param>
-        private void Dispose(bool disposing)
-        {
-            // Release unmanaged resources
-            Marshal.ReleaseComObject(_wiaVectorEnumerator);
-        }
-
-        #endregion
-
-        #endregion
-
-        #region Private Fields
-
-        /// <summary>
-        /// WIA vector enumerator.
-        /// </summary>
-        readonly IEnumerator _wiaVectorEnumerator;
-
-        #endregion
-
-        #region IEnumerator Members
-
-        /// <summary>
-        /// Item at the current position.
-        /// </summary>
-        object IEnumerator.Current { get { return Current; } }
-
-        /// <summary>
-        /// Item at the current position.
-        /// </summary>
-        public WiaVector Current
-        {
-            get
-            {
-                var vector = (Wia.Vector)_wiaVectorEnumerator.Current;
-                return new WiaVector(vector);
-            }
-        }
-
-        /// <summary>
-        /// Moves to the next item if available.
-        /// </summary>
-        /// <returns>True when moved, false when no more items exist.</returns>
-        public bool MoveNext()
-        {
-            return _wiaVectorEnumerator.MoveNext();
-        }
-
-        /// <summary>
-        /// Moves to the beginning of the collection.
-        /// </summary>
-        public void Reset()
-        {
-            _wiaVectorEnumerator.Reset();
-        }
-
-        #endregion
+        #endregion IEnumerable Members
     }
 }

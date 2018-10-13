@@ -9,7 +9,7 @@ namespace CodeForDotNet.Windows.Native
     /// Provides helper functions for the Windows clipboard.
     /// For metafile functions, see source article: http://www.dotnet247.com/247reference/msgs/23/118514.aspx
     /// </summary>
-    public abstract class ClipboardHelper
+    public static class ClipboardHelper
     {
         /// <summary>
         /// Retrieves a .NET <see cref="Metafile"/> from the clipboard correctly.

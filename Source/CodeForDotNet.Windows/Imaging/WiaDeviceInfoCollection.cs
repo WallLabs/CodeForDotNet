@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using CodeForDotNet.Collections;
+using System;
 using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
@@ -7,7 +7,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Managed <see cref="Wia.DeviceInfos"/>.
     /// </summary>
-    public class WiaDeviceInfoCollection : Collection<WiaDeviceInfo>, IDisposable
+    public class WiaDeviceInfoCollection : DisposableCollection<WiaDeviceInfo>
     {
         #region Lifetime
 
@@ -25,61 +25,13 @@ namespace CodeForDotNet.Windows.Imaging
         public WiaDeviceInfoCollection(Wia.DeviceInfos interopCollection)
         {
             // Validate
-            if (interopCollection == null) throw new ArgumentNullException("interopCollection");
+            if (interopCollection == null) throw new ArgumentNullException(nameof(interopCollection));
 
             // Add unmanaged collection items with managed wrappers
             foreach (Wia.DeviceInfo interopItem in interopCollection)
                 Add(new WiaDeviceInfo(interopItem));
         }
 
-        #region IDisposable
-
-        /// <summary>
-        /// Calls dispose during finalization (if it has not been called already).
-        /// </summary>
-        ~WiaDeviceInfoCollection()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources.
-        /// </summary>
-        public void Dispose()
-        {
-            // Dispose
-            Dispose(true);
-
-            // Suppress finalization (it is no longer necessary)
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Frees resources.
-        /// </summary>
-        /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>,
-        /// false when called during finalization.</param>
-        void Dispose(bool disposing)
-        {
-            try
-            {
-                // Dispose managed resources
-                if (disposing)
-                {
-                    foreach (var item in Items)
-                        item.Dispose();
-                }
-            }
-            finally
-            {
-                // Release references to aid garbage collection
-                Clear();
-            }
-        }
-
-        #endregion
-
-        #endregion
+        #endregion Lifetime
     }
 }

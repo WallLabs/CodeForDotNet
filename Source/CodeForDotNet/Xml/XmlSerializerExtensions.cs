@@ -19,7 +19,7 @@ namespace CodeForDotNet.Xml
         public static bool IsXmlSerializable(this Type type)
         {
             // Validate
-            if (type == null) throw new ArgumentNullException("type");
+            if (type == null) throw new ArgumentNullException(nameof(type));
 
             // Use reflection to see if XML serialization interface or attributes implemented
             var typeInfo = type.GetTypeInfo();
@@ -114,7 +114,7 @@ namespace CodeForDotNet.Xml
         public static void SerializeXml(this object value, XmlWriter writer, Type[] extraTypes)
         {
             // Validate
-            if (ReferenceEquals(value, null)) throw new ArgumentNullException("value");
+            if (ReferenceEquals(value, null)) throw new ArgumentNullException(nameof(value));
 
             // Create serializer with extra types when specified
             var serializer = extraTypes == null || extraTypes.Length == 0 ?
@@ -197,7 +197,7 @@ namespace CodeForDotNet.Xml
         public static object DeserializeXml(Type type, XmlReader xmlReader, Type[] extraTypes)
         {
             // Validate
-            if (xmlReader == null) throw new ArgumentNullException("xmlReader");
+            if (xmlReader == null) throw new ArgumentNullException(nameof(xmlReader));
 
             // Create serializer with extra types when specified
             var serializer = extraTypes == null || extraTypes.Length == 0 ?

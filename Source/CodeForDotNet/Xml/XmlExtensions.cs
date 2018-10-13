@@ -21,7 +21,7 @@ namespace CodeForDotNet.Xml
         {
             // Validate
             if (value == null)
-                throw new ArgumentNullException("value");
+                throw new ArgumentNullException(nameof(value));
 
             // Return string with invalid characters removed
             return new string(value.ToCharArray().Where(IsValidInXml).ToArray());
@@ -37,7 +37,7 @@ namespace CodeForDotNet.Xml
         {
             return
             (
-                // Check valid control characters...
+                 // Check valid control characters...
                  value == 0x9 ||    // Horizontal tab (ASCII 9 or '\t').
                  value == 0xA ||    // New line (ASCII 10 or '\n').
                  value == 0xD ||    // Carriage (ASCII 13 or '\r').
@@ -48,7 +48,7 @@ namespace CodeForDotNet.Xml
             );
         }
 
-        #endregion
+        #endregion String Extensions
 
         #region XmlReader Extensions
 
@@ -68,8 +68,8 @@ namespace CodeForDotNet.Xml
         public static int ReadElementInt32(this XmlReader reader, string localName = null, string @namespace = null)
         {
             // Validate
-            if (reader == null) throw new ArgumentNullException("reader");
-            if (@namespace != null && localName == null) throw new ArgumentNullException("localName");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
+            if (@namespace != null && localName == null) throw new ArgumentNullException(nameof(localName));
 
             // Read element start (moving past any other non-element content)
             // using the appropriate overload depending on parameters passed
@@ -106,8 +106,8 @@ namespace CodeForDotNet.Xml
         public static long ReadElementInt64(this XmlReader reader, string localName = null, string @namespace = null)
         {
             // Validate
-            if (reader == null) throw new ArgumentNullException("reader");
-            if (@namespace != null && localName == null) throw new ArgumentNullException("localName");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
+            if (@namespace != null && localName == null) throw new ArgumentNullException(nameof(localName));
 
             // Read element start (moving past any other non-element content)
             // using the appropriate overload depending on parameters passed
@@ -144,8 +144,8 @@ namespace CodeForDotNet.Xml
         public static decimal ReadElementDecimal(this XmlReader reader, string localName = null, string @namespace = null)
         {
             // Validate
-            if (reader == null) throw new ArgumentNullException("reader");
-            if (@namespace != null && localName == null) throw new ArgumentNullException("localName");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
+            if (@namespace != null && localName == null) throw new ArgumentNullException(nameof(localName));
 
             // Read element start (moving past any other non-element content)
             // using the appropriate overload depending on parameters passed
@@ -182,8 +182,8 @@ namespace CodeForDotNet.Xml
         public static float ReadElementSingle(this XmlReader reader, string localName = null, string @namespace = null)
         {
             // Validate
-            if (reader == null) throw new ArgumentNullException("reader");
-            if (@namespace != null && localName == null) throw new ArgumentNullException("localName");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
+            if (@namespace != null && localName == null) throw new ArgumentNullException(nameof(localName));
 
             // Read element start (moving past any other non-element content)
             // using the appropriate overload depending on parameters passed
@@ -220,8 +220,8 @@ namespace CodeForDotNet.Xml
         public static double ReadElementDouble(this XmlReader reader, string localName = null, string @namespace = null)
         {
             // Validate
-            if (reader == null) throw new ArgumentNullException("reader");
-            if (@namespace != null && localName == null) throw new ArgumentNullException("localName");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
+            if (@namespace != null && localName == null) throw new ArgumentNullException(nameof(localName));
 
             // Read element start (moving past any other non-element content)
             // using the appropriate overload depending on parameters passed
@@ -258,8 +258,8 @@ namespace CodeForDotNet.Xml
         public static bool ReadElementBoolean(this XmlReader reader, string localName = null, string @namespace = null)
         {
             // Validate
-            if (reader == null) throw new ArgumentNullException("reader");
-            if (@namespace != null && localName == null) throw new ArgumentNullException("localName");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
+            if (@namespace != null && localName == null) throw new ArgumentNullException(nameof(localName));
 
             // Read element start (moving past any other non-element content)
             // using the appropriate overload depending on parameters passed
@@ -296,8 +296,8 @@ namespace CodeForDotNet.Xml
         public static T ReadElement<T>(this XmlReader reader, string localName = null, string @namespace = null)
         {
             // Validate
-            if (reader == null) throw new ArgumentNullException("reader");
-            if (@namespace != null && localName == null) throw new ArgumentNullException("localName");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
+            if (@namespace != null && localName == null) throw new ArgumentNullException(nameof(localName));
 
             // Read element start (moving past any other non-element content)
             // using the appropriate overload depending on parameters passed
@@ -337,8 +337,8 @@ namespace CodeForDotNet.Xml
         public static int ReadElementBase64(this XmlReader reader, byte[] buffer, int index, int count, string localName = null, string @namespace = null)
         {
             // Validate
-            if (reader == null) throw new ArgumentNullException("reader");
-            if (@namespace != null && localName == null) throw new ArgumentNullException("localName");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
+            if (@namespace != null && localName == null) throw new ArgumentNullException(nameof(localName));
 
             // Read element start (moving past any other non-element content)
             // using the appropriate overload depending on parameters passed
@@ -378,8 +378,8 @@ namespace CodeForDotNet.Xml
         public static int ReadElementBinHex(this XmlReader reader, byte[] buffer, int index, int count, string localName = null, string @namespace = null)
         {
             // Validate
-            if (reader == null) throw new ArgumentNullException("reader");
-            if (@namespace != null && localName == null) throw new ArgumentNullException("localName");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
+            if (@namespace != null && localName == null) throw new ArgumentNullException(nameof(localName));
 
             // Read element start (moving past any other non-element content)
             // using the appropriate overload depending on parameters passed
@@ -417,8 +417,8 @@ namespace CodeForDotNet.Xml
         public static T ReadElement<T>(this XmlReader reader, IXmlNamespaceResolver namespaceResolver, string localName = null, string @namespace = null)
         {
             // Validate
-            if (reader == null) throw new ArgumentNullException("reader");
-            if (@namespace != null && localName == null) throw new ArgumentNullException("localName");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
+            if (@namespace != null && localName == null) throw new ArgumentNullException(nameof(localName));
 
             // Read element start (moving past any other non-element content)
             // using the appropriate overload depending on parameters passed
@@ -439,7 +439,7 @@ namespace CodeForDotNet.Xml
             return value;
         }
 
-        #endregion
+        #endregion XmlReader Extensions
 
         #region XmlWriter Extensions
 
@@ -467,8 +467,8 @@ namespace CodeForDotNet.Xml
         public static void WriteElementValue(this XmlWriter writer, string localName, string @namespace, object value)
         {
             // Validate
-            if (writer == null) throw new ArgumentNullException("writer");
-            if (localName == null) throw new ArgumentNullException("localName");
+            if (writer == null) throw new ArgumentNullException(nameof(writer));
+            if (localName == null) throw new ArgumentNullException(nameof(localName));
 
             // Write element start (moving past any other non-element content)
             // using the appropriate overload depending on parameters passed
@@ -484,6 +484,6 @@ namespace CodeForDotNet.Xml
             writer.WriteEndElement();
         }
 
-        #endregion
+        #endregion XmlWriter Extensions
     }
 }

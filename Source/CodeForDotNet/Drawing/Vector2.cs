@@ -7,7 +7,7 @@ namespace CodeForDotNet.Drawing
     /// <summary>
     /// A 2D vector represented by angle and distance.
     /// </summary>
-    public struct Vector2
+    public struct Vector2 : IEquatable<Vector2>
     {
         #region Lifetime
 
@@ -21,21 +21,24 @@ namespace CodeForDotNet.Drawing
             Distance = distance;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Operators
 
         /// <summary>
-        /// Compares two this object against the other by value.
+        /// Compares this object with another.
         /// </summary>
-        public override bool Equals(object obj)
+        public override bool Equals(object something)
         {
-            // Check nullability and type without causing endless recursion
-            if (!(obj is Vector2 other))
-                return false;
+            return something is Vector2 other && Equals(other);
+        }
 
-            // Compare values
-            return (Math.Abs(Angle - other.Angle) < Single.Epsilon && Math.Abs(Distance - other.Distance) < Single.Epsilon);
+        /// <summary>
+        /// Compares this object with another of the same type.
+        /// </summary>
+        public bool Equals(Vector2 other)
+        {
+            return (Math.Abs(Angle - other.Angle) < float.Epsilon && Math.Abs(Distance - other.Distance) < float.Epsilon);
         }
 
         /// <summary>
@@ -78,7 +81,7 @@ namespace CodeForDotNet.Drawing
             return new Vector2(ad1.Angle - ad2.Angle, ad1.Distance - ad2.Distance);
         }
 
-        #endregion
+        #endregion Operators
 
         #region Properties
 
@@ -92,7 +95,7 @@ namespace CodeForDotNet.Drawing
         /// </summary>
         public float Distance { get; set; }
 
-        #endregion
+        #endregion Properties
 
         #region Public Methods
 
@@ -148,12 +151,15 @@ namespace CodeForDotNet.Drawing
                 case Quadrant.TopRight:
                     result = new Vector2(89 - result.Angle, result.Distance);
                     break;
+
                 case Quadrant.BottomRight:
                     result = new Vector2(90 + result.Angle, result.Distance);
                     break;
+
                 case Quadrant.BottomLeft:
                     result = new Vector2(269 - result.Angle, result.Distance);
                     break;
+
                 case Quadrant.TopLeft:
                     result = new Vector2(270 + result.Angle, result.Distance);
                     break;
@@ -237,6 +243,6 @@ namespace CodeForDotNet.Drawing
             Distance -= value.Distance;
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

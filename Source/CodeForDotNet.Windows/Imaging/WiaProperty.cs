@@ -7,7 +7,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Managed <see cref="Wia.Property"/>.
     /// </summary>
-    public class WiaProperty : IDisposable
+    public class WiaProperty : DisposableObject
     {
         #region Lifetime
 
@@ -19,52 +19,37 @@ namespace CodeForDotNet.Windows.Imaging
             _wiaProperty = property;
         }
 
-        #region IDisposable
-
         /// <summary>
-        /// Calls dispose during finalization (if it has not been called already).
-        /// </summary>
-        ~WiaProperty()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources.
-        /// </summary>
-        public void Dispose()
-        {
-            // Dispose
-            Dispose(true);
-
-            // Suppress finalization (it is no longer necessary)
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Frees resources.
+        /// Frees resources owned by this instance.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>,
-        /// false when called during finalization.</param>
-        private void Dispose(bool disposing)
+        /// True when called from <see cref="IDisposable.Dispose()"/>,
+        /// false when called during finalization.
+        /// </param>
+        protected override void Dispose(bool disposing)
         {
-            // Dispose unmanaged resources
-            Marshal.ReleaseComObject(_wiaProperty);
+            try
+            {
+                // Dispose unmanaged resources.
+                Marshal.ReleaseComObject(_wiaProperty);
+            }
+            finally
+            {
+                // Call base class method to fire events and set status properties.
+                base.Dispose(disposing);
+            }
         }
 
-        #endregion
-
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
         /// <summary>
         /// Unmanaged <see cref="Wia.Property"/>.
         /// </summary>
-        readonly Wia.Property _wiaProperty;
+        private readonly Wia.Property _wiaProperty;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -72,7 +57,8 @@ namespace CodeForDotNet.Windows.Imaging
         /// Thread synchronization object.
         /// </summary>
         public object SyncRoot { get { return _syncRoot; } }
-        static readonly object _syncRoot = new object();
+
+        private static readonly object _syncRoot = new object();
 
         /// <summary>
         /// Indicates the property is read-only.
@@ -140,7 +126,8 @@ namespace CodeForDotNet.Windows.Imaging
                 return _wiaSubtypeValues;
             }
         }
-        WiaVector _wiaSubtypeValues;
+
+        private WiaVector _wiaSubtypeValues;
 
         /// <summary>
         /// Property type.
@@ -156,6 +143,6 @@ namespace CodeForDotNet.Windows.Imaging
             set { _wiaProperty.set_Value(ref value); }
         }
 
-        #endregion
+        #endregion Public Properties
     }
 }

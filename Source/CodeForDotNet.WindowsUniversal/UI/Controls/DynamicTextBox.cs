@@ -33,7 +33,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         /// </summary>
         public const string CursorFillBrushResourceName = "ComboBoxItemSelectedBackgroundThemeBrush";
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -56,7 +56,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             GotFocus += OnGotFocus;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -75,7 +75,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         /// </summary>
         private int _originalSelectionStart;
 
-        #endregion
+        #endregion Private Fields
 
         #region Protected Properties
 
@@ -85,9 +85,10 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         /// <see cref="OnAfterKeyDown"/> to supporting repeat detection.
         /// </summary>
         protected ReadOnlyCollection<VirtualKey> KeysDown { get { return new ReadOnlyCollection<VirtualKey>(_keysDown); } }
+
         private readonly List<VirtualKey> _keysDown;
 
-        #endregion
+        #endregion Protected Properties
 
         #region Public Properties
 
@@ -164,7 +165,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         public int MinLength
         {
             get { return (int)GetValue(MinLengthProperty); }
-            set { SetValue(MinLengthProperty, value);}
+            set { SetValue(MinLengthProperty, value); }
         }
 
         /// <summary>
@@ -214,7 +215,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             set { SetValue(DirectInputProperty, value); }
         }
 
-        #endregion
+        #endregion Public Properties
 
         #region Events
 
@@ -223,7 +224,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         /// </summary>
         public event EventHandler<KeyRoutedEventArgs> BeforeKeyDown;
 
-        #endregion
+        #endregion Events
 
         #region Event Handlers
 
@@ -593,14 +594,14 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             }
 
             // Over-type when only remaining character is pad character
-            if (textLength == 1 && PadChar.HasValue && Text == PadChar.Value.ToString())
+            if (textLength == 1 && PadChar.HasValue && Text == PadChar.Value.ToString(CultureInfo.InvariantCulture))
             {
                 args.SelectionStart = 0;
                 args.SelectionLength = 1;
             }
         }
 
-        #endregion
+        #endregion Event Handlers
 
         #region Public Methods
 
@@ -719,7 +720,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             var text = Text;
             var selectLength = SelectionLength;
             var selectIndex = SelectionStart;
-            if (text.Length == 0 ||selectIndex >= text.Length)
+            if (text.Length == 0 || selectIndex >= text.Length)
                 return;
 
             // Delete selection or at least the current character
@@ -783,7 +784,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             OnKeyDown(args);
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Private Methods
 
@@ -819,6 +820,6 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             _cursor.Height = RenderSize.Height - padding.Top - padding.Bottom;
         }
 
-        #endregion
+        #endregion Private Methods
     }
 }

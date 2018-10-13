@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CodeForDotNet.UI.Models
@@ -87,7 +88,7 @@ namespace CodeForDotNet.UI.Models
 
                     // Fire event causing UI to update
                     PropertyChanged(this, new PropertyChangedEventArgs(name));
-                })
+                }, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default)
                 .Wait(UpdateTimeout);
             }
         }

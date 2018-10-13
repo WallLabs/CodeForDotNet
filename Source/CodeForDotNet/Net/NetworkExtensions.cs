@@ -14,7 +14,7 @@ namespace CodeForDotNet.Net
         public static string GetFullHostName()
         {
             var ipProperties = IPGlobalProperties.GetIPGlobalProperties();
-            return String.IsNullOrWhiteSpace(ipProperties.DomainName)
+            return string.IsNullOrWhiteSpace(ipProperties.DomainName)
                        ? ipProperties.HostName
                        : ipProperties.HostName + "." + ipProperties.DomainName;
         }

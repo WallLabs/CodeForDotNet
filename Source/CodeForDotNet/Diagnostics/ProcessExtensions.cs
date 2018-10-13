@@ -20,8 +20,8 @@ namespace CodeForDotNet.Diagnostics
         public static ProcessResult Run(string program, string parameters = null, string workingDirectory = null, int? timeout = null)
         {
             // Validate
-            if (String.IsNullOrEmpty(program)) throw new ArgumentNullException("program");
-            if (timeout.HasValue && timeout <= 0) throw new ArgumentOutOfRangeException("timeout");
+            if (string.IsNullOrEmpty(program)) throw new ArgumentNullException(nameof(program));
+            if (timeout.HasValue && timeout <= 0) throw new ArgumentOutOfRangeException(nameof(timeout));
 
             // Run program and wait for exit
             var start = new ProcessStartInfo
@@ -57,7 +57,7 @@ namespace CodeForDotNet.Diagnostics
                 {
                     process.BeginOutputReadLine();
                     process.BeginErrorReadLine();
-                    process.WaitForExit(timeout.HasValue ? timeout.Value * 1000 : Int32.MaxValue);
+                    process.WaitForExit(timeout.HasValue ? timeout.Value * 1000 : int.MaxValue);
                 }
 
                 // Kill process when timed out

@@ -16,7 +16,7 @@ namespace CodeForDotNet.Drawing.Printing
         public static PrinterSettings ToPrinterSettings(this PrinterSettingsData source)
         {
             // Validate
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
             // Convert...
             return new PrinterSettings
@@ -80,7 +80,7 @@ namespace CodeForDotNet.Drawing.Printing
         public static PageSettingsData ToData(this PageSettings source)
         {
             // Validate
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
             // Convert...
             var target = new PageSettingsData

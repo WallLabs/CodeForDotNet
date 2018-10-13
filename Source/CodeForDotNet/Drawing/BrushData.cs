@@ -32,7 +32,7 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Creates a brush with a two color gradient.
         /// </summary>
-        public BrushData(Color startColor, Color endColor, Decimal angle)
+        public BrushData(Color startColor, Color endColor, decimal angle)
         {
             _brushType = BrushFillType.TwoColorGradient;
             StartColor = startColor.ToArgb();
@@ -43,7 +43,7 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Creates a brush with a texture.
         /// </summary>
-        public BrushData(byte[] texture, Decimal angle, BrushFillWrapMode wrapMode, float scale)
+        public BrushData(byte[] texture, decimal angle, BrushFillWrapMode wrapMode, float scale)
         {
             _brushType = BrushFillType.Texture;
             Texture = texture;
@@ -124,7 +124,7 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Angle, when relevant for the type.
         /// </summary>
-        public Decimal? Angle { get; set; }
+        public decimal? Angle { get; set; }
 
         /// <summary>
         /// Omits the <see cref="Angle"/> property from XML serialization when empty.

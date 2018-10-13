@@ -62,7 +62,7 @@ namespace CodeForDotNet.Configuration
         {
             // Validate arguments
             if (collection == null)
-                throw new ArgumentNullException("collection");
+                throw new ArgumentNullException(nameof(collection));
 
             // Iterate through the settings to be stored
             foreach (SettingsPropertyValue property in collection)
@@ -89,7 +89,7 @@ namespace CodeForDotNet.Configuration
         {
             // Validate parameters
             if (collection == null)
-                throw new ArgumentNullException("collection");
+                throw new ArgumentNullException(nameof(collection));
 
             // Create new collection of values
             SettingsPropertyValueCollection values = new SettingsPropertyValueCollection();
@@ -110,9 +110,9 @@ namespace CodeForDotNet.Configuration
         /// <summary>
         /// Helper method: fetches correct registry subkey.
         /// HKLM is used for settings marked as application-scoped.
-        /// HKLU is used for settings marked as user-scoped. 
+        /// HKLU is used for settings marked as user-scoped.
         /// </summary>
-        static RegistryKey GetRegKey(SettingsProperty property)
+        private static RegistryKey GetRegKey(SettingsProperty property)
         {
             RegistryKey key = IsUserScoped(property) ? Registry.CurrentUser : Registry.LocalMachine;
             key = key.CreateSubKey(GetSubKeyPath(property), RegistryKeyPermissionCheck.ReadSubTree);
@@ -122,12 +122,12 @@ namespace CodeForDotNet.Configuration
         /// <summary>
         /// Helper method: walks the "attribute bag" for a given property
         /// to determine if it is user-scoped or not.
-        /// Note that this provider does not enforce other rules, such as 
+        /// Note that this provider does not enforce other rules, such as
         ///    - unknown attributes
         ///    - improper attribute combinations (e.g. both user and app - this implementation
         ///      would say true for user-scoped regardless of existence of app-scoped)
         /// </summary>
-        static bool IsUserScoped(SettingsProperty property)
+        private static bool IsUserScoped(SettingsProperty property)
         {
             foreach (DictionaryEntry settingsAttribute in property.Attributes)
             {
@@ -143,7 +143,7 @@ namespace CodeForDotNet.Configuration
         /// and optional RegistrySettingsProviderSubkeyAttribute. Does not include the HKLM or HKCU hive.
         /// e.g. SOFTWARE\Company\Product\[Subkey\]Setting = Value.
         /// </summary>
-        static string GetSubKeyPath(SettingsProperty property)
+        private static string GetSubKeyPath(SettingsProperty property)
         {
             // Get the AssemblyCompany and AssemblyProduct names from the caller
             Assembly assembly = Assembly.GetCallingAssembly();

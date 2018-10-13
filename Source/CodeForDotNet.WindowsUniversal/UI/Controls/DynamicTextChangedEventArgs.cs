@@ -17,15 +17,15 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         public DynamicTextChangedEventArgs(string text, string originalText)
         {
             // Validate
-            if (text == null) throw new ArgumentNullException("text");
-            if (originalText == null) throw new ArgumentNullException("originalText");
+            if (text == null) throw new ArgumentNullException(nameof(text));
+            if (originalText == null) throw new ArgumentNullException(nameof(originalText));
 
             // Initialize member
             Text = text;
             OriginalText = originalText;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Properties
 
@@ -42,6 +42,6 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         /// </summary>
         public string Text { get; set; }
 
-        #endregion
+        #endregion Properties
     }
 }

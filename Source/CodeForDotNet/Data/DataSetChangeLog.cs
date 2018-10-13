@@ -69,8 +69,7 @@ namespace CodeForDotNet.Data
         /// <summary>
         /// Thread synchronization object.
         /// </summary>
-        public object SyncRoot { get { return _syncRoot; } }
-        object _syncRoot = new object();
+        public object SyncRoot { get; } = new object();
 
         /// <summary>
         /// DataSet which this change log belongs to.
@@ -367,7 +366,7 @@ namespace CodeForDotNet.Data
         {
             // Initialize
             DataTable table = row.Table;
-            string result = String.Empty;
+            string result = string.Empty;
 
             // Validate request
             if (table.PrimaryKey.Length == 0)

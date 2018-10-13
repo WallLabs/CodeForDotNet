@@ -41,7 +41,7 @@ namespace CodeForDotNet.IO
                 if (excludeFiles != null)
                 {
                     if (excludeFiles.Any(excludeFile =>
-                        String.Compare(fileName, excludeFile, StringComparison.OrdinalIgnoreCase) == 0))
+                        string.Compare(fileName, excludeFile, StringComparison.OrdinalIgnoreCase) == 0))
                         continue;
                 }
 
@@ -137,7 +137,7 @@ namespace CodeForDotNet.IO
             // Create the target path if it doesn't exist
             progressHandler?.Invoke(null, new FileExtensionsProgressEventArgs
             {
-                Message = String.Format(CultureInfo.CurrentCulture,
+                Message = string.Format(CultureInfo.CurrentCulture,
                 Resources.FileExtensionsCopyDirectoryCreateDirectory,
                 Path.GetFileName(Path.GetFileName(targetPath))),
                 Position = ++current,
@@ -159,7 +159,7 @@ namespace CodeForDotNet.IO
                 // Provide feedback
                 progressHandler?.Invoke(null, new FileExtensionsProgressEventArgs
                 {
-                    Message = String.Format(CultureInfo.CurrentCulture,
+                    Message = string.Format(CultureInfo.CurrentCulture,
                     Resources.FileExtensionsCopyDirectoryFile,
                     Path.GetFileName(filePath)),
                     Position = ++current,

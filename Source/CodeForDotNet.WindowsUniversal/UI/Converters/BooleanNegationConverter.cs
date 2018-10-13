@@ -9,7 +9,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
     public sealed class BooleanNegationConverter : IValueConverter
     {
         /// <summary>
-        /// Converts a <see cref="Boolean"/> by negating it.
+        /// Converts a <see cref="bool"/> by negating it.
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
@@ -17,7 +17,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
         }
 
         /// <summary>
-        /// Converts a <see cref="Boolean"/> back by negating it again.
+        /// Converts a <see cref="bool"/> back by negating it again.
         /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {

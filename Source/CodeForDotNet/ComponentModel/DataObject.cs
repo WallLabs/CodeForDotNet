@@ -425,7 +425,7 @@ namespace CodeForDotNet.ComponentModel
 
                             // Add property to instance cache
                             if (!propertyId.HasValue)
-                                throw new ArgumentNullException("propertyId");
+                                throw new ArgumentNullException(nameof(propertyId));
                             if (!_instancePropertiesChanged.Contains(propertyId.Value))
                                 _instancePropertiesChanged.Add(propertyId.Value);
 

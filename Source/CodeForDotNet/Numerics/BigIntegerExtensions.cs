@@ -36,10 +36,10 @@ namespace CodeForDotNet.Numerics
         public static string ToString(this BigInteger value, int numberBase, bool signed, int minWidth)
         {
             // Validate
-            if (numberBase < 2 || numberBase > 16) throw new ArgumentOutOfRangeException("numberBase");
-            if (minWidth < 0) throw new ArgumentOutOfRangeException("minWidth");
+            if (numberBase < 2 || numberBase > 16) throw new ArgumentOutOfRangeException(nameof(numberBase));
+            if (minWidth < 0) throw new ArgumentOutOfRangeException(nameof(minWidth));
             var negative = value < 0;
-            if (negative && !signed) throw new ArgumentOutOfRangeException("value");
+            if (negative && !signed) throw new ArgumentOutOfRangeException(nameof(value));
 
             // Decide how to handle sign according to base
             var bitBased = true;
@@ -134,8 +134,8 @@ namespace CodeForDotNet.Numerics
         public static bool TryParse(this string value, int numberBase, out BigInteger result, bool signed)
         {
             // Validate
-            if (String.IsNullOrEmpty(value)) throw new ArgumentNullException("value");
-            if (numberBase < 2 || numberBase > 16) throw new ArgumentOutOfRangeException("numberBase");
+            if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(value));
+            if (numberBase < 2 || numberBase > 16) throw new ArgumentOutOfRangeException(nameof(numberBase));
 
             // Prepare result
             result = 0;

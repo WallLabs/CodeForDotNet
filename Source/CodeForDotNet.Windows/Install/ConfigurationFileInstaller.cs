@@ -105,8 +105,8 @@ namespace CodeForDotNet.Install
                 if (installer.Context.Parameters.ContainsKey(parameter))
                 {
                     string parameterValue = installer.Context.Parameters[parameter];
-                    return (!String.IsNullOrEmpty(parameterValue) &&
-                        (String.Compare(parameterValue.Trim(), "false", StringComparison.OrdinalIgnoreCase) != 0) &&
+                    return (!string.IsNullOrEmpty(parameterValue) &&
+                        (string.Compare(parameterValue.Trim(), "false", StringComparison.OrdinalIgnoreCase) != 0) &&
                         (parameterValue.Trim() != "0"));
                 }
                 installer = installer.Parent;
@@ -123,14 +123,14 @@ namespace CodeForDotNet.Install
             base.Install(stateSaver);
 
             // Do nothing when conditional argument not satisfied
-            if (String.IsNullOrEmpty(ConditionArgument))
-                throw new ArgumentNullException(String.Format(CultureInfo.CurrentCulture,
+            if (string.IsNullOrEmpty(ConditionArgument))
+                throw new ArgumentNullException(string.Format(CultureInfo.CurrentCulture,
                     Resources.ErrorMissingConditionProperty, "ConfigurationFileInstaller"));
             if (!IsParameterTrue(ConditionArgument))
                 return;
 
             // Display status
-            Context.LogMessage(String.Format(CultureInfo.CurrentCulture, Resources.StatusInstall,
+            Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusInstall,
                 "ConfigurationFileInstaller", ConditionArgument));
 
             // Process each file
@@ -141,7 +141,7 @@ namespace CodeForDotNet.Install
             {
                 // Load file
                 string filePath = assemblyDir + Path.DirectorySeparatorChar + filename;
-                Context.LogMessage(String.Format(CultureInfo.CurrentCulture, Resources.StatusLoadingFile, filePath));
+                Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusLoadingFile, filePath));
                 string fileContents;
                 using (StreamReader reader = File.OpenText(filePath))
                     fileContents = reader.ReadToEnd();
@@ -208,7 +208,7 @@ namespace CodeForDotNet.Install
                 return;
 
             // Display status
-            Context.LogMessage(String.Format(CultureInfo.CurrentCulture, Resources.StatusUninstall,
+            Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusUninstall,
                 "ConfigurationFileInstaller", ConditionArgument));
 
             // Get saved assembly list
@@ -221,7 +221,7 @@ namespace CodeForDotNet.Install
                 {
                     if (File.Exists(filename))
                     {
-                        Context.LogMessage(String.Format(CultureInfo.CurrentCulture,
+                        Context.LogMessage(string.Format(CultureInfo.CurrentCulture,
                             Resources.StatusDeletingFile, filename));
                         File.Delete(filename);
                     }

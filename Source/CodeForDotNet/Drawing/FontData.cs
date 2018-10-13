@@ -65,7 +65,7 @@ namespace CodeForDotNet.Drawing
             // Compare values
             return
                 other.Family == Family &&
-                Math.Abs(other.Size - Size) < Single.Epsilon &&
+                Math.Abs(other.Size - Size) < float.Epsilon &&
                 other.Style == Style;
         }
 

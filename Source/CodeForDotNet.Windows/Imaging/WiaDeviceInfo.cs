@@ -8,7 +8,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Encapsulates a <see cref="Wia.DeviceInfo"/> in managed code.
     /// </summary>
-    public class WiaDeviceInfo : IDisposable
+    public class WiaDeviceInfo : DisposableObject
     {
         #region Lifetime
 
@@ -20,64 +20,44 @@ namespace CodeForDotNet.Windows.Imaging
             _wiaDeviceInfo = deviceInfo;
         }
 
-        #region IDisposable
-
         /// <summary>
-        /// Calls dispose during finalization (if it has not been called already).
-        /// </summary>
-        ~WiaDeviceInfo()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources.
-        /// </summary>
-        public void Dispose()
-        {
-            // Dispose
-            Dispose(true);
-
-            // Suppress finalization (it is no longer necessary)
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Frees resources.
+        /// Frees resources owned by this instance.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>,
-        /// false when called during finalization.</param>
-        void Dispose(bool disposing)
+        /// True when called from <see cref="IDisposable.Dispose()"/>,
+        /// false when called during finalization.
+        /// </param>
+        protected override void Dispose(bool disposing)
         {
             try
             {
-                // Dispose managed resources
+                // Dispose managed resources.
                 if (disposing)
                 {
                     if (_properties != null) _properties.Dispose();
                 }
-            }
-            finally
-            {
-                // Dispose unmanaged resources
+
+                // Dispose unmanaged resources.
                 if (_wiaDeviceInfo != null)
                     Marshal.ReleaseComObject(_wiaDeviceInfo);
             }
+            finally
+            {
+                // Call base class method to fire events and set status properties.
+                base.Dispose(disposing);
+            }
         }
 
-        #endregion
-
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
         /// <summary>
         /// Unmanaged <see cref="Wia.DeviceInfo"/>.
         /// </summary>
-        readonly Wia.DeviceInfo _wiaDeviceInfo;
+        private readonly Wia.DeviceInfo _wiaDeviceInfo;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -85,7 +65,8 @@ namespace CodeForDotNet.Windows.Imaging
         /// Thread synchronization object.
         /// </summary>
         public object SyncRoot { get { return _syncRoot; } }
-        static readonly object _syncRoot = new object();
+
+        private static readonly object _syncRoot = new object();
 
         /// <summary>
         /// Device identifier.
@@ -144,9 +125,10 @@ namespace CodeForDotNet.Windows.Imaging
                 return _properties;
             }
         }
-        WiaPropertyCollection _properties;
 
-        #endregion
+        private WiaPropertyCollection _properties;
+
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -159,6 +141,6 @@ namespace CodeForDotNet.Windows.Imaging
             return new WiaDevice(wiaDevice);
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

@@ -14,7 +14,7 @@ namespace CodeForDotNet.ComponentModel
         /// </summary>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            return sourceType == typeof(String) || base.CanConvertFrom(context, sourceType);
+            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
         }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace CodeForDotNet.ComponentModel
         /// </summary>
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            return destinationType == typeof(String) || base.CanConvertTo(context, destinationType);
+            return destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace CodeForDotNet.ComponentModel
         public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
         {
             // Convert from string
-            if (value is String stringValue)
+            if (value is string stringValue)
                 return BigInteger.Parse(stringValue, culture);
 
             // Convert from other types

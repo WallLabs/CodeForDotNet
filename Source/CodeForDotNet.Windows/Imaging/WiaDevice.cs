@@ -7,7 +7,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Encapsulates a <see cref="Wia.Device"/> in managed code.
     /// </summary>
-    public class WiaDevice : IDisposable
+    public class WiaDevice : DisposableObject
     {
         #region Lifetime
 
@@ -19,39 +19,18 @@ namespace CodeForDotNet.Windows.Imaging
             _wiaDevice = device;
         }
 
-        #region IDisposable
-
         /// <summary>
-        /// Calls dispose during finalization (if it has not been called already).
-        /// </summary>
-        ~WiaDevice()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources.
-        /// </summary>
-        public void Dispose()
-        {
-            // Dispose
-            Dispose(true);
-
-            // Suppress finalization (it is no longer necessary)
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Frees resources.
+        /// Frees resources owned by this instance.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>,
-        /// false when called during finalization.</param>
-        private void Dispose(bool disposing)
+        /// True when called from <see cref="IDisposable.Dispose()"/>,
+        /// false when called during finalization.
+        /// </param>
+        protected override void Dispose(bool disposing)
         {
             try
             {
-                // Dispose managed resources
+                // Dispose managed resources.
                 if (disposing)
                 {
                     if (_item != null) _item.Dispose();
@@ -60,26 +39,27 @@ namespace CodeForDotNet.Windows.Imaging
                     if (_events != null) _events.Dispose();
                     if (_commands != null) _commands.Dispose();
                 }
+
+                // Dispose unmanaged resources.
+                Marshal.ReleaseComObject(_wiaDevice);
             }
             finally
             {
-                // Dispose unmanaged resources
-                Marshal.ReleaseComObject(_wiaDevice);
+                // Call base class method to fire events and set status properties.
+                base.Dispose(disposing);
             }
         }
 
-        #endregion
-
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
         /// <summary>
         /// Unmanaged <see cref="Wia.Device"/>.
         /// </summary>
-        readonly Wia.Device _wiaDevice;
+        private readonly Wia.Device _wiaDevice;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -87,7 +67,8 @@ namespace CodeForDotNet.Windows.Imaging
         /// Thread synchronization object.
         /// </summary>
         public object SyncRoot { get { return _syncRoot; } }
-        static readonly object _syncRoot = new object();
+
+        private static readonly object _syncRoot = new object();
 
         /// <summary>
         /// Device identifier.
@@ -120,7 +101,8 @@ namespace CodeForDotNet.Windows.Imaging
                 return _properties;
             }
         }
-        WiaPropertyCollection _properties;
+
+        private WiaPropertyCollection _properties;
 
         /// <summary>
         /// Commands.
@@ -143,7 +125,8 @@ namespace CodeForDotNet.Windows.Imaging
                 return _commands;
             }
         }
-        WiaDeviceCommandCollection _commands;
+
+        private WiaDeviceCommandCollection _commands;
 
         /// <summary>
         /// Events.
@@ -166,7 +149,8 @@ namespace CodeForDotNet.Windows.Imaging
                 return _events;
             }
         }
-        WiaDeviceEventCollection _events;
+
+        private WiaDeviceEventCollection _events;
 
         /// <summary>
         /// Items.
@@ -189,7 +173,8 @@ namespace CodeForDotNet.Windows.Imaging
                 return _items;
             }
         }
-        WiaItemCollection _items;
+
+        private WiaItemCollection _items;
 
         /// <summary>
         /// Item.
@@ -212,9 +197,10 @@ namespace CodeForDotNet.Windows.Imaging
                 return _item;
             }
         }
+
         private WiaItem _item;
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -236,6 +222,6 @@ namespace CodeForDotNet.Windows.Imaging
             return new WiaItem(wiaItem);
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

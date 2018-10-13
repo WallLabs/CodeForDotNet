@@ -16,7 +16,7 @@ namespace CodeForDotNet.Runtime.Serialization
         public static string SerializeJsonString<T>(this T value)
         {
             // Validate
-            if (ReferenceEquals(value, null)) throw new ArgumentNullException("value");
+            if (ReferenceEquals(value, null)) throw new ArgumentNullException(nameof(value));
 
             // Initialize serializer
             var serializer = new DataContractJsonSerializer(typeof(T));
@@ -37,7 +37,7 @@ namespace CodeForDotNet.Runtime.Serialization
         public static T DeserializeJson<T>(this string value)
         {
             // Validate
-            if (String.IsNullOrWhiteSpace("value")) throw new ArgumentNullException("value");
+            if (string.IsNullOrWhiteSpace("value")) throw new ArgumentNullException(nameof(value));
 
             // Initialize serializer
             var serializer = new DataContractJsonSerializer(typeof(T));

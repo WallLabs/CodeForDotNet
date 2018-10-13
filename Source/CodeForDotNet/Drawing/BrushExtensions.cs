@@ -39,7 +39,7 @@ namespace CodeForDotNet.Drawing
                     {
                         // Single Color
                         if (!data.StartColor.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.StartColor)));
+                            string.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.StartColor)));
                         return new SolidBrush(Color.FromArgb(data.StartColor.Value));
                     }
 
@@ -47,11 +47,11 @@ namespace CodeForDotNet.Drawing
                     {
                         // Two color gradient
                         if (!data.StartColor.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.StartColor)));
+                            string.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.StartColor)));
                         if (!data.EndColor.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.EndColor)));
+                            string.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.EndColor)));
                         if (!data.Angle.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.Angle)));
+                            string.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.Angle)));
                         Color startColor, endColor;
                         if (reverse)
                         {
@@ -64,18 +64,18 @@ namespace CodeForDotNet.Drawing
                             endColor = Color.FromArgb(data.EndColor.Value);
                         }
                         return new LinearGradientBrush(bounds, startColor,
-                                                         endColor, Decimal.ToSingle(data.Angle.Value));
+                                                         endColor, decimal.ToSingle(data.Angle.Value));
                     }
 
                 case BrushFillType.Texture:
                     {
                         // Texture
                         if (!data.Angle.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.Angle)));
+                            string.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.Angle)));
                         if (!data.WrapMode.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.WrapMode)));
+                            string.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.WrapMode)));
                         if (!data.Scale.HasValue) throw new ArgumentNullException(
-                            String.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.Scale)));
+                            string.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.Scale)));
 
                         // Make texture
                         Image image;
@@ -84,7 +84,7 @@ namespace CodeForDotNet.Drawing
                         var brush = new TextureBrush(image, (WrapMode)(int)data.WrapMode.Value);
 
                         // Rotate
-                        brush.RotateTransform(Decimal.ToSingle(data.Angle.Value), MatrixOrder.Append);
+                        brush.RotateTransform(decimal.ToSingle(data.Angle.Value), MatrixOrder.Append);
 
                         // Scale image to fit
                         var scaleX = 1.0F;

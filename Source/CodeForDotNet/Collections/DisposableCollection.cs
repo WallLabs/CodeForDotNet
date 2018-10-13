@@ -8,7 +8,7 @@ namespace CodeForDotNet.Collections
     /// Disposable collection of <typeparamref name="T"/> items.
     /// Also disposes items when removed or the collection is cleared.
     /// </summary>
-    public class DisposableCollection<T> : Collection<T>, IDisposable where T : class
+    public class DisposableCollection<T> : Collection<T>, IDisposableObject where T : class
     {
         #region Lifetime
 
@@ -23,60 +23,135 @@ namespace CodeForDotNet.Collections
         /// </summary>
         public DisposableCollection(IList<T> list) : base(list) { }
 
-        #region IDisposable Members
-
         /// <summary>
-        /// Calls <see cref="Dispose(bool)"/> during finalization to free resources in case it was forgotten.
+        /// Overrides the finalizer to ensure any available dispose logic is called.
         /// </summary>
         ~DisposableCollection()
         {
-            // Partial dispose
+            // Dispose only once
+            if (IsDisposing || IsDisposed)
+                return;
+            IsDisposing = true;
+
+            // Dispose only unmanaged resources
             Dispose(false);
         }
 
         /// <summary>
-        /// Proactively frees resources.
+        /// Frees all resources held by this object, immediately (rather than waiting for Garbage Collection).
+        /// This can provide a performance increase and avoid memory congestion on objects that hold
+        /// many or "expensive" (large) external resources.
         /// </summary>
+        /// <remarks>
+        /// First fires the Disposing event, which could cancel this operation.
+        /// When not canceled, calls the <see cref="Dispose(bool)"/> method,
+        /// which should be overridden in inheriting classes to release
+        /// their local resources.
+        /// Finally fires the Disposed event.
+        /// Use the IsDisposing and IsDisposed properties to avoid using objects
+        /// that are about to or have been disposed.
+        /// </remarks>
         public void Dispose()
         {
-            // Full dispose
-            Dispose(true);
-
-            // Suppress finalization as no longer needed
-            GC.SuppressFinalize(this);
+            // Dispose only once
+            if (IsDisposing || IsDisposed)
+                return;
+            IsDisposing = true;
+            try
+            {
+                // Fire disposing event
+                Disposing?.Invoke(this, EventArgs.Empty);
+            }
+            finally
+            {
+                try
+                {
+                    // Full managed dispose
+                    Dispose(true);
+                }
+                finally
+                {
+                    // Do not finalize
+                    GC.SuppressFinalize(this);
+                }
+            }
         }
 
         /// <summary>
-        /// Frees resources owned by this object.
+        /// Inheritors implement the <see cref="Dispose(bool)"/> method to dispose resources accordingly,
+        /// depending on whether they have been called proactively or automatically via
+        /// the finalizer.
         /// </summary>
         /// <param name="disposing">
-        /// True when called proactively by <see cref="Dispose()"/>.
-        /// False when called during finalization.
+        /// True when called proactively, i.e. Not during garbage collection.
+        /// Managed resources should not be accessed when this is False,
+        /// just references and unmanaged resources released.
         /// </param>
-        void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
-                ClearItems();
-            else
-                base.ClearItems();
+            // Set second flag to indicate Disposed state
+            IsDisposed = true;
+            try
+            {
+                // Dispose or release references according to dispose type.
+                if (disposing)
+                    ClearItems();
+                else
+                    base.ClearItems();
+            }
+            finally
+            {
+                // Fire Disposed event
+                Disposed?.Invoke(this, EventArgs.Empty);
+            }
         }
 
-        #endregion
+        #endregion Lifetime
 
-        #endregion
+        #region Public Properties
+
+        /// <summary>
+        /// Indicates that this object is committed to the process of Disposing.
+        /// When this flag is true, do not pass any references or queue it for processing.
+        /// </summary>
+        public bool IsDisposing { get; private set; }
+
+        /// <summary>
+        /// Indicated that this object has been Disposed.
+        /// When this flag is true, do not use this object in any way.
+        /// </summary>
+        public bool IsDisposed { get; private set; }
+
+        #endregion Public Properties
+
+        #region Events
+
+        /// <summary>
+        /// Fires when the Dispose method is called on this object (except when garbage collected).
+        /// </summary>
+        public event EventHandler Disposing;
+
+        /// <summary>
+        /// Fires after this object has been Disposed.
+        /// Use this event to ensure all references are invalidated and any dependent objects are also Disposed
+        /// or released.
+        /// </summary>
+        public event EventHandler Disposed;
+
+        #endregion Events
 
         #region Public Methods
 
         /// <summary>
-        /// Clears and disposes items.
+        /// Disposes then clears all items.
         /// </summary>
         protected override void ClearItems()
         {
             try
             {
                 // Dispose items
-                foreach (var item in Items)
-                    ((IDisposable)item).Dispose();
+                foreach (IDisposable item in Items)
+                    item.Dispose();
             }
             finally
             {
@@ -86,15 +161,14 @@ namespace CodeForDotNet.Collections
         }
 
         /// <summary>
-        /// Removes and disposes an item.
+        /// Disposes then removes an item.
         /// </summary>
         protected override void RemoveItem(int index)
         {
             try
             {
-                var item = Items[index];
-                if (item != null)
-                    ((IDisposable)item).Dispose();
+                var item = (IDisposable)Items[index];
+                item?.Dispose();
             }
             finally
             {
@@ -103,15 +177,14 @@ namespace CodeForDotNet.Collections
         }
 
         /// <summary>
-        /// Disposes the replaces an item.
+        /// Disposes then replaces an item.
         /// </summary>
         protected override void SetItem(int index, T item)
         {
             try
             {
-                var oldItem = Items[index];
-                if (oldItem != null)
-                    ((IDisposable)oldItem).Dispose();
+                var oldItem = (IDisposable)Items[index];
+                oldItem?.Dispose();
             }
             finally
             {
@@ -119,6 +192,6 @@ namespace CodeForDotNet.Collections
             }
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

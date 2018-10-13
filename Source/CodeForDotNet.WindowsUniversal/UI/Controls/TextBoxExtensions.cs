@@ -17,7 +17,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         public static void SelectText(this TextBox textBox, int selectIndex, int selectLength)
         {
             // Validate
-            if (textBox == null) throw new ArgumentNullException("textBox");
+            if (textBox == null) throw new ArgumentNullException(nameof(textBox));
 
             // Select first position when invalid
             if (selectIndex < 0)
@@ -55,7 +55,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         public static void SendKeys(this TextBox textBox, string value)
         {
             // Validate
-            if (textBox == null) throw new ArgumentNullException("textBox");
+            if (textBox == null) throw new ArgumentNullException(nameof(textBox));
             if (value == null) value = "";
 
             // Calculate change

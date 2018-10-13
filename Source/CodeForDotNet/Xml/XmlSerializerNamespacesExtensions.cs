@@ -14,8 +14,8 @@ namespace CodeForDotNet.Xml
         public static void Merge(this XmlSerializerNamespaces xmlns, XmlSerializerNamespaces other)
         {
             // Validate
-            if (xmlns == null) throw new ArgumentNullException("xmlns");
-            if (other == null) throw new ArgumentNullException("other");
+            if (xmlns == null) throw new ArgumentNullException(nameof(xmlns));
+            if (other == null) throw new ArgumentNullException(nameof(other));
 
             // Merge...
             foreach (var qname in other.ToArray())

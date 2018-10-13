@@ -9,7 +9,7 @@ namespace CodeForDotNet.Windows.Native
     /// <summary>
     /// Helper class that executes NGEN on target assemblies.
     /// </summary>
-    public abstract class NativeCodeGenerator
+    public static class NativeCodeGenerator
     {
         /// <summary>
         /// Gets the path to the .Net Framework.
@@ -57,8 +57,8 @@ namespace CodeForDotNet.Windows.Native
         public static bool Remove(string assemblyName, out string consoleOutput)
         {
             // Validate
-            if (String.IsNullOrEmpty(assemblyName))
-                throw new ArgumentNullException("assemblyName");
+            if (string.IsNullOrEmpty(assemblyName))
+                throw new ArgumentNullException(nameof(assemblyName));
 
             // Execute NGEN to remove the assembly
             var parameters = "uninstall \"" + assemblyName.Trim('\"') + "\" /nologo /silent";
@@ -109,7 +109,7 @@ namespace CodeForDotNet.Windows.Native
             }
 
             // Get console output text (if any)
-            consoleOutput = String.Empty;
+            consoleOutput = string.Empty;
             if (process.StandardOutput.Peek() != -1)
                 consoleOutput = process.StandardOutput.ReadToEnd();
 

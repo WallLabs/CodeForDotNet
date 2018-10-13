@@ -3,7 +3,7 @@
 namespace CodeForDotNet
 {
     /// <summary>
-    /// Contains extensions for working with the <see cref="Byte"/> structure.
+    /// Contains extensions for working with the <see cref="byte"/> structure.
     /// </summary>
     public static class ByteExtensions
     {

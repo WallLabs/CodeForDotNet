@@ -10,7 +10,7 @@ namespace CodeForDotNet.Numerics
     /// <summary>
     /// Number of unlimited size, based on a variable length byte array, signed or unsigned.
     /// </summary>
-    public struct Number : IComparable<Number>
+    public struct Number : IComparable<Number>, IEquatable<Number>
     {
         #region Constants
 
@@ -19,7 +19,7 @@ namespace CodeForDotNet.Numerics
         /// </summary>
         private const string NumberDigits = "0123456789ABCDEF";
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -30,7 +30,7 @@ namespace CodeForDotNet.Numerics
             : this()
         {
             // Validate
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
 
             // Set value
             _bytes = value;
@@ -38,7 +38,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Creates a value based on an existing <see cref="Byte"/>.
+        /// Creates a value based on an existing <see cref="byte"/>.
         /// </summary>
         public Number(byte value)
             : this()
@@ -48,7 +48,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Creates a value based on an existing <see cref="SByte"/>.
+        /// Creates a value based on an existing <see cref="sbyte"/>.
         /// </summary>
         [CLSCompliant(false)]
         public Number(sbyte value)
@@ -59,7 +59,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Creates a value based on an existing <see cref="Int16"/>.
+        /// Creates a value based on an existing <see cref="short"/>.
         /// </summary>
         public Number(short value)
             : this()
@@ -69,7 +69,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Creates a value based on an existing <see cref="UInt16"/>.
+        /// Creates a value based on an existing <see cref="ushort"/>.
         /// </summary>
         [CLSCompliant(false)]
         public Number(ushort value)
@@ -80,7 +80,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Creates a value based on an existing <see cref="Int32"/>.
+        /// Creates a value based on an existing <see cref="int"/>.
         /// </summary>
         public Number(int value)
             : this()
@@ -90,7 +90,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Creates a value based on an existing <see cref="UInt32"/>.
+        /// Creates a value based on an existing <see cref="uint"/>.
         /// </summary>
         [CLSCompliant(false)]
         public Number(uint value)
@@ -101,7 +101,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Creates a value based on an existing <see cref="Int64"/>.
+        /// Creates a value based on an existing <see cref="long"/>.
         /// </summary>
         public Number(long value)
             : this()
@@ -111,7 +111,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Creates a value based on an existing <see cref="UInt64"/>.
+        /// Creates a value based on an existing <see cref="ulong"/>.
         /// </summary>
         [CLSCompliant(false)]
         public Number(ulong value)
@@ -122,13 +122,13 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Creates a value based on an existing <see cref="Single"/>.
+        /// Creates a value based on an existing <see cref="float"/>.
         /// </summary>
         public Number(float value)
             : this()
         {
             // Validate
-            if (Single.IsInfinity(value) || Single.IsNaN(value))
+            if (float.IsInfinity(value) || float.IsNaN(value))
                 throw new OverflowException();
 
             // Set value
@@ -137,13 +137,13 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Creates a value based on an existing <see cref="Double"/>.
+        /// Creates a value based on an existing <see cref="double"/>.
         /// </summary>
         public Number(double value)
             : this()
         {
             // Validate
-            if (Double.IsInfinity(value) || Double.IsNaN(value))
+            if (double.IsInfinity(value) || double.IsNaN(value))
                 throw new OverflowException();
 
             // Set value
@@ -152,14 +152,14 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Creates a value based on an existing <see cref="Decimal"/>.
+        /// Creates a value based on an existing <see cref="decimal"/>.
         /// </summary>
         public Number(decimal value)
             : this()
         {
             // Split decimal into parts and detect sign
-            value = Decimal.Truncate(value);
-            var decimalIntegers = Decimal.GetBits(value);
+            value = decimal.Truncate(value);
+            var decimalIntegers = decimal.GetBits(value);
             var signScaleAndHighWord = decimalIntegers[3];
             decimalIntegers[3] = signScaleAndHighWord & 0x0000ffff;
             var negative = (signScaleAndHighWord & 0x80000000) != 0;
@@ -199,7 +199,7 @@ namespace CodeForDotNet.Numerics
             Signed = true;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
@@ -209,7 +209,7 @@ namespace CodeForDotNet.Numerics
         /// </summary>
         private readonly byte[] _bytes;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -218,7 +218,7 @@ namespace CodeForDotNet.Numerics
         /// </summary>
         public static Number Zero
         {
-            get { return new Number(new byte[0], true); }
+            get { return new Number(Array.Empty<byte>(), true); }
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace CodeForDotNet.Numerics
             }
         }
 
-        #endregion
+        #endregion Public Properties
 
         #region Operators
 
@@ -297,7 +297,7 @@ namespace CodeForDotNet.Numerics
             get { return _bytes[index]; }
         }
 
-        #endregion
+        #endregion Indexer
 
         #region Comparison Operators
 
@@ -318,21 +318,15 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Compares this object with another for equality.
+        /// Compares this object with another.
         /// </summary>
-        public override bool Equals(object obj)
+        public override bool Equals(object something)
         {
-            // Compare type
-            if (!(obj is Number))
-                return false;
-            var other = (Number)obj;
-
-            // Call overloaded method to compare contents
-            return Equals(other);
+            return something is Number other && Equals(other);
         }
 
         /// <summary>
-        /// Compares this object with another <see cref="Number"/> for equality.
+        /// Compares this object with another of the same type.
         /// </summary>
         public bool Equals(Number other)
         {
@@ -371,12 +365,12 @@ namespace CodeForDotNet.Numerics
             return left.CompareTo(right) >= 0;
         }
 
-        #endregion
+        #endregion Comparison Operators
 
         #region Implicit Conversion Operators
 
         /// <summary>
-        /// Implicitly converts an (unsigned) <see cref="Byte"/> to a <see cref="Number"/>.
+        /// Implicitly converts an (unsigned) <see cref="byte"/> to a <see cref="Number"/>.
         /// </summary>
         public static implicit operator Number(byte value)
         {
@@ -384,7 +378,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Implicitly converts an (signed) <see cref="SByte"/> to a <see cref="Number"/>.
+        /// Implicitly converts an (signed) <see cref="sbyte"/> to a <see cref="Number"/>.
         /// </summary>
         [CLSCompliant(false)]
         public static implicit operator Number(sbyte value)
@@ -393,7 +387,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Implicitly converts an (unsigned) <see cref="UInt16"/> to a <see cref="Number"/>.
+        /// Implicitly converts an (unsigned) <see cref="ushort"/> to a <see cref="Number"/>.
         /// </summary>
         [CLSCompliant(false)]
         public static implicit operator Number(ushort value)
@@ -402,7 +396,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Implicitly converts an (signed) <see cref="Int16"/> to a <see cref="Number"/>.
+        /// Implicitly converts an (signed) <see cref="short"/> to a <see cref="Number"/>.
         /// </summary>
         public static implicit operator Number(short value)
         {
@@ -410,7 +404,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Implicitly converts an (unsigned) <see cref="UInt32"/> to a <see cref="Number"/>.
+        /// Implicitly converts an (unsigned) <see cref="uint"/> to a <see cref="Number"/>.
         /// </summary>
         [CLSCompliant(false)]
         public static implicit operator Number(uint value)
@@ -419,7 +413,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Implicitly converts an (signed) <see cref="Int32"/> to a <see cref="Number"/>.
+        /// Implicitly converts an (signed) <see cref="int"/> to a <see cref="Number"/>.
         /// </summary>
         public static implicit operator Number(int value)
         {
@@ -427,7 +421,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Implicitly converts an (unsigned) <see cref="UInt64"/> to a <see cref="Number"/>.
+        /// Implicitly converts an (unsigned) <see cref="ulong"/> to a <see cref="Number"/>.
         /// </summary>
         [CLSCompliant(false)]
         public static implicit operator Number(ulong value)
@@ -436,7 +430,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Implicitly converts an (signed) <see cref="Int64"/> to a <see cref="Number"/>.
+        /// Implicitly converts an (signed) <see cref="long"/> to a <see cref="Number"/>.
         /// </summary>
         public static implicit operator Number(long value)
         {
@@ -444,7 +438,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Implicitly converts an (signed) <see cref="Single"/> to a <see cref="Number"/>.
+        /// Implicitly converts an (signed) <see cref="float"/> to a <see cref="Number"/>.
         /// </summary>
         public static implicit operator Number(float value)
         {
@@ -452,7 +446,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Implicitly converts an (signed) <see cref="Double"/> to a <see cref="Number"/>.
+        /// Implicitly converts an (signed) <see cref="double"/> to a <see cref="Number"/>.
         /// </summary>
         public static implicit operator Number(double value)
         {
@@ -460,19 +454,19 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Implicitly converts an (signed) <see cref="Decimal"/> to a <see cref="Number"/>.
+        /// Implicitly converts an (signed) <see cref="decimal"/> to a <see cref="Number"/>.
         /// </summary>
         public static implicit operator Number(decimal value)
         {
             return new Number(value);
         }
 
-        #endregion
+        #endregion Implicit Conversion Operators
 
         #region Explicit Conversion Operators
 
         /// <summary>
-        /// Explicitly converts a <see cref="Number"/> to a <see cref="Byte"/> (unsigned).
+        /// Explicitly converts a <see cref="Number"/> to a <see cref="byte"/> (unsigned).
         /// </summary>
         public static explicit operator byte(Number value)
         {
@@ -482,7 +476,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Explicitly converts a <see cref="Number"/> to a <see cref="SByte"/> (signed).
+        /// Explicitly converts a <see cref="Number"/> to a <see cref="sbyte"/> (signed).
         /// </summary>
         [CLSCompliant(false)]
         public static explicit operator sbyte(Number value)
@@ -495,7 +489,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Explicitly converts a <see cref="Number"/> to a <see cref="Int16"/> (signed).
+        /// Explicitly converts a <see cref="Number"/> to a <see cref="short"/> (signed).
         /// </summary>
         public static explicit operator short(Number value)
         {
@@ -510,7 +504,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Explicitly converts a <see cref="Number"/> to a <see cref="UInt16"/> (unsigned).
+        /// Explicitly converts a <see cref="Number"/> to a <see cref="ushort"/> (unsigned).
         /// </summary>
         [CLSCompliant(false)]
         public static explicit operator ushort(Number value)
@@ -526,7 +520,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Explicitly converts a <see cref="Number"/> to a <see cref="Int32"/> (signed).
+        /// Explicitly converts a <see cref="Number"/> to a <see cref="int"/> (signed).
         /// </summary>
         public static explicit operator int(Number value)
         {
@@ -541,7 +535,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Explicitly converts a <see cref="Number"/> to a <see cref="UInt32"/> (unsigned).
+        /// Explicitly converts a <see cref="Number"/> to a <see cref="uint"/> (unsigned).
         /// </summary>
         [CLSCompliant(false)]
         public static explicit operator uint(Number value)
@@ -557,7 +551,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Explicitly converts a <see cref="Number"/> to a <see cref="Int64"/> (signed).
+        /// Explicitly converts a <see cref="Number"/> to a <see cref="long"/> (signed).
         /// </summary>
         public static explicit operator long(Number value)
         {
@@ -572,7 +566,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Explicitly converts a <see cref="Number"/> to a <see cref="UInt64"/> (unsigned).
+        /// Explicitly converts a <see cref="Number"/> to a <see cref="ulong"/> (unsigned).
         /// </summary>
         [CLSCompliant(false)]
         public static explicit operator ulong(Number value)
@@ -588,7 +582,7 @@ namespace CodeForDotNet.Numerics
         }
 
         /// <summary>
-        /// Explicitly converts a <see cref="Number"/> to a <see cref="Decimal"/> (signed).
+        /// Explicitly converts a <see cref="Number"/> to a <see cref="decimal"/> (signed).
         /// </summary>
         public static explicit operator decimal(Number value)
         {
@@ -603,7 +597,7 @@ namespace CodeForDotNet.Numerics
                 !value.Sign, 0);
         }
 
-        #endregion
+        #endregion Explicit Conversion Operators
 
         #region Bitwise Operators
 
@@ -783,7 +777,7 @@ namespace CodeForDotNet.Numerics
             var shiftBits = shift % 8;                      // Get any remaining bits shifted
             var valueSize = value.ByteSize;
             if (shiftWholeBytes >= valueSize)               // Return zero when entire value shifted out
-                return new Number(new byte[0], value.Signed);
+                return new Number(Array.Empty<byte>(), value.Signed);
             var resultSize = valueSize - shiftWholeBytes;   // Calculate size without whole shifted bytes
             var resultBytes = new byte[resultSize];         // Allocate buffer
 
@@ -831,7 +825,7 @@ namespace CodeForDotNet.Numerics
             return new Number(resultBytes, value.Signed);
         }
 
-        #endregion
+        #endregion Bitwise Operators
 
         #region Unary Operators
 
@@ -906,7 +900,7 @@ namespace CodeForDotNet.Numerics
             return value - (byte)1;
         }
 
-        #endregion
+        #endregion Unary Operators
 
         #region Binary Operators
 
@@ -1087,7 +1081,7 @@ namespace CodeForDotNet.Numerics
             var resultSigned = left.Signed || right.Signed;
 
             // Divide bytes with carry
-            var resultBytes = new byte[0];
+            var resultBytes = Array.Empty<byte>();
             var resultSize = 0;
             uint carry = 0;
             for (var divisorIndex = divisorSize - 1; divisorIndex >= 0; divisorIndex--)
@@ -1170,7 +1164,7 @@ namespace CodeForDotNet.Numerics
             var factorSize = factorBytes.Length;
 
             // Multiply bytes with carry
-            var resultBytes = new byte[0];
+            var resultBytes = Array.Empty<byte>();
             var resultSize = resultBytes.Length;
             ushort carry = 0;
             for (var factorIndex = 0; factorIndex < factorSize; factorIndex++)
@@ -1250,11 +1244,13 @@ namespace CodeForDotNet.Numerics
             return new Number(resultBytes, resultSigned);
         }
 
-        #endregion
+        #endregion Binary Operators
 
-        #endregion
+        #endregion Operators
 
         #region Public Methods
+
+        #region Content
 
         /// <summary>
         /// Gets a hash based on the current value.
@@ -1275,6 +1271,10 @@ namespace CodeForDotNet.Numerics
         {
             return new ReadOnlyCollection<byte>(_bytes);
         }
+
+        #endregion Content
+
+        #region Size
 
         /// <summary>
         /// Returns a <see cref="Number"/> which has been resized with sign extension when <see cref="Signed"/>.
@@ -1311,6 +1311,10 @@ namespace CodeForDotNet.Numerics
             // Return result
             return new Number(resizedBytes, signed);
         }
+
+        #endregion Size
+
+        #region Sign
 
         /// <summary>
         /// Creates a signed copy of this value, optionally extending to preserve sign.
@@ -1380,6 +1384,8 @@ namespace CodeForDotNet.Numerics
             return new Number(_bytes, false);
         }
 
+        #endregion Sign
+
         #region String Conversion
 
         /// <summary>
@@ -1406,8 +1412,8 @@ namespace CodeForDotNet.Numerics
         public string ToString(int numberBase, int minimumLength)
         {
             // Validate
-            if (numberBase < 2 || numberBase > 16) throw new ArgumentOutOfRangeException("numberBase");
-            if (minimumLength < 0) throw new ArgumentOutOfRangeException("minimumLength");
+            if (numberBase < 2 || numberBase > 16) throw new ArgumentOutOfRangeException(nameof(numberBase));
+            if (minimumLength < 0) throw new ArgumentOutOfRangeException(nameof(minimumLength));
             var signed = Signed;
             var negative = !Sign;
 
@@ -1459,7 +1465,7 @@ namespace CodeForDotNet.Numerics
                 do
                 {
                     // Divide byte value/dividend by base to extract digit value as remainder
-                    var baseDividend = Decimal.Floor(digitByteValue / (decimal)numberBase);
+                    var baseDividend = decimal.Floor(digitByteValue / (decimal)numberBase);
                     var baseRemainder = digitByteValue - numberBase * baseDividend;
                     digitValue = (int)baseRemainder;
                     digitByteValue = (byte)baseDividend;
@@ -1468,7 +1474,6 @@ namespace CodeForDotNet.Numerics
                     result.Insert(firstDigitIndex, new[] { NumberDigits[digitValue] });
                     digits++;
                     digitsThisByte++;
-
                 } while (digitByteValue > 0 || digitsThisByte < minimumDigitsPerByte);
             }
 
@@ -1523,7 +1528,7 @@ namespace CodeForDotNet.Numerics
                 return result;
 
             // Throw detailed error message when failed
-            var message = String.Format(CultureInfo.CurrentCulture, signed
+            var message = string.Format(CultureInfo.CurrentCulture, signed
                 ? Resources.NumberParseFormatErrorSigned
                 : Resources.NumberParseFormatErrorUnsigned,
                 value, numberBase);
@@ -1544,11 +1549,11 @@ namespace CodeForDotNet.Numerics
         public static bool TryParse(string value, int numberBase, out Number result, bool signed)
         {
             // Validate
-            if (String.IsNullOrEmpty(value)) throw new ArgumentNullException("value");
-            if (numberBase < 2 || numberBase > 16) throw new ArgumentOutOfRangeException("numberBase");
+            if (string.IsNullOrEmpty(value)) throw new ArgumentNullException(nameof(value));
+            if (numberBase < 2 || numberBase > 16) throw new ArgumentOutOfRangeException(nameof(numberBase));
 
             // Prepare result
-            result = new Number(new byte[0], signed);
+            result = new Number(Array.Empty<byte>(), signed);
 
             // Decide how to handle sign according to base
             var bitBased = true;
@@ -1633,7 +1638,243 @@ namespace CodeForDotNet.Numerics
             return true;
         }
 
-        #endregion
+        #endregion String Conversion
+
+        #region Value Conversion
+
+        #region From
+
+        /// <summary>
+        /// Converts an (unsigned) <see cref="byte"/> to a <see cref="Number"/>.
+        /// </summary>
+        public static Number FromByte(byte value)
+        {
+            return new Number(value);
+        }
+
+        /// <summary>
+        /// Converts an (signed) <see cref="sbyte"/> to a <see cref="Number"/>.
+        /// </summary>
+        [CLSCompliant(false)]
+        public static Number FromSByte(sbyte value)
+        {
+            return new Number(value);
+        }
+
+        /// <summary>
+        /// Converts an (unsigned) <see cref="ushort"/> to a <see cref="Number"/>.
+        /// </summary>
+        [CLSCompliant(false)]
+        public static Number FromUInt16(ushort value)
+        {
+            return new Number(value);
+        }
+
+        /// <summary>
+        /// Converts an (signed) <see cref="short"/> to a <see cref="Number"/>.
+        /// </summary>
+        public static Number FromInt16(short value)
+        {
+            return new Number(value);
+        }
+
+        /// <summary>
+        /// Converts an (unsigned) <see cref="uint"/> to a <see cref="Number"/>.
+        /// </summary>
+        [CLSCompliant(false)]
+        public static Number FromUInt32(uint value)
+        {
+            return new Number(value);
+        }
+
+        /// <summary>
+        /// Converts an (signed) <see cref="int"/> to a <see cref="Number"/>.
+        /// </summary>
+        public static Number FromInt32(int value)
+        {
+            return new Number(value);
+        }
+
+        /// <summary>
+        /// Converts an (unsigned) <see cref="ulong"/> to a <see cref="Number"/>.
+        /// </summary>
+        [CLSCompliant(false)]
+        public static Number FromUInt64(ulong value)
+        {
+            return new Number(value);
+        }
+
+        /// <summary>
+        /// Converts an (signed) <see cref="long"/> to a <see cref="Number"/>.
+        /// </summary>
+        public static Number FromInt64(long value)
+        {
+            return new Number(value);
+        }
+
+        /// <summary>
+        /// Converts an (signed) <see cref="float"/> to a <see cref="Number"/>.
+        /// </summary>
+        public static Number FromSingle(float value)
+        {
+            return new Number(value);
+        }
+
+        /// <summary>
+        /// Converts an (signed) <see cref="double"/> to a <see cref="Number"/>.
+        /// </summary>
+        public static Number FromDouble(double value)
+        {
+            return new Number(value);
+        }
+
+        /// <summary>
+        /// Converts an (signed) <see cref="decimal"/> to a <see cref="Number"/>.
+        /// </summary>
+        public static Number FromDecimal(decimal value)
+        {
+            return new Number(value);
+        }
+
+        #endregion From
+
+        #region To
+
+        /// <summary>
+        /// Converts the current value to a <see cref="byte"/> (unsigned).
+        /// </summary>
+        public byte ToByte()
+        {
+            var byteLength = ByteSize;
+            if (byteLength > 1 || Signed) throw new OverflowException();
+            return byteLength == 0 ? (byte)0 : _bytes[0];
+        }
+
+        /// <summary>
+        /// Converts the current value to a <see cref="sbyte"/> (signed).
+        /// </summary>
+        [CLSCompliant(false)]
+        public sbyte ToSByte()
+        {
+            var byteLength = ByteSize;
+            if (byteLength > 1) throw new OverflowException();
+            if (byteLength == 0)
+                return 0;
+            return (sbyte)_bytes[0];
+        }
+
+        /// <summary>
+        /// Converts the current value to a <see cref="short"/> (signed).
+        /// </summary>
+        public short ToInt16()
+        {
+            var byteLength = ByteSize;
+            if (byteLength > 1) throw new OverflowException();
+            if (byteLength == 0)
+                return 0;
+            var result = (short)_bytes[0];
+            if (byteLength == 1)
+                result &= (short)(_bytes[0] << 8);
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the current value to a <see cref="ushort"/> (unsigned).
+        /// </summary>
+        [CLSCompliant(false)]
+        public ushort ToUInt16()
+        {
+            var byteLength = ByteSize;
+            if (byteLength > 2 || Signed) throw new OverflowException();
+            if (byteLength == 0)
+                return 0;
+            var result = (ushort)_bytes[0];
+            if (byteLength == 1)
+                result &= (ushort)(_bytes[0] << 8);
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the current value to a <see cref="int"/> (signed).
+        /// </summary>
+        public int ToInt32()
+        {
+            var byteLength = ByteSize;
+            if (byteLength > 4) throw new OverflowException();
+            if (byteLength == 0)
+                return 0;
+            var result = (int)_bytes[0];
+            for (var index = 1; index <= 3; index++)
+                result &= _bytes[0] << (8 * index);
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the current value to a <see cref="uint"/> (unsigned).
+        /// </summary>
+        [CLSCompliant(false)]
+        public uint ToUInt32()
+        {
+            var byteLength = ByteSize;
+            if (byteLength > 4 || Signed) throw new OverflowException();
+            if (byteLength == 0)
+                return 0;
+            var result = (uint)_bytes[0];
+            for (var index = 1; index <= 3; index++)
+                result &= (uint)_bytes[0] << (8 * index);
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the current value to a <see cref="long"/> (signed).
+        /// </summary>
+        public long ToInt64()
+        {
+            var byteLength = ByteSize;
+            if (byteLength > 8) throw new OverflowException();
+            if (byteLength == 0)
+                return 0;
+            var result = (long)_bytes[0];
+            for (var index = 1; index <= 7; index++)
+                result &= _bytes[0] << (8 * index);
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the current value to a <see cref="ulong"/> (unsigned).
+        /// </summary>
+        [CLSCompliant(false)]
+        public ulong ToUInt64()
+        {
+            var byteLength = ByteSize;
+            if (byteLength > 8 || Signed) throw new OverflowException();
+            if (byteLength == 0)
+                return 0;
+            var result = (ulong)_bytes[0];
+            for (var index = 1; index <= 7; index++)
+                result &= (ulong)_bytes[0] << (8 * index);
+            return result;
+        }
+
+        /// <summary>
+        /// Converts the current value to a <see cref="decimal"/> (signed).
+        /// </summary>
+        public decimal ToDecimal()
+        {
+            var byteLength = ByteSize;
+            if (byteLength > 3) throw new OverflowException();
+            // TODO: Support truncation with exponent for larger numbers
+            if (byteLength == 0)
+                return 0;
+            return new decimal(_bytes[0],
+                byteLength > 1 ? _bytes[1] : 0,
+                byteLength > 2 ? _bytes[2] : 0,
+                !Sign, 0);
+        }
+
+        #endregion To
+
+        #endregion Value Conversion
 
         #region Mathematical Functions
 
@@ -1685,9 +1926,9 @@ namespace CodeForDotNet.Numerics
             return result;
         }
 
-        #endregion
+        #endregion Mathematical Functions
 
-        #endregion
+        #endregion Public Methods
 
         #region IComparable
 
@@ -1720,6 +1961,6 @@ namespace CodeForDotNet.Numerics
             return 0;
         }
 
-        #endregion
+        #endregion IComparable
     }
 }

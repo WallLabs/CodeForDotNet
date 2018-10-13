@@ -114,8 +114,8 @@ namespace CodeForDotNet.Install
                 if (installer.Context.Parameters.ContainsKey(parameter))
                 {
                     string parameterValue = installer.Context.Parameters[parameter];
-                    return (!String.IsNullOrEmpty(parameterValue) &&
-                        (String.Compare(parameterValue.Trim(), "false", StringComparison.OrdinalIgnoreCase) != 0) &&
+                    return (!string.IsNullOrEmpty(parameterValue) &&
+                        (string.Compare(parameterValue.Trim(), "false", StringComparison.OrdinalIgnoreCase) != 0) &&
                         (parameterValue.Trim() != "0"));
                 }
                 installer = installer.Parent;
@@ -132,14 +132,14 @@ namespace CodeForDotNet.Install
             base.Install(stateSaver);
 
             // Do nothing when conditional argument not satisfied
-            if (String.IsNullOrWhiteSpace(ConditionArgument))
-                throw new ArgumentNullException(String.Format(CultureInfo.CurrentCulture,
+            if (string.IsNullOrWhiteSpace(ConditionArgument))
+                throw new ArgumentNullException(string.Format(CultureInfo.CurrentCulture,
                     Resources.ErrorMissingConditionProperty, "DesktopShortcutInstaller"));
             if (!IsParameterTrue(ConditionArgument))
                 return;
 
             // Display status
-            Context.LogMessage(String.Format(CultureInfo.CurrentCulture, Resources.StatusInstall,
+            Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusInstall,
                 "DesktopShortcutInstaller", ConditionArgument));
 
             // Create desktop shortcut
@@ -185,7 +185,7 @@ namespace CodeForDotNet.Install
                 return;
 
             // Display status
-            Context.LogMessage(String.Format(CultureInfo.CurrentCulture, Resources.StatusUninstall,
+            Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusUninstall,
                 "DesktopShortcutInstaller", ConditionArgument));
 
             // Remove desktop shortcut
@@ -195,7 +195,7 @@ namespace CodeForDotNet.Install
                 string shortcutTargetPath = ExpandVariables(TargetDirectory) + Path.DirectorySeparatorChar + ShortcutName + ".lnk";
                 if (File.Exists(shortcutTargetPath))
                 {
-                    Context.LogMessage(String.Format(CultureInfo.CurrentCulture,
+                    Context.LogMessage(string.Format(CultureInfo.CurrentCulture,
                         Resources.StatusDeletingFile, shortcutTargetPath));
                     File.Delete(shortcutTargetPath);
                 }
@@ -221,7 +221,7 @@ namespace CodeForDotNet.Install
         {
             string output = input;
             if (input == null)
-                return String.Empty;
+                return string.Empty;
 
             // Translate %AssemblyDir% as installation target folder.
             string installPath = Path.GetDirectoryName(Context.Parameters["assemblypath"].Trim('"')).TrimEnd(Path.DirectorySeparatorChar);

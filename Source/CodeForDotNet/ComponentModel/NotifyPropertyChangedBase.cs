@@ -101,15 +101,13 @@ namespace CodeForDotNet.ComponentModel
 
             // Call optional "before assignment" method
             var oldValue = target;
-            if (beforeAssign != null)
-                beforeAssign(this, ref target, oldValue, value, propertyName);
+            beforeAssign?.Invoke(this, ref target, oldValue, value, propertyName);
 
             // Set value
             target = value;
 
             // Call optional "after assignment" method
-            if (afterAssign != null)
-                afterAssign(this, ref target, oldValue, value, propertyName);
+            afterAssign?.Invoke(this, ref target, oldValue, value, propertyName);
 
             // Fire event
             InvokePropertyChanged(propertyName);

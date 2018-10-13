@@ -98,8 +98,8 @@ namespace CodeForDotNet.Install
                 if (installer.Context.Parameters.ContainsKey(parameter))
                 {
                     string parameterValue = installer.Context.Parameters[parameter];
-                    return (!String.IsNullOrEmpty(parameterValue) &&
-                        (String.Compare(parameterValue.Trim(), "false", StringComparison.OrdinalIgnoreCase) != 0) &&
+                    return (!string.IsNullOrEmpty(parameterValue) &&
+                        (string.Compare(parameterValue.Trim(), "false", StringComparison.OrdinalIgnoreCase) != 0) &&
                         (parameterValue.Trim() != "0"));
                 }
                 installer = installer.Parent;
@@ -116,14 +116,14 @@ namespace CodeForDotNet.Install
             base.Install(stateSaver);
 
             // Do nothing when conditional argument not satisfied
-            if (String.IsNullOrEmpty(ConditionArgument))
-                throw new ArgumentNullException(String.Format(CultureInfo.CurrentCulture,
+            if (string.IsNullOrEmpty(ConditionArgument))
+                throw new ArgumentNullException(string.Format(CultureInfo.CurrentCulture,
                     Resources.ErrorMissingConditionProperty, "NativeCodeGeneratorInstaller"));
             if (!IsParameterTrue(ConditionArgument))
                 return;
 
             // Display status
-            Context.LogMessage(String.Format(CultureInfo.CurrentCulture, Resources.StatusInstall,
+            Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusInstall,
                 "NativeCodeGeneratorInstaller", ConditionArgument));
 
             // Run NGEN to install assemblies into native image cache
@@ -164,7 +164,7 @@ namespace CodeForDotNet.Install
                 return;
 
             // Display status
-            Context.LogMessage(String.Format(CultureInfo.CurrentCulture, Resources.StatusUninstall,
+            Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusUninstall,
                 "NativeCodeGeneratorInstaller", ConditionArgument));
 
             // Get saved assembly list

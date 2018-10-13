@@ -8,7 +8,7 @@ namespace CodeForDotNet.Drawing
     /// Specifies shortcut keys that can be used by menu items.
     /// </summary>
     [Flags]
-    public enum KeyboardShortcut
+    public enum KeyboardShortcuts
     {
         /// <summary>
         /// No shortcut key is associated with the menu item.

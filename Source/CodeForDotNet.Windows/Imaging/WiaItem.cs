@@ -7,7 +7,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Encapsulates a <see cref="Item"/> in managed code.
     /// </summary>
-    public class WiaItem : IDisposable
+    public class WiaItem : DisposableObject
     {
         #region Lifetime
 
@@ -19,66 +19,46 @@ namespace CodeForDotNet.Windows.Imaging
             _wiaItem = item;
         }
 
-        #region IDisposable
-
         /// <summary>
-        /// Calls dispose during finalization (if it has not been called already).
-        /// </summary>
-        ~WiaItem()
-        {
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources.
-        /// </summary>
-        public void Dispose()
-        {
-            // Dispose
-            Dispose(true);
-
-            // Suppress finalization (it is no longer necessary)
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Frees resources.
+        /// Frees resources owned by this instance.
         /// </summary>
         /// <param name="disposing">
-        /// True when called from <see cref="Dispose()"/>,
-        /// false when called during finalization.</param>
-        void Dispose(bool disposing)
+        /// True when called from <see cref="IDisposable.Dispose()"/>,
+        /// false when called during finalization.
+        /// </param>
+        protected override void Dispose(bool disposing)
         {
             try
             {
-                // Dispose managed resources
+                // Dispose managed resources.
                 if (disposing)
                 {
                     if (_properties != null) _properties.Dispose();
                     if (_formats != null) _formats.Dispose();
                     if (_commands != null) _commands.Dispose();
                 }
-            }
-            finally
-            {
-                // Dispose unmanaged resources
+
+                // Dispose unmanaged resources.
                 if (_wiaItem != null)
                     Marshal.ReleaseComObject(_wiaItem);
             }
+            finally
+            {
+                // Call base class method to fire events and set status properties.
+                base.Dispose(disposing);
+            }
         }
 
-        #endregion
-
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
         /// <summary>
         /// Unmanaged <see cref="Wia.Item"/>.
         /// </summary>
-        readonly Wia.Item _wiaItem;
+        private readonly Wia.Item _wiaItem;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -86,7 +66,8 @@ namespace CodeForDotNet.Windows.Imaging
         /// Thread synchronization object.
         /// </summary>
         public object SyncRoot { get { return _syncRoot; } }
-        static readonly object _syncRoot = new object();
+
+        private static readonly object _syncRoot = new object();
 
         /// <summary>
         /// Item identifier.
@@ -114,7 +95,8 @@ namespace CodeForDotNet.Windows.Imaging
                 return _commands;
             }
         }
-        WiaDeviceCommandCollection _commands;
+
+        private WiaDeviceCommandCollection _commands;
 
         /// <summary>
         /// Properties.
@@ -137,7 +119,8 @@ namespace CodeForDotNet.Windows.Imaging
                 return _properties;
             }
         }
-        WiaPropertyCollection _properties;
+
+        private WiaPropertyCollection _properties;
 
         /// <summary>
         /// Formats.
@@ -160,14 +143,15 @@ namespace CodeForDotNet.Windows.Imaging
                 return _formats;
             }
         }
-        WiaFormatCollection _formats;
+
+        private WiaFormatCollection _formats;
 
         /// <summary>
         /// Item.
         /// </summary>
         public object Item { get { return _wiaItem.WiaItem; } }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -198,6 +182,6 @@ namespace CodeForDotNet.Windows.Imaging
             return _wiaItem.Transfer(formatId);
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

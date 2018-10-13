@@ -24,7 +24,7 @@ namespace CodeForDotNet.Data
         public static Collection<string> GetErrors(this DataSet dataSet)
         {
             // Validate
-            if (dataSet == null) throw new ArgumentNullException("dataSet");
+            if (dataSet == null) throw new ArgumentNullException(nameof(dataSet));
 
             // Get errors...
             var errors = new Collection<string>();

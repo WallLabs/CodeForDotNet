@@ -1,6 +1,7 @@
 ﻿using CodeForDotNet.Numerics;
 using CodeForDotNet.WindowsUniversal.Input;
 using System;
+using System.Globalization;
 using Windows.UI.Xaml;
 
 namespace CodeForDotNet.WindowsUniversal.UI.Controls
@@ -23,7 +24,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             PadChar = '0';
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Properties
 
@@ -64,7 +65,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         /// </summary>
         public static readonly DependencyProperty NumberMaxProperty =
             DependencyProperty.Register("MaxSignedValue", typeof(double), typeof(NumericTextBox),
-                                        new PropertyMetadata(Double.MaxValue));
+                                        new PropertyMetadata(double.MaxValue));
 
         /// <summary>
         /// Maximum value.
@@ -72,7 +73,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         public double NumberMax
         {
             get { return (double)GetValue(NumberMaxProperty); }
-            set { SetValue(NumberMaxProperty, value);}
+            set { SetValue(NumberMaxProperty, value); }
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         /// </summary>
         public static readonly DependencyProperty NumberMinProperty =
             DependencyProperty.Register("MinSignedValue", typeof(double), typeof(NumericTextBox),
-                                        new PropertyMetadata(Double.MinValue));
+                                        new PropertyMetadata(double.MinValue));
 
         /// <summary>
         /// Minimum value.
@@ -91,7 +92,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             set { SetValue(NumberMinProperty, value); }
         }
 
-        #endregion
+        #endregion Properties
 
         #region Event Handlers
 
@@ -167,36 +168,36 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
                 }
             }
 
-            // Strip invalid characters
+            // Strip invalid characters.
             var validChars = GetValidNumberChars((int)NumberBase);
             var text = "";
             foreach (var textChar in args.Text)
             {
-                // Allow sign as first char
+                // Allow sign as first character.
                 if (sign.HasValue && text.Length == 0 && (textChar == '+' || textChar == '-'))
                 {
                     text += textChar;
                 }
                 else
                 {
-                    // Allow only valid number chars for rest of string
-                    if (validChars.IndexOf(textChar.ToString(), StringComparison.OrdinalIgnoreCase) >= 0)
+                    // Allow only valid number characters for rest of string.
+                    if (validChars.IndexOf(textChar.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase) >= 0)
                     {
-                        // Add valid char with uppercase correction if necessary
-                        if (Char.IsLetter(textChar) && !Char.IsUpper(textChar))
+                        // Add valid char with uppercase correction if necessary.
+                        if (char.IsLetter(textChar) && !char.IsUpper(textChar))
                         {
-                            // Correct lower to upper case
-                            text += Char.ToUpperInvariant(textChar);
+                            // Correct lower to uppercase.
+                            text += char.ToUpperInvariant(textChar);
                         }
                         else
                         {
-                            // No change necessary
+                            // No change necessary.
                             text += textChar;
                         }
                     }
                     else
                     {
-                        // Skip or pad invalid char
+                        // Skip or pad invalid characters.
                         if (PadChar.HasValue)
                             text += PadChar.Value;
                     }
@@ -204,7 +205,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             }
 
             // Validate number when set (format and sign, minimum and maximum)
-            if (!String.IsNullOrEmpty(text))
+            if (!string.IsNullOrEmpty(text))
             {
                 var numberBase = (int)NumberBase;
                 if (!Number.TryParse(text, numberBase, out Number value) || value < NumberMin || value > NumberMax)
@@ -219,7 +220,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             base.OnBeforeTextChanged(sender, args);
         }
 
-        #endregion
+        #endregion Event Handlers
 
         #region Private Methods
 
@@ -244,7 +245,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException("numberBase");
+                    throw new ArgumentOutOfRangeException(nameof(numberBase));
             }
             return allowedChars;
         }
@@ -328,7 +329,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         private Number GetValue()
         {
             // Return zero when empty
-            if (String.IsNullOrWhiteSpace(Text))
+            if (string.IsNullOrWhiteSpace(Text))
                 return Number.Zero;
 
             // Parse and return value
@@ -336,6 +337,6 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             return value;
         }
 
-        #endregion
+        #endregion Private Methods
     }
 }

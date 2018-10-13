@@ -107,9 +107,9 @@ namespace CodeForDotNet.Data
             if (Count > 0)
             {
                 // Build description string
-                return String.Format(culture,
+                return string.Format(culture,
                                      Resources.ScheduleItemCollectionToStringFormat, Count,
-                                     String.Join(Resources.ScheduleItemCollectionToStringSeparator,
+                                     string.Join(Resources.ScheduleItemCollectionToStringSeparator,
                                                  (from item in Items select item.ToString(culture)).ToArray()));
             }
 

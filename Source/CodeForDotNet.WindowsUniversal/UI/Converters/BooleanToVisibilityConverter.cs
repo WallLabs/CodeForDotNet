@@ -11,7 +11,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
     public sealed class BooleanToVisibilityConverter : IValueConverter
     {
         /// <summary>
-        /// Converts from a <see cref="Boolean"/> to a <see cref="Visibility"/>.
+        /// Converts from a <see cref="bool"/> to a <see cref="Visibility"/>.
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
@@ -19,7 +19,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
         }
 
         /// <summary>
-        /// Converts back from a <see cref="Visibility"/> to a <see cref="Boolean"/>.
+        /// Converts back from a <see cref="Visibility"/> to a <see cref="bool"/>.
         /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {

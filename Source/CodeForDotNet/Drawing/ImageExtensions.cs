@@ -62,7 +62,7 @@ namespace CodeForDotNet.Drawing
         public static string GetContentType(this ImageFormat format)
         {
             // Validate
-            if (format == null) throw new ArgumentNullException("format");
+            if (format == null) throw new ArgumentNullException(nameof(format));
 
             // Call overloaded method
             return GetContentType(format.Guid);
@@ -95,14 +95,14 @@ namespace CodeForDotNet.Drawing
         /// <returns>Image format or null when unsupported.</returns>
         public static ImageFormat GetFormat(string contentType)
         {
-            if (String.CompareOrdinal(contentType, BmpContentType) == 0) return ImageFormat.Bmp;
-            if (String.CompareOrdinal(contentType, EmfContentType) == 0) return ImageFormat.Emf;
-            if (String.CompareOrdinal(contentType, WmfContentType) == 0) return ImageFormat.Wmf;
-            if (String.CompareOrdinal(contentType, GifContentType) == 0) return ImageFormat.Gif;
-            if (String.CompareOrdinal(contentType, TifContentType) == 0) return ImageFormat.Tiff;
-            if (String.CompareOrdinal(contentType, IcoContentType) == 0) return ImageFormat.Icon;
-            if (String.CompareOrdinal(contentType, PngContentType) == 0) return ImageFormat.Png;
-            if (String.CompareOrdinal(contentType, JpgContentType) == 0) return ImageFormat.Jpeg;
+            if (string.CompareOrdinal(contentType, BmpContentType) == 0) return ImageFormat.Bmp;
+            if (string.CompareOrdinal(contentType, EmfContentType) == 0) return ImageFormat.Emf;
+            if (string.CompareOrdinal(contentType, WmfContentType) == 0) return ImageFormat.Wmf;
+            if (string.CompareOrdinal(contentType, GifContentType) == 0) return ImageFormat.Gif;
+            if (string.CompareOrdinal(contentType, TifContentType) == 0) return ImageFormat.Tiff;
+            if (string.CompareOrdinal(contentType, IcoContentType) == 0) return ImageFormat.Icon;
+            if (string.CompareOrdinal(contentType, PngContentType) == 0) return ImageFormat.Png;
+            if (string.CompareOrdinal(contentType, JpgContentType) == 0) return ImageFormat.Jpeg;
             return null;
         }
 

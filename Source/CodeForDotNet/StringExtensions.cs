@@ -5,7 +5,7 @@ using System.Text;
 namespace CodeForDotNet
 {
     /// <summary>
-    /// Extensions for working with the <see cref="String"/> type.
+    /// Extensions for working with the <see cref="string"/> type.
     /// </summary>
     public static class StringExtensions
     {
@@ -43,7 +43,7 @@ namespace CodeForDotNet
         /// </summary>
         public static string NullWhenEmpty(string value)
         {
-            return String.IsNullOrEmpty(value) ? null : value;
+            return string.IsNullOrEmpty(value) ? null : value;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace CodeForDotNet
         public static string[] SplitEscaped(this string text, char delimiter, char escape, bool removeEscape, bool removeEmptyEntries)
         {
             // Validate
-            if (text == null) throw new ArgumentNullException("text");
+            if (text == null) throw new ArgumentNullException(nameof(text));
 
             // Split...
             var results = new List<string>();
@@ -119,7 +119,7 @@ namespace CodeForDotNet
         public static string Space(this string value)
         {
             // Validate
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
 
             // Space string...
             var buffer = new StringBuilder();
@@ -128,7 +128,7 @@ namespace CodeForDotNet
             foreach (char currentChar in value)
             {
                 // Add space if case changed to uppercase and not a whitespace or whitespace before
-                if (!Char.IsWhiteSpace(lastChar) && !Char.IsWhiteSpace(currentChar) && Char.IsUpper(currentChar) && lastLow)
+                if (!char.IsWhiteSpace(lastChar) && !char.IsWhiteSpace(currentChar) && char.IsUpper(currentChar) && lastLow)
                     buffer.Append(' ');
 
                 // Add current char
@@ -136,7 +136,7 @@ namespace CodeForDotNet
 
                 // Next char...
                 lastChar = currentChar;
-                lastLow = Char.IsLower(currentChar);
+                lastLow = char.IsLower(currentChar);
             }
             return buffer.ToString();
         }
@@ -170,7 +170,7 @@ namespace CodeForDotNet
         public static string Truncate(this string value, int length, string ending)
         {
             // Validate
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
 
             // Return original string when shorter
             var originalLength = value.Length;
@@ -178,7 +178,7 @@ namespace CodeForDotNet
                 return value;
 
             // Do not use ending when length is shorter
-            var endingLength = !String.IsNullOrEmpty(ending) ? ending.Length : 0;
+            var endingLength = !string.IsNullOrEmpty(ending) ? ending.Length : 0;
             var useEnding = (endingLength > 0) && (endingLength < length);
 
             // Truncate string when longer, leaving room for ending
@@ -215,7 +215,7 @@ namespace CodeForDotNet
         public static int IndexStarting(this IEnumerable<string> array, string value, StringComparison comparison)
         {
             // Validate
-            if (array == null) throw new ArgumentNullException("array");
+            if (array == null) throw new ArgumentNullException(nameof(array));
 
             // Search string
             var index = 0;
@@ -236,7 +236,7 @@ namespace CodeForDotNet
         public static string TrimLines(this string value)
         {
             // Validate
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
 
             // Trim...
             var result = new StringBuilder();

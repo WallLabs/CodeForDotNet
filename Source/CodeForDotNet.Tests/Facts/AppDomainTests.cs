@@ -18,7 +18,7 @@ namespace CodeForDotNet.Tests.Facts
         public void AppDomainTestRun()
         {
             // Run a disposable instance, e.g. a process which runs a simple command
-            var testMethod = typeof(Process).GetMethod("Start", new[] { typeof(String), typeof(String) });
+            var testMethod = typeof(Process).GetMethod("Start", new[] { typeof(string), typeof(string) });
             AppDomain.CurrentDomain.Run(testMethod, Environment.ExpandEnvironmentVariables("%COMSPEC%"), "/C DIR");
         }
     }

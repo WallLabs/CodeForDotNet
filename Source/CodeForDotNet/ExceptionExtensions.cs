@@ -26,7 +26,7 @@ namespace CodeForDotNet
         public static string GetFullMessage(this Exception exception, bool debug)
         {
             // Validate
-            if (exception == null) throw new ArgumentNullException("exception");
+            if (exception == null) throw new ArgumentNullException(nameof(exception));
 
             // Get full message by adding all messages from inner exceptions
             var message = new StringBuilder();

@@ -7,7 +7,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Managed <see cref="WiaImageFile"/>.
     /// </summary>
-    public class WiaImageFile : IDisposable
+    public class WiaImageFile : DisposableObject
     {
         #region Lifetime
 
@@ -19,68 +19,44 @@ namespace CodeForDotNet.Windows.Imaging
             _wiaImageFile = vector;
         }
 
-        #region IDisposable
-
         /// <summary>
-        /// Disposes unmanaged resources during finalization.
+        /// Frees resources owned by this instance.
         /// </summary>
-        ~WiaImageFile()
-        {
-            // Unmanaged only dispose
-            Dispose(false);
-        }
-
-        /// <summary>
-        /// Proactively frees resources owned by this object.
-        /// </summary>
-        public void Dispose()
+        /// <param name="disposing">
+        /// True when called from <see cref="IDisposable.Dispose()"/>,
+        /// false when called during finalization.
+        /// </param>
+        protected override void Dispose(bool disposing)
         {
             try
             {
-                // Full managed dispose
-                Dispose(true);
-            }
-            finally
-            {
-                // Suppress finalization as no longer necessary
-                GC.SuppressFinalize(this);
-            }
-        }
-
-        /// <summary>
-        /// Frees resources owned by this object.
-        /// </summary>
-        /// <param name="disposing">True when called via <see cref="Dispose()"/>.</param>
-        void Dispose(bool disposing)
-        {
-            try
-            {
-                // Dispose managed resources
+                // Dispose managed resources.
                 if (disposing)
                 {
                     if (_properties != null) _properties.Dispose();
                 }
-            }
-            finally
-            {
-                // Dispose unmanaged resources
+
+                // Dispose unmanaged resources.
                 if (_wiaImageFile != null)
                     Marshal.ReleaseComObject(_wiaImageFile);
             }
+            finally
+            {
+                // Call base class method to fire events and set status properties.
+                base.Dispose(disposing);
+            }
         }
 
-        #endregion
-
-        #endregion
+        #endregion Lifetime
 
         #region Private Fields
 
         /// <summary>
         /// Unmanaged <see cref="Wia.ImageFile"/>.
         /// </summary>
-        readonly Wia.ImageFile _wiaImageFile;
+        private readonly Wia.ImageFile _wiaImageFile;
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Properties
 
@@ -88,7 +64,8 @@ namespace CodeForDotNet.Windows.Imaging
         /// Thread synchronization object.
         /// </summary>
         public object SyncRoot { get { return _syncRoot; } }
-        static readonly object _syncRoot = new object();
+
+        private static readonly object _syncRoot = new object();
 
         /// <summary>
         /// Active frame.
@@ -120,7 +97,8 @@ namespace CodeForDotNet.Windows.Imaging
                 return _argbData;
             }
         }
-        WiaVector _argbData;
+
+        private WiaVector _argbData;
 
         /// <summary>
         /// File data.
@@ -143,7 +121,8 @@ namespace CodeForDotNet.Windows.Imaging
                 return _fileData;
             }
         }
-        WiaVector _fileData;
+
+        private WiaVector _fileData;
 
         /// <summary>
         /// File extension.
@@ -226,9 +205,10 @@ namespace CodeForDotNet.Windows.Imaging
                 return _properties;
             }
         }
-        WiaPropertyCollection _properties;
 
-        #endregion
+        private WiaPropertyCollection _properties;
+
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -248,6 +228,6 @@ namespace CodeForDotNet.Windows.Imaging
             _wiaImageFile.SaveFile(fileName);
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

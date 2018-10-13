@@ -55,7 +55,7 @@ namespace CodeForDotNet
         public static DateTime GetNext(this DateTime date, DaysOfWeek days)
         {
             // Validate
-            if (days == DaysOfWeek.None) throw new ArgumentOutOfRangeException("days");
+            if (days == DaysOfWeek.None) throw new ArgumentOutOfRangeException(nameof(days));
 
             // Get next day
             var next = date;
@@ -74,7 +74,7 @@ namespace CodeForDotNet
         public static DateTimeOffset GetNext(this DateTimeOffset date, DaysOfWeek days)
         {
             // Validate
-            if (days == DaysOfWeek.None) throw new ArgumentOutOfRangeException("days");
+            if (days == DaysOfWeek.None) throw new ArgumentOutOfRangeException(nameof(days));
 
             // Get next day
             var next = date;

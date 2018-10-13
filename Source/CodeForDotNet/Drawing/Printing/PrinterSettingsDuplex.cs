@@ -1,9 +1,12 @@
-﻿namespace CodeForDotNet.Drawing.Printing
+﻿using System;
+
+namespace CodeForDotNet.Drawing.Printing
 {
     /// <summary>
     /// Defines a printer duplex setting which is not bound to any API,
     /// so it can be used for future proof data serialization and cross-platform.
     /// </summary>
+    [Serializable]
     public enum PrinterSettingsDuplex
     {
         /// <summary>

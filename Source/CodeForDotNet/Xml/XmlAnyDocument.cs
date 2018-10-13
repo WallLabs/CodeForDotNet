@@ -43,7 +43,7 @@ namespace CodeForDotNet.Xml
         /// </summary>
         public const string XmlNamespace = ""; /* unqualified/anonymous type when serialized as document */
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -62,10 +62,10 @@ namespace CodeForDotNet.Xml
         /// </summary>
         private XmlAnyDocument(SerializationInfo info, StreamingContext context)
         {
-            if (info == null) throw new ArgumentNullException("info");
+            if (info == null) throw new ArgumentNullException(nameof(info));
             _xml = new XmlDocument().CreateDocumentFragment();
             string xml = info.GetString("Xml");
-            if (!String.IsNullOrEmpty(xml))
+            if (!string.IsNullOrEmpty(xml))
                 Add(info.GetString("Xml"), null, null);
         }
 
@@ -79,13 +79,13 @@ namespace CodeForDotNet.Xml
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             // Validate
-            if (info == null) throw new ArgumentNullException("info");
+            if (info == null) throw new ArgumentNullException(nameof(info));
 
             // Add properties
             info.AddValue("Xml", GetRoot().OuterXml);
         }
 
-        #endregion
+        #endregion ISerializable Members
 
         #region IXmlSerializable Members
 
@@ -111,7 +111,7 @@ namespace CodeForDotNet.Xml
         public void ReadXml(XmlReader reader)
         {
             // Validate
-            if (reader == null) throw new ArgumentNullException("reader");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
 
             // Remove any existing content
             Clear();
@@ -138,7 +138,7 @@ namespace CodeForDotNet.Xml
             GetRoot().WriteSubtree(writer);
         }
 
-        #endregion
+        #endregion IXmlSerializable Members
 
         #region IDisposable Members
 
@@ -170,7 +170,7 @@ namespace CodeForDotNet.Xml
         /// True when called proactively by <see cref="Dispose()"/>.
         /// False when called during finalization.
         /// </param>
-        void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             try
             {
@@ -185,9 +185,9 @@ namespace CodeForDotNet.Xml
             }
         }
 
-        #endregion
+        #endregion IDisposable Members
 
-        #endregion
+        #endregion Lifetime
 
         #region Operators
 
@@ -196,8 +196,7 @@ namespace CodeForDotNet.Xml
         /// </summary>
         public static bool operator ==(XmlAnyDocument data1, XmlAnyDocument data2)
         {
-            return !ReferenceEquals(data1, null)
-                ? data1.Equals(data2) : ReferenceEquals(data2, null);
+            return data1?.Equals(data2) ?? data2 is null;
         }
 
         /// <summary>
@@ -205,25 +204,22 @@ namespace CodeForDotNet.Xml
         /// </summary>
         public static bool operator !=(XmlAnyDocument data1, XmlAnyDocument data2)
         {
-            if (!ReferenceEquals(data1, null))
-                return !data1.Equals(data2);
-            return !ReferenceEquals(data2, null);
+            return !(data1?.Equals(data2) ?? data2 is null);
         }
 
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        public override bool Equals(object obj)
+        public override bool Equals(object other)
         {
             // Compare nullability and type
-            var other = obj as XmlAnyDocument;
-            if (ReferenceEquals(other, null))
+            if (!(other is XmlAnyDocument otherXml))
                 return false;
 
             // Compare values
             return
-                Xml != null && other.Xml != null &&
-                Xml.CreateNavigator().OuterXml == other.Xml.CreateNavigator().OuterXml;
+                Xml != null && otherXml.Xml != null &&
+                Xml.CreateNavigator().OuterXml == otherXml.Xml.CreateNavigator().OuterXml;
         }
 
         /// <summary>
@@ -234,7 +230,7 @@ namespace CodeForDotNet.Xml
             return Xml.GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
         #region Public Properties
 
@@ -242,14 +238,15 @@ namespace CodeForDotNet.Xml
         /// XML data.
         /// </summary>
         public IXPathNavigable Xml { get { return _xml; } }
-        XmlDocumentFragment _xml;
+
+        private XmlDocumentFragment _xml;
 
         /// <summary>
         /// Indicates whether the XML is currently empty.
         /// </summary>
         public bool IsEmpty { get { return _xml == null || _xml.ChildNodes.Count == 0; } }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -298,7 +295,7 @@ namespace CodeForDotNet.Xml
         public XPathNavigator GetPath(string path, bool create)
         {
             // Return document root when no path
-            if (String.IsNullOrEmpty(path))
+            if (string.IsNullOrEmpty(path))
                 return Xml.CreateNavigator();
 
             // Attempt to get path
@@ -356,8 +353,8 @@ namespace CodeForDotNet.Xml
         public void Add(string sourceXml, string sourcePath, string targetPath, bool overwrite)
         {
             // Validate
-            if (String.IsNullOrEmpty(sourceXml))
-                throw new ArgumentNullException("sourceXml");
+            if (string.IsNullOrEmpty(sourceXml))
+                throw new ArgumentNullException(nameof(sourceXml));
 
             // Call overloaded method
             Add(sourceXml.CreateXPathDocument(), sourcePath, targetPath, overwrite);
@@ -385,10 +382,10 @@ namespace CodeForDotNet.Xml
         public void Add(IXPathNavigable sourceXml, string sourcePath, string targetPath, bool overwrite)
         {
             // Validate
-            if (sourceXml == null) throw new ArgumentNullException("sourceXml");
+            if (sourceXml == null) throw new ArgumentNullException(nameof(sourceXml));
 
             // Use root elements as source when null or root
-            if (String.IsNullOrEmpty(sourcePath) || sourcePath == "/") sourcePath = "/*";
+            if (string.IsNullOrEmpty(sourcePath) || sourcePath == "/") sourcePath = "/*";
 
             // Read source XML and make anonymous
             var buffer = new StringBuilder();
@@ -431,6 +428,6 @@ namespace CodeForDotNet.Xml
             }
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

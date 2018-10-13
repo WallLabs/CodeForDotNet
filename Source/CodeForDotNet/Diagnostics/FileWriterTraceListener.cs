@@ -101,7 +101,7 @@ namespace CodeForDotNet.Diagnostics
         {
             // Create directory if not exists
             string directory = Path.GetDirectoryName(_fileName);
-            if (!String.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
 
             // Create or open file

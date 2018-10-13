@@ -16,9 +16,9 @@ namespace CodeForDotNet.WindowsUniversal.Tests.Models
         public ControlTestUIModel()
         {
             // Register properties
-            RegisterProperty(TextBoxTextPropertyId, "TextBoxText", String.Empty, false);
+            RegisterProperty(TextBoxTextPropertyId, "TextBoxText", string.Empty, false);
             RegisterProperty(TextBoxTextChangedDatePropertyId, "TextBoxTextChangedDate", (DateTimeOffset?)null, false);
-            RegisterProperty(DynamicTextBoxTextPropertyId, "DynamicTextBoxText", String.Empty, false);
+            RegisterProperty(DynamicTextBoxTextPropertyId, "DynamicTextBoxText", string.Empty, false);
             RegisterProperty(DynamicTextBoxTextChangedDatePropertyId, "DynamicTextBoxTextChangedDate", (DateTimeOffset?)null, false);
         }
 

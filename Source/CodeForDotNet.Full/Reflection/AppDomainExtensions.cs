@@ -19,8 +19,8 @@ namespace CodeForDotNet.Reflection
         public static void Run(this AppDomain currentDomain, MethodBase method, params object[] parameters)
         {
             // Validate
-            if (currentDomain == null) throw new ArgumentNullException("currentDomain");
-            if (method == null) throw new ArgumentNullException("method");
+            if (currentDomain == null) throw new ArgumentNullException(nameof(currentDomain));
+            if (method == null) throw new ArgumentNullException(nameof(method));
 
             // Run...
             AppDomain childDomain = null;
@@ -29,10 +29,10 @@ namespace CodeForDotNet.Reflection
             {
                 // Create child application domain
                 var domainSetup = new AppDomainSetup
-                                      {
-                                          ConfigurationFile = currentDomain.SetupInformation.ConfigurationFile,
-                                          ApplicationBase = Directory.GetCurrentDirectory()
-                                      };
+                {
+                    ConfigurationFile = currentDomain.SetupInformation.ConfigurationFile,
+                    ApplicationBase = Directory.GetCurrentDirectory()
+                };
                 childDomain = AppDomain.CreateDomain(currentDomain.FriendlyName, currentDomain.Evidence, domainSetup);
 
                 // Create instance

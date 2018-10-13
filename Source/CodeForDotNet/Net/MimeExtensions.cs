@@ -63,8 +63,8 @@ namespace CodeForDotNet.Net
         public static string GetHeaderValue(string header)
         {
             // Validate
-            if (String.IsNullOrEmpty(header))
-                throw new ArgumentNullException("header");
+            if (string.IsNullOrEmpty(header))
+                throw new ArgumentNullException(nameof(header));
 
             // Strip header value
             int firstAttribute = header.IndexOf(';');
@@ -81,10 +81,10 @@ namespace CodeForDotNet.Net
         public static string GetHeaderAttribute(string header, string name)
         {
             // Validate
-            if (String.IsNullOrEmpty(header))
-                throw new ArgumentNullException("header");
-            if (String.IsNullOrEmpty(name))
-                throw new ArgumentNullException("name");
+            if (string.IsNullOrEmpty(header))
+                throw new ArgumentNullException(nameof(header));
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentNullException(nameof(name));
 
             // Split header value and following attributes, separated by semicolons
             var attributes = header.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
@@ -102,7 +102,7 @@ namespace CodeForDotNet.Net
                 // Get key, return value if found
                 var trimChars = new[] { ' ', '\"' };
                 var key = attributeParts[0].Trim(trimChars);
-                if (String.Compare(key, name, StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(key, name, StringComparison.OrdinalIgnoreCase) == 0)
                     return attributeParts[1].Trim(trimChars);
             }
 
@@ -127,9 +127,9 @@ namespace CodeForDotNet.Net
         public static bool FindLine(byte[] buffer, int offset, int length, out int lineSize, out int nextLine)
         {
             // Validate
-            if (buffer == null) throw new ArgumentNullException("buffer");
-            if (offset < 0) throw new ArgumentOutOfRangeException("offset");
-            if (length <= 0) throw new ArgumentOutOfRangeException("length");
+            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
+            if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset));
+            if (length <= 0) throw new ArgumentOutOfRangeException(nameof(length));
 
             // Initialize
             lineSize = 0;
@@ -170,10 +170,10 @@ namespace CodeForDotNet.Net
         public static bool FindBoundary(byte[] buffer, int offset, int length, byte[] boundary, out int contentEnd, out int boundaryEnd)
         {
             // Validate
-            if (buffer == null) throw new ArgumentNullException("buffer");
-            if (offset < 0) throw new ArgumentOutOfRangeException("offset");
-            if (length <= 0) throw new ArgumentOutOfRangeException("length");
-            if (boundary == null) throw new ArgumentNullException("boundary");
+            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
+            if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset));
+            if (length <= 0) throw new ArgumentOutOfRangeException(nameof(length));
+            if (boundary == null) throw new ArgumentNullException(nameof(boundary));
 
             // Initialize
             contentEnd = -1;

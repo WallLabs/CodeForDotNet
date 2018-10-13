@@ -6,6 +6,7 @@ namespace CodeForDotNet.Drawing
     /// <summary>
     /// Margins data.
     /// </summary>
+    [Serializable]
     public class PageMarginsData : ICloneable
     {
         #region Lifetime
@@ -28,7 +29,7 @@ namespace CodeForDotNet.Drawing
             Bottom = bottom;
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Properties
 
@@ -52,11 +53,9 @@ namespace CodeForDotNet.Drawing
         /// </summary>
         public int Bottom { get; set; }
 
-        #endregion
+        #endregion Properties
 
         #region Public Methods
-
-       
 
         /// <summary>
         /// Converts the margins to an XML string.
@@ -74,7 +73,7 @@ namespace CodeForDotNet.Drawing
             return XmlSerializerExtensions.DeserializeXml<PageMarginsData>(value);
         }
 
-        #endregion
+        #endregion Public Methods
 
         #region Operators
 
@@ -124,7 +123,7 @@ namespace CodeForDotNet.Drawing
                 Bottom.GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
         #region ICloneable Members
 
@@ -144,6 +143,6 @@ namespace CodeForDotNet.Drawing
             return Copy();
         }
 
-        #endregion
+        #endregion ICloneable Members
     }
 }

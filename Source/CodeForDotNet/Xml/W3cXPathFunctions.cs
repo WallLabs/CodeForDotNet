@@ -39,7 +39,7 @@ namespace CodeForDotNet.Xml
         public bool matches(string input, string pattern)
         {
             // Call overloaded method
-            return matches(input, pattern, String.Empty);
+            return matches(input, pattern, string.Empty);
         }
 
         /// <summary>
@@ -63,8 +63,8 @@ namespace CodeForDotNet.Xml
         public bool matches(string input, string pattern, string flags)
         {
             // Validate
-            if (input == null) throw new ArgumentNullException("input");
-            if (pattern == null) throw new ArgumentNullException("pattern");
+            if (input == null) throw new ArgumentNullException(nameof(input));
+            if (pattern == null) throw new ArgumentNullException(nameof(pattern));
 
             // Normalize space of the input string so that line beginnings and ends are valid according to regular expression syntax
             input = input.Trim();
