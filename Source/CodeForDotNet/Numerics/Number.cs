@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace CodeForDotNet.Numerics
     /// <summary>
     /// Number of unlimited size, based on a variable length byte array, signed or unsigned.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1720", Justification = "Use of the word \"signed\" is preferable for an intuitive interface.")]
     public struct Number : IComparable<Number>, IEquatable<Number>
     {
         #region Constants
@@ -30,7 +32,7 @@ namespace CodeForDotNet.Numerics
             : this()
         {
             // Validate
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value is null) throw new ArgumentNullException(nameof(value));
 
             // Set value
             _bytes = value;
@@ -54,8 +56,11 @@ namespace CodeForDotNet.Numerics
         public Number(sbyte value)
             : this()
         {
-            _bytes = new[] { (byte)value };
-            Signed = true;
+            unchecked
+            {
+                _bytes = new[] { (byte)value };
+                Signed = true;
+            }
         }
 
         /// <summary>
@@ -157,46 +162,49 @@ namespace CodeForDotNet.Numerics
         public Number(decimal value)
             : this()
         {
-            // Split decimal into parts and detect sign
-            value = decimal.Truncate(value);
-            var decimalIntegers = decimal.GetBits(value);
-            var signScaleAndHighWord = decimalIntegers[3];
-            decimalIntegers[3] = signScaleAndHighWord & 0x0000ffff;
-            var negative = (signScaleAndHighWord & 0x80000000) != 0;
-            var scale = (short)((signScaleAndHighWord >> 16) & 0x7fff);
-
-            // Calculate binary scale
-            var bitScale = scale * (10 / 2);
-            var byteScale = bitScale / 8;
-            var byteSize = bitScale + (4 * 4);
-
-            // Allocate buffer for conversion and initialize
-            var bytes = new byte[byteSize];
-            if (negative)
+            unchecked
             {
-                // Set scale bytes negative when necessary
-                for (var index = 0; index < byteScale; index++)
-                    bytes[index] = 0xff;
-            }
+                // Split decimal into parts and detect sign
+                value = decimal.Truncate(value);
+                var decimalIntegers = decimal.GetBits(value);
+                var signScaleAndHighWord = decimalIntegers[3];
+                decimalIntegers[3] = signScaleAndHighWord & 0x0000ffff;
+                var negative = (signScaleAndHighWord & 0x80000000) != 0;
+                var scale = (short)((signScaleAndHighWord >> 16) & 0x7fff);
 
-            // Convert value part
-            var bitShift = bitScale - (byteScale * 8);
-            var carry = 0;
-            for (int bytesIndex = byteScale, decimalIndex = 0;
-                bytesIndex < byteSize;
-                bytesIndex += 4, decimalIndex++)
-            {
-                var intPlusCarryLong = (long)(decimalIntegers[decimalIndex] << bitShift) + carry;
-                var intValue = (int)((negative
-                                          ? intPlusCarryLong > 0 ? -intPlusCarryLong : -1
-                                          : intPlusCarryLong) & 0xffffffff);
-                Array.Copy(BitConverter.GetBytes(intValue), 0, bytes, bytesIndex, 4);
-                carry = (int)(intPlusCarryLong >> 32);
-            }
+                // Calculate binary scale
+                var bitScale = scale * (10 / 2);
+                var byteScale = bitScale / 8;
+                var byteSize = bitScale + (4 * 4);
 
-            // Set value
-            _bytes = bytes;
-            Signed = true;
+                // Allocate buffer for conversion and initialize
+                var bytes = new byte[byteSize];
+                if (negative)
+                {
+                    // Set scale bytes negative when necessary
+                    for (var index = 0; index < byteScale; index++)
+                        bytes[index] = 0xff;
+                }
+
+                // Convert value part
+                var bitShift = bitScale - (byteScale * 8);
+                var carry = 0;
+                for (int bytesIndex = byteScale, decimalIndex = 0;
+                    bytesIndex < byteSize;
+                    bytesIndex += 4, decimalIndex++)
+                {
+                    var intPlusCarryLong = (long)(decimalIntegers[decimalIndex] << bitShift) + carry;
+                    var intValue = (int)((negative
+                                              ? intPlusCarryLong > 0 ? -intPlusCarryLong : -1
+                                              : intPlusCarryLong) & 0xffffffff);
+                    Array.Copy(BitConverter.GetBytes(intValue), 0, bytes, bytesIndex, 4);
+                    carry = (int)(intPlusCarryLong >> 32);
+                }
+
+                // Set value
+                _bytes = bytes;
+                Signed = true;
+            }
         }
 
         #endregion Lifetime
@@ -722,34 +730,37 @@ namespace CodeForDotNet.Numerics
         /// </summary>
         public static Number LeftShift(Number value, int shift)
         {
-            // Return same value when no shift
-            if (shift == 0) return value;
-
-            // Return opposite shift when negative (code only shifts positive)
-            if (shift < 0)
-                return value >> -shift;
-
-            // Get sizes
-            var shiftWholeBytes = shift / 8;                // Get whole bytes shifted
-            var shiftBits = shift % 8;                      // Get any remaining bits shifted
-            var valueSize = value.ByteSize;
-            var resultSize = shiftWholeBytes + valueSize;   // Add space for whole shifted bytes
-            if (shiftBits > 0) resultSize++;                // Add space for carry bits
-            var resultBytes = new byte[resultSize];         // Allocate buffer
-
-            // Apply bitwise operator to each byte
-            var valueBytes = value._bytes;
-            byte carry = 0;
-            for (int resultIndex = shiftWholeBytes, valueIndex = 0;
-                resultIndex < resultSize; resultIndex++, valueIndex++)
+            unchecked
             {
-                var valueByte = valueIndex < valueSize ? valueBytes[valueIndex] : (byte)0;
-                resultBytes[resultIndex] = (byte)((valueByte << shiftBits) | carry);
-                carry = (byte)(valueByte >> (8 - shiftBits));
-            }
+                // Return same value when no shift
+                if (shift == 0) return value;
 
-            // Return result, preserving sign
-            return new Number(resultBytes, value.Signed);
+                // Return opposite shift when negative (code only shifts positive)
+                if (shift < 0)
+                    return value >> -shift;
+
+                // Get sizes
+                var shiftWholeBytes = shift / 8;                // Get whole bytes shifted
+                var shiftBits = shift % 8;                      // Get any remaining bits shifted
+                var valueSize = value.ByteSize;
+                var resultSize = shiftWholeBytes + valueSize;   // Add space for whole shifted bytes
+                if (shiftBits > 0) resultSize++;                // Add space for carry bits
+                var resultBytes = new byte[resultSize];         // Allocate buffer
+
+                // Apply bitwise operator to each byte
+                var valueBytes = value._bytes;
+                byte carry = 0;
+                for (int resultIndex = shiftWholeBytes, valueIndex = 0;
+                    resultIndex < resultSize; resultIndex++, valueIndex++)
+                {
+                    var valueByte = valueIndex < valueSize ? valueBytes[valueIndex] : (byte)0;
+                    resultBytes[resultIndex] = (byte)((valueByte << shiftBits) | carry);
+                    carry = (byte)(valueByte >> (8 - shiftBits));
+                }
+
+                // Return result, preserving sign
+                return new Number(resultBytes, value.Signed);
+            }
         }
 
         /// <summary>
@@ -765,35 +776,38 @@ namespace CodeForDotNet.Numerics
         /// </summary>
         public static Number RightShift(Number value, int shift)
         {
-            // Return same value when no shift
-            if (shift == 0) return value;
-
-            // Return opposite shift when negative (code only shifts positive)
-            if (shift < 0)
-                return value << -shift;
-
-            // Get sizes (do nothing when zero)
-            var shiftWholeBytes = shift / 8;                // Get whole bytes shifted
-            var shiftBits = shift % 8;                      // Get any remaining bits shifted
-            var valueSize = value.ByteSize;
-            if (shiftWholeBytes >= valueSize)               // Return zero when entire value shifted out
-                return new Number(Array.Empty<byte>(), value.Signed);
-            var resultSize = valueSize - shiftWholeBytes;   // Calculate size without whole shifted bytes
-            var resultBytes = new byte[resultSize];         // Allocate buffer
-
-            // Apply bitwise operator to each byte
-            var valueBytes = value._bytes;
-            byte carry = 0;
-            for (int resultIndex = resultSize - 1, valueIndex = valueSize - 1;
-                resultIndex >= 0; resultIndex--, valueIndex--)
+            unchecked
             {
-                var valueByte = valueBytes[valueIndex];
-                resultBytes[resultIndex] = (byte)((valueByte >> shiftBits) | carry);
-                carry = (byte)(valueByte & (0xff << (8 - shiftBits)));
-            }
+                // Return same value when no shift
+                if (shift == 0) return value;
 
-            // Return result, preserving sign
-            return new Number(resultBytes, value.Signed);
+                // Return opposite shift when negative (code only shifts positive)
+                if (shift < 0)
+                    return value << -shift;
+
+                // Get sizes (do nothing when zero)
+                var shiftWholeBytes = shift / 8;                // Get whole bytes shifted
+                var shiftBits = shift % 8;                      // Get any remaining bits shifted
+                var valueSize = value.ByteSize;
+                if (shiftWholeBytes >= valueSize)               // Return zero when entire value shifted out
+                    return new Number(Array.Empty<byte>(), value.Signed);
+                var resultSize = valueSize - shiftWholeBytes;   // Calculate size without whole shifted bytes
+                var resultBytes = new byte[resultSize];         // Allocate buffer
+
+                // Apply bitwise operator to each byte
+                var valueBytes = value._bytes;
+                byte carry = 0;
+                for (int resultIndex = resultSize - 1, valueIndex = valueSize - 1;
+                    resultIndex >= 0; resultIndex--, valueIndex--)
+                {
+                    var valueByte = valueBytes[valueIndex];
+                    resultBytes[resultIndex] = (byte)((valueByte >> shiftBits) | carry);
+                    carry = (byte)(valueByte & (0xff << (8 - shiftBits)));
+                }
+
+                // Return result, preserving sign
+                return new Number(resultBytes, value.Signed);
+            }
         }
 
         /// <summary>
@@ -811,18 +825,21 @@ namespace CodeForDotNet.Numerics
         /// </summary>
         public static Number OnesComplement(Number value)
         {
-            // Get sizes (ensure at least one byte for result)
-            var valueSize = value.ByteSize;
-            var resultSize = valueSize > 0 ? valueSize : 1;
-            var resultBytes = new byte[resultSize];
+            unchecked
+            {
+                // Get sizes (ensure at least one byte for result)
+                var valueSize = value.ByteSize;
+                var resultSize = valueSize > 0 ? valueSize : 1;
+                var resultBytes = new byte[resultSize];
 
-            // Apply bitwise operator to each byte
-            var valueBytes = value._bytes;
-            for (var index = 0; index < resultSize; index++)
-                resultBytes[index] = (byte)(valueSize > index ? ~valueBytes[index] : 0);
+                // Apply bitwise operator to each byte
+                var valueBytes = value._bytes;
+                for (var index = 0; index < resultSize; index++)
+                    resultBytes[index] = (byte)(valueSize > index ? ~valueBytes[index] : 0);
 
-            // Return result, preserving sign
-            return new Number(resultBytes, value.Signed);
+                // Return result, preserving sign
+                return new Number(resultBytes, value.Signed);
+            }
         }
 
         #endregion Bitwise Operators
@@ -917,58 +934,61 @@ namespace CodeForDotNet.Numerics
         /// </summary>
         public static Number Add(Number left, Number right)
         {
-            // Calculate size and sign
-            var leftSize = left.ByteSize;
-            var rightSize = right.ByteSize;
-            var leftSigned = left.Signed;
-            var rightSigned = right.Signed;
-            var resultSigned = leftSigned || rightSigned;
-            var resultSize = rightSize > leftSize ? rightSize : leftSize;
-            var leftBytes = left._bytes;
-            var rightBytes = right._bytes;
-            if (leftSigned != rightSigned &&
-                ((leftSize > 0 && (leftBytes[leftSize - 1] & 0x80) != 0) ||
-                (rightSize > 0 && (rightBytes[rightSize - 1] & 0x80) != 0)))
+            unchecked
             {
-                // Extend by one byte when part unsigned and last bit used
-                resultSize++;
+                // Calculate size and sign
+                var leftSize = left.ByteSize;
+                var rightSize = right.ByteSize;
+                var leftSigned = left.Signed;
+                var rightSigned = right.Signed;
+                var resultSigned = leftSigned || rightSigned;
+                var resultSize = rightSize > leftSize ? rightSize : leftSize;
+                var leftBytes = left._bytes;
+                var rightBytes = right._bytes;
+                if (leftSigned != rightSigned &&
+                    ((leftSize > 0 && (leftBytes[leftSize - 1] & 0x80) != 0) ||
+                    (rightSize > 0 && (rightBytes[rightSize - 1] & 0x80) != 0)))
+                {
+                    // Extend by one byte when part unsigned and last bit used
+                    resultSize++;
+                }
+
+                // Add bytes with carry
+                var resultBytes = new byte[resultSize];
+                var leftSign = left.Sign;
+                var rightSign = right.Sign;
+                byte carry = 0;
+                for (var index = 0; index < resultSize; index++)
+                {
+                    // Get sign extended bytes
+                    var leftValue = index < leftSize ? leftBytes[index] : leftSign ? (byte)0 : (byte)0xFF;
+                    var rightValue = index < rightSize ? rightBytes[index] : rightSign ? (byte)0 : (byte)0xFF;
+
+                    // Add with carry
+                    var resultAndCarry = (ushort)(leftValue + carry + rightValue);
+                    carry = (byte)(resultAndCarry >> 8);
+                    var result = (byte)resultAndCarry;
+                    resultBytes[index] = result;
+                }
+
+                // Extend overflow and/or sign when necessary
+                var lastBitSet = (resultBytes[resultSize - 1] & 0x80) != 0;
+                if ((!resultSigned && carry == 1) ||
+                    (resultSigned && (
+                        (leftSign == rightSign && ((lastBitSet && carry == 0) || (!lastBitSet && carry == 1)))) ||
+                        (leftSign != rightSign && ((lastBitSet && carry == 1) || (!lastBitSet && carry == 0)))))
+                {
+                    Array.Resize(ref resultBytes, resultSize + 1);
+                    resultBytes[resultSize] = !resultSigned
+                        ? carry             // Unsigned overflow
+                        : carry != 0        // Sign extension
+                            ? (byte)0xff
+                            : (byte)0;
+                }
+
+                // Return result
+                return new Number(resultBytes, resultSigned);
             }
-
-            // Add bytes with carry
-            var resultBytes = new byte[resultSize];
-            var leftSign = left.Sign;
-            var rightSign = right.Sign;
-            byte carry = 0;
-            for (var index = 0; index < resultSize; index++)
-            {
-                // Get sign extended bytes
-                var leftValue = index < leftSize ? leftBytes[index] : leftSign ? (byte)0 : (byte)0xFF;
-                var rightValue = index < rightSize ? rightBytes[index] : rightSign ? (byte)0 : (byte)0xFF;
-
-                // Add with carry
-                var resultAndCarry = (ushort)(leftValue + carry + rightValue);
-                carry = (byte)(resultAndCarry >> 8);
-                var result = (byte)resultAndCarry;
-                resultBytes[index] = result;
-            }
-
-            // Extend overflow and/or sign when necessary
-            var lastBitSet = (resultBytes[resultSize - 1] & 0x80) != 0;
-            if ((!resultSigned && carry == 1) ||
-                (resultSigned && (
-                    (leftSign == rightSign && ((lastBitSet && carry == 0) || (!lastBitSet && carry == 1)))) ||
-                    (leftSign != rightSign && ((lastBitSet && carry == 1) || (!lastBitSet && carry == 0)))))
-            {
-                Array.Resize(ref resultBytes, resultSize + 1);
-                resultBytes[resultSize] = !resultSigned
-                    ? carry             // Unsigned overflow
-                    : carry != 0        // Sign extension
-                        ? (byte)0xff
-                        : (byte)0;
-            }
-
-            // Return result
-            return new Number(resultBytes, resultSigned);
         }
 
         /// <summary>
@@ -984,59 +1004,62 @@ namespace CodeForDotNet.Numerics
         /// </summary>
         public static Number Subtract(Number left, Number right)
         {
-            // Calculate size and sign
-            var leftSize = left.ByteSize;
-            var rightSize = right.ByteSize;
-            var leftSigned = left.Signed;
-            var rightSigned = right.Signed;
-            var resultSigned = leftSigned || rightSigned;
-            var resultSize = rightSize > leftSize ? rightSize : leftSize;
-            var leftBytes = left._bytes;
-            var rightBytes = right._bytes;
-            if (leftSigned != rightSigned &&
-                ((leftSize > 0 && (leftBytes[leftSize - 1] & 0x80) != 0) ||
-                 (rightSize > 0 && (rightBytes[rightSize - 1] & 0x80) != 0)))
+            unchecked
             {
-                // Extend by one byte when part unsigned and last bit used
-                resultSize++;
+                // Calculate size and sign
+                var leftSize = left.ByteSize;
+                var rightSize = right.ByteSize;
+                var leftSigned = left.Signed;
+                var rightSigned = right.Signed;
+                var resultSigned = leftSigned || rightSigned;
+                var resultSize = rightSize > leftSize ? rightSize : leftSize;
+                var leftBytes = left._bytes;
+                var rightBytes = right._bytes;
+                if (leftSigned != rightSigned &&
+                    ((leftSize > 0 && (leftBytes[leftSize - 1] & 0x80) != 0) ||
+                     (rightSize > 0 && (rightBytes[rightSize - 1] & 0x80) != 0)))
+                {
+                    // Extend by one byte when part unsigned and last bit used
+                    resultSize++;
+                }
+
+                // Subtract bytes with borrow
+                var resultBytes = new byte[resultSize];
+                var leftSign = left.Sign;
+                var rightSign = right.Sign;
+                sbyte borrow = 0;
+                for (var index = 0; index < resultSize; index++)
+                {
+                    // Get sign extended bytes
+                    var leftValue = index < leftSize ? leftBytes[index] : leftSign ? (byte)0 : (byte)0xFF;
+                    var rightValue = index < rightSize ? rightBytes[index] : rightSign ? (byte)0 : (byte)0xFF;
+
+                    // Add with borrow
+                    var resultAndBorrow = (ushort)(leftValue + borrow - rightValue);
+                    borrow = (sbyte)(resultAndBorrow >> 8);
+                    var result = (byte)resultAndBorrow;
+                    resultBytes[index] = result;
+                }
+
+                // Extend overflow and/or sign when necessary
+                var lastBitSet = (resultBytes[resultSize - 1] & 0x80) != 0;
+                if ((!resultSigned && borrow == -1) ||
+                    (resultSigned && (
+                        (leftSign == rightSign && ((lastBitSet && borrow == 0) || (!lastBitSet && borrow == -1)))) ||
+                        (leftSign != rightSign && ((lastBitSet && borrow == -1) || (!lastBitSet && borrow == 0)))))
+                {
+                    Array.Resize(ref resultBytes, resultSize + 1);
+                    resultBytes[resultSize] = !resultSigned
+                        ? (byte)borrow             // Unsigned overflow
+                        : borrow != (byte)0        // Sign extension
+                            ? (byte)0
+                            : (byte)0xff;
+                    resultSigned = true;
+                }
+
+                // Return result
+                return new Number(resultBytes, resultSigned);
             }
-
-            // Subtract bytes with borrow
-            var resultBytes = new byte[resultSize];
-            var leftSign = left.Sign;
-            var rightSign = right.Sign;
-            sbyte borrow = 0;
-            for (var index = 0; index < resultSize; index++)
-            {
-                // Get sign extended bytes
-                var leftValue = index < leftSize ? leftBytes[index] : leftSign ? (byte)0 : (byte)0xFF;
-                var rightValue = index < rightSize ? rightBytes[index] : rightSign ? (byte)0 : (byte)0xFF;
-
-                // Add with borrow
-                var resultAndBorrow = (ushort)(leftValue + borrow - rightValue);
-                borrow = (sbyte)(resultAndBorrow >> 8);
-                var result = (byte)resultAndBorrow;
-                resultBytes[index] = result;
-            }
-
-            // Extend overflow and/or sign when necessary
-            var lastBitSet = (resultBytes[resultSize - 1] & 0x80) != 0;
-            if ((!resultSigned && borrow == -1) ||
-                (resultSigned && (
-                    (leftSign == rightSign && ((lastBitSet && borrow == 0) || (!lastBitSet && borrow == -1)))) ||
-                    (leftSign != rightSign && ((lastBitSet && borrow == -1) || (!lastBitSet && borrow == 0)))))
-            {
-                Array.Resize(ref resultBytes, resultSize + 1);
-                resultBytes[resultSize] = !resultSigned
-                    ? (byte)borrow             // Unsigned overflow
-                    : borrow != (byte)0        // Sign extension
-                        ? (byte)0
-                        : (byte)0xff;
-                resultSigned = true;
-            }
-
-            // Return result
-            return new Number(resultBytes, resultSigned);
         }
 
         /// <summary>
@@ -1140,108 +1163,111 @@ namespace CodeForDotNet.Numerics
         /// </summary>
         public static Number Multiply(Number left, Number right)
         {
-            // Return zero when any part is zero
-            if (left.IsZero || right.IsZero)
-                return Zero;
-
-            // Return other value when any part is one
-            if (left == 1) return right;
-            if (right == 1) return left;
-
-            // Return negated value when any part is minus one
-            if (left == -1) return -right;
-            if (right == -1) return -left;
-
-            // Calculate size and sign
-            var leftSize = left.ByteSize;
-            var leftSigned = left.Signed;
-            var leftSign = left.Sign;
-            var rightSigned = right.Signed;
-            var rightSign = right.Sign;
-            var resultSigned = leftSigned || rightSigned;
-            var leftBytes = left._bytes;
-            var factorBytes = right._bytes;
-            var factorSize = factorBytes.Length;
-
-            // Multiply bytes with carry
-            var resultBytes = Array.Empty<byte>();
-            var resultSize = resultBytes.Length;
-            ushort carry = 0;
-            for (var factorIndex = 0; factorIndex < factorSize; factorIndex++)
+            unchecked
             {
-                // Get each factor byte
-                var factorDigit = factorBytes[factorIndex];
+                // Return zero when any part is zero
+                if (left.IsZero || right.IsZero)
+                    return Zero;
 
-                // Multiply to each byte of product with shifted power
-                for (int leftIndex = 0, resultIndex = factorIndex; leftIndex < leftSize; leftIndex++, resultIndex++)
+                // Return other value when any part is one
+                if (left == 1) return right;
+                if (right == 1) return left;
+
+                // Return negated value when any part is minus one
+                if (left == -1) return -right;
+                if (right == -1) return -left;
+
+                // Calculate size and sign
+                var leftSize = left.ByteSize;
+                var leftSigned = left.Signed;
+                var leftSign = left.Sign;
+                var rightSigned = right.Signed;
+                var rightSign = right.Sign;
+                var resultSigned = leftSigned || rightSigned;
+                var leftBytes = left._bytes;
+                var factorBytes = right._bytes;
+                var factorSize = factorBytes.Length;
+
+                // Multiply bytes with carry
+                var resultBytes = Array.Empty<byte>();
+                var resultSize = resultBytes.Length;
+                ushort carry = 0;
+                for (var factorIndex = 0; factorIndex < factorSize; factorIndex++)
                 {
-                    // Get sign extended accumulator byte
-                    var resultValue = resultIndex < resultSize
-                        ? resultBytes[resultIndex]
-                        : leftSign ? (byte)0 : (byte)0xFF;
+                    // Get each factor byte
+                    var factorDigit = factorBytes[factorIndex];
 
-                    // Get product byte
-                    var leftValue = leftBytes[leftIndex];
-
-                    // Multiply with carry
-                    ulong resultAndCarry;
-                    if (factorDigit != 0)
+                    // Multiply to each byte of product with shifted power
+                    for (int leftIndex = 0, resultIndex = factorIndex; leftIndex < leftSize; leftIndex++, resultIndex++)
                     {
-                        // Add previous digit result, multiple then add carry when factor is non-zero
-                        resultAndCarry = (((ulong)resultValue + leftValue) * factorDigit) + carry;
+                        // Get sign extended accumulator byte
+                        var resultValue = resultIndex < resultSize
+                            ? resultBytes[resultIndex]
+                            : leftSign ? (byte)0 : (byte)0xFF;
+
+                        // Get product byte
+                        var leftValue = leftBytes[leftIndex];
+
+                        // Multiply with carry
+                        ulong resultAndCarry;
+                        if (factorDigit != 0)
+                        {
+                            // Add previous digit result, multiple then add carry when factor is non-zero
+                            resultAndCarry = (((ulong)resultValue + leftValue) * factorDigit) + carry;
+                        }
+                        else
+                        {
+                            // Just add carry when factor digit is zero
+                            resultAndCarry = (ulong)resultValue + carry;
+                        }
+                        carry = (ushort)(resultAndCarry >> 8);
+                        resultValue = (byte)resultAndCarry;
+
+                        // Store result, extending when necessary
+                        if (resultIndex >= resultSize)
+                        {
+                            resultSize = resultIndex + 1;
+                            Array.Resize(ref resultBytes, resultSize);
+                        }
+                        resultBytes[resultIndex] = resultValue;
+                    }
+                }
+
+                // Extend overflow and/or sign when necessary
+                var lastBitSet = resultSize > 0 && (resultBytes[resultSize - 1] & 0x80) != 0;
+                if ((!resultSigned && carry != 0) ||
+                    (resultSigned && (
+                        (leftSign == rightSign && ((lastBitSet && carry == 0) || (!lastBitSet && carry != 0)))) ||
+                     (leftSign != rightSign && ((lastBitSet && carry != 0) || (!lastBitSet && carry == 0)))))
+                {
+                    if (!resultSigned)
+                    {
+                        // Unsigned overflow
+                        if ((carry & 0xff00) == 0)
+                        {
+                            Array.Resize(ref resultBytes, resultSize + 1);
+                            resultBytes[resultSize] = (byte)carry;
+                        }
+                        else
+                        {
+                            Array.Resize(ref resultBytes, resultSize + 2);
+                            resultBytes[resultSize] = (byte)carry;
+                            resultBytes[resultSize + 1] = (byte)(carry >> 8);
+                        }
                     }
                     else
                     {
-                        // Just add carry when factor digit is zero
-                        resultAndCarry = (ulong)resultValue + carry;
-                    }
-                    carry = (ushort)(resultAndCarry >> 8);
-                    resultValue = (byte)resultAndCarry;
-
-                    // Store result, extending when necessary
-                    if (resultIndex >= resultSize)
-                    {
-                        resultSize = resultIndex + 1;
-                        Array.Resize(ref resultBytes, resultSize);
-                    }
-                    resultBytes[resultIndex] = resultValue;
-                }
-            }
-
-            // Extend overflow and/or sign when necessary
-            var lastBitSet = resultSize > 0 && (resultBytes[resultSize - 1] & 0x80) != 0;
-            if ((!resultSigned && carry != 0) ||
-                (resultSigned && (
-                    (leftSign == rightSign && ((lastBitSet && carry == 0) || (!lastBitSet && carry != 0)))) ||
-                 (leftSign != rightSign && ((lastBitSet && carry != 0) || (!lastBitSet && carry == 0)))))
-            {
-                if (!resultSigned)
-                {
-                    // Unsigned overflow
-                    if ((carry & 0xff00) == 0)
-                    {
+                        // Sign extension
                         Array.Resize(ref resultBytes, resultSize + 1);
-                        resultBytes[resultSize] = (byte)carry;
-                    }
-                    else
-                    {
-                        Array.Resize(ref resultBytes, resultSize + 2);
-                        resultBytes[resultSize] = (byte)carry;
-                        resultBytes[resultSize + 1] = (byte)(carry >> 8);
+                        resultBytes[resultSize] = carry != 0
+                            ? (byte)0xff
+                            : (byte)0;
                     }
                 }
-                else
-                {
-                    // Sign extension
-                    Array.Resize(ref resultBytes, resultSize + 1);
-                    resultBytes[resultSize] = carry != 0
-                        ? (byte)0xff
-                        : (byte)0;
-                }
-            }
 
-            // Return result
-            return new Number(resultBytes, resultSigned);
+                // Return result
+                return new Number(resultBytes, resultSigned);
+            }
         }
 
         #endregion Binary Operators
@@ -1411,101 +1437,104 @@ namespace CodeForDotNet.Numerics
         /// </summary>
         public string ToString(int numberBase, int minimumLength)
         {
-            // Validate
-            if (numberBase < 2 || numberBase > 16) throw new ArgumentOutOfRangeException(nameof(numberBase));
-            if (minimumLength < 0) throw new ArgumentOutOfRangeException(nameof(minimumLength));
-            var signed = Signed;
-            var negative = !Sign;
+            unchecked
+            {
+                // Validate
+                if (numberBase < 2 || numberBase > 16) throw new ArgumentOutOfRangeException(nameof(numberBase));
+                if (minimumLength < 0) throw new ArgumentOutOfRangeException(nameof(minimumLength));
+                var signed = Signed;
+                var negative = !Sign;
 
-            // Decide how to handle sign according to base
-            var bitBased = true;
-            var bitsPerDigit = 1;
-            if (numberBase > 2 && numberBase % 2 == 0)
-            {
-                var baseRoot = Math.Sqrt(numberBase);
-                bitsPerDigit = (int)Math.Floor(baseRoot);
-                bitBased = !(baseRoot - bitsPerDigit > 0);
-            }
-            var minimumDigitsPerByte = bitBased ? (int)Math.Ceiling(8d / bitsPerDigit) : 0;
-            if (minimumDigitsPerByte > 0 && minimumLength > 0)
-                minimumLength = (int)Math.Ceiling((double)minimumLength / minimumDigitsPerByte) * minimumDigitsPerByte;
-
-            // Process whole number...
-            var result = new StringBuilder(minimumLength);
-            var negate = false;
-            if (negative && !bitBased)
-            {
-                // Just prepend negative sign to positive number for non-bit based values
-                result.Append('-');
-                negate = true;
-            }
-            var firstDigitIndex = result.Length;
-            var byteLength = _bytes.Length;
-            var digitValue = 0;
-            var digits = 0;
-            var negateCarry = (sbyte)0;
-            for (var byteIndex = 0; byteIndex < byteLength; byteIndex++)
-            {
-                // Get value (negating when necessary)
-                var byteValue = _bytes[byteIndex];
-                if (negate)
+                // Decide how to handle sign according to base
+                var bitBased = true;
+                var bitsPerDigit = 1;
+                if (numberBase > 2 && numberBase % 2 == 0)
                 {
-                    var negateAndCarry = -byteValue + negateCarry;
-                    byteValue = (byte)negateAndCarry;
-                    negateCarry = (sbyte)(negateAndCarry >> 8);
+                    var baseRoot = Math.Sqrt(numberBase);
+                    bitsPerDigit = (int)Math.Floor(baseRoot);
+                    bitBased = !(baseRoot - bitsPerDigit > 0);
                 }
+                var minimumDigitsPerByte = bitBased ? (int)Math.Ceiling(8d / bitsPerDigit) : 0;
+                if (minimumDigitsPerByte > 0 && minimumLength > 0)
+                    minimumLength = (int)Math.Ceiling((double)minimumLength / minimumDigitsPerByte) * minimumDigitsPerByte;
 
-                // Skip unnecessary byte
-                if (byteValue == 0 && digits >= minimumLength)
-                    continue;
-
-                // Divide into string of digits...
-                var digitByteValue = byteValue;
-                var digitsThisByte = 0;
-                do
+                // Process whole number...
+                var result = new StringBuilder(minimumLength);
+                var negate = false;
+                if (negative && !bitBased)
                 {
-                    // Divide byte value/dividend by base to extract digit value as remainder
-                    var baseDividend = decimal.Floor(digitByteValue / (decimal)numberBase);
-                    var baseRemainder = digitByteValue - numberBase * baseDividend;
-                    digitValue = (int)baseRemainder;
-                    digitByteValue = (byte)baseDividend;
-
-                    // Use remainder as digit from right to left
-                    result.Insert(firstDigitIndex, new[] { NumberDigits[digitValue] });
-                    digits++;
-                    digitsThisByte++;
-                } while (digitByteValue > 0 || digitsThisByte < minimumDigitsPerByte);
-            }
-
-            // Add padding at last position of bit based values when necessary
-            if (signed && bitBased)
-            {
-                if (negative)
-                {
-                    // Ensure negative binary values have at least 2 bits (one for sign)
-                    if (bitsPerDigit == 1 && result.Length == 1 && minimumLength < 2)
-                        minimumLength = 2;
+                    // Just prepend negative sign to positive number for non-bit based values
+                    result.Append('-');
+                    negate = true;
                 }
-                else
+                var firstDigitIndex = result.Length;
+                var byteLength = _bytes.Length;
+                var digitValue = 0;
+                var digits = 0;
+                var negateCarry = (sbyte)0;
+                for (var byteIndex = 0; byteIndex < byteLength; byteIndex++)
                 {
-                    // Pad with zero when non-negative but MSB set in value
-                    var negativeBitValue = 1 << (bitsPerDigit - 1);
-                    var negativeBitSet = (negativeBitValue & digitValue) != 0;
-                    if (negativeBitSet)
+                    // Get value (negating when necessary)
+                    var byteValue = _bytes[byteIndex];
+                    if (negate)
                     {
-                        var positiveWidth = result.Length - firstDigitIndex + minimumDigitsPerByte;
-                        if (minimumLength < positiveWidth)
-                            minimumLength = positiveWidth;
+                        var negateAndCarry = -byteValue + negateCarry;
+                        byteValue = (byte)negateAndCarry;
+                        negateCarry = (sbyte)(negateAndCarry >> 8);
+                    }
+
+                    // Skip unnecessary byte
+                    if (byteValue == 0 && digits >= minimumLength)
+                        continue;
+
+                    // Divide into string of digits...
+                    var digitByteValue = byteValue;
+                    var digitsThisByte = 0;
+                    do
+                    {
+                        // Divide byte value/dividend by base to extract digit value as remainder
+                        var baseDividend = decimal.Floor(digitByteValue / (decimal)numberBase);
+                        var baseRemainder = digitByteValue - numberBase * baseDividend;
+                        digitValue = (int)baseRemainder;
+                        digitByteValue = (byte)baseDividend;
+
+                        // Use remainder as digit from right to left
+                        result.Insert(firstDigitIndex, new[] { NumberDigits[digitValue] });
+                        digits++;
+                        digitsThisByte++;
+                    } while (digitByteValue > 0 || digitsThisByte < minimumDigitsPerByte);
+                }
+
+                // Add padding at last position of bit based values when necessary
+                if (signed && bitBased)
+                {
+                    if (negative)
+                    {
+                        // Ensure negative binary values have at least 2 bits (one for sign)
+                        if (bitsPerDigit == 1 && result.Length == 1 && minimumLength < 2)
+                            minimumLength = 2;
+                    }
+                    else
+                    {
+                        // Pad with zero when non-negative but MSB set in value
+                        var negativeBitValue = 1 << (bitsPerDigit - 1);
+                        var negativeBitSet = (negativeBitValue & digitValue) != 0;
+                        if (negativeBitSet)
+                        {
+                            var positiveWidth = result.Length - firstDigitIndex + minimumDigitsPerByte;
+                            if (minimumLength < positiveWidth)
+                                minimumLength = positiveWidth;
+                        }
                     }
                 }
+
+                // Pad string to desired width
+                while (result.Length - firstDigitIndex < minimumLength)
+                    result.Insert(firstDigitIndex, new[] { negative && !negate ? NumberDigits[numberBase - 1] : NumberDigits[0] });
+
+                // Return result
+                return result.ToString();
             }
-
-            // Pad string to desired width
-            while (result.Length - firstDigitIndex < minimumLength)
-                result.Insert(firstDigitIndex, new[] { negative && !negate ? NumberDigits[numberBase - 1] : NumberDigits[0] });
-
-            // Return result
-            return result.ToString();
         }
 
         /// <summary>

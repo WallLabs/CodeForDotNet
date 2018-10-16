@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration.Install;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -17,6 +18,7 @@ namespace CodeForDotNet.Install
     [RunInstaller(false)]
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(ConfigurationFileInstaller), "ConfigurationFileInstallerToolboxIcon.bmp")]
+    [SuppressMessage("Microsoft.Usage", "CA2227", Justification = "Settable properties required by toolbox extension specification.")]
     public partial class ConfigurationFileInstaller : Installer
     {
         /// <summary>
@@ -24,10 +26,12 @@ namespace CodeForDotNet.Install
         /// </summary>
         public ConfigurationFileInstaller()
         {
+            // Initialize members.
             ExpandVariables = true;
             DeleteAtUninstall = true;
             Variables = new Collection<string>();
             FileNames = new Collection<string>();
+
             // This call is required by the Designer.
             InitializeComponent();
         }

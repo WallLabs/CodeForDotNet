@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
@@ -7,6 +8,8 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Managed <see cref="Wia.Vector"/>.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1710", Justification = "Named after unmanaged type it extends.")]
+    [SuppressMessage("Microsoft.Design", "CA1010", Justification = "Extends unmanaged type which is a collection of different object types.")]
     public class WiaVector : IList
     {
         #region Lifetime

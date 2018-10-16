@@ -1,10 +1,12 @@
-﻿using Wia = Interop.Wia;
+﻿using System.Diagnostics.CodeAnalysis;
+using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
     /// <summary>
     /// Managed <see cref="Wia.WiaImageBias"/>.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1717", Justification = "False positive, it is not plural.")]
     public enum WiaImageBias
     {
         /// <summary>

@@ -1,10 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeForDotNet
 {
     /// <summary>
     /// Provides a base object which provides greater control over object lifetime and memory management.
     /// </summary>
+    [SuppressMessage("Microsoft.Design", "CA1063", Justification = "This is the correct disposable implementation.")]
     public abstract class DisposableObject : IDisposableObject
     {
         #region Lifetime

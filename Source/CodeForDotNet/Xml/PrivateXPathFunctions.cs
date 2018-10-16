@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace CodeForDotNet.Xml
@@ -11,6 +12,7 @@ namespace CodeForDotNet.Xml
     /// Functions must be lowercase (against typical coding standards) to conform to XML naming standards,
     /// i.e. extension functions are matched using case sensitivity.
     /// </remarks>
+    [SuppressMessage("Microsoft.Performance", "CA1822", Justification = "Non-static member required by XPath function library support.")]
     public sealed class PrivateXPathFunctions
     {
         #region Constants
@@ -20,7 +22,7 @@ namespace CodeForDotNet.Xml
         /// </summary>
         public const string XmlNamespace = "urn:PrivateXPathFunctions";
 
-        #endregion
+        #endregion Constants
 
         #region DateTime Functions
 
@@ -64,6 +66,6 @@ namespace CodeForDotNet.Xml
             return value.ToString("f", CultureInfo.CurrentCulture);
         }
 
-        #endregion
+        #endregion DateTime Functions
     }
 }

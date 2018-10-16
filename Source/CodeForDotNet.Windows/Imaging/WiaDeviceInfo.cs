@@ -64,9 +64,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Thread synchronization object.
         /// </summary>
-        public object SyncRoot { get { return _syncRoot; } }
-
-        private static readonly object _syncRoot = new object();
+        public static object SyncRoot { get; } = new object();
 
         /// <summary>
         /// Device identifier.
@@ -114,7 +112,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_properties == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_properties == null)
                             _properties = new WiaPropertyCollection(_wiaDeviceInfo.Properties);

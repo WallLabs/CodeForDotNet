@@ -1,6 +1,7 @@
 ﻿using CodeForDotNet.Collections;
 using CodeForDotNet.Xml;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Xml.Serialization;
 
@@ -9,6 +10,9 @@ namespace CodeForDotNet.Drawing
     /// <summary>
     /// Brush data.
     /// </summary>
+    [Serializable]
+    [SuppressMessage("Microsoft.Usage", "CA2235", Justification = "Custom member types are serializable. Rest are false positive, e.g. built-in value types do not need to be marked serializable.")]
+    [SuppressMessage("Microsoft.Performance", "CA1819", Justification = "Array properties are required for serialization and it's okay if the referenced data array is changed because it is a data entity.")]
     public class BrushData : ICloneable
     {
         #region Lifetime

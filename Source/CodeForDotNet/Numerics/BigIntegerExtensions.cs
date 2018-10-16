@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Text;
 
@@ -7,12 +8,13 @@ namespace CodeForDotNet.Numerics
     /// <summary>
     /// <see cref="BigInteger"/> extensions.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1720", Justification = "Use of the word \"signed\" is preferable for an intuitive interface.")]
     public static class BigIntegerExtensions
     {
         /// <summary>
         /// Valid number digits in order of value starting at zero.
         /// </summary>
-        const string NumberDigits = "0123456789ABCDEF";
+        private const string NumberDigits = "0123456789ABCDEF";
 
         /// <summary>
         /// Converts the number to a string of the specified base.
@@ -85,7 +87,7 @@ namespace CodeForDotNet.Numerics
 
                 // Use remainder as digit from right to left
                 var digit = (int)(negate ? numberBase - 1 - remainder : remainder);
-                result.Insert(firstDigit, new[] {NumberDigits[digit] });
+                result.Insert(firstDigit, new[] { NumberDigits[digit] });
 
                 // Add padding at last position of bit based values when necessary
                 if (quotient < 1 && signed && bitBased)
@@ -109,7 +111,6 @@ namespace CodeForDotNet.Numerics
                         }
                     }
                 }
-
             } while (quotient > 0);
 
             // Pad string to desired width

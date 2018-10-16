@@ -28,7 +28,7 @@ namespace CodeForDotNet.Data
         /// </summary>
         public const string XmlNamespace = Constants.XmlRootNamespace;
 
-        #endregion
+        #endregion Constants
 
         #region Lifetime
 
@@ -42,7 +42,7 @@ namespace CodeForDotNet.Data
             Start = DateTimeOffset.Now;   // Setter will populate End property using Duration
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Operators
 
@@ -51,10 +51,7 @@ namespace CodeForDotNet.Data
         /// </summary>
         public static bool operator ==(ScheduleItem scheduleItem1, ScheduleItem scheduleItem2)
         {
-            if (!ReferenceEquals(scheduleItem1, null))
-                return scheduleItem1.Equals(scheduleItem2);
-
-            return ReferenceEquals(scheduleItem2, null);
+            return scheduleItem1?.Equals(scheduleItem2) ?? scheduleItem2 == null;
         }
 
         /// <summary>
@@ -62,20 +59,16 @@ namespace CodeForDotNet.Data
         /// </summary>
         public static bool operator !=(ScheduleItem scheduleItem1, ScheduleItem scheduleItem2)
         {
-            if (!ReferenceEquals(scheduleItem1, null))
-                return !scheduleItem1.Equals(scheduleItem2);
-
-            return !ReferenceEquals(scheduleItem2, null);
+            return !(scheduleItem1?.Equals(scheduleItem2) ?? scheduleItem2 == null);
         }
 
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        public override bool Equals(object obj)
+        public override bool Equals(object something)
         {
             // Compare nullability and type
-            var other = obj as ScheduleItem;
-            if (ReferenceEquals(other, null))
+            if (!(something is ScheduleItem other) || other is null)
                 return false;
 
             // Compare values
@@ -102,7 +95,7 @@ namespace CodeForDotNet.Data
                 Days.GetHashCode();
         }
 
-        #endregion
+        #endregion Operators
 
         #region Public Properties
 
@@ -132,7 +125,8 @@ namespace CodeForDotNet.Data
                 if (Days != DaysOfWeek.None) Days = value.DayOfWeek.ToDaysOfWeek();
             }
         }
-        DateTimeOffset _start;
+
+        private DateTimeOffset _start;
 
         /// <summary>
         /// Duration in minutes.
@@ -151,7 +145,8 @@ namespace CodeForDotNet.Data
                 _duration = value;
             }
         }
-        int _duration;
+
+        private int _duration;
 
         /// <summary>
         /// Date and time when the schedule ends, taking into account duration and all occurrences.
@@ -162,7 +157,6 @@ namespace CodeForDotNet.Data
         {
             get
             {
-
                 // Add start and duration
                 var end = _start.AddMinutes(_duration);
 
@@ -214,7 +208,8 @@ namespace CodeForDotNet.Data
                 }
             }
         }
-        ScheduleItemRecurrence _recurrence;
+
+        private ScheduleItemRecurrence _recurrence;
 
         /// <summary>
         /// Omits the <see cref="Recurrence"/> property from XML serialization when it is default.
@@ -282,7 +277,8 @@ namespace CodeForDotNet.Data
                 _interval = value;
             }
         }
-        int _interval;
+
+        private int _interval;
 
         /// <summary>
         /// Omits the <see cref="Interval"/> property from XML serialization when it is empty.
@@ -323,7 +319,8 @@ namespace CodeForDotNet.Data
                 }
             }
         }
-        ScheduleItemOffset _offset;
+
+        private ScheduleItemOffset _offset;
 
         /// <summary>
         /// Omits the <see cref="Offset"/> property from XML serialization when it is empty.
@@ -351,7 +348,8 @@ namespace CodeForDotNet.Data
                 _days = value;
             }
         }
-        DaysOfWeek _days;
+
+        private DaysOfWeek _days;
 
         /// <summary>
         /// Omits the <see cref="Days"/> property from XML serialization when it is empty.
@@ -377,7 +375,8 @@ namespace CodeForDotNet.Data
                 _occurrences = value;
             }
         }
-        int? _occurrences;
+
+        private int? _occurrences;
 
         /// <summary>
         /// Omits the <see cref="Occurrences"/> property from XML serialization when it is empty.
@@ -385,7 +384,7 @@ namespace CodeForDotNet.Data
         [XmlIgnore]
         public bool OccurrencesSpecified { get { return Occurrences.HasValue && Occurrences.Value > 0; } }
 
-        #endregion
+        #endregion Public Properties
 
         #region Public Methods
 
@@ -641,6 +640,6 @@ namespace CodeForDotNet.Data
             return utcDate <= closestEnd && dateEnd >= closestStart;
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

@@ -65,9 +65,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Thread synchronization object.
         /// </summary>
-        public object SyncRoot { get { return _syncRoot; } }
-
-        private static readonly object _syncRoot = new object();
+        public static object SyncRoot { get; } = new object();
 
         /// <summary>
         /// Item identifier.
@@ -84,7 +82,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_commands == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_commands == null)
                             _commands = new WiaDeviceCommandCollection(_wiaItem.Commands);
@@ -108,7 +106,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_properties == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_properties == null)
                             _properties = new WiaPropertyCollection(_wiaItem.Properties);
@@ -132,7 +130,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_formats == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_formats == null)
                             _formats = new WiaFormatCollection(_wiaItem.Formats);

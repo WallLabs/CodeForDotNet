@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using Wia = Interop.Wia;
 
@@ -66,9 +67,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Thread synchronization object.
         /// </summary>
-        public object SyncRoot { get { return _syncRoot; } }
-
-        private static readonly object _syncRoot = new object();
+        public static object SyncRoot { get; } = new object();
 
         /// <summary>
         /// Device identifier.
@@ -90,7 +89,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_properties == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_properties == null)
                             _properties = new WiaPropertyCollection(_wiaDevice.Properties);
@@ -114,7 +113,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_commands == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_commands == null)
                             _commands = new WiaDeviceCommandCollection(_wiaDevice.Commands);
@@ -138,7 +137,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_events == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_events == null)
                             _events = new WiaDeviceEventCollection(_wiaDevice.Events);
@@ -162,7 +161,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_items == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_items == null)
                             _items = new WiaItemCollection(_wiaDevice.Items);
@@ -186,7 +185,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_item == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_item == null)
                             _item = new WiaItem((Wia.Item)_wiaDevice.WiaItem);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeForDotNet.ComponentModel
 {
@@ -12,6 +13,7 @@ namespace CodeForDotNet.ComponentModel
     /// The <see cref="DataObjectAttribute"/> and <see cref="SerializableAttribute"/> must still be defined on your class.
     /// </remarks>
     [Serializable]
+    [SuppressMessage("Microsoft.Naming", "CA1710", Justification = "Should not end in \"Collection\" because it extends \"BindingList\" so is best named similarly.")]
     public abstract class GenericBindingList<T> : BindingList<T>
     {
         #region Lifetime
@@ -36,7 +38,7 @@ namespace CodeForDotNet.ComponentModel
                 AddRange(list);
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region ObjectDataSource methods
 
@@ -83,7 +85,7 @@ namespace CodeForDotNet.ComponentModel
                 RemoveAt(index);
         }
 
-        #endregion
+        #endregion ObjectDataSource methods
 
         #region BindingList Methods
 
@@ -110,6 +112,6 @@ namespace CodeForDotNet.ComponentModel
             return -1;
         }
 
-        #endregion
+        #endregion BindingList Methods
     }
 }

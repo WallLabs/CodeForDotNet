@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration.Install;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -18,6 +19,7 @@ namespace CodeForDotNet.Install
     [RunInstaller(false)]
     [ToolboxItem(true)]
     [ToolboxBitmap(typeof(NativeCodeGeneratorInstaller), "NativeCodeGeneratorInstallerToolboxIcon.bmp")]
+    [SuppressMessage("Microsoft.Usage", "CA2227", Justification = "Settable properties required by toolbox extension specification.")]
     public class NativeCodeGeneratorInstaller : Installer
     {
         /// <summary>
@@ -61,8 +63,8 @@ namespace CodeForDotNet.Install
             }
         }
 
-
         #region Component Designer generated code
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -71,7 +73,8 @@ namespace CodeForDotNet.Install
         {
             _components = new System.ComponentModel.Container();
         }
-        #endregion
+
+        #endregion Component Designer generated code
 
         /// <summary>
         /// Condition required to activate the feature.

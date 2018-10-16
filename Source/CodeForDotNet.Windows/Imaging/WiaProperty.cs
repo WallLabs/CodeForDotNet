@@ -56,9 +56,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Thread synchronization object.
         /// </summary>
-        public object SyncRoot { get { return _syncRoot; } }
-
-        private static readonly object _syncRoot = new object();
+        public static object SyncRoot { get; } = new object();
 
         /// <summary>
         /// Indicates the property is read-only.
@@ -115,7 +113,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_wiaSubtypeValues == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_wiaSubtypeValues == null)
                             _wiaSubtypeValues = new WiaVector(_wiaProperty.SubTypeValues);

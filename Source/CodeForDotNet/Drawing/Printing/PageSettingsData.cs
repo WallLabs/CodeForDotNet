@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeForDotNet.Drawing.Printing
 {
@@ -6,6 +7,7 @@ namespace CodeForDotNet.Drawing.Printing
     /// Printer page settings.
     /// </summary>
     [Serializable]
+    [SuppressMessage("Microsoft.Usage", "CA2235", Justification = "Custom member types are serializable. Rest are false positive, e.g. built-in value types do not need to be marked serializable.")]
     public class PageSettingsData
     {
         #region Lifetime
@@ -19,7 +21,7 @@ namespace CodeForDotNet.Drawing.Printing
             Margins = new PageMarginsData();
         }
 
-        #endregion
+        #endregion Lifetime
 
         #region Properties
 
@@ -63,6 +65,6 @@ namespace CodeForDotNet.Drawing.Printing
         /// </summary>
         public string PrinterName { get; set; }
 
-        #endregion
+        #endregion Properties
     }
 }

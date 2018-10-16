@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Security;
@@ -31,16 +32,19 @@ namespace CodeForDotNet.Xml
         /// <summary>
         /// XML root element name.
         /// </summary>
+        [NonSerialized]
         public const string XmlRootName = "xml";
 
         /// <summary>
         /// XML type name.
         /// </summary>
+        [NonSerialized]
         public const string XmlTypeName = "xmlAnyDocumentType";
 
         /// <summary>
         /// XML namespace.
         /// </summary>
+        [NonSerialized]
         public const string XmlNamespace = ""; /* unqualified/anonymous type when serialized as document */
 
         #endregion Constants
@@ -60,6 +64,7 @@ namespace CodeForDotNet.Xml
         /// <summary>
         /// Serialization constructor.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Unused parameter required by serialization.")]
         private XmlAnyDocument(SerializationInfo info, StreamingContext context)
         {
             if (info == null) throw new ArgumentNullException(nameof(info));
@@ -92,6 +97,7 @@ namespace CodeForDotNet.Xml
         /// <summary>
         /// Gets the schema and XML type of this class.
         /// </summary>
+        [SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Unused parameter required by interface.")]
         public static XmlQualifiedName GetSchema(XmlSchemaSet schemaSet)
         {
             return new XmlQualifiedName(XmlTypeName, XmlNamespace);
@@ -239,6 +245,7 @@ namespace CodeForDotNet.Xml
         /// </summary>
         public IXPathNavigable Xml { get { return _xml; } }
 
+        [NonSerialized]
         private XmlDocumentFragment _xml;
 
         /// <summary>

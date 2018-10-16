@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace CodeForDotNet.WindowsUniversal.UI.Controls
 {
     /// <summary>
     /// Number base.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1720", Justification = "Name is preferred for an intuitive object model and would not conflict when used as an enumeration member.")]
     public enum NumericTextBoxNumberBase
     {
         /// <summary>

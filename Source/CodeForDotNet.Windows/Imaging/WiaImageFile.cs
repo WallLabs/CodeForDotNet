@@ -63,9 +63,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Thread synchronization object.
         /// </summary>
-        public object SyncRoot { get { return _syncRoot; } }
-
-        private static readonly object _syncRoot = new object();
+        public static object SyncRoot { get; } = new object();
 
         /// <summary>
         /// Active frame.
@@ -86,7 +84,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_argbData == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_argbData == null)
                             _argbData = new WiaVector(_wiaImageFile.ARGBData);
@@ -110,7 +108,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_fileData == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_fileData == null)
                             _fileData = new WiaVector(_wiaImageFile.FileData);
@@ -194,7 +192,7 @@ namespace CodeForDotNet.Windows.Imaging
                 // Create wrapper first time
                 if (_properties == null)
                 {
-                    lock (_syncRoot)
+                    lock (SyncRoot)
                     {
                         if (_properties == null)
                             _properties = new WiaPropertyCollection(_wiaImageFile.Properties);

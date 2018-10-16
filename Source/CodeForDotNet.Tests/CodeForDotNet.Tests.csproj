@@ -73,7 +73,6 @@
     <Compile Include="Facts\ProcessTests.cs" />
     <Compile Include="Facts\StringTests.cs" />
     <Compile Include="Facts\WiaFacts.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Facts\NumericsFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

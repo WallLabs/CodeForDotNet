@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace CodeForDotNet.ComponentModel
@@ -10,6 +11,7 @@ namespace CodeForDotNet.ComponentModel
     /// Object containing uniquely identifiable properties,
     /// with intelligent change notification and event caching.
     /// </summary>
+    [SuppressMessage("Microsoft.Design", "CA1063", Justification = "This is the correct disposable implementation.")]
     public abstract class PropertyObject : EventObject, IPropertyObject
     {
         #region Lifetime

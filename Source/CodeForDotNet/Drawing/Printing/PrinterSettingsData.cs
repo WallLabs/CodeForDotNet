@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeForDotNet.Drawing.Printing
 {
@@ -6,6 +7,7 @@ namespace CodeForDotNet.Drawing.Printing
     /// Printer settings data.
     /// </summary>
     [Serializable]
+    [SuppressMessage("Microsoft.Usage", "CA2235", Justification = "Custom member types are serializable. Rest are false positive, e.g. built-in value types do not need to be marked serializable.")]
     public class PrinterSettingsData
     {
         #region Properties
@@ -38,6 +40,6 @@ namespace CodeForDotNet.Drawing.Printing
             get { return new PrinterSettingsData { Collate = true, DuplexOutput = PrinterSettingsDuplex.Simplex, Copies = 1 }; }
         }
 
-        #endregion
+        #endregion Properties
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
 using System.Xml.Xsl;
@@ -15,6 +16,7 @@ namespace CodeForDotNet.Xml
     /// Functions must be lowercase (against typical coding standards) to conform to the XPath 2.0 specification,
     /// i.e. extension functions are matched using case sensitivity.
     /// </remarks>
+    [SuppressMessage("Microsoft.Performance", "CA1822", Justification = "Non-static member required by XPath function library support.")]
     public sealed class W3cXPathFunctions
     {
         #region Constants
@@ -24,7 +26,7 @@ namespace CodeForDotNet.Xml
         /// </summary>
         public const string XmlNamespace = "http://www.w3.org/2005/xpath-functions";
 
-        #endregion
+        #endregion Constants
 
         #region String Functions
 
@@ -83,8 +85,8 @@ namespace CodeForDotNet.Xml
             return Regex.Match(input.Trim(), pattern, options).Success;
         }
 
-        #endregion
+        #endregion Pattern Matches
 
-        #endregion
+        #endregion String Functions
     }
 }
