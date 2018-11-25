@@ -797,20 +797,20 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             if (_cursor == null)
                 throw new InvalidOperationException(AssemblyResources.DynamicTextBoxStyleMissingCursor);
 
+            // Do nothing when no text.
+            var textLength = Text.Length;
+            if (textLength == 0)
+                return;
+
             // Get area of selected character
             var cursorIndex = SelectionStart;
             var trailing = false;
-            var textLength = Text.Length;
-            Rect cursorRect;
-            if (textLength > 0)
+            if (cursorIndex >= textLength)
             {
-                if (cursorIndex >= textLength)
-                {
-                    trailing = true;
-                    cursorIndex = textLength - 1;
-                }
-                cursorRect = GetRectFromCharacterIndex(cursorIndex, trailing);
+                trailing = true;
+                cursorIndex = textLength - 1;
             }
+            var cursorRect = GetRectFromCharacterIndex(cursorIndex, trailing);
 
             // Move cursor to selected character
             var padding = Padding;
