@@ -1,5 +1,8 @@
 # Code for .NET - Release Notes
 
+## Version 4.72.1811.25### (2018.11.25)
+* Remove ObservableDictionary and ObservableCollection in favour of built-in types.
+
 ## Version 4.72.1810.16### (2018.10.16)
 * Remove all global code analysis suppressions, re-evaluate all CA errors and correct or suppress with attribute on the class or member affected.
 * Avoid overflow exceptions in Number casting down to byte during internal manipulation (not a bug but an un-necessary error when compiling with check for overflow, now set as standard in this solution for debug builds).

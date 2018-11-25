@@ -154,7 +154,7 @@ namespace CodeForDotNet.Collections
                 return 0;
 
             // Calculate and return hash of all items
-            return array.Cast<object>().Aggregate(0, (current, item) => current ^ (!ReferenceEquals(item, null) ? item.GetHashCode() : 0));
+            return array.Cast<object>().Aggregate(0, (current, item) => current ^ (item?.GetHashCode() ?? 0));
         }
 
         /// <summary>

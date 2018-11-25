@@ -89,82 +89,6 @@
             </summary>
             <param name="list">List of items to dispose.</param>
         </member>
-        <member name="T:CodeForDotNet.Collections.CollectionChange">
-            <summary>
-            Describes the action that causes a change to a collection.
-            </summary>
-            <remarks>
-            Portable version of the Windows.Foundation.Collections.CollectionChange enumeration only
-            available to non-portable Windows Store application.
-            </remarks>
-        </member>
-        <member name="F:CodeForDotNet.Collections.CollectionChange.Reset">
-            <summary>
-            All entries cleared.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Collections.CollectionChange.Add">
-            <summary>
-            Entry added.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Collections.CollectionChange.Remove">
-            <summary>
-            Entry removed.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Collections.CollectionChange.Replace">
-            <summary>
-            Entry replaced.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Collections.CollectionChangedEventArgs`1">
-            <summary>
-            Event arguments for the <see cref="E:CodeForDotNet.Collections.ObservableCollection`1.CollectionChanged"/> event.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.CollectionChangedEventArgs`1.#ctor(CodeForDotNet.Collections.CollectionChange,`0)">
-            <summary>
-            Creates an instance with specific values.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Collections.CollectionChangedEventArgs`1.CollectionChange">
-            <summary>
-            Change details.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Collections.CollectionChangedEventArgs`1.Value">
-            <summary>
-            Changed entry key.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Collections.CollectionChangedEventHandler`1">
-            <summary>
-            Represents the method that handles the changed event of an observable collection.
-            </summary>
-            <typeparam name="T">The type of the values in the collection.</typeparam>
-        </member>
-        <member name="T:CodeForDotNet.Collections.DictionaryChangedEventArgs`2">
-            <summary>
-            Event arguments for the <see cref="E:CodeForDotNet.Collections.ObservableDictionary`2.DictionaryChanged"/> event.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.DictionaryChangedEventArgs`2.#ctor(CodeForDotNet.Collections.CollectionChange,`0,`1)">
-            <summary>
-            Creates an instance with specific values.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Collections.DictionaryChangedEventArgs`2.Key">
-            <summary>
-            Changed entry key.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Collections.DictionaryChangedEventHandler`2">
-            <summary>
-            Represents the method that handles the changed event of an observable dictionary.
-            </summary>
-            <typeparam name="TKey">The type of the keys in the dictionary.</typeparam><typeparam name="TValue">The type of the values in the dictionary.</typeparam>
-        </member>
         <member name="T:CodeForDotNet.Collections.DictionaryExtensions">
             <summary>
             Extensions and helper methods for work with <see cref="T:System.Collections.IDictionary"/> objects.
@@ -199,7 +123,7 @@
             Compares two dictionaries by value.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Collections.DictionaryExtensions.GetHashCodeOfItemsIfExists(System.Collections.IDictionary)">
+        <member name="M:CodeForDotNet.Collections.DictionaryExtensions.GetHashCode(System.Collections.IDictionary)">
             <summary>
             Gets the hash code of the keys and values of all items in the dictionary, or zero when null.
             </summary>
@@ -306,226 +230,6 @@
         <member name="M:CodeForDotNet.Collections.DisposableCollection`1.SetItem(System.Int32,`0)">
             <summary>
             Disposes then replaces an item.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Collections.IObservableCollection`1">
-            <summary>
-            Notifies listeners of dynamic changes to a collection, such as when items are added or removed.
-            </summary>
-            <typeparam name="T">The type of the values in the collection.</typeparam>
-        </member>
-        <member name="E:CodeForDotNet.Collections.IObservableCollection`1.CollectionChanged">
-            <summary>
-            Occurs when the Collection changes.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Collections.IObservableDictionary`2">
-            <summary>
-            Notifies listeners of dynamic changes to a dictionary, such as when items are added or removed.
-            </summary>
-            <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
-            <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
-        </member>
-        <member name="E:CodeForDotNet.Collections.IObservableDictionary`2.DictionaryChanged">
-            <summary>
-            Occurs when the dictionary changes.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Collections.ObservableCollection`1">
-            <summary>
-            Portable observable collection.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableCollection`1.#ctor">
-            <summary>
-            Creates an instance.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Collections.ObservableCollection`1._collection">
-            <summary>
-            Underlying Collection which this class makes observable.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Collections.ObservableCollection`1.Item(System.Int32)">
-            <summary>
-            Looks-up an entry by key.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Collections.ObservableCollection`1.Count">
-            <summary>
-            Number of entries.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Collections.ObservableCollection`1.IsReadOnly">
-            <summary>
-            Indicates whether this is read only.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableCollection`1.IndexOf(`0)">
-            <summary>
-            Gets the index of an item.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableCollection`1.Insert(System.Int32,`0)">
-            <summary>
-            Inserts a new item at the specified index.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableCollection`1.RemoveAt(System.Int32)">
-            <summary>
-            Removes an item at a specific index.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableCollection`1.Add(`0)">
-            <summary>
-            Adds a new entry using the specified key and value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableCollection`1.Remove(`0)">
-            <summary>
-            Removes an entry by key.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableCollection`1.Clear">
-            <summary>
-            Clears all entries.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableCollection`1.Contains(`0)">
-            <summary>
-            Checks if the entry exists in this collection.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableCollection`1.GetEnumerator">
-            <summary>
-            Gets an enumerator for this collection.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableCollection`1.System#Collections#IEnumerable#GetEnumerator">
-            <summary>
-            Gets an enumerator for this collection.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableCollection`1.CopyTo(`0[],System.Int32)">
-            <summary>
-            Copies entries from this collection to an array.
-            </summary>
-        </member>
-        <member name="E:CodeForDotNet.Collections.ObservableCollection`1.CollectionChanged">
-            <summary>
-            Fired when a change occurs.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableCollection`1.OnCollectionChanged(CodeForDotNet.Collections.CollectionChange,`0)">
-            <summary>
-            Fires the <see cref="E:CodeForDotNet.Collections.ObservableCollection`1.CollectionChanged"/> event.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Collections.ObservableDictionary`2">
-            <summary>
-            Implementation of IObservableMap that supports re-entrance for use as a default view model.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.#ctor">
-            <summary>
-            Creates an instance.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Collections.ObservableDictionary`2._dictionary">
-            <summary>
-            Underlying dictionary which this class makes observable.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Collections.ObservableDictionary`2.Item(`0)">
-            <summary>
-            Looks-up an entry by key.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Collections.ObservableDictionary`2.Keys">
-            <summary>
-            Key values.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Collections.ObservableDictionary`2.Values">
-            <summary>
-            Entry values.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Collections.ObservableDictionary`2.Count">
-            <summary>
-            Number of entries.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Collections.ObservableDictionary`2.IsReadOnly">
-            <summary>
-            Indicates whether this is read only.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.Add(`0,`1)">
-            <summary>
-            Adds a new entry using the specified key and value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <summary>
-            Adds a key pair entry.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.Remove(`0)">
-            <summary>
-            Removes an entry by key.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <summary>
-            Removes an entry.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.Clear">
-            <summary>
-            Clears all entries.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.ContainsKey(`0)">
-            <summary>
-            Checks if the current key exists in this collection.
-            </summary>
-            <param name="key"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.TryGetValue(`0,`1@)">
-            <summary>
-            Gets an entry's value by key if it exists.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <summary>
-            Checks if the entry exists in this collection.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.GetEnumerator">
-            <summary>
-            Gets an enumerator for this collection.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.System#Collections#IEnumerable#GetEnumerator">
-            <summary>
-            Gets an enumerator for this collection.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
-            <summary>
-            Copies entries from this collection to an array.
-            </summary>
-        </member>
-        <member name="E:CodeForDotNet.Collections.ObservableDictionary`2.DictionaryChanged">
-            <summary>
-            Fired when a change occurs.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.OnDictionaryChanged(CodeForDotNet.Collections.CollectionChange,`0,`1)">
-            <summary>
-            Fires the <see cref="E:CodeForDotNet.Collections.ObservableDictionary`2.DictionaryChanged"/> event.
             </summary>
         </member>
         <member name="T:CodeForDotNet.ComponentModel.BigIntegerConverter">
@@ -756,6 +460,134 @@
         <member name="P:CodeForDotNet.ComponentModel.DataObjectChangeEventArgs.Action">
             <summary>
             Action which occurred.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.ComponentModel.DataObjectCollection`1">
+            <summary>
+            Collection of <see cref="T:CodeForDotNet.ComponentModel.DataObject"/> items supporting ID index and central event notification.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.#ctor">
+            <summary>
+            Creates an empty instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Creates an instance based on an existing enumeration.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.#ctor(System.Collections.Generic.List{`0})">
+            <summary>
+            Creates an instance based on an existing list.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.Finalize">
+            <summary>
+            Frees unmanaged resources during finalization.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.Dispose">
+            <summary>
+            Proactively frees resources owned by this object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.Dispose(System.Boolean)">
+            <summary>
+            Proactively frees resources owned by this object.
+            </summary>
+            <remarks>
+            Full dispose pattern is not implemented because there is no need
+            to un-hook events during finalization.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.op_Equality(CodeForDotNet.ComponentModel.DataObjectCollection{`0},CodeForDotNet.ComponentModel.DataObjectCollection{`0})">
+            <summary>
+            Compares two instances of this type for equality by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.op_Inequality(CodeForDotNet.ComponentModel.DataObjectCollection{`0},CodeForDotNet.ComponentModel.DataObjectCollection{`0})">
+            <summary>
+            Compares two instances of this type for equality by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.Equals(System.Object)">
+            <summary>
+            Compares this instance with another object by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.GetHashCode">
+            <summary>
+            Gets a hash code based on the current values of this object.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.ComponentModel.DataObjectCollection`1._suspendEventsCount">
+            <summary>
+            Counts the number of times the <see cref="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.SuspendEvents"/> method was called
+            to decide whether events are currently suspended, when greater than zero.
+            The value is decremented on each call to <see cref="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.ResumeEvents"/>.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.ComponentModel.DataObjectCollection`1.SyncRoot">
+            <summary>
+            Thread synchronization object.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.ComponentModel.DataObjectCollection`1.EventsAreEnabled">
+            <summary>
+            Flags that events are current enabled, and will be fired immediately.  This
+            can be used by inheriting classes to determine whether to cache or fire events
+            immediately, in conjunction with the ResumeEvents() override.
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.ComponentModel.DataObjectCollection`1.EventsResumed">
+            <summary>
+            Fired when events are suspended the first time, i.e. is not fired when nested.
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.ComponentModel.DataObjectCollection`1.EventsSuspended">
+            <summary>
+            Fired when events are suspended the first time, i.e. is not fired when nested.
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.ComponentModel.DataObjectCollection`1.ItemDataChanged">
+            <summary>
+            Fired when an item <see cref="E:CodeForDotNet.ComponentModel.DataObject.DataChanged"/> event occurs.
+            The sender remains as the item which originated the event.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.ResumeEvents">
+            <summary>
+            Resumes all events after SuspendEvents. Automatically fires any pending events
+            when appropriate.  Implements reference counting to detect when to finally
+            resume events, at which point the Resume event is fired.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.SuspendEvents">
+            <summary>
+            Disables all events until ResumeEvents is called.  Implements reference counting
+            to detect when to finally resume events, increasing performance by preventing
+            un-necessary event handling.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.HookEvents(`0)">
+            <summary>
+            Hooks all monitored events of an item.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.UnhookEvents(`0)">
+            <summary>
+            Un-hooks all monitored events of an item.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            Handles changes to the collection.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObjectCollection`1.OnItemDataChanged(System.Object,CodeForDotNet.ComponentModel.DataObjectChangeEventArgs)">
+            <summary>
+            Bubbles the <see cref="E:CodeForDotNet.ComponentModel.DataObject.DataChanged"/> event of an item in this collection.
             </summary>
         </member>
         <member name="T:CodeForDotNet.ComponentModel.DataObjectState">

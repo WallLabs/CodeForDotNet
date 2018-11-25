@@ -95,9 +95,9 @@ namespace CodeForDotNet.Collections
         /// <summary>
         /// Gets the hash code of the keys and values of all items in the dictionary, or zero when null.
         /// </summary>
-        public static int GetHashCodeOfItemsIfExists(IDictionary dictionary)
+        public static int GetHashCode(IDictionary dictionary)
         {
-            return ReferenceEquals(dictionary, null) ? 0 : dictionary.GetHashCodeOfItems();
+            return dictionary?.GetHashCodeOfItems() ?? 0;
         }
 
         /// <summary>
@@ -111,9 +111,9 @@ namespace CodeForDotNet.Collections
             // Calculate hash code
             var hash = 0;
             foreach (var item in dictionary.Keys)
-                hash ^= !ReferenceEquals(item, null) ? item.GetHashCode() : 0;
+                hash ^= item?.GetHashCode() ?? 0;
             foreach (var item in dictionary.Values)
-                hash ^= !ReferenceEquals(item, null) ? item.GetHashCode() : 0;
+                hash ^= item?.GetHashCode() ?? 0;
             return hash;
         }
 

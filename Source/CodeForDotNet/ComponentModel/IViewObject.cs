@@ -1,5 +1,6 @@
 ﻿using CodeForDotNet.Collections;
 using System;
+using System.Collections.ObjectModel;
 
 namespace CodeForDotNet.ComponentModel
 {
@@ -20,7 +21,7 @@ namespace CodeForDotNet.ComponentModel
         /// </summary>
         ObservableCollection<IViewObject> Children { get; }
 
-        #endregion
+        #endregion Properties
 
         #region Methods
 
@@ -43,7 +44,7 @@ namespace CodeForDotNet.ComponentModel
         /// </remarks>
         void InvalidateLayout(bool includeChildren);
 
-        #endregion
+        #endregion Methods
 
         #region Events
 
@@ -52,6 +53,6 @@ namespace CodeForDotNet.ComponentModel
         /// </summary>
         event EventHandler<ViewObjectParentChangedEventArgs> ParentChanged;
 
-        #endregion
+        #endregion Events
     }
 }
