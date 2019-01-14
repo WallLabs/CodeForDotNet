@@ -7,7 +7,7 @@
     /// <remarks>
     /// Member names and values map directly to the Universal Windows contract.
     /// </remarks>
-    public enum FontStyleData
+    public enum FontStyle
     {
         /// <summary>
         /// Normal.

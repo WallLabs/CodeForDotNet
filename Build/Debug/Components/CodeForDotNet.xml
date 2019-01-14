@@ -3026,7 +3026,7 @@
             Creates an empty instance.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.FontData.#ctor(System.String,System.Single,CodeForDotNet.Drawing.FontStyleData)">
+        <member name="M:CodeForDotNet.Drawing.FontData.#ctor(System.String,System.Single,CodeForDotNet.Drawing.FontStyle)">
             <summary>
             Creates an instance with the specified properties.
             </summary>
@@ -3106,7 +3106,7 @@
             and must be disposed as usual by the caller or other owner.
             </remarks>
         </member>
-        <member name="T:CodeForDotNet.Drawing.FontStyleData">
+        <member name="T:CodeForDotNet.Drawing.FontStyle">
             <summary>
             Font style, defined separately from any API so it can be used in future proof
             data serialization and cross-platform applications.
@@ -3115,17 +3115,17 @@
             Member names and values map directly to the Universal Windows contract.
             </remarks>
         </member>
-        <member name="F:CodeForDotNet.Drawing.FontStyleData.Normal">
+        <member name="F:CodeForDotNet.Drawing.FontStyle.Normal">
             <summary>
             Normal.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.FontStyleData.Oblique">
+        <member name="F:CodeForDotNet.Drawing.FontStyle.Oblique">
             <summary>
             Oblique style.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Drawing.FontStyleData.Italic">
+        <member name="F:CodeForDotNet.Drawing.FontStyle.Italic">
             <summary>
             Italic.
             </summary>
