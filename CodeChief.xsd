@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CodeChief.CodeChief.xsd"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.codechief.com/Schemas/XML/CodeChief.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://www.codechief.com/Schemas/XML/CodeChief.xsd">
+
+  <!-- Root Elements -->
+  <xs:element name="schedule" type="tns:scheduleType" />
+  <xs:element name="scheduleItem" type="tns:scheduleItemType" />
+  <xs:element name="scheduleItems" type="tns:scheduleItemsType" />
+
+  <!-- GUID Type -->
+  <xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Schedule Type -->
+  <xs:complexType name="scheduleType">
+    <xs:sequence>
+      <xs:element name="description" type="xs:string" />
+      <xs:element name="includes" type="tns:scheduleItemsType" minOccurs="0" />
+      <xs:element name="excludes" type="tns:scheduleItemsType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Schedule Item Type -->
+  <xs:complexType name="scheduleItemType">
+    <xs:sequence>
+      <xs:element name="timeZone" type="xs:string" />
+      <xs:element name="start" type="xs:dateTime" />
+      <xs:element name="duration" type="xs:int" />
+      <xs:element name="recurrence" type="tns:scheduleItemRecurrence" minOccurs="0" />
+      <xs:element name="interval" type="xs:int" minOccurs="0" />
+      <xs:element name="offset" type="tns:scheduleItemOffset" minOccurs="0" />
+      <xs:element name="days" type="xs:int" minOccurs="0" />
+      <xs:element name="occurrences" type="xs:int" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Schedule Items Collection -->
+  <xs:complexType name="scheduleItemsType">
+    <xs:sequence>
+      <xs:element name="scheduleItem" type="tns:scheduleItemType" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Schedule Item Offset Enumeration -->
+  <xs:simpleType name="scheduleItemOffset">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Monthly" />
+      <xs:enumeration value="Yearly" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Schedule Item Recurrence Enumeration -->
+  <xs:simpleType name="scheduleItemRecurrence">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Hourly" />
+      <xs:enumeration value="Daily" />
+      <xs:enumeration value="Weekly" />
+      <xs:enumeration value="Monthly" />
+      <xs:enumeration value="Yearly" />
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
