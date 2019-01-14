@@ -21,7 +21,7 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Creates an instance with the specified properties.
         /// </summary>
-        public FontData(string family, float size, FontStyleData style)
+        public FontData(string family, float size, FontStyle style)
         {
             // Initialize properties
             Family = family;
@@ -97,7 +97,7 @@ namespace CodeForDotNet.Drawing
         /// <summary>
         /// Font style.
         /// </summary>
-        public FontStyleData Style { get; set; }
+        public FontStyle Style { get; set; }
 
         #endregion Public Properties
 

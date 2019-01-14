@@ -20,7 +20,7 @@ namespace CodeForDotNet.Drawing
             if (data == null) throw new ArgumentNullException(nameof(data));
 
             // Create and return system font
-            return new Font(data.Family, data.Size, (FontStyle)(int)data.Style);
+            return new Font(data.Family, data.Size, (System.Drawing.FontStyle)(int)data.Style);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace CodeForDotNet.Drawing
             return new FontData(
                 font.FontFamily.Name,
                 font.SizeInPoints,
-                (FontStyleData)(int)font.Style);
+                (FontStyle)(int)font.Style);
         }
 
         #endregion Font Conversion

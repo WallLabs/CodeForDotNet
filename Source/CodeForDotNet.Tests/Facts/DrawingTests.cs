@@ -58,7 +58,7 @@ namespace CodeForDotNet.Tests.Facts
         public void DrawingTestFontDataXmlSerialize()
         {
             // Create a test object and serialize
-            var font1 = new FontData("Verdana", 10, (int)FontStyle.Regular);
+            var font1 = new FontData("Verdana", 10, (int)System.Drawing.FontStyle.Regular);
             var font1Xml = font1.SerializeXml();
 
             // De-serialize the font and check contents match
