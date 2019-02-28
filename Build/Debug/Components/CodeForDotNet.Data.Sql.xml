@@ -90,8 +90,8 @@
         </member>
         <member name="M:CodeForDotNet.Data.Sql.SqlExtensions.BuildConnectionString(System.String,System.String,System.String,System.String)">
             <summary>
-            Creates an SQL Server connection string from common pieces,
-            e.g. server name, database, user &amp; password (if not integrated security).
+            Creates an SQL Server connection string from common pieces, e.g. server name, database,
+            user &amp; password (if not integrated security).
             </summary>
             <param name="serverName">Database server name or (local) for shared memory local access.</param>
             <param name="databaseName">Default database name.</param>
@@ -101,11 +101,15 @@
         </member>
         <member name="M:CodeForDotNet.Data.Sql.SqlExtensions.CreateCommandWithParameters(System.Data.SqlClient.SqlConnection,System.String)">
             <summary>
-            Creates a command object for the specified stored procedure, automatically
-            populating the parameters. Parameter sets are cached for performance.
+            Creates a command object for the specified stored procedure, automatically populating the
+            parameters. Parameter sets are cached for performance.
             </summary>
-            <param name="connection">Connection used to derive parameters (first time only) or create the command.</param>
-            <param name="procedureName">Name of the stored procedure for which to create the command and parameters.</param>
+            <param name="connection">
+            Connection used to derive parameters (first time only) or create the command.
+            </param>
+            <param name="procedureName">
+            Name of the stored procedure for which to create the command and parameters.
+            </param>
         </member>
     </members>
 </doc>

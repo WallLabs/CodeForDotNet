@@ -75,13 +75,23 @@
             </summary>
             <param name="array">Array to search.</param>
             <param name="value">Value to search for.</param>
-            <param name="comparisonType">Comparison options, e.g. set to <see cref="F:System.StringComparison.OrdinalIgnoreCase"/> for a case insensitive comparison.</param>
+            <param name="comparisonType">
+            Comparison options, e.g. set to <see cref="F:System.StringComparison.OrdinalIgnoreCase"/> for a
+            case insensitive comparison.
+            </param>
             <returns>True when found.</returns>
         </member>
-        <member name="M:CodeForDotNet.Collections.ArrayExtensions.GetHashCode(System.Collections.IList)">
+        <member name="M:CodeForDotNet.Collections.ArrayExtensions.Contains(System.Collections.Specialized.StringCollection,System.String,System.StringComparison)">
             <summary>
-            Gets the hash code of all items in the array.
+            Checks if the string collection contains the specified value optionally ignoring case.
             </summary>
+            <param name="collection">Collection to search.</param>
+            <param name="value">Value to search for.</param>
+            <param name="comparisonType">
+            Comparison options, e.g. set to <see cref="F:System.StringComparison.OrdinalIgnoreCase"/> for a
+            case insensitive comparison.
+            </param>
+            <returns>True when found.</returns>
         </member>
         <member name="M:CodeForDotNet.Collections.ArrayExtensions.Dispose(System.Collections.IList)">
             <summary>
@@ -89,9 +99,15 @@
             </summary>
             <param name="list">List of items to dispose.</param>
         </member>
+        <member name="M:CodeForDotNet.Collections.ArrayExtensions.GetHashCode(System.Collections.IList)">
+            <summary>
+            Gets the hash code of all items in the array.
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.Collections.DictionaryExtensions">
             <summary>
-            Extensions and helper methods for work with <see cref="T:System.Collections.IDictionary"/> objects.
+            Extensions and helper methods for work with <see cref="T:System.Collections.IDictionary"/> and
+            <see cref="T:System.Collections.Generic.IDictionary`2"/> objects.
             </summary>
         </member>
         <member name="F:CodeForDotNet.Collections.DictionaryExtensions.AddKeysToValuesDefaultFormat">
@@ -103,17 +119,13 @@
             <summary>
             Prefixes the key to all values in a dictionary using the <see cref="F:CodeForDotNet.Collections.DictionaryExtensions.AddKeysToValuesDefaultFormat"/>.
             </summary>
-            <param name="dictionary">
-            Dictionary to update.
-            </param>
+            <param name="dictionary">Dictionary to update.</param>
         </member>
         <member name="M:CodeForDotNet.Collections.DictionaryExtensions.AddKeysToValues(System.Collections.IDictionary,System.String)">
             <summary>
             Prefixes the key to all values in a dictionary using a specific format.
             </summary>
-            <param name="dictionary">
-            Dictionary to update.
-            </param>
+            <param name="dictionary">Dictionary to update.</param>
             <param name="format">
             Format used to join the values. The first argument is the key and the second the value.
             </param>
@@ -122,6 +134,18 @@
             <summary>
             Compares two dictionaries by value.
             </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.DictionaryExtensions.Dispose(System.Collections.IDictionary)">
+            <summary>
+            Disposes all members implementing <see cref="T:System.IDisposable"/>.
+            </summary>
+            <param name="dictionary">Dictionary of items to dispose.</param>
+        </member>
+        <member name="M:CodeForDotNet.Collections.DictionaryExtensions.Dispose``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>
+            Disposes all members implementing <see cref="T:System.IDisposable"/>.
+            </summary>
+            <param name="dictionary">Dictionary of items to dispose.</param>
         </member>
         <member name="M:CodeForDotNet.Collections.DictionaryExtensions.GetHashCode(System.Collections.IDictionary)">
             <summary>
@@ -137,12 +161,6 @@
             <summary>
             Returns the item in the dictionary if it exists, otherwise null.
             </summary>
-        </member>
-        <member name="M:CodeForDotNet.Collections.DictionaryExtensions.Dispose(System.Collections.IDictionary)">
-            <summary>
-            Disposes all members implementing <see cref="T:System.IDisposable"/>.
-            </summary>
-            <param name="dictionary">Dictionary of items to dispose.</param>
         </member>
         <member name="T:CodeForDotNet.Collections.DisposableCollection`1">
             <summary>
@@ -232,6 +250,177 @@
             Disposes then replaces an item.
             </summary>
         </member>
+        <member name="T:CodeForDotNet.Collections.INotifyDictionaryChanged`2">
+            <summary>
+            Notifies listeners of changes to a dictionary, such as when items are added, removed, changed or the whole collection reset.
+            </summary>
+            <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
+            <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+        </member>
+        <member name="E:CodeForDotNet.Collections.INotifyDictionaryChanged`2.DictionaryChanged">
+            <summary>
+            Occurs when the dictionary changes.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Collections.NotifyDictionaryChangedEventArgs`2">
+            <summary>
+            Event arguments for the <see cref="E:CodeForDotNet.Collections.ObservableDictionary`2.DictionaryChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.NotifyDictionaryChangedEventArgs`2.#ctor(System.Collections.Specialized.NotifyCollectionChangedAction,`0,`1)">
+            <summary>
+            Creates an instance with specific values.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Collections.NotifyDictionaryChangedEventArgs`2.CollectionChange">
+            <summary>
+            Change details.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Collections.NotifyDictionaryChangedEventArgs`2.Key">
+            <summary>
+            Changed entry key.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Collections.NotifyDictionaryChangedEventArgs`2.Value">
+            <summary>
+            Changed entry key.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Collections.NotifyDictionaryChangedEventHandler`2">
+            <summary>
+            Represents the method that handles the changed event of an observable dictionary.
+            </summary>
+            <typeparam name="TKey">The type of the keys in the dictionary.</typeparam><typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+        </member>
+        <member name="T:CodeForDotNet.Collections.ObservableDictionary`2">
+            <summary>
+            Implementation of IObservableMap that supports re-entrance for use as a default view model.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Collections.ObservableDictionary`2._dictionary">
+            <summary>
+            Underlying dictionary which this class makes observable.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.#ctor">
+            <summary>
+            Creates an instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Serialization constructor.
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.Collections.ObservableDictionary`2.DictionaryChanged">
+            <summary>
+            Fired when a change occurs with arguments containing details about the change.
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.Collections.ObservableDictionary`2.PropertyChanged">
+            <summary>
+            Fired when a change occurs.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Collections.ObservableDictionary`2.Count">
+            <summary>
+            Number of entries.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Collections.ObservableDictionary`2.IsReadOnly">
+            <summary>
+            Indicates whether this is read only.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Collections.ObservableDictionary`2.Keys">
+            <summary>
+            Key values.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Collections.ObservableDictionary`2.Values">
+            <summary>
+            Entry values.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Collections.ObservableDictionary`2.Item(`0)">
+            <summary>
+            Looks-up an entry by key.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.Add(`0,`1)">
+            <summary>
+            Adds a new entry using the specified key and value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.Add(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            Adds a key pair entry.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.Clear">
+            <summary>
+            Clears all entries.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            Checks if the entry exists in this collection.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.ContainsKey(`0)">
+            <summary>
+            Checks if the current key exists in this collection.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
+            <summary>
+            Copies entries from this collection to an array.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.GetEnumerator">
+            <summary>
+            Gets an enumerator for this collection.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Gets an enumerator for this collection.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Serialization method.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.Remove(`0)">
+            <summary>
+            Removes an entry by key.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>
+            Removes an entry.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.TryGetValue(`0,`1@)">
+            <summary>
+            Gets an entry's value by key if it exists.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.OnDictionaryChanged(System.Collections.Specialized.NotifyCollectionChangedAction,`0,`1)">
+            <summary>
+            Fires the <see cref="E:CodeForDotNet.Collections.ObservableDictionary`2.DictionaryChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Collections.ObservableDictionary`2.OnPropertyChanged(System.String)">
+            <summary>
+            Fires the <see cref="E:CodeForDotNet.Collections.ObservableDictionary`2.PropertyChanged"/> event.
+            </summary>
+            <param name="name"></param>
+        </member>
         <member name="T:CodeForDotNet.ComponentModel.BigIntegerConverter">
             <summary>
             Type converter which supports use of <see cref="T:System.Numerics.BigInteger"/> types in dependency properties.
@@ -259,18 +448,21 @@
         </member>
         <member name="T:CodeForDotNet.ComponentModel.DataObject">
             <summary>
-            CRUD data object with intelligent data change event caching, able to distinguish between instance and store changes,
-            e.g. clearing pending instance events when store is read (which would overwrite any pending changes).
+            CRUD data object with intelligent data change event caching, able to distinguish between
+            instance and store changes, e.g. clearing pending instance events when store is read (which
+            would overwrite any pending changes).
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.DataObject.#ctor">
+        <member name="F:CodeForDotNet.ComponentModel.DataObject._committedPropertiesChanged">
             <summary>
-            Creates an instance.
+            List of all committed (i.e. <see cref="M:CodeForDotNet.ComponentModel.DataObject.Create"/> or <see cref="M:CodeForDotNet.ComponentModel.DataObject.Update"/>) property names
+            which changed during <see cref="M:CodeForDotNet.ComponentModel.IEventCache.SuspendEvents"/>.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.ComponentModel.DataObject._originalProperties">
+        <member name="F:CodeForDotNet.ComponentModel.DataObject._instancePropertiesChanged">
             <summary>
-            Original property storage.
+            List of all property names which changed during <see cref="M:CodeForDotNet.ComponentModel.IEventCache.SuspendEvents"/>
+            since the last <see cref="M:CodeForDotNet.ComponentModel.DataObject.Create"/> or <see cref="M:CodeForDotNet.ComponentModel.DataObject.Update"/>.
             </summary>
         </member>
         <member name="F:CodeForDotNet.ComponentModel.DataObject._changedProperties">
@@ -278,20 +470,25 @@
             Changed property storage.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.ComponentModel.DataObject._instancePropertiesChanged">
-            <summary>
-            List of all property names which changed during <see cref="M:CodeForDotNet.ComponentModel.IEventObject.SuspendEvents"/> since the last <see cref="M:CodeForDotNet.ComponentModel.DataObject.Create"/> or <see cref="M:CodeForDotNet.ComponentModel.DataObject.Update"/>.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.ComponentModel.DataObject._committedPropertiesChanged">
-            <summary>
-            List of all committed (i.e. <see cref="M:CodeForDotNet.ComponentModel.DataObject.Create"/> or <see cref="M:CodeForDotNet.ComponentModel.DataObject.Update"/>) property names which changed during <see cref="M:CodeForDotNet.ComponentModel.IEventObject.SuspendEvents"/>.
-            </summary>
-        </member>
         <member name="F:CodeForDotNet.ComponentModel.DataObject._lastChangeAction">
             <summary>
-            Caches the last <see cref="E:CodeForDotNet.ComponentModel.DataObject.DataChanged"/> event action when events are suspended.
-            Only the most significant action is cached.
+            Caches the last <see cref="E:CodeForDotNet.ComponentModel.DataObject.DataChanged"/> event action when events are suspended. Only
+            the most significant action is cached.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.ComponentModel.DataObject._originalProperties">
+            <summary>
+            Original property storage.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObject.#ctor">
+            <summary>
+            Creates an instance.
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.ComponentModel.DataObject.DataChanged">
+            <summary>
+            Fired when data for this object has changed.
             </summary>
         </member>
         <member name="P:CodeForDotNet.ComponentModel.DataObject.DataState">
@@ -304,9 +501,26 @@
             Creates the object in storage.
             </summary>
             <remarks>
-            Only valid when the <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> is <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.None"/>.
-            Sets the <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> to <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Current"/> once successful
+            Only valid when the <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> is <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.None"/>. Sets
+            the <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> to <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Current"/> once successful
             </remarks>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObject.Delete">
+            <summary>
+            Deletes the object from storage.
+            </summary>
+            <remarks>
+            Only valid when the current <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> is
+            <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Current"/> or <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Changed"/>. Sets the
+            <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> to <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Deleted"/> once successful.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObject.NotifyChange(CodeForDotNet.ComponentModel.IDataObject,CodeForDotNet.ComponentModel.DataObjectChangeEventArgs)">
+            <summary>
+            Notifies this object that a related data object has changed.
+            </summary>
+            <param name="changed">Changed data object instance.</param>
+            <param name="change">Change details.</param>
         </member>
         <member name="M:CodeForDotNet.ComponentModel.DataObject.Read">
             <summary>
@@ -322,41 +536,32 @@
             Updates the object in storage.
             </summary>
             <remarks>
-            Only valid when the current <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> is <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Changed"/>.
-            Sets the <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> to <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Current"/> once successful.
+            Only valid when the current <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> is
+            <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Changed"/>. Sets the <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> to
+            <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Current"/> once successful.
             </remarks>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.DataObject.Delete">
+        <member name="M:CodeForDotNet.ComponentModel.DataObject.DoDataChanged(CodeForDotNet.ComponentModel.DataObjectChangeAction,System.Nullable{System.Guid})">
             <summary>
-            Deletes the object from storage.
+            Fires or caches the DataChanged event.
             </summary>
             <remarks>
-            Only valid when the current <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> is <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Current"/> or <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Changed"/>.
-            Sets the <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> to <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Deleted"/> once successful.
+            Sets <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> property to <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Changed"/> when
+            properties change.
             </remarks>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.DataObject.NotifyChange(CodeForDotNet.ComponentModel.IDataObject,CodeForDotNet.ComponentModel.DataObjectChangeEventArgs)">
+        <member name="M:CodeForDotNet.ComponentModel.DataObject.OnChangeNotification(CodeForDotNet.ComponentModel.IDataObject,CodeForDotNet.ComponentModel.DataObjectChangeEventArgs)">
             <summary>
-            Notifies this object that a related data object has changed.
+            Handles change notification events, when this object is notified that a related data
+            object has changed via the <see cref="M:CodeForDotNet.ComponentModel.DataObject.NotifyChange(CodeForDotNet.ComponentModel.IDataObject,CodeForDotNet.ComponentModel.DataObjectChangeEventArgs)"/> method.
             </summary>
+            <remarks>
+            Thread safe locking, <see cref="M:CodeForDotNet.ComponentModel.EventCache.SuspendEvents"/> and
+            <see cref="M:CodeForDotNet.ComponentModel.EventCache.ResumeEvents"/> are handled by the caller. The base class
+            implementation does nothing.
+            </remarks>
             <param name="changed">Changed data object instance.</param>
             <param name="change">Change details.</param>
-        </member>
-        <member name="E:CodeForDotNet.ComponentModel.DataObject.DataChanged">
-            <summary>
-            Fired when data for this object has changed.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.DataObject.OnDataChanged(CodeForDotNet.ComponentModel.DataObjectChangeEventArgs)">
-            <summary>
-            Fires the <see cref="E:CodeForDotNet.ComponentModel.DataObject.DataChanged"/> event.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.DataObject.OnEventsResumed">
-            <summary>
-            Called when events are resumed the last time, i.e. is not fired when nested.
-            Fires the <see cref="E:CodeForDotNet.ComponentModel.DataObject.DataChanged"/> event when changes are pending.
-            </summary>
         </member>
         <member name="M:CodeForDotNet.ComponentModel.DataObject.OnCreate(System.Collections.Generic.Dictionary{System.Guid,System.Object})">
             <summary>
@@ -364,6 +569,23 @@
             </summary>
             <param name="newProperties">Current property values.</param>
             <returns>Updated properties.</returns>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObject.OnDataChanged(CodeForDotNet.ComponentModel.DataObjectChangeEventArgs)">
+            <summary>
+            Fires the <see cref="E:CodeForDotNet.ComponentModel.DataObject.DataChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObject.OnDelete(System.Collections.Generic.Dictionary{System.Guid,System.Object})">
+            <summary>
+            Overridden by inheritors to delete the object from storage.
+            </summary>
+            <param name="originalProperties">Original properties for concurrency check.</param>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.DataObject.OnEventsResumed">
+            <summary>
+            Called when events are resumed the last time, i.e. is not fired when nested. Fires the
+            <see cref="E:CodeForDotNet.ComponentModel.DataObject.DataChanged"/> event when changes are pending.
+            </summary>
         </member>
         <member name="M:CodeForDotNet.ComponentModel.DataObject.OnRead(System.Collections.Generic.Dictionary{System.Guid,System.Object})">
             <summary>
@@ -379,32 +601,6 @@
             <param name="changedProperties">Changed properties.</param>
             <param name="originalProperties">Original properties.</param>
             <returns>Updated properties.</returns>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.DataObject.OnDelete(System.Collections.Generic.Dictionary{System.Guid,System.Object})">
-            <summary>
-            Overridden by inheritors to delete the object from storage.
-            </summary>
-            <param name="originalProperties">Original properties for concurrency check.</param>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.DataObject.DoDataChanged(CodeForDotNet.ComponentModel.DataObjectChangeAction,System.Nullable{System.Guid})">
-            <summary>
-            Fires or caches the DataChanged event.
-            </summary>
-            <remarks>
-            Sets <see cref="P:CodeForDotNet.ComponentModel.DataObject.DataState"/> property to <see cref="F:CodeForDotNet.ComponentModel.DataObjectState.Changed"/> when properties change.
-            </remarks>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.DataObject.OnChangeNotification(CodeForDotNet.ComponentModel.IDataObject,CodeForDotNet.ComponentModel.DataObjectChangeEventArgs)">
-            <summary>
-            Handles change notification events, when this object is notified that
-            a related data object has changed via the <see cref="M:CodeForDotNet.ComponentModel.DataObject.NotifyChange(CodeForDotNet.ComponentModel.IDataObject,CodeForDotNet.ComponentModel.DataObjectChangeEventArgs)"/> method.
-            </summary>
-            <remarks>
-            Thread safe locking, <see cref="M:CodeForDotNet.ComponentModel.EventObject.SuspendEvents"/> and <see cref="M:CodeForDotNet.ComponentModel.EventObject.ResumeEvents"/> are handled by the caller.
-            The base class implementation does nothing.
-            </remarks>
-            <param name="changed">Changed data object instance.</param>
-            <param name="change">Change details.</param>
         </member>
         <member name="T:CodeForDotNet.ComponentModel.DataObjectChangeAction">
             <summary>
@@ -617,70 +813,69 @@
             The object has been deleted.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.ComponentModel.EventObject">
+        <member name="T:CodeForDotNet.ComponentModel.EventCache">
             <summary>
-            Provides methods and events to implement suspend/resume and caching of events.
-            Events are cached when they are not relevant until an atomic operation has completed.
-            This can give great performance gains, especially in graphics related applications.
+            Provides methods and events to implement suspend/resume and caching of events. Events are
+            cached when they are not relevant until an atomic operation has completed. This can give
+            great performance gains, especially in graphics related applications.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.EventObject.#ctor">
-            <summary>
-            Creates a stand-alone instance.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.ComponentModel.EventObject._suspendEventsCount">
+        <member name="F:CodeForDotNet.ComponentModel.EventCache._suspendEventsCount">
             <summary>
             Reference counter for Suspend/Resume events.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.ComponentModel.EventObject.SyncRoot">
+        <member name="M:CodeForDotNet.ComponentModel.EventCache.#ctor">
+            <summary>
+            Creates a stand-alone instance.
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.ComponentModel.EventCache.EventsResumed">
+            <summary>
+            Fired when events are suspended the first time, i.e. is not fired when nested.
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.ComponentModel.EventCache.EventsSuspended">
+            <summary>
+            Fired when events are suspended the first time, i.e. is not fired when nested.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.ComponentModel.EventCache.EventsAreEnabled">
+            <summary>
+            Flags that events are current enabled, and will be fired immediately. This can be used by
+            inheriting classes to determine whether to cache or fire events immediately, in
+            conjunction with the ResumeEvents() override.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.ComponentModel.EventCache.SyncRoot">
             <summary>
             Thread synchronization object.
             </summary>
             <remarks>
-            Lock this object when you read or write properties of this object which
-            must be complete as a batch before any other threads enter the section,
-            e.g. during data load or save operations.
+            Lock this object when you read or write properties of this object which must be complete
+            as a batch before any other threads enter the section, e.g. during data load or save operations.
             </remarks>
         </member>
-        <member name="P:CodeForDotNet.ComponentModel.EventObject.EventsAreEnabled">
-            <summary>
-            Flags that events are current enabled, and will be fired immediately.
-            This can be used by inheriting classes to determine whether to cache or fire events
-            immediately, in conjunction with the ResumeEvents() override.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.EventObject.SuspendEvents">
-            <summary>
-            Disables all events until ResumeEvents is called.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.EventObject.ResumeEvents">
+        <member name="M:CodeForDotNet.ComponentModel.EventCache.ResumeEvents">
             <summary>
             Resumes all events after SuspendEvents. Automatically fires any pending events.
             </summary>
         </member>
-        <member name="E:CodeForDotNet.ComponentModel.EventObject.EventsSuspended">
+        <member name="M:CodeForDotNet.ComponentModel.EventCache.SuspendEvents">
             <summary>
-            Fired when events are suspended the first time, i.e. is not fired when nested.
+            Disables all events until ResumeEvents is called.
             </summary>
         </member>
-        <member name="E:CodeForDotNet.ComponentModel.EventObject.EventsResumed">
+        <member name="M:CodeForDotNet.ComponentModel.EventCache.OnEventsResumed">
             <summary>
-            Fired when events are suspended the first time, i.e. is not fired when nested.
+            Called when events are resumed the last time, i.e. is not fired when nested. Fires the
+            <see cref="E:CodeForDotNet.ComponentModel.EventCache.EventsResumed"/> event.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.EventObject.OnEventsSuspended">
+        <member name="M:CodeForDotNet.ComponentModel.EventCache.OnEventsSuspended">
             <summary>
-            Called when events are suspended the first time, i.e. is not fired when nested.
-            Fires the <see cref="E:CodeForDotNet.ComponentModel.EventObject.EventsSuspended"/> event.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.EventObject.OnEventsResumed">
-            <summary>
-            Called when events are resumed the last time, i.e. is not fired when nested.
-            Fires the <see cref="E:CodeForDotNet.ComponentModel.EventObject.EventsResumed"/> event.
+            Called when events are suspended the first time, i.e. is not fired when nested. Fires the
+            <see cref="E:CodeForDotNet.ComponentModel.EventCache.EventsSuspended"/> event.
             </summary>
         </member>
         <member name="T:CodeForDotNet.ComponentModel.GenericBindingList`1">
@@ -739,6 +934,11 @@
             CRUD data object with event caching.
             </summary>
         </member>
+        <member name="E:CodeForDotNet.ComponentModel.IDataObject.DataChanged">
+            <summary>
+            Fired when data for this object has changed.
+            </summary>
+        </member>
         <member name="P:CodeForDotNet.ComponentModel.IDataObject.DataState">
             <summary>
             Indicates the current state of the data represented by this instance.
@@ -747,6 +947,11 @@
         <member name="M:CodeForDotNet.ComponentModel.IDataObject.Create">
             <summary>
             Creates the object in storage.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.IDataObject.Delete">
+            <summary>
+            Deletes the object from storage.
             </summary>
         </member>
         <member name="M:CodeForDotNet.ComponentModel.IDataObject.Read">
@@ -759,71 +964,74 @@
             Updates the object in storage.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.IDataObject.Delete">
+        <member name="T:CodeForDotNet.ComponentModel.IEventCache">
             <summary>
-            Deletes the object from storage.
+            Provides methods and events to implement suspend/resume and caching of events. Events are
+            cached when they are not relevant until an atomic operation has completed. This can give
+            great performance gains, especially in graphics related applications.
             </summary>
         </member>
-        <member name="E:CodeForDotNet.ComponentModel.IDataObject.DataChanged">
-            <summary>
-            Fired when data for this object has changed.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.ComponentModel.IEventObject">
-            <summary>
-            Provides methods and events to implement suspend/resume and caching of events.
-            Events are cached when they are not relevant until an atomic operation has completed.
-            This can give great performance gains, especially in graphics related applications.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.ComponentModel.IEventObject.EventsAreEnabled">
-            <summary>
-            Flags that events are current enabled, and will be fired immediately.
-            This can be used by inheriting classes to determine whether to cache or fire events
-            immediately, in conjunction with the ResumeEvents() override.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.IEventObject.SuspendEvents">
-            <summary>
-            Disables all events until ResumeEvents is called.
-            Implements reference counting to detect when to finally resume events, increasing performance by
-            preventing un-necessary event handling.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.IEventObject.ResumeEvents">
-            <summary>
-            Resumes all events after SuspendEvents. Automatically fires any pending events when appropriate.
-            Implements reference counting to detect when to finally resume events, at which point the Resume event is fired.
-            </summary>
-        </member>
-        <member name="E:CodeForDotNet.ComponentModel.IEventObject.EventsSuspended">
+        <member name="E:CodeForDotNet.ComponentModel.IEventCache.EventsResumed">
             <summary>
             Fired when events are suspended the first time, i.e. is not fired when nested.
             </summary>
         </member>
-        <member name="E:CodeForDotNet.ComponentModel.IEventObject.EventsResumed">
+        <member name="E:CodeForDotNet.ComponentModel.IEventCache.EventsSuspended">
             <summary>
             Fired when events are suspended the first time, i.e. is not fired when nested.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.ComponentModel.IPropertyObject">
+        <member name="P:CodeForDotNet.ComponentModel.IEventCache.EventsAreEnabled">
+            <summary>
+            Flags that events are current enabled, and will be fired immediately. This can be used by
+            inheriting classes to determine whether to cache or fire events immediately, in
+            conjunction with the ResumeEvents() override.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.IEventCache.ResumeEvents">
+            <summary>
+            Resumes all events after SuspendEvents. Automatically fires any pending events when
+            appropriate. Implements reference counting to detect when to finally resume events, at
+            which point the Resume event is fired.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.IEventCache.SuspendEvents">
+            <summary>
+            Disables all events until ResumeEvents is called. Implements reference counting to detect
+            when to finally resume events, increasing performance by preventing un-necessary event handling.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.ComponentModel.IPropertyStore">
             <summary>
             View component dependency object with intelligent property change event caching.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.IPropertyObject.GetPropertyIds">
+        <member name="E:CodeForDotNet.ComponentModel.IPropertyStore.PropertyStoreChanged">
             <summary>
-            Gets all property IDs.
+            Fired when properties of this object are changed.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.IPropertyObject.ContainsProperty(System.Guid)">
+        <member name="M:CodeForDotNet.ComponentModel.IPropertyStore.ClearProperty(System.Guid)">
+            <summary>
+            Clears a property value if it exists, disposing any current value when flagged.
+            </summary>
+            <param name="id">Property ID.</param>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.IPropertyStore.ContainsProperty(System.Guid)">
             <summary>
             Checks if the property value exists.
             </summary>
             <param name="id">Property ID.</param>
             <returns>True when exists, otherwise false.</returns>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.IPropertyObject.GetProperty``1(System.Guid)">
+        <member name="M:CodeForDotNet.ComponentModel.IPropertyStore.ContainsPropertyValue(System.Guid)">
+            <summary>
+            Checks if the property has a value.
+            </summary>
+            <param name="id">Property ID.</param>
+            <returns>True when present, otherwise false.</returns>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.IPropertyStore.GetProperty``1(System.Guid)">
             <summary>
             Gets a property value.
             </summary>
@@ -831,7 +1039,7 @@
             <returns>Property value.</returns>
             <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the ID does not exist.</exception>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.IPropertyObject.GetProperty``1(System.Guid,``0)">
+        <member name="M:CodeForDotNet.ComponentModel.IPropertyStore.GetProperty``1(System.Guid,``0)">
             <summary>
             Gets a property value, or a default when it doesn't exist.
             </summary>
@@ -839,36 +1047,32 @@
             <param name="defaultValue">Default value.</param>
             <returns>Property value or the default when it doesn't exist.</returns>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.IPropertyObject.SetProperty``1(System.Guid,``0)">
+        <member name="M:CodeForDotNet.ComponentModel.IPropertyStore.GetPropertyIds">
             <summary>
-            Sets a property value.
+            Gets all property IDs.
             </summary>
-            <param name="id">Property ID.</param>
-            <param name="value">Property value.</param>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.IPropertyObject.SetProperties(System.Collections.Generic.Dictionary{System.Guid,System.Object})">
-            <summary>
-            Sets multuple properties.
-            </summary>
-            <exception cref="T:System.ArgumentNullException">Thrown when the <paramref name="properties"/> parameter is null or empty.</exception>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.IPropertyObject.ClearProperty(System.Guid)">
-            <summary>
-            Clears a property value if it exists, disposing any current value when flagged.
-            </summary>
-            <param name="id">Property ID.</param>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.IPropertyObject.NotifyChange(CodeForDotNet.ComponentModel.IPropertyObject,CodeForDotNet.ComponentModel.PropertyObjectChangeEventArgs)">
+        <member name="M:CodeForDotNet.ComponentModel.IPropertyStore.NotifyChange(CodeForDotNet.ComponentModel.IPropertyStore,CodeForDotNet.ComponentModel.PropertyStoreChangeEventArgs)">
             <summary>
             Notifies this object that a related view object has changed.
             </summary>
             <param name="changed">Changed view object instance.</param>
             <param name="change">Change details.</param>
         </member>
-        <member name="E:CodeForDotNet.ComponentModel.IPropertyObject.PropertyObjectChanged">
+        <member name="M:CodeForDotNet.ComponentModel.IPropertyStore.SetProperties(System.Collections.Generic.IDictionary{System.Guid,System.Object})">
             <summary>
-            Fired when properties of this object are changed.
+            Sets multiple properties.
             </summary>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when the <paramref name="properties"/> parameter is null or empty.
+            </exception>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.IPropertyStore.SetProperty``1(System.Guid,``0)">
+            <summary>
+            Sets a property value.
+            </summary>
+            <param name="id">Property ID.</param>
+            <param name="value">Property value.</param>
         </member>
         <member name="T:CodeForDotNet.ComponentModel.IUndoable">
             <summary>
@@ -1046,107 +1250,112 @@
             Called when the <see cref="E:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.PropertyChanged"/> event occurs during resume events.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.ComponentModel.PropertyObject">
+        <member name="T:CodeForDotNet.ComponentModel.PropertyStore">
             <summary>
-            Object containing uniquely identifiable properties,
-            with intelligent change notification and event caching.
+            Object containing uniquely identifiable properties, with intelligent change notification and
+            event caching.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.#ctor">
+        <member name="F:CodeForDotNet.ComponentModel.PropertyStore._changedProperties">
             <summary>
-            Creates an instance.
+            List of all property IDs which changed during <see cref="M:CodeForDotNet.ComponentModel.IEventCache.SuspendEvents"/>.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.Finalize">
+        <member name="F:CodeForDotNet.ComponentModel.PropertyStore._disposePropertyIDs">
             <summary>
-            Overrides the finalizer to ensure any available dispose logic is called.
+            List of property IDs which will be automatically disposed when changed or this instance
+            is disposed.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.Dispose">
-            <summary>
-            Frees all resources held by this object, immediately (rather than waiting for Garbage Collection).
-            This can provide a performance increase and avoid memory congestion on objects that hold
-            many or "expensive" (large) external resources.
-            </summary>
-            <remarks>
-            First fires the Disposing event, which could cancel this operation.
-            When not canceled, calls the <see cref="M:CodeForDotNet.ComponentModel.PropertyObject.Dispose(System.Boolean)"/> method,
-            which should be overridden in inheriting classes to release
-            their local resources.
-            Finally fires the Disposed event.
-            Use the IsDisposing and IsDisposed properties to avoid using objects
-            that are about to or have been disposed.
-            </remarks>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.Dispose(System.Boolean)">
-            <summary>
-            Inheritors implement the <see cref="M:CodeForDotNet.ComponentModel.PropertyObject.Dispose(System.Boolean)"/> method to dispose resources accordingly,
-            depending on whether they have been called proactively or automatically via
-            the finalizer.
-            </summary>
-            <param name="disposing">
-            True when called proactively, i.e. Not during garbage collection.
-            Managed resources should not be accessed when this is False,
-            just references and unmanaged resources released.
-            </param>
-        </member>
-        <member name="P:CodeForDotNet.ComponentModel.PropertyObject.IsDisposing">
-            <summary>
-            Indicates that this object is committed to the process of disposing.
-            When this flag is TRUE, do not pass any references or queue it for processing.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.ComponentModel.PropertyObject.IsDisposed">
-            <summary>
-            Indicated that this object has been disposed.
-            When this flag is TRUE, do not use this object in any way.
-            </summary>
-        </member>
-        <member name="E:CodeForDotNet.ComponentModel.PropertyObject.Disposing">
-            <summary>
-            Fires when the Dispose method is called on this object (except when garbage collected).
-            </summary>
-        </member>
-        <member name="E:CodeForDotNet.ComponentModel.PropertyObject.Disposed">
-            <summary>
-            Fires after this object has been Disposed.
-            Use this event to ensure all references are invalidated and any dependent objects are also Disposed
-            or released.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.ComponentModel.PropertyObject._properties">
+        <member name="F:CodeForDotNet.ComponentModel.PropertyStore._properties">
             <summary>
             Property value storage.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.ComponentModel.PropertyObject._propertyNames">
+        <member name="F:CodeForDotNet.ComponentModel.PropertyStore._propertyNames">
             <summary>
             Property ID to name mappings, for compatibility with <see cref="T:System.ComponentModel.INotifyPropertyChanged"/>.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.ComponentModel.PropertyObject._changedProperties">
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.#ctor">
             <summary>
-            List of all property IDs which changed during <see cref="M:CodeForDotNet.ComponentModel.IEventObject.SuspendEvents"/>.
+            Creates an instance.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.ComponentModel.PropertyObject._disposePropertyIDs">
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.Finalize">
             <summary>
-            List of property IDs which will be automatically disposed when changed or this instance is disposed.
+            Overrides the finalizer to ensure any available dispose logic is called.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.GetPropertyIds">
+        <member name="E:CodeForDotNet.ComponentModel.PropertyStore.Disposed">
             <summary>
-            Gets all property IDs.
+            Fires after this object has been Disposed. Use this event to ensure all references are
+            invalidated and any dependent objects are also Disposed or released.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.ContainsProperty(System.Guid)">
+        <member name="E:CodeForDotNet.ComponentModel.PropertyStore.Disposing">
+            <summary>
+            Fires when the Dispose method is called on this object (except when garbage collected).
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.ComponentModel.PropertyStore.PropertyChanged">
+            <summary>
+            Fired when properties of this object are changed, used to notify the standard .NET
+            component model.
+            </summary>
+        </member>
+        <member name="E:CodeForDotNet.ComponentModel.PropertyStore.PropertyStoreChanged">
+            <summary>
+            Fired when properties of this object are changed, used to notify our enhanced component model.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.ComponentModel.PropertyStore.IsDisposed">
+            <summary>
+            Indicated that this object has been disposed. When this flag is TRUE, do not use this
+            object in any way.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.ComponentModel.PropertyStore.IsDisposing">
+            <summary>
+            Indicates that this object is committed to the process of disposing. When this flag is
+            TRUE, do not pass any references or queue it for processing.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.ClearProperty(System.Guid)">
+            <summary>
+            Clears a property value if it exists, disposing any current value when flagged.
+            </summary>
+            <param name="id">Property ID.</param>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.ContainsProperty(System.Guid)">
             <summary>
             Checks if the property value exists.
             </summary>
             <param name="id">Property ID.</param>
             <returns>True when exists, otherwise false.</returns>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.GetProperty``1(System.Guid)">
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.ContainsPropertyValue(System.Guid)">
+            <summary>
+            Checks if the property has a value.
+            </summary>
+            <param name="id">Property ID.</param>
+            <returns>True when present, otherwise false.</returns>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.Dispose">
+            <summary>
+            Frees all resources held by this object, immediately (rather than waiting for Garbage
+            Collection). This can provide a performance increase and avoid memory congestion on
+            objects that hold many or "expensive" (large) external resources.
+            </summary>
+            <remarks>
+            First fires the Disposing event, which could cancel this operation. When not canceled,
+            calls the <see cref="M:CodeForDotNet.ComponentModel.PropertyStore.Dispose(System.Boolean)"/> method, which should be overridden in inheriting
+            classes to release their local resources. Finally fires the Disposed event. Use the
+            IsDisposing and IsDisposed properties to avoid using objects that are about to or have
+            been disposed.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.GetProperty``1(System.Guid)">
             <summary>
             Gets a property value.
             </summary>
@@ -1154,7 +1363,7 @@
             <returns>Property value.</returns>
             <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the ID does not exist.</exception>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.GetProperty``1(System.Guid,``0)">
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.GetProperty``1(System.Guid,``0)">
             <summary>
             Gets a property value, or a default when it doesn't exist.
             </summary>
@@ -1162,106 +1371,109 @@
             <param name="defaultValue">Default value.</param>
             <returns>Property value or the default when it doesn't exist.</returns>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.SetProperty``1(System.Guid,``0)">
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.GetPropertyIds">
+            <summary>
+            Gets all property IDs.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.NotifyChange(CodeForDotNet.ComponentModel.IPropertyStore,CodeForDotNet.ComponentModel.PropertyStoreChangeEventArgs)">
+            <summary>
+            Notifies this object that a related <see cref="T:CodeForDotNet.ComponentModel.IPropertyStore"/> has changed.
+            </summary>
+            <param name="changed">Changed object instance.</param>
+            <param name="change">Change details.</param>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.SetProperties(System.Collections.Generic.IDictionary{System.Guid,System.Object})">
+            <summary>
+            Sets multiple properties.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when the <paramref name="properties"/> parameter is null or empty.
+            </exception>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.SetProperty``1(System.Guid,``0)">
             <summary>
             Sets or adds a property value.
             </summary>
             <param name="id">Property ID.</param>
             <param name="value">Property value.</param>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.SetProperties(System.Collections.Generic.Dictionary{System.Guid,System.Object})">
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.Dispose(System.Boolean)">
             <summary>
-            Sets multuple properties.
+            Inheritors implement the <see cref="M:CodeForDotNet.ComponentModel.PropertyStore.Dispose(System.Boolean)"/> method to dispose resources
+            accordingly, depending on whether they have been called proactively or automatically via
+            the finalizer.
             </summary>
-            <exception cref="T:System.ArgumentNullException">Thrown when the <paramref name="properties"/> parameter is null or empty.</exception>
+            <param name="disposing">
+            True when called proactively, i.e. Not during garbage collection. Managed resources
+            should not be accessed when this is False, just references and unmanaged resources released.
+            </param>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.ClearProperty(System.Guid)">
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.OnChangeNotification(CodeForDotNet.ComponentModel.IPropertyStore,CodeForDotNet.ComponentModel.PropertyStoreChangeEventArgs)">
             <summary>
-            Clears a property value if it exists, disposing any current value when flagged.
-            </summary>
-            <param name="id">Property ID.</param>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.NotifyChange(CodeForDotNet.ComponentModel.IPropertyObject,CodeForDotNet.ComponentModel.PropertyObjectChangeEventArgs)">
-            <summary>
-            Notifies this object that a related <see cref="T:CodeForDotNet.ComponentModel.IPropertyObject"/> has changed.
-            </summary>
-            <param name="changed">Changed object instance.</param>
-            <param name="change">Change details.</param>
-        </member>
-        <member name="E:CodeForDotNet.ComponentModel.PropertyObject.PropertyObjectChanged">
-            <summary>
-            Fired when properties of this object are changed, used to notify our enhanced component model.
-            </summary>
-        </member>
-        <member name="E:CodeForDotNet.ComponentModel.PropertyObject.PropertyChanged">
-            <summary>
-            Fired when properties of this object are changed, used to notify the standard .NET component model.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.OnPropertyChanged(CodeForDotNet.ComponentModel.PropertyObjectChangeEventArgs)">
-            <summary>
-            Fires the <see cref="E:CodeForDotNet.ComponentModel.PropertyObject.PropertyObjectChanged"/> and <see cref="E:CodeForDotNet.ComponentModel.PropertyObject.PropertyChanged"/> events.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.OnChangeNotification(CodeForDotNet.ComponentModel.IPropertyObject,CodeForDotNet.ComponentModel.PropertyObjectChangeEventArgs)">
-            <summary>
-            Handles change notification events, when this object is notified that
-            a related view object has changed via the <see cref="M:CodeForDotNet.ComponentModel.PropertyObject.NotifyChange(CodeForDotNet.ComponentModel.IPropertyObject,CodeForDotNet.ComponentModel.PropertyObjectChangeEventArgs)"/> method.
+            Handles change notification events, when this object is notified that a related view
+            object has changed via the <see cref="M:CodeForDotNet.ComponentModel.PropertyStore.NotifyChange(CodeForDotNet.ComponentModel.IPropertyStore,CodeForDotNet.ComponentModel.PropertyStoreChangeEventArgs)"/> method.
             </summary>
             <remarks>
-            Thread safe locking, <see cref="M:CodeForDotNet.ComponentModel.EventObject.SuspendEvents"/> and <see cref="M:CodeForDotNet.ComponentModel.EventObject.ResumeEvents"/> are handled by the caller.
-            The base class implementation does nothing.
+            Thread safe locking, <see cref="M:CodeForDotNet.ComponentModel.EventCache.SuspendEvents"/> and
+            <see cref="M:CodeForDotNet.ComponentModel.EventCache.ResumeEvents"/> are handled by the caller. The base class
+            implementation does nothing.
             </remarks>
             <param name="changed">Changed view object instance.</param>
             <param name="change">Change details.</param>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.OnEventsResumed">
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.OnEventsResumed">
             <summary>
-            Called when events are resumed the last time, i.e. is not fired when nested.
-            Fires the <see cref="E:CodeForDotNet.ComponentModel.PropertyObject.PropertyObjectChanged"/> event when changes are pending.
+            Called when events are resumed the last time, i.e. is not fired when nested. Fires the
+            <see cref="E:CodeForDotNet.ComponentModel.PropertyStore.PropertyStoreChanged"/> event when changes are pending.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.RegisterProperty``1(System.Guid,System.String,``0,System.Boolean)">
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.OnPropertyChanged(CodeForDotNet.ComponentModel.PropertyStoreChangeEventArgs)">
             <summary>
-            Registeres a new property and default value and optional automatic call to <see cref="M:System.IDisposable.Dispose"/>
-            when the value is changed or this object is disposed.
+            Fires the <see cref="E:CodeForDotNet.ComponentModel.PropertyStore.PropertyStoreChanged"/> and <see cref="E:CodeForDotNet.ComponentModel.PropertyStore.PropertyChanged"/> events.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.RegisterProperty``1(System.Guid,System.String,``0,System.Boolean)">
+            <summary>
+            Registers a new property and default value and optional automatic call to
+            <see cref="M:System.IDisposable.Dispose"/> when the value is changed or this object is disposed.
             </summary>
             <param name="id">Property ID for usage with this class.</param>
             <param name="name">Property name for compatibility with <see cref="T:System.ComponentModel.INotifyPropertyChanged"/>.</param>
             <param name="defaultValue">Default value.</param>
             <param name="dispose">Enables the automatic dispose option.</param>
             <remarks>
-            Called by inheritors during initialization to register their properties.
-            Does not trigger any events.
+            Called by inheritors during initialization to register their properties. Does not trigger
+            any events.
             </remarks>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.DoPropertyChanged(System.Guid)">
-            <summary>
-            Fires or caches the <see cref="E:CodeForDotNet.ComponentModel.PropertyObject.PropertyObjectChanged"/> and <see cref="E:CodeForDotNet.ComponentModel.PropertyObject.PropertyChanged"/> events.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObject.DisposeProperty(System.Guid)">
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.DisposeProperty(System.Guid)">
             <summary>
             Disposes and clears property if flagged.
             </summary>
             <param name="id">Property ID.</param>
         </member>
-        <member name="T:CodeForDotNet.ComponentModel.PropertyObjectChangeEventArgs">
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStore.DoPropertyChanged(System.Guid)">
             <summary>
-            Event arguments for the <see cref="E:CodeForDotNet.ComponentModel.IPropertyObject.PropertyObjectChanged"/> event.
+            Fires or caches the <see cref="E:CodeForDotNet.ComponentModel.PropertyStore.PropertyStoreChanged"/> and <see cref="E:CodeForDotNet.ComponentModel.PropertyStore.PropertyChanged"/> events.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObjectChangeEventArgs.#ctor">
+        <member name="T:CodeForDotNet.ComponentModel.PropertyStoreChangeEventArgs">
+            <summary>
+            Event arguments for the <see cref="E:CodeForDotNet.ComponentModel.IPropertyStore.PropertyStoreChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStoreChangeEventArgs.#ctor">
             <summary>
             Creates an empty instance.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.PropertyObjectChangeEventArgs.#ctor(System.Guid[])">
+        <member name="M:CodeForDotNet.ComponentModel.PropertyStoreChangeEventArgs.#ctor(System.Guid[])">
             <summary>
             Creates an instance with the specified values.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.ComponentModel.PropertyObjectChangeEventArgs.Keys">
+        <member name="P:CodeForDotNet.ComponentModel.PropertyStoreChangeEventArgs.Keys">
             <summary>
             Names of the properties or relations which changed.
             </summary>
@@ -1330,9 +1542,9 @@
             Removes children when they are disposed.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.ComponentModel.ViewObject.OnChildPropertyChanged(System.Object,CodeForDotNet.ComponentModel.PropertyObjectChangeEventArgs)">
+        <member name="M:CodeForDotNet.ComponentModel.ViewObject.OnChildPropertyChanged(System.Object,CodeForDotNet.ComponentModel.PropertyStoreChangeEventArgs)">
             <summary>
-            Called when the <see cref="E:CodeForDotNet.ComponentModel.IPropertyObject.PropertyObjectChanged"/> event is fired
+            Called when the <see cref="E:CodeForDotNet.ComponentModel.IPropertyStore.PropertyStoreChanged"/> event is fired
             on any of the <see cref="P:CodeForDotNet.ComponentModel.ViewObject.Children"/>.
             </summary>
             <param name="sender">Event initiator.</param>
@@ -1894,34 +2106,9 @@
             Error data used to report failures to a service.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Data.ErrorReportData.op_Equality(CodeForDotNet.Data.ErrorReportData,CodeForDotNet.Data.ErrorReportData)">
+        <member name="P:CodeForDotNet.Data.ErrorReportData.ErrorTypeFullName">
             <summary>
-            Tests two objects of this type for equality by value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Data.ErrorReportData.op_Inequality(CodeForDotNet.Data.ErrorReportData,CodeForDotNet.Data.ErrorReportData)">
-            <summary>
-            Tests two objects of this type for in-equality by value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Data.ErrorReportData.Equals(System.Object)">
-            <summary>
-            Compares this object with another by value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Data.ErrorReportData.GetHashCode">
-            <summary>
-            Gets an XOR based hash code based on the contents of this object.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Data.ErrorReportData.SourceId">
-            <summary>
-            Unique identifier used to group reports from the same source.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Data.ErrorReportData.SourceAssemblyName">
-            <summary>
-            Source assembly name including fully qualified name, version and any other attributes such as public key.
+            Optional full type name of the exception which occurred.
             </summary>
         </member>
         <member name="P:CodeForDotNet.Data.ErrorReportData.EventDate">
@@ -1934,9 +2121,15 @@
             Message.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Data.ErrorReportData.ErrorTypeFullName">
+        <member name="P:CodeForDotNet.Data.ErrorReportData.SourceAssemblyName">
             <summary>
-            Optional full type name of the exception which occurred.
+            Source assembly name including fully qualified name, version and any other attributes
+            such as public key.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Data.ErrorReportData.SourceId">
+            <summary>
+            Unique identifier used to group reports from the same source.
             </summary>
         </member>
         <member name="P:CodeForDotNet.Data.ErrorReportData.StackTrace">
@@ -1944,19 +2137,44 @@
             Optional stack trace.
             </summary>
         </member>
+        <member name="M:CodeForDotNet.Data.ErrorReportData.op_Inequality(CodeForDotNet.Data.ErrorReportData,CodeForDotNet.Data.ErrorReportData)">
+            <summary>
+            Tests two objects of this type for in-equality by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Data.ErrorReportData.op_Equality(CodeForDotNet.Data.ErrorReportData,CodeForDotNet.Data.ErrorReportData)">
+            <summary>
+            Tests two objects of this type for equality by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Data.ErrorReportData.Equals(System.Object)">
+            <summary>
+            Compares this object with another by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Data.ErrorReportData.GetHashCode">
+            <summary>
+            Gets an XOR based hash code based on the contents of this object.
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.Data.GuidDataKey">
             <summary>
             Error data used to report failures to a service.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Data.GuidDataKey.op_Equality(CodeForDotNet.Data.GuidDataKey,CodeForDotNet.Data.GuidDataKey)">
+        <member name="P:CodeForDotNet.Data.GuidDataKey.Id">
             <summary>
-            Tests two objects of this type for equality by value.
+            Unique identifier used to group reports from the same source.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Data.GuidDataKey.op_Inequality(CodeForDotNet.Data.GuidDataKey,CodeForDotNet.Data.GuidDataKey)">
             <summary>
             Tests two objects of this type for in-equality by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Data.GuidDataKey.op_Equality(CodeForDotNet.Data.GuidDataKey,CodeForDotNet.Data.GuidDataKey)">
+            <summary>
+            Tests two objects of this type for equality by value.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Data.GuidDataKey.Equals(System.Object)">
@@ -1967,11 +2185,6 @@
         <member name="M:CodeForDotNet.Data.GuidDataKey.GetHashCode">
             <summary>
             Gets an XOR based hash code based on the contents of this object.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Data.GuidDataKey.Id">
-            <summary>
-            Unique identifier used to group reports from the same source.
             </summary>
         </member>
         <member name="T:CodeForDotNet.Data.Schedule">
@@ -2601,7 +2814,8 @@
         </member>
         <member name="T:CodeForDotNet.Diagnostics.FileWriterTraceListener">
             <summary>
-            Writes trace output to a file, supporting environment variables in the filename and lazy open of the file.
+            Writes trace output to a file, supporting environment variables in the filename and lazy open
+            of the file.
             </summary>
         </member>
         <member name="F:CodeForDotNet.Diagnostics.FileWriterTraceListener._fileName">
@@ -2629,11 +2843,6 @@
             Flushes any buffered data to the file (if open).
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Diagnostics.FileWriterTraceListener.Dispose(System.Boolean)">
-            <summary>
-            Cleans-up resources.
-            </summary>
-        </member>
         <member name="M:CodeForDotNet.Diagnostics.FileWriterTraceListener.Write(System.String)">
             <summary>
             Writes to the output stream.
@@ -2642,6 +2851,11 @@
         <member name="M:CodeForDotNet.Diagnostics.FileWriterTraceListener.WriteLine(System.String)">
             <summary>
             Writes to the output stream followed by a new line.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Diagnostics.FileWriterTraceListener.Dispose(System.Boolean)">
+            <summary>
+            Cleans-up resources.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Diagnostics.FileWriterTraceListener.OpenFile">
@@ -3196,783 +3410,6 @@
             <param name="contentType">MIME content type.</param>
             <returns>Image format or null when unsupported.</returns>
         </member>
-        <member name="T:CodeForDotNet.Drawing.KeyboardShortcuts">
-            <summary>
-            Keyboard shortcut data, disconnected from any API dependencies, useful for
-            future proof serialization and cross-platform. A copy of System.Windows.Forms.Shortcut.
-            Specifies shortcut keys that can be used by menu items.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.None">
-            <summary>
-            No shortcut key is associated with the menu item.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ins">
-            <summary>
-            The shortcut key INSERT.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Del">
-            <summary>
-            The shortcut key DELETE.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F1">
-            <summary>
-            The shortcut key F1.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F2">
-            <summary>
-            The shortcut key F2.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F3">
-            <summary>
-            The shortcut key F3.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F4">
-            <summary>
-            The shortcut key F4.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F5">
-            <summary>
-            The shortcut key F5.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F6">
-            <summary>
-            The shortcut key F6.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F7">
-            <summary>
-            The shortcut key F7.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F8">
-            <summary>
-            The shortcut key F8.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F9">
-            <summary>
-            The shortcut key F9.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F10">
-            <summary>
-            The shortcut key F10.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F11">
-            <summary>
-            The shortcut key F11.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.F12">
-            <summary>
-            The shortcut key F12.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftIns">
-            <summary>
-            The shortcut keys SHIFT+INSERT.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftDel">
-            <summary>
-            The shortcut keys SHIFT+DELETE.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF1">
-            <summary>
-            The shortcut keys SHIFT+F1.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF2">
-            <summary>
-            The shortcut keys SHIFT+F2.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF3">
-            <summary>
-            The shortcut keys SHIFT+F3.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF4">
-            <summary>
-            The shortcut keys SHIFT+F4.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF5">
-            <summary>
-            The shortcut keys SHIFT+F5.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF6">
-            <summary>
-            The shortcut keys SHIFT+F6.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF7">
-            <summary>
-            The shortcut keys SHIFT+F7.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF8">
-            <summary>
-            The shortcut keys SHIFT+F8.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF9">
-            <summary>
-            The shortcut keys SHIFT+F9.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF10">
-            <summary>
-            The shortcut keys SHIFT+F10.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF11">
-            <summary>
-            The shortcut keys SHIFT+F11.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.ShiftF12">
-            <summary>
-            The shortcut keys SHIFT+F12.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlIns">
-            <summary>
-            The shortcut keys CTRL+INSERT.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlDel">
-            <summary>
-            The shortcut keys CTRL+DELETE.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl0">
-            <summary>
-            The shortcut keys CTRL+0.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl1">
-            <summary>
-            The shortcut keys CTRL+1.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl2">
-            <summary>
-            The shortcut keys CTRL+2.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl3">
-            <summary>
-            The shortcut keys CTRL+3.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl4">
-            <summary>
-            The shortcut keys CTRL+4.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl5">
-            <summary>
-            The shortcut keys CTRL+5.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl6">
-            <summary>
-            The shortcut keys CTRL+6.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl7">
-            <summary>
-            The shortcut keys CTRL+7.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl8">
-            <summary>
-            The shortcut keys CTRL+8.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Ctrl9">
-            <summary>
-            The shortcut keys CTRL+9.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlA">
-            <summary>
-            The shortcut keys CTRL+A.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlB">
-            <summary>
-            The shortcut keys CTRL+B.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlC">
-            <summary>
-            The shortcut keys CTRL+C.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlD">
-            <summary>
-            The shortcut keys CTRL+D.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlE">
-            <summary>
-            The shortcut keys CTRL+E.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF">
-            <summary>
-            The shortcut keys CTRL+F.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlG">
-            <summary>
-            The shortcut keys CTRL+G.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlH">
-            <summary>
-            The shortcut keys CTRL+H.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlI">
-            <summary>
-            The shortcut keys CTRL+I.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlJ">
-            <summary>
-            The shortcut keys CTRL+J.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlK">
-            <summary>
-            The shortcut keys CTRL+K.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlL">
-            <summary>
-            The shortcut keys CTRL+L.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlM">
-            <summary>
-            The shortcut keys CTRL+M.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlN">
-            <summary>
-            The shortcut keys CTRL+N.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlO">
-            <summary>
-            The shortcut keys CTRL+O.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlP">
-            <summary>
-            The shortcut keys CTRL+P.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlQ">
-            <summary>
-            The shortcut keys CTRL+Q.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlR">
-            <summary>
-            The shortcut keys CTRL+R.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlS">
-            <summary>
-            The shortcut keys CTRL+S.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlT">
-            <summary>
-            The shortcut keys CTRL+T.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlU">
-            <summary>
-            The shortcut keys CTRL+U.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlV">
-            <summary>
-            The shortcut keys CTRL+V.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlW">
-            <summary>
-            The shortcut keys CTRL+W.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlX">
-            <summary>
-            The shortcut keys CTRL+X.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlY">
-            <summary>
-            The shortcut keys CTRL+Y.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlZ">
-            <summary>
-            The shortcut keys CTRL+Z.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF1">
-            <summary>
-            The shortcut keys CTRL+F1.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF2">
-            <summary>
-            The shortcut keys CTRL+F2.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF3">
-            <summary>
-            The shortcut keys CTRL+F3.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF4">
-            <summary>
-            The shortcut keys CTRL+F4.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF5">
-            <summary>
-            The shortcut keys CTRL+F5.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF6">
-            <summary>
-            The shortcut keys CTRL+F6.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF7">
-            <summary>
-            The shortcut keys CTRL+F7.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF8">
-            <summary>
-            The shortcut keys CTRL+F8.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF9">
-            <summary>
-            The shortcut keys CTRL+F9.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF10">
-            <summary>
-            The shortcut keys CTRL+F10.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF11">
-            <summary>
-            The shortcut keys CTRL+F11.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlF12">
-            <summary>
-            The shortcut keys CTRL+F12.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift0">
-            <summary>
-            The shortcut keys CTRL+SHIFT+0.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift1">
-            <summary>
-            The shortcut keys CTRL+SHIFT+1.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift2">
-            <summary>
-            The shortcut keys CTRL+SHIFT+2.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift3">
-            <summary>
-            The shortcut keys CTRL+SHIFT+3.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift4">
-            <summary>
-            The shortcut keys CTRL+SHIFT+4.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift5">
-            <summary>
-            The shortcut keys CTRL+SHIFT+5.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift6">
-            <summary>
-            The shortcut keys CTRL+SHIFT+6.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift7">
-            <summary>
-            The shortcut keys CTRL+SHIFT+7.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift8">
-            <summary>
-            The shortcut keys CTRL+SHIFT+8.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShift9">
-            <summary>
-            The shortcut keys CTRL+SHIFT+9.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftA">
-            <summary>
-            The shortcut keys CTRL+SHIFT+A.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftB">
-            <summary>
-            The shortcut keys CTRL+SHIFT+B.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftC">
-            <summary>
-            The shortcut keys CTRL+SHIFT+C.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftD">
-            <summary>
-            The shortcut keys CTRL+SHIFT+D.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftE">
-            <summary>
-            The shortcut keys CTRL+SHIFT+E.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftG">
-            <summary>
-            The shortcut keys CTRL+SHIFT+G.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftH">
-            <summary>
-            The shortcut keys CTRL+SHIFT+H.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftI">
-            <summary>
-            The shortcut keys CTRL+SHIFT+I.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftJ">
-            <summary>
-            The shortcut keys CTRL+SHIFT+J.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftK">
-            <summary>
-            The shortcut keys CTRL+SHIFT+K.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftL">
-            <summary>
-            The shortcut keys CTRL+SHIFT+L.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftM">
-            <summary>
-            The shortcut keys CTRL+SHIFT+M.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftN">
-            <summary>
-            The shortcut keys CTRL+SHIFT+N.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftO">
-            <summary>
-            The shortcut keys CTRL+SHIFT+O.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftP">
-            <summary>
-            The shortcut keys CTRL+SHIFT+P.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftQ">
-            <summary>
-            The shortcut keys CTRL+SHIFT+Q.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftR">
-            <summary>
-            The shortcut keys CTRL+SHIFT+R.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftS">
-            <summary>
-            The shortcut keys CTRL+SHIFT+S.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftT">
-            <summary>
-            The shortcut keys CTRL+SHIFT+T.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftU">
-            <summary>
-            The shortcut keys CTRL+SHIFT+U.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftV">
-            <summary>
-            The shortcut keys CTRL+SHIFT+V.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftW">
-            <summary>
-            The shortcut keys CTRL+SHIFT+W.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftX">
-            <summary>
-            The shortcut keys CTRL+SHIFT+X.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftY">
-            <summary>
-            The shortcut keys CTRL+SHIFT+Y.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftZ">
-            <summary>
-            The shortcut keys CTRL+SHIFT+Z.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF1">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F1.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF2">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F2.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF3">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F3.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF4">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F4.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF5">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F5.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF6">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F6.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF7">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F7.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF8">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F8.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF9">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F9.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF10">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F10.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF11">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F11.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.CtrlShiftF12">
-            <summary>
-            The shortcut keys CTRL+SHIFT+F12.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltBksp">
-            <summary>
-            The shortcut keys ALT+BACKSPACE.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltLeftArrow">
-            <summary>
-            The shortcut keys ALT+LEFTARROW.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltUpArrow">
-            <summary>
-            The shortcut keys ALT+UPARROW.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltRightArrow">
-            <summary>
-            The shortcut keys ALT+RIGHTARROW.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltDownArrow">
-            <summary>
-            The shortcut keys ALT+DOWNARROW.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt0">
-            <summary>
-            The shortcut keys ALT+0.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt1">
-            <summary>
-            The shortcut keys ALT+1.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt2">
-            <summary>
-            The shortcut keys ALT+2.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt3">
-            <summary>
-            The shortcut keys ALT+3.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt4">
-            <summary>
-            The shortcut keys ALT+4.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt5">
-            <summary>
-            The shortcut keys ALT+5.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt6">
-            <summary>
-            The shortcut keys ALT+6.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt7">
-            <summary>
-            The shortcut keys ALT+7.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt8">
-            <summary>
-            The shortcut keys ALT+8.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.Alt9">
-            <summary>
-            The shortcut keys ALT+9.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF1">
-            <summary>
-            The shortcut keys ALT+F1.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF2">
-            <summary>
-            The shortcut keys ALT+F2.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF3">
-            <summary>
-            The shortcut keys ALT+F3.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF4">
-            <summary>
-            The shortcut keys ALT+F4.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF5">
-            <summary>
-            The shortcut keys ALT+F5.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF6">
-            <summary>
-            The shortcut keys ALT+F6.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF7">
-            <summary>
-            The shortcut keys ALT+F7.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF8">
-            <summary>
-            The shortcut keys ALT+F8.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF9">
-            <summary>
-            The shortcut keys ALT+F9.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF10">
-            <summary>
-            The shortcut keys ALT+F10.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF11">
-            <summary>
-            The shortcut keys ALT+F11.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.KeyboardShortcuts.AltF12">
-            <summary>
-            The shortcut keys ALT+F12.
-            </summary>
-        </member>
         <member name="T:CodeForDotNet.Drawing.PointExtensions">
             <summary>
             Provides useful extension methods to the <see cref="T:System.Drawing.Point"/> class.
@@ -4252,9 +3689,10 @@
         </member>
         <member name="T:CodeForDotNet.Drawing.StringHorizontalAlignment">
             <summary>
-            String alignment disconnected from any API dependencies, useful for
-            future proof serialization and cross-platform.
+            String alignment disconnected from any API dependencies, useful for future proof
+            serialization and cross-platform.
             </summary>
+            <remarks>Explicitly cast to "System.Drawing.StringAlignment" via integer.</remarks>
         </member>
         <member name="F:CodeForDotNet.Drawing.StringHorizontalAlignment.Near">
             <summary>
@@ -5629,14 +5067,14 @@
             Extensions for working with <see cref="T:System.Runtime.Serialization.Json.DataContractJsonSerializer"/>.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Runtime.Serialization.DataContractJsonSerializerExtensions.SerializeJsonString``1(``0)">
-            <summary>
-            Serializes this object as a JSON string.
-            </summary>
-        </member>
         <member name="M:CodeForDotNet.Runtime.Serialization.DataContractJsonSerializerExtensions.DeserializeJson``1(System.String)">
             <summary>
             De-serializes an object from a JSON string.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Runtime.Serialization.DataContractJsonSerializerExtensions.SerializeJsonString``1(``0)">
+            <summary>
+            Serializes this object as a JSON string.
             </summary>
         </member>
         <member name="T:CodeForDotNet.StringExtensions">
@@ -5748,16 +5186,6 @@
             <see cref="T:System.IAsyncResult"/> implementation.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Threading.AsyncResult.#ctor(System.AsyncCallback,System.Object)">
-            <summary>
-            Creates an instance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Threading.AsyncResult.Dispose(System.Boolean)">
-            <summary>
-            Frees resources.
-            </summary>
-        </member>
         <member name="F:CodeForDotNet.Threading.AsyncResult._callback">
             <summary>
             Optional callback method, invoked upon completion.
@@ -5776,6 +5204,11 @@
         <member name="F:CodeForDotNet.Threading.AsyncResult._waitHandle">
             <summary>
             Handle used to wait for completion.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Threading.AsyncResult.#ctor(System.AsyncCallback,System.Object)">
+            <summary>
+            Creates an instance.
             </summary>
         </member>
         <member name="P:CodeForDotNet.Threading.AsyncResult.AsyncState">
@@ -5808,6 +5241,11 @@
             Locking object.
             </summary>
         </member>
+        <member name="M:CodeForDotNet.Threading.AsyncResult.End``1(System.IAsyncResult)">
+            <summary>
+            Ends the operation.
+            </summary>
+        </member>
         <member name="M:CodeForDotNet.Threading.AsyncResult.Complete(System.Boolean)">
             <summary>
             Completes the operation.
@@ -5821,9 +5259,9 @@
             <param name="completedSynchronously">True when completed synchronously.</param>
             <param name="exception">Error.</param>
         </member>
-        <member name="M:CodeForDotNet.Threading.AsyncResult.End``1(System.IAsyncResult)">
+        <member name="M:CodeForDotNet.Threading.AsyncResult.Dispose(System.Boolean)">
             <summary>
-            Ends the operation.
+            Frees resources.
             </summary>
         </member>
         <member name="T:CodeForDotNet.Threading.CompletedAsyncResult">
@@ -6589,56 +6027,6 @@
             XML serialization extensions.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.IsXmlSerializable(System.Type)">
-            <summary>
-            Determines if the specified type is XML serializable.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.SerializeXml(System.Object)">
-            <summary>
-            Serializes the object to an XML string using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>,
-            with optional formatting.
-            </summary>
-            <param name="value">XML serializable object.</param>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.SerializeXml(System.Object,System.Boolean)">
-            <summary>
-            Serializes the object to an XML string using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>,
-            with optional formatting.
-            </summary>
-            <param name="value">XML serializable object.</param>
-            <param name="format">Set true to format the XML by indenting each parent-child element on new lines.</param>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.SerializeXml(System.Object,System.Type[])">
-            <summary>
-            Serializes the object to an XML string using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>.
-            </summary>
-            <param name="value">XML serializable object.</param>
-            <param name="extraTypes">Additional types the serializer must know.</param>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.SerializeXml(System.Object,System.Type[],System.Boolean)">
-            <summary>
-            Serializes the object to an XML string using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>.
-            </summary>
-            <param name="value">XML serializable object.</param>
-            <param name="extraTypes">Additional types the serializer must know.</param>
-            <param name="format">Set true to format the XML by indenting each parent-child element on new lines.</param>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.SerializeXml(System.Object,System.Xml.XmlWriter)">
-            <summary>
-            Serializes the object to an <see cref="T:System.Xml.XmlWriter"/> using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>.
-            </summary>
-            <param name="value">XML serializable object.</param>
-            <param name="writer">XML writer to serialize to. It's settings may be modified.</param>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.SerializeXml(System.Object,System.Xml.XmlWriter,System.Type[])">
-            <summary>
-            Serializes the object to an <see cref="T:System.Xml.XmlWriter"/> using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>.
-            </summary>
-            <param name="value">XML serializable object.</param>
-            <param name="writer">XML writer to serialize to. It's settings may be modified.</param>
-            <param name="extraTypes">Additional types the serializer must know.</param>
-        </member>
         <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.DeserializeXml``1(System.String)">
             <summary>
             De-serializes an object from a string using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>.
@@ -6673,6 +6061,60 @@
             <summary>
             De-serializes an object from an <see cref="T:System.Xml.XmlReader"/> using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>.
             </summary>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.IsXmlSerializable(System.Type)">
+            <summary>
+            Determines if the specified type is XML serializable.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.SerializeXml(System.Object)">
+            <summary>
+            Serializes the object to an XML string using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>, with
+            optional formatting.
+            </summary>
+            <param name="value">XML serializable object.</param>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.SerializeXml(System.Object,System.Boolean)">
+            <summary>
+            Serializes the object to an XML string using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>, with
+            optional formatting.
+            </summary>
+            <param name="value">XML serializable object.</param>
+            <param name="format">
+            Set true to format the XML by indenting each parent-child element on new lines.
+            </param>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.SerializeXml(System.Object,System.Type[])">
+            <summary>
+            Serializes the object to an XML string using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>.
+            </summary>
+            <param name="value">XML serializable object.</param>
+            <param name="extraTypes">Additional types the serializer must know.</param>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.SerializeXml(System.Object,System.Type[],System.Boolean)">
+            <summary>
+            Serializes the object to an XML string using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>.
+            </summary>
+            <param name="value">XML serializable object.</param>
+            <param name="extraTypes">Additional types the serializer must know.</param>
+            <param name="format">
+            Set true to format the XML by indenting each parent-child element on new lines.
+            </param>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.SerializeXml(System.Object,System.Xml.XmlWriter)">
+            <summary>
+            Serializes the object to an <see cref="T:System.Xml.XmlWriter"/> using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>.
+            </summary>
+            <param name="value">XML serializable object.</param>
+            <param name="writer">XML writer to serialize to. It's settings may be modified.</param>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlSerializerExtensions.SerializeXml(System.Object,System.Xml.XmlWriter,System.Type[])">
+            <summary>
+            Serializes the object to an <see cref="T:System.Xml.XmlWriter"/> using the <see cref="T:System.Xml.Serialization.XmlSerializer"/>.
+            </summary>
+            <param name="value">XML serializable object.</param>
+            <param name="writer">XML writer to serialize to. It's settings may be modified.</param>
+            <param name="extraTypes">Additional types the serializer must know.</param>
         </member>
         <member name="T:CodeForDotNet.Xml.XmlSerializerNamespacesExtensions">
             <summary>

@@ -40,10 +40,9 @@
             Byte to hexadecimal string two-way value converter.
             </summary>
             <remarks>
-            Converts an unsigned byte to a fixed width format uppercase hexadecimal string
-            without any prefix, i.e. exactly two characters "00" to "FF".
-            Converts a string of any supported (<see cref="F:System.Globalization.NumberStyles.HexNumber"/>)
-            format to an unsigned byte.
+            Converts an unsigned byte to a fixed width format uppercase hexadecimal string without any
+            prefix, i.e. exactly two characters "00" to "FF". Converts a string of any supported (
+            <see cref="F:System.Globalization.NumberStyles.HexNumber"/>) format to an unsigned byte.
             </remarks>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Converters.ByteToHexStringValueConverter.Convert(System.Object,System.Type,System.Object,System.String)">
@@ -53,7 +52,8 @@
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Converters.ByteToHexStringValueConverter.ConvertBack(System.Object,System.Type,System.Object,System.String)">
             <summary>
-            Modifies the target data before passing it to the source object. This method is called only in TwoWay bindings.
+            Modifies the target data before passing it to the source object. This method is called
+            only in TwoWay bindings.
             </summary>
         </member>
         <member name="T:CodeForDotNet.WindowsUniversal.UI.Converters.ConvertibleValueConverter">
@@ -80,9 +80,9 @@
             Enumeration two-way value converter.
             </summary>
             <remarks>
-            Converts enumeration values to their underlying type's value, e.g. enumeration value to integer.
-            Converts to enumeration values by doing nothing but pass the value through,
-            allowing the runtime to implicitly cast back to the enumeration value.
+            Converts enumeration values to their underlying type's value, e.g. enumeration value to
+            integer. Converts to enumeration values by doing nothing but pass the value through, allowing
+            the runtime to implicitly cast back to the enumeration value.
             </remarks>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Converters.EnumerationValueConverter.Convert(System.Object,System.Type,System.Object,System.String)">
@@ -92,16 +92,15 @@
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Converters.EnumerationValueConverter.ConvertBack(System.Object,System.Type,System.Object,System.String)">
             <summary>
-            Modifies the target data before passing it to the source object. This method is called only in TwoWay bindings.
+            Modifies the target data before passing it to the source object. This method is called
+            only in TwoWay bindings.
             </summary>
         </member>
         <member name="T:CodeForDotNet.WindowsUniversal.UI.Converters.IsNullToBooleanValueConverter">
             <summary>
             Null test to boolean one-way value converter.
             </summary>
-            <remarks>
-            Converts null to false and non-null to true, any object type.
-            </remarks>
+            <remarks>Converts null to false and non-null to true, any object type.</remarks>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Converters.IsNullToBooleanValueConverter.Convert(System.Object,System.Type,System.Object,System.String)">
             <summary>
@@ -115,8 +114,8 @@
         </member>
         <member name="T:CodeForDotNet.WindowsUniversal.UI.ApplicationBase">
             <summary>
-            Windows Store application with common features including a strongly typed application
-            model, session state persistence and error reporting.
+            Windows Store application with common features including a strongly typed application model,
+            session state persistence and error reporting.
             </summary>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.#ctor(System.Uri)">
@@ -130,20 +129,20 @@
             Creates an instance.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.StartPageType">
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.ErrorReportUri">
             <summary>
-            Start page type, used for navigation.
+            URI where <see cref="T:CodeForDotNet.Data.ErrorReportData"/> will be posted.
             </summary>
         </member>
         <member name="P:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.Pages">
             <summary>
-            Currently loaded pages, managed by this application,
-            e.g. their state is saved and restored together with the application.
+            Currently loaded pages, managed by this application, e.g. their state is saved and
+            restored together with the application.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.ErrorReportUri">
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.StartPageType">
             <summary>
-            URI where <see cref="T:CodeForDotNet.Data.ErrorReportData"/> will be posted.
+            Start page type, used for navigation.
             </summary>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.CheckErrors">
@@ -161,9 +160,32 @@
             Saves state of the entire application including any loaded pages.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.ShowSendErrorsDialog">
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.DiscardErrors">
             <summary>
-            Displays a dialog which prompts the user to send error reports.
+            Discards all errors.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.OnError(System.Object,Windows.UI.Xaml.UnhandledExceptionEventArgs)">
+            <summary>
+            Logs unhandled errors.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.OnLaunched(Windows.ApplicationModel.Activation.LaunchActivatedEventArgs)">
+            <summary>
+            Invoked when the application is launched normally by the end user. Other entry points
+            will be used when the application is launched to open a specific file, to display search
+            results, and so forth.
+            </summary>
+            <param name="event">Details about the launch request and process.</param>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.OnResuming(System.Object,System.Object)">
+            <summary>
+            Loads state when the application is resumed.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.OnSuspending(System.Object,Windows.ApplicationModel.SuspendingEventArgs)">
+            <summary>
+            Saves state when the application is suspended.
             </summary>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.SendErrors">
@@ -171,32 +193,9 @@
             Reports outstanding errors to the web service.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.DiscardErrors">
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.ShowSendErrorsDialog">
             <summary>
-            Discards all errors.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.OnLaunched(Windows.ApplicationModel.Activation.LaunchActivatedEventArgs)">
-            <summary>
-            Invoked when the application is launched normally by the end user.  Other entry points
-            will be used when the application is launched to open a specific file, to display
-            search results, and so forth.
-            </summary>
-            <param name="event">Details about the launch request and process.</param>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.OnSuspending(System.Object,Windows.ApplicationModel.SuspendingEventArgs)">
-            <summary>
-            Saves state when the application is suspended.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.OnResuming(System.Object,System.Object)">
-            <summary>
-            Loads state when the application is resumed.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.ApplicationBase.OnError(System.Object,Windows.UI.Xaml.UnhandledExceptionEventArgs)">
-            <summary>
-            Logs unhandled errors.
+            Displays a dialog which prompts the user to send error reports.
             </summary>
         </member>
         <member name="T:CodeForDotNet.WindowsUniversal.UI.AssemblyResources">
@@ -216,8 +215,8 @@
         </member>
         <member name="T:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox">
             <summary>
-            Enhanced <see cref="T:Windows.UI.Xaml.Controls.TextBox"/> control supporting multiple key-down tracking
-            and group navigational functionality.
+            Enhanced <see cref="T:Windows.UI.Xaml.Controls.TextBox"/> control supporting multiple key-down tracking and group
+            navigational functionality.
             </summary>
         </member>
         <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.CursorElementName">
@@ -230,52 +229,9 @@
             Name of the resource used as the fill brush for the cursor.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.#ctor">
+        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.DirectInputProperty">
             <summary>
-            Creates an instance.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox._cursor">
-            <summary>
-            Cursor rectangle.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox._originalText">
-            <summary>
-            <see cref="P:Windows.UI.Xaml.Controls.TextBox.Text"/> value before it was changed.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox._originalSelectionStart">
-            <summary>
-            <see cref="P:Windows.UI.Xaml.Controls.TextBox.SelectionStart"/> value before it was changed.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.KeysDown">
-            <summary>
-            Currently pressed keys.
-            Set during the <see cref="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)"/> even handler, after <see cref="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnBeforeKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)"/> but before
-            <see cref="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnAfterKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)"/> to supporting repeat detection.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupNextProperty">
-            <summary>
-            <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupNext"/> property.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupNext">
-            <summary>
-            Sets the next control in an input group, to which the focus will be switched when moving right at the edge of this text box
-            or typing a character beyond the maximum length.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupPreviousProperty">
-            <summary>
-            <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupPrevious"/> property.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupPrevious">
-            <summary>
-            Sets the previous control in an input group, to which the focus will be switched when moving left or typing at the edge of this text box.
+            <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.DirectInput"/> dependency property.
             </summary>
         </member>
         <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupDownProperty">
@@ -283,9 +239,14 @@
             <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupDown"/> property.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupDown">
+        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupNextProperty">
             <summary>
-            Sets the next control downwards in an input group, to which the focus will be switched when moving down in this text box.
+            <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupNext"/> property.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupPreviousProperty">
+            <summary>
+            <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupPrevious"/> property.
             </summary>
         </member>
         <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupUpProperty">
@@ -293,19 +254,9 @@
             <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupUp"/> property.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupUp">
-            <summary>
-            Sets the previous control upwards an input group, to which the focus will be switched when moving up in this text box.
-            </summary>
-        </member>
         <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MinLengthProperty">
             <summary>
             <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MinLength"/> dependency property.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MinLength">
-            <summary>
-            Minimum text length.
             </summary>
         </member>
         <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.PadCharProperty">
@@ -313,31 +264,29 @@
             <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.PadChar"/> dependency property.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.PadChar">
-            <summary>
-            Padding character used when the current text is less than <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MinLength"/>.
-            </summary>
-        </member>
         <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.UppercaseProperty">
             <summary>
             <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.Uppercase"/> dependency property.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.Uppercase">
+        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox._cursor">
             <summary>
-            Forces all alphabetical keys to upper case, not shift.
-            Requires <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.DirectInput"/> to be enabled.
+            Cursor rectangle.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.DirectInputProperty">
+        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox._originalSelectionStart">
             <summary>
-            <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.DirectInput"/> dependency property.
+            <see cref="P:Windows.UI.Xaml.Controls.TextBox.SelectionStart"/> value before it was changed.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.DirectInput">
+        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox._originalText">
             <summary>
-            Enables direct handling of input from key press events, allowing input to be accepted even when
-            the control has <see cref="P:Windows.UI.Xaml.Controls.TextBox.IsReadOnly"/> set, e.g. to blocking any soft keyboards from popping up.
+            <see cref="P:Windows.UI.Xaml.Controls.TextBox.Text"/> value before it was changed.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.#ctor">
+            <summary>
+            Creates an instance.
             </summary>
         </member>
         <member name="E:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.BeforeKeyDown">
@@ -345,118 +294,58 @@
             Fired before the key down event is processed.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnApplyTemplate">
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.DirectInput">
             <summary>
-            Prepares the control for display.
+            Enables direct handling of input from key press events, allowing input to be accepted
+            even when the control has <see cref="P:Windows.UI.Xaml.Controls.TextBox.IsReadOnly"/> set, e.g. to blocking any soft
+            keyboards from popping up.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnGotFocus(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupDown">
             <summary>
-            Checks text selection when focus is received.
+            Sets the next control downwards in an input group, to which the focus will be switched
+            when moving down in this text box.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnBeforeTextChanged(System.Object,CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextChangedEventArgs)">
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupNext">
             <summary>
-            Called before the base text box changed event is processed but this class, but after the core text box has
-            already processed a change (because it provides no text change handler itself to override).
-            This class performs trimming or padding here, so must be called when overridden to retain this functionality.
+            Sets the next control in an input group, to which the focus will be switched when moving
+            right at the edge of this text box or typing a character beyond the maximum length.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnTextChanged(System.Object,Windows.UI.Xaml.Controls.TextChangedEventArgs)">
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupPrevious">
             <summary>
-            Applies format and range rules as the text changes.
+            Sets the previous control in an input group, to which the focus will be switched when
+            moving left or typing at the edge of this text box.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnAfterTextChanged(System.Object,CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextChangedEventArgs)">
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupUp">
             <summary>
-            Called after the base text box changed event has been processed.
+            Sets the previous control upwards an input group, to which the focus will be switched
+            when moving up in this text box.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MinLength">
             <summary>
-            Tracks key presses, filters keys and updates data bindings.
+            Minimum text length.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnBeforeKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.PadChar">
             <summary>
-            Called before the <see cref="E:Windows.UI.Xaml.UIElement.KeyDown" /> event is processed.
-            Set <see cref="P:Windows.UI.Xaml.Input.KeyRoutedEventArgs.Handled"/> true to block the key press from being processed by the base control.
-            Use the <see cref="P:Windows.UI.Xaml.Input.KeyRoutedEventArgs.Key"/> to examine the current key press, the <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.KeysDown"/> collection
-            does not contain the current key unless it was previously pressed to support repeat detection.
-            This class implements grouped control navigation in this method.
-            If you override this method and do not call it this functionality will be disabled.
+            Padding character used when the current text is less than <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MinLength"/>.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnAfterKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.Uppercase">
             <summary>
-            Called after the <see cref="E:Windows.UI.Xaml.UIElement.KeyDown" /> event is processed.
-            The key press was blocked when <see cref="P:Windows.UI.Xaml.Input.KeyRoutedEventArgs.Handled"/> is true.
+            Forces all alphabetical keys to upper case, not shift. Requires <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.DirectInput"/>
+            to be enabled.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnKeyUp(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.KeysDown">
             <summary>
-            Tracks key presses.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnBeforeKeyUp(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
-            <summary>
-            Called before the <see cref="E:Windows.UI.Xaml.UIElement.KeyUp" /> event is processed.
-            Set <see cref="P:Windows.UI.Xaml.Input.KeyRoutedEventArgs.Handled"/> true to block the key release from being processed by the base control.
-            Use the <see cref="P:Windows.UI.Xaml.Input.KeyRoutedEventArgs.Key"/> to examine the released key, the <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.KeysDown"/> collection
-            is the state before processing this event so still contains the released key.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnAfterKeyUp(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
-            <summary>
-            Called after the <see cref="E:Windows.UI.Xaml.UIElement.KeyUp" /> event is processed.
-            The key release processing was blocked when <see cref="P:Windows.UI.Xaml.Input.KeyRoutedEventArgs.Handled"/> is true.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnSelectionChanged(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
-            <summary>
-            Handles the selection changed event.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnBeforeSelectionChanged(System.Object,CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextSelectionChangedEventArgs)">
-            <summary>
-            Enforces selection rules based on current/maximum length and trying over to next control in a group.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MoveLeftInGroup">
-            <summary>
-            Moves to the <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupPrevious"/> control if specified.
-            When the next control is a <see cref="T:Windows.UI.Xaml.Controls.TextBox"/> also selects the
-            next logical character from which to continue input.
-            </summary>
-            <returns>True when a move occurred.</returns>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MoveRightInGroup">
-            <summary>
-            Moves to the <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupNext"/> control if specified.
-            When the next control is a <see cref="T:Windows.UI.Xaml.Controls.TextBox"/> also selects the
-            next logical character from which to continue input.
-            </summary>
-            <returns>True when a move occurred.</returns>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MoveUpInGroup">
-            <summary>
-            Moves to the <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupUp"/> control if specified.
-            When the next control is a <see cref="T:Windows.UI.Xaml.Controls.TextBox"/> also selects the
-            next logical character from which to continue input.
-            </summary>
-            <returns>True when a move occurred.</returns>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MoveDownInGroup">
-            <summary>
-            Moves to the <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupDown"/> control if specified.
-            When the next control is a <see cref="T:Windows.UI.Xaml.Controls.TextBox"/> also selects the
-            next logical character from which to continue input.
-            </summary>
-            <returns>True when a move occurred.</returns>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.DoDelete">
-            <summary>
-            Deletes the current selection or one character to the right.
+            Currently pressed keys. Set during the <see cref="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)"/> even handler, after
+            <see cref="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnBeforeKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)"/> but before <see cref="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnAfterKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)"/> to supporting
+            repeat detection.
             </summary>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.DoBackspace">
@@ -464,9 +353,108 @@
             Deletes the current selection or one character to the left (backspace rather than delete).
             </summary>
         </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.DoDelete">
+            <summary>
+            Deletes the current selection or one character to the right.
+            </summary>
+        </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.HandleKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
             <summary>
             Handles the key down event.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MoveDownInGroup">
+            <summary>
+            Moves to the <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupDown"/> control if specified. When the next control is a
+            <see cref="T:Windows.UI.Xaml.Controls.TextBox"/> also selects the next logical character from which to continue input.
+            </summary>
+            <returns>True when a move occurred.</returns>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MoveLeftInGroup">
+            <summary>
+            Moves to the <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupPrevious"/> control if specified. When the next control is a
+            <see cref="T:Windows.UI.Xaml.Controls.TextBox"/> also selects the next logical character from which to continue input.
+            </summary>
+            <returns>True when a move occurred.</returns>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MoveRightInGroup">
+            <summary>
+            Moves to the <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupNext"/> control if specified. When the next control is a
+            <see cref="T:Windows.UI.Xaml.Controls.TextBox"/> also selects the next logical character from which to continue input.
+            </summary>
+            <returns>True when a move occurred.</returns>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.MoveUpInGroup">
+            <summary>
+            Moves to the <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.GroupUp"/> control if specified. When the next control is a
+            <see cref="T:Windows.UI.Xaml.Controls.TextBox"/> also selects the next logical character from which to continue input.
+            </summary>
+            <returns>True when a move occurred.</returns>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnAfterKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
+            <summary>
+            Called after the <see cref="E:Windows.UI.Xaml.UIElement.KeyDown"/> event is processed. The key press was
+            blocked when <see cref="P:Windows.UI.Xaml.Input.KeyRoutedEventArgs.Handled"/> is true.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnAfterKeyUp(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
+            <summary>
+            Called after the <see cref="E:Windows.UI.Xaml.UIElement.KeyUp"/> event is processed. The key release
+            processing was blocked when <see cref="P:Windows.UI.Xaml.Input.KeyRoutedEventArgs.Handled"/> is true.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnAfterTextChanged(System.Object,CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextChangedEventArgs)">
+            <summary>
+            Called after the base text box changed event has been processed.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnApplyTemplate">
+            <summary>
+            Prepares the control for display.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnBeforeKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
+            <summary>
+            Called before the <see cref="E:Windows.UI.Xaml.UIElement.KeyDown"/> event is processed. Set
+            <see cref="P:Windows.UI.Xaml.Input.KeyRoutedEventArgs.Handled"/> true to block the key press from being processed
+            by the base control. Use the <see cref="P:Windows.UI.Xaml.Input.KeyRoutedEventArgs.Key"/> to examine the current
+            key press, the <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.KeysDown"/> collection does not contain the current key unless
+            it was previously pressed to support repeat detection. This class implements grouped
+            control navigation in this method. If you override this method and do not call it this
+            functionality will be disabled.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnBeforeKeyUp(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
+            <summary>
+            Called before the <see cref="E:Windows.UI.Xaml.UIElement.KeyUp"/> event is processed. Set
+            <see cref="P:Windows.UI.Xaml.Input.KeyRoutedEventArgs.Handled"/> true to block the key release from being
+            processed by the base control. Use the <see cref="P:Windows.UI.Xaml.Input.KeyRoutedEventArgs.Key"/> to examine
+            the released key, the <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.KeysDown"/> collection is the state before processing
+            this event so still contains the released key.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnBeforeSelectionChanged(System.Object,CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextSelectionChangedEventArgs)">
+            <summary>
+            Enforces selection rules based on current/maximum length and trying over to next control
+            in a group.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnBeforeTextChanged(System.Object,CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextChangedEventArgs)">
+            <summary>
+            Called before the base text box changed event is processed but this class, but after the
+            core text box has already processed a change (because it provides no text change handler
+            itself to override). This class performs trimming or padding here, so must be called when
+            overridden to retain this functionality.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
+            <summary>
+            Tracks key presses, filters keys and updates data bindings.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnKeyUp(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
+            <summary>
+            Tracks key presses.
             </summary>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.LayoutCursor">
@@ -474,10 +462,26 @@
             Positions the cursor based on current selection state.
             </summary>
         </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnGotFocus(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Checks text selection when focus is received.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnSelectionChanged(System.Object,Windows.UI.Xaml.RoutedEventArgs)">
+            <summary>
+            Handles the selection changed event.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextBox.OnTextChanged(System.Object,Windows.UI.Xaml.Controls.TextChangedEventArgs)">
+            <summary>
+            Applies format and range rules as the text changes.
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextChangedEventArgs">
             <summary>
-            Provides a better alternative to <see cref="T:Windows.UI.Xaml.Controls.TextChangedEventArgs"/> to track overrides to text content through multiple event consumers.
-            Enables the sender to efficiently set the final changes once, avoiding loops or conflicting change events.
+            Provides a better alternative to <see cref="T:Windows.UI.Xaml.Controls.TextChangedEventArgs"/> to track overrides to
+            text content through multiple event consumers. Enables the sender to efficiently set the
+            final changes once, avoiding loops or conflicting change events.
             </summary>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextChangedEventArgs.#ctor(System.String,System.String)">
@@ -552,7 +556,7 @@
         </member>
         <member name="T:CodeForDotNet.WindowsUniversal.UI.Controls.EventControl">
             <summary>
-            Control implementing <see cref="T:CodeForDotNet.ComponentModel.IEventObject"/> for efficient event handling,
+            Control implementing <see cref="T:CodeForDotNet.ComponentModel.IEventCache"/> for efficient event handling,
             thread safety and increased performance.
             </summary>
         </member>
@@ -621,29 +625,9 @@
             Supports multiple bases, e.g. decimal, hexadecimal, binary.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.#ctor">
-            <summary>
-            Creates an instance with default values.
-            </summary>
-        </member>
         <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberBaseProperty">
             <summary>
             <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberBase"/> dependency property.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberBase">
-            <summary>
-            Sets the number base edited with this text box.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberSignedProperty">
-            <summary>
-            <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberSigned"/> dependency property.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberSigned">
-            <summary>
-            Enables editing signed values. Only applicable to decimal.
             </summary>
         </member>
         <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberMaxProperty">
@@ -651,19 +635,39 @@
             <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberMax"/> dependency property.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberMax">
-            <summary>
-            Maximum value.
-            </summary>
-        </member>
         <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberMinProperty">
             <summary>
             <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberMin"/> dependency property.
             </summary>
         </member>
+        <member name="F:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberSignedProperty">
+            <summary>
+            <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberSigned"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.#ctor">
+            <summary>
+            Creates an instance with default values.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberBase">
+            <summary>
+            Sets the number base edited with this text box.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberMax">
+            <summary>
+            Maximum value.
+            </summary>
+        </member>
         <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberMin">
             <summary>
             Minimum value.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberSigned">
+            <summary>
+            Enables editing signed values. Only applicable to decimal.
             </summary>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.OnBeforeKeyDown(Windows.UI.Xaml.Input.KeyRoutedEventArgs)">
@@ -673,12 +677,14 @@
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.OnBeforeSelectionChanged(System.Object,CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextSelectionChangedEventArgs)">
             <summary>
-            Enforces selection rules based on current/maximum length and trying over to next control in a group.
+            Enforces selection rules based on current/maximum length and trying over to next control
+            in a group.
             </summary>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.OnBeforeTextChanged(System.Object,CodeForDotNet.WindowsUniversal.UI.Controls.DynamicTextChangedEventArgs)">
             <summary>
-            Strips non-numeric characters according to <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberBase"/> before processing text changes.
+            Strips non-numeric characters according to <see cref="P:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.NumberBase"/> before processing
+            text changes.
             </summary>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.GetValidNumberChars(System.Int32)">
@@ -686,19 +692,19 @@
             Gets the valid characters for a number base system.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.IsKeyValidNumber(CodeForDotNet.WindowsUniversal.Input.KeyboardKey,System.Int32)">
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.IsKeyValidNumber(CodeForDotNet.UI.Input.KeyboardKey,System.Int32)">
             <summary>
             Tests if a key is a valid number entry for the specified base.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.Negate">
-            <summary>
-            Negates the current value.
             </summary>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.GetValue">
             <summary>
             Gets the current numeric value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBox.Negate">
+            <summary>
+            Negates the current value.
             </summary>
         </member>
         <member name="T:CodeForDotNet.WindowsUniversal.UI.Controls.NumericTextBoxNumberBase">
@@ -906,971 +912,6 @@
             Performs page specific setup when navigated to.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.WindowsUniversal.Input.DelegateCommand">
-            <summary>
-            Generic command which calls delegate function(s) to execute or get the status.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.DefaultId">
-            <summary>
-            Used to identify the status of the command when it has no parameter.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.#ctor(System.Action{System.Object})">
-            <summary>
-            Creates an instance which calls the specified <see cref="M:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.Execute(System.Object)"/> delegate when executed.
-            </summary>
-            <param name="executeMethod">Method invoked by <see cref="M:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.Execute(System.Object)"/> to perform the command action.</param>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean})">
-            <summary>
-            Creates an instance which calls the specified <see cref="M:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.Execute(System.Object)"/> and <see cref="M:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.CanExecute(System.Object)"/> delegates when executed.
-            </summary>
-            <param name="executeMethod">Method invoked by <see cref="M:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.Execute(System.Object)"/> to perform the command action.</param>
-            <param name="canExecuteMethod">Optional method invoked by <see cref="M:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.CanExecute(System.Object)"/> to test whether the command is currently available for execution.</param>
-        </member>
-        <member name="E:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.CanExecuteChanged">
-            <summary>
-            Fired when the execution status has changed.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.CanExecute(System.Object)">
-            <summary>
-            Checks whether this command is currently available for execution.
-            </summary>
-            <param name="parameter">Optional command specific parameter.</param>
-            <returns>True when can execute.</returns>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.Execute(System.Object)">
-            <summary>
-            Executes the command.
-            </summary>
-            <param name="parameter">Optional command specific parameter.</param>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.InvokeCanExecuteChanged">
-            <summary>
-            Fires the <see cref="E:CodeForDotNet.WindowsUniversal.Input.DelegateCommand.CanExecuteChanged"/> event, causing consumers of this command to update their status.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.WindowsUniversal.Input.KeyboardKey">
-            <summary>
-            Complete set of keyboard virtual key definitions, an expanded version of the <see cref="T:Windows.System.VirtualKey"/>
-            like the Windows Forms "Keys" enumeration, which is not currently available in WinRT.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.None">
-            <summary>
-            No key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.MouseLeft">
-            <summary>
-            Left mouse button.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.MouseRight">
-            <summary>
-            Right mouse button.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Cancel">
-            <summary>
-            Control-break processing.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.MouseMiddle">
-            <summary>
-            Middle mouse button (three-button mouse).
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.MouseX1">
-            <summary>
-            X1 mouse button.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.MouseX2">
-            <summary>
-            X2 mouse button.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Backspace">
-            <summary>
-            BACKSPACE key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Tab">
-            <summary>
-            TAB key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Clear">
-            <summary>
-            CLEAR key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Enter">
-            <summary>
-            ENTER key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Shift">
-            <summary>
-            SHIFT key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Control">
-            <summary>
-            CTRL key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Alt">
-            <summary>
-            ALT key.
-            </summary>
-            <remarks>
-            Originally named "MENU" in header file but "Alt" name taken for more intuitive use.
-            </remarks>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Pause">
-            <summary>
-            PAUSE key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.CapsLock">
-            <summary>
-            CAPS LOCK key.
-            </summary>
-            <remarks>
-            Originally named "CAPITAL" in header file but "CapsLock" name taken for more intuitive use.
-            </remarks>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeKana">
-            <summary>
-            IME Kana mode.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeHanguel">
-            <summary>
-            IME Hanguel mode (maintained for compatibility; use <see cref="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeHangul"/>).
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeHangul">
-            <summary>
-            IME Hangul mode.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeJunja">
-            <summary>
-            IME Junja mode.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeFinal">
-            <summary>
-            IME final mode.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeHanja">
-            <summary>
-            IME Hanja mode.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeKanji">
-            <summary>
-            IME Kanji mode.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Escape">
-            <summary>
-            ESC key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeConvert">
-            <summary>
-            IME convert.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeNonConvert">
-            <summary>
-            IME nonconvert.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeAccept">
-            <summary>
-            IME accept.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeModeChange">
-            <summary>
-            IME mode change request.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Space">
-            <summary>
-            SPACEBAR.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.PageUp">
-            <summary>
-            PAGE UP key.
-            </summary>
-            <remarks>
-            Originally named "PRIOR" in header file but "PageUp" name taken for more intuitive use.
-            </remarks>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.PageDown">
-            <summary>
-            PAGE DOWN key.
-            </summary>
-            <remarks>
-            Originally named "NEXT" in header file but "PageDown" name taken for more intuitive use.
-            </remarks>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.End">
-            <summary>
-            END key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Home">
-            <summary>
-            HOME key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Left">
-            <summary>
-            LEFT ARROW key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Up">
-            <summary>
-            UP ARROW key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Right">
-            <summary>
-            RIGHT ARROW key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Down">
-            <summary>
-            DOWN ARROW key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Select">
-            <summary>
-            SELECT key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Print">
-            <summary>
-            PRINT key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Execute">
-            <summary>
-            EXECUTE key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Snapshot">
-            <summary>
-            PRINT SCREEN key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Insert">
-            <summary>
-            INS key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Delete">
-            <summary>
-            DEL key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Help">
-            <summary>
-            HELP key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Number0">
-            <summary>
-            0 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Number1">
-            <summary>
-            1 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Number2">
-            <summary>
-            2 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Number3">
-            <summary>
-            3 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Number4">
-            <summary>
-            4 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Number5">
-            <summary>
-            5 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Number6">
-            <summary>
-            6 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Number7">
-            <summary>
-            7 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Number8">
-            <summary>
-            8 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Number9">
-            <summary>
-            9 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.A">
-            <summary>
-            A key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.B">
-            <summary>
-            B key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.C">
-            <summary>
-            C key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.D">
-            <summary>
-            D key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.E">
-            <summary>
-            E key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F">
-            <summary>
-            F key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.G">
-            <summary>
-            G key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.H">
-            <summary>
-            H key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.I">
-            <summary>
-            I key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.J">
-            <summary>
-            J key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.K">
-            <summary>
-            K key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.L">
-            <summary>
-            L key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.M">
-            <summary>
-            M key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.N">
-            <summary>
-            N key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.O">
-            <summary>
-            O key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.P">
-            <summary>
-            P key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Q">
-            <summary>
-            Q key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.R">
-            <summary>
-            R key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.S">
-            <summary>
-            S key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.T">
-            <summary>
-            T key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.U">
-            <summary>
-            U key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.V">
-            <summary>
-            V key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.W">
-            <summary>
-            W key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.X">
-            <summary>
-            X key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Y">
-            <summary>
-            Y key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Z">
-            <summary>
-            Z key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.WindowsLeft">
-            <summary>
-            Left Windows key (Natural keyboard) .
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.WindowsRight">
-            <summary>
-            Right Windows key (Natural keyboard).
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Apps">
-            <summary>
-            Applications key (Natural keyboard).
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Sleep">
-            <summary>
-            Computer Sleep key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPad0">
-            <summary>
-            Numeric keypad 0 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPad1">
-            <summary>
-            Numeric keypad 1 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPad2">
-            <summary>
-            Numeric keypad 2 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPad3">
-            <summary>
-            Numeric keypad 3 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPad4">
-            <summary>
-            Numeric keypad 4 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPad5">
-            <summary>
-            Numeric keypad 5 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPad6">
-            <summary>
-            Numeric keypad 6 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPad7">
-            <summary>
-            Numeric keypad 7 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPad8">
-            <summary>
-            Numeric keypad 8 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPad9">
-            <summary>
-            Numeric keypad 9 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPadMultiply">
-            <summary>
-            Multiply key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPadAdd">
-            <summary>
-            Add key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPadSeparator">
-            <summary>
-            Separator key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPadSubtract">
-            <summary>
-            Subtract key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPadDecimal">
-            <summary>
-            Decimal key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPadDivide">
-            <summary>
-            Divide key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F1">
-            <summary>
-            F1 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F2">
-            <summary>
-            F2 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F3">
-            <summary>
-            F3 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F4">
-            <summary>
-            F4 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F5">
-            <summary>
-            F5 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F6">
-            <summary>
-            F6 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F7">
-            <summary>
-            F7 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F8">
-            <summary>
-            F8 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F9">
-            <summary>
-            F9 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F10">
-            <summary>
-            F10 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F11">
-            <summary>
-            F11 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F12">
-            <summary>
-            F12 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F13">
-            <summary>
-            F13 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F14">
-            <summary>
-            F14 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F15">
-            <summary>
-            F15 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F16">
-            <summary>
-            F16 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F17">
-            <summary>
-            F17 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F18">
-            <summary>
-            F18 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F19">
-            <summary>
-            F19 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F20">
-            <summary>
-            F20 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F21">
-            <summary>
-            F21 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F22">
-            <summary>
-            F22 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F23">
-            <summary>
-            F23 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.F24">
-            <summary>
-            F24 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberLock">
-            <summary>
-            NUM LOCK key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ScrollLock">
-            <summary>
-            SCROLL LOCK key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ShiftLeft">
-            <summary>
-            Left SHIFT key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ShiftRight">
-            <summary>
-            Right SHIFT key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ControlLeft">
-            <summary>
-            Left CONTROL key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ControlRight">
-            <summary>
-            Right CONTROL key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.MenuLeft">
-            <summary>
-            Left MENU key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.MenuRight">
-            <summary>
-            Right MENU key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.BrowserBack">
-            <summary>
-            Browser Back key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.BrowserForward">
-            <summary>
-            Browser Forward key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.BrowserRefresh">
-            <summary>
-            Browser Refresh key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.BrowserStop">
-            <summary>
-            Browser Stop key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.BrowserSearch">
-            <summary>
-            Browser Search key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.BrowserFavorites">
-            <summary>
-            Browser Favorites key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.BrowserHome">
-            <summary>
-            Browser Start and Home key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.VolumeMute">
-            <summary>
-            Volume Mute key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.VolumeDown">
-            <summary>
-            Volume Down key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.VolumeUp">
-            <summary>
-            Volume Up key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.MediaNextTrack">
-            <summary>
-            Next Track key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.MediaPreviousTrack">
-            <summary>
-            Previous Track key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.MediaStop">
-            <summary>
-            Stop Media key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.MediaPlayPause">
-            <summary>
-            Play/Pause Media key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.LaunchMail">
-            <summary>
-            Start Mail key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.LaunchMediaSelect">
-            <summary>
-            Select Media key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.LaunchApp1">
-            <summary>
-            Start Application 1 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.LaunchApp2">
-            <summary>
-            Start Application 2 key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Oem1">
-            <summary>
-            Used for miscellaneous characters; it can vary by keyboard.
-            For the US standard keyboard, the ';:' key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Plus">
-            <summary>
-            For any country/region, the '+' key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Comma">
-            <summary>
-            For any country/region, the ',' key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Minus">
-            <summary>
-            For any country/region, the '-' key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Period">
-            <summary>
-            For any country/region, the '.' key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Oem2">
-            <summary>
-            Used for miscellaneous characters; it can vary by keyboard.
-            For the US standard keyboard, the '/?' key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Oem3">
-            <summary>
-            Used for miscellaneous characters; it can vary by keyboard.
-            For the US standard keyboard, the '`~' key
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Oem4">
-            <summary>
-            Used for miscellaneous characters; it can vary by keyboard.
-            For the US standard keyboard, the '[{' key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Oem5">
-            <summary>
-            Used for miscellaneous characters; it can vary by keyboard.
-            For the US standard keyboard, the '\|' key
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Oem6">
-            <summary>
-            Used for miscellaneous characters; it can vary by keyboard.
-            For the US standard keyboard, the ']}' key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Oem7">
-            <summary>
-            Used for miscellaneous characters; it can vary by keyboard.
-            For the US standard keyboard, the 'single-quote/double-quote' key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Oem8">
-            <summary>
-            Used for miscellaneous characters; it can vary by keyboard.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Oem102">
-            <summary>
-            Either the angle bracket key or the backslash key on the RT 102-key keyboard.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ImeProcess">
-            <summary>
-            IME PROCESS key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Packet">
-            <summary>
-            Used to pass Unicode characters as if they were keystrokes. The VK_PACKET key is the low word of a 32-bit Virtual Key value used for non-keyboard input methods. For more information, see Remark in KEYBDINPUT, SendInput, WM_KEYDOWN, and WM_KEYUP.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Attention">
-            <summary>
-            Attn key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.CursorSelect">
-            <summary>
-            CrSel key. Defined by IBM as cursor select.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.ExtendedKeySelect">
-            <summary>
-            ExSel key. Defined by IBM as extended key function select (pressed before the key with an extended function).
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.EraseEof">
-            <summary>
-            Erase EOF key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Play">
-            <summary>
-            Play key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.Zoom">
-            <summary>
-            Zoom key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.PA1">
-            <summary>
-            PA1 key. Defined by IBM as the "WINDOW POP WM" key.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.PA2Clear">
-            <summary>
-            OEM Clear. Defined by IBM as the "PA2 CLEAR WM" key.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.WindowsUniversal.Input.KeyboardKeyConverter">
-            <summary>
-            Converts virtual keys to strings.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Input.KeyboardKeyConverter.ConvertToString(CodeForDotNet.WindowsUniversal.Input.KeyboardKey)">
-            <summary>
-            Translates a virtual key to an input character when relevant.
-            </summary>
-            <param name="key">Key to convert.</param>
-            <returns>String (normally one character) or null when no mapping, e.g. function key.</returns>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Input.KeyboardKeyConverter.ConvertToString(CodeForDotNet.WindowsUniversal.Input.KeyboardKey,System.Boolean)">
-            <summary>
-            Translates a virtual key to an input character when relevant.
-            </summary>
-            <param name="key">Key to convert.</param>
-            <param name="uppercase">True to return uppercase characters, e.g. when shift is also pressed.</param>
-            <returns>String (normally one character) or null when no mapping, e.g. function key.</returns>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Input.KeyboardKeyConverter.ConvertToString(CodeForDotNet.WindowsUniversal.Input.KeyboardKey,System.Boolean,System.Globalization.CultureInfo)">
-            <summary>
-            Translates a virtual key to an input character when relevant.
-            </summary>
-            <param name="key">Key to convert.</param>
-            <param name="uppercase">True to return uppercase characters, e.g. when shift is also pressed.</param>
-            <param name="culture">Culture used for the <see cref="F:CodeForDotNet.WindowsUniversal.Input.KeyboardKey.NumberPadDecimal"/>.</param>
-            <returns>String (normally one character) or null when no mapping, e.g. function key.</returns>
-        </member>
         <member name="T:CodeForDotNet.WindowsUniversal.Runtime.SuspensionManager">
             <summary>
             SuspensionManager captures global session state to simplify process lifetime management
@@ -1977,10 +1018,9 @@
             Stores errors in local storage as serialized exceptions.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.SourceIdFileName">
+        <member name="F:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.FileNameFormat">
             <summary>
-            Name of the file which stores a unique source identifier,
-            used to correlate files sent from the same installation.
+            Error file name format.
             </summary>
         </member>
         <member name="F:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.FolderName">
@@ -1988,23 +1028,11 @@
             Name of the folder in local storage where files are stored.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.FileNameFormat">
+        <member name="F:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.SourceIdFileName">
             <summary>
-            Error file name format.
+            Name of the file which stores a unique source identifier, used to correlate files sent
+            from the same installation.
             </summary>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.GenerateReport(System.Exception)">
-            <summary>
-            Extracts information from an error to use as the contents of an error file.
-            </summary>
-            <param name="error">Error to extract.</param>
-            <returns>File contents.</returns>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.LoadSourceId">
-            <summary>
-            Retrieves or creates the error ID file.
-            </summary>
-            <returns>Unique ID stored as a file locally so it remains the same for the installation lifetime of the application.</returns>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.Add(System.Exception)">
             <summary>
@@ -2020,15 +1048,31 @@
             <param name="contents">Contents to write.</param>
             <returns>File name.</returns>
         </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.List">
+        <member name="M:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.GenerateReport(System.Exception)">
             <summary>
-            Lists all errors currently held in the store.
+            Extracts information from an error to use as the contents of an error file.
             </summary>
+            <param name="error">Error to extract.</param>
+            <returns>File contents.</returns>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.Get(System.String)">
             <summary>
             Gets an error.
             </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.List">
+            <summary>
+            Lists all errors currently held in the store.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.LoadSourceId">
+            <summary>
+            Retrieves or creates the error ID file.
+            </summary>
+            <returns>
+            Unique ID stored as a file locally so it remains the same for the installation lifetime
+            of the application.
+            </returns>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.Storage.LocalErrorStore.Remove(System.String)">
             <summary>
@@ -2045,23 +1089,42 @@
             <summary>
             Creates or opens an existing file in the folder.
             </summary>
-            <param name="parentFolder">Folder in which the file is located, usually specified via extension.</param>
+            <param name="parentFolder">
+            Folder in which the file is located, usually specified via extension.
+            </param>
             <param name="fileName">File name.</param>
             <returns>A <see cref="T:Windows.Storage.IStorageFile"/> representing the created or existing file.</returns>
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.Storage.StorageExtensions.CreateFolder(Windows.Storage.IStorageFolder,System.String)">
             <summary>
-            Calls the <see cref="M:Windows.Storage.IStorageFolder.CreateFolderAsync(System.String)"/> method synchronously
-            and without error if the folder already exists.
+            Calls the <see cref="M:Windows.Storage.IStorageFolder.CreateFolderAsync(System.String)"/> method synchronously and
+            without error if the folder already exists.
             </summary>
             <param name="parentFolder">Parent folder, usually specified via extension.</param>
             <param name="folderName">Name of the folder to create.</param>
             <returns>A <see cref="T:Windows.Storage.IStorageFolder"/> representing the created or existing folder.</returns>
         </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.Storage.StorageExtensions.Delete(Windows.Storage.IStorageFile)">
+            <summary>
+            Deletes a file, moving it to the recycle bin when available.
+            </summary>
+            <param name="file">File to delete, usually specified via extension.</param>
+        </member>
+        <member name="M:CodeForDotNet.WindowsUniversal.Storage.StorageExtensions.Delete(Windows.Storage.IStorageFile,System.Boolean)">
+            <summary>
+            Moves a file to the recycle bin or deletes it permanently when specified or the recycle
+            bin is not available.
+            </summary>
+            <param name="file">File to delete, usually specified via extension.</param>
+            <param name="permanent">
+            True to delete permanently, otherwise it is moved to the recycle bin when available.
+            Default is false (recycle).
+            </param>
+        </member>
         <member name="M:CodeForDotNet.WindowsUniversal.Storage.StorageExtensions.OpenFile(Windows.Storage.IStorageFolder,System.String)">
             <summary>
-            Gets a file if it exists or returns null when not found.
-            A better alternative to <see cref="M:Windows.Storage.IStorageFolder.GetFileAsync(System.String)"/> which throws an exception when not found.
+            Gets a file if it exists or returns null when not found. A better alternative to
+            <see cref="M:Windows.Storage.IStorageFolder.GetFileAsync(System.String)"/> which throws an exception when not found.
             </summary>
             <param name="parentFolder">Folder to query, usually specified via extension.</param>
             <param name="fileName">Name of the file to query, case insensitive.</param>
@@ -2069,8 +1132,8 @@
         </member>
         <member name="M:CodeForDotNet.WindowsUniversal.Storage.StorageExtensions.OpenFolder(Windows.Storage.IStorageFolder,System.String)">
             <summary>
-            Gets a subfolder if it exists or returns null when not found.
-            A better alternative to <see cref="M:Windows.Storage.IStorageFolder.GetFolderAsync(System.String)"/> which throws an exception when not found.
+            Gets a subfolder if it exists or returns null when not found. A better alternative to
+            <see cref="M:Windows.Storage.IStorageFolder.GetFolderAsync(System.String)"/> which throws an exception when not found.
             </summary>
             <param name="parentFolder">Folder to query, usually specified via extension.</param>
             <param name="subfolderName">Name of the subfolder to query, case insensitive.</param>
@@ -2089,22 +1152,6 @@
             </summary>
             <param name="file">File to write, usually specified via extension.</param>
             <param name="contents">Text content to write.</param>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Storage.StorageExtensions.Delete(Windows.Storage.IStorageFile)">
-            <summary>
-            Deletes a file, moving it to the recycle bin when available.
-            </summary>
-            <param name="file">File to delete, usually specified via extension.</param>
-        </member>
-        <member name="M:CodeForDotNet.WindowsUniversal.Storage.StorageExtensions.Delete(Windows.Storage.IStorageFile,System.Boolean)">
-            <summary>
-            Moves a file to the recycle bin or deletes it permanently when specified or the recycle bin is not available.
-            </summary>
-            <param name="file">File to delete, usually specified via extension.</param>
-            <param name="permanent">
-            True to delete permanently, otherwise it is moved to the recycle bin when available.
-            Default is false (recycle).
-            </param>
         </member>
         <member name="T:CodeForDotNet.WindowsUniversal.CodeForDotNet_WindowsUniversal_XamlTypeInfo.XamlMetaDataProvider">
             <summary>

@@ -1,5 +1,12 @@
 # Code for .NET - Release Notes
 
+## Version 4.72.1902.28### (2019.02.28)
+* Restore ObservableDictionary as still not available in .NET Standard, this time using similar event argument types and naming as the Microsoft ObservableCollection.
+* Add paint and mouse event arguments to UI assembly.
+* Move keyboard and command input classes from WindowsUniversal to UI assembly as they have no strict dependency on XAML and could be used generically.
+* Added StringCollection.Contains() extension.
+* Add support for disposing generic dictionaries to DictionaryExtensions.
+
 ## Version 4.72.1811.25### (2018.11.25)
 * Remove ObservableDictionary and ObservableCollection in favour of built-in types.
 
