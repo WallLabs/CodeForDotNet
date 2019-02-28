@@ -14,13 +14,12 @@ namespace CodeForDotNet.WindowsUniversal.Storage
     /// </summary>
     public static class LocalErrorStore
     {
-        #region Constants
+        #region Public Fields
 
         /// <summary>
-        /// Name of the file which stores a unique source identifier,
-        /// used to correlate files sent from the same installation.
+        /// Error file name format.
         /// </summary>
-        public const string SourceIdFileName = "Source ID.txt";
+        public const string FileNameFormat = "{0:yyyyMMddHHmmssfff} Error.txt";
 
         /// <summary>
         /// Name of the folder in local storage where files are stored.
@@ -28,13 +27,52 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public const string FolderName = "Errors";
 
         /// <summary>
-        /// Error file name format.
+        /// Name of the file which stores a unique source identifier, used to correlate files sent
+        /// from the same installation.
         /// </summary>
-        public const string FileNameFormat = "{0:yyyyMMddHHmmssfff} Error.txt";
+        public const string SourceIdFileName = "Source ID.txt";
 
-        #endregion Constants
+        #endregion Public Fields
 
         #region Public Methods
+
+        /// <summary>
+        /// Adds an error to the store.
+        /// </summary>
+        /// <param name="error">Error to write the contents of.</param>
+        /// <returns>File name.</returns>
+        public static string Add(Exception error)
+        {
+            // Extract error contents
+            ErrorReportData contents = GenerateReport(error);
+
+            // Call overloaded method
+            return Add(contents);
+        }
+
+        /// <summary>
+        /// Adds an error to the store.
+        /// </summary>
+        /// <param name="contents">Contents to write.</param>
+        /// <returns>File name.</returns>
+        public static string Add(ErrorReportData contents)
+        {
+            // Open local storage folder
+            StorageFolder storage = ApplicationData.Current.LocalFolder;
+
+            // Open or create errors folder
+            IStorageFolder errorsFolder = storage.CreateFolder(FolderName);
+
+            // Generate a unique file name
+            string fileName = string.Format(CultureInfo.InvariantCulture, FileNameFormat, DateTime.UtcNow);
+
+            // Write error to file
+            IStorageFile file = errorsFolder.CreateFile(fileName);
+            file.WriteAllText(contents.SerializeXml(true));
+
+            // Return file name
+            return fileName;
+        }
 
         /// <summary>
         /// Extracts information from an error to use as the contents of an error file.
@@ -44,12 +82,15 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static ErrorReportData GenerateReport(Exception error)
         {
             // Validate
-            if (error == null) throw new ArgumentNullException(nameof(error));
+            if (error == null)
+            {
+                throw new ArgumentNullException(nameof(error));
+            }
 
             // Write application and version information at top
-            var application = Application.Current;
-            var applicationType = application.GetType();
-            var report = new ErrorReportData
+            Application application = Application.Current;
+            Type applicationType = application.GetType();
+            ErrorReportData report = new ErrorReportData
             {
                 Id = Guid.NewGuid(),
                 SourceId = LoadSourceId(),
@@ -65,25 +106,81 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         }
 
         /// <summary>
+        /// Gets an error.
+        /// </summary>
+        public static ErrorReportData Get(string fileName)
+        {
+            // Open local storage folder
+            StorageFolder storage = ApplicationData.Current.LocalFolder;
+
+            // Open errors folder (return null when not found)
+            IStorageFolder errorsFolder = storage.OpenFolder(FolderName);
+            if (errorsFolder == null)
+            {
+                return null;
+            }
+
+            // Open file (return null when not found)
+            IStorageFile file = errorsFolder.OpenFile(fileName);
+            if (file == null)
+            {
+                return null;
+            }
+
+            // Return contents
+            return XmlSerializerExtensions.DeserializeXml<ErrorReportData>(file.ReadAllText());
+        }
+
+        /// <summary>
+        /// Lists all errors currently held in the store.
+        /// </summary>
+        public static string[] List()
+        {
+            // Open local storage folder
+            StorageFolder storage = ApplicationData.Current.LocalFolder;
+
+            // Open errors folder (return null when not found)
+            IStorageFolder errorsFolder = storage.OpenFolder(FolderName);
+            if (errorsFolder == null)
+            {
+                return null;
+            }
+
+            // List files
+            List<string> files = new List<string>();
+            files.AddRange(from file in errorsFolder.GetFilesAsync().GetAwaiter().GetResult()
+                           where !file.Name.Equals(SourceIdFileName, StringComparison.OrdinalIgnoreCase)
+                           select file.Name);
+
+            // Return result
+            return files.ToArray();
+        }
+
+        /// <summary>
         /// Retrieves or creates the error ID file.
         /// </summary>
-        /// <returns>Unique ID stored as a file locally so it remains the same for the installation lifetime of the application.</returns>
+        /// <returns>
+        /// Unique ID stored as a file locally so it remains the same for the installation lifetime
+        /// of the application.
+        /// </returns>
         public static Guid LoadSourceId()
         {
             // Open local storage folder
-            var storage = ApplicationData.Current.LocalFolder;
+            StorageFolder storage = ApplicationData.Current.LocalFolder;
 
             // Open errors folder (return null when not found)
-            var errorsFolder = storage.CreateFolder(FolderName);
+            IStorageFolder errorsFolder = storage.CreateFolder(FolderName);
 
             // Open ID file if exists
-            var file = errorsFolder.OpenFile(SourceIdFileName);
+            IStorageFile file = errorsFolder.OpenFile(SourceIdFileName);
             Guid id;
             if (file != null)
             {
                 // Read existing ID
                 if (!Guid.TryParse(file.ReadAllText(), out id))
+                {
                     return id;
+                }
             }
             else
             {
@@ -100,106 +197,27 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         }
 
         /// <summary>
-        /// Adds an error to the store.
-        /// </summary>
-        /// <param name="error">Error to write the contents of.</param>
-        /// <returns>File name.</returns>
-        public static string Add(Exception error)
-        {
-            // Extract error contents
-            var contents = GenerateReport(error);
-
-            // Call overloaded method
-            return Add(contents);
-        }
-
-        /// <summary>
-        /// Adds an error to the store.
-        /// </summary>
-        /// <param name="contents">Contents to write.</param>
-        /// <returns>File name.</returns>
-        public static string Add(ErrorReportData contents)
-        {
-            // Open local storage folder
-            var storage = ApplicationData.Current.LocalFolder;
-
-            // Open or create errors folder
-            var errorsFolder = storage.CreateFolder(FolderName);
-
-            // Generate a unique file name
-            var fileName = string.Format(CultureInfo.InvariantCulture, FileNameFormat, DateTime.UtcNow);
-
-            // Write error to file
-            var file = errorsFolder.CreateFile(fileName);
-            file.WriteAllText(contents.SerializeXml(true));
-
-            // Return file name
-            return fileName;
-        }
-
-        /// <summary>
-        /// Lists all errors currently held in the store.
-        /// </summary>
-        public static string[] List()
-        {
-            // Open local storage folder
-            var storage = ApplicationData.Current.LocalFolder;
-
-            // Open errors folder (return null when not found)
-            var errorsFolder = storage.OpenFolder(FolderName);
-            if (errorsFolder == null)
-                return null;
-
-            // List files
-            var files = new List<string>();
-            files.AddRange(from file in errorsFolder.GetFilesAsync().GetAwaiter().GetResult()
-                           where !file.Name.Equals(SourceIdFileName, StringComparison.OrdinalIgnoreCase)
-                           select file.Name);
-
-            // Return result
-            return files.ToArray();
-        }
-
-        /// <summary>
-        /// Gets an error.
-        /// </summary>
-        public static ErrorReportData Get(string fileName)
-        {
-            // Open local storage folder
-            var storage = ApplicationData.Current.LocalFolder;
-
-            // Open errors folder (return null when not found)
-            var errorsFolder = storage.OpenFolder(FolderName);
-            if (errorsFolder == null)
-                return null;
-
-            // Open file (return null when not found)
-            var file = errorsFolder.OpenFile(fileName);
-            if (file == null)
-                return null;
-
-            // Return contents
-            return XmlSerializerExtensions.DeserializeXml<ErrorReportData>(file.ReadAllText());
-        }
-
-        /// <summary>
         /// Removes an error from the store.
         /// </summary>
         /// <param name="fileName">File name.</param>
         public static void Remove(string fileName)
         {
             // Open local storage folder
-            var storage = ApplicationData.Current.LocalFolder;
+            StorageFolder storage = ApplicationData.Current.LocalFolder;
 
             // Open errors folder (return when not found)
-            var errorsFolder = storage.OpenFolder(FolderName);
+            IStorageFolder errorsFolder = storage.OpenFolder(FolderName);
             if (errorsFolder == null)
+            {
                 return;
+            }
 
             // Open file (return when not found)
-            var file = errorsFolder.OpenFile(fileName);
+            IStorageFile file = errorsFolder.OpenFile(fileName);
             if (file == null)
+            {
                 return;
+            }
 
             // Delete file
             file.Delete(true);

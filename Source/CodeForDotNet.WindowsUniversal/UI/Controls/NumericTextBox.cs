@@ -1,5 +1,5 @@
 ﻿using CodeForDotNet.Numerics;
-using CodeForDotNet.WindowsUniversal.Input;
+using CodeForDotNet.UI.Input;
 using System;
 using System.Globalization;
 using Windows.UI.Xaml;
@@ -13,7 +13,39 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
     [CLSCompliant(false)]
     public class NumericTextBox : DynamicTextBox
     {
-        #region Lifetime
+        #region Public Fields
+
+        /// <summary>
+        /// <see cref="NumberBase"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty NumberBaseProperty =
+            DependencyProperty.Register("NumberBase", typeof(NumericTextBoxNumberBase), typeof(NumericTextBox),
+                                        new PropertyMetadata(NumericTextBoxNumberBase.Decimal));
+
+        /// <summary>
+        /// <see cref="NumberMax"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty NumberMaxProperty =
+            DependencyProperty.Register("MaxSignedValue", typeof(double), typeof(NumericTextBox),
+                                        new PropertyMetadata(double.MaxValue));
+
+        /// <summary>
+        /// <see cref="NumberMin"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty NumberMinProperty =
+            DependencyProperty.Register("MinSignedValue", typeof(double), typeof(NumericTextBox),
+                                        new PropertyMetadata(double.MinValue));
+
+        /// <summary>
+        /// <see cref="NumberSigned"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty NumberSignedProperty =
+            DependencyProperty.Register("NumberSigned", typeof(bool), typeof(NumericTextBox),
+                                        new PropertyMetadata(true));
+
+        #endregion Public Fields
+
+        #region Public Constructors
 
         /// <summary>
         /// Creates an instance with default values.
@@ -24,77 +56,49 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             PadChar = '0';
         }
 
-        #endregion Lifetime
+        #endregion Public Constructors
 
-        #region Properties
-
-        /// <summary>
-        /// <see cref="NumberBase"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty NumberBaseProperty =
-            DependencyProperty.Register("NumberBase", typeof(NumericTextBoxNumberBase), typeof(NumericTextBox),
-                                        new PropertyMetadata(NumericTextBoxNumberBase.Decimal));
+        #region Public Properties
 
         /// <summary>
         /// Sets the number base edited with this text box.
         /// </summary>
         public NumericTextBoxNumberBase NumberBase
         {
-            get { return (NumericTextBoxNumberBase)GetValue(NumberBaseProperty); }
-            set { SetValue(NumberBaseProperty, value); }
+            get => (NumericTextBoxNumberBase)GetValue(NumberBaseProperty);
+            set => SetValue(NumberBaseProperty, value);
         }
-
-        /// <summary>
-        /// <see cref="NumberSigned"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty NumberSignedProperty =
-            DependencyProperty.Register("NumberSigned", typeof(bool), typeof(NumericTextBox),
-                                        new PropertyMetadata(true));
-
-        /// <summary>
-        /// Enables editing signed values. Only applicable to decimal.
-        /// </summary>
-        public bool NumberSigned
-        {
-            get { return (bool)GetValue(NumberSignedProperty); }
-            set { SetValue(NumberSignedProperty, value); }
-        }
-
-        /// <summary>
-        /// <see cref="NumberMax"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty NumberMaxProperty =
-            DependencyProperty.Register("MaxSignedValue", typeof(double), typeof(NumericTextBox),
-                                        new PropertyMetadata(double.MaxValue));
 
         /// <summary>
         /// Maximum value.
         /// </summary>
         public double NumberMax
         {
-            get { return (double)GetValue(NumberMaxProperty); }
-            set { SetValue(NumberMaxProperty, value); }
+            get => (double)GetValue(NumberMaxProperty);
+            set => SetValue(NumberMaxProperty, value);
         }
-
-        /// <summary>
-        /// <see cref="NumberMin"/> dependency property.
-        /// </summary>
-        public static readonly DependencyProperty NumberMinProperty =
-            DependencyProperty.Register("MinSignedValue", typeof(double), typeof(NumericTextBox),
-                                        new PropertyMetadata(double.MinValue));
 
         /// <summary>
         /// Minimum value.
         /// </summary>
         public double NumberMin
         {
-            get { return (double)GetValue(NumberMinProperty); }
-            set { SetValue(NumberMinProperty, value); }
+            get => (double)GetValue(NumberMinProperty);
+            set => SetValue(NumberMinProperty, value);
         }
 
-        #endregion Properties
+        /// <summary>
+        /// Enables editing signed values. Only applicable to decimal.
+        /// </summary>
+        public bool NumberSigned
+        {
+            get => (bool)GetValue(NumberSignedProperty);
+            set => SetValue(NumberSignedProperty, value);
+        }
 
-        #region Event Handlers
+        #endregion Public Properties
+
+        #region Protected Methods
 
         /// <summary>
         /// Filters invalid keys.
@@ -104,8 +108,11 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             // Call base class method to process cursor keys, do nothing more when handled
             base.OnBeforeKeyDown(args);
             if (args.Handled)
+            {
                 return;
-            var key = (KeyboardKey)args.Key;
+            }
+
+            KeyboardKey key = (KeyboardKey)args.Key;
 
             // Allow minus to switch sign when signed
             if ((key == KeyboardKey.NumberPadSubtract || key == KeyboardKey.Minus) && NumberSigned)
@@ -117,61 +124,83 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
 
             // Filter keys according to current number settings
             if (!IsKeyValidNumber(key, (int)NumberBase))
+            {
                 args.Handled = true;
+            }
         }
 
         /// <summary>
-        /// Enforces selection rules based on current/maximum length and trying over to next control in a group.
+        /// Enforces selection rules based on current/maximum length and trying over to next control
+        /// in a group.
         /// </summary>
         protected override void OnBeforeSelectionChanged(object sender, DynamicTextSelectionChangedEventArgs args)
         {
             // Never select the sign
             bool? sign = null;
-            var text = Text;
+            string text = Text;
             if (NumberBase == NumericTextBoxNumberBase.Decimal)
             {
-                if (text.StartsWith("+", StringComparison.OrdinalIgnoreCase)) sign = true;
-                else if (text.StartsWith("-", StringComparison.OrdinalIgnoreCase)) sign = false;
+                if (text.StartsWith("+", StringComparison.OrdinalIgnoreCase))
+                {
+                    sign = true;
+                }
+                else if (text.StartsWith("-", StringComparison.OrdinalIgnoreCase))
+                {
+                    sign = false;
+                }
             }
             if (sign.HasValue && args.SelectionStart == 0)
+            {
                 args.SelectionStart = 1;
+            }
 
             // Apply base class rules
             base.OnBeforeSelectionChanged(sender, args);
         }
 
         /// <summary>
-        /// Strips non-numeric characters according to <see cref="NumberBase"/> before processing text changes.
+        /// Strips non-numeric characters according to <see cref="NumberBase"/> before processing
+        /// text changes.
         /// </summary>
         protected override void OnBeforeTextChanged(object sender, DynamicTextChangedEventArgs args)
         {
             // Apply decimal sign rules
-            var originalText = args.OriginalText;
-            var textValue = args.Text;
+            string originalText = args.OriginalText;
+            string textValue = args.Text;
             bool? sign = null;
             if (NumberBase == NumericTextBoxNumberBase.Decimal && NumberSigned)
             {
                 // Detect sign
-                if (textValue.StartsWith("+", StringComparison.OrdinalIgnoreCase)) sign = true;
-                else if (textValue.StartsWith("-", StringComparison.OrdinalIgnoreCase)) sign = false;
+                if (textValue.StartsWith("+", StringComparison.OrdinalIgnoreCase))
+                {
+                    sign = true;
+                }
+                else if (textValue.StartsWith("-", StringComparison.OrdinalIgnoreCase))
+                {
+                    sign = false;
+                }
 
                 // Apply sign rules
                 if (sign.HasValue)
                 {
                     // Remove sign when only remaining character
                     if (textValue.Length == 1)
+                    {
                         sign = null;
+                    }
 
                     // Prevent selection of sign itself
                     else if (SelectionStart == 0)
+                    {
                         SelectionStart = 1;
+                    }
                 }
             }
 
             // Strip invalid characters.
-            var validChars = GetValidNumberChars((int)NumberBase);
-            var text = "";
-            foreach (var textChar in args.Text)
+            string validChars = GetValidNumberChars((int)NumberBase);
+            string text = "";
+            foreach (char textChar in args.Text)
             {
                 // Allow sign as first character.
                 if (sign.HasValue && text.Length == 0 && (textChar == '+' || textChar == '-'))
@@ -199,7 +228,9 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
                     {
                         // Skip or pad invalid characters.
                         if (PadChar.HasValue)
+                        {
                             text += PadChar.Value;
+                        }
                     }
                 }
             }
@@ -207,7 +238,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             // Validate number when set (format and sign, minimum and maximum)
             if (!string.IsNullOrEmpty(text))
             {
-                var numberBase = (int)NumberBase;
+                int numberBase = (int)NumberBase;
                 if (!Number.TryParse(text, numberBase, out Number value) || value < NumberMin || value > NumberMax)
                 {
                     // Discard changes when invalid
@@ -220,7 +251,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             base.OnBeforeTextChanged(sender, args);
         }
 
-        #endregion Event Handlers
+        #endregion Protected Methods
 
         #region Private Methods
 
@@ -263,7 +294,10 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
                 case KeyboardKey.NumberPad0:
                 case KeyboardKey.NumberPad1:
                     if (numberBase < 2)
+                    {
                         return false;
+                    }
+
                     break;
 
                 // Allow decimal keys for base 10+
@@ -284,7 +318,10 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
                 case KeyboardKey.NumberPad8:
                 case KeyboardKey.NumberPad9:
                     if (numberBase < 10)
+                    {
                         return false;
+                    }
+
                     break;
 
                 // Allow hex keys for base 16
@@ -295,7 +332,10 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
                 case KeyboardKey.E:
                 case KeyboardKey.F:
                     if (numberBase < 16)
+                    {
                         return false;
+                    }
+
                     break;
 
                 // All other keys invalid
@@ -306,35 +346,40 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         }
 
         /// <summary>
-        /// Negates the current value.
-        /// </summary>
-        private void Negate()
-        {
-            // Validate
-            if (!NumberSigned) throw new InvalidOperationException();
-
-            // Get value
-            var value = GetValue();
-
-            // Negate
-            value = -value;
-
-            // Set text to negated value
-            Text = value.ToString((int)NumberBase, MinLength);
-        }
-
-        /// <summary>
         /// Gets the current numeric value.
         /// </summary>
         private Number GetValue()
         {
             // Return zero when empty
             if (string.IsNullOrWhiteSpace(Text))
+            {
                 return Number.Zero;
+            }
 
             // Parse and return value
             Number.TryParse(Text, (int)NumberBase, out Number value, NumberSigned);
             return value;
+        }
+
+        /// <summary>
+        /// Negates the current value.
+        /// </summary>
+        private void Negate()
+        {
+            // Validate
+            if (!NumberSigned)
+            {
+                throw new InvalidOperationException();
+            }
+
+            // Get value
+            Number value = GetValue();
+
+            // Negate
+            value = -value;
+
+            // Set text to negated value
+            Text = value.ToString((int)NumberBase, MinLength);
         }
 
         #endregion Private Methods

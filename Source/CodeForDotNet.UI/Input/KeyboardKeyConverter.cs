@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Globalization;
 
-namespace CodeForDotNet.WindowsUniversal.Input
+namespace CodeForDotNet.UI.Input
 {
     /// <summary>
     /// Converts virtual keys to strings.
     /// </summary>
     public static class KeyboardKeyConverter
     {
+        #region Public Methods
+
         /// <summary>
         /// Translates a virtual key to an input character when relevant.
         /// </summary>
@@ -22,7 +24,9 @@ namespace CodeForDotNet.WindowsUniversal.Input
         /// Translates a virtual key to an input character when relevant.
         /// </summary>
         /// <param name="key">Key to convert.</param>
-        /// <param name="uppercase">True to return uppercase characters, e.g. when shift is also pressed.</param>
+        /// <param name="uppercase">
+        /// True to return uppercase characters, e.g. when shift is also pressed.
+        /// </param>
         /// <returns>String (normally one character) or null when no mapping, e.g. function key.</returns>
         public static string ConvertToString(KeyboardKey key, bool uppercase)
         {
@@ -33,7 +37,9 @@ namespace CodeForDotNet.WindowsUniversal.Input
         /// Translates a virtual key to an input character when relevant.
         /// </summary>
         /// <param name="key">Key to convert.</param>
-        /// <param name="uppercase">True to return uppercase characters, e.g. when shift is also pressed.</param>
+        /// <param name="uppercase">
+        /// True to return uppercase characters, e.g. when shift is also pressed.
+        /// </param>
         /// <param name="culture">Culture used for the <see cref="KeyboardKey.NumberPadDecimal"/>.</param>
         /// <returns>String (normally one character) or null when no mapping, e.g. function key.</returns>
         public static string ConvertToString(KeyboardKey key, bool uppercase, CultureInfo culture)
@@ -187,9 +193,12 @@ namespace CodeForDotNet.WindowsUniversal.Input
                     return "/";
 
                 default:
+
                     // Control key or non-visible character
                     return null;
             }
         }
+
+        #endregion Public Methods
     }
 }

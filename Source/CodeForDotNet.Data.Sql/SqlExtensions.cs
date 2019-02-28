@@ -15,15 +15,15 @@ namespace CodeForDotNet.Data.Sql
         /// <summary>
         /// Cache of <see cref="SqlParameter"/> items for a given command hash-code.
         /// </summary>
-        static readonly Dictionary<int, SqlParameter[]> ParameterCache = new Dictionary<int, SqlParameter[]>();
+        private static readonly Dictionary<int, SqlParameter[]> ParameterCache = new Dictionary<int, SqlParameter[]>();
 
-        #endregion
+        #endregion Private Fields
 
         #region Public Methods
 
         /// <summary>
-        /// Creates an SQL Server connection string from common pieces,
-        /// e.g. server name, database, user &amp; password (if not integrated security).
+        /// Creates an SQL Server connection string from common pieces, e.g. server name, database,
+        /// user &amp; password (if not integrated security).
         /// </summary>
         /// <param name="serverName">Database server name or (local) for shared memory local access.</param>
         /// <param name="databaseName">Default database name.</param>
@@ -52,29 +52,33 @@ namespace CodeForDotNet.Data.Sql
         }
 
         /// <summary>
-        /// Creates a command object for the specified stored procedure, automatically
-        /// populating the parameters. Parameter sets are cached for performance.
+        /// Creates a command object for the specified stored procedure, automatically populating the
+        /// parameters. Parameter sets are cached for performance.
         /// </summary>
-        /// <param name="connection">Connection used to derive parameters (first time only) or create the command.</param>
-        /// <param name="procedureName">Name of the stored procedure for which to create the command and parameters.</param>
+        /// <param name="connection">
+        /// Connection used to derive parameters (first time only) or create the command.
+        /// </param>
+        /// <param name="procedureName">
+        /// Name of the stored procedure for which to create the command and parameters.
+        /// </param>
         public static SqlCommand CreateCommandWithParameters(this SqlConnection connection, string procedureName)
         {
             // Validate
-            if (connection == null) throw new ArgumentNullException(nameof(connection));
-            if (procedureName == null) throw new ArgumentNullException(nameof(procedureName));
+            if (connection is null) throw new ArgumentNullException(nameof(connection));
+            if (procedureName is null) throw new ArgumentNullException(nameof(procedureName));
 
             // Open connection if necessary
             if (connection.State != ConnectionState.Open)
                 connection.Open();
 
             // Create the command
-            var cmd = connection.CreateCommand();
+            SqlCommand cmd = connection.CreateCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = procedureName;
 
             // Get parameter set with caching
-            int cacheKey = connection.ConnectionString.GetHashCode() ^ procedureName.GetHashCode();
-            bool cached = true;
+            var cacheKey = connection.ConnectionString.GetHashCode() ^ procedureName.GetHashCode();
+            var cached = true;
             if (!ParameterCache.ContainsKey(cacheKey))
             {
                 lock (ParameterCache)
@@ -99,10 +103,10 @@ namespace CodeForDotNet.Data.Sql
                                 null, parameter.XmlSchemaCollectionDatabase,
                                 parameter.XmlSchemaCollectionOwningSchema,
                                 parameter.XmlSchemaCollectionName)
-                                {
-                                    Offset = parameter.Offset,
-                                    TypeName = parameter.TypeName
-                                };
+                            {
+                                Offset = parameter.Offset,
+                                TypeName = parameter.TypeName
+                            };
                             parameterCache.Add(cacheParameter);
                         }
                         ParameterCache.Add(cacheKey, parameterCache.ToArray());
@@ -112,8 +116,8 @@ namespace CodeForDotNet.Data.Sql
             if (cached)
             {
                 // Set parameters from cache
-                var parameterCache = ParameterCache[cacheKey];
-                foreach (var cacheParameter in parameterCache)
+                SqlParameter[] parameterCache = ParameterCache[cacheKey];
+                foreach (SqlParameter cacheParameter in parameterCache)
                 {
                     var parameter = new SqlParameter(
                         cacheParameter.ParameterName, cacheParameter.SqlDbType,
@@ -124,10 +128,10 @@ namespace CodeForDotNet.Data.Sql
                         null, cacheParameter.XmlSchemaCollectionDatabase,
                         cacheParameter.XmlSchemaCollectionOwningSchema,
                         cacheParameter.XmlSchemaCollectionName)
-                        {
-                            Offset = cacheParameter.Offset,
-                            TypeName = cacheParameter.TypeName
-                        };
+                    {
+                        Offset = cacheParameter.Offset,
+                        TypeName = cacheParameter.TypeName
+                    };
                     cmd.Parameters.Add(parameter);
                 }
             }
@@ -136,6 +140,6 @@ namespace CodeForDotNet.Data.Sql
             return cmd;
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

@@ -29,9 +29,6 @@
     </Compile>
     <Compile Include="UI\Converters\BooleanNegationConverter.cs" />
     <Compile Include="UI\Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Input\DelegateCommand.cs" />
-    <Compile Include="Input\KeyboardKey.cs" />
-    <Compile Include="Input\KeyboardKeyConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runtime\SuspensionManager.cs" />
     <Compile Include="Runtime\SuspensionManagerException.cs" />

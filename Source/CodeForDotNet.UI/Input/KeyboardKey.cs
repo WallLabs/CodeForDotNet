@@ -1,10 +1,9 @@
-﻿using Windows.System;
-
-namespace CodeForDotNet.WindowsUniversal.Input
+﻿namespace CodeForDotNet.UI.Input
 {
     /// <summary>
-    /// Complete set of keyboard virtual key definitions, an expanded version of the <see cref="VirtualKey"/>
-    /// like the Windows Forms "Keys" enumeration, which is not currently available in WinRT.
+    /// Complete set of keyboard virtual key definitions, an expanded version of the XAML
+    /// "Windows.System.VirtualKey" like the Windows Forms "Keys" enumeration, which is not currently
+    /// available in WinRT.
     /// </summary>
     public enum KeyboardKey
     {
@@ -17,7 +16,7 @@ namespace CodeForDotNet.WindowsUniversal.Input
         /// Left mouse button.
         /// </summary>
         MouseLeft = 0x01,
-    
+
         /// <summary>
         /// Right mouse button.
         /// </summary>
@@ -52,22 +51,22 @@ namespace CodeForDotNet.WindowsUniversal.Input
         /// TAB key.
         /// </summary>
         Tab = 0x09,
- 
+
         /// <summary>
         /// CLEAR key.
         /// </summary>
         Clear = 0x0C,
- 
+
         /// <summary>
         /// ENTER key.
         /// </summary>
         Enter = 0x0D,
- 
+
         /// <summary>
         /// SHIFT key.
         /// </summary>
         Shift = 0x10,
- 
+
         /// <summary>
         /// CTRL key.
         /// </summary>
@@ -80,12 +79,12 @@ namespace CodeForDotNet.WindowsUniversal.Input
         /// Originally named "MENU" in header file but "Alt" name taken for more intuitive use.
         /// </remarks>
         Alt = 0x12,
- 
+
         /// <summary>
         /// PAUSE key.
         /// </summary>
         Pause = 0x13,
- 
+
         /// <summary>
         /// CAPS LOCK key.
         /// </summary>
@@ -93,7 +92,7 @@ namespace CodeForDotNet.WindowsUniversal.Input
         /// Originally named "CAPITAL" in header file but "CapsLock" name taken for more intuitive use.
         /// </remarks>
         CapsLock = 0x14,
- 
+
         /// <summary>
         /// IME Kana mode.
         /// </summary>
@@ -133,7 +132,7 @@ namespace CodeForDotNet.WindowsUniversal.Input
         /// ESC key.
         /// </summary>
         Escape = 0x1B,
- 
+
         /// <summary>
         /// IME convert.
         /// </summary>
@@ -244,7 +243,7 @@ namespace CodeForDotNet.WindowsUniversal.Input
         /// 0 key.
         /// </summary>
         Number0 = 0x30,
-        
+
         /// <summary>
         /// 1 key.
         /// </summary>
@@ -508,7 +507,7 @@ namespace CodeForDotNet.WindowsUniversal.Input
         /// <summary>
         /// Subtract key.
         /// </summary>
-        NumberPadSubtract =  0x6D,
+        NumberPadSubtract = 0x6D,
 
         /// <summary>
         /// Decimal key.
@@ -771,8 +770,8 @@ namespace CodeForDotNet.WindowsUniversal.Input
         LaunchApp2 = 0xB7,
 
         /// <summary>
-        /// Used for miscellaneous characters; it can vary by keyboard.
-        /// For the US standard keyboard, the ';:' key.
+        /// Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+        /// the ';:' key.
         /// </summary>
         Oem1 = 0xBA,
 
@@ -797,38 +796,38 @@ namespace CodeForDotNet.WindowsUniversal.Input
         Period = 0xBE,
 
         /// <summary>
-        /// Used for miscellaneous characters; it can vary by keyboard.
-        /// For the US standard keyboard, the '/?' key.
+        /// Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+        /// the '/?' key.
         /// </summary>
         Oem2 = 0xBF,
 
         /// <summary>
-        /// Used for miscellaneous characters; it can vary by keyboard.
-        /// For the US standard keyboard, the '`~' key
+        /// Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+        /// the '`~' key
         /// </summary>
         Oem3 = 0xC0,
 
         /// <summary>
-        /// Used for miscellaneous characters; it can vary by keyboard.
-        /// For the US standard keyboard, the '[{' key.
+        /// Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+        /// the '[{' key.
         /// </summary>
         Oem4 = 0xDB,
 
         /// <summary>
-        /// Used for miscellaneous characters; it can vary by keyboard.
-        /// For the US standard keyboard, the '\|' key
+        /// Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+        /// the '\|' key
         /// </summary>
         Oem5 = 0xDC,
 
         /// <summary>
-        /// Used for miscellaneous characters; it can vary by keyboard.
-        /// For the US standard keyboard, the ']}' key.
+        /// Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+        /// the ']}' key.
         /// </summary>
         Oem6 = 0xDD,
 
         /// <summary>
-        /// Used for miscellaneous characters; it can vary by keyboard.
-        /// For the US standard keyboard, the 'single-quote/double-quote' key.
+        /// Used for miscellaneous characters; it can vary by keyboard. For the US standard keyboard,
+        /// the 'single-quote/double-quote' key.
         /// </summary>
         Oem7 = 0xDE,
 
@@ -841,14 +840,16 @@ namespace CodeForDotNet.WindowsUniversal.Input
         /// Either the angle bracket key or the backslash key on the RT 102-key keyboard.
         /// </summary>
         Oem102 = 0xE2,
-        
+
         /// <summary>
         /// IME PROCESS key.
         /// </summary>
         ImeProcess = 0xE5,
 
         /// <summary>
-        /// Used to pass Unicode characters as if they were keystrokes. The VK_PACKET key is the low word of a 32-bit Virtual Key value used for non-keyboard input methods. For more information, see Remark in KEYBDINPUT, SendInput, WM_KEYDOWN, and WM_KEYUP.
+        /// Used to pass Unicode characters as if they were keystrokes. The VK_PACKET key is the low
+        /// word of a 32-bit Virtual Key value used for non-keyboard input methods. For more
+        /// information, see Remark in KEYBDINPUT, SendInput, WM_KEYDOWN, and WM_KEYUP.
         /// </summary>
         Packet = 0xE7,
 
@@ -863,7 +864,8 @@ namespace CodeForDotNet.WindowsUniversal.Input
         CursorSelect = 0xF7,
 
         /// <summary>
-        /// ExSel key. Defined by IBM as extended key function select (pressed before the key with an extended function).
+        /// ExSel key. Defined by IBM as extended key function select (pressed before the key with an
+        /// extended function).
         /// </summary>
         ExtendedKeySelect = 0xF8,
 

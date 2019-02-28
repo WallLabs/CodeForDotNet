@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 
 namespace CodeForDotNet.Collections
@@ -32,19 +33,23 @@ namespace CodeForDotNet.Collections
             {
                 var value1 = left[index];
                 var value2 = right[index];
-                if (!ReferenceEquals(value1, null))
+                if (value1 is null)
+                {
+                    // Not same when nullability doesn't match.
+                    if (!(value2 is null))
+                        return false;
+                }
+                else
                 {
                     // Compare nested array by value too
                     if (value1.GetType().IsArray)
                         return AreEqual((Array)value1, (Array)value2);
 
-                    // Compare other objects using any defined comparer or operator overloads
-                    // This will still compare reference types by reference when none are defined
+                    // Compare other objects using any defined comparer or operator overloads This
+                    // will still compare reference types by reference when none are defined
                     if (!value1.Equals(value2))
                         return false;
                 }
-                else if (!ReferenceEquals(value2, null))
-                    return false;
             }
 
             // Return same
@@ -63,8 +68,8 @@ namespace CodeForDotNet.Collections
                 return false;
 
             // Compare values
-            var enumerator1 = left.GetEnumerator();
-            var enumerator2 = right.GetEnumerator();
+            IEnumerator enumerator1 = left.GetEnumerator();
+            IEnumerator enumerator2 = right.GetEnumerator();
             do
             {
                 // Get next item and check length
@@ -84,19 +89,23 @@ namespace CodeForDotNet.Collections
                 // Compare current values
                 var value1 = enumerator1.Current;
                 var value2 = enumerator2.Current;
-                if (!ReferenceEquals(value1, null))
+                if (value1 is null)
+                {
+                    // Not same when nullability doesn't match.
+                    if (!(value2 is null))
+                        return false;
+                }
+                else
                 {
                     // Compare nested array by value too
                     if (value1.GetType().IsArray)
                         return AreEqual((Array)value1, (Array)value2);
 
-                    // Compare other objects using any defined comparer or operator overloads
-                    // This will still compare reference types by reference when none are defined
+                    // Compare other objects using any defined comparer or operator overloads This
+                    // will still compare reference types by reference when none are defined
                     if (!value1.Equals(value2))
                         return false;
                 }
-                else if (!ReferenceEquals(value2, null))
-                    return false;
 
                 // Next...
             } while (true);
@@ -137,7 +146,10 @@ namespace CodeForDotNet.Collections
         /// </summary>
         /// <param name="array">Array to search.</param>
         /// <param name="value">Value to search for.</param>
-        /// <param name="comparisonType">Comparison options, e.g. set to <see cref="StringComparison.OrdinalIgnoreCase"/> for a case insensitive comparison.</param>
+        /// <param name="comparisonType">
+        /// Comparison options, e.g. set to <see cref="StringComparison.OrdinalIgnoreCase"/> for a
+        /// case insensitive comparison.
+        /// </param>
         /// <returns>True when found.</returns>
         public static bool Contains(this IEnumerable<string> array, string value, StringComparison comparisonType = StringComparison.Ordinal)
         {
@@ -145,16 +157,22 @@ namespace CodeForDotNet.Collections
         }
 
         /// <summary>
-        /// Gets the hash code of all items in the array.
+        /// Checks if the string collection contains the specified value optionally ignoring case.
         /// </summary>
-        public static int GetHashCode(this IList array)
+        /// <param name="collection">Collection to search.</param>
+        /// <param name="value">Value to search for.</param>
+        /// <param name="comparisonType">
+        /// Comparison options, e.g. set to <see cref="StringComparison.OrdinalIgnoreCase"/> for a
+        /// case insensitive comparison.
+        /// </param>
+        /// <returns>True when found.</returns>
+        public static bool Contains(this StringCollection collection, string value, StringComparison comparisonType = StringComparison.Ordinal)
         {
-            // Return zero when null
-            if (ReferenceEquals(array, null))
-                return 0;
+            // Cast to array.
+            IEnumerable<string> array = collection.OfType<string>();
 
-            // Calculate and return hash of all items
-            return array.Cast<object>().Aggregate(0, (current, item) => current ^ (item?.GetHashCode() ?? 0));
+            // Call overloaded method to check contents.
+            return array.Contains(value, comparisonType);
         }
 
         /// <summary>
@@ -168,11 +186,24 @@ namespace CodeForDotNet.Collections
                 return;
 
             // Dispose all members
-            foreach (var disposable in list.Cast<IDisposable>().ToArray())
+            foreach (IDisposable disposable in list.Cast<IDisposable>().ToArray())
             {
                 list.Remove(disposable);
                 disposable.Dispose();
             }
+        }
+
+        /// <summary>
+        /// Gets the hash code of all items in the array.
+        /// </summary>
+        public static int GetHashCode(this IList array)
+        {
+            // Return zero when null
+            if (array is null)
+                return 0;
+
+            // Calculate and return hash of all items
+            return array.Cast<object>().Aggregate(0, (current, item) => current ^ (item?.GetHashCode() ?? 0));
         }
 
         #endregion Public Methods

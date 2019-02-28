@@ -2,37 +2,51 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 
-namespace CodeForDotNet.WindowsUniversal.Input
+namespace CodeForDotNet.UI.Input
 {
     /// <summary>
     /// Generic command which calls delegate function(s) to execute or get the status.
     /// </summary>
     public class DelegateCommand : ICommand
     {
-        #region Constants
+        #region Private Fields
 
         /// <summary>
         /// Used to identify the status of the command when it has no parameter.
         /// </summary>
         private const string DefaultId = "";
 
-        #endregion
+        private readonly Func<object, bool> _canExecuteMethod;
 
-        #region Lifetime
+        private readonly Dictionary<object, bool> _commandStatus;
+
+        private readonly Action<object> _executeMethod;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         /// <summary>
         /// Creates an instance which calls the specified <see cref="Execute"/> delegate when executed.
         /// </summary>
-        /// <param name="executeMethod">Method invoked by <see cref="Execute"/> to perform the command action.</param>
+        /// <param name="executeMethod">
+        /// Method invoked by <see cref="Execute"/> to perform the command action.
+        /// </param>
         public DelegateCommand(Action<object> executeMethod) : this(executeMethod, null)
         {
         }
 
         /// <summary>
-        /// Creates an instance which calls the specified <see cref="Execute"/> and <see cref="CanExecute"/> delegates when executed.
+        /// Creates an instance which calls the specified <see cref="Execute"/> and
+        /// <see cref="CanExecute"/> delegates when executed.
         /// </summary>
-        /// <param name="executeMethod">Method invoked by <see cref="Execute"/> to perform the command action.</param>
-        /// <param name="canExecuteMethod">Optional method invoked by <see cref="CanExecute"/> to test whether the command is currently available for execution.</param>
+        /// <param name="executeMethod">
+        /// Method invoked by <see cref="Execute"/> to perform the command action.
+        /// </param>
+        /// <param name="canExecuteMethod">
+        /// Optional method invoked by <see cref="CanExecute"/> to test whether the command is
+        /// currently available for execution.
+        /// </param>
         public DelegateCommand(Action<object> executeMethod, Func<object, bool> canExecuteMethod)
         {
             _executeMethod = executeMethod;
@@ -40,24 +54,16 @@ namespace CodeForDotNet.WindowsUniversal.Input
             _commandStatus = new Dictionary<object, bool>();
         }
 
-        #endregion
+        #endregion Public Constructors
 
-        #region Private Fields
-
-        private readonly Action<object> _executeMethod;
-        private readonly Func<object, bool> _canExecuteMethod;
-        private readonly Dictionary<object, bool> _commandStatus;
-
-        #endregion
-
-        #region Events
+        #region Public Events
 
         /// <summary>
         /// Fired when the execution status has changed.
         /// </summary>
         public event EventHandler CanExecuteChanged;
 
-        #endregion
+        #endregion Public Events
 
         #region Public Methods
 
@@ -69,15 +75,15 @@ namespace CodeForDotNet.WindowsUniversal.Input
         public bool CanExecute(object parameter)
         {
             // Get current status
-            var status = _canExecuteMethod == null || _canExecuteMethod(parameter);
+            bool status = _canExecuteMethod == null || _canExecuteMethod(parameter);
 
             // Detect status change
-            var id = parameter ?? DefaultId;
-            var lastStatus = _commandStatus.ContainsKey(id) && _commandStatus[id];
+            object id = parameter ?? DefaultId;
+            bool lastStatus = _commandStatus.ContainsKey(id) && _commandStatus[id];
             if (status != lastStatus)
             {
-                // Store new status to detect next change
-                // Must do before firing event else loops (stack overflow)
+                // Store new status to detect next change Must do before firing event else loops
+                // (stack overflow)
                 _commandStatus[id] = status;
             }
 
@@ -95,13 +101,14 @@ namespace CodeForDotNet.WindowsUniversal.Input
         }
 
         /// <summary>
-        /// Fires the <see cref="CanExecuteChanged"/> event, causing consumers of this command to update their status.
+        /// Fires the <see cref="CanExecuteChanged"/> event, causing consumers of this command to
+        /// update their status.
         /// </summary>
         public void InvokeCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
-        #endregion
+        #endregion Public Methods
     }
 }

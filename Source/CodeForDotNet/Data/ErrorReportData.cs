@@ -9,36 +9,72 @@ namespace CodeForDotNet.Data
     [DataContract]
     public class ErrorReportData : GuidDataKey
     {
-        #region Operators
+        #region Public Properties
 
         /// <summary>
-        /// Tests two objects of this type for equality by value.
+        /// Optional full type name of the exception which occurred.
         /// </summary>
-        public static bool operator ==(ErrorReportData source, ErrorReportData target)
-        {
-            return !ReferenceEquals(source, null)
-                       ? source.Equals(target)
-                       : ReferenceEquals(target, null);
-        }
+        [DataMember]
+        public string ErrorTypeFullName { get; set; }
+
+        /// <summary>
+        /// Date and time when the event occurred.
+        /// </summary>
+        [DataMember(IsRequired = true)]
+        public DateTimeOffset EventDate { get; set; }
+
+        /// <summary>
+        /// Message.
+        /// </summary>
+        [DataMember(IsRequired = true)]
+        public string Message { get; set; }
+
+        /// <summary>
+        /// Source assembly name including fully qualified name, version and any other attributes
+        /// such as public key.
+        /// </summary>
+        [DataMember(IsRequired = true)]
+        public string SourceAssemblyName { get; set; }
+
+        /// <summary>
+        /// Unique identifier used to group reports from the same source.
+        /// </summary>
+        [DataMember(IsRequired = true)]
+        public Guid SourceId { get; set; }
+
+        /// <summary>
+        /// Optional stack trace.
+        /// </summary>
+        [DataMember]
+        public string StackTrace { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         /// <summary>
         /// Tests two objects of this type for in-equality by value.
         /// </summary>
-        public static bool operator !=(ErrorReportData source, ErrorReportData target)
+        public static bool operator !=(ErrorReportData left, ErrorReportData right)
         {
-            return !ReferenceEquals(source, null)
-                       ? !source.Equals(target)
-                       : !ReferenceEquals(target, null);
+            return !(left?.Equals(right) ?? right is null);
+        }
+
+        /// <summary>
+        /// Tests two objects of this type for equality by value.
+        /// </summary>
+        public static bool operator ==(ErrorReportData left, ErrorReportData right)
+        {
+            return left?.Equals(right) ?? right is null;
         }
 
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        public override bool Equals(object obj)
+        public override bool Equals(object unknown)
         {
             // Compare null and type
-            var other = obj as ErrorReportData;
-            if (ReferenceEquals(other, null))
+            if (!(unknown is ErrorReportData other) || other is null)
                 return false;
 
             return
@@ -65,46 +101,6 @@ namespace CodeForDotNet.Data
                    (StackTrace != null ? StackTrace.GetHashCode() : 0);
         }
 
-        #endregion
-
-        #region Public Properties
-
-        /// <summary>
-        /// Unique identifier used to group reports from the same source.
-        /// </summary>
-        [DataMember(IsRequired = true)]
-        public Guid SourceId { get; set; }
-
-        /// <summary>
-        /// Source assembly name including fully qualified name, version and any other attributes such as public key.
-        /// </summary>
-        [DataMember(IsRequired = true)]
-        public string SourceAssemblyName { get; set; }
-
-        /// <summary>
-        /// Date and time when the event occurred.
-        /// </summary>
-        [DataMember(IsRequired = true)]
-        public DateTimeOffset EventDate { get; set; }
-
-        /// <summary>
-        /// Message.
-        /// </summary>
-        [DataMember(IsRequired = true)]
-        public string Message { get; set; }
-
-        /// <summary>
-        /// Optional full type name of the exception which occurred.
-        /// </summary>
-        [DataMember]
-        public string ErrorTypeFullName { get; set; }
-
-        /// <summary>
-        /// Optional stack trace.
-        /// </summary>
-        [DataMember]
-        public string StackTrace { get; set; }
-
-        #endregion
+        #endregion Public Methods
     }
 }

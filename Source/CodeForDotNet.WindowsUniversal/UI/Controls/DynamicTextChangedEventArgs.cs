@@ -4,12 +4,13 @@ using Windows.UI.Xaml.Controls;
 namespace CodeForDotNet.WindowsUniversal.UI.Controls
 {
     /// <summary>
-    /// Provides a better alternative to <see cref="TextChangedEventArgs"/> to track overrides to text content through multiple event consumers.
-    /// Enables the sender to efficiently set the final changes once, avoiding loops or conflicting change events.
+    /// Provides a better alternative to <see cref="TextChangedEventArgs"/> to track overrides to
+    /// text content through multiple event consumers. Enables the sender to efficiently set the
+    /// final changes once, avoiding loops or conflicting change events.
     /// </summary>
     public class DynamicTextChangedEventArgs : EventArgs
     {
-        #region Lifetime
+        #region Public Constructors
 
         /// <summary>
         /// Creates an instance with the required properties.
@@ -17,17 +18,17 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         public DynamicTextChangedEventArgs(string text, string originalText)
         {
             // Validate
-            if (text == null) throw new ArgumentNullException(nameof(text));
-            if (originalText == null) throw new ArgumentNullException(nameof(originalText));
+            if (text is null) throw new ArgumentNullException(nameof(text));
+            if (originalText is null) throw new ArgumentNullException(nameof(originalText));
 
             // Initialize member
             Text = text;
             OriginalText = originalText;
         }
 
-        #endregion Lifetime
+        #endregion Public Constructors
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         /// Original text content at the time the change occurred (not before).
@@ -42,6 +43,6 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         /// </summary>
         public string Text { get; set; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

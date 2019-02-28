@@ -7,7 +7,7 @@ namespace CodeForDotNet.ComponentModel
     /// <summary>
     /// View object with intelligent property, data and event caching.
     /// </summary>
-    public interface IViewObject : IPropertyObject
+    public interface IViewObject : IPropertyStore
     {
         #region Properties
 

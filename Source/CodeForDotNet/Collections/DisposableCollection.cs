@@ -32,7 +32,10 @@ namespace CodeForDotNet.Collections
         {
             // Dispose only once
             if (IsDisposing || IsDisposed)
+            {
                 return;
+            }
+
             IsDisposing = true;
 
             // Dispose only unmanaged resources
@@ -57,7 +60,10 @@ namespace CodeForDotNet.Collections
         {
             // Dispose only once
             if (IsDisposing || IsDisposed)
+            {
                 return;
+            }
+
             IsDisposing = true;
             try
             {
@@ -97,9 +103,13 @@ namespace CodeForDotNet.Collections
             {
                 // Dispose or release references according to dispose type.
                 if (disposing)
+                {
                     ClearItems();
+                }
                 else
+                {
                     base.ClearItems();
+                }
             }
             finally
             {
@@ -153,7 +163,9 @@ namespace CodeForDotNet.Collections
             {
                 // Dispose items
                 foreach (IDisposable item in Items)
+                {
                     item.Dispose();
+                }
             }
             finally
             {
@@ -169,7 +181,7 @@ namespace CodeForDotNet.Collections
         {
             try
             {
-                var item = (IDisposable)Items[index];
+                IDisposable item = (IDisposable)Items[index];
                 item?.Dispose();
             }
             finally
@@ -185,7 +197,7 @@ namespace CodeForDotNet.Collections
         {
             try
             {
-                var oldItem = (IDisposable)Items[index];
+                IDisposable oldItem = (IDisposable)Items[index];
                 oldItem?.Dispose();
             }
             finally

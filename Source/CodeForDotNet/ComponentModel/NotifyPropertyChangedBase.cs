@@ -9,7 +9,7 @@ namespace CodeForDotNet.ComponentModel
     /// Use the <see cref="SetProperty&lt;T&gt;(ref T, T, string, SetPropertyEventHandler&lt;T&gt;, SetPropertyEventHandler&lt;T&gt;)"/> method
     /// in your property setters to automatically test for equality, then set the new value and fire the <see cref="PropertyChanged"/> event when changed.
     /// </summary>
-    public abstract class NotifyPropertyChangedBase : EventObject, INotifyPropertyChanged
+    public abstract class NotifyPropertyChangedBase : EventCache, INotifyPropertyChanged
     {
         #region Lifetime
 

@@ -15,9 +15,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencie
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7402DBF0-5BFC-4201-94A5-3C232A5B3B32}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		Build.cmd = Build.cmd
+		CodeMaid.config = CodeMaid.config
 		Local Test.runsettings = Local Test.runsettings
+		NuGet.config = NuGet.config
 		Release.cmd = Release.cmd
 		Version.cmd = Version.cmd
 		Version.ps1 = Version.ps1

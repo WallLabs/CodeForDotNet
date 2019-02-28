@@ -8,16 +8,24 @@ namespace CodeForDotNet.ComponentModel
     /// <summary>
     /// View component dependency object with intelligent property change event caching.
     /// </summary>
-    public interface IPropertyObject : IEventObject, IDisposableObject, INotifyPropertyChanged
+    public interface IPropertyStore : IEventCache, IDisposableObject, INotifyPropertyChanged
     {
-        #region Methods
-
-        #region Property Access
+        #region Public Events
 
         /// <summary>
-        /// Gets all property IDs.
+        /// Fired when properties of this object are changed.
         /// </summary>
-        Collection<Guid> GetPropertyIds();
+        event EventHandler<PropertyStoreChangeEventArgs> PropertyStoreChanged;
+
+        #endregion Public Events
+
+        #region Public Methods
+
+        /// <summary>
+        /// Clears a property value if it exists, disposing any current value when flagged.
+        /// </summary>
+        /// <param name="id">Property ID.</param>
+        void ClearProperty(Guid id);
 
         /// <summary>
         /// Checks if the property value exists.
@@ -25,6 +33,13 @@ namespace CodeForDotNet.ComponentModel
         /// <param name="id">Property ID.</param>
         /// <returns>True when exists, otherwise false.</returns>
         bool ContainsProperty(Guid id);
+
+        /// <summary>
+        /// Checks if the property has a value.
+        /// </summary>
+        /// <param name="id">Property ID.</param>
+        /// <returns>True when present, otherwise false.</returns>
+        bool ContainsPropertyValue(Guid id);
 
         /// <summary>
         /// Gets a property value.
@@ -43,46 +58,32 @@ namespace CodeForDotNet.ComponentModel
         T GetProperty<T>(Guid id, T defaultValue);
 
         /// <summary>
-        /// Sets a property value.
+        /// Gets all property IDs.
         /// </summary>
-        /// <param name="id">Property ID.</param>
-        /// <param name="value">Property value.</param>
-        void SetProperty<T>(Guid id, T value);
-
-        /// <summary>
-        /// Sets multuple properties.
-        /// </summary>
-        /// <exception cref="ArgumentNullException">Thrown when the <paramref name="properties"/> parameter is null or empty.</exception>
-        void SetProperties(Dictionary<Guid, object> properties);
-
-        /// <summary>
-        /// Clears a property value if it exists, disposing any current value when flagged.
-        /// </summary>
-        /// <param name="id">Property ID.</param>
-        void ClearProperty(Guid id);
-
-        #endregion
-
-        #region Change Notification
+        Collection<Guid> GetPropertyIds();
 
         /// <summary>
         /// Notifies this object that a related view object has changed.
         /// </summary>
         /// <param name="changed">Changed view object instance.</param>
         /// <param name="change">Change details.</param>
-        void NotifyChange(IPropertyObject changed, PropertyObjectChangeEventArgs change);
-
-        #endregion
-
-        #endregion
-
-        #region Events
+        void NotifyChange(IPropertyStore changed, PropertyStoreChangeEventArgs change);
 
         /// <summary>
-        /// Fired when properties of this object are changed.
+        /// Sets multiple properties.
         /// </summary>
-        event EventHandler<PropertyObjectChangeEventArgs> PropertyObjectChanged;
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when the <paramref name="properties"/> parameter is null or empty.
+        /// </exception>
+        void SetProperties(IDictionary<Guid, object> properties);
 
-        #endregion
+        /// <summary>
+        /// Sets a property value.
+        /// </summary>
+        /// <param name="id">Property ID.</param>
+        /// <param name="value">Property value.</param>
+        void SetProperty<T>(Guid id, T value);
+
+        #endregion Public Methods
     }
 }

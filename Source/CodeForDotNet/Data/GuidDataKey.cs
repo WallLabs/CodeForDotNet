@@ -9,36 +9,41 @@ namespace CodeForDotNet.Data
     [DataContract]
     public class GuidDataKey
     {
-        #region Operators
+        #region Public Properties
 
         /// <summary>
-        /// Tests two objects of this type for equality by value.
+        /// Unique identifier used to group reports from the same source.
         /// </summary>
-        public static bool operator ==(GuidDataKey source, GuidDataKey target)
-        {
-            return !ReferenceEquals(source, null)
-                       ? source.Equals(target)
-                       : ReferenceEquals(target, null);
-        }
+        [DataMember(IsRequired = true)]
+        public Guid Id { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         /// <summary>
         /// Tests two objects of this type for in-equality by value.
         /// </summary>
-        public static bool operator !=(GuidDataKey source, GuidDataKey target)
+        public static bool operator !=(GuidDataKey left, GuidDataKey right)
         {
-            return !ReferenceEquals(source, null)
-                       ? !source.Equals(target)
-                       : !ReferenceEquals(target, null);
+            return !(left?.Equals(right) ?? right is null);
+        }
+
+        /// <summary>
+        /// Tests two objects of this type for equality by value.
+        /// </summary>
+        public static bool operator ==(GuidDataKey left, GuidDataKey right)
+        {
+            return left?.Equals(right) ?? right is null;
         }
 
         /// <summary>
         /// Compares this object with another by value.
         /// </summary>
-        public override bool Equals(object obj)
+        public override bool Equals(object unknown)
         {
             // Compare null and type
-            var other = obj as GuidDataKey;
-            if (ReferenceEquals(other, null))
+            if (!(unknown is GuidDataKey other) || other is null)
                 return false;
 
             return
@@ -53,16 +58,6 @@ namespace CodeForDotNet.Data
             return Id.GetHashCode();
         }
 
-        #endregion
-
-        #region Public Properties
-
-        /// <summary>
-        /// Unique identifier used to group reports from the same source.
-        /// </summary>
-        [DataMember(IsRequired = true)]
-        public Guid Id { get; set; }
-
-        #endregion
+        #endregion Public Methods
     }
 }

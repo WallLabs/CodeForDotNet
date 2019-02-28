@@ -1,6 +1,6 @@
-﻿using System;
+﻿using CodeForDotNet.Properties;
+using System;
 using System.Threading;
-using CodeForDotNet.Properties;
 
 namespace CodeForDotNet.Threading
 {
@@ -9,7 +9,31 @@ namespace CodeForDotNet.Threading
     /// </summary>
     public abstract class AsyncResult : DisposableObject, IAsyncResult
     {
-        #region Lifetime
+        #region Private Fields
+
+        /// <summary>
+        /// Optional callback method, invoked upon completion.
+        /// </summary>
+        private readonly AsyncCallback _callback;
+
+        /// <summary>
+        /// Indicates that <see cref="End{TAsyncResult}"/> has already been called.
+        /// </summary>
+        private bool _endCalled;
+
+        /// <summary>
+        /// Stores any error which occurred during completion.
+        /// </summary>
+        private Exception _exception;
+
+        /// <summary>
+        /// Handle used to wait for completion.
+        /// </summary>
+        private ManualResetEvent _waitHandle;
+
+        #endregion Private Fields
+
+        #region Protected Constructors
 
         /// <summary>
         /// Creates an instance.
@@ -21,60 +45,7 @@ namespace CodeForDotNet.Threading
             Lock = new object();
         }
 
-        /// <summary>
-        /// Frees resources.
-        /// </summary>
-        protected override void Dispose(bool disposing)
-        {
-            // Dispose only once
-            if (IsDisposed)
-                return;
-
-            // Dispose
-            try
-            {
-                // Free resources during dispose
-                if (disposing)
-                {
-                    if (_waitHandle != null)
-                    {
-                        _waitHandle.Dispose();
-                        _waitHandle = null;
-                    }
-                }
-            }
-            finally
-            {
-                // Dispose base class
-                base.Dispose(disposing);
-            }
-        }
-
-        #endregion
-
-        #region Private Fields
-
-        /// <summary>
-        /// Optional callback method, invoked upon completion.
-        /// </summary>
-        readonly AsyncCallback _callback;
-
-        /// <summary>
-        /// Indicates that <see cref="End{TAsyncResult}"/> has already been called.
-        /// </summary>
-        bool _endCalled;
-
-        /// <summary>
-        /// Stores any error which occurred during completion.
-        /// </summary>
-        Exception _exception;
-
-        /// <summary>
-        /// Handle used to wait for completion.
-        /// </summary>
-        ManualResetEvent _waitHandle;
-
-        #endregion
+        #endregion Protected Constructors
 
         #region Public Properties
 
@@ -124,14 +95,14 @@ namespace CodeForDotNet.Threading
         /// <summary>
         /// Indicates a completion callback is present.
         /// </summary>
-        public bool HasCallback { get { return _callback != null; } }
+        public bool HasCallback => _callback != null;
 
         /// <summary>
         /// Indicates the operation has completed.
         /// </summary>
         public bool IsCompleted { get; private set; }
 
-        #endregion
+        #endregion Public Properties
 
         #region Protected Properties
 
@@ -140,70 +111,9 @@ namespace CodeForDotNet.Threading
         /// </summary>
         protected object Lock { get; set; }
 
-        #endregion
+        #endregion Protected Properties
 
         #region Protected Methods
-
-        /// <summary>
-        /// Completes the operation.
-        /// </summary>
-        /// <param name="completedSynchronously">True when completed synchronously.</param>
-        protected void Complete(bool completedSynchronously)
-        {
-            // Ensure only called once
-            if (IsCompleted)
-                throw new InvalidOperationException(Resources.AsyncCompleteCalledTwice);
-
-            // Set synchronous flag as specified
-            CompletedSynchronously = completedSynchronously;
-
-            // Set complete
-            if (completedSynchronously)
-            {
-                // If we completedSynchronously, no wait handle was created so
-                // we don't need to worry about a race
-                IsCompleted = true;
-            }
-            else
-            {
-                // Set completed during asynchronous operation
-                lock (Lock)
-                {
-                    IsCompleted = true;
-                    if (_waitHandle != null)
-                        _waitHandle.Set();
-                }
-            }
-
-            // Execute callback when specified
-            if (_callback != null)
-            {
-                try
-                {
-                    // Invoke caller's specified callback to notify end
-                    _callback(this);
-                }
-                catch (Exception e)
-                {
-                    // Throw callback errors directly (the caller has a problem, this error is not part of the result)
-                    throw new InvalidOperationException("Async callback threw an Exception", e);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Completes the operation with an error.
-        /// </summary>
-        /// <param name="completedSynchronously">True when completed synchronously.</param>
-        /// <param name="exception">Error.</param>
-        protected void Complete(bool completedSynchronously, Exception exception)
-        {
-            // Set error
-            _exception = exception;
-
-            // Complete
-            Complete(completedSynchronously);
-        }
 
         /// <summary>
         /// Ends the operation.
@@ -214,8 +124,7 @@ namespace CodeForDotNet.Threading
             // Validate
             if (result == null)
                 throw new ArgumentNullException(nameof(result));
-            var asyncResult = result as TAsyncResult;
-            if (asyncResult == null)
+            if (!(result is TAsyncResult asyncResult))
                 throw new ArgumentOutOfRangeException(nameof(result));
 
             // Ensure end is only called once
@@ -242,6 +151,97 @@ namespace CodeForDotNet.Threading
             return asyncResult;
         }
 
-        #endregion
+        /// <summary>
+        /// Completes the operation.
+        /// </summary>
+        /// <param name="completedSynchronously">True when completed synchronously.</param>
+        protected void Complete(bool completedSynchronously)
+        {
+            // Ensure only called once
+            if (IsCompleted)
+                throw new InvalidOperationException(Resources.AsyncCompleteCalledTwice);
+
+            // Set synchronous flag as specified
+            CompletedSynchronously = completedSynchronously;
+
+            // Set complete
+            if (completedSynchronously)
+            {
+                // If we completedSynchronously, no wait handle was created so we don't need to worry
+                // about a race
+                IsCompleted = true;
+            }
+            else
+            {
+                // Set completed during asynchronous operation
+                lock (Lock)
+                {
+                    IsCompleted = true;
+                    if (_waitHandle != null)
+                        _waitHandle.Set();
+                }
+            }
+
+            // Execute callback when specified
+            if (_callback != null)
+            {
+                try
+                {
+                    // Invoke caller's specified callback to notify end
+                    _callback(this);
+                }
+                catch (Exception e)
+                {
+                    // Throw callback errors directly (the caller has a problem, this error is not
+                    // part of the result)
+                    throw new InvalidOperationException("Async callback threw an Exception", e);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Completes the operation with an error.
+        /// </summary>
+        /// <param name="completedSynchronously">True when completed synchronously.</param>
+        /// <param name="exception">Error.</param>
+        protected void Complete(bool completedSynchronously, Exception exception)
+        {
+            // Set error
+            _exception = exception;
+
+            // Complete
+            Complete(completedSynchronously);
+        }
+
+        /// <summary>
+        /// Frees resources.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            // Dispose only once
+            if (IsDisposed)
+                return;
+
+            // Dispose
+            try
+            {
+                // Free resources during dispose
+                if (disposing)
+                {
+                    if (_waitHandle != null)
+                    {
+                        _waitHandle.Dispose();
+                        _waitHandle = null;
+                    }
+                }
+            }
+            finally
+            {
+                // Dispose base class
+                base.Dispose(disposing);
+            }
+        }
+
+        #endregion Protected Methods
     }
 }

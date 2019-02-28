@@ -5,7 +5,7 @@ namespace CodeForDotNet.ComponentModel
     /// <summary>
     /// Event arguments for the <see cref="IDataObject.DataChanged"/> event.
     /// </summary>
-    public class DataObjectChangeEventArgs : PropertyObjectChangeEventArgs
+    public class DataObjectChangeEventArgs : PropertyStoreChangeEventArgs
     {
         #region Lifetime
 

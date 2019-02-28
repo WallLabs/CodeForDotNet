@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace CodeForDotNet.Drawing
+namespace CodeForDotNet.UI.Input
 {
     /// <summary>
-    /// Keyboard shortcut data, disconnected from any API dependencies, useful for
-    /// future proof serialization and cross-platform. A copy of System.Windows.Forms.Shortcut.
-    /// Specifies shortcut keys that can be used by menu items.
+    /// Keyboard shortcut data, disconnected from any API dependencies, useful for future proof
+    /// serialization and cross-platform. A copy of System.Windows.Forms.Shortcut. Specifies shortcut
+    /// keys that can be used by menu items.
     /// </summary>
     [Flags]
     public enum KeyboardShortcuts

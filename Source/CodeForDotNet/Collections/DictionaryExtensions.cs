@@ -7,27 +7,26 @@ using System.Linq;
 namespace CodeForDotNet.Collections
 {
     /// <summary>
-    /// Extensions and helper methods for work with <see cref="IDictionary"/> objects.
+    /// Extensions and helper methods for work with <see cref="IDictionary"/> and
+    /// <see cref="IDictionary{TKey, TValue}"/> objects.
     /// </summary>
     public static class DictionaryExtensions
     {
-        #region Constants
+        #region Private Fields
 
         /// <summary>
         /// Default format string used prefix the key of a dictionary to it's values.
         /// </summary>
         private const string AddKeysToValuesDefaultFormat = "{0} - {1}";
 
-        #endregion Constants
+        #endregion Private Fields
 
         #region Public Methods
 
         /// <summary>
         /// Prefixes the key to all values in a dictionary using the <see cref="AddKeysToValuesDefaultFormat"/>.
         /// </summary>
-        /// <param name="dictionary">
-        /// Dictionary to update.
-        /// </param>
+        /// <param name="dictionary">Dictionary to update.</param>
         public static void AddKeysToValues(this IDictionary dictionary)
         {
             AddKeysToValues(dictionary, AddKeysToValuesDefaultFormat);
@@ -36,17 +35,18 @@ namespace CodeForDotNet.Collections
         /// <summary>
         /// Prefixes the key to all values in a dictionary using a specific format.
         /// </summary>
-        /// <param name="dictionary">
-        /// Dictionary to update.
-        /// </param>
+        /// <param name="dictionary">Dictionary to update.</param>
         /// <param name="format">
         /// Format used to join the values. The first argument is the key and the second the value.
         /// </param>
         public static void AddKeysToValues(this IDictionary dictionary, string format)
         {
             // Validate
-            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
-            if (format == null) throw new ArgumentNullException(nameof(format));
+            if (dictionary == null)
+                throw new ArgumentNullException(nameof(dictionary));
+
+            if (format == null)
+                throw new ArgumentNullException(nameof(format));
 
             // Get a fixed list of keys so we can modify the dictionary
             var keys = dictionary.Keys.Cast<object>().ToArray();
@@ -78,18 +78,59 @@ namespace CodeForDotNet.Collections
                 return false;
 
             // Compare values
-            var dictionary1Enumerator = dictionary1.GetEnumerator();
-            var dictionary2Enumerator = dictionary2.GetEnumerator();
+            IEnumerator<KeyValuePair<TKey, TValue>> dictionary1Enumerator = dictionary1.GetEnumerator();
+            IEnumerator<KeyValuePair<TKey, TValue>> dictionary2Enumerator = dictionary2.GetEnumerator();
             while (dictionary1Enumerator.MoveNext() & dictionary2Enumerator.MoveNext())
             {
-                var item1 = dictionary1Enumerator.Current;
-                var item2 = dictionary2Enumerator.Current;
+                KeyValuePair<TKey, TValue> item1 = dictionary1Enumerator.Current;
+                KeyValuePair<TKey, TValue> item2 = dictionary2Enumerator.Current;
                 if (!item1.Key.Equals(item2.Key) || !(item1.Value?.Equals(item2.Value) ?? item2.Value == null))
+                {
                     return false;
+                }
             }
 
             // Return same
             return true;
+        }
+
+        /// <summary>
+        /// Disposes all members implementing <see cref="IDisposable"/>.
+        /// </summary>
+        /// <param name="dictionary">Dictionary of items to dispose.</param>
+        public static void Dispose(this IDictionary dictionary)
+        {
+            // Validate
+            if (dictionary == null)
+                throw new ArgumentNullException(nameof(dictionary));
+
+            // Dispose members
+            foreach (IDisposable disposable in dictionary.Values.Cast<IDisposable>().ToArray())
+            {
+                dictionary.Remove(disposable);
+                disposable.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Disposes all members implementing <see cref="IDisposable"/>.
+        /// </summary>
+        /// <param name="dictionary">Dictionary of items to dispose.</param>
+        public static void Dispose<TKey, TValue>(this IDictionary<TKey, TValue> dictionary)
+        {
+            // Validate
+            if (dictionary == null)
+                throw new ArgumentNullException(nameof(dictionary));
+
+            // Dispose members
+            foreach (KeyValuePair<TKey, TValue> pair in dictionary)
+            {
+                if (pair.Value is IDisposable disposable)
+                {
+                    dictionary.Remove(pair.Key);
+                    disposable?.Dispose();
+                }
+            }
         }
 
         /// <summary>
@@ -106,7 +147,8 @@ namespace CodeForDotNet.Collections
         public static int GetHashCodeOfItems(this IDictionary dictionary)
         {
             // Validate
-            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            if (dictionary == null)
+                throw new ArgumentNullException(nameof(dictionary));
 
             // Calculate hash code
             var hash = 0;
@@ -123,27 +165,11 @@ namespace CodeForDotNet.Collections
         public static TValue GetIfExists<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
         {
             // Validate
-            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
+            if (dictionary == null)
+                throw new ArgumentNullException(nameof(dictionary));
 
             // Call overloaded method
             return dictionary.ContainsKey(key) ? dictionary[key] : default(TValue);
-        }
-
-        /// <summary>
-        /// Disposes all members implementing <see cref="IDisposable"/>.
-        /// </summary>
-        /// <param name="dictionary">Dictionary of items to dispose.</param>
-        public static void Dispose(this IDictionary dictionary)
-        {
-            // Validate
-            if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
-
-            // Dispose members
-            foreach (var disposable in dictionary.Values.Cast<IDisposable>().ToArray())
-            {
-                dictionary.Remove(disposable);
-                disposable.Dispose();
-            }
         }
 
         #endregion Public Methods

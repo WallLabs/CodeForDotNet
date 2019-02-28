@@ -5,25 +5,37 @@ namespace CodeForDotNet.ComponentModel
     /// <summary>
     /// CRUD data object with event caching.
     /// </summary>
-    public interface IDataObject : IPropertyObject
+    public interface IDataObject : IPropertyStore
     {
-        #region Properties
+        #region Public Events
+
+        /// <summary>
+        /// Fired when data for this object has changed.
+        /// </summary>
+        event EventHandler<DataObjectChangeEventArgs> DataChanged;
+
+        #endregion Public Events
+
+        #region Public Properties
 
         /// <summary>
         /// Indicates the current state of the data represented by this instance.
         /// </summary>
         DataObjectState DataState { get; }
 
-        #endregion
+        #endregion Public Properties
 
-        #region Methods
-
-        #region Store Access
+        #region Public Methods
 
         /// <summary>
         /// Creates the object in storage.
         /// </summary>
         void Create();
+
+        /// <summary>
+        /// Deletes the object from storage.
+        /// </summary>
+        void Delete();
 
         /// <summary>
         /// Reads the object from storage.
@@ -35,22 +47,6 @@ namespace CodeForDotNet.ComponentModel
         /// </summary>
         void Update();
 
-        /// <summary>
-        /// Deletes the object from storage.
-        /// </summary>
-        void Delete();
-
-        #endregion
-
-        #endregion
-
-        #region Events
-
-        /// <summary>
-        /// Fired when data for this object has changed.
-        /// </summary>
-        event EventHandler<DataObjectChangeEventArgs> DataChanged;
-
-        #endregion
+        #endregion Public Methods
     }
 }

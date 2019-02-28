@@ -6,7 +6,7 @@ namespace CodeForDotNet.WindowsUniversal.Tests.Models
     /// <summary>
     /// Model behind the "Control Test" view.
     /// </summary>
-    public class ControlTestUIModel : PropertyObject
+    public class ControlTestUIModel : PropertyStore
     {
         #region Lifetime
 

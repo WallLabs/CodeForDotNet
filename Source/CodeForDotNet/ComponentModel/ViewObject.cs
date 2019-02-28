@@ -8,7 +8,7 @@ namespace CodeForDotNet.ComponentModel
     /// <summary>
     /// View object with intelligent property, data and event caching.
     /// </summary>
-    public class ViewObject : PropertyObject
+    public class ViewObject : PropertyStore
     {
         #region Lifetime
 
@@ -193,7 +193,7 @@ namespace CodeForDotNet.ComponentModel
                         // Hook events of new items
                         foreach (var newChild in args.NewItems.Cast<IViewObject>())
                         {
-                            newChild.PropertyObjectChanged += OnChildPropertyChanged;
+                            newChild.PropertyStoreChanged += OnChildPropertyChanged;
                             newChild.Disposed += OnChildDisposed;
                         }
 
@@ -204,7 +204,7 @@ namespace CodeForDotNet.ComponentModel
                         // Un-hook events of old items
                         foreach (var oldChild in args.OldItems.Cast<IViewObject>())
                         {
-                            oldChild.PropertyObjectChanged -= OnChildPropertyChanged;
+                            oldChild.PropertyStoreChanged -= OnChildPropertyChanged;
                             oldChild.Disposed -= OnChildDisposed;
                         }
 
@@ -216,14 +216,14 @@ namespace CodeForDotNet.ComponentModel
                         // Un-hook events of old items
                         foreach (var oldChild in args.OldItems.Cast<IViewObject>())
                         {
-                            oldChild.PropertyObjectChanged -= OnChildPropertyChanged;
+                            oldChild.PropertyStoreChanged -= OnChildPropertyChanged;
                             oldChild.Disposed -= OnChildDisposed;
                         }
 
                         // Hook events of new items
                         foreach (var newChild in args.NewItems.Cast<IViewObject>())
                         {
-                            newChild.PropertyObjectChanged += OnChildPropertyChanged;
+                            newChild.PropertyStoreChanged += OnChildPropertyChanged;
                             newChild.Disposed += OnChildDisposed;
                         }
 
@@ -261,7 +261,7 @@ namespace CodeForDotNet.ComponentModel
         }
 
         /// <summary>
-        /// Called when the <see cref="IPropertyObject.PropertyObjectChanged"/> event is fired
+        /// Called when the <see cref="IPropertyStore.PropertyStoreChanged"/> event is fired
         /// on any of the <see cref="Children"/>.
         /// </summary>
         /// <param name="sender">Event initiator.</param>
@@ -270,7 +270,7 @@ namespace CodeForDotNet.ComponentModel
         /// Inheritors must call this base class method first.
         /// </remarks>
         [CLSCompliant(false)]
-        public virtual void OnChildPropertyChanged(object sender, PropertyObjectChangeEventArgs arguments)
+        public virtual void OnChildPropertyChanged(object sender, PropertyStoreChangeEventArgs arguments)
         {
             // Currently empty but still required to call for future base code support
         }

@@ -13,117 +13,7 @@ namespace CodeForDotNet.Xml
     /// </summary>
     public static class XmlSerializerExtensions
     {
-        /// <summary>
-        /// Determines if the specified type is XML serializable.
-        /// </summary>
-        public static bool IsXmlSerializable(this Type type)
-        {
-            // Validate
-            if (type == null) throw new ArgumentNullException(nameof(type));
-
-            // Use reflection to see if XML serialization interface or attributes implemented
-            var typeInfo = type.GetTypeInfo();
-            return typeInfo.ImplementedInterfaces.Contains(typeof(IXmlSerializable)) ||
-                   typeInfo.GetAttribute<XmlRootAttribute>() != null;
-        }
-
-        /// <summary>
-        /// Serializes the object to an XML string using the <see cref="XmlSerializer"/>,
-        /// with optional formatting.
-        /// </summary>
-        /// <param name="value">XML serializable object.</param>
-        public static string SerializeXml(this object value)
-        {
-            // Call overloaded method
-            return SerializeXml(value, null, false);
-        }
-
-        /// <summary>
-        /// Serializes the object to an XML string using the <see cref="XmlSerializer"/>,
-        /// with optional formatting.
-        /// </summary>
-        /// <param name="value">XML serializable object.</param>
-        /// <param name="format">Set true to format the XML by indenting each parent-child element on new lines.</param>
-        public static string SerializeXml(this object value, bool format)
-        {
-            // Call overloaded method
-            return SerializeXml(value, null, format);
-        }
-
-        /// <summary>
-        /// Serializes the object to an XML string using the <see cref="XmlSerializer"/>.
-        /// </summary>
-        /// <param name="value">XML serializable object.</param>
-        /// <param name="extraTypes">Additional types the serializer must know.</param>
-        public static string SerializeXml(this object value, Type[] extraTypes)
-        {
-            // Call overloaded method
-            return SerializeXml(value, extraTypes, false);
-        }
-
-        /// <summary>
-        /// Serializes the object to an XML string using the <see cref="XmlSerializer"/>.
-        /// </summary>
-        /// <param name="value">XML serializable object.</param>
-        /// <param name="extraTypes">Additional types the serializer must know.</param>
-        /// <param name="format">Set true to format the XML by indenting each parent-child element on new lines.</param>
-        public static string SerializeXml(this object value, Type[] extraTypes, bool format)
-        {
-            // Use consistent line endings so that serialize/de-serialize round-trips
-            // In testing it was proven that the .NET framework uses Unix line endings (CR without LF)
-            // mostly and when replace is not specified certain circumstances (combination of
-            // IXmlSerialiable and other serializer attributes) would not round trip
-            // because in other places the CR and LF would be used by default. Hence we fix
-            // the Unix style line endings. Source solution with issues was Reaction Server v1.5.
-            // Possibly re-test with newer version or when more time to investigate.
-            var settings = new XmlWriterSettings
-            {
-                Indent = format,
-                NewLineHandling = format ? NewLineHandling.Replace : NewLineHandling.Entitize
-            };
-
-            // Serialize to XML string buffer
-            var buffer = new StringBuilder();
-            using (var writer = XmlWriter.Create(buffer, settings))
-            {
-                // Call overloaded method
-                SerializeXml(value, writer, extraTypes);
-            }
-
-            // Return result
-            return buffer.ToString();
-        }
-
-        /// <summary>
-        /// Serializes the object to an <see cref="XmlWriter"/> using the <see cref="XmlSerializer"/>.
-        /// </summary>
-        /// <param name="value">XML serializable object.</param>
-        /// <param name="writer">XML writer to serialize to. It's settings may be modified.</param>
-        public static void SerializeXml(this object value, XmlWriter writer)
-        {
-            // Call overloaded method
-            SerializeXml(value, writer, null);
-        }
-
-        /// <summary>
-        /// Serializes the object to an <see cref="XmlWriter"/> using the <see cref="XmlSerializer"/>.
-        /// </summary>
-        /// <param name="value">XML serializable object.</param>
-        /// <param name="writer">XML writer to serialize to. It's settings may be modified.</param>
-        /// <param name="extraTypes">Additional types the serializer must know.</param>
-        public static void SerializeXml(this object value, XmlWriter writer, Type[] extraTypes)
-        {
-            // Validate
-            if (ReferenceEquals(value, null)) throw new ArgumentNullException(nameof(value));
-
-            // Create serializer with extra types when specified
-            var serializer = extraTypes == null || extraTypes.Length == 0 ?
-                new XmlSerializer(value.GetType()) :
-                new XmlSerializer(value.GetType(), extraTypes);
-
-            // Serialize to writer
-            serializer.Serialize(writer, value);
-        }
+        #region Public Methods
 
         /// <summary>
         /// De-serializes an object from a string using the <see cref="XmlSerializer"/>.
@@ -200,7 +90,7 @@ namespace CodeForDotNet.Xml
             if (xmlReader == null) throw new ArgumentNullException(nameof(xmlReader));
 
             // Create serializer with extra types when specified
-            var serializer = extraTypes == null || extraTypes.Length == 0 ?
+            XmlSerializer serializer = extraTypes == null || extraTypes.Length == 0 ?
                 new XmlSerializer(type) :
                 new XmlSerializer(type, extraTypes);
 
@@ -219,5 +109,123 @@ namespace CodeForDotNet.Xml
             // Return result
             return result;
         }
+
+        /// <summary>
+        /// Determines if the specified type is XML serializable.
+        /// </summary>
+        public static bool IsXmlSerializable(this Type type)
+        {
+            // Validate
+            if (type == null) throw new ArgumentNullException(nameof(type));
+
+            // Use reflection to see if XML serialization interface or attributes implemented
+            TypeInfo typeInfo = type.GetTypeInfo();
+            return typeInfo.ImplementedInterfaces.Contains(typeof(IXmlSerializable)) ||
+                   typeInfo.GetAttribute<XmlRootAttribute>() != null;
+        }
+
+        /// <summary>
+        /// Serializes the object to an XML string using the <see cref="XmlSerializer"/>, with
+        /// optional formatting.
+        /// </summary>
+        /// <param name="value">XML serializable object.</param>
+        public static string SerializeXml(this object value)
+        {
+            // Call overloaded method
+            return SerializeXml(value, null, false);
+        }
+
+        /// <summary>
+        /// Serializes the object to an XML string using the <see cref="XmlSerializer"/>, with
+        /// optional formatting.
+        /// </summary>
+        /// <param name="value">XML serializable object.</param>
+        /// <param name="format">
+        /// Set true to format the XML by indenting each parent-child element on new lines.
+        /// </param>
+        public static string SerializeXml(this object value, bool format)
+        {
+            // Call overloaded method
+            return SerializeXml(value, null, format);
+        }
+
+        /// <summary>
+        /// Serializes the object to an XML string using the <see cref="XmlSerializer"/>.
+        /// </summary>
+        /// <param name="value">XML serializable object.</param>
+        /// <param name="extraTypes">Additional types the serializer must know.</param>
+        public static string SerializeXml(this object value, Type[] extraTypes)
+        {
+            // Call overloaded method
+            return SerializeXml(value, extraTypes, false);
+        }
+
+        /// <summary>
+        /// Serializes the object to an XML string using the <see cref="XmlSerializer"/>.
+        /// </summary>
+        /// <param name="value">XML serializable object.</param>
+        /// <param name="extraTypes">Additional types the serializer must know.</param>
+        /// <param name="format">
+        /// Set true to format the XML by indenting each parent-child element on new lines.
+        /// </param>
+        public static string SerializeXml(this object value, Type[] extraTypes, bool format)
+        {
+            // Use consistent line endings so that serialize/de-serialize round-trips In testing it
+            // was proven that the .NET framework uses Unix line endings (CR without LF) mostly and
+            // when replace is not specified certain circumstances (combination of IXmlSerialiable
+            // and other serializer attributes) would not round trip because in other places the CR
+            // and LF would be used by default. Hence we fix the Unix style line endings. Source
+            // solution with issues was Reaction Server v1.5. Possibly re-test with newer version or
+            // when more time to investigate.
+            var settings = new XmlWriterSettings
+            {
+                Indent = format,
+                NewLineHandling = format ? NewLineHandling.Replace : NewLineHandling.Entitize
+            };
+
+            // Serialize to XML string buffer
+            var buffer = new StringBuilder();
+            using (var writer = XmlWriter.Create(buffer, settings))
+            {
+                // Call overloaded method
+                SerializeXml(value, writer, extraTypes);
+            }
+
+            // Return result
+            return buffer.ToString();
+        }
+
+        /// <summary>
+        /// Serializes the object to an <see cref="XmlWriter"/> using the <see cref="XmlSerializer"/>.
+        /// </summary>
+        /// <param name="value">XML serializable object.</param>
+        /// <param name="writer">XML writer to serialize to. It's settings may be modified.</param>
+        public static void SerializeXml(this object value, XmlWriter writer)
+        {
+            // Call overloaded method
+            SerializeXml(value, writer, null);
+        }
+
+        /// <summary>
+        /// Serializes the object to an <see cref="XmlWriter"/> using the <see cref="XmlSerializer"/>.
+        /// </summary>
+        /// <param name="value">XML serializable object.</param>
+        /// <param name="writer">XML writer to serialize to. It's settings may be modified.</param>
+        /// <param name="extraTypes">Additional types the serializer must know.</param>
+        public static void SerializeXml(this object value, XmlWriter writer, Type[] extraTypes)
+        {
+            // Validate
+            if (value is null) throw new ArgumentNullException(nameof(value));
+
+            // Create serializer with extra types when specified
+            XmlSerializer serializer = extraTypes == null || extraTypes.Length == 0 ?
+                new XmlSerializer(value.GetType()) :
+                new XmlSerializer(value.GetType(), extraTypes);
+
+            // Serialize to writer
+            serializer.Serialize(writer, value);
+        }
+
+        #endregion Public Methods
     }
 }

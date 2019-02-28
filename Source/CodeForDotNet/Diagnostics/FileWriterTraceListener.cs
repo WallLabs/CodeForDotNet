@@ -5,19 +5,26 @@ using System.IO;
 namespace CodeForDotNet.Diagnostics
 {
     /// <summary>
-    /// Writes trace output to a file, supporting environment variables in the filename and lazy open of the file.
+    /// Writes trace output to a file, supporting environment variables in the filename and lazy open
+    /// of the file.
     /// </summary>
     public class FileWriterTraceListener : TraceListener
     {
+        #region Private Fields
+
         /// <summary>
         /// Filename to write to.
         /// </summary>
-        string _fileName;
+        private readonly string _fileName;
 
         /// <summary>
         /// Output file stream.
         /// </summary>
-        StreamWriter _stream;
+        private StreamWriter _stream;
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         /// <summary>
         /// Creates the object.
@@ -27,6 +34,10 @@ namespace CodeForDotNet.Diagnostics
             // Expand any variables in the filename
             _fileName = Environment.ExpandEnvironmentVariables(fileName);
         }
+
+        #endregion Public Constructors
+
+        #region Public Methods
 
         /// <summary>
         /// Closes the output stream (if open).
@@ -47,27 +58,6 @@ namespace CodeForDotNet.Diagnostics
         {
             if (_stream != null)
                 _stream.Flush();
-        }
-
-        /// <summary>
-        /// Cleans-up resources.
-        /// </summary>
-        protected override void Dispose(bool disposing)
-        {
-            try
-            {
-                // Dispose unmanaged resources
-                if (_stream != null)
-                {
-                    _stream.Dispose();
-                    _stream = null;
-                }
-            }
-            finally
-            {
-                // Dispose base class
-                base.Dispose(disposing);
-            }
         }
 
         /// <summary>
@@ -94,13 +84,42 @@ namespace CodeForDotNet.Diagnostics
             _stream.WriteLine(message);
         }
 
+        #endregion Public Methods
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Cleans-up resources.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            try
+            {
+                // Dispose unmanaged resources
+                if (_stream != null)
+                {
+                    _stream.Dispose();
+                    _stream = null;
+                }
+            }
+            finally
+            {
+                // Dispose base class
+                base.Dispose(disposing);
+            }
+        }
+
+        #endregion Protected Methods
+
+        #region Private Methods
+
         /// <summary>
         /// Opens the stream when it is needed (lazy open).
         /// </summary>
-        void OpenFile()
+        private void OpenFile()
         {
             // Create directory if not exists
-            string directory = Path.GetDirectoryName(_fileName);
+            var directory = Path.GetDirectoryName(_fileName);
             if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
 
@@ -108,5 +127,7 @@ namespace CodeForDotNet.Diagnostics
             if (_stream == null)
                 _stream = new StreamWriter(_fileName, true);
         }
+
+        #endregion Private Methods
     }
 }

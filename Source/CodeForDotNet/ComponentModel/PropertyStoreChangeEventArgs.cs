@@ -4,16 +4,16 @@ using System.Collections.ObjectModel;
 namespace CodeForDotNet.ComponentModel
 {
     /// <summary>
-    /// Event arguments for the <see cref="IPropertyObject.PropertyObjectChanged"/> event.
+    /// Event arguments for the <see cref="IPropertyStore.PropertyStoreChanged"/> event.
     /// </summary>
-    public class PropertyObjectChangeEventArgs : EventArgs
+    public class PropertyStoreChangeEventArgs : EventArgs
     {
-        #region Lifetime
+        #region Public Constructors
 
         /// <summary>
         /// Creates an empty instance.
         /// </summary>
-        public PropertyObjectChangeEventArgs()
+        public PropertyStoreChangeEventArgs()
         {
             Keys = new Collection<Guid>();
         }
@@ -21,12 +21,12 @@ namespace CodeForDotNet.ComponentModel
         /// <summary>
         /// Creates an instance with the specified values.
         /// </summary>
-        public PropertyObjectChangeEventArgs(Guid[] keys)
+        public PropertyStoreChangeEventArgs(Guid[] keys)
         {
             Keys = new Collection<Guid>(keys);
         }
 
-        #endregion
+        #endregion Public Constructors
 
         #region Public Properties
 
@@ -35,6 +35,6 @@ namespace CodeForDotNet.ComponentModel
         /// </summary>
         public Collection<Guid> Keys { get; private set; }
 
-        #endregion
+        #endregion Public Properties
     }
 }

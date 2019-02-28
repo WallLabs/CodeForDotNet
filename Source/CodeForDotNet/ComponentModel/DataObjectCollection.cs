@@ -9,7 +9,7 @@ namespace CodeForDotNet.ComponentModel
     /// <summary>
     /// Collection of <see cref="DataObject"/> items supporting ID index and central event notification.
     /// </summary>
-    public class DataObjectCollection<T> : ObservableCollection<T>, IEventObject, IDisposable
+    public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDisposable
         where T : DataObject
     {
         #region Lifetime
