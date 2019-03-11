@@ -47,7 +47,7 @@ robocopy "%~dp0CodeForDotNet.Full\bin\%ConfigurationName%" "%~dp0Temp\Build\%Con
 if %errorlevel% gtr 7 goto Error
 robocopy "%~dp0CodeForDotNet.Windows\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Windows.* /xf *CodeAnalysisLog.xml /xf *.lastcodeanalysissucceeded
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.WindowsUniversal\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.WindowsUniversal.* /xf *.xr.xml /xf *CodeAnalysisLog.xml /xf *.lastcodeanalysissucceeded
+robocopy "%~dp0CodeForDotNet.WindowsUniversal\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.WindowsUniversal.* *.winmd /xf *.xr.xml /xf *CodeAnalysisLog.xml /xf *.lastcodeanalysissucceeded
 if %errorlevel% gtr 7 goto Error
 robocopy "%~dp0CodeForDotNet.WindowsUniversal\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components\CodeForDotNet.WindowsUniversal" CodeForDotNet.WindowsUniversal.xr.xml *.xbf /s /xf *CodeAnalysisLog.xml /xf *.lastcodeanalysissucceeded
 if %errorlevel% gtr 7 goto Error

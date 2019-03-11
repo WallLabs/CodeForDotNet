@@ -1,5 +1,10 @@
 # Code for .NET - Release Notes
 
+## Version 4.72.1903.11### (2019.03.11)
+* Remove DictionaryChangedEventHandler in preference of using the newer EventHandler&lt;T&gt; generic delegate definition.
+* Add missing WPF/XAML build dependency to Windows Universal component build.
+* Update packages.
+
 ## Version 4.72.1902.28### (2019.02.28)
 * Restore ObservableDictionary as still not available in .NET Standard, this time using similar event argument types and naming as the Microsoft ObservableCollection.
 * Add paint and mouse event arguments to UI assembly.

@@ -252,7 +252,8 @@
         </member>
         <member name="T:CodeForDotNet.Collections.INotifyDictionaryChanged`2">
             <summary>
-            Notifies listeners of changes to a dictionary, such as when items are added, removed, changed or the whole collection reset.
+            Notifies listeners of changes to a dictionary, such as when items are added, removed, changed
+            or the whole collection reset.
             </summary>
             <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
             <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
@@ -286,12 +287,6 @@
             <summary>
             Changed entry key.
             </summary>
-        </member>
-        <member name="T:CodeForDotNet.Collections.NotifyDictionaryChangedEventHandler`2">
-            <summary>
-            Represents the method that handles the changed event of an observable dictionary.
-            </summary>
-            <typeparam name="TKey">The type of the keys in the dictionary.</typeparam><typeparam name="TValue">The type of the values in the dictionary.</typeparam>
         </member>
         <member name="T:CodeForDotNet.Collections.ObservableDictionary`2">
             <summary>
