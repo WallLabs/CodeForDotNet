@@ -181,7 +181,7 @@ namespace CodeForDotNet.Collections
         {
             try
             {
-                IDisposable item = (IDisposable)Items[index];
+                var item = (IDisposable)Items[index];
                 item?.Dispose();
             }
             finally
@@ -197,7 +197,7 @@ namespace CodeForDotNet.Collections
         {
             try
             {
-                IDisposable oldItem = (IDisposable)Items[index];
+                var oldItem = (IDisposable)Items[index];
                 oldItem?.Dispose();
             }
             finally

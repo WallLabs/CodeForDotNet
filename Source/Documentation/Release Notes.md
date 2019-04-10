@@ -1,5 +1,9 @@
 # Code for .NET - Release Notes
 
+## Version 4.72.1904.10### (2019.04.10)
+* Visual Studio 2019 update with new code analysis fixes and refactoring.
+* Fixed UWP tests.
+ 
 ## Version 4.72.1903.11### (2019.03.11)
 * Remove DictionaryChangedEventHandler in preference of using the newer EventHandler&lt;T&gt; generic delegate definition.
 * Add missing WPF/XAML build dependency to Windows Universal component build.

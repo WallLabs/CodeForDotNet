@@ -113,7 +113,7 @@ namespace CodeForDotNet.Install
             {
                 if (installer.Context.Parameters.ContainsKey(parameter))
                 {
-                    string parameterValue = installer.Context.Parameters[parameter];
+                    var parameterValue = installer.Context.Parameters[parameter];
                     return (!string.IsNullOrEmpty(parameterValue) &&
                         (string.Compare(parameterValue.Trim(), "false", StringComparison.OrdinalIgnoreCase) != 0) &&
                         (parameterValue.Trim() != "0"));
@@ -143,7 +143,7 @@ namespace CodeForDotNet.Install
                 "DesktopShortcutInstaller", ConditionArgument));
 
             // Create desktop shortcut
-            string shortcutTargetPath = ExpandVariables(TargetDirectory) + Path.DirectorySeparatorChar + ShortcutName + ShortcutFileExtension;
+            var shortcutTargetPath = ExpandVariables(TargetDirectory) + Path.DirectorySeparatorChar + ShortcutName + ShortcutFileExtension;
             Context.LogMessage("\t" + shortcutTargetPath);
             try
             {
@@ -192,7 +192,7 @@ namespace CodeForDotNet.Install
             try
             {
                 // Delete icon (if exists)
-                string shortcutTargetPath = ExpandVariables(TargetDirectory) + Path.DirectorySeparatorChar + ShortcutName + ".lnk";
+                var shortcutTargetPath = ExpandVariables(TargetDirectory) + Path.DirectorySeparatorChar + ShortcutName + ".lnk";
                 if (File.Exists(shortcutTargetPath))
                 {
                     Context.LogMessage(string.Format(CultureInfo.CurrentCulture,
@@ -219,16 +219,16 @@ namespace CodeForDotNet.Install
         /// <returns>Output text with all supported variables expanded.</returns>
         private string ExpandVariables(string input)
         {
-            string output = input;
+            var output = input;
             if (input == null)
                 return string.Empty;
 
             // Translate %AssemblyDir% as installation target folder.
-            string installPath = Path.GetDirectoryName(Context.Parameters["assemblypath"].Trim('"')).TrimEnd(Path.DirectorySeparatorChar);
+            var installPath = Path.GetDirectoryName(Context.Parameters["assemblypath"].Trim('"')).TrimEnd(Path.DirectorySeparatorChar);
             output = output.Replace("%AssemblyDir%", installPath);
 
             // Translate special folders
-            bool allUsers = (GetSpecialFolderPath(SafeNativeMethods.Shell32.CSIDL_COMMON_PROGRAMS).Length > 0);
+            var allUsers = (GetSpecialFolderPath(SafeNativeMethods.Shell32.CSIDL_COMMON_PROGRAMS).Length > 0);
             output = output.Replace("%CurrentUserPrograms%", GetSpecialFolderPath(SafeNativeMethods.Shell32.CSIDL_PROGRAMS));
             output = output.Replace("%AllUsersPrograms%",
                 GetSpecialFolderPath(allUsers ? SafeNativeMethods.Shell32.CSIDL_COMMON_PROGRAMS : SafeNativeMethods.Shell32.CSIDL_PROGRAMS));
@@ -262,7 +262,7 @@ namespace CodeForDotNet.Install
         /// <returns>Path to the special folder, if it exists.</returns>
         private static string GetSpecialFolderPath(int nFolder, bool create)
         {
-            StringBuilder pathBuffer = new StringBuilder(500);
+            var pathBuffer = new StringBuilder(500);
             SafeNativeMethods.Shell32.SHGetSpecialFolderPath(IntPtr.Zero, pathBuffer, nFolder, create);
             return pathBuffer.ToString();
         }

@@ -526,7 +526,7 @@ namespace CodeForDotNet.Tests.Facts
             Assert.AreEqual(1, minusOne / minusOne);
 
             // Test division with remainder
-            Assert.AreEqual(5, Number.Divide(26, 5, out Number remainder));
+            Assert.AreEqual(5, Number.Divide(26, 5, out var remainder));
             Assert.AreEqual(1, remainder);
         }
 

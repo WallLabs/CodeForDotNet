@@ -1,15 +1,15 @@
 {
   "runtimeTarget": {
     "name": ".NETStandard,Version=v2.0/",
-    "signature": "345b24313a10e47fdb8ebbae775520a4ae4b837b"
+    "signature": "9dd7f08e0191e5d00c65eb873729ac78b7420fe4"
   },
   "compilationOptions": {},
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "CodeForDotNet/4.72.1903.10001": {
+      "CodeForDotNet/4.72.1904.10003": {
         "dependencies": {
-          "Microsoft.CodeAnalysis.FxCopAnalyzers": "2.6.3",
+          "Microsoft.CodeAnalysis.FxCopAnalyzers": "2.9.1",
           "NETStandard.Library": "2.0.3",
           "System.Drawing.Common": "4.5.1",
           "System.Drawing.Primitives": "4.3.0",
@@ -21,19 +21,20 @@
           "CodeForDotNet.dll": {}
         }
       },
-      "Microsoft.CodeAnalysis.FxCopAnalyzers/2.6.3": {
+      "Microsoft.CodeAnalysis.FxCopAnalyzers/2.9.1": {
         "dependencies": {
-          "Microsoft.CodeQuality.Analyzers": "2.6.3",
-          "Microsoft.NetCore.Analyzers": "2.6.3",
-          "Microsoft.NetFramework.Analyzers": "2.6.3",
-          "Text.Analyzers": "2.6.3"
+          "Microsoft.CodeAnalysis.VersionCheckAnalyzer": "2.9.1",
+          "Microsoft.CodeQuality.Analyzers": "2.9.1",
+          "Microsoft.NetCore.Analyzers": "2.9.1",
+          "Microsoft.NetFramework.Analyzers": "2.9.1"
         }
       },
-      "Microsoft.CodeQuality.Analyzers/2.6.3": {},
-      "Microsoft.NetCore.Analyzers/2.6.3": {},
+      "Microsoft.CodeAnalysis.VersionCheckAnalyzer/2.9.1": {},
+      "Microsoft.CodeQuality.Analyzers/2.9.1": {},
+      "Microsoft.NetCore.Analyzers/2.9.1": {},
       "Microsoft.NETCore.Platforms/1.1.1": {},
       "Microsoft.NETCore.Targets/1.1.3": {},
-      "Microsoft.NetFramework.Analyzers/2.6.3": {},
+      "Microsoft.NetFramework.Analyzers/2.9.1": {},
       "NETStandard.Library/2.0.3": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.1"
@@ -123,36 +124,42 @@
           "Microsoft.NETCore.Targets": "1.1.3",
           "System.Runtime": "4.3.1"
         }
-      },
-      "Text.Analyzers/2.6.3": {}
+      }
     }
   },
   "libraries": {
-    "CodeForDotNet/4.72.1903.10001": {
+    "CodeForDotNet/4.72.1904.10003": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.CodeAnalysis.FxCopAnalyzers/2.6.3": {
+    "Microsoft.CodeAnalysis.FxCopAnalyzers/2.9.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-e8tBG/lWlpA55jyyw/ceB4RJY/Fbtw/xY9GhYTRe01HsU4u8ECIGWhwLj/k89W2ZPrm/P4lUG+VcEwERSY/ugA==",
-      "path": "microsoft.codeanalysis.fxcopanalyzers/2.6.3",
-      "hashPath": "microsoft.codeanalysis.fxcopanalyzers.2.6.3.nupkg.sha512"
+      "sha512": "sha512-tnJafOyqJbrEUcnQn3D57+vnzOuJPz7BijKMcBMY9pS8K757HD70F9gOsPpeKf/frx7BFmhV2tbrnEKieKqPrA==",
+      "path": "microsoft.codeanalysis.fxcopanalyzers/2.9.1",
+      "hashPath": "microsoft.codeanalysis.fxcopanalyzers.2.9.1.nupkg.sha512"
     },
-    "Microsoft.CodeQuality.Analyzers/2.6.3": {
+    "Microsoft.CodeAnalysis.VersionCheckAnalyzer/2.9.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ns86d09X8PekFxDI9TUQs1diW9EPFbnnZEAieMEe2en0a61cdNH6NI9BvxJtwX2I9+okBWzr7vInknMzy3IK/A==",
-      "path": "microsoft.codequality.analyzers/2.6.3",
-      "hashPath": "microsoft.codequality.analyzers.2.6.3.nupkg.sha512"
+      "sha512": "sha512-XS9PHyJbPEg+3Q/RsKVS2KtfBwRB3GWdemj0MuD5l1atbmXlWUDQuytalcdc1OH6COY9rleMLHwJM+ajtVx7Rg==",
+      "path": "microsoft.codeanalysis.versioncheckanalyzer/2.9.1",
+      "hashPath": "microsoft.codeanalysis.versioncheckanalyzer.2.9.1.nupkg.sha512"
     },
-    "Microsoft.NetCore.Analyzers/2.6.3": {
+    "Microsoft.CodeQuality.Analyzers/2.9.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-jHd3oP9DnksKS/szAW1uQV8WN05rju0AE2KiqCC5YHQkmxZueM6MDtvxofdXZPGIJ7DpHUE0Ghxrjw7R4dNtVQ==",
-      "path": "microsoft.netcore.analyzers/2.6.3",
-      "hashPath": "microsoft.netcore.analyzers.2.6.3.nupkg.sha512"
+      "sha512": "sha512-bv1El69gzisTdOtiDh5YM2GCssgObnm6gXcUyokJbMP2Ly3Ix4iC3KyH0jAiSYDnoFKRQ04T2ly4pc3rO2JtKg==",
+      "path": "microsoft.codequality.analyzers/2.9.1",
+      "hashPath": "microsoft.codequality.analyzers.2.9.1.nupkg.sha512"
+    },
+    "Microsoft.NetCore.Analyzers/2.9.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-oQ1VZI5pS21Mtiw0D5dskpF+TXiBKhZkivKsxcizDjvQP9Y+ZE7JKpNXVSejjhvHCkU1g3FBz8ni9oCX1VxNmw==",
+      "path": "microsoft.netcore.analyzers/2.9.1",
+      "hashPath": "microsoft.netcore.analyzers.2.9.1.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.1": {
       "type": "package",
@@ -168,12 +175,12 @@
       "path": "microsoft.netcore.targets/1.1.3",
       "hashPath": "microsoft.netcore.targets.1.1.3.nupkg.sha512"
     },
-    "Microsoft.NetFramework.Analyzers/2.6.3": {
+    "Microsoft.NetFramework.Analyzers/2.9.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-L6BC3smztIblEHIJsAm+gsEPpW0JQqWH87qNMM5L6I/g01fnG6eIzwjJo03GWzQdCfLuh9v0I63z9vHmAcXIUA==",
-      "path": "microsoft.netframework.analyzers/2.6.3",
-      "hashPath": "microsoft.netframework.analyzers.2.6.3.nupkg.sha512"
+      "sha512": "sha512-A20Gda5IcyKhirHVqpvBFG2KzUP3usBSCkX5BIirEbr/pD6VQdlAz8NpY84zHOwdzG+pUkpc9V/hTNbOOFz93Q==",
+      "path": "microsoft.netframework.analyzers/2.9.1",
+      "hashPath": "microsoft.netframework.analyzers.2.9.1.nupkg.sha512"
     },
     "NETStandard.Library/2.0.3": {
       "type": "package",
@@ -251,13 +258,6 @@
       "sha512": "sha512-fUiP+CyyCjs872OA8trl6p97qma/da1xGq3h4zAbJZk8zyaU4zyEfqW5vbkP80xG/Nimun1vlWBboMEk7XxdEw==",
       "path": "system.threading.tasks/4.3.0",
       "hashPath": "system.threading.tasks.4.3.0.nupkg.sha512"
-    },
-    "Text.Analyzers/2.6.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-gp9JttEK9yunfBtW9/LPJuEL3JMQvVtAEGKg/n5cU7ihq5IB53vcKRVgRbG6tLOETn5uk/N8886kHRx1Rnp4lw==",
-      "path": "text.analyzers/2.6.3",
-      "hashPath": "text.analyzers.2.6.3.nupkg.sha512"
     }
   }
 }

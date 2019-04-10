@@ -163,7 +163,7 @@ namespace CodeForDotNet.Data
                 // Add any recurrences
                 if (Recurrence != ScheduleItemRecurrence.None && Occurrences.HasValue)
                 {
-                    for (int occurence = 1; occurence < Occurrences; occurence++)
+                    for (var occurence = 1; occurence < Occurrences; occurence++)
                     {
                         // Get next start date
                         var next = GetNext(end);
@@ -531,8 +531,8 @@ namespace CodeForDotNet.Data
                                 if (Offset == ScheduleItemOffset.None)
                                 {
                                     // Next month on same day, skipping months with less days
-                                    DateTimeOffset nextMonth = eventStart.AddMonths(Interval);
-                                    int skip = 1;
+                                    var nextMonth = eventStart.AddMonths(Interval);
+                                    var skip = 1;
                                     while (nextMonth.Day != eventStart.Day)
                                         nextMonth = eventStart.AddMonths(Interval + skip++);
                                     eventStart = nextMonth;
@@ -540,7 +540,7 @@ namespace CodeForDotNet.Data
                                 else
                                 {
                                     // Get next month with weekday offset
-                                    DayOfWeek weekday = Days.ToArray()[0];
+                                    var weekday = Days.ToArray()[0];
                                     switch (Offset)
                                     {
                                         case ScheduleItemOffset.First:
@@ -572,8 +572,8 @@ namespace CodeForDotNet.Data
                                 if (Offset == ScheduleItemOffset.None)
                                 {
                                     // Next year on same day, skipping years with less days in the same month
-                                    DateTimeOffset nextYear = eventStart.AddYears(Interval);
-                                    int skip = 1;
+                                    var nextYear = eventStart.AddYears(Interval);
+                                    var skip = 1;
                                     while (nextYear.Day != eventStart.Day)
                                         nextYear = eventStart.AddYears(Interval + skip++);
                                     eventStart = nextYear;
@@ -581,7 +581,7 @@ namespace CodeForDotNet.Data
                                 else
                                 {
                                     // Get next year with weekday offset
-                                    DayOfWeek weekday = Days.ToArray()[0];
+                                    var weekday = Days.ToArray()[0];
                                     switch (Offset)
                                     {
                                         case ScheduleItemOffset.First:

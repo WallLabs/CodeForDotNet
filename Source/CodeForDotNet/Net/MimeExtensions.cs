@@ -67,7 +67,7 @@ namespace CodeForDotNet.Net
                 throw new ArgumentNullException(nameof(header));
 
             // Strip header value
-            int firstAttribute = header.IndexOf(';');
+            var firstAttribute = header.IndexOf(';');
             if (firstAttribute > 0)
                 header = header.Substring(0, firstAttribute);
             return header.Trim();
@@ -136,7 +136,7 @@ namespace CodeForDotNet.Net
             nextLine = -1;
 
             // Get the length of the current line (return null when no complete line ending with LF)
-            int newLineIndex = Array.IndexOf(buffer, (byte)'\n', offset, length);
+            var newLineIndex = Array.IndexOf(buffer, (byte)'\n', offset, length);
             if (newLineIndex < 0)
                 return false;
 
@@ -184,7 +184,7 @@ namespace CodeForDotNet.Net
             while (search < offset + length - boundary.Length + 2)
             {
                 // Find new line
-                if (!FindLine(buffer, search, offset + length - search, out int lineSize, out int nextLine))
+                if (!FindLine(buffer, search, offset + length - search, out var lineSize, out var nextLine))
                     return false;
 
                 // Check for boundary

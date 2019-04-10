@@ -676,9 +676,19 @@
             Encapsulates a WIA source, e.g. scanner or camera.
             </summary>
         </member>
+        <member name="F:CodeForDotNet.Windows.Imaging.WiaManager._wiaManager">
+            <summary>
+            WIA device manager.
+            </summary>
+        </member>
         <member name="M:CodeForDotNet.Windows.Imaging.WiaManager.#ctor">
             <summary>
             Creates the object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Imaging.WiaManager.GetDevices">
+            <summary>
+            Gets information about currently available devices.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Windows.Imaging.WiaManager.Dispose(System.Boolean)">
@@ -686,19 +696,8 @@
             Frees resources owned by this instance.
             </summary>
             <param name="disposing">
-            True when called from <see cref="M:System.IDisposable.Dispose"/>,
-            false when called during finalization.
+            True when called from <see cref="M:System.IDisposable.Dispose"/>, false when called during finalization.
             </param>
-        </member>
-        <member name="F:CodeForDotNet.Windows.Imaging.WiaManager._wiaManager">
-            <summary>
-            WIA device manager.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Windows.Imaging.WiaManager.GetDevices">
-            <summary>
-            Gets information about currently available devices.
-            </summary>
         </member>
         <member name="T:CodeForDotNet.Windows.Imaging.WiaProperty">
             <summary>
@@ -1547,7 +1546,8 @@
         </member>
         <member name="T:CodeForDotNet.Install.NativeCodeGeneratorInstaller">
             <summary>
-            Generates native images on assemblies and their assemblyList during setup to decrease start-up times and increase performance.
+            Generates native images on assemblies and their assemblyList during setup to decrease start-up
+            times and increase performance.
             </summary>
         </member>
         <member name="F:CodeForDotNet.Install.NativeCodeGeneratorInstaller._components">
@@ -1560,33 +1560,17 @@
             Creates the component.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.Dispose(System.Boolean)">
+        <member name="P:CodeForDotNet.Install.NativeCodeGeneratorInstaller.AssemblyList">
             <summary>
-            Clean up any resources being used.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
+            List of assemblies referenced by the application, so must should also have native images
+            cached to decrease start-up times and increase performance. Make a list of filenames
+            without path (e.g. MyAssembly.dll).
             </summary>
         </member>
         <member name="P:CodeForDotNet.Install.NativeCodeGeneratorInstaller.ConditionArgument">
             <summary>
             Condition required to activate the feature.
             </summary>
-        </member>
-        <member name="P:CodeForDotNet.Install.NativeCodeGeneratorInstaller.AssemblyList">
-            <summary>
-            List of assemblies referenced by the application, so must should also have native images cached to decrease start-up times and increase performance. Make a list of filenames without path (e.g. MyAssembly.dll).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.IsParameterTrue(System.String)">
-            <summary>
-            Checks all installers in the stack for the specified parameter.
-            </summary>
-            <param name="parameter"></param>
-            <returns></returns>
         </member>
         <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.Install(System.Collections.IDictionary)">
             <summary>
@@ -1597,6 +1581,24 @@
             <summary>
             Uninstalls the component.
             </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify the contents of this method with the
+            code editor.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Install.NativeCodeGeneratorInstaller.IsParameterTrue(System.String)">
+            <summary>
+            Checks all installers in the stack for the specified parameter.
+            </summary>
+            <param name="parameter"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

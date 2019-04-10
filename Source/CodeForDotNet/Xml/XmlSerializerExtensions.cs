@@ -90,7 +90,7 @@ namespace CodeForDotNet.Xml
             if (xmlReader == null) throw new ArgumentNullException(nameof(xmlReader));
 
             // Create serializer with extra types when specified
-            XmlSerializer serializer = extraTypes == null || extraTypes.Length == 0 ?
+            var serializer = extraTypes == null || extraTypes.Length == 0 ?
                 new XmlSerializer(type) :
                 new XmlSerializer(type, extraTypes);
 
@@ -119,7 +119,7 @@ namespace CodeForDotNet.Xml
             if (type == null) throw new ArgumentNullException(nameof(type));
 
             // Use reflection to see if XML serialization interface or attributes implemented
-            TypeInfo typeInfo = type.GetTypeInfo();
+            var typeInfo = type.GetTypeInfo();
             return typeInfo.ImplementedInterfaces.Contains(typeof(IXmlSerializable)) ||
                    typeInfo.GetAttribute<XmlRootAttribute>() != null;
         }
@@ -218,7 +218,7 @@ namespace CodeForDotNet.Xml
             if (value is null) throw new ArgumentNullException(nameof(value));
 
             // Create serializer with extra types when specified
-            XmlSerializer serializer = extraTypes == null || extraTypes.Length == 0 ?
+            var serializer = extraTypes == null || extraTypes.Length == 0 ?
                 new XmlSerializer(value.GetType()) :
                 new XmlSerializer(value.GetType(), extraTypes);
 

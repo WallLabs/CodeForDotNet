@@ -1,4 +1,4 @@
-﻿# ==============================================================================
+# ==============================================================================
 # Visual Studio Version PowerShell Module
 # ------------------------------------------------------------------------------
 #
@@ -25,17 +25,15 @@
 #
 # ------------------------------------------------------------------------------
 
-
 # ==============================================================================
 # Globals
 # ------------------------------------------------------------------------------
 
 # Options
-Set-StrictMode -Version Latest    # Proactively avoid errors and inconsistency
-$error.Clear()                    # Clear any errors from previous script runs
-$ErrorActionPreference = "Stop"   # All unhandled errors stop program
-$WarningPreference = "Stop"       # All warnings stop program
-
+Set-StrictMode -Version Latest;   # Proactively avoid errors and inconsistency
+$Error.Clear();                   # Clear any errors from previous script runs
+$ErrorActionPreference = 'Stop';  # All unhandled errors stop program
+$WarningPreference = 'Stop';      # All warnings stop program
 
 # ==============================================================================
 # Functions
@@ -143,6 +141,15 @@ function Set-VersionInCppResourceFile([String]$File, [Version]$Version)
 }
 
 [CmdletBinding]
+function Set-VersionInPowerShellScript([String]$File, [String]$Variable, [Version]$Version)
+{
+	Write-Host("Setting version in PowerShell script variable `$$Variable in file `"$File`"")
+	$contents = [System.IO.File]::ReadAllText($File)
+	$contents = [RegEx]::Replace($contents, "(\s*\`$$Variable\s*=\s*')(?:\d+(?:\.\d+)+)(')",("`${1}" + $Version.ToString() + "`${2}"))
+	[System.IO.File]::WriteAllText($File, $contents)
+}
+
+[CmdletBinding]
 function Set-VersionInPowerShellManifest([String]$File, [Version]$Version)
 {
 	Write-Host("Setting version in PowerShell manifest file " + $File)
@@ -175,7 +182,7 @@ function Set-VersionInXmlProject([String]$File, [Version]$Version)
 	Write-Host("Setting version in XML project file " + $File)
 
 	# Load file
-	$contents = [xml][System.IO.File]::ReadAllText($File)
+	$contents = [xml][System.IO.File]::ReadAllText($File);
 
 	# Find and replace manifest version
 	$versionElement = $contents.SelectSingleNode("/Project/PropertyGroup/Version");
@@ -190,5 +197,5 @@ function Set-VersionInXmlProject([String]$File, [Version]$Version)
 	if ($versionElement -ne $null) { $versionElement.InnerText = $Version.ToString(); }
 
 	# Save changes
-	[System.IO.File]::WriteAllText($File, $contents.OuterXml)
+	[System.IO.File]::WriteAllText($File, $contents.OuterXml);
 }

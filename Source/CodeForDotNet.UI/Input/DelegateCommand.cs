@@ -75,11 +75,11 @@ namespace CodeForDotNet.UI.Input
         public bool CanExecute(object parameter)
         {
             // Get current status
-            bool status = _canExecuteMethod == null || _canExecuteMethod(parameter);
+            var status = _canExecuteMethod == null || _canExecuteMethod(parameter);
 
             // Detect status change
-            object id = parameter ?? DefaultId;
-            bool lastStatus = _commandStatus.ContainsKey(id) && _commandStatus[id];
+            var id = parameter ?? DefaultId;
+            var lastStatus = _commandStatus.ContainsKey(id) && _commandStatus[id];
             if (status != lastStatus)
             {
                 // Store new status to detect next change Must do before firing event else loops

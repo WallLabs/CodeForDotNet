@@ -1166,9 +1166,22 @@
         </member>
         <member name="T:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase">
             <summary>
-            Base object which provides a compact <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> implementation.
-            Use the <see cref="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetProperty``1(``0@,``0,System.String,CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0},CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0})"/> method
-            in your property setters to automatically test for equality, then set the new value and fire the <see cref="E:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.PropertyChanged"/> event when changed.
+            Base object which provides a compact <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> implementation. Use
+            the
+            <see cref="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetProperty``1(``0@,``0,System.String,CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0},CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0})"/>
+            method in your property setters to automatically test for equality, then set the new value and
+            fire the <see cref="E:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.PropertyChanged"/> event when changed.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase._pendingPropertyChangeEvents">
+            <summary>
+            Pending events which will be fired then cleared when events are resumed.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase._synchronization">
+            <summary>
+            Synchronization context under which this object was created, e.g. parent UI dispatcher such
+            as a DependencyObject context in XAML.
             </summary>
         </member>
         <member name="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.#ctor">
@@ -1181,54 +1194,17 @@
             Creates an empty instance with the specified synchronization context.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase._synchronization">
+        <member name="T:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler`1">
             <summary>
-            Synchronization context under which this object was created, e.g. parent UI dispatcher such as a DependencyObject context in XAML.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase._pendingPropertyChangeEvents">
-            <summary>
-            Pending events which will be fired then cleared when events are resumed.
+            Method signature used to call
+            <see cref="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetProperty``1(``0@,``0,System.String,CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0},CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0})"/>
+            before and after callbacks.
             </summary>
         </member>
         <member name="E:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.PropertyChanged">
             <summary>
             Fired when a property changes.
             </summary>
-        </member>
-        <member name="T:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler`1">
-            <summary>
-            Method signature used to call <see cref="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetProperty``1(``0@,``0,System.String,CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0},CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0})"/>
-            before and after callbacks.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetProperty``1(``0@,``0,System.String)">
-            <summary>
-            Sets a property with change checking and change notification.
-            </summary>
-            <typeparam name="T">Target type.</typeparam>
-            <param name="target">Target reference, i.e. a backing field.</param>
-            <param name="value">Value to set.</param>
-            <param name="propertyName">Property name, must match public property name else bindings will not see change.</param>
-            <returns>True when changed.</returns>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetProperty``1(``0@,``0,System.String,CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0},CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0})">
-            <summary>
-            Sets a property with change checking and change notification.
-            </summary>
-            <typeparam name="T">Target type.</typeparam>
-            <param name="target">Target reference, i.e. a backing field.</param>
-            <param name="value">Value to set.</param>
-            <param name="propertyName">Property name, must match public property name else bindings will not see change.</param>
-            <param name="beforeAssign">
-            Optional callback which is invoked before assignment and before firing the changed event, with the old and new values,
-             e.g. to un-hook events or deactivate the old value.
-            </param>
-            <param name="afterAssign">
-            Optional callback which is invoked after assignment but before firing the changed event, with the old and new values,
-             e.g. to hook events or clean-up the old value.
-            </param>
-            <returns>True when changed.</returns>
         </member>
         <member name="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.InvokePropertyChanged(System.String)">
             <summary>
@@ -1244,6 +1220,38 @@
             <summary>
             Called when the <see cref="E:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.PropertyChanged"/> event occurs during resume events.
             </summary>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetProperty``1(``0@,``0,System.String)">
+            <summary>
+            Sets a property with change checking and change notification.
+            </summary>
+            <typeparam name="T">Target type.</typeparam>
+            <param name="target">Target reference, i.e. a backing field.</param>
+            <param name="value">Value to set.</param>
+            <param name="propertyName">
+            Property name, must match public property name else bindings will not see change.
+            </param>
+            <returns>True when changed.</returns>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetProperty``1(``0@,``0,System.String,CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0},CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0})">
+            <summary>
+            Sets a property with change checking and change notification.
+            </summary>
+            <typeparam name="T">Target type.</typeparam>
+            <param name="target">Target reference, i.e. a backing field.</param>
+            <param name="value">Value to set.</param>
+            <param name="propertyName">
+            Property name, must match public property name else bindings will not see change.
+            </param>
+            <param name="beforeAssign">
+            Optional callback which is invoked before assignment and before firing the changed event,
+            with the old and new values, e.g. to un-hook events or deactivate the old value.
+            </param>
+            <param name="afterAssign">
+            Optional callback which is invoked after assignment but before firing the changed event,
+            with the old and new values, e.g. to hook events or clean-up the old value.
+            </param>
+            <returns>True when changed.</returns>
         </member>
         <member name="T:CodeForDotNet.ComponentModel.PropertyStore">
             <summary>
@@ -4141,6 +4149,12 @@
             Valid number digits in order of value starting at zero.
             </summary>
         </member>
+        <member name="F:CodeForDotNet.Numerics.Number._bytes">
+            <summary>
+            The internal numeric value, stored as a byte array ordered from least significant (LSB) to
+            most significant (MSB), i.e. the LSB is at index 0.
+            </summary>
+        </member>
         <member name="M:CodeForDotNet.Numerics.Number.#ctor(System.Byte[],System.Boolean)">
             <summary>
             Creates a value based on an existing array of bytes (not copied).
@@ -4201,15 +4215,9 @@
             Creates a value based on an existing <see cref="T:System.Decimal"/>.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Numerics.Number._bytes">
+        <member name="P:CodeForDotNet.Numerics.Number.MinusOne">
             <summary>
-            The internal numeric value, stored as a byte array ordered from least significant (LSB) to most significant (MSB),
-            i.e. the LSB is at index 0.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Numerics.Number.Zero">
-            <summary>
-            Zero signed value.
+            Minus-one signed value.
             </summary>
         </member>
         <member name="P:CodeForDotNet.Numerics.Number.One">
@@ -4217,28 +4225,14 @@
             One signed value.
             </summary>
         </member>
-        <member name="P:CodeForDotNet.Numerics.Number.MinusOne">
+        <member name="P:CodeForDotNet.Numerics.Number.Zero">
             <summary>
-            Minus-one signed value.
+            Zero signed value.
             </summary>
-        </member>
-        <member name="P:CodeForDotNet.Numerics.Number.Signed">
-            <summary>
-            Enables or disables signed number processing.
-            </summary>
-            <remarks>
-            The internal value is not changed, only its interpretation.
-            </remarks>
         </member>
         <member name="P:CodeForDotNet.Numerics.Number.ByteSize">
             <summary>
             Size in bytes.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Numerics.Number.Sign">
-            <summary>
-            Indicates the sign, true for positive, false for negative.
-            Always true when unsigned.
             </summary>
         </member>
         <member name="P:CodeForDotNet.Numerics.Number.IsZero">
@@ -4246,49 +4240,155 @@
             Indicates the current value is zero.
             </summary>
         </member>
+        <member name="P:CodeForDotNet.Numerics.Number.Sign">
+            <summary>
+            Indicates the sign, true for positive, false for negative. Always true when unsigned.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Numerics.Number.Signed">
+            <summary>
+            Enables or disables signed number processing.
+            </summary>
+            <remarks>The internal value is not changed, only its interpretation.</remarks>
+        </member>
         <member name="P:CodeForDotNet.Numerics.Number.Item(System.Int32)">
             <summary>
             Gets the byte at the specified index.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Equality(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.Absolute(CodeForDotNet.Numerics.Number)">
             <summary>
-            Compares two objects of this type for equality.
+            Gets the absolute value of the number, basically converting negative to positive when necessary.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Inequality(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.Add(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
             <summary>
-            Compares two objects of this type for equality.
+            Adds two numbers together.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Equals(System.Object)">
+        <member name="M:CodeForDotNet.Numerics.Number.BitwiseAnd(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
             <summary>
-            Compares this object with another.
+            Performs a bitwise AND on two <see cref="T:CodeForDotNet.Numerics.Number"/> values.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Equals(CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.BitwiseOr(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
             <summary>
-            Compares this object with another of the same type.
+            Performs a bitwise OR on two <see cref="T:CodeForDotNet.Numerics.Number"/> values.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_LessThan(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.Decrement(CodeForDotNet.Numerics.Number)">
             <summary>
-            Tests if one <see cref="T:CodeForDotNet.Numerics.Number"/> is less than another.
+            Decrements a <see cref="T:CodeForDotNet.Numerics.Number"/> by one.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_LessThanOrEqual(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.Divide(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
             <summary>
-            Tests if one <see cref="T:CodeForDotNet.Numerics.Number"/> is less than or equal to another.
+            Divides one <see cref="T:CodeForDotNet.Numerics.Number"/> by another.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_GreaterThan(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.Divide(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number@)">
             <summary>
-            Tests if one <see cref="T:CodeForDotNet.Numerics.Number"/> is greater than another.
+            Divides one <see cref="T:CodeForDotNet.Numerics.Number"/> by another, including remainder.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_GreaterThanOrEqual(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.Byte">
             <summary>
-            Tests if one <see cref="T:CodeForDotNet.Numerics.Number"/> is greater than or equal to another.
+            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.Byte"/> (unsigned).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.Decimal">
+            <summary>
+            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.Decimal"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.Int32">
+            <summary>
+            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.Int32"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.Int64">
+            <summary>
+            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.Int64"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.SByte">
+            <summary>
+            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.SByte"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.Int16">
+            <summary>
+            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.Int16"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.UInt32">
+            <summary>
+            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.UInt32"/> (unsigned).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.UInt64">
+            <summary>
+            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.UInt64"/> (unsigned).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.UInt16">
+            <summary>
+            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.UInt16"/> (unsigned).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromByte(System.Byte)">
+            <summary>
+            Converts an (unsigned) <see cref="T:System.Byte"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromDecimal(System.Decimal)">
+            <summary>
+            Converts an (signed) <see cref="T:System.Decimal"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromDouble(System.Double)">
+            <summary>
+            Converts an (signed) <see cref="T:System.Double"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromInt16(System.Int16)">
+            <summary>
+            Converts an (signed) <see cref="T:System.Int16"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromInt32(System.Int32)">
+            <summary>
+            Converts an (signed) <see cref="T:System.Int32"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromInt64(System.Int64)">
+            <summary>
+            Converts an (signed) <see cref="T:System.Int64"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromSByte(System.SByte)">
+            <summary>
+            Converts an (signed) <see cref="T:System.SByte"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromSingle(System.Single)">
+            <summary>
+            Converts an (signed) <see cref="T:System.Single"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromUInt16(System.UInt16)">
+            <summary>
+            Converts an (unsigned) <see cref="T:System.UInt16"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromUInt32(System.UInt32)">
+            <summary>
+            Converts an (unsigned) <see cref="T:System.UInt32"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.FromUInt64(System.UInt64)">
+            <summary>
+            Converts an (unsigned) <see cref="T:System.UInt64"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.op_Implicit(System.Byte)~CodeForDotNet.Numerics.Number">
@@ -4346,84 +4446,9 @@
             Implicitly converts an (signed) <see cref="T:System.Decimal"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.Byte">
+        <member name="M:CodeForDotNet.Numerics.Number.Increment(CodeForDotNet.Numerics.Number)">
             <summary>
-            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.Byte"/> (unsigned).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.SByte">
-            <summary>
-            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.SByte"/> (signed).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.Int16">
-            <summary>
-            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.Int16"/> (signed).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.UInt16">
-            <summary>
-            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.UInt16"/> (unsigned).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.Int32">
-            <summary>
-            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.Int32"/> (signed).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.UInt32">
-            <summary>
-            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.UInt32"/> (unsigned).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.Int64">
-            <summary>
-            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.Int64"/> (signed).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.UInt64">
-            <summary>
-            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.UInt64"/> (unsigned).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Explicit(CodeForDotNet.Numerics.Number)~System.Decimal">
-            <summary>
-            Explicitly converts a <see cref="T:CodeForDotNet.Numerics.Number"/> to a <see cref="T:System.Decimal"/> (signed).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_BitwiseAnd(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
-            <summary>
-            Performs a bitwise AND on two <see cref="T:CodeForDotNet.Numerics.Number"/> values.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.BitwiseAnd(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
-            <summary>
-            Performs a bitwise AND on two <see cref="T:CodeForDotNet.Numerics.Number"/> values.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_BitwiseOr(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
-            <summary>
-            Performs a bitwise OR on two <see cref="T:CodeForDotNet.Numerics.Number"/> values.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.BitwiseOr(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
-            <summary>
-            Performs a bitwise OR on two <see cref="T:CodeForDotNet.Numerics.Number"/> values.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_ExclusiveOr(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
-            <summary>
-            Performs a bitwise XOR on two <see cref="T:CodeForDotNet.Numerics.Number"/> values.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Xor(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
-            <summary>
-            Performs a bitwise XOR on two <see cref="T:CodeForDotNet.Numerics.Number"/> values.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_LeftShift(CodeForDotNet.Numerics.Number,System.Int32)">
-            <summary>
-            Performs a bitwise left shift of a <see cref="T:CodeForDotNet.Numerics.Number"/> value.
+            Increments a <see cref="T:CodeForDotNet.Numerics.Number"/> by one.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.LeftShift(CodeForDotNet.Numerics.Number,System.Int32)">
@@ -4431,78 +4456,24 @@
             Performs a bitwise left shift of a <see cref="T:CodeForDotNet.Numerics.Number"/> value.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_RightShift(CodeForDotNet.Numerics.Number,System.Int32)">
+        <member name="M:CodeForDotNet.Numerics.Number.Multiply(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
             <summary>
-            Performs a bitwise right shift of a <see cref="T:CodeForDotNet.Numerics.Number"/> value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.RightShift(CodeForDotNet.Numerics.Number,System.Int32)">
-            <summary>
-            Performs a bitwise right shift of a <see cref="T:CodeForDotNet.Numerics.Number"/> value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_OnesComplement(CodeForDotNet.Numerics.Number)">
-            <summary>
-            Performs a bitwise NOT on a <see cref="T:CodeForDotNet.Numerics.Number"/> value,
-            also known as the "one's complement".
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.OnesComplement(CodeForDotNet.Numerics.Number)">
-            <summary>
-            Performs a bitwise NOT on a <see cref="T:CodeForDotNet.Numerics.Number"/> value,
-            also known as the "one's complement".
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_UnaryNegation(CodeForDotNet.Numerics.Number)">
-            <summary>
-            Performs a negation of a <see cref="T:CodeForDotNet.Numerics.Number"/>,
-            also known as the "two's complement".
+            Multiplies one <see cref="T:CodeForDotNet.Numerics.Number"/> by another.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.Negate(CodeForDotNet.Numerics.Number)">
             <summary>
-            Performs a negation of a <see cref="T:CodeForDotNet.Numerics.Number"/>,
-            also known as the "two's complement".
+            Performs a negation of a <see cref="T:CodeForDotNet.Numerics.Number"/>, also known as the "two's complement".
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_UnaryPlus(CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.OnesComplement(CodeForDotNet.Numerics.Number)">
             <summary>
-            Returns the value of a <see cref="T:CodeForDotNet.Numerics.Number"/> (no change to sign).
+            Performs a bitwise NOT on a <see cref="T:CodeForDotNet.Numerics.Number"/> value, also known as the "one's complement".
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Plus(CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.op_UnaryNegation(CodeForDotNet.Numerics.Number)">
             <summary>
-            Returns the value of a <see cref="T:CodeForDotNet.Numerics.Number"/> (no change to sign).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Increment(CodeForDotNet.Numerics.Number)">
-            <summary>
-            Increments a <see cref="T:CodeForDotNet.Numerics.Number"/> by one.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Increment(CodeForDotNet.Numerics.Number)">
-            <summary>
-            Increments a <see cref="T:CodeForDotNet.Numerics.Number"/> by one.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Decrement(CodeForDotNet.Numerics.Number)">
-            <summary>
-            Decrements a <see cref="T:CodeForDotNet.Numerics.Number"/> by one.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Decrement(CodeForDotNet.Numerics.Number)">
-            <summary>
-            Decrements a <see cref="T:CodeForDotNet.Numerics.Number"/> by one.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Addition(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
-            <summary>
-            Adds two numbers together.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Add(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
-            <summary>
-            Adds two numbers together.
+            Performs a negation of a <see cref="T:CodeForDotNet.Numerics.Number"/>, also known as the "two's complement".
             </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.op_Subtraction(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
@@ -4510,24 +4481,19 @@
             Subtracts two numbers.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Subtract(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.op_Decrement(CodeForDotNet.Numerics.Number)">
             <summary>
-            Subtracts two numbers.
+            Decrements a <see cref="T:CodeForDotNet.Numerics.Number"/> by one.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.op_Division(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.op_Inequality(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
             <summary>
-            Divides one <see cref="T:CodeForDotNet.Numerics.Number"/> by another.
+            Compares two objects of this type for equality.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Divide(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.op_BitwiseAnd(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
             <summary>
-            Divides one <see cref="T:CodeForDotNet.Numerics.Number"/> by another.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Divide(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number@)">
-            <summary>
-            Divides one <see cref="T:CodeForDotNet.Numerics.Number"/> by another, including remainder.
+            Performs a bitwise AND on two <see cref="T:CodeForDotNet.Numerics.Number"/> values.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.op_Multiply(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
@@ -4535,14 +4501,145 @@
             Multiplies one <see cref="T:CodeForDotNet.Numerics.Number"/> by another.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Multiply(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+        <member name="M:CodeForDotNet.Numerics.Number.op_Division(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
             <summary>
-            Multiplies one <see cref="T:CodeForDotNet.Numerics.Number"/> by another.
+            Divides one <see cref="T:CodeForDotNet.Numerics.Number"/> by another.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.GetHashCode">
+        <member name="M:CodeForDotNet.Numerics.Number.op_ExclusiveOr(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
             <summary>
-            Gets a hash based on the current value.
+            Performs a bitwise XOR on two <see cref="T:CodeForDotNet.Numerics.Number"/> values.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_BitwiseOr(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+            <summary>
+            Performs a bitwise OR on two <see cref="T:CodeForDotNet.Numerics.Number"/> values.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_OnesComplement(CodeForDotNet.Numerics.Number)">
+            <summary>
+            Performs a bitwise NOT on a <see cref="T:CodeForDotNet.Numerics.Number"/> value, also known as the "one's complement".
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_UnaryPlus(CodeForDotNet.Numerics.Number)">
+            <summary>
+            Returns the value of a <see cref="T:CodeForDotNet.Numerics.Number"/> (no change to sign).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_Addition(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+            <summary>
+            Adds two numbers together.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_Increment(CodeForDotNet.Numerics.Number)">
+            <summary>
+            Increments a <see cref="T:CodeForDotNet.Numerics.Number"/> by one.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_LessThan(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+            <summary>
+            Tests if one <see cref="T:CodeForDotNet.Numerics.Number"/> is less than another.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_LeftShift(CodeForDotNet.Numerics.Number,System.Int32)">
+            <summary>
+            Performs a bitwise left shift of a <see cref="T:CodeForDotNet.Numerics.Number"/> value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_LessThanOrEqual(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+            <summary>
+            Tests if one <see cref="T:CodeForDotNet.Numerics.Number"/> is less than or equal to another.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_Equality(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+            <summary>
+            Compares two objects of this type for equality.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_GreaterThan(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+            <summary>
+            Tests if one <see cref="T:CodeForDotNet.Numerics.Number"/> is greater than another.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_GreaterThanOrEqual(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+            <summary>
+            Tests if one <see cref="T:CodeForDotNet.Numerics.Number"/> is greater than or equal to another.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.op_RightShift(CodeForDotNet.Numerics.Number,System.Int32)">
+            <summary>
+            Performs a bitwise right shift of a <see cref="T:CodeForDotNet.Numerics.Number"/> value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.Parse(System.String,System.Int32)">
+            <summary>
+            Converts a string to a signed <see cref="T:CodeForDotNet.Numerics.Number"/> of the specified base.
+            </summary>
+            <exception cref="T:System.FormatException">
+            Thrown when conversion is not possible because the string value has an invalid format.
+            </exception>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.Parse(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Converts a string to a signed or unsigned <see cref="T:CodeForDotNet.Numerics.Number"/> of the specified base.
+            </summary>
+            <exception cref="T:System.FormatException">
+            Thrown when conversion is not possible because the string value has an invalid format.
+            </exception>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.Plus(CodeForDotNet.Numerics.Number)">
+            <summary>
+            Returns the value of a <see cref="T:CodeForDotNet.Numerics.Number"/> (no change to sign).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.Power(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+            <summary>
+            Calculates the exponent, multiplying a <see cref="T:CodeForDotNet.Numerics.Number"/> by itself a number of times.
+            </summary>
+            <remarks>
+            Also known as raising the <paramref name="value"/> to the specified
+            <paramref name="exponent"/> "power". http://en.wikipedia.org/wiki/Exponentiation_by_squaring
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.RightShift(CodeForDotNet.Numerics.Number,System.Int32)">
+            <summary>
+            Performs a bitwise right shift of a <see cref="T:CodeForDotNet.Numerics.Number"/> value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.Subtract(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+            <summary>
+            Subtracts two numbers.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.TryParse(System.String,System.Int32,CodeForDotNet.Numerics.Number@)">
+            <summary>
+            Attempts conversion of a string to a signed <see cref="T:CodeForDotNet.Numerics.Number"/> of the specified base.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.TryParse(System.String,System.Int32,CodeForDotNet.Numerics.Number@,System.Boolean)">
+            <summary>
+            Attempts conversion of a string to a signed or unsigned <see cref="T:CodeForDotNet.Numerics.Number"/> of the
+            specified base.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.Xor(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
+            <summary>
+            Performs a bitwise XOR on two <see cref="T:CodeForDotNet.Numerics.Number"/> values.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.CompareTo(CodeForDotNet.Numerics.Number)">
+            <summary>
+            Compares this <see cref="T:CodeForDotNet.Numerics.Number"/> with another.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.Equals(System.Object)">
+            <summary>
+            Compares this object with another.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.Equals(CodeForDotNet.Numerics.Number)">
+            <summary>
+            Compares this object with another of the same type.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.GetBytes">
@@ -4550,9 +4647,14 @@
             Gets a read-only reference to the internal bytes of this value.
             </summary>
             <remarks>
-            The numeric value is stored in this byte array ordered from least significant (LSB) to most significant (MSB),
-            i.e. the LSB is at index 0.
+            The numeric value is stored in this byte array ordered from least significant (LSB) to most
+            significant (MSB), i.e. the LSB is at index 0.
             </remarks>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.GetHashCode">
+            <summary>
+            Gets a hash based on the current value.
+            </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.Resize(System.Int32)">
             <summary>
@@ -4565,33 +4667,50 @@
             Returns a <see cref="T:CodeForDotNet.Numerics.Number"/> which has been resized with optional sign extension.
             </summary>
             <param name="size">New size in bytes.</param>
-            <param name="extendSign">When true the sign will be extended when setting to a larger value.</param>
+            <param name="extendSign">
+            When true the sign will be extended when setting to a larger value.
+            </param>
             <returns>New value which is truncated or extended as specified. Any overflow is discarded.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToByte">
+            <summary>
+            Converts the current value to a <see cref="T:System.Byte"/> (unsigned).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToDecimal">
+            <summary>
+            Converts the current value to a <see cref="T:System.Decimal"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToInt16">
+            <summary>
+            Converts the current value to a <see cref="T:System.Int16"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToInt32">
+            <summary>
+            Converts the current value to a <see cref="T:System.Int32"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToInt64">
+            <summary>
+            Converts the current value to a <see cref="T:System.Int64"/> (signed).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.Number.ToSByte">
+            <summary>
+            Converts the current value to a <see cref="T:System.SByte"/> (signed).
+            </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.ToSigned(System.Boolean)">
             <summary>
             Creates a signed copy of this value, optionally extending to preserve sign.
             </summary>
             <param name="extend">
-            Set true to preserve sign by extending when converting from unsigned to signed and
-            the most significant (sign) bit is already used by the original value.
+            Set true to preserve sign by extending when converting from unsigned to signed and the most
+            significant (sign) bit is already used by the original value.
             </param>
-            <returns>
-            New <see cref="T:CodeForDotNet.Numerics.Number" /> which is signed and has the same value.
-            </returns>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.ToUnsigned(System.Boolean)">
-            <summary>
-            Creates an unsigned copy of this value.
-            </summary>
-            <param name="positiveOnly">
-            Set true to ensure a positive result by returning zero when negative.
-            </param>
-            <returns>
-            New <see cref="T:CodeForDotNet.Numerics.Number" /> which is unsigned and has the same value when positive,
-            and optionally the same bit value (but different interpreted value) or zero when negative
-            (according to the <see paramref="positiveOnly" /> option).
-            </returns>
+            <returns>New <see cref="T:CodeForDotNet.Numerics.Number"/> which is signed and has the same value.</returns>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.ToString">
             <summary>
@@ -4609,106 +4728,9 @@
             Converts the number to a string of the specified base.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Parse(System.String,System.Int32)">
-            <summary>
-            Converts a string to a signed <see cref="T:CodeForDotNet.Numerics.Number"/> of the specified base.
-            </summary>
-            <exception cref="T:System.FormatException">Thrown when conversion is not possible because the string value has an invalid format.</exception>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Parse(System.String,System.Int32,System.Boolean)">
-            <summary>
-            Converts a string to a signed or unsigned <see cref="T:CodeForDotNet.Numerics.Number"/> of the specified base.
-            </summary>
-            <exception cref="T:System.FormatException">Thrown when conversion is not possible because the string value has an invalid format.</exception>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.TryParse(System.String,System.Int32,CodeForDotNet.Numerics.Number@)">
-            <summary>
-            Attempts conversion of a string to a signed <see cref="T:CodeForDotNet.Numerics.Number"/> of the specified base.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.TryParse(System.String,System.Int32,CodeForDotNet.Numerics.Number@,System.Boolean)">
-            <summary>
-            Attempts conversion of a string to a signed or unsigned <see cref="T:CodeForDotNet.Numerics.Number"/> of the specified base.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.FromByte(System.Byte)">
-            <summary>
-            Converts an (unsigned) <see cref="T:System.Byte"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.FromSByte(System.SByte)">
-            <summary>
-            Converts an (signed) <see cref="T:System.SByte"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.FromUInt16(System.UInt16)">
-            <summary>
-            Converts an (unsigned) <see cref="T:System.UInt16"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.FromInt16(System.Int16)">
-            <summary>
-            Converts an (signed) <see cref="T:System.Int16"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.FromUInt32(System.UInt32)">
-            <summary>
-            Converts an (unsigned) <see cref="T:System.UInt32"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.FromInt32(System.Int32)">
-            <summary>
-            Converts an (signed) <see cref="T:System.Int32"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.FromUInt64(System.UInt64)">
-            <summary>
-            Converts an (unsigned) <see cref="T:System.UInt64"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.FromInt64(System.Int64)">
-            <summary>
-            Converts an (signed) <see cref="T:System.Int64"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.FromSingle(System.Single)">
-            <summary>
-            Converts an (signed) <see cref="T:System.Single"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.FromDouble(System.Double)">
-            <summary>
-            Converts an (signed) <see cref="T:System.Double"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.FromDecimal(System.Decimal)">
-            <summary>
-            Converts an (signed) <see cref="T:System.Decimal"/> to a <see cref="T:CodeForDotNet.Numerics.Number"/>.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.ToByte">
-            <summary>
-            Converts the current value to a <see cref="T:System.Byte"/> (unsigned).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.ToSByte">
-            <summary>
-            Converts the current value to a <see cref="T:System.SByte"/> (signed).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.ToInt16">
-            <summary>
-            Converts the current value to a <see cref="T:System.Int16"/> (signed).
-            </summary>
-        </member>
         <member name="M:CodeForDotNet.Numerics.Number.ToUInt16">
             <summary>
             Converts the current value to a <see cref="T:System.UInt16"/> (unsigned).
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.ToInt32">
-            <summary>
-            Converts the current value to a <see cref="T:System.Int32"/> (signed).
             </summary>
         </member>
         <member name="M:CodeForDotNet.Numerics.Number.ToUInt32">
@@ -4716,40 +4738,23 @@
             Converts the current value to a <see cref="T:System.UInt32"/> (unsigned).
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.ToInt64">
-            <summary>
-            Converts the current value to a <see cref="T:System.Int64"/> (signed).
-            </summary>
-        </member>
         <member name="M:CodeForDotNet.Numerics.Number.ToUInt64">
             <summary>
             Converts the current value to a <see cref="T:System.UInt64"/> (unsigned).
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Numerics.Number.ToDecimal">
+        <member name="M:CodeForDotNet.Numerics.Number.ToUnsigned(System.Boolean)">
             <summary>
-            Converts the current value to a <see cref="T:System.Decimal"/> (signed).
+            Creates an unsigned copy of this value.
             </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Absolute(CodeForDotNet.Numerics.Number)">
-            <summary>
-            Gets the absolute value of the number, basically
-            converting negative to positive when necessary.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.Power(CodeForDotNet.Numerics.Number,CodeForDotNet.Numerics.Number)">
-            <summary>
-            Calculates the exponent, multiplying a <see cref="T:CodeForDotNet.Numerics.Number"/> by itself a number of times.
-            </summary>
-            <remarks>
-            Also known as raising the <paramref name="value"/> to the specified <paramref name="exponent"/> "power".
-            http://en.wikipedia.org/wiki/Exponentiation_by_squaring
-            </remarks>
-        </member>
-        <member name="M:CodeForDotNet.Numerics.Number.CompareTo(CodeForDotNet.Numerics.Number)">
-            <summary>
-            Compares this <see cref="T:CodeForDotNet.Numerics.Number"/> with another.
-            </summary>
+            <param name="positiveOnly">
+            Set true to ensure a positive result by returning zero when negative.
+            </param>
+            <returns>
+            New <see cref="T:CodeForDotNet.Numerics.Number"/> which is unsigned and has the same value when positive, and
+            optionally the same bit value (but different interpreted value) or zero when negative
+            (according to the <see paramref="positiveOnly"/> option).
+            </returns>
         </member>
         <member name="T:CodeForDotNet.Numerics.NumberExtensions">
             <summary>
@@ -5479,15 +5484,19 @@
         </member>
         <member name="T:CodeForDotNet.Xml.XmlAnyDocument">
             <summary>
-            Container for unqualified arbitrary XML data which is serializable
-            as child element of a qualified type, i.e. an "xs:any" container.
+            Container for unqualified arbitrary XML data which is serializable as child element of a
+            qualified type, i.e. an "xs:any" container.
             </summary>
             <remarks>
-            The default root element is "root" when serialized standalone.
-            Normally this is a property of another serializable type, in which case the root
-            is set by the XML serialization attributes of the parent property or in the
-            custom serialization code of the parent class if implemented.
+            The default root element is "root" when serialized standalone. Normally this is a property of
+            another serializable type, in which case the root is set by the XML serialization attributes
+            of the parent property or in the custom serialization code of the parent class if implemented.
             </remarks>
+        </member>
+        <member name="F:CodeForDotNet.Xml.XmlAnyDocument.XmlNamespace">
+            <summary>
+            XML namespace.
+            </summary>
         </member>
         <member name="F:CodeForDotNet.Xml.XmlAnyDocument.XmlRootName">
             <summary>
@@ -5497,11 +5506,6 @@
         <member name="F:CodeForDotNet.Xml.XmlAnyDocument.XmlTypeName">
             <summary>
             XML type name.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Xml.XmlAnyDocument.XmlNamespace">
-            <summary>
-            XML namespace.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Xml.XmlAnyDocument.#ctor">
@@ -5514,76 +5518,9 @@
             Serialization constructor.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-            Called by the binary serializer to get object data.
-            </summary>
-            <remarks>
-            We need to control serialization because the <see cref="T:System.Xml.XmlDocumentFragment"/> class is not serializable.
-            </remarks>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetSchema(System.Xml.Schema.XmlSchemaSet)">
-            <summary>
-            Gets the schema and XML type of this class.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetSchema">
-            <summary>
-            Returns the XML schema for this type.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.ReadXml(System.Xml.XmlReader)">
-            <summary>
-            Reads properties of this object from XML during de-serialization.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.WriteXml(System.Xml.XmlWriter)">
-            <summary>
-            Writes properties of this object to XML during serialization.
-            </summary>
-        </member>
         <member name="M:CodeForDotNet.Xml.XmlAnyDocument.Finalize">
             <summary>
             Calls <see cref="M:CodeForDotNet.Xml.XmlAnyDocument.Dispose(System.Boolean)"/> during finalization to free resources in case it was forgotten.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.Dispose">
-            <summary>
-            Proactively frees resources.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.Dispose(System.Boolean)">
-            <summary>
-            Frees resources owned by this object.
-            </summary>
-            <param name="disposing">
-            True when called proactively by <see cref="M:CodeForDotNet.Xml.XmlAnyDocument.Dispose"/>.
-            False when called during finalization.
-            </param>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.op_Equality(CodeForDotNet.Xml.XmlAnyDocument,CodeForDotNet.Xml.XmlAnyDocument)">
-            <summary>
-            Tests two objects of this type for equality by value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.op_Inequality(CodeForDotNet.Xml.XmlAnyDocument,CodeForDotNet.Xml.XmlAnyDocument)">
-            <summary>
-            Tests two objects of this type for inequality by value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.Equals(System.Object)">
-            <summary>
-            Compares this object with another by value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetHashCode">
-            <summary>
-            Returns a hash-code based on the current value of this object.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Xml.XmlAnyDocument.Xml">
-            <summary>
-            XML data.
             </summary>
         </member>
         <member name="P:CodeForDotNet.Xml.XmlAnyDocument.IsEmpty">
@@ -5591,39 +5528,25 @@
             Indicates whether the XML is currently empty.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.Clear">
+        <member name="P:CodeForDotNet.Xml.XmlAnyDocument.Xml">
             <summary>
-            Removing all content.
+            XML data.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetRoot">
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetSchema(System.Xml.Schema.XmlSchemaSet)">
             <summary>
-            Returns an <see cref="T:System.Xml.XPath.XPathNavigator"/> positioned at the root of the data.
+            Gets the schema and XML type of this class.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetPath(System.String)">
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.op_Inequality(CodeForDotNet.Xml.XmlAnyDocument,CodeForDotNet.Xml.XmlAnyDocument)">
             <summary>
-            Returns an <see cref="T:System.Xml.XPath.XPathNavigator"/> positioned within the data.
-            The path is not created.
+            Tests two objects of this type for inequality by value.
             </summary>
-            <remarks>
-            Even if this instance was serialized standalone the default "root" element is not part of the path because it is stripped during de-serialization.
-            </remarks>
-            <param name="path">Optional XPath expression to select the sub-path. Set null to select the root element.</param>
-            <returns><see cref="T:System.Xml.XPath.XPathNavigator"/> positioned at the path or null when not found.</returns>
         </member>
-        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetPath(System.String,System.Boolean)">
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.op_Equality(CodeForDotNet.Xml.XmlAnyDocument,CodeForDotNet.Xml.XmlAnyDocument)">
             <summary>
-            Returns an <see cref="T:System.Xml.XPath.XPathNavigator"/> positioned within the data.
-            Parent elements in the path without filters will be created if the <paramref name="create"/> option is set.
-            (up to the first filter).
+            Tests two objects of this type for equality by value.
             </summary>
-            <remarks>
-            Even if this instance was serialized standalone the default "root" element is not part of the path because it is stripped during de-serialization.
-            </remarks>
-            <param name="path">Optional XPath expression to select the sub-path. Set null to select the root element.</param>
-            <param name="create">Create the path if it doesn't exist.</param>
-            <returns><see cref="T:System.Xml.XPath.XPathNavigator"/> positioned at the path or null when not found and <paramref name="create"/> was not set true.</returns>
         </member>
         <member name="M:CodeForDotNet.Xml.XmlAnyDocument.Add(System.String,System.String,System.String)">
             <summary>
@@ -5659,11 +5582,99 @@
             <param name="targetPath">Target XPath, or null for root.</param>
             <param name="overwrite">Set true to delete data first.</param>
         </member>
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.Clear">
+            <summary>
+            Removing all content.
+            </summary>
+        </member>
         <member name="M:CodeForDotNet.Xml.XmlAnyDocument.Delete(System.String)">
             <summary>
             Deletes XML from the specified path.
             </summary>
             <param name="path">XPath target path, null for root.</param>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.Dispose">
+            <summary>
+            Proactively frees resources.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.Equals(System.Object)">
+            <summary>
+            Compares this object with another by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetHashCode">
+            <summary>
+            Returns a hash-code based on the current value of this object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Called by the binary serializer to get object data.
+            </summary>
+            <remarks>
+            We need to control serialization because the <see cref="T:System.Xml.XmlDocumentFragment"/> class is not serializable.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetPath(System.String)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathNavigator"/> positioned within the data. The path is not created.
+            </summary>
+            <remarks>
+            Even if this instance was serialized standalone the default "root" element is not part of
+            the path because it is stripped during de-serialization.
+            </remarks>
+            <param name="path">
+            Optional XPath expression to select the sub-path. Set null to select the root element.
+            </param>
+            <returns><see cref="T:System.Xml.XPath.XPathNavigator"/> positioned at the path or null when not found.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetPath(System.String,System.Boolean)">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathNavigator"/> positioned within the data. Parent elements in the
+            path without filters will be created if the <paramref name="create"/> option is set. (up to
+            the first filter).
+            </summary>
+            <remarks>
+            Even if this instance was serialized standalone the default "root" element is not part of
+            the path because it is stripped during de-serialization.
+            </remarks>
+            <param name="path">
+            Optional XPath expression to select the sub-path. Set null to select the root element.
+            </param>
+            <param name="create">Create the path if it doesn't exist.</param>
+            <returns>
+            <see cref="T:System.Xml.XPath.XPathNavigator"/> positioned at the path or null when not found and
+            <paramref name="create"/> was not set true.
+            </returns>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetRoot">
+            <summary>
+            Returns an <see cref="T:System.Xml.XPath.XPathNavigator"/> positioned at the root of the data.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.GetSchema">
+            <summary>
+            Returns the XML schema for this type.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            Reads properties of this object from XML during de-serialization.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            Writes properties of this object to XML during serialization.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Xml.XmlAnyDocument.Dispose(System.Boolean)">
+            <summary>
+            Frees resources owned by this object.
+            </summary>
+            <param name="disposing">
+            True when called proactively by <see cref="M:CodeForDotNet.Xml.XmlAnyDocument.Dispose"/>. False when called during finalization.
+            </param>
         </member>
         <member name="T:CodeForDotNet.Xml.XmlExtensions">
             <summary>

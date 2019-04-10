@@ -28,7 +28,7 @@ namespace CodeForDotNet.Windows.Imaging
             if (interopCollection == null) throw new ArgumentNullException(nameof(interopCollection));
 
             // Add unmanaged collection items with managed wrappers
-            foreach (object interopItem in interopCollection)
+            foreach (var interopItem in interopCollection)
                 Add(interopItem);
         }
 

@@ -45,7 +45,7 @@ namespace CodeForDotNet.Data
                         Data.Dispose();
                     if (_changeLog != null)
                     {
-                        foreach (DataSetChangeLogEntry change in _changeLog)
+                        foreach (var change in _changeLog)
                             change.Dispose();
                         _changeLog.Clear();
                     }
@@ -94,8 +94,8 @@ namespace CodeForDotNet.Data
         {
             lock (SyncRoot)
             {
-                Collection<string> result = new Collection<string>();
-                for (int i = _logIndex + 1; (i >= 0) && (i < _changeLog.Count); i--)
+                var result = new Collection<string>();
+                for (var i = _logIndex + 1; (i >= 0) && (i < _changeLog.Count); i--)
                     result.Add(_changeLog[i].Name);
                 return result;
             }
@@ -109,8 +109,8 @@ namespace CodeForDotNet.Data
         {
             lock (SyncRoot)
             {
-                Collection<string> result = new Collection<string>();
-                for (int i = _logIndex; (i >= 0) && (i < _changeLog.Count); i++)
+                var result = new Collection<string>();
+                for (var i = _logIndex; (i >= 0) && (i < _changeLog.Count); i++)
                     result.Add(_changeLog[i].Name);
                 return result;
             }
@@ -124,7 +124,7 @@ namespace CodeForDotNet.Data
             lock (SyncRoot)
             {
                 // Get changes
-                DataSet changes = Data.GetChanges();
+                var changes = Data.GetChanges();
 
                 // Do nothing when no changes
                 if (changes == null)
@@ -141,7 +141,7 @@ namespace CodeForDotNet.Data
                 }
 
                 // Add change log entry
-                DataSetChangeLogEntry logEntry = new DataSetChangeLogEntry(DateTime.UtcNow, name, changes);
+                var logEntry = new DataSetChangeLogEntry(DateTime.UtcNow, name, changes);
                 _changeLog.Add(logEntry);
                 _logIndex++;
 
@@ -171,7 +171,7 @@ namespace CodeForDotNet.Data
                     throw new InvalidOperationException();
 
                 // Disable constraints during update (if enabled)
-                bool enforceConstraints = Data.EnforceConstraints;
+                var enforceConstraints = Data.EnforceConstraints;
                 if (enforceConstraints)
                     Data.EnforceConstraints = false;
 
@@ -182,8 +182,8 @@ namespace CodeForDotNet.Data
                 while (steps-- > 0)
                 {
                     // Get change log entry
-                    DataSetChangeLogEntry logEntry = _changeLog[_logIndex];
-                    DataSet changes = logEntry.Changes;
+                    var logEntry = _changeLog[_logIndex];
+                    var changes = logEntry.Changes;
 
                     // Reverse changes to DataSet
                     foreach (DataTable changedTable in changes.Tables)
@@ -198,11 +198,11 @@ namespace CodeForDotNet.Data
                                         // Reverse INSERT...
 
                                         // Find the original row
-                                        string primaryKeyStatement = GetPrimaryKeyFilterExpression(changedRow);
-                                        DataRow[] existingRows = Data.Tables[changedTable.TableName].Select(primaryKeyStatement);
+                                        var primaryKeyStatement = GetPrimaryKeyFilterExpression(changedRow);
+                                        var existingRows = Data.Tables[changedTable.TableName].Select(primaryKeyStatement);
                                         if (existingRows.Length == 0)
                                             throw new InvalidOperationException("Rollback could not find original row in DataSet, needed to roll-back INSERT.");
-                                        DataRow row = existingRows[0];
+                                        var row = existingRows[0];
 
                                         // Delete the row
                                         row.Delete();
@@ -214,14 +214,14 @@ namespace CodeForDotNet.Data
                                         // Reverse UPDATE...
 
                                         // Find the original row
-                                        string primaryKeyStatement = GetPrimaryKeyFilterExpression(changedRow);
-                                        DataRow[] existingRows = Data.Tables[changedTable.TableName].Select(primaryKeyStatement);
+                                        var primaryKeyStatement = GetPrimaryKeyFilterExpression(changedRow);
+                                        var existingRows = Data.Tables[changedTable.TableName].Select(primaryKeyStatement);
                                         if (existingRows.Length == 0)
                                             throw new InvalidOperationException("Rollback could not find original row in DataSet, needed to roll-back UPDATE.");
-                                        DataRow row = existingRows[0];
+                                        var row = existingRows[0];
 
                                         // Restore the original row values
-                                        for (int i = 0; i < changedTable.Columns.Count; i++)
+                                        for (var i = 0; i < changedTable.Columns.Count; i++)
                                             row[i] = changedRow[i, DataRowVersion.Original];
                                         break;
                                     }
@@ -231,9 +231,9 @@ namespace CodeForDotNet.Data
                                         // Reverse DELETE...
 
                                         // Insert the original row
-                                        DataTable table = Data.Tables[changedTable.TableName];
-                                        DataRow row = table.NewRow();
-                                        for (int i = 0; i < changedTable.Columns.Count; i++)
+                                        var table = Data.Tables[changedTable.TableName];
+                                        var row = table.NewRow();
+                                        for (var i = 0; i < changedTable.Columns.Count; i++)
                                             row[i] = changedRow[i, DataRowVersion.Original];
                                         table.Rows.Add(row);
                                         break;
@@ -267,7 +267,7 @@ namespace CodeForDotNet.Data
                     throw new InvalidOperationException();
 
                 // Disable constraints during update (if enabled)
-                bool enforceConstraints = Data.EnforceConstraints;
+                var enforceConstraints = Data.EnforceConstraints;
                 if (enforceConstraints)
                     Data.EnforceConstraints = false;
 
@@ -278,8 +278,8 @@ namespace CodeForDotNet.Data
                 while (steps-- > 0)
                 {
                     // Get change log entry
-                    DataSetChangeLogEntry logEntry = _changeLog[_logIndex + 1];
-                    DataSet changes = logEntry.Changes;
+                    var logEntry = _changeLog[_logIndex + 1];
+                    var changes = logEntry.Changes;
 
                     // Re-apply changes to DataSet
                     foreach (DataTable changedTable in changes.Tables)
@@ -303,11 +303,11 @@ namespace CodeForDotNet.Data
                                         // Re-apply UPDATE...
 
                                         // Find the original row
-                                        string primaryKeyStatement = GetPrimaryKeyFilterExpression(changedRow);
-                                        DataRow[] existingRows = Data.Tables[changedTable.TableName].Select(primaryKeyStatement);
+                                        var primaryKeyStatement = GetPrimaryKeyFilterExpression(changedRow);
+                                        var existingRows = Data.Tables[changedTable.TableName].Select(primaryKeyStatement);
                                         if (existingRows.Length == 0)
                                             throw new InvalidOperationException("Rollback could not find original row in DataSet, needed to roll-back UPDATE.");
-                                        DataRow row = existingRows[0];
+                                        var row = existingRows[0];
 
                                         // Update row values
                                         row.ItemArray = changedRow.ItemArray;
@@ -322,11 +322,11 @@ namespace CodeForDotNet.Data
                                         changedRow.RejectChanges();
 
                                         // Find the original row
-                                        string primaryKeyStatement = GetPrimaryKeyFilterExpression(changedRow);
-                                        DataRow[] existingRows = Data.Tables[changedTable.TableName].Select(primaryKeyStatement);
+                                        var primaryKeyStatement = GetPrimaryKeyFilterExpression(changedRow);
+                                        var existingRows = Data.Tables[changedTable.TableName].Select(primaryKeyStatement);
                                         if (existingRows.Length == 0)
                                             throw new InvalidOperationException("Rollback could not find original row in DataSet, needed to roll-back INSERT.");
-                                        DataRow row = existingRows[0];
+                                        var row = existingRows[0];
 
                                         // Restore change row to original state
                                         changedRow.Delete();
@@ -365,17 +365,17 @@ namespace CodeForDotNet.Data
         static string GetPrimaryKeyFilterExpression(DataRow row)
         {
             // Initialize
-            DataTable table = row.Table;
-            string result = string.Empty;
+            var table = row.Table;
+            var result = string.Empty;
 
             // Validate request
             if (table.PrimaryKey.Length == 0)
                 throw new InvalidOperationException("Table " + table.TableName + " does not have a primary key!");
 
             // Build selection expression
-            for (int i = 0; i < table.PrimaryKey.Length; i++)
+            for (var i = 0; i < table.PrimaryKey.Length; i++)
             {
-                DataColumn keyColumn = table.PrimaryKey[i];
+                var keyColumn = table.PrimaryKey[i];
                 if (i > 0)
                     result += " AND ";
                 result += "[" + keyColumn.ColumnName + "] = ";

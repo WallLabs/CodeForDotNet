@@ -63,7 +63,7 @@ namespace CodeForDotNet
             var results = new List<string>();
             var item = new StringBuilder();
             var escaped = false;
-            foreach (char character in text)
+            foreach (var character in text)
             {
                 // Was previous character an escape character
                 if (escaped)
@@ -125,7 +125,7 @@ namespace CodeForDotNet
             var buffer = new StringBuilder();
             var lastLow = false;
             var lastChar = ' ';
-            foreach (char currentChar in value)
+            foreach (var currentChar in value)
             {
                 // Add space if case changed to uppercase and not a whitespace or whitespace before
                 if (!char.IsWhiteSpace(lastChar) && !char.IsWhiteSpace(currentChar) && char.IsUpper(currentChar) && lastLow)

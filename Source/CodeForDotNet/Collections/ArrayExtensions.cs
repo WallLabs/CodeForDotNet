@@ -68,8 +68,8 @@ namespace CodeForDotNet.Collections
                 return false;
 
             // Compare values
-            IEnumerator enumerator1 = left.GetEnumerator();
-            IEnumerator enumerator2 = right.GetEnumerator();
+            var enumerator1 = left.GetEnumerator();
+            var enumerator2 = right.GetEnumerator();
             do
             {
                 // Get next item and check length
@@ -169,7 +169,7 @@ namespace CodeForDotNet.Collections
         public static bool Contains(this StringCollection collection, string value, StringComparison comparisonType = StringComparison.Ordinal)
         {
             // Cast to array.
-            IEnumerable<string> array = collection.OfType<string>();
+            var array = collection.OfType<string>();
 
             // Call overloaded method to check contents.
             return array.Contains(value, comparisonType);
@@ -186,7 +186,7 @@ namespace CodeForDotNet.Collections
                 return;
 
             // Dispose all members
-            foreach (IDisposable disposable in list.Cast<IDisposable>().ToArray())
+            foreach (var disposable in list.Cast<IDisposable>().ToArray())
             {
                 list.Remove(disposable);
                 disposable.Dispose();

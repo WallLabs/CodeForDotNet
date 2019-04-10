@@ -295,7 +295,7 @@ namespace CodeForDotNet.ComponentModel
                 try
                 {
                     // Set each property
-                    foreach (KeyValuePair<Guid, object> property in properties)
+                    foreach (var property in properties)
                         SetProperty(property.Key, property.Value);
                 }
                 finally
@@ -355,7 +355,7 @@ namespace CodeForDotNet.ComponentModel
                 {
                     if (_disposePropertyIDs != null)
                     {
-                        foreach (Guid propertyId in _disposePropertyIDs)
+                        foreach (var propertyId in _disposePropertyIDs)
                             DisposeProperty(propertyId);
                     }
                 }
@@ -418,7 +418,7 @@ namespace CodeForDotNet.ComponentModel
             PropertyStoreChanged?.Invoke(this, change);
             if (PropertyChanged != null)
             {
-                foreach (Guid propertyId in change.Keys)
+                foreach (var propertyId in change.Keys)
                 {
                     var propertyName = _propertyNames[propertyId];
                     PropertyChanged(this, new PropertyChangedEventArgs(propertyName));

@@ -67,7 +67,7 @@ namespace CodeForDotNet.Configuration
             // Iterate through the settings to be stored
             foreach (SettingsPropertyValue property in collection)
             {
-                RegistryKey key = GetRegKey(property.Property);
+                var key = GetRegKey(property.Property);
                 if (property.SerializedValue != null)
                 {
                     // Set value when non-default
@@ -92,12 +92,12 @@ namespace CodeForDotNet.Configuration
                 throw new ArgumentNullException(nameof(collection));
 
             // Create new collection of values
-            SettingsPropertyValueCollection values = new SettingsPropertyValueCollection();
+            var values = new SettingsPropertyValueCollection();
 
             // Iterate through the settings to be retrieved
             foreach (SettingsProperty setting in collection)
             {
-                SettingsPropertyValue value = new SettingsPropertyValue(setting)
+                var value = new SettingsPropertyValue(setting)
                 {
                     IsDirty = false,
                     SerializedValue = GetRegKey(setting).GetValue(setting.Name)
@@ -114,7 +114,7 @@ namespace CodeForDotNet.Configuration
         /// </summary>
         private static RegistryKey GetRegKey(SettingsProperty property)
         {
-            RegistryKey key = IsUserScoped(property) ? Registry.CurrentUser : Registry.LocalMachine;
+            var key = IsUserScoped(property) ? Registry.CurrentUser : Registry.LocalMachine;
             key = key.CreateSubKey(GetSubKeyPath(property), RegistryKeyPermissionCheck.ReadSubTree);
             return key;
         }
@@ -146,18 +146,18 @@ namespace CodeForDotNet.Configuration
         private static string GetSubKeyPath(SettingsProperty property)
         {
             // Get the AssemblyCompany and AssemblyProduct names from the caller
-            Assembly assembly = Assembly.GetCallingAssembly();
-            AssemblyProductAttribute productAttribute = (AssemblyProductAttribute)
+            var assembly = Assembly.GetCallingAssembly();
+            var productAttribute = (AssemblyProductAttribute)
                 Attribute.GetCustomAttribute(assembly, typeof(AssemblyProductAttribute));
-            AssemblyCompanyAttribute companyAttribute = (AssemblyCompanyAttribute)
+            var companyAttribute = (AssemblyCompanyAttribute)
                 Attribute.GetCustomAttribute(assembly, typeof(AssemblyCompanyAttribute));
-            string path = "SOFTWARE\\" + companyAttribute.Company + "\\" + productAttribute.Product;
+            var path = "SOFTWARE\\" + companyAttribute.Company + "\\" + productAttribute.Product;
 
             // Add the RegistrySettingsProviderSubkeyAttribute if specified
-            Type attributeType = typeof(RegistrySettingsProviderSubkeyAttribute);
+            var attributeType = typeof(RegistrySettingsProviderSubkeyAttribute);
             if (property.Attributes.ContainsKey(attributeType))
             {
-                RegistrySettingsProviderSubkeyAttribute attribute = (RegistrySettingsProviderSubkeyAttribute)
+                var attribute = (RegistrySettingsProviderSubkeyAttribute)
                     property.Attributes[attributeType];
                 path += "\\" + attribute.Subkey.TrimEnd('\\');
             }

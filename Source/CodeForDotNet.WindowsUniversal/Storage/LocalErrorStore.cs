@@ -44,7 +44,7 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static string Add(Exception error)
         {
             // Extract error contents
-            ErrorReportData contents = GenerateReport(error);
+            var contents = GenerateReport(error);
 
             // Call overloaded method
             return Add(contents);
@@ -58,16 +58,16 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static string Add(ErrorReportData contents)
         {
             // Open local storage folder
-            StorageFolder storage = ApplicationData.Current.LocalFolder;
+            var storage = ApplicationData.Current.LocalFolder;
 
             // Open or create errors folder
-            IStorageFolder errorsFolder = storage.CreateFolder(FolderName);
+            var errorsFolder = storage.CreateFolder(FolderName);
 
             // Generate a unique file name
-            string fileName = string.Format(CultureInfo.InvariantCulture, FileNameFormat, DateTime.UtcNow);
+            var fileName = string.Format(CultureInfo.InvariantCulture, FileNameFormat, DateTime.UtcNow);
 
             // Write error to file
-            IStorageFile file = errorsFolder.CreateFile(fileName);
+            var file = errorsFolder.CreateFile(fileName);
             file.WriteAllText(contents.SerializeXml(true));
 
             // Return file name
@@ -88,9 +88,9 @@ namespace CodeForDotNet.WindowsUniversal.Storage
             }
 
             // Write application and version information at top
-            Application application = Application.Current;
-            Type applicationType = application.GetType();
-            ErrorReportData report = new ErrorReportData
+            var application = Application.Current;
+            var applicationType = application.GetType();
+            var report = new ErrorReportData
             {
                 Id = Guid.NewGuid(),
                 SourceId = LoadSourceId(),
@@ -111,17 +111,17 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static ErrorReportData Get(string fileName)
         {
             // Open local storage folder
-            StorageFolder storage = ApplicationData.Current.LocalFolder;
+            var storage = ApplicationData.Current.LocalFolder;
 
             // Open errors folder (return null when not found)
-            IStorageFolder errorsFolder = storage.OpenFolder(FolderName);
+            var errorsFolder = storage.OpenFolder(FolderName);
             if (errorsFolder == null)
             {
                 return null;
             }
 
             // Open file (return null when not found)
-            IStorageFile file = errorsFolder.OpenFile(fileName);
+            var file = errorsFolder.OpenFile(fileName);
             if (file == null)
             {
                 return null;
@@ -137,17 +137,17 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static string[] List()
         {
             // Open local storage folder
-            StorageFolder storage = ApplicationData.Current.LocalFolder;
+            var storage = ApplicationData.Current.LocalFolder;
 
             // Open errors folder (return null when not found)
-            IStorageFolder errorsFolder = storage.OpenFolder(FolderName);
+            var errorsFolder = storage.OpenFolder(FolderName);
             if (errorsFolder == null)
             {
                 return null;
             }
 
             // List files
-            List<string> files = new List<string>();
+            var files = new List<string>();
             files.AddRange(from file in errorsFolder.GetFilesAsync().GetAwaiter().GetResult()
                            where !file.Name.Equals(SourceIdFileName, StringComparison.OrdinalIgnoreCase)
                            select file.Name);
@@ -166,13 +166,13 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static Guid LoadSourceId()
         {
             // Open local storage folder
-            StorageFolder storage = ApplicationData.Current.LocalFolder;
+            var storage = ApplicationData.Current.LocalFolder;
 
             // Open errors folder (return null when not found)
-            IStorageFolder errorsFolder = storage.CreateFolder(FolderName);
+            var errorsFolder = storage.CreateFolder(FolderName);
 
             // Open ID file if exists
-            IStorageFile file = errorsFolder.OpenFile(SourceIdFileName);
+            var file = errorsFolder.OpenFile(SourceIdFileName);
             Guid id;
             if (file != null)
             {
@@ -203,17 +203,17 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static void Remove(string fileName)
         {
             // Open local storage folder
-            StorageFolder storage = ApplicationData.Current.LocalFolder;
+            var storage = ApplicationData.Current.LocalFolder;
 
             // Open errors folder (return when not found)
-            IStorageFolder errorsFolder = storage.OpenFolder(FolderName);
+            var errorsFolder = storage.OpenFolder(FolderName);
             if (errorsFolder == null)
             {
                 return;
             }
 
             // Open file (return when not found)
-            IStorageFile file = errorsFolder.OpenFile(fileName);
+            var file = errorsFolder.OpenFile(fileName);
             if (file == null)
             {
                 return;

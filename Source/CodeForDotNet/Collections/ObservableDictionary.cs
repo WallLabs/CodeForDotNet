@@ -144,7 +144,7 @@ namespace CodeForDotNet.Collections
          _dictionary.Clear();
 
          // Fire event
-         OnDictionaryChanged(NotifyCollectionChangedAction.Reset, default(TKey), default(TValue));
+         OnDictionaryChanged(NotifyCollectionChangedAction.Reset, default, default);
       }
 
       /// <summary>

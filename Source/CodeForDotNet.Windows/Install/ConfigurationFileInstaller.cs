@@ -108,7 +108,7 @@ namespace CodeForDotNet.Install
             {
                 if (installer.Context.Parameters.ContainsKey(parameter))
                 {
-                    string parameterValue = installer.Context.Parameters[parameter];
+                    var parameterValue = installer.Context.Parameters[parameter];
                     return (!string.IsNullOrEmpty(parameterValue) &&
                         (string.Compare(parameterValue.Trim(), "false", StringComparison.OrdinalIgnoreCase) != 0) &&
                         (parameterValue.Trim() != "0"));
@@ -138,34 +138,34 @@ namespace CodeForDotNet.Install
                 "ConfigurationFileInstaller", ConditionArgument));
 
             // Process each file
-            string assemblyPath = Path.GetFullPath(GetParameterValue("assemblypath"));
-            string assemblyDir = Path.GetDirectoryName(assemblyPath).TrimEnd(Path.DirectorySeparatorChar);
+            var assemblyPath = Path.GetFullPath(GetParameterValue("assemblypath"));
+            var assemblyDir = Path.GetDirectoryName(assemblyPath).TrimEnd(Path.DirectorySeparatorChar);
             var installedFilenames = new List<string>();
-            foreach (string filename in FileNames)
+            foreach (var filename in FileNames)
             {
                 // Load file
-                string filePath = assemblyDir + Path.DirectorySeparatorChar + filename;
+                var filePath = assemblyDir + Path.DirectorySeparatorChar + filename;
                 Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusLoadingFile, filePath));
                 string fileContents;
-                using (StreamReader reader = File.OpenText(filePath))
+                using (var reader = File.OpenText(filePath))
                     fileContents = reader.ReadToEnd();
 
                 // Replace variables in file
-                foreach (string variable in Variables)
+                foreach (var variable in Variables)
                 {
                     // Get variable key and value from (key=value)
-                    string[] variableParts = variable.Split('=');
+                    var variableParts = variable.Split('=');
                     if (variableParts.Length != 2)
                         continue;
-                    string variableKey = variableParts[0];
-                    string variableValue = variableParts[1];
+                    var variableKey = variableParts[0];
+                    var variableValue = variableParts[1];
 
                     // Get property values (if specified)
                     if (variableValue.StartsWith("[", StringComparison.OrdinalIgnoreCase) &&
                         variableValue.EndsWith("]", StringComparison.OrdinalIgnoreCase))
                     {
-                        string propertyName = variableValue.Substring(1, variableValue.Length - 2);
-                        string propertyValue = GetParameterValue(propertyName);
+                        var propertyName = variableValue.Substring(1, variableValue.Length - 2);
+                        var propertyValue = GetParameterValue(propertyName);
                         if ((propertyValue == null) || (propertyValue.Length == 0))
                             continue;
                     }
@@ -175,7 +175,7 @@ namespace CodeForDotNet.Install
                 }
 
                 // Expand variables
-                foreach (string installerParameter in GetAllParameters())
+                foreach (var installerParameter in GetAllParameters())
                     fileContents = fileContents.Replace("%" + installerParameter + "%", GetParameterValue(installerParameter));
                 if (ExpandVariables)
                     fileContents = Environment.ExpandEnvironmentVariables(fileContents);
@@ -186,7 +186,7 @@ namespace CodeForDotNet.Install
 
                 // Write modified file back to disk
                 File.Delete(filePath);
-                using (StreamWriter writer = File.CreateText(filePath))
+                using (var writer = File.CreateText(filePath))
                     writer.Write(fileContents);
 
                 // Add to installed list
@@ -216,12 +216,12 @@ namespace CodeForDotNet.Install
                 "ConfigurationFileInstaller", ConditionArgument));
 
             // Get saved assembly list
-            string[] installedFilenames = (string[])savedState[ConditionArgument];
+            var installedFilenames = (string[])savedState[ConditionArgument];
 
             // Delete files (if flagged)
             if (DeleteAtUninstall)
             {
-                foreach (string filename in installedFilenames)
+                foreach (var filename in installedFilenames)
                 {
                     if (File.Exists(filename))
                     {

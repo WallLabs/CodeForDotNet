@@ -78,11 +78,11 @@ namespace CodeForDotNet.IO
                 return;
 
             // Recursively delete subdirectories
-            foreach (string subdirectory in Directory.GetDirectories(path))
+            foreach (var subdirectory in Directory.GetDirectories(path))
                 DeleteDirectoryForce(subdirectory);
 
             // Delete files in current directory
-            foreach (string file in Directory.GetFiles(path))
+            foreach (var file in Directory.GetFiles(path))
                 DeleteFileForce(file);
 
             // Delete the directory itself (now it is empty)

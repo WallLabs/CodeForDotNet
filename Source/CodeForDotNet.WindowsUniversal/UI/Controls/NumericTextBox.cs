@@ -112,7 +112,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
                 return;
             }
 
-            KeyboardKey key = (KeyboardKey)args.Key;
+            var key = (KeyboardKey)args.Key;
 
             // Allow minus to switch sign when signed
             if ((key == KeyboardKey.NumberPadSubtract || key == KeyboardKey.Minus) && NumberSigned)
@@ -137,7 +137,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         {
             // Never select the sign
             bool? sign = null;
-            string text = Text;
+            var text = Text;
             if (NumberBase == NumericTextBoxNumberBase.Decimal)
             {
                 if (text.StartsWith("+", StringComparison.OrdinalIgnoreCase))
@@ -165,8 +165,8 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         protected override void OnBeforeTextChanged(object sender, DynamicTextChangedEventArgs args)
         {
             // Apply decimal sign rules
-            string originalText = args.OriginalText;
-            string textValue = args.Text;
+            var originalText = args.OriginalText;
+            var textValue = args.Text;
             bool? sign = null;
             if (NumberBase == NumericTextBoxNumberBase.Decimal && NumberSigned)
             {
@@ -198,9 +198,9 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             }
 
             // Strip invalid characters.
-            string validChars = GetValidNumberChars((int)NumberBase);
-            string text = "";
-            foreach (char textChar in args.Text)
+            var validChars = GetValidNumberChars((int)NumberBase);
+            var text = "";
+            foreach (var textChar in args.Text)
             {
                 // Allow sign as first character.
                 if (sign.HasValue && text.Length == 0 && (textChar == '+' || textChar == '-'))
@@ -238,8 +238,8 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             // Validate number when set (format and sign, minimum and maximum)
             if (!string.IsNullOrEmpty(text))
             {
-                int numberBase = (int)NumberBase;
-                if (!Number.TryParse(text, numberBase, out Number value) || value < NumberMin || value > NumberMax)
+                var numberBase = (int)NumberBase;
+                if (!Number.TryParse(text, numberBase, out var value) || value < NumberMin || value > NumberMax)
                 {
                     // Discard changes when invalid
                     text = originalText;
@@ -357,7 +357,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             }
 
             // Parse and return value
-            Number.TryParse(Text, (int)NumberBase, out Number value, NumberSigned);
+            Number.TryParse(Text, (int)NumberBase, out var value, NumberSigned);
             return value;
         }
 
@@ -373,7 +373,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             }
 
             // Get value
-            Number value = GetValue();
+            var value = GetValue();
 
             // Negate
             value = -value;

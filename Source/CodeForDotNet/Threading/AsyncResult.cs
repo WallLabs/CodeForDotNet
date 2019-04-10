@@ -1,4 +1,4 @@
-﻿using CodeForDotNet.Properties;
+using CodeForDotNet.Properties;
 using System;
 using System.Threading;
 
@@ -151,53 +151,55 @@ namespace CodeForDotNet.Threading
             return asyncResult;
         }
 
-        /// <summary>
-        /// Completes the operation.
-        /// </summary>
-        /// <param name="completedSynchronously">True when completed synchronously.</param>
-        protected void Complete(bool completedSynchronously)
-        {
-            // Ensure only called once
-            if (IsCompleted)
-                throw new InvalidOperationException(Resources.AsyncCompleteCalledTwice);
+      /// <summary>
+      /// Completes the operation.
+      /// </summary>
+      /// <param name="completedSynchronously">True when completed synchronously.</param>
+      protected void Complete(bool completedSynchronously)
+      {
+         // Ensure only called once
+         if (IsCompleted)
+            throw new InvalidOperationException(Resources.AsyncCompleteCalledTwice);
 
-            // Set synchronous flag as specified
-            CompletedSynchronously = completedSynchronously;
+         // Set synchronous flag as specified
+         CompletedSynchronously = completedSynchronously;
 
-            // Set complete
-            if (completedSynchronously)
+         // Set complete
+         if (completedSynchronously)
+         {
+            // If we completedSynchronously, no wait handle was created so we don't need to worry
+            // about a race
+            IsCompleted = true;
+         }
+         else
+         {
+            // Set completed during asynchronous operation
+            lock (Lock)
             {
-                // If we completedSynchronously, no wait handle was created so we don't need to worry
-                // about a race
-                IsCompleted = true;
+               IsCompleted = true;
+               if (_waitHandle != null)
+                  _waitHandle.Set();
             }
-            else
-            {
-                // Set completed during asynchronous operation
-                lock (Lock)
-                {
-                    IsCompleted = true;
-                    if (_waitHandle != null)
-                        _waitHandle.Set();
-                }
-            }
+         }
 
-            // Execute callback when specified
-            if (_callback != null)
+         // Execute callback when specified
+         if (_callback != null)
+         {
+            try
             {
-                try
-                {
-                    // Invoke caller's specified callback to notify end
-                    _callback(this);
-                }
-                catch (Exception e)
-                {
-                    // Throw callback errors directly (the caller has a problem, this error is not
-                    // part of the result)
-                    throw new InvalidOperationException("Async callback threw an Exception", e);
-                }
+               // Invoke caller's specified callback to notify end
+               _callback(this);
             }
-        }
+#pragma warning disable CA1031 // Do not catch general exception types
+            catch (Exception error)
+            {
+               // Throw callback errors directly (the caller has a problem, this error is not
+               // part of the result)
+               throw new InvalidOperationException("Async callback threw an Exception", error);
+            }
+#pragma warning restore CA1031 // Do not catch general exception types
+         }
+      }
 
         /// <summary>
         /// Completes the operation with an error.

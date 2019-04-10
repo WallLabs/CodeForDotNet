@@ -171,7 +171,7 @@ namespace CodeForDotNet.Windows.Imaging
         public bool Contains(object value)
         {
             // Search all items (1 based array)
-            for (int i = 1; i <= _wiaVector.Count; i++)
+            for (var i = 1; i <= _wiaVector.Count; i++)
             {
                 object existingItem = null;
                 _wiaVector.let_Item(i, ref existingItem);
@@ -191,7 +191,7 @@ namespace CodeForDotNet.Windows.Imaging
         public int IndexOf(object value)
         {
             // Search all items (1 based array)
-            for (int i = 1; i <= _wiaVector.Count; i++)
+            for (var i = 1; i <= _wiaVector.Count; i++)
             {
                 object existingItem = null;
                 _wiaVector.let_Item(i, ref existingItem);
@@ -232,7 +232,7 @@ namespace CodeForDotNet.Windows.Imaging
         public void Remove(object value)
         {
             // Get index of item
-            int index = IndexOf(value);
+            var index = IndexOf(value);
             if (index >= 0)
             {
                 // Remove item when found
@@ -284,7 +284,7 @@ namespace CodeForDotNet.Windows.Imaging
             if (array == null) throw new ArgumentNullException(nameof(array));
 
             // Copy
-            for (int i = 1; i <= _wiaVector.Count; i++)
+            for (var i = 1; i <= _wiaVector.Count; i++)
             {
                 object item = null;
                 _wiaVector.let_Item(index + 1, ref item);
@@ -303,7 +303,7 @@ namespace CodeForDotNet.Windows.Imaging
             if (array == null) throw new ArgumentNullException(nameof(array));
 
             // Copy
-            for (int i = 1; i <= _wiaVector.Count; i++)
+            for (var i = 1; i <= _wiaVector.Count; i++)
             {
                 object item = null;
                 _wiaVector.let_Item(index + 1, ref item);

@@ -31,7 +31,7 @@ namespace CodeForDotNet.Data
         /// <remarks>
         /// The type must match or have a cast operator, because no explicit conversion is performed.
         /// </remarks>
-        public static T GetNullable<T>(this IDataRecord reader, string column, T defaultValue = default(T))
+        public static T GetNullable<T>(this IDataRecord reader, string column, T defaultValue = default)
         {
             var ordinal = reader.GetOrdinal(column);
             return reader.GetNullable(ordinal, defaultValue);
@@ -51,7 +51,7 @@ namespace CodeForDotNet.Data
         /// <remarks>
         /// The type must match or have a cast operator, because no explicit conversion is performed.
         /// </remarks>
-        public static T GetNullable<T>(this IDataRecord reader, int ordinal, T defaultValue = default(T))
+        public static T GetNullable<T>(this IDataRecord reader, int ordinal, T defaultValue = default)
         {
             return reader.IsDBNull(ordinal) ? defaultValue : (T)reader.GetValue(ordinal);
         }

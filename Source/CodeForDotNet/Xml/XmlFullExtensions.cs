@@ -116,7 +116,7 @@ namespace CodeForDotNet.Xml
                 {
                     // Load transform
                     _formatXmlTrimTransform = new XslCompiledTransform();
-                    using (Stream resource = typeof(XmlFullExtensions).Assembly.GetManifestResourceStream(
+                    using (var resource = typeof(XmlFullExtensions).Assembly.GetManifestResourceStream(
                         typeof(XmlFullExtensions).Namespace + "." + FormatXmlTrimXsltFileName))
                     {
                         Debug.Assert(resource != null);

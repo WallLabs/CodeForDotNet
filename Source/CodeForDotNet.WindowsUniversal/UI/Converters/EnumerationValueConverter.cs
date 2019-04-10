@@ -25,7 +25,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
             if (value is null) throw new ArgumentNullException(nameof(value));
 
             // Convert to underlying enumeration value type
-            Type valueType = Enum.GetUnderlyingType(value.GetType());
+            var valueType = Enum.GetUnderlyingType(value.GetType());
             return System.Convert.ChangeType(value, valueType, CultureInfo.CurrentCulture);
         }
 

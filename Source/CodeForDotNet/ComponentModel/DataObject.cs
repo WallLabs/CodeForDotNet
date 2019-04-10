@@ -299,7 +299,7 @@ namespace CodeForDotNet.ComponentModel
                         case DataObjectChangeAction.Update:
 
                             // Commit all instance property changes
-                            foreach (Guid instancePropertyId in _instancePropertiesChanged)
+                            foreach (var instancePropertyId in _instancePropertiesChanged)
                             {
                                 if (!_committedPropertiesChanged.Contains(instancePropertyId))
                                     _committedPropertiesChanged.Add(instancePropertyId);
@@ -410,7 +410,7 @@ namespace CodeForDotNet.ComponentModel
                 {
                     // Build event
                     var properties = new List<Guid>(_committedPropertiesChanged);
-                    foreach (Guid property in _instancePropertiesChanged)
+                    foreach (var property in _instancePropertiesChanged)
                     {
                         if (!properties.Contains(property))
                             properties.Add(property);
