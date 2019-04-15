@@ -4,28 +4,10 @@
 # Root configuration.
 root = true
 
-# Common
+# Common.
 [*]
 charset = utf-8
 end_of_line = crlf
-
-# C++ and C#
-[*.{c,cpp,h,hpp,cs}]
-indent_style = space
-indent_size = 3
-trim_trailing_whitespace = true
-insert_final_newline = true
-max_line_length = 100
-
-# HTML
-[*.{htm,html}]
-indent_style = tab
-trim_trailing_whitespace = true
-insert_final_newline = true
-max_line_length = off
-
-# XML
-[*.xml]
 indent_style = tab
 trim_trailing_whitespace = true
 insert_final_newline = true

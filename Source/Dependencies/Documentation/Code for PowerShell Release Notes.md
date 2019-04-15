@@ -1,5 +1,8 @@
 # Code for PowerShell - Release Notes
 
+## Version 1.0.1904.10### (2019.04.10)
+* Improved documentation of Visual Studio version module commands.
+
 ## Version 1.0.1904.8### (2019.04.08)
 * Added version function to set constant in PowerShell script.
 * Added unit tests for version PowerShell file updates (script and manifest).

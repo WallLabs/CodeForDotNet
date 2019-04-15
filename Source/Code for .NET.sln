@@ -5,10 +5,6 @@ VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{32956BD0-6695-47DF-9D51-0CB6603E8467}"
 	ProjectSection(SolutionItems) = preProject
-		Dependencies\Code for PowerShell Release Notes.md = Dependencies\Code for PowerShell Release Notes.md
-		Dependencies\Code for Windows Release Notes.md = Dependencies\Code for Windows Release Notes.md
-		Dependencies\CodeForPowerShell.Version.txt = Dependencies\CodeForPowerShell.Version.txt
-		Dependencies\CodeForWindows.Version.txt = Dependencies\CodeForWindows.Version.txt
 		Dependencies\Update.cmd = Dependencies\Update.cmd
 		Dependencies\Variables.cmd = Dependencies\Variables.cmd
 	EndProjectSection
@@ -71,6 +67,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeForDotNet.Data.Sql", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeForDotNet.UI", "CodeForDotNet.UI\CodeForDotNet.UI.csproj", "{378E9B01-B3BD-4887-AF40-C22D94281F74}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{C0CC94EF-441F-4F41-A362-A0533A3C7D9B}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Documentation\Code for PowerShell Release Notes.md = Dependencies\Documentation\Code for PowerShell Release Notes.md
+		Dependencies\Documentation\Code for Windows Release Notes.md = Dependencies\Documentation\Code for Windows Release Notes.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Version", "Version", "{FA10C927-F54D-4F21-A104-820B89783FD2}"
+	ProjectSection(SolutionItems) = preProject
+		Dependencies\Version\CodeForPowerShell.Version.txt = Dependencies\Version\CodeForPowerShell.Version.txt
+		Dependencies\Version\CodeForWindows.Version.txt = Dependencies\Version\CodeForWindows.Version.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +125,8 @@ Global
 		{8D05AF50-08EE-43CB-8EB1-6C67F0C56FC3} = {32956BD0-6695-47DF-9D51-0CB6603E8467}
 		{E7C4CC3F-63E2-4A3D-8F8D-FE994429C63C} = {8D05AF50-08EE-43CB-8EB1-6C67F0C56FC3}
 		{B2BC6A86-7972-4C44-9AAC-B5B1E3E9724B} = {32956BD0-6695-47DF-9D51-0CB6603E8467}
+		{C0CC94EF-441F-4F41-A362-A0533A3C7D9B} = {32956BD0-6695-47DF-9D51-0CB6603E8467}
+		{FA10C927-F54D-4F21-A104-820B89783FD2} = {32956BD0-6695-47DF-9D51-0CB6603E8467}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8EFA9AB-A701-421A-9542-C10FF1F9308F}

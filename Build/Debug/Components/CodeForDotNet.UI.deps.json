@@ -9,7 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "CodeForDotNet.UI/1.0.0": {
         "dependencies": {
-          "CodeForDotNet": "4.72.1904.10002",
+          "CodeForDotNet": "4.72.1904.15000",
           "Microsoft.CodeAnalysis.FxCopAnalyzers": "2.9.1",
           "NETStandard.Library": "2.0.3"
         },
@@ -121,7 +121,7 @@
           "System.Runtime": "4.3.1"
         }
       },
-      "CodeForDotNet/4.72.1904.10002": {
+      "CodeForDotNet/4.72.1904.15000": {
         "dependencies": {
           "System.Drawing.Common": "4.5.1",
           "System.Drawing.Primitives": "4.3.0",
@@ -267,7 +267,7 @@
       "path": "system.threading.tasks/4.3.0",
       "hashPath": "system.threading.tasks.4.3.0.nupkg.sha512"
     },
-    "CodeForDotNet/4.72.1904.10002": {
+    "CodeForDotNet/4.72.1904.15000": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

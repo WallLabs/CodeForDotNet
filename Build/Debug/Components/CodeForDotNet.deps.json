@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "CodeForDotNet/4.72.1904.10003": {
+      "CodeForDotNet/4.72.1904.15001": {
         "dependencies": {
           "Microsoft.CodeAnalysis.FxCopAnalyzers": "2.9.1",
           "NETStandard.Library": "2.0.3",
@@ -128,7 +128,7 @@
     }
   },
   "libraries": {
-    "CodeForDotNet/4.72.1904.10003": {
+    "CodeForDotNet/4.72.1904.15001": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

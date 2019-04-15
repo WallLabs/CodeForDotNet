@@ -58,13 +58,11 @@ robocopy "%~dp0Documentation" "%~dp0Temp\Build\%ConfigurationName%\Documentation
 if %errorlevel% gtr 7 goto Error
 
 echo.
-echo Copying version references...
+echo Copying version reference...
 md "%~dp0Temp\Build\%ConfigurationName%\Version"
 if %errorlevel% neq 0 goto Error
 copy "%~dp0Version.txt" "%~dp0Temp\Build\%ConfigurationName%\Version\CodeForDotNet.Version.txt"
 if %errorlevel% neq 0 goto Error
-robocopy "%~dp0Dependencies" "%~dp0Temp\Build\%ConfigurationName%\Version" *Version.txt
-if %errorlevel% gtr 7 goto Error
 
 echo.
 echo %ConfigurationName% build successful.
