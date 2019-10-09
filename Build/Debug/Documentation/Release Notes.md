@@ -1,5 +1,10 @@
 # Code for .NET - Release Notes
 
+## Version 4.8.1910.09### (2019.10.09)
+* Visual Studio 2019 16.3 new code analysis fixes and refactoring including C# 8 nullable.
+* Full framework version updated to v4.8.
+* Preparation for .NET Core 3 although components must remain on .NET Standard 2.0 until full framework supports 2.1.
+
 ## Version 4.72.1904.10### (2019.04.10)
 * Visual Studio 2019 update with new code analysis fixes and refactoring.
 * Fixed UWP tests.
