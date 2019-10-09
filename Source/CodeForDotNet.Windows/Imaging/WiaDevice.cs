@@ -1,226 +1,228 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+using System;
 using System.Runtime.InteropServices;
 using Wia = Interop.Wia;
 
+#nullable enable
+
 namespace CodeForDotNet.Windows.Imaging
 {
-    /// <summary>
-    /// Encapsulates a <see cref="Wia.Device"/> in managed code.
-    /// </summary>
-    public class WiaDevice : DisposableObject
-    {
-        #region Lifetime
+	/// <summary>
+	/// Encapsulates a <see cref="Wia.Device"/> in managed code.
+	/// </summary>
+	public class WiaDevice : DisposableObject
+	{
+		#region Private Fields
 
-        /// <summary>
-        /// Creates an instance to wrap the specified unmanaged object.
-        /// </summary>
-        internal WiaDevice(Wia.Device device)
-        {
-            _wiaDevice = device;
-        }
+		/// <summary>
+		/// Unmanaged <see cref="Wia.Device"/>.
+		/// </summary>
+		private readonly Wia.Device _wiaDevice;
 
-        /// <summary>
-        /// Frees resources owned by this instance.
-        /// </summary>
-        /// <param name="disposing">
-        /// True when called from <see cref="IDisposable.Dispose()"/>,
-        /// false when called during finalization.
-        /// </param>
-        protected override void Dispose(bool disposing)
-        {
-            try
-            {
-                // Dispose managed resources.
-                if (disposing)
-                {
-                    if (_item != null) _item.Dispose();
-                    if (_items != null) _items.Dispose();
-                    if (_properties != null) _properties.Dispose();
-                    if (_events != null) _events.Dispose();
-                    if (_commands != null) _commands.Dispose();
-                }
+		private WiaDeviceCommandCollection? _commands;
 
-                // Dispose unmanaged resources.
-                Marshal.ReleaseComObject(_wiaDevice);
-            }
-            finally
-            {
-                // Call base class method to fire events and set status properties.
-                base.Dispose(disposing);
-            }
-        }
+		private WiaDeviceEventCollection? _events;
 
-        #endregion Lifetime
+		private WiaItem? _item;
 
-        #region Private Fields
+		private WiaItemCollection? _items;
 
-        /// <summary>
-        /// Unmanaged <see cref="Wia.Device"/>.
-        /// </summary>
-        private readonly Wia.Device _wiaDevice;
+		private WiaPropertyCollection? _properties;
 
-        #endregion Private Fields
+		#endregion Private Fields
 
-        #region Public Properties
+		#region Internal Constructors
 
-        /// <summary>
-        /// Thread synchronization object.
-        /// </summary>
-        public static object SyncRoot { get; } = new object();
+		/// <summary>
+		/// Creates an instance to wrap the specified unmanaged object.
+		/// </summary>
+		internal WiaDevice(Wia.Device device)
+		{
+			_wiaDevice = device;
+		}
 
-        /// <summary>
-        /// Device identifier.
-        /// </summary>
-        public string Id { get { return _wiaDevice.DeviceID; } }
+		#endregion Internal Constructors
 
-        /// <summary>
-        /// Device type.
-        /// </summary>
-        public WiaDeviceType DeviceType { get { return (WiaDeviceType)(int)_wiaDevice.Type; } }
+		#region Public Properties
 
-        /// <summary>
-        /// Properties.
-        /// </summary>
-        public WiaPropertyCollection Properties
-        {
-            get
-            {
-                // Create wrapper first time
-                if (_properties == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (_properties == null)
-                            _properties = new WiaPropertyCollection(_wiaDevice.Properties);
-                    }
-                }
+		/// <summary>
+		/// Thread synchronization object.
+		/// </summary>
+		public static object SyncRoot { get; } = new object();
 
-                // Return wrapped value
-                return _properties;
-            }
-        }
+		/// <summary>
+		/// Commands.
+		/// </summary>
+		public WiaDeviceCommandCollection Commands
+		{
+			get
+			{
+				// Create wrapper first time
+				if (_commands == null)
+				{
+					lock (SyncRoot)
+					{
+						if (_commands == null)
+							_commands = new WiaDeviceCommandCollection(_wiaDevice.Commands);
+					}
+				}
 
-        private WiaPropertyCollection _properties;
+				// Return wrapped value
+				return _commands;
+			}
+		}
 
-        /// <summary>
-        /// Commands.
-        /// </summary>
-        public WiaDeviceCommandCollection Commands
-        {
-            get
-            {
-                // Create wrapper first time
-                if (_commands == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (_commands == null)
-                            _commands = new WiaDeviceCommandCollection(_wiaDevice.Commands);
-                    }
-                }
+		/// <summary>
+		/// Device type.
+		/// </summary>
+		public WiaDeviceType DeviceType { get { return (WiaDeviceType)(int)_wiaDevice.Type; } }
 
-                // Return wrapped value
-                return _commands;
-            }
-        }
+		/// <summary>
+		/// Events.
+		/// </summary>
+		public WiaDeviceEventCollection Events
+		{
+			get
+			{
+				// Create wrapper first time
+				if (_events == null)
+				{
+					lock (SyncRoot)
+					{
+						if (_events == null)
+							_events = new WiaDeviceEventCollection(_wiaDevice.Events);
+					}
+				}
 
-        private WiaDeviceCommandCollection _commands;
+				// Return wrapped value
+				return _events;
+			}
+		}
 
-        /// <summary>
-        /// Events.
-        /// </summary>
-        public WiaDeviceEventCollection Events
-        {
-            get
-            {
-                // Create wrapper first time
-                if (_events == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (_events == null)
-                            _events = new WiaDeviceEventCollection(_wiaDevice.Events);
-                    }
-                }
+		/// <summary>
+		/// Device identifier.
+		/// </summary>
+		public string Id { get { return _wiaDevice.DeviceID; } }
 
-                // Return wrapped value
-                return _events;
-            }
-        }
+		/// <summary>
+		/// Item.
+		/// </summary>
+		public WiaItem Item
+		{
+			get
+			{
+				// Create wrapper first time
+				if (_item == null)
+				{
+					lock (SyncRoot)
+					{
+						if (_item == null)
+							_item = new WiaItem((Wia.Item)_wiaDevice.WiaItem);
+					}
+				}
 
-        private WiaDeviceEventCollection _events;
+				// Return wrapped value
+				return _item;
+			}
+		}
 
-        /// <summary>
-        /// Items.
-        /// </summary>
-        public WiaItemCollection Items
-        {
-            get
-            {
-                // Create wrapper first time
-                if (_items == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (_items == null)
-                            _items = new WiaItemCollection(_wiaDevice.Items);
-                    }
-                }
+		/// <summary>
+		/// Items.
+		/// </summary>
+		public WiaItemCollection Items
+		{
+			get
+			{
+				// Create wrapper first time
+				if (_items == null)
+				{
+					lock (SyncRoot)
+					{
+						if (_items == null)
+							_items = new WiaItemCollection(_wiaDevice.Items);
+					}
+				}
 
-                // Return wrapped value
-                return _items;
-            }
-        }
+				// Return wrapped value
+				return _items;
+			}
+		}
 
-        private WiaItemCollection _items;
+		/// <summary>
+		/// Properties.
+		/// </summary>
+		public WiaPropertyCollection Properties
+		{
+			get
+			{
+				// Create wrapper first time
+				if (_properties == null)
+				{
+					lock (SyncRoot)
+					{
+						if (_properties == null)
+							_properties = new WiaPropertyCollection(_wiaDevice.Properties);
+					}
+				}
 
-        /// <summary>
-        /// Item.
-        /// </summary>
-        public WiaItem Item
-        {
-            get
-            {
-                // Create wrapper first time
-                if (_item == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (_item == null)
-                            _item = new WiaItem((Wia.Item)_wiaDevice.WiaItem);
-                    }
-                }
+				// Return wrapped value
+				return _properties;
+			}
+		}
 
-                // Return wrapped value
-                return _item;
-            }
-        }
+		#endregion Public Properties
 
-        private WiaItem _item;
+		#region Public Methods
 
-        #endregion Public Properties
+		/// <summary>
+		/// Executes a command.
+		/// </summary>
+		public WiaItem ExecuteCommand(string commandId)
+		{
+			var wiaItem = _wiaDevice.ExecuteCommand(commandId);
+			return new WiaItem(wiaItem);
+		}
 
-        #region Public Methods
+		/// <summary>
+		/// Gets the item with the specified ID.
+		/// </summary>
+		public WiaItem GetItemById(string itemId)
+		{
+			var wiaItem = _wiaDevice.GetItem(itemId);
+			return new WiaItem(wiaItem);
+		}
 
-        /// <summary>
-        /// Executes a command.
-        /// </summary>
-        public WiaItem ExecuteCommand(string commandId)
-        {
-            var wiaItem = _wiaDevice.ExecuteCommand(commandId);
-            return new WiaItem(wiaItem);
-        }
+		#endregion Public Methods
 
-        /// <summary>
-        /// Gets the item with the specified ID.
-        /// </summary>
-        public WiaItem GetItemById(string itemId)
-        {
-            var wiaItem = _wiaDevice.GetItem(itemId);
-            return new WiaItem(wiaItem);
-        }
+		#region Protected Methods
 
-        #endregion Public Methods
-    }
+		/// <summary>
+		/// Frees resources owned by this instance.
+		/// </summary>
+		/// <param name="disposing">True when called from <see cref="IDisposable.Dispose()"/>, false when called during finalization.</param>
+		protected override void Dispose(bool disposing)
+		{
+			try
+			{
+				// Dispose managed resources.
+				if (disposing)
+				{
+					if (_item != null) _item.Dispose();
+					if (_items != null) _items.Dispose();
+					if (_properties != null) _properties.Dispose();
+					if (_events != null) _events.Dispose();
+					if (_commands != null) _commands.Dispose();
+				}
+
+				// Dispose unmanaged resources.
+				Marshal.ReleaseComObject(_wiaDevice);
+			}
+			finally
+			{
+				// Call base class method to fire events and set status properties.
+				base.Dispose(disposing);
+			}
+		}
+
+		#endregion Protected Methods
+	}
 }

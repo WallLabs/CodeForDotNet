@@ -10,287 +10,321 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
+#nullable enable
+
 namespace CodeForDotNet.Install
 {
-    /// <summary>
-    /// Generates native images on assemblies and their assemblyList during setup to decrease start-up times and increase performance.
-    /// </summary>
-    [RunInstaller(false)]
-    [ToolboxItem(true)]
-    [ToolboxBitmap(typeof(DesktopShortcutInstaller), "DesktopShortcutInstallerToolboxIcon.bmp")]
-    public partial class DesktopShortcutInstaller : Installer
-    {
-        /// <summary>
-        /// Shell shortcut file extension including dot.
-        /// </summary>
-        const string ShortcutFileExtension = ".lnk";
+	/// <summary>
+	/// Options for the ShortcutShowCommand.
+	/// </summary>
+	public enum ShowWindowOption
+	{
+		/// <summary>
+		/// None specified.
+		/// </summary>
+		None,
 
-        /// <summary>
-        /// Creates the component.
-        /// </summary>
-        public DesktopShortcutInstaller()
-        {
-            // This call is required by the Designer.
-            InitializeComponent();
-        }
+		/// <summary>
+		/// Default.
+		/// </summary>
+		Default = 1,
 
-        /// <summary>
-        /// Target path for the desktop shortcut.
-        /// </summary>
-        [Browsable(true)]
-        [Category("Installation")]
-        [Description("Target path for the desktop shortcut.")]
-        public string TargetDirectory { get; set; }
+		/// <summary>
+		/// Minimized.
+		/// </summary>
+		Minimized = 2,
 
-        /// <summary>
-        /// Condition required to activate the feature.
-        /// </summary>
-        [Browsable(true)]
-        [Category("Installation")]
-        [Description("Condition required to activate the feature.")]
-        public string ConditionArgument { get; set; }
+		/// <summary>
+		/// Maximized.
+		/// </summary>
+		Maximized = 3
+	}
 
-        /// <summary>
-        /// Name for the desktop shortcut.
-        /// </summary>
-        [Browsable(true)]
-        [Category("SafeNativeMethods.Shortcut")]
-        [Description("Name for the desktop shortcut.")]
-        public string ShortcutName { get; set; }
+	/// <summary>
+	/// Generates native images on assemblies and their assemblyList during setup to decrease start-up times and increase performance.
+	/// </summary>
+	[RunInstaller(false)]
+	[ToolboxItem(true)]
+	[ToolboxBitmap(typeof(DesktopShortcutInstaller), "DesktopShortcutInstallerToolboxIcon.bmp")]
+	public partial class DesktopShortcutInstaller : Installer
+	{
+		#region Private Fields
 
-        /// <summary>
-        /// Description for the desktop shortcut.
-        /// </summary>
-        [Browsable(true)]
-        [Category("SafeNativeMethods.Shortcut")]
-        [Description("Description for the desktop shortcut.")]
-        public string ShortcutDescription { get; set; }
+		/// <summary>
+		/// Shell shortcut file extension including dot.
+		/// </summary>
+		private const string ShortcutFileExtension = ".lnk";
 
-        /// <summary>
-        /// Path for the desktop shortcut. Use %AssemblyDir% for the setup target folder. %AllUsersDesktop%, %CurrentUserDesktop%, %AllUsersPrograms%, %CurrentUserPrograms%, %MyDocuments%, or any other environment variable.
-        /// </summary>
-        [Browsable(true)]
-        [Category("SafeNativeMethods.Shortcut")]
-        [Description(
-            "Path for the desktop shortcut. Use %AssemblyDir% for the setup target folder. %AllUsersDesktop%, %CurrentUserDesktop%, %AllUsersPrograms%, %CurrentUserPrograms%, %MyDocuments%, or any other environment variable."
-            )]
-        public string ShortcutPath { get; set; }
+		#endregion Private Fields
 
-        /// <summary>
-        /// Arguments for the desktop shortcut.
-        /// </summary>
-        [Browsable(true)]
-        [Category("SafeNativeMethods.Shortcut")]
-        [Description("Arguments for the desktop shortcut.")]
-        public string ShortcutArguments { get; set; }
+		#region Public Constructors
 
-        /// <summary>
-        /// Working directory for the desktop shortcut.
-        /// </summary>
-        [Browsable(true)]
-        [Category("SafeNativeMethods.Shortcut")]
-        [Description("Working directory for the desktop shortcut.")]
-        public string ShortcutWorkingDirectory { get; set; }
+		/// <summary>
+		/// Creates the component.
+		/// </summary>
+		public DesktopShortcutInstaller()
+		{
+			// This call is required by the Designer.
+			InitializeComponent();
+		}
 
-        /// <summary>
-        /// Window show style for the desktop shortcut.
-        /// </summary>
-        [Browsable(true)]
-        [Category("SafeNativeMethods.Shortcut")]
-        [Description("Window show style for the desktop shortcut.")]
-        [DefaultValue(ShowWindowOption.Default)]
-        public ShowWindowOption ShortcutShowCommand { get; set; }
+		#endregion Public Constructors
 
-        /// <summary>
-        /// Checks all installers in the stack for the specified parameter.
-        /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
-        private bool IsParameterTrue(string parameter)
-        {
-            Installer installer = this;
-            while (installer != null)
-            {
-                if (installer.Context.Parameters.ContainsKey(parameter))
-                {
-                    var parameterValue = installer.Context.Parameters[parameter];
-                    return (!string.IsNullOrEmpty(parameterValue) &&
-                        (string.Compare(parameterValue.Trim(), "false", StringComparison.OrdinalIgnoreCase) != 0) &&
-                        (parameterValue.Trim() != "0"));
-                }
-                installer = installer.Parent;
-            }
-            return false;
-        }
+		#region Public Properties
 
-        /// <summary>
-        /// Installs the component.
-        /// </summary>
-        public override void Install(IDictionary stateSaver)
-        {
-            // Call base class implementation
-            base.Install(stateSaver);
+		/// <summary>
+		/// Condition required to activate the feature.
+		/// </summary>
+		[Browsable(true)]
+		[Category("Installation")]
+		[Description("Condition required to activate the feature.")]
+		public string? ConditionArgument { get; set; }
 
-            // Do nothing when conditional argument not satisfied
-            if (string.IsNullOrWhiteSpace(ConditionArgument))
-                throw new ArgumentNullException(string.Format(CultureInfo.CurrentCulture,
-                    Resources.ErrorMissingConditionProperty, "DesktopShortcutInstaller"));
-            if (!IsParameterTrue(ConditionArgument))
-                return;
+		/// <summary>
+		/// Arguments for the desktop shortcut.
+		/// </summary>
+		[Browsable(true)]
+		[Category("SafeNativeMethods.Shortcut")]
+		[Description("Arguments for the desktop shortcut.")]
+		public string? ShortcutArguments { get; set; }
 
-            // Display status
-            Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusInstall,
-                "DesktopShortcutInstaller", ConditionArgument));
+		/// <summary>
+		/// Description for the desktop shortcut.
+		/// </summary>
+		[Browsable(true)]
+		[Category("SafeNativeMethods.Shortcut")]
+		[Description("Description for the desktop shortcut.")]
+		public string? ShortcutDescription { get; set; }
 
-            // Create desktop shortcut
-            var shortcutTargetPath = ExpandVariables(TargetDirectory) + Path.DirectorySeparatorChar + ShortcutName + ShortcutFileExtension;
-            Context.LogMessage("\t" + shortcutTargetPath);
-            try
-            {
-                var shortcut = (SafeNativeMethods.IShellLinkA)new SafeNativeMethods.Shortcut();
-                shortcut.SetDescription(ExpandVariables(ShortcutDescription));
-                shortcut.SetArguments(ExpandVariables(ShortcutArguments));
-                shortcut.SetWorkingDirectory(ExpandVariables(ShortcutWorkingDirectory));
-                shortcut.SetPath(ExpandVariables(ShortcutPath));
-                shortcut.SetShowCmd((uint)ShortcutShowCommand);
-                if (File.Exists(shortcutTargetPath))
-                    File.Delete(shortcutTargetPath);
-                ((SafeNativeMethods.IPersistFile)shortcut).Save(shortcutTargetPath, false);
-            }
-            catch (ExternalException error)
-            {
-                // Log error
-                Context.LogMessage(error.ToString());
+		/// <summary>
+		/// Name for the desktop shortcut.
+		/// </summary>
+		[Browsable(true)]
+		[Category("SafeNativeMethods.Shortcut")]
+		[Description("Name for the desktop shortcut.")]
+		public string? ShortcutName { get; set; }
 
-                // Throw any errors as installation errors
-                throw new InstallException(error.Message, error);
-            }
+		/// <summary>
+		/// Path for the desktop shortcut. Use %AssemblyDir% for the setup target folder. %AllUsersDesktop%, %CurrentUserDesktop%, %AllUsersPrograms%,
+		/// %CurrentUserPrograms%, %MyDocuments%, or any other environment variable.
+		/// </summary>
+		[Browsable(true)]
+		[Category("SafeNativeMethods.Shortcut")]
+		[Description(
+			"Path for the desktop shortcut. Use %AssemblyDir% for the setup target folder. %AllUsersDesktop%, %CurrentUserDesktop%, %AllUsersPrograms%, %CurrentUserPrograms%, %MyDocuments%, or any other environment variable."
+			)]
+		public string? ShortcutPath { get; set; }
 
-            // Save state
-            if (stateSaver.Contains(ConditionArgument))
-                stateSaver.Remove(ConditionArgument);
-            stateSaver.Add(ConditionArgument, true);
-        }
+		/// <summary>
+		/// Window show style for the desktop shortcut.
+		/// </summary>
+		[Browsable(true)]
+		[Category("SafeNativeMethods.Shortcut")]
+		[Description("Window show style for the desktop shortcut.")]
+		[DefaultValue(ShowWindowOption.Default)]
+		public ShowWindowOption ShortcutShowCommand { get; set; }
 
-        /// <summary>
-        /// Uninstalls the component.
-        /// </summary>
-        public override void Uninstall(IDictionary savedState)
-        {
-            // Call base class implementation
-            base.Uninstall(savedState);
+		/// <summary>
+		/// Working directory for the desktop shortcut.
+		/// </summary>
+		[Browsable(true)]
+		[Category("SafeNativeMethods.Shortcut")]
+		[Description("Working directory for the desktop shortcut.")]
+		public string? ShortcutWorkingDirectory { get; set; }
 
-            // Do nothing when conditional argument not satisfied
-            if ((savedState == null) || !savedState.Contains(ConditionArgument))
-                return;
+		/// <summary>
+		/// Target path for the desktop shortcut.
+		/// </summary>
+		[Browsable(true)]
+		[Category("Installation")]
+		[Description("Target path for the desktop shortcut.")]
+		public string? TargetDirectory { get; set; }
 
-            // Display status
-            Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusUninstall,
-                "DesktopShortcutInstaller", ConditionArgument));
+		#endregion Public Properties
 
-            // Remove desktop shortcut
-            try
-            {
-                // Delete icon (if exists)
-                var shortcutTargetPath = ExpandVariables(TargetDirectory) + Path.DirectorySeparatorChar + ShortcutName + ".lnk";
-                if (File.Exists(shortcutTargetPath))
-                {
-                    Context.LogMessage(string.Format(CultureInfo.CurrentCulture,
-                        Resources.StatusDeletingFile, shortcutTargetPath));
-                    File.Delete(shortcutTargetPath);
-                }
-            }
-            catch (IOException error)
-            {
-                // Log error
-                Context.LogMessage(error.ToString());
+		#region Public Methods
 
-                // Ignore errors during uninstall, else app may not be possible to remove.
-            }
+		/// <summary>
+		/// Installs the component.
+		/// </summary>
+		public override void Install(IDictionary stateSaver)
+		{
+			// Validate.
+			if (stateSaver is null) throw new ArgumentNullException(nameof(stateSaver));
 
-            // Clean up state
-            savedState.Remove(ConditionArgument);
-        }
+			// Call base class implementation
+			base.Install(stateSaver);
 
-        /// <summary>
-        /// Expands all supported special variables and all user and system environment variables in the input text.
-        /// </summary>
-        /// <param name="input">Input text with any variables.</param>
-        /// <returns>Output text with all supported variables expanded.</returns>
-        private string ExpandVariables(string input)
-        {
-            var output = input;
-            if (input == null)
-                return string.Empty;
+			// Do nothing when conditional argument not satisfied
+			if (string.IsNullOrWhiteSpace(ConditionArgument))
+				throw new ArgumentNullException(string.Format(CultureInfo.CurrentCulture,
+					Resources.ErrorMissingConditionProperty, "DesktopShortcutInstaller"));
+			if (!IsParameterTrue(ConditionArgument!))
+				return;
 
-            // Translate %AssemblyDir% as installation target folder.
-            var installPath = Path.GetDirectoryName(Context.Parameters["assemblypath"].Trim('"')).TrimEnd(Path.DirectorySeparatorChar);
-            output = output.Replace("%AssemblyDir%", installPath);
+			// Display status
+			Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusInstall,
+				"DesktopShortcutInstaller", ConditionArgument));
 
-            // Translate special folders
-            var allUsers = (GetSpecialFolderPath(SafeNativeMethods.Shell32.CSIDL_COMMON_PROGRAMS).Length > 0);
-            output = output.Replace("%CurrentUserPrograms%", GetSpecialFolderPath(SafeNativeMethods.Shell32.CSIDL_PROGRAMS));
-            output = output.Replace("%AllUsersPrograms%",
-                GetSpecialFolderPath(allUsers ? SafeNativeMethods.Shell32.CSIDL_COMMON_PROGRAMS : SafeNativeMethods.Shell32.CSIDL_PROGRAMS));
-            output = output.Replace("%CurrentUserDesktop%", GetSpecialFolderPath(SafeNativeMethods.Shell32.CSIDL_DESKTOPDIRECTORY));
-            output = output.Replace("%AllUsersDesktop%",
-                GetSpecialFolderPath(allUsers ? SafeNativeMethods.Shell32.CSIDL_COMMON_DESKTOPDIRECTORY : SafeNativeMethods.Shell32.CSIDL_DESKTOPDIRECTORY));
-            output = output.Replace("%MyDocuments%", GetSpecialFolderPath(SafeNativeMethods.Shell32.CSIDL_PERSONAL));
+			// Create desktop shortcut
+			var shortcutTargetPath = ShortcutName + ShortcutFileExtension;
+			if (!string.IsNullOrWhiteSpace(TargetDirectory))
+				shortcutTargetPath = Path.Combine(ExpandVariables(TargetDirectory!), shortcutTargetPath);
+			Context.LogMessage("\t" + shortcutTargetPath);
+			try
+			{
+				var shortcut = (SafeNativeMethods.IShellLinkA)new SafeNativeMethods.Shortcut();
+				if (!string.IsNullOrWhiteSpace(ShortcutDescription))
+					shortcut.SetDescription(ExpandVariables(ShortcutDescription!));
+				if (!string.IsNullOrWhiteSpace(ShortcutArguments))
+					shortcut.SetArguments(ExpandVariables(ShortcutArguments!));
+				if (!string.IsNullOrWhiteSpace(ShortcutWorkingDirectory))
+					shortcut.SetWorkingDirectory(ExpandVariables(ShortcutWorkingDirectory!));
+				if (!string.IsNullOrWhiteSpace(ShortcutPath))
+					shortcut.SetPath(ExpandVariables(ShortcutPath!));
+				shortcut.SetShowCmd((uint)ShortcutShowCommand);
+				if (File.Exists(shortcutTargetPath))
+					File.Delete(shortcutTargetPath);
+				((SafeNativeMethods.IPersistFile)shortcut).Save(shortcutTargetPath, false);
+			}
+			catch (ExternalException error)
+			{
+				// Log error
+				Context.LogMessage(error.ToString());
 
-            // Translate any other environment variables
-            output = Environment.ExpandEnvironmentVariables(output);
+				// Throw any errors as installation errors
+				throw new InstallException(error.Message, error);
+			}
 
-            // Return result
-            return output;
-        }
+			// Save state
+			if (stateSaver.Contains(ConditionArgument))
+				stateSaver.Remove(ConditionArgument);
+			stateSaver.Add(ConditionArgument, true);
+		}
 
-        /// <summary>
-        /// Gets the path to a system special folder. If the folder does not exist, it is NOT created.
-        /// </summary>
-        /// <param name="nFolder">CSIDL of the special folder.</param>
-        /// <returns>Path to the special folder, if it exists.</returns>
-        private static string GetSpecialFolderPath(int nFolder)
-        {
-            return GetSpecialFolderPath(nFolder, false);
-        }
+		/// <summary>
+		/// Uninstalls the component.
+		/// </summary>
+		public override void Uninstall(IDictionary savedState)
+		{
+			// Call base class implementation
+			base.Uninstall(savedState);
 
-        /// <summary>
-        /// Gets the path to a system special folder. If the folder does not exist, it can be created (optional).
-        /// </summary>
-        /// <param name="nFolder">CSIDL of the special folder.</param>
-        /// <param name="create">Set true to create the special folder if it does not exist.</param>
-        /// <returns>Path to the special folder, if it exists.</returns>
-        private static string GetSpecialFolderPath(int nFolder, bool create)
-        {
-            var pathBuffer = new StringBuilder(500);
-            SafeNativeMethods.Shell32.SHGetSpecialFolderPath(IntPtr.Zero, pathBuffer, nFolder, create);
-            return pathBuffer.ToString();
-        }
-    }
+			// Do nothing when conditional argument not satisfied
+			if ((savedState == null) || !savedState.Contains(ConditionArgument))
+				return;
 
-    /// <summary>
-    /// Options for the ShortcutShowCommand.
-    /// </summary>
-    public enum ShowWindowOption
-    {
-        /// <summary>
-        /// None specified.
-        /// </summary>
-        None,
+			// Display status
+			Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusUninstall,
+				"DesktopShortcutInstaller", ConditionArgument));
 
-        /// <summary>
-        /// Default.
-        /// </summary>
-        Default = 1,
+			// Remove desktop shortcut
+			try
+			{
+				// Delete icon (if exists)
+				var shortcutTargetPath = ShortcutName + ShortcutFileExtension;
+				if (!string.IsNullOrWhiteSpace(TargetDirectory))
+					shortcutTargetPath = Path.Combine(ExpandVariables(TargetDirectory!), shortcutTargetPath);
+				if (File.Exists(shortcutTargetPath))
+				{
+					Context.LogMessage(string.Format(CultureInfo.CurrentCulture,
+						Resources.StatusDeletingFile, shortcutTargetPath));
+					File.Delete(shortcutTargetPath);
+				}
+			}
+			catch (IOException error)
+			{
+				// Log error
+				Context.LogMessage(error.ToString());
 
-        /// <summary>
-        /// Minimized.
-        /// </summary>
-        Minimized = 2,
+				// Ignore errors during uninstall, else app may not be possible to remove.
+			}
 
-        /// <summary>
-        /// Maximized.
-        /// </summary>
-        Maximized = 3
-    }
+			// Clean up state
+			savedState.Remove(ConditionArgument);
+		}
+
+		#endregion Public Methods
+
+		#region Private Methods
+
+		/// <summary>
+		/// Gets the path to a system special folder. If the folder does not exist, it is NOT created.
+		/// </summary>
+		/// <param name="nFolder">CSIDL of the special folder.</param>
+		/// <returns>Path to the special folder, if it exists.</returns>
+		private static string GetSpecialFolderPath(int nFolder)
+		{
+			return GetSpecialFolderPath(nFolder, false);
+		}
+
+		/// <summary>
+		/// Gets the path to a system special folder. If the folder does not exist, it can be created (optional).
+		/// </summary>
+		/// <param name="nFolder">CSIDL of the special folder.</param>
+		/// <param name="create">Set true to create the special folder if it does not exist.</param>
+		/// <returns>Path to the special folder, if it exists.</returns>
+		private static string GetSpecialFolderPath(int nFolder, bool create)
+		{
+			var pathBuffer = new StringBuilder(500);
+			SafeNativeMethods.Shell32.SHGetSpecialFolderPath(IntPtr.Zero, pathBuffer, nFolder, create);
+			return pathBuffer.ToString();
+		}
+
+		/// <summary>
+		/// Expands all supported special variables and all user and system environment variables in the input text.
+		/// </summary>
+		/// <param name="input">Input text with any variables.</param>
+		/// <returns>Output text with all supported variables expanded.</returns>
+		private string ExpandVariables(string input)
+		{
+			var output = input;
+			if (input == null)
+				return string.Empty;
+
+			// Translate %AssemblyDir% as installation target folder.
+			var installPath = Path.GetDirectoryName(Context.Parameters["assemblypath"].Trim('"')).TrimEnd(Path.DirectorySeparatorChar);
+			output = output.Replace("%AssemblyDir%", installPath);
+
+			// Translate special folders
+			var allUsers = (GetSpecialFolderPath(SafeNativeMethods.Shell32.CSIDL_COMMON_PROGRAMS).Length > 0);
+			output = output.Replace("%CurrentUserPrograms%", GetSpecialFolderPath(SafeNativeMethods.Shell32.CSIDL_PROGRAMS));
+			output = output.Replace("%AllUsersPrograms%",
+				GetSpecialFolderPath(allUsers ? SafeNativeMethods.Shell32.CSIDL_COMMON_PROGRAMS : SafeNativeMethods.Shell32.CSIDL_PROGRAMS));
+			output = output.Replace("%CurrentUserDesktop%", GetSpecialFolderPath(SafeNativeMethods.Shell32.CSIDL_DESKTOPDIRECTORY));
+			output = output.Replace("%AllUsersDesktop%",
+				GetSpecialFolderPath(allUsers ? SafeNativeMethods.Shell32.CSIDL_COMMON_DESKTOPDIRECTORY : SafeNativeMethods.Shell32.CSIDL_DESKTOPDIRECTORY));
+			output = output.Replace("%MyDocuments%", GetSpecialFolderPath(SafeNativeMethods.Shell32.CSIDL_PERSONAL));
+
+			// Translate any other environment variables
+			output = Environment.ExpandEnvironmentVariables(output);
+
+			// Return result
+			return output;
+		}
+
+		/// <summary>
+		/// Checks all installers in the stack for the specified parameter.
+		/// </summary>
+		/// <param name="parameter"></param>
+		/// <returns></returns>
+		private bool IsParameterTrue(string parameter)
+		{
+			Installer installer = this;
+			while (installer != null)
+			{
+				if (installer.Context.Parameters.ContainsKey(parameter))
+				{
+					var parameterValue = installer.Context.Parameters[parameter];
+					return (!string.IsNullOrEmpty(parameterValue) &&
+						(string.Compare(parameterValue.Trim(), "false", StringComparison.OrdinalIgnoreCase) != 0) &&
+						(parameterValue.Trim() != "0"));
+				}
+				installer = installer.Parent;
+			}
+			return false;
+		}
+
+		#endregion Private Methods
+	}
 }

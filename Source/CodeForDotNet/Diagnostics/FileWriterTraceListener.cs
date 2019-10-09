@@ -4,130 +4,120 @@ using System.IO;
 
 namespace CodeForDotNet.Diagnostics
 {
-    /// <summary>
-    /// Writes trace output to a file, supporting environment variables in the filename and lazy open
-    /// of the file.
-    /// </summary>
-    public class FileWriterTraceListener : TraceListener
-    {
-        #region Private Fields
+	/// <summary>
+	/// Writes trace output to a file, supporting environment variables in the filename and lazy open of the file.
+	/// </summary>
+	public class FileWriterTraceListener : TraceListener
+	{
+		#region Private Fields
 
-        /// <summary>
-        /// Filename to write to.
-        /// </summary>
-        private readonly string _fileName;
+		/// <summary>
+		/// Filename to write to.
+		/// </summary>
+		private readonly string _fileName;
 
-        /// <summary>
-        /// Output file stream.
-        /// </summary>
-        private StreamWriter _stream;
+		/// <summary>
+		/// Output file stream.
+		/// </summary>
+		private StreamWriter? _stream;
 
-        #endregion Private Fields
+		#endregion Private Fields
 
-        #region Public Constructors
+		#region Public Constructors
 
-        /// <summary>
-        /// Creates the object.
-        /// </summary>
-        public FileWriterTraceListener(string fileName)
-        {
-            // Expand any variables in the filename
-            _fileName = Environment.ExpandEnvironmentVariables(fileName);
-        }
+		/// <summary>
+		/// Creates the object.
+		/// </summary>
+		public FileWriterTraceListener(string fileName)
+		{
+			// Expand any variables in the filename
+			_fileName = Environment.ExpandEnvironmentVariables(fileName);
+		}
 
-        #endregion Public Constructors
+		#endregion Public Constructors
 
-        #region Public Methods
+		#region Public Methods
 
-        /// <summary>
-        /// Closes the output stream (if open).
-        /// </summary>
-        public override void Close()
-        {
-            if (_stream != null)
-            {
-                _stream.Dispose();
-                _stream = null;
-            }
-        }
+		/// <summary>
+		/// Closes the output stream (if open).
+		/// </summary>
+		public override void Close()
+		{
+			_stream?.Dispose();
+		}
 
-        /// <summary>
-        /// Flushes any buffered data to the file (if open).
-        /// </summary>
-        public override void Flush()
-        {
-            if (_stream != null)
-                _stream.Flush();
-        }
+		/// <summary>
+		/// Flushes any buffered data to the file (if open).
+		/// </summary>
+		public override void Flush()
+		{
+			_stream?.Flush();
+		}
 
-        /// <summary>
-        /// Writes to the output stream.
-        /// </summary>
-        public override void Write(string message)
-        {
-            // Lazy create/open file
-            OpenFile();
+		/// <summary>
+		/// Writes to the output stream.
+		/// </summary>
+		public override void Write(string message)
+		{
+			// Lazy create/open file
+			OpenFile();
 
-            // Write to file
-            _stream.Write(message);
-        }
+			// Write to file
+			_stream?.Write(message);
+		}
 
-        /// <summary>
-        /// Writes to the output stream followed by a new line.
-        /// </summary>
-        public override void WriteLine(string message)
-        {
-            // Lazy create/open file
-            OpenFile();
+		/// <summary>
+		/// Writes to the output stream followed by a new line.
+		/// </summary>
+		public override void WriteLine(string message)
+		{
+			// Lazy create/open file
+			OpenFile();
 
-            // Write to file
-            _stream.WriteLine(message);
-        }
+			// Write to file
+			_stream?.WriteLine(message);
+		}
 
-        #endregion Public Methods
+		#endregion Public Methods
 
-        #region Protected Methods
+		#region Protected Methods
 
-        /// <summary>
-        /// Cleans-up resources.
-        /// </summary>
-        protected override void Dispose(bool disposing)
-        {
-            try
-            {
-                // Dispose unmanaged resources
-                if (_stream != null)
-                {
-                    _stream.Dispose();
-                    _stream = null;
-                }
-            }
-            finally
-            {
-                // Dispose base class
-                base.Dispose(disposing);
-            }
-        }
+		/// <summary>
+		/// Cleans-up resources.
+		/// </summary>
+		protected override void Dispose(bool disposing)
+		{
+			try
+			{
+				// Dispose unmanaged resources
+				_stream?.Dispose();
+			}
+			finally
+			{
+				// Dispose base class
+				base.Dispose(disposing);
+			}
+		}
 
-        #endregion Protected Methods
+		#endregion Protected Methods
 
-        #region Private Methods
+		#region Private Methods
 
-        /// <summary>
-        /// Opens the stream when it is needed (lazy open).
-        /// </summary>
-        private void OpenFile()
-        {
-            // Create directory if not exists
-            var directory = Path.GetDirectoryName(_fileName);
-            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
-                Directory.CreateDirectory(directory);
+		/// <summary>
+		/// Opens the stream when it is needed (lazy open).
+		/// </summary>
+		private void OpenFile()
+		{
+			// Create directory if not exists
+			var directory = Path.GetDirectoryName(_fileName);
+			if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+				Directory.CreateDirectory(directory);
 
-            // Create or open file
-            if (_stream == null)
-                _stream = new StreamWriter(_fileName, true);
-        }
+			// Create or open file
+			if (_stream == null)
+				_stream = new StreamWriter(_fileName, true);
+		}
 
-        #endregion Private Methods
-    }
+		#endregion Private Methods
+	}
 }

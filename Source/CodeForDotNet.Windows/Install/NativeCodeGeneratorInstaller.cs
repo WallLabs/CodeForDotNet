@@ -1,3 +1,5 @@
+using CodeForDotNet.Windows.Native;
+using CodeForDotNet.Windows.Properties;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,223 +10,221 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using CodeForDotNet.Windows.Native;
-using CodeForDotNet.Windows.Properties;
+
+#nullable enable
 
 namespace CodeForDotNet.Install
 {
-   /// <summary>
-   /// Generates native images on assemblies and their assemblyList during setup to decrease start-up
-   /// times and increase performance.
-   /// </summary>
-   [RunInstaller(false)]
-   [ToolboxItem(true)]
-   [ToolboxBitmap(typeof(NativeCodeGeneratorInstaller), "NativeCodeGeneratorInstallerToolboxIcon.bmp")]
-   [SuppressMessage("Microsoft.Usage", "CA2227", Justification = "Settable properties required by toolbox extension specification.")]
-   public class NativeCodeGeneratorInstaller : Installer
-   {
-      #region Private Fields
+	/// <summary>
+	/// Generates native images on assemblies and their assemblyList during setup to decrease start-up times and increase performance.
+	/// </summary>
+	[RunInstaller(false)]
+	[ToolboxItem(true)]
+	[ToolboxBitmap(typeof(NativeCodeGeneratorInstaller), "NativeCodeGeneratorInstallerToolboxIcon.bmp")]
+	[SuppressMessage("Microsoft.Usage", "CA2227", Justification = "Settable properties required by toolbox extension specification.")]
+	public class NativeCodeGeneratorInstaller : Installer
+	{
+		#region Private Fields
 
-      /// <summary>
-      /// Required designer variable.
-      /// </summary>
-      private Container _components;
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private Container? _components;
 
-      #endregion Private Fields
+		#endregion Private Fields
 
-      #region Public Constructors
+		#region Public Constructors
 
-      /// <summary>
-      /// Creates the component.
-      /// </summary>
-      public NativeCodeGeneratorInstaller()
-      {
-         // This call is required by the Designer.
-         InitializeComponent();
+		/// <summary>
+		/// Creates the component.
+		/// </summary>
+		public NativeCodeGeneratorInstaller()
+		{
+			// This call is required by the Designer.
+			InitializeComponent();
 
-         // Initialize members
-         AssemblyList = new Collection<string>();
-      }
+			// Initialize members
+			AssemblyList = new Collection<string>();
+		}
 
-      #endregion Public Constructors
+		#endregion Public Constructors
 
-      #region Public Properties
+		#region Public Properties
 
-      /// <summary>
-      /// List of assemblies referenced by the application, so must should also have native images
-      /// cached to decrease start-up times and increase performance. Make a list of filenames
-      /// without path (e.g. MyAssembly.dll).
-      /// </summary>
-      [Category("Installation"), Description("List of assemblies referenced by the application, so must should also have native images cached to decrease start-up times and increase performance. Make a list of filenames without path (e.g. MyAssembly.dll).")]
-      public Collection<string> AssemblyList { get; set; }
+		/// <summary>
+		/// List of assemblies referenced by the application, so must should also have native images cached to decrease start-up times and increase performance.
+		/// Make a list of filenames without path (e.g. MyAssembly.dll).
+		/// </summary>
+		[Category("Installation"), Description("List of assemblies referenced by the application, so must should also have native images cached to decrease start-up times and increase performance. Make a list of filenames without path (e.g. MyAssembly.dll).")]
+		public Collection<string> AssemblyList { get; set; }
 
-      /// <summary>
-      /// Condition required to activate the feature.
-      /// </summary>
-      [Browsable(true), Category("Installation"), Description("Condition required to activate the feature.")]
-      public string ConditionArgument { get; set; }
+		/// <summary>
+		/// Condition required to activate the feature.
+		/// </summary>
+		[Browsable(true), Category("Installation"), Description("Condition required to activate the feature.")]
+		public string? ConditionArgument { get; set; }
 
-      #endregion Public Properties
+		#endregion Public Properties
 
-      #region Public Methods
+		#region Public Methods
 
-      /// <summary>
-      /// Installs the component.
-      /// </summary>
-      [SuppressMessage("Microsoft.Design", "CA1031", Justification = "External program error is logged before being re-thrown.")]
-      public override void Install(IDictionary stateSaver)
-      {
-         // Call base class implementation
-         base.Install(stateSaver);
+		/// <summary>
+		/// Installs the component.
+		/// </summary>
+		[SuppressMessage("Microsoft.Design", "CA1031", Justification = "External program error is logged before being re-thrown.")]
+		public override void Install(IDictionary stateSaver)
+		{
+			// Validate.
+			if (stateSaver is null) throw new ArgumentNullException(nameof(stateSaver));
 
-         // Do nothing when conditional argument not satisfied
-         if (string.IsNullOrEmpty(ConditionArgument))
-            throw new ArgumentNullException(string.Format(CultureInfo.CurrentCulture,
-                Resources.ErrorMissingConditionProperty, "NativeCodeGeneratorInstaller"));
-         if (!IsParameterTrue(ConditionArgument))
-            return;
+			// Call base class implementation
+			base.Install(stateSaver);
 
-         // Display status
-         Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusInstall,
-             "NativeCodeGeneratorInstaller", ConditionArgument));
+			// Do nothing when conditional argument not satisfied
+			if (string.IsNullOrEmpty(ConditionArgument))
+				throw new ArgumentNullException(string.Format(CultureInfo.CurrentCulture,
+					Resources.ErrorMissingConditionProperty, "NativeCodeGeneratorInstaller"));
+			if (!IsParameterTrue(ConditionArgument!))
+				return;
 
-         // Run NGEN to install assemblies into native image cache
-         var targetDir = Path.GetDirectoryName(Context.Parameters["assemblypath"].Trim('"')).TrimEnd(Path.DirectorySeparatorChar);
-         var installedAssemblyList = new List<string>();
-         foreach (var assemblyFilename in AssemblyList)
-         {
-            try
-            {
-               // Run NGEN
-               var assemblyPath = targetDir + Path.DirectorySeparatorChar + assemblyFilename;
-               Context.LogMessage("\t" + assemblyPath);
-               if (NativeCodeGenerator.Install(assemblyPath, out var consoleOutput, out var assemblyFullName))
-                  installedAssemblyList.Add(assemblyFullName);
+			// Display status
+			Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusInstall,
+				"NativeCodeGeneratorInstaller", ConditionArgument));
 
-               // Log output.
-               Context.LogMessage(consoleOutput);
-            }
-            catch (Exception error)
-            {
-               // Log error then re-throw.
-               Context.LogMessage(error.GetFullMessage());
-               throw;
-            }
-         }
+			// Run NGEN to install assemblies into native image cache
+			var targetDir = Path.GetDirectoryName(Context.Parameters["assemblypath"].Trim('"')).TrimEnd(Path.DirectorySeparatorChar);
+			var installedAssemblyList = new List<string>();
+			foreach (var assemblyFilename in AssemblyList)
+			{
+				try
+				{
+					// Run NGEN
+					var assemblyPath = targetDir + Path.DirectorySeparatorChar + assemblyFilename;
+					Context.LogMessage("\t" + assemblyPath);
+					if (NativeCodeGenerator.Install(assemblyPath, out var consoleOutput, out var assemblyFullName))
+						installedAssemblyList.Add(assemblyFullName!);
 
-         // Save state
-         if (stateSaver.Contains(ConditionArgument))
-            stateSaver.Remove(ConditionArgument);
-         stateSaver.Add(ConditionArgument, installedAssemblyList.ToArray());
-      }
+					// Log output.
+					Context.LogMessage(consoleOutput);
+				}
+				catch (Exception error)
+				{
+					// Log error then re-throw.
+					Context.LogMessage(error.GetFullMessage());
+					throw;
+				}
+			}
 
-      /// <summary>
-      /// Uninstalls the component.
-      /// </summary>
-      [SuppressMessage("Microsoft.Design", "CA1031", Justification = "External program error is logged before being re-thrown.")]
-      public override void Uninstall(IDictionary savedState)
-      {
-         // Call base class implementation
-         base.Uninstall(savedState);
+			// Save state
+			if (stateSaver.Contains(ConditionArgument))
+				stateSaver.Remove(ConditionArgument);
+			stateSaver.Add(ConditionArgument, installedAssemblyList.ToArray());
+		}
 
-         // Do nothing when conditional argument not satisfied
-         if (savedState == null || !savedState.Contains(ConditionArgument))
-            return;
+		/// <summary>
+		/// Uninstalls the component.
+		/// </summary>
+		[SuppressMessage("Microsoft.Design", "CA1031", Justification = "External program error is logged before being re-thrown.")]
+		public override void Uninstall(IDictionary savedState)
+		{
+			// Call base class implementation
+			base.Uninstall(savedState);
 
-         // Display status
-         Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusUninstall,
-             "NativeCodeGeneratorInstaller", ConditionArgument));
+			// Do nothing when conditional argument not satisfied
+			if (savedState == null || !savedState.Contains(ConditionArgument))
+				return;
 
-         // Get saved assembly list
-         var installedAssemblies = (string[])savedState[ConditionArgument];
+			// Display status
+			Context.LogMessage(string.Format(CultureInfo.CurrentCulture, Resources.StatusUninstall,
+				"NativeCodeGeneratorInstaller", ConditionArgument));
 
-         // Run NGEN to delete assemblies from the native image cache
-         foreach (var assemblyFullName in installedAssemblies)
-         {
-            try
-            {
-               // Run NGEN
-               Context.LogMessage("\t" + assemblyFullName);
-               NativeCodeGenerator.Remove(assemblyFullName, out var consoleOutput);
+			// Get saved assembly list
+			var installedAssemblies = (string[])savedState[ConditionArgument];
 
-               // Log output.
-               Context.LogMessage(consoleOutput);
-            }
-            catch (Exception error)
-            {
-               // Log error then re-throw.
-               Context.LogMessage(error.GetFullMessage());
-               throw;
-            }
-         }
+			// Run NGEN to delete assemblies from the native image cache
+			foreach (var assemblyFullName in installedAssemblies)
+			{
+				try
+				{
+					// Run NGEN
+					Context.LogMessage("\t" + assemblyFullName);
+					NativeCodeGenerator.Remove(assemblyFullName, out var consoleOutput);
 
-         // Clean up state (if conditional)
-         savedState.Remove(ConditionArgument);
-      }
+					// Log output.
+					Context.LogMessage(consoleOutput);
+				}
+				catch (Exception error)
+				{
+					// Log error then re-throw.
+					Context.LogMessage(error.GetFullMessage());
+					throw;
+				}
+			}
 
-      #endregion Public Methods
+			// Clean up state (if conditional)
+			savedState.Remove(ConditionArgument);
+		}
 
-      #region Protected Methods
+		#endregion Public Methods
 
-      /// <summary>
-      /// Clean up any resources being used.
-      /// </summary>
-      protected override void Dispose(bool disposing)
-      {
-         try
-         {
-            // Dispose owned objects (when actually disposing, not finalizing)
-            if (disposing)
-            {
-               if (_components != null)
-                  _components.Dispose();
-            }
+		#region Protected Methods
 
-            // Release references to aid garbage collection
-            _components = null;
-         }
-         finally
-         {
-            // Dispose base class
-            base.Dispose(disposing);
-         }
-      }
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		protected override void Dispose(bool disposing)
+		{
+			try
+			{
+				// Dispose owned objects (when actually disposing, not finalizing)
+				if (disposing)
+				{
+					if (_components != null)
+						_components.Dispose();
+				}
 
-      #endregion Protected Methods
+				// Release references to aid garbage collection
+				_components = null;
+			}
+			finally
+			{
+				// Dispose base class
+				base.Dispose(disposing);
+			}
+		}
 
-      #region Private Methods
+		#endregion Protected Methods
 
-      /// <summary>
-      /// Required method for Designer support - do not modify the contents of this method with the
-      /// code editor.
-      /// </summary>
-      private void InitializeComponent()
-      {
-         _components = new System.ComponentModel.Container();
-      }
+		#region Private Methods
 
-      /// <summary>
-      /// Checks all installers in the stack for the specified parameter.
-      /// </summary>
-      /// <param name="parameter"></param>
-      /// <returns></returns>
-      private bool IsParameterTrue(string parameter)
-      {
-         Installer installer = this;
-         while (installer != null)
-         {
-            if (installer.Context.Parameters.ContainsKey(parameter))
-            {
-               var parameterValue = installer.Context.Parameters[parameter];
-               return (!string.IsNullOrEmpty(parameterValue) &&
-                   (string.Compare(parameterValue.Trim(), "false", StringComparison.OrdinalIgnoreCase) != 0) &&
-                   (parameterValue.Trim() != "0"));
-            }
-            installer = installer.Parent;
-         }
-         return false;
-      }
+		/// <summary>
+		/// Required method for Designer support - do not modify the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			_components = new System.ComponentModel.Container();
+		}
 
-      #endregion Private Methods
-   }
+		/// <summary>
+		/// Checks all installers in the stack for the specified parameter.
+		/// </summary>
+		private bool IsParameterTrue(string parameter)
+		{
+			Installer installer = this;
+			while (installer != null)
+			{
+				if (installer.Context.Parameters.ContainsKey(parameter))
+				{
+					var parameterValue = installer.Context.Parameters[parameter];
+					return (!string.IsNullOrEmpty(parameterValue) &&
+						(string.Compare(parameterValue.Trim(), "false", StringComparison.OrdinalIgnoreCase) != 0) &&
+						(parameterValue.Trim() != "0"));
+				}
+				installer = installer.Parent;
+			}
+			return false;
+		}
+
+		#endregion Private Methods
+	}
 }

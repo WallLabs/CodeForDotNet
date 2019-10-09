@@ -1,27 +1,40 @@
-﻿using System;
+using System;
 using System.Data.SqlClient;
 
 namespace CodeForDotNet.Data.Sql.Adapters
 {
-    /// <summary>
-    /// Data adapter for the <see cref="GuidDataKey"/> entity.
-    /// </summary>
-    public static class GuidDataKeyAdapter
-    {
-        /// <summary>
-        /// Reads properties of a <see cref="GuidDataKey"/> from a data reader.
-        /// </summary>
-        public static void Read(this GuidDataKey entity, SqlDataReader reader)
-        {
-            entity.Id = reader.Get<Guid>("Id");
-        }
+	/// <summary>
+	/// Data adapter for the <see cref="GuidDataKey"/> entity.
+	/// </summary>
+	public static class GuidDataKeyAdapter
+	{
+		#region Public Methods
 
-        /// <summary>
-        /// Sets data command parameter values for a <see cref="GuidDataKey"/>.
-        /// </summary>
-        public static void Set(this GuidDataKey entity, SqlParameterCollection parameters)
-        {
-            parameters["@id"].Value = entity.Id;
-        }
-    }
+		/// <summary>
+		/// Reads properties of a <see cref="GuidDataKey"/> from a data reader.
+		/// </summary>
+		public static void Read(this GuidDataKey entity, SqlDataReader reader)
+		{
+			// Validate.
+			if (entity is null) throw new ArgumentNullException(nameof(entity));
+
+			// Read entity.
+			entity.Id = reader.Get<Guid>("Id");
+		}
+
+		/// <summary>
+		/// Sets data command parameter values for a <see cref="GuidDataKey"/>.
+		/// </summary>
+		public static void Set(this GuidDataKey entity, SqlParameterCollection parameters)
+		{
+			// Validate.
+			if (entity is null) throw new ArgumentNullException(nameof(entity));
+			if (parameters is null) throw new ArgumentNullException(nameof(parameters));
+
+			// Set parameters.
+			parameters["@id"].Value = entity.Id;
+		}
+
+		#endregion Public Methods
+	}
 }

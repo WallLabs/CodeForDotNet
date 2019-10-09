@@ -19,7 +19,7 @@ namespace CodeForDotNet.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -75,6 +75,15 @@ namespace CodeForDotNet.Properties {
         internal static string AsyncEndCalledTwice {
             get {
                 return ResourceManager.GetString("AsyncEndCalledTwice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Async callback threw an exception..
+        /// </summary>
+        internal static string AsyncResultCompleteError {
+            get {
+                return ResourceManager.GetString("AsyncResultCompleteError", resourceCulture);
             }
         }
         
@@ -183,6 +192,51 @@ namespace CodeForDotNet.Properties {
         internal static string DataObjectUpdateStateInvalid {
             get {
                 return ResourceManager.GetString("DataObjectUpdateStateInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table {0} does not have a primary key..
+        /// </summary>
+        internal static string DataSetChangeLogGetPrimaryKeyFilterExpressionNoPrimaryKey {
+            get {
+                return ResourceManager.GetString("DataSetChangeLogGetPrimaryKeyFilterExpressionNoPrimaryKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redo delete could not find row to delete..
+        /// </summary>
+        internal static string DataSetChangeLogRedoDeleteError {
+            get {
+                return ResourceManager.GetString("DataSetChangeLogRedoDeleteError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redo update could not find row to update..
+        /// </summary>
+        internal static string DataSetChangeLogRedoUpdateError {
+            get {
+                return ResourceManager.GetString("DataSetChangeLogRedoUpdateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo insert could not find row to delete..
+        /// </summary>
+        internal static string DataSetChangeLogUndoInsertError {
+            get {
+                return ResourceManager.GetString("DataSetChangeLogUndoInsertError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo update could not find row to restore..
+        /// </summary>
+        internal static string DataSetChangeLogUndoUpdateError {
+            get {
+                return ResourceManager.GetString("DataSetChangeLogUndoUpdateError", resourceCulture);
             }
         }
         

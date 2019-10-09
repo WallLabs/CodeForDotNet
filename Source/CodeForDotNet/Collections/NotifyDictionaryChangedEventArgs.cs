@@ -1,36 +1,44 @@
-﻿using System;
+using System;
 using System.Collections.Specialized;
 
 namespace CodeForDotNet.Collections
 {
-    /// <summary>
-    /// Event arguments for the <see cref="ObservableDictionary{TKey,TValue}.DictionaryChanged"/> event.
-    /// </summary>
-    public class NotifyDictionaryChangedEventArgs<TKey, TValue> : EventArgs
-    {
-        /// <summary>
-        /// Creates an instance with specific values.
-        /// </summary>
-        public NotifyDictionaryChangedEventArgs(NotifyCollectionChangedAction change, TKey key, TValue value)
-        {
-            CollectionChange = change;
-            Key = key;
-            Value = value;
-        }
+	/// <summary>
+	/// Event arguments for the <see cref="ObservableDictionary{TKey,TValue}.DictionaryChanged"/> event.
+	/// </summary>
+	public class NotifyDictionaryChangedEventArgs<TKey, TValue> : EventArgs
+	{
+		#region Public Constructors
 
-        /// <summary>
-        /// Change details.
-        /// </summary>
-        public NotifyCollectionChangedAction CollectionChange { get; private set; }
+		/// <summary>
+		/// Creates an instance with specific values.
+		/// </summary>
+		public NotifyDictionaryChangedEventArgs(NotifyCollectionChangedAction change, TKey key, TValue value)
+		{
+			CollectionChange = change;
+			Key = key;
+			Value = value;
+		}
 
-        /// <summary>
-        /// Changed entry key.
-        /// </summary>
-        public TKey Key { get; private set; }
+		#endregion Public Constructors
 
-        /// <summary>
-        /// Changed entry key.
-        /// </summary>
-        public TValue Value { get; private set; }
-    }
+		#region Public Properties
+
+		/// <summary>
+		/// Change details.
+		/// </summary>
+		public NotifyCollectionChangedAction CollectionChange { get; private set; }
+
+		/// <summary>
+		/// Changed entry key.
+		/// </summary>
+		public TKey Key { get; private set; }
+
+		/// <summary>
+		/// Changed entry key.
+		/// </summary>
+		public TValue Value { get; private set; }
+
+		#endregion Public Properties
+	}
 }

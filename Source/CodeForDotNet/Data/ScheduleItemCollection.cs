@@ -1,6 +1,5 @@
 using CodeForDotNet.Collections;
 using CodeForDotNet.Properties;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -9,114 +8,108 @@ using System.Xml.Serialization;
 
 namespace CodeForDotNet.Data
 {
-    /// <summary>
-    /// Collection of <see cref="ScheduleItem"/>.
-    /// </summary>
-    [XmlRoot(XmlRootName, Namespace = XmlNamespace)]
-    [XmlType(XmlTypeName, Namespace = XmlNamespace)]
-    public class ScheduleItemCollection : Collection<ScheduleItem>
-    {
-        #region Constants
+	/// <summary>
+	/// Collection of <see cref="ScheduleItem"/>.
+	/// </summary>
+	[XmlRoot(XmlRootName, Namespace = XmlNamespace)]
+	[XmlType(XmlTypeName, Namespace = XmlNamespace)]
+	public class ScheduleItemCollection : Collection<ScheduleItem>
+	{
+		#region Public Fields
 
-        /// <summary>
-        /// XML root element name.
-        /// </summary>
-        public const string XmlRootName = nameof(ScheduleItem) + "s";
+		/// <summary>
+		/// XML namespace.
+		/// </summary>
+		public const string XmlNamespace = Constants.XmlRootNamespace;
 
-        /// <summary>
-        /// XML type name.
-        /// </summary>
-        public const string XmlTypeName = XmlRootName + "Type";
+		/// <summary>
+		/// XML root element name.
+		/// </summary>
+		public const string XmlRootName = nameof(ScheduleItem) + "s";
 
-        /// <summary>
-        /// XML namespace.
-        /// </summary>
-        public const string XmlNamespace = Constants.XmlRootNamespace;
+		/// <summary>
+		/// XML type name.
+		/// </summary>
+		public const string XmlTypeName = XmlRootName + "Type";
 
-        #endregion Constants
+		#endregion Public Fields
 
-        #region Operators
+		#region Public Constructors
 
-        /// <summary>
-        /// Tests two objects of this type for equality by value.
-        /// </summary>
-        public static bool operator ==(ScheduleItemCollection scheduleItem1, ScheduleItemCollection scheduleItem2)
-        {
-            return scheduleItem1?.Equals(scheduleItem2) ?? scheduleItem2 is null;
-        }
+		/// <summary>
+		/// Creates an empty collection.
+		/// </summary>
+		public ScheduleItemCollection() { }
 
-        /// <summary>
-        /// Tests two objects of this type for inequality by value.
-        /// </summary>
-        public static bool operator !=(ScheduleItemCollection scheduleItem1, ScheduleItemCollection scheduleItem2)
-        {
-            return !(scheduleItem1?.Equals(scheduleItem2) ?? scheduleItem2 is null);
-        }
+		/// <summary>
+		/// Creates an instance based on an existing list.
+		/// </summary>
+		public ScheduleItemCollection(IList<ScheduleItem> list) : base(list) { }
 
-        /// <summary>
-        /// Compares this object with another by value.
-        /// </summary>
-        public override bool Equals(object other)
-        {
-            // Compare nullability and type
-            if (other is null || !(other is ScheduleItemCollection otherCollection))
-                return false;
+		#endregion Public Constructors
 
-            // Compare values
-            return ArrayExtensions.AreEqual(this, otherCollection);
-        }
+		#region Public Methods
 
-        /// <summary>
-        /// Returns a hash-code based on the current value of this object.
-        /// </summary>
-        public override int GetHashCode() => ArrayExtensions.GetHashCode(this);
+		/// <summary>
+		/// Tests two objects of this type for inequality by value.
+		/// </summary>
+		public static bool operator !=(ScheduleItemCollection? scheduleItem1, ScheduleItemCollection? scheduleItem2)
+		{
+			return !(scheduleItem1?.Equals(scheduleItem2) ?? scheduleItem2 is null);
+		}
 
-        #endregion Operators
+		/// <summary>
+		/// Tests two objects of this type for equality by value.
+		/// </summary>
+		public static bool operator ==(ScheduleItemCollection? scheduleItem1, ScheduleItemCollection? scheduleItem2)
+		{
+			return scheduleItem1?.Equals(scheduleItem2) ?? scheduleItem2 is null;
+		}
 
-        #region Lifetime
+		/// <summary>
+		/// Compares this object with another by value.
+		/// </summary>
+		public override bool Equals(object? other)
+		{
+			// Compare nullability and type
+			if (other is null || !(other is ScheduleItemCollection otherCollection))
+				return false;
 
-        /// <summary>
-        /// Creates an empty collection.
-        /// </summary>
-        public ScheduleItemCollection() { }
+			// Compare values
+			return ArrayExtensions.AreEqual(this, otherCollection);
+		}
 
-        /// <summary>
-        /// Creates an instance based on an existing list.
-        /// </summary>
-        public ScheduleItemCollection(IList<ScheduleItem> list) : base(list) { }
+		/// <summary>
+		/// Returns a hash-code based on the current value of this object.
+		/// </summary>
+		public override int GetHashCode() => ArrayExtensions.GetHashCode(this);
 
-        #endregion Lifetime
+		/// <summary>
+		/// Returns a string describing the schedule items, using the <see cref="CultureInfo.CurrentCulture"/>.
+		/// </summary>
+		public override string? ToString()
+		{
+			return ToString(CultureInfo.CurrentCulture);
+		}
 
-        #region Public Methods
+		/// <summary>
+		/// Returns a string describing this schedule items, using the specified <see cref="CultureInfo"/>.
+		/// </summary>
+		public string? ToString(CultureInfo culture)
+		{
+			if (Count > 0)
+			{
+				// Build description string
+				return string.Format(culture,
+									 Resources.ScheduleItemCollectionToStringFormat, Count,
+									 string.Join(Resources.ScheduleItemCollectionToStringSeparator,
+												 (from item in Items select item.ToString(culture)).ToArray()));
+			}
 
-        /// <summary>
-        /// Returns a string describing the schedule items,
-        /// using the <see cref="CultureInfo.CurrentCulture"/>.
-        /// </summary>
-        public override string ToString()
-        {
-            return ToString(CultureInfo.CurrentCulture);
-        }
+			// No text when empty: should be excluded from any descriptions.
+			return null;
+		}
 
-        /// <summary>
-        /// Returns a string describing this schedule items,
-        /// using the specified <see cref="CultureInfo"/>.
-        /// </summary>
-        public string ToString(CultureInfo culture)
-        {
-            if (Count > 0)
-            {
-                // Build description string
-                return string.Format(culture,
-                                     Resources.ScheduleItemCollectionToStringFormat, Count,
-                                     string.Join(Resources.ScheduleItemCollectionToStringSeparator,
-                                                 (from item in Items select item.ToString(culture)).ToArray()));
-            }
-
-            // No text when empty: should be excluded from any descriptions.
-            return null;
-        }
-
-        #endregion Public Methods
-    }
+		#endregion Public Methods
+	}
 }

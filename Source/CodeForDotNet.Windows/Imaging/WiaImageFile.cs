@@ -1,231 +1,234 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using Wia = Interop.Wia;
 
+#nullable enable
+
 namespace CodeForDotNet.Windows.Imaging
 {
-    /// <summary>
-    /// Managed <see cref="WiaImageFile"/>.
-    /// </summary>
-    public class WiaImageFile : DisposableObject
-    {
-        #region Lifetime
+	/// <summary>
+	/// Managed <see cref="WiaImageFile"/>.
+	/// </summary>
+	public class WiaImageFile : DisposableObject
+	{
+		#region Private Fields
 
-        /// <summary>
-        /// Creates an instance to wrap the specified unmanaged object.
-        /// </summary>
-        internal WiaImageFile(Wia.ImageFile vector)
-        {
-            _wiaImageFile = vector;
-        }
+		/// <summary>
+		/// Unmanaged <see cref="Wia.ImageFile"/>.
+		/// </summary>
+		private readonly Wia.ImageFile _wiaImageFile;
 
-        /// <summary>
-        /// Frees resources owned by this instance.
-        /// </summary>
-        /// <param name="disposing">
-        /// True when called from <see cref="IDisposable.Dispose()"/>,
-        /// false when called during finalization.
-        /// </param>
-        protected override void Dispose(bool disposing)
-        {
-            try
-            {
-                // Dispose managed resources.
-                if (disposing)
-                {
-                    if (_properties != null) _properties.Dispose();
-                }
+		private WiaVector? _argbData;
 
-                // Dispose unmanaged resources.
-                if (_wiaImageFile != null)
-                    Marshal.ReleaseComObject(_wiaImageFile);
-            }
-            finally
-            {
-                // Call base class method to fire events and set status properties.
-                base.Dispose(disposing);
-            }
-        }
+		private WiaVector? _fileData;
 
-        #endregion Lifetime
+		private WiaPropertyCollection? _properties;
 
-        #region Private Fields
+		#endregion Private Fields
 
-        /// <summary>
-        /// Unmanaged <see cref="Wia.ImageFile"/>.
-        /// </summary>
-        private readonly Wia.ImageFile _wiaImageFile;
+		#region Internal Constructors
 
-        #endregion Private Fields
+		/// <summary>
+		/// Creates an instance to wrap the specified unmanaged object.
+		/// </summary>
+		internal WiaImageFile(Wia.ImageFile vector)
+		{
+			_wiaImageFile = vector;
+		}
 
-        #region Public Properties
+		#endregion Internal Constructors
 
-        /// <summary>
-        /// Thread synchronization object.
-        /// </summary>
-        public static object SyncRoot { get; } = new object();
+		#region Public Properties
 
-        /// <summary>
-        /// Active frame.
-        /// </summary>
-        public int ActiveFrame
-        {
-            get { return _wiaImageFile.ActiveFrame; }
-            set { _wiaImageFile.ActiveFrame = value; }
-        }
+		/// <summary>
+		/// Thread synchronization object.
+		/// </summary>
+		public static object SyncRoot { get; } = new object();
 
-        /// <summary>
-        /// Color palette.
-        /// </summary>
-        public WiaVector ArgbData
-        {
-            get
-            {
-                // Create wrapper first time
-                if (_argbData == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (_argbData == null)
-                            _argbData = new WiaVector(_wiaImageFile.ARGBData);
-                    }
-                }
+		/// <summary>
+		/// Active frame.
+		/// </summary>
+		public int ActiveFrame
+		{
+			get { return _wiaImageFile.ActiveFrame; }
+			set { _wiaImageFile.ActiveFrame = value; }
+		}
 
-                // Return wrapped value
-                return _argbData;
-            }
-        }
+		/// <summary>
+		/// Color palette.
+		/// </summary>
+		public WiaVector ArgbData
+		{
+			get
+			{
+				// Create wrapper first time
+				if (_argbData == null)
+				{
+					lock (SyncRoot)
+					{
+						if (_argbData == null)
+							_argbData = new WiaVector(_wiaImageFile.ARGBData);
+					}
+				}
 
-        private WiaVector _argbData;
+				// Return wrapped value
+				return _argbData;
+			}
+		}
 
-        /// <summary>
-        /// File data.
-        /// </summary>
-        public WiaVector FileData
-        {
-            get
-            {
-                // Create wrapper first time
-                if (_fileData == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (_fileData == null)
-                            _fileData = new WiaVector(_wiaImageFile.FileData);
-                    }
-                }
+		/// <summary>
+		/// File data.
+		/// </summary>
+		public WiaVector FileData
+		{
+			get
+			{
+				// Create wrapper first time
+				if (_fileData == null)
+				{
+					lock (SyncRoot)
+					{
+						if (_fileData == null)
+							_fileData = new WiaVector(_wiaImageFile.FileData);
+					}
+				}
 
-                // Return wrapped value
-                return _fileData;
-            }
-        }
+				// Return wrapped value
+				return _fileData;
+			}
+		}
 
-        private WiaVector _fileData;
+		/// <summary>
+		/// File extension.
+		/// </summary>
+		public string FileExtension { get { return _wiaImageFile.FileExtension; } }
 
-        /// <summary>
-        /// File extension.
-        /// </summary>
-        public string FileExtension { get { return _wiaImageFile.FileExtension; } }
+		/// <summary>
+		/// Image format ID.
+		/// </summary>
+		public string FormatId { get { return _wiaImageFile.FormatID; } }
 
-        /// <summary>
-        /// Image format ID.
-        /// </summary>
-        public string FormatId { get { return _wiaImageFile.FormatID; } }
+		/// <summary>
+		/// Frame count.
+		/// </summary>
+		public int FrameCount { get { return _wiaImageFile.FrameCount; } }
 
-        /// <summary>
-        /// Frame count.
-        /// </summary>
-        public int FrameCount { get { return _wiaImageFile.FrameCount; } }
+		/// <summary>
+		/// Height in pixels.
+		/// </summary>
+		public int Height { get { return _wiaImageFile.Height; } }
 
-        /// <summary>
-        /// Width in pixels.
-        /// </summary>
-        public int Width { get { return _wiaImageFile.Width; } }
+		/// <summary>
+		/// Horizontal resolution.
+		/// </summary>
+		public double HorizontalResolution { get { return _wiaImageFile.HorizontalResolution; } }
 
-        /// <summary>
-        /// Height in pixels.
-        /// </summary>
-        public int Height { get { return _wiaImageFile.Height; } }
+		/// <summary>
+		/// Indicates pixel alpha component (transparency) is used.
+		/// </summary>
+		public bool IsAlphaPixelFormat { get { return _wiaImageFile.IsAlphaPixelFormat; } }
 
-        /// <summary>
-        /// Horizontal resolution.
-        /// </summary>
-        public double HorizontalResolution { get { return _wiaImageFile.HorizontalResolution; } }
+		/// <summary>
+		/// Indicates the picture is animated (contains multiple frames).
+		/// </summary>
+		public bool IsAnimated { get { return _wiaImageFile.IsAnimated; } }
 
-        /// <summary>
-        /// Vertical resolution.
-        /// </summary>
-        public double VerticalResolution { get { return _wiaImageFile.VerticalResolution; } }
+		/// <summary>
+		/// Indicates the pixel extended format.
+		/// </summary>
+		public bool IsExtendedPixelFormat { get { return _wiaImageFile.IsExtendedPixelFormat; } }
 
-        /// <summary>
-        /// Indicates pixel alpha component (transparency) is used.
-        /// </summary>
-        public bool IsAlphaPixelFormat { get { return _wiaImageFile.IsAlphaPixelFormat; } }
+		/// <summary>
+		/// Indicates the pixel indexed (color palette) format.
+		/// </summary>
+		public bool IsIndexedPixelFormat { get { return _wiaImageFile.IsIndexedPixelFormat; } }
 
-        /// <summary>
-        /// Indicates the picture is animated (contains multiple frames).
-        /// </summary>
-        public bool IsAnimated { get { return _wiaImageFile.IsAnimated; } }
+		/// <summary>
+		/// Pixel color depth.
+		/// </summary>
+		public int PixelDepth { get { return _wiaImageFile.PixelDepth; } }
 
-        /// <summary>
-        /// Indicates the pixel extended format.
-        /// </summary>
-        public bool IsExtendedPixelFormat { get { return _wiaImageFile.IsExtendedPixelFormat; } }
+		/// <summary>
+		/// Properties.
+		/// </summary>
+		public WiaPropertyCollection Properties
+		{
+			get
+			{
+				// Create wrapper first time
+				if (_properties == null)
+				{
+					lock (SyncRoot)
+					{
+						if (_properties == null)
+							_properties = new WiaPropertyCollection(_wiaImageFile.Properties);
+					}
+				}
 
-        /// <summary>
-        /// Indicates the pixel indexed (color palette) format.
-        /// </summary>
-        public bool IsIndexedPixelFormat { get { return _wiaImageFile.IsIndexedPixelFormat; } }
+				// Return wrapped value
+				return _properties;
+			}
+		}
 
-        /// <summary>
-        /// Pixel color depth.
-        /// </summary>
-        public int PixelDepth { get { return _wiaImageFile.PixelDepth; } }
+		/// <summary>
+		/// Vertical resolution.
+		/// </summary>
+		public double VerticalResolution { get { return _wiaImageFile.VerticalResolution; } }
 
-        /// <summary>
-        /// Properties.
-        /// </summary>
-        public WiaPropertyCollection Properties
-        {
-            get
-            {
-                // Create wrapper first time
-                if (_properties == null)
-                {
-                    lock (SyncRoot)
-                    {
-                        if (_properties == null)
-                            _properties = new WiaPropertyCollection(_wiaImageFile.Properties);
-                    }
-                }
+		/// <summary>
+		/// Width in pixels.
+		/// </summary>
+		public int Width { get { return _wiaImageFile.Width; } }
 
-                // Return wrapped value
-                return _properties;
-            }
-        }
+		#endregion Public Properties
 
-        private WiaPropertyCollection _properties;
+		#region Public Methods
 
-        #endregion Public Properties
+		/// <summary>
+		/// Loads the image from a file.
+		/// </summary>
+		public void LoadFile(string fileName)
+		{
+			_wiaImageFile.LoadFile(fileName);
+		}
 
-        #region Public Methods
+		/// <summary>
+		/// Saves the image to a file.
+		/// </summary>
+		public void SaveFile(string fileName)
+		{
+			_wiaImageFile.SaveFile(fileName);
+		}
 
-        /// <summary>
-        /// Loads the image from a file.
-        /// </summary>
-        public void LoadFile(string fileName)
-        {
-            _wiaImageFile.LoadFile(fileName);
-        }
+		#endregion Public Methods
 
-        /// <summary>
-        /// Saves the image to a file.
-        /// </summary>
-        public void SaveFile(string fileName)
-        {
-            _wiaImageFile.SaveFile(fileName);
-        }
+		#region Protected Methods
 
-        #endregion Public Methods
-    }
+		/// <summary>
+		/// Frees resources owned by this instance.
+		/// </summary>
+		/// <param name="disposing">True when called from <see cref="IDisposable.Dispose()"/>, false when called during finalization.</param>
+		protected override void Dispose(bool disposing)
+		{
+			try
+			{
+				// Dispose managed resources.
+				if (disposing)
+				{
+					if (_properties != null) _properties.Dispose();
+				}
+
+				// Dispose unmanaged resources.
+				if (_wiaImageFile != null)
+					Marshal.ReleaseComObject(_wiaImageFile);
+			}
+			finally
+			{
+				// Call base class method to fire events and set status properties.
+				base.Dispose(disposing);
+			}
+		}
+
+		#endregion Protected Methods
+	}
 }

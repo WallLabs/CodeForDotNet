@@ -123,6 +123,9 @@
   <data name="AsyncEndCalledTwice" xml:space="preserve">
     <value>Asynchronous operation already ended.</value>
   </data>
+  <data name="AsyncResultCompleteError" xml:space="preserve">
+    <value>Async callback threw an exception.</value>
+  </data>
   <data name="BrushScaleOnlyForTextures" xml:space="preserve">
     <value>Scale is only valid for Texture brush types.</value>
   </data>
@@ -159,6 +162,22 @@
   </data>
   <data name="DataObjectUpdateStateInvalid" xml:space="preserve">
     <value>Cannot update a data object when it's current state is not changed.</value>
+  </data>
+  <data name="DataSetChangeLogGetPrimaryKeyFilterExpressionNoPrimaryKey" xml:space="preserve">
+    <value>Table {0} does not have a primary key.</value>
+    <comment>0 = table name.</comment>
+  </data>
+  <data name="DataSetChangeLogRedoDeleteError" xml:space="preserve">
+    <value>Redo delete could not find row to delete.</value>
+  </data>
+  <data name="DataSetChangeLogRedoUpdateError" xml:space="preserve">
+    <value>Redo update could not find row to update.</value>
+  </data>
+  <data name="DataSetChangeLogUndoInsertError" xml:space="preserve">
+    <value>Undo insert could not find row to delete.</value>
+  </data>
+  <data name="DataSetChangeLogUndoUpdateError" xml:space="preserve">
+    <value>Undo update could not find row to restore.</value>
   </data>
   <data name="DaysOfWeekFriday" xml:space="preserve">
     <value>Friday</value>

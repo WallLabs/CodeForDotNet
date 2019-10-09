@@ -11,7 +11,7 @@
     <AssemblyName>CodeForDotNet.WindowsUniversal</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -19,6 +19,8 @@
   </PropertyGroup>
   <PropertyGroup>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\Common\AssemblyInfoCore.cs">
@@ -35,7 +37,7 @@
     <Compile Include="Storage\LocalErrorStore.cs" />
     <Compile Include="Storage\StorageExtensions.cs" />
     <Compile Include="UI\ApplicationBase.cs" />
-    <Compile Include="UI\AssemblyResources.cs" />
+    <Compile Include="AssemblyResources.cs" />
     <Compile Include="UI\Controls\DynamicTextBox.cs" />
     <Compile Include="UI\Controls\DynamicTextChangedEventArgs.cs" />
     <Compile Include="UI\Controls\DynamicTextSelectionChangedEventArgs.cs" />
@@ -56,12 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers">
-      <Version>2.9.1</Version>
+      <Version>2.9.6</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.8</Version>
+      <Version>6.2.9</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

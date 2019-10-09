@@ -1,248 +1,231 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 
 namespace CodeForDotNet.Drawing
 {
-    /// <summary>
-    /// A 2D vector represented by angle and distance.
-    /// </summary>
-    public struct Vector2 : IEquatable<Vector2>
-    {
-        #region Lifetime
+	/// <summary>
+	/// A 2D vector represented by angle and distance.
+	/// </summary>
+	public struct Vector2 : IEquatable<Vector2>
+	{
+		#region Public Constructors
 
-        /// <summary>
-        /// Creates structure of this type containing the specified values.
-        /// </summary>
-        public Vector2(float angle, float distance)
-            : this()
-        {
-            Angle = angle;
-            Distance = distance;
-        }
+		/// <summary>
+		/// Creates structure of this type containing the specified values.
+		/// </summary>
+		public Vector2(float angle, float distance)
+			: this()
+		{
+			Angle = angle;
+			Distance = distance;
+		}
 
-        #endregion Lifetime
+		#endregion Public Constructors
 
-        #region Operators
+		#region Public Properties
 
-        /// <summary>
-        /// Compares this object with another.
-        /// </summary>
-        public override bool Equals(object something)
-        {
-            return something is Vector2 other && Equals(other);
-        }
+		/// <summary>
+		/// The angle of this vector.
+		/// </summary>
+		public float Angle { get; set; }
 
-        /// <summary>
-        /// Compares this object with another of the same type.
-        /// </summary>
-        public bool Equals(Vector2 other)
-        {
-            return (Math.Abs(Angle - other.Angle) < float.Epsilon && Math.Abs(Distance - other.Distance) < float.Epsilon);
-        }
+		/// <summary>
+		/// The distance of this vector.
+		/// </summary>
+		public float Distance { get; set; }
 
-        /// <summary>
-        /// Gets a hash-code based on the current values.
-        /// </summary>
-        public override int GetHashCode()
-        {
-            return Angle.GetHashCode() ^ Distance.GetHashCode();
-        }
+		#endregion Public Properties
 
-        /// <summary>
-        /// Compares two objects of this type for equality.
-        /// </summary>
-        public static bool operator ==(Vector2 ad1, Vector2 ad2)
-        {
-            return Equals(ad1, ad2);
-        }
+		#region Public Methods
 
-        /// <summary>
-        /// Compares two objects of this type for inequality.
-        /// </summary>
-        public static bool operator !=(Vector2 ad1, Vector2 ad2)
-        {
-            return !Equals(ad1, ad2);
-        }
+		/// <summary>
+		/// Converts the DxDy vector to an AngleDistance.
+		/// </summary>
+		public static Vector2 FromPointF(PointF point)
+		{
+			// Prepare result
+			var result = new Vector2(0, 0);
 
-        /// <summary>
-        /// Overrides the addition operator, adding both angle and distance values.
-        /// </summary>
-        public static Vector2 operator +(Vector2 ad1, Vector2 ad2)
-        {
-            return new Vector2(ad1.Angle + ad2.Angle, ad1.Distance + ad2.Distance);
-        }
+			// Translate vector to 90 degree Quadrant
+			Quadrant quadrant;
+			if (point.X < 0)
+			{
+				if (point.Y < 0)
+				{
+					quadrant = Quadrant.TopLeft;
+					point = new PointF(-point.X, -point.Y);
+				}
+				else
+				{
+					quadrant = Quadrant.BottomLeft;
+					point = new PointF(-point.X, point.Y);
+				}
+			}
+			else
+			{
+				if (point.Y < 0)
+				{
+					quadrant = Quadrant.TopRight;
+					point = new PointF(point.X, -point.Y);
+				}
+				else
+				{
+					quadrant = Quadrant.BottomRight;
+				}
+			}
 
-        /// <summary>
-        /// Overrides the subtraction operator, subtracting both angle and distance values.
-        /// </summary>
-        public static Vector2 operator -(Vector2 ad1, Vector2 ad2)
-        {
-            return new Vector2(ad1.Angle - ad2.Angle, ad1.Distance - ad2.Distance);
-        }
+			// Calculate distance from X and Y
+			result.Distance = Convert.ToInt32(Math.Sqrt(Math.Pow(point.X, 2) + Math.Pow(point.Y, 2)));
 
-        #endregion Operators
+			// Calculate angle from X and Y
+			var radians = Math.Atan2(point.Y, point.X);
+			result.Angle = Convert.ToSingle(radians * (180 / Math.PI));
 
-        #region Properties
+			// Transform result back according to quadrant
+			switch (quadrant)
+			{
+				case Quadrant.TopRight:
+					result = new Vector2(89 - result.Angle, result.Distance);
+					break;
 
-        /// <summary>
-        /// The angle of this vector.
-        /// </summary>
-        public float Angle { get; set; }
+				case Quadrant.BottomRight:
+					result = new Vector2(90 + result.Angle, result.Distance);
+					break;
 
-        /// <summary>
-        /// The distance of this vector.
-        /// </summary>
-        public float Distance { get; set; }
+				case Quadrant.BottomLeft:
+					result = new Vector2(269 - result.Angle, result.Distance);
+					break;
 
-        #endregion Properties
+				case Quadrant.TopLeft:
+					result = new Vector2(270 + result.Angle, result.Distance);
+					break;
+			}
 
-        #region Public Methods
+			// Range check
+			Debug.Assert(result.Angle >= 0 && result.Angle < 360);
 
-        /// <summary>
-        /// Converts the DxDy vector to an AngleDistance.
-        /// </summary>
-        public static Vector2 FromPointF(PointF point)
-        {
-            // Prepare result
-            var result = new Vector2(0, 0);
+			// Return result
+			return result;
+		}
 
-            // Translate vector to 90 degree Quadrant
-            Quadrant q;
-            if (point.X < 0)
-            {
-                if (point.Y < 0)
-                {
-                    q = Quadrant.TopLeft;
-                    point = new PointF(-point.X, -point.Y);
-                }
-                else
-                {
-                    q = Quadrant.BottomLeft;
-                    point = new PointF(-point.X, point.Y);
-                }
-            }
-            else
-            {
-                if (point.Y < 0)
-                {
-                    q = Quadrant.TopRight;
-                    point = new PointF(point.X, -point.Y);
-                }
-                else
-                {
-                    q = Quadrant.BottomRight;
-                }
-            }
+		/// <summary>
+		/// Overrides the subtraction operator, subtracting both angle and distance values.
+		/// </summary>
+		public static Vector2 operator -(Vector2 ad1, Vector2 ad2)
+		{
+			return new Vector2(ad1.Angle - ad2.Angle, ad1.Distance - ad2.Distance);
+		}
 
-            // Calculate distance from X and Y
-            result.Distance = Convert.ToInt32(Math.Sqrt(Math.Pow(point.X, 2) + Math.Pow(point.Y, 2)));
+		/// <summary>
+		/// Compares two objects of this type for inequality.
+		/// </summary>
+		public static bool operator !=(Vector2 ad1, Vector2 ad2)
+		{
+			return !Equals(ad1, ad2);
+		}
 
-            // Calculate angle from X and Y
-            var radians = Math.Atan2(point.Y, point.X);
-            result.Angle = Convert.ToSingle(radians * (180 / Math.PI));
+		/// <summary>
+		/// Overrides the addition operator, adding both angle and distance values.
+		/// </summary>
+		public static Vector2 operator +(Vector2 ad1, Vector2 ad2)
+		{
+			return new Vector2(ad1.Angle + ad2.Angle, ad1.Distance + ad2.Distance);
+		}
 
-            // Calculate angle from Y and distance
-            //			adResult.Angle = (System.Math.Pow(dxdy.DY, 2) / System.Math.Pow(adResult.Distance, 2)) * 90;
+		/// <summary>
+		/// Compares two objects of this type for equality.
+		/// </summary>
+		public static bool operator ==(Vector2 ad1, Vector2 ad2)
+		{
+			return Equals(ad1, ad2);
+		}
 
-            // Transform result back according to quadrant
-            switch (q)
-            {
-                case Quadrant.TopRight:
-                    result = new Vector2(89 - result.Angle, result.Distance);
-                    break;
+		/// <summary>
+		/// Adds the value to this instance.
+		/// </summary>
+		public void Add(Vector2 value)
+		{
+			Angle += value.Angle;
+			while (Angle >= 360)
+				Angle -= 360;
+			Distance += value.Distance;
+		}
 
-                case Quadrant.BottomRight:
-                    result = new Vector2(90 + result.Angle, result.Distance);
-                    break;
+		/// <summary>
+		/// Compares this object with another.
+		/// </summary>
+		public override bool Equals(object something)
+		{
+			return something is Vector2 other && Equals(other);
+		}
 
-                case Quadrant.BottomLeft:
-                    result = new Vector2(269 - result.Angle, result.Distance);
-                    break;
+		/// <summary>
+		/// Compares this object with another of the same type.
+		/// </summary>
+		public bool Equals(Vector2 other)
+		{
+			return (Math.Abs(Angle - other.Angle) < float.Epsilon && Math.Abs(Distance - other.Distance) < float.Epsilon);
+		}
 
-                case Quadrant.TopLeft:
-                    result = new Vector2(270 + result.Angle, result.Distance);
-                    break;
-            }
+		/// <summary>
+		/// Gets a hash-code based on the current values.
+		/// </summary>
+		public override int GetHashCode()
+		{
+			return Angle.GetHashCode() ^ Distance.GetHashCode();
+		}
 
-            // Range check
-            Debug.Assert(result.Angle >= 0 && result.Angle < 360);
+		/// <summary>
+		/// Subtracts the value from this instance.
+		/// </summary>
+		public void Subtract(Vector2 value)
+		{
+			Angle -= value.Angle;
+			while (Angle < 0)
+				Angle += 360;
+			Distance -= value.Distance;
+		}
 
-            // Return result
-            return result;
-        }
+		/// <summary>
+		/// Converts an AngleDistance vector this type.
+		/// </summary>
+		public PointF ToPointF()
+		{
+			// Change 360 degree Angle to 90 degree and Quadrant
+			var vector = this;
+			var quadrant = (Quadrant)((byte)(vector.Angle / 90));
+			vector.Angle -= 90 * ((byte)quadrant);
+			if ((quadrant == Quadrant.TopRight) || (quadrant == Quadrant.BottomLeft))
+				vector.Angle = 90 - vector.Angle;
 
-        /// <summary>
-        /// Converts an AngleDistance vector this type.
-        /// </summary>
-        public PointF ToPointF()
-        {
-            // Change 360 degree Angle to 90 degree and Quadrant
-            var vector = this;
-            var quadrant = (Quadrant)((byte)(vector.Angle / 90));
-            vector.Angle -= 90 * ((byte)quadrant);
-            if ((quadrant == Quadrant.TopRight) || (quadrant == Quadrant.BottomLeft))
-                vector.Angle = 90 - vector.Angle;
+			// Calculate Y from Distance and Angle
+			var y = (int)Math.Sqrt(Math.Pow(vector.Distance, 2) * (vector.Angle / 90));
 
-            // Use Matrix rotation to transform angle and distance to points
-            //var points = new[] { new PointF(0, -Distance) };
-            //using (var m = new Matrix())
-            //{
-            //    m.Rotate(Angle);
-            //    m.TransformPoints(points);
-            //}
-            //result.X = (int)points[0].X;
-            //result.Y = (int)points[0].Y;
+			// Calculate X from Distance and Angle
+			var x = (int)Math.Sqrt(Math.Pow(vector.Distance, 2) * ((90 - vector.Angle) / 90));
 
-            // Calculate Y from Distance and Angle
-            var y = (int)Math.Sqrt(Math.Pow(vector.Distance, 2) * (vector.Angle / 90));
+			// Transform results according to quadrant
+			switch (quadrant)
+			{
+				case Quadrant.TopRight:
+					y = -y;
+					break;
 
-            // Calculate X from Distance and Angle
-            var x = (int)Math.Sqrt(Math.Pow(vector.Distance, 2) * ((90 - vector.Angle) / 90));
+				case Quadrant.BottomLeft:
+					x = -x;
+					break;
 
-            // Transform results according to quadrant
-            switch (quadrant)
-            {
-                case Quadrant.TopRight:
-                    y = -y;
-                    break;
+				case Quadrant.TopLeft:
+					x = -x;
+					y = -y;
+					break;
+			}
 
-                case Quadrant.BottomLeft:
-                    x = -x;
-                    break;
+			// Return result
+			return new PointF(x, y);
+		}
 
-                case Quadrant.TopLeft:
-                    x = -x;
-                    y = -y;
-                    break;
-            }
-
-            // Return result
-            return new PointF(x, y);
-        }
-
-        /// <summary>
-        /// Adds the value to this instance.
-        /// </summary>
-        public void Add(Vector2 value)
-        {
-            Angle += value.Angle;
-            while (Angle >= 360)
-                Angle -= 360;
-            Distance += value.Distance;
-        }
-
-        /// <summary>
-        /// Subtracts the value from this instance.
-        /// </summary>
-        public void Subtract(Vector2 value)
-        {
-            Angle -= value.Angle;
-            while (Angle < 0)
-                Angle += 360;
-            Distance -= value.Distance;
-        }
-
-        #endregion Public Methods
-    }
+		#endregion Public Methods
+	}
 }

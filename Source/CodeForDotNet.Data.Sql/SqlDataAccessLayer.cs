@@ -1,93 +1,86 @@
-﻿using System.Data;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace CodeForDotNet.Data.Sql
 {
-    /// <summary>
-    /// Disposable base class for a SQL Data Access Layer which holds connection
-    /// information and helper methods.
-    /// </summary>
-    public abstract class SqlDataAccessLayer : DisposableObject
-    {
-        #region Lifetime
+	/// <summary>
+	/// Disposable base class for a SQL Data Access Layer which holds connection information and helper methods.
+	/// </summary>
+	public abstract class SqlDataAccessLayer : DisposableObject
+	{
+		#region Protected Constructors
 
-        /// <summary>
-        /// Initializes the database connection (but does not open it).
-        /// Ensure this object is disposed to close the connection if it was opened.
-        /// </summary>
-        protected SqlDataAccessLayer(string connectionString)
-        {
-            ConnectionString = connectionString;
-        }
+		/// <summary>
+		/// Initializes the database connection (but does not open it). Ensure this object is disposed to close the connection if it was opened.
+		/// </summary>
+		protected SqlDataAccessLayer(string connectionString)
+		{
+			ConnectionString = connectionString;
+		}
 
-        #region IDisposable Members
+		#endregion Protected Constructors
 
-        /// <summary>
-        /// Diposes resources either proactively via Dipose() or during finalization.
-        /// </summary>
-        /// <param name="disposing">True when disposing, false when finalizing.</param>
-        protected override void Dispose(bool disposing)
-        {
-            // Dispose only once
-            if (IsDisposed)
-                return;
+		#region Protected Properties
 
-            // Dispose
-            try
-            {
-                // Dispose managed resources
-                if (disposing)
-                {
-                    if (Connection != null)
-                        Connection.Dispose();
-                }
-            }
-            finally
-            {
-                // Dispose base class
-                base.Dispose(disposing);
-            }
-        }
+		/// <summary>
+		/// Current connection, for the lifetime of this object. Opened on the first call to OpenConnection(), closed during Dispose.
+		/// </summary>
+		protected SqlConnection? Connection { get; private set; }
 
-        #endregion
+		/// <summary>
+		/// Connection string for this instance.
+		/// </summary>
+		protected string ConnectionString { get; private set; }
 
-        #endregion
+		#endregion Protected Properties
 
-        #region Properties
+		#region Protected Methods
 
-        /// <summary>
-        /// Connection string for this instance.
-        /// </summary>
-        protected string ConnectionString { get; private set; }
+		/// <summary>
+		/// Disposes resources either proactively via <see cref="Dispose"/> or during finalization.
+		/// </summary>
+		/// <param name="disposing">True when disposing, false when finalizing.</param>
+		protected override void Dispose(bool disposing)
+		{
+			// Dispose only once
+			if (IsDisposed)
+				return;
 
-        /// <summary>
-        /// Current connection, for the lifetime of this object.
-        /// Opened on the first call to OpenConnection(), closed during Dispose.
-        /// </summary>
-        protected SqlConnection Connection { get; private set; }
+			// Dispose
+			try
+			{
+				// Dispose managed resources
+				if (disposing)
+				{
+					if (Connection != null)
+						Connection.Dispose();
+				}
+			}
+			finally
+			{
+				// Dispose base class
+				base.Dispose(disposing);
+			}
+		}
 
-        #endregion
+		/// <summary>
+		/// Opens or re-opens the connection if closed or broken.
+		/// </summary>
+		protected SqlConnection OpenConnection()
+		{
+			// Open the connection if closed or re-open if broken
+			if ((Connection == null) || (Connection.State == ConnectionState.Closed) || (Connection.State == ConnectionState.Broken))
+			{
+				if (Connection != null)
+					Connection.Dispose();
+				Connection = new SqlConnection(ConnectionString);
+				Connection.Open();
+			}
 
-        #region Private Methods
+			// Return opened connection
+			return Connection;
+		}
 
-        /// <summary>
-        /// Opens or re-opens the connection if closed or broken.
-        /// </summary>
-        protected SqlConnection OpenConnection()
-        {
-            // Open the connection if closed or re-open if broken
-            if ((Connection == null) || (Connection.State == ConnectionState.Closed) || (Connection.State == ConnectionState.Broken))
-            {
-                if (Connection != null)
-                    Connection.Dispose();
-                Connection = new SqlConnection(ConnectionString);
-                Connection.Open();
-            }
-
-            // Return opened connection
-            return Connection;
-        }
-
-        #endregion
-    }
+		#endregion Protected Methods
+	}
 }

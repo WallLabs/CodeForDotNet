@@ -42,22 +42,14 @@
             <summary>
             Creates an instance which calls the specified <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> delegate when executed.
             </summary>
-            <param name="executeMethod">
-            Method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> to perform the command action.
-            </param>
+            <param name="executeMethod">Method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> to perform the command action.</param>
         </member>
         <member name="M:CodeForDotNet.UI.Input.DelegateCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean})">
             <summary>
-            Creates an instance which calls the specified <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> and
-            <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)"/> delegates when executed.
+            Creates an instance which calls the specified <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> and <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)"/> delegates when executed.
             </summary>
-            <param name="executeMethod">
-            Method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> to perform the command action.
-            </param>
-            <param name="canExecuteMethod">
-            Optional method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)"/> to test whether the command is
-            currently available for execution.
-            </param>
+            <param name="executeMethod">Method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> to perform the command action.</param>
+            <param name="canExecuteMethod">Optional method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)"/> to test whether the command is currently available for execution.</param>
         </member>
         <member name="E:CodeForDotNet.UI.Input.DelegateCommand.CanExecuteChanged">
             <summary>
@@ -79,8 +71,7 @@
         </member>
         <member name="M:CodeForDotNet.UI.Input.DelegateCommand.InvokeCanExecuteChanged">
             <summary>
-            Fires the <see cref="E:CodeForDotNet.UI.Input.DelegateCommand.CanExecuteChanged"/> event, causing consumers of this command to
-            update their status.
+            Fires the <see cref="E:CodeForDotNet.UI.Input.DelegateCommand.CanExecuteChanged"/> event, causing consumers of this command to update their status.
             </summary>
         </member>
         <member name="T:CodeForDotNet.UI.Input.KeyboardKey">
@@ -994,9 +985,7 @@
             Translates a virtual key to an input character when relevant.
             </summary>
             <param name="key">Key to convert.</param>
-            <param name="uppercase">
-            True to return uppercase characters, e.g. when shift is also pressed.
-            </param>
+            <param name="uppercase">True to return uppercase characters, e.g. when shift is also pressed.</param>
             <returns>String (normally one character) or null when no mapping, e.g. function key.</returns>
         </member>
         <member name="M:CodeForDotNet.UI.Input.KeyboardKeyConverter.ConvertToString(CodeForDotNet.UI.Input.KeyboardKey,System.Boolean,System.Globalization.CultureInfo)">
@@ -1004,17 +993,14 @@
             Translates a virtual key to an input character when relevant.
             </summary>
             <param name="key">Key to convert.</param>
-            <param name="uppercase">
-            True to return uppercase characters, e.g. when shift is also pressed.
-            </param>
+            <param name="uppercase">True to return uppercase characters, e.g. when shift is also pressed.</param>
             <param name="culture">Culture used for the <see cref="F:CodeForDotNet.UI.Input.KeyboardKey.NumberPadDecimal"/>.</param>
             <returns>String (normally one character) or null when no mapping, e.g. function key.</returns>
         </member>
         <member name="T:CodeForDotNet.UI.Input.KeyboardShortcuts">
             <summary>
-            Keyboard shortcut data, disconnected from any API dependencies, useful for future proof
-            serialization and cross-platform. A copy of System.Windows.Forms.Shortcut. Specifies shortcut
-            keys that can be used by menu items.
+            Keyboard shortcut data, disconnected from any API dependencies, useful for future proof serialization and cross-platform. A copy of
+            System.Windows.Forms.Shortcut. Specifies shortcut keys that can be used by menu items.
             </summary>
         </member>
         <member name="F:CodeForDotNet.UI.Input.KeyboardShortcuts.None">
@@ -1885,10 +1871,9 @@
             Maximum time (in milliseconds) allowed for the UI to process updates before continuing with other updates.
             </summary>
             <remarks>
-            When too short and events are generated too quickly, the UI has no chance to refresh.
-            When too long and processor intensive operations are triggered, the UI could appear to hang.
-            Deadlocks could occur when background threads with call <see cref="M:CodeForDotNet.UI.Models.UIModel.DoPropertyChanged(System.String)"/>
-            to update the UI thread and another UI action has been performed which also requires the same lock.
+            When too short and events are generated too quickly, the UI has no chance to refresh. When too long and processor intensive operations are triggered,
+            the UI could appear to hang. Deadlocks could occur when background threads with call <see cref="M:CodeForDotNet.UI.Models.UIModel.DoPropertyChanged(System.String)"/> to update the UI thread
+            and another UI action has been performed which also requires the same lock.
             </remarks>
         </member>
         <member name="M:CodeForDotNet.UI.Models.UIModel.#ctor(System.Threading.Tasks.TaskFactory)">
@@ -1896,23 +1881,21 @@
             Creates an instance.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.UI.Models.UIModel.Dispose(System.Boolean)">
+        <member name="E:CodeForDotNet.UI.Models.UIModel.PropertyChanged">
             <summary>
-            Frees resources owned by this instance.
+            Fired when the model data has changed and the view should be refreshed.
             </summary>
-            <param name="disposing">
-            True when called via <see cref="M:System.IDisposable.Dispose"/>, false when called during finalization.
-            </param>
         </member>
         <member name="P:CodeForDotNet.UI.Models.UIModel.UITaskFactory">
             <summary>
             Task factory for the UI thread.
             </summary>
         </member>
-        <member name="E:CodeForDotNet.UI.Models.UIModel.PropertyChanged">
+        <member name="M:CodeForDotNet.UI.Models.UIModel.Dispose(System.Boolean)">
             <summary>
-            Fired when the model data has changed and the view should be refreshed.
+            Frees resources owned by this instance.
             </summary>
+            <param name="disposing">True when called via <see cref="M:System.IDisposable.Dispose"/>, false when called during finalization.</param>
         </member>
         <member name="M:CodeForDotNet.UI.Models.UIModel.DoPropertyChanged(System.String)">
             <summary>

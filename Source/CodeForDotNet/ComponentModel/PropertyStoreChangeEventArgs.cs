@@ -1,40 +1,40 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 
 namespace CodeForDotNet.ComponentModel
 {
-    /// <summary>
-    /// Event arguments for the <see cref="IPropertyStore.PropertyStoreChanged"/> event.
-    /// </summary>
-    public class PropertyStoreChangeEventArgs : EventArgs
-    {
-        #region Public Constructors
+	/// <summary>
+	/// Event arguments for the <see cref="IPropertyStore.PropertyStoreChanged"/> event.
+	/// </summary>
+	public class PropertyStoreChangeEventArgs : EventArgs
+	{
+		#region Public Constructors
 
-        /// <summary>
-        /// Creates an empty instance.
-        /// </summary>
-        public PropertyStoreChangeEventArgs()
-        {
-            Keys = new Collection<Guid>();
-        }
+		/// <summary>
+		/// Creates an empty instance.
+		/// </summary>
+		public PropertyStoreChangeEventArgs()
+		{
+			Keys = new Collection<Guid>();
+		}
 
-        /// <summary>
-        /// Creates an instance with the specified values.
-        /// </summary>
-        public PropertyStoreChangeEventArgs(Guid[] keys)
-        {
-            Keys = new Collection<Guid>(keys);
-        }
+		/// <summary>
+		/// Creates an instance with the specified values.
+		/// </summary>
+		public PropertyStoreChangeEventArgs(Guid[] keys)
+		{
+			Keys = new Collection<Guid>(keys);
+		}
 
-        #endregion Public Constructors
+		#endregion Public Constructors
 
-        #region Public Properties
+		#region Public Properties
 
-        /// <summary>
-        /// Names of the properties or relations which changed.
-        /// </summary>
-        public Collection<Guid> Keys { get; private set; }
+		/// <summary>
+		/// Names of the properties or relations which changed.
+		/// </summary>
+		public Collection<Guid> Keys { get; private set; }
 
-        #endregion Public Properties
-    }
+		#endregion Public Properties
+	}
 }

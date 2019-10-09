@@ -1,4 +1,4 @@
-﻿using CodeForDotNet.UI.Models;
+using CodeForDotNet.UI.Models;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -6,85 +6,85 @@ using Windows.UI.Xaml.Navigation;
 
 namespace CodeForDotNet.WindowsUniversal.UI.Models
 {
-    /// <summary>
-    /// Base class for all XAML pages which support the UI model framework.
-    /// </summary>
-    [CLSCompliant(false)]
-    public abstract partial class UIModelPage<TApplicationUIModel, TPageUIModel> : Page
-        where TApplicationUIModel : ApplicationUIModel
-        where TPageUIModel : PageUIModel<TApplicationUIModel>
-    {
-        #region Lifetime
+	/// <summary>
+	/// Base class for all XAML pages which support the UI model framework.
+	/// </summary>
+	[CLSCompliant(false)]
+	public abstract partial class UIModelPage<TApplicationUIModel, TPageUIModel> : Page
+		where TApplicationUIModel : ApplicationUIModel
+		where TPageUIModel : PageUIModel<TApplicationUIModel>
+	{
+		#region Public Fields
 
-        /// <summary>
-        /// Initializes an instance.
-        /// </summary>
-        protected UIModelPage()
-        {
-        }
+		/// <summary>
+		/// <see cref="Model"/><see cref="DependencyProperty"/>.
+		/// </summary>
+		public static readonly DependencyProperty ModelProperty = DependencyProperty.Register(
+			nameof(Model), typeof(TPageUIModel), typeof(UIModelPage<TApplicationUIModel, TPageUIModel>), null);
 
-        #endregion Lifetime
+		#endregion Public Fields
 
-        #region Public Properties
+		#region Protected Constructors
 
-        /// <summary>
-        /// <see cref="Model"/> <see cref="DependencyProperty"/>.
-        /// </summary>
-        public static readonly DependencyProperty ModelProperty = DependencyProperty.Register(
-            nameof(Model), typeof(TPageUIModel), typeof(UIModelPage<TApplicationUIModel, TPageUIModel>), null);
+		/// <summary>
+		/// Initializes an instance.
+		/// </summary>
+		protected UIModelPage()
+		{
+		}
 
-        /// <summary>
-        /// Page UI model.
-        /// </summary>
-        public TPageUIModel Model
-        {
-            get { return (TPageUIModel)GetValue(ModelProperty); }
-            private set { SetValue(ModelProperty, value); }
-        }
+		#endregion Protected Constructors
 
-        #endregion Public Properties
+		#region Public Properties
 
-        #region Protected Methods
+		/// <summary>
+		/// Page UI model.
+		/// </summary>
+		public TPageUIModel Model
+		{
+			get { return (TPageUIModel)GetValue(ModelProperty); }
+			private set { SetValue(ModelProperty, value); }
+		}
 
-        /// <summary>
-        /// Creates the page model when it is displayed.
-        /// </summary>
-        protected abstract TPageUIModel CreateModel(TApplicationUIModel application);
+		#endregion Public Properties
 
-        #endregion Protected Methods
+		#region Protected Methods
 
-        #region Events
+		/// <summary>
+		/// Creates the page model when it is displayed.
+		/// </summary>
+		protected abstract TPageUIModel CreateModel(TApplicationUIModel application);
 
-        /// <summary>
-        /// Initializes the page when it is loaded.
-        /// </summary>
-        protected override void OnNavigatedTo(NavigationEventArgs arguments)
-        {
-            // Initialize model
-            var application = (UIModelApplication<TApplicationUIModel>)Application.Current;
-            DataContext = Model = CreateModel(application.Model);
+		/// <summary>
+		/// Cleans-up when navigating away from the page.
+		/// </summary>
+		protected override void OnNavigatedFrom(NavigationEventArgs arguments)
+		{
+			try
+			{
+				// Call base class method
+				base.OnNavigatedFrom(arguments);
+			}
+			finally
+			{
+				// Dispose model
+				Model?.Dispose();
+			}
+		}
 
-            // Call base class method
-            base.OnNavigatedTo(arguments);
-        }
+		/// <summary>
+		/// Initializes the page when it is loaded.
+		/// </summary>
+		protected override void OnNavigatedTo(NavigationEventArgs arguments)
+		{
+			// Initialize model
+			var application = (UIModelApplication<TApplicationUIModel>)Application.Current;
+			DataContext = Model = CreateModel(application.Model!);
 
-        /// <summary>
-        /// Cleans-up when navigating away from the page.
-        /// </summary>
-        protected override void OnNavigatedFrom(NavigationEventArgs arguments)
-        {
-            try
-            {
-                // Call base class method
-                base.OnNavigatedFrom(arguments);
-            }
-            finally
-            {
-                // Dispose model
-                Model?.Dispose();
-            }
-        }
+			// Call base class method
+			base.OnNavigatedTo(arguments);
+		}
 
-        #endregion Events
-    }
+		#endregion Protected Methods
+	}
 }
