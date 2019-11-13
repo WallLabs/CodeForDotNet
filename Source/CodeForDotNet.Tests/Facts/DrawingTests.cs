@@ -1,5 +1,6 @@
-﻿using CodeForDotNet.Diagnostics;
+using CodeForDotNet.Diagnostics;
 using CodeForDotNet.Drawing;
+using CodeForDotNet.Numerics;
 using CodeForDotNet.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Drawing;
@@ -70,36 +71,84 @@ namespace CodeForDotNet.Tests.Facts
             Assert.AreEqual(font1Xml, font2Xml);
         }
 
-        /// <summary>
-        /// Tests the <see cref="Vector2"/> class.
-        /// </summary>
-        [TestMethod]
-        public void DrawingTestVector2()
+		/// <summary>
+		/// Tests the <see cref="AngleVector2"/> class.
+		/// </summary>
+		/// <remarks>
+		/// <list type="number">
+		/// <listheader>Expected Results</listheader>
+		/// <item>
+		/// A bitmap file is generated then displayed showing the results of the drawing test.
+		/// </item>
+		///	<item>
+		/// A red circle is drawn using the vector class to convert angle vectors to points.
+		/// If the calculation is correct, with a constant length with an increasing angle
+		/// then a perfect circle should be drawn.
+		///	</item>
+		///	<item>
+		/// A green circle is drawn using the resulting points from the first angle conversion
+		/// round-tripped back to an angle then point. If the calculation is accurate,
+		/// the red circle will be completely hidden. Calculation errors would hence be
+		/// shown in red.
+		///	</item>
+		///	<item>
+		///	In testing this calculation has prooven to be 100% round-trip capable at least visibly,
+		///	meaning only a green circle should be visible without any red pixels.
+		///	</item>
+		/// </list>
+		/// </remarks>
+		[TestMethod]
+        public void DrawingTestAngleVector2()
         {
-            // Draw a circle in a bitmap using the vector class
-            using (var canvas = new Bitmap(1001, 1001))
+			// Create drawing.
+			using (var canvas = new Bitmap(720, 720))
             {
-                var vector = new Vector2(0, 500);
                 using (var graphics = Graphics.FromImage(canvas))
-                using (var path = new GraphicsPath())
-                {
-                    graphics.TranslateTransform(500, 500);
+                using (var angleToPointCircle = new GraphicsPath())
+				using (var pointToAngleCircle = new GraphicsPath())
+				{
+					// Set origin to center.
+					graphics.TranslateTransform(359.5f, 359.5f);
+
+					// Fill background.
                     graphics.FillRectangle(Brushes.White, 0, 0, canvas.Width, canvas.Height);
-                    path.StartFigure();
-                    var lastPoint = vector.ToPointF();
+
+					// Start drawing.
+                    angleToPointCircle.StartFigure();
+					pointToAngleCircle.StartFigure();
+					var vector = new AngleVector2(0, 359.5f);
+					var lastPoint = vector.ToPointF();
+					var lastRoundTripPoint = new AngleVector2(lastPoint).ToPointF();
                     do
                     {
+						// Calculate current positions.
                         var currentPoint = vector.ToPointF();
-                        path.AddLine(lastPoint, currentPoint);
-                        vector.Angle += 0.01f;
-                        lastPoint = currentPoint;
-                    } while (vector.Angle < 360);
-                    path.CloseFigure();
-                    graphics.DrawPath(Pens.Black, path);
+						var currentRoundTripPoint = new AngleVector2(currentPoint).ToPointF();
+
+						// Draw position.
+                        angleToPointCircle.AddLine(lastPoint, currentPoint);
+						pointToAngleCircle.AddLine(lastRoundTripPoint, currentRoundTripPoint);
+
+						// Next...
+						vector.Angle += 0.01f;
+						lastPoint = currentPoint;
+						lastRoundTripPoint = currentRoundTripPoint;
+                    }
+					while (vector.Angle < 360);
+
+					// End drawing.
+                    angleToPointCircle.CloseFigure();
+					pointToAngleCircle.CloseFigure();
+                    graphics.DrawPath(Pens.Red, angleToPointCircle);
+					graphics.DrawPath(Pens.Green, pointToAngleCircle);
                 }
-                canvas.Save("TestVector2.bmp");
+
+				// Save to bitmap.
+                canvas.Save("TestAngleVector2.bmp");
             }
-            ProcessExtensions.Run("mspaint.exe", "TestVector2.bmp", null, 5);
+
+			// Display bitmap.
+            ProcessExtensions.Run("mspaint.exe", "TestAngleVector2.bmp", timeout: 5);
         }
     }
 }

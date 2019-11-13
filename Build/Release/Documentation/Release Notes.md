@@ -1,5 +1,11 @@
 # Code for .NET - Release Notes
 
+## Version 4.8.1911.13### (2019.11.13)
+* Renamed Vector2 to AngleVector2 to avoid conflict with new Vector2 system class.
+* Moved AngleVector2 and Quadrant to Numerics namespace to follow similar system class grouping.
+* Enhanced AngleVector2 unit test to visually test both angle to point and point to angle (rount-trip).
+* Optimized AngleVector2 code to improve accuracy and ensure round-trip works 100% (visually).
+
 ## Version 4.8.1910.09### (2019.10.09)
 * Visual Studio 2019 16.3 new code analysis fixes and refactoring including C# 8 nullable.
 * Full framework version updated to v4.8.

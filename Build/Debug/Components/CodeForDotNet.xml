@@ -3478,32 +3478,6 @@
             Converts the margins to an XML string.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Drawing.Quadrant">
-            <summary>
-            View quadrant, used for layout. Quadrants go clockwise from 12 o'clock so they can be mapped to 90 degree portions of 360 degrees. i.e. can be used to
-            translate an angle into a quadrant.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.Quadrant.TopRight">
-            <summary>
-            0 to 89 degrees
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.Quadrant.BottomRight">
-            <summary>
-            90 to 179 degrees
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.Quadrant.BottomLeft">
-            <summary>
-            180 to 269 degrees
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.Quadrant.TopLeft">
-            <summary>
-            270 to 359 degrees
-            </summary>
-        </member>
         <member name="T:CodeForDotNet.Drawing.StringHorizontalAlignment">
             <summary>
             String alignment disconnected from any API dependencies, useful for future proof serialization and cross-platform.
@@ -3523,81 +3497,6 @@
         <member name="F:CodeForDotNet.Drawing.StringHorizontalAlignment.Far">
             <summary>
             Far from the start of the line (according to writing direction).
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Drawing.Vector2">
-            <summary>
-            A 2D vector represented by angle and distance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Vector2.#ctor(System.Single,System.Single)">
-            <summary>
-            Creates structure of this type containing the specified values.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Drawing.Vector2.Angle">
-            <summary>
-            The angle of this vector.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Drawing.Vector2.Distance">
-            <summary>
-            The distance of this vector.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Vector2.FromPointF(System.Drawing.PointF)">
-            <summary>
-            Converts the DxDy vector to an AngleDistance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Vector2.op_Subtraction(CodeForDotNet.Drawing.Vector2,CodeForDotNet.Drawing.Vector2)">
-            <summary>
-            Overrides the subtraction operator, subtracting both angle and distance values.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Vector2.op_Inequality(CodeForDotNet.Drawing.Vector2,CodeForDotNet.Drawing.Vector2)">
-            <summary>
-            Compares two objects of this type for inequality.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Vector2.op_Addition(CodeForDotNet.Drawing.Vector2,CodeForDotNet.Drawing.Vector2)">
-            <summary>
-            Overrides the addition operator, adding both angle and distance values.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Vector2.op_Equality(CodeForDotNet.Drawing.Vector2,CodeForDotNet.Drawing.Vector2)">
-            <summary>
-            Compares two objects of this type for equality.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Vector2.Add(CodeForDotNet.Drawing.Vector2)">
-            <summary>
-            Adds the value to this instance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Vector2.Equals(System.Object)">
-            <summary>
-            Compares this object with another.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Vector2.Equals(CodeForDotNet.Drawing.Vector2)">
-            <summary>
-            Compares this object with another of the same type.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Vector2.GetHashCode">
-            <summary>
-            Gets a hash-code based on the current values.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Vector2.Subtract(CodeForDotNet.Drawing.Vector2)">
-            <summary>
-            Subtracts the value from this instance.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Vector2.ToPointF">
-            <summary>
-            Converts an AngleDistance vector this type.
             </summary>
         </member>
         <member name="T:CodeForDotNet.ExceptionExtensions">
@@ -3909,6 +3808,91 @@
         <member name="M:CodeForDotNet.Net.NetworkExtensions.GetFullHostName">
             <summary>
             Gets the host name and any domain (the FQDN) of the local computer.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Numerics.AngleVector2">
+            <summary>
+            A two-dimentional vector represented by angle and length.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.#ctor(System.Single,System.Single)">
+            <summary>
+            Creates an instance with the specified values.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.#ctor(System.Drawing.PointF)">
+            <summary>
+            Creates a structure by converting from a <see cref="T:System.Drawing.PointF"/>.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Numerics.AngleVector2.Angle">
+            <summary>
+            Angle.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Numerics.AngleVector2.Length">
+            <summary>
+            Length.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.From(System.Drawing.PointF)">
+            <summary>
+            Creates an angle based vector from a point based vector..
+            </summary>					  
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.From(System.Single,System.Single)">
+            <summary>
+            Creates an angle based vector from a point based vector..
+            </summary>					  
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.op_Subtraction(CodeForDotNet.Numerics.AngleVector2,CodeForDotNet.Numerics.AngleVector2)">
+            <summary>
+            Overrides the subtraction operator, subtracting both angle and distance values.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.op_Inequality(CodeForDotNet.Numerics.AngleVector2,CodeForDotNet.Numerics.AngleVector2)">
+            <summary>
+            Compares two objects of this type for inequality.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.op_Addition(CodeForDotNet.Numerics.AngleVector2,CodeForDotNet.Numerics.AngleVector2)">
+            <summary>
+            Overrides the addition operator, adding both angle and distance values.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.op_Equality(CodeForDotNet.Numerics.AngleVector2,CodeForDotNet.Numerics.AngleVector2)">
+            <summary>
+            Compares two objects of this type for equality.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.Add(CodeForDotNet.Numerics.AngleVector2)">
+            <summary>
+            Adds the value to this instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.Equals(System.Object)">
+            <summary>
+            Compares this object with another.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.Equals(CodeForDotNet.Numerics.AngleVector2)">
+            <summary>
+            Compares this object with another of the same type.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.GetHashCode">
+            <summary>
+            Gets a hash-code based on the current values.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.Subtract(CodeForDotNet.Numerics.AngleVector2)">
+            <summary>
+            Subtracts the value from this instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Numerics.AngleVector2.ToPointF">
+            <summary>
+            Converts this angle based vector to a point based vector.
             </summary>
         </member>
         <member name="T:CodeForDotNet.Numerics.BigIntegerExtensions">
