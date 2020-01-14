@@ -8,16 +8,16 @@ namespace CodeForDotNet.Tests.Facts
 	/// Tests the <see cref="StringExtensions"/> class.
 	/// </summary>
 	[TestClass]
-	public class StringTests
-	{
-		#region Public Methods
+    [SuppressMessage("Microsoft.Globalization", "CA1303: Do not pass literals as localized parameters", Justification = "Test data.")]
+    public class StringTests
+    {
+        #region Public Methods
 
-		/// <summary>
-		/// Test the <see cref="StringExtensions.SplitEscaped"/> method.
-		/// </summary>
-		[TestMethod]
-		[SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Test.")]
-		public void StringTestSplitEscaped()
+        /// <summary>
+        /// Test the <see cref="StringExtensions.SplitEscaped"/> method.
+        /// </summary>
+        [TestMethod]
+        public void StringTestSplitEscaped()
 		{
 			var test = @"abc, de\,f, gh\=i".SplitEscaped(',', '\\', false, false);
 			Assert.IsTrue(test[0].Equals(@"abc", StringComparison.OrdinalIgnoreCase));

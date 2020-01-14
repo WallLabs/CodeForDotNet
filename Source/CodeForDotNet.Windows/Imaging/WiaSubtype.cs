@@ -1,4 +1,5 @@
-﻿using Wia = Interop.Wia;
+using System.Diagnostics.CodeAnalysis;
+using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
 {
@@ -25,6 +26,7 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Flag.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
         Flag = 3,
     }
 }
