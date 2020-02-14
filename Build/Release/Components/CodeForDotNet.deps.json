@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "CodeForDotNet/4.8.2001.14000": {
+      "CodeForDotNet/4.8.2002.14002": {
         "dependencies": {
           "Microsoft.CodeAnalysis": "3.4.0",
           "Microsoft.CodeAnalysis.CSharp": "3.4.0",
@@ -815,7 +815,7 @@
     }
   },
   "libraries": {
-    "CodeForDotNet/4.8.2001.14000": {
+    "CodeForDotNet/4.8.2002.14002": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

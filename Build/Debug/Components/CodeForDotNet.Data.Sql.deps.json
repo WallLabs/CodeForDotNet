@@ -9,7 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "CodeForDotNet.Data.Sql/1.0.0": {
         "dependencies": {
-          "CodeForDotNet": "4.8.2001.14000",
+          "CodeForDotNet": "4.8.2002.14002",
           "Microsoft.CodeAnalysis": "3.4.0",
           "Microsoft.CodeAnalysis.CSharp": "3.4.0",
           "Microsoft.CodeAnalysis.FxCopAnalyzers": "2.9.8",
@@ -879,7 +879,7 @@
           }
         }
       },
-      "CodeForDotNet/4.8.2001.14000": {
+      "CodeForDotNet/4.8.2002.14002": {
         "dependencies": {
           "Microsoft.CodeAnalysis": "3.4.0",
           "Microsoft.CodeAnalysis.CSharp": "3.4.0",
@@ -1343,7 +1343,7 @@
       "path": "system.threading.tasks.extensions/4.5.3",
       "hashPath": "system.threading.tasks.extensions.4.5.3.nupkg.sha512"
     },
-    "CodeForDotNet/4.8.2001.14000": {
+    "CodeForDotNet/4.8.2002.14002": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
