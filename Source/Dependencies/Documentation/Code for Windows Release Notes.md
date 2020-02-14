@@ -1,5 +1,8 @@
 # Code for Windows - Release Notes
 
+## Version 1.0.1912.25### (2019.12.25)
+* Replace CodeMaid with EditorConfig support for code styles and clean-up (requires "Code Cleanup on Save" Visual Studio extension).
+
 ## Version 1.0.1904.16### (2019.04.15)
 * Add CodeMaid and EditorConfig files to solution and to build as useful template for other solutions.
  
