@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeForDotNet;
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -46,7 +47,7 @@ namespace CodeChief.Net
         #region Lifetime
 
         /// <summary>
-        /// The constructor expecting an <see cref="Int64"/> represented MAC address.
+        /// The constructor expecting an <see cref="long"/> represented MAC address.
         /// </summary>
         public MacAddress(long mac)
         {
@@ -58,7 +59,7 @@ namespace CodeChief.Net
         /// </summary>
         public MacAddress(string mac)
         {
-            var value = TryParseInt64(mac, true);
+            long? value = TryParseInt64(mac, true);
             Debug.Assert(value != null);
             _value = value.Value;
         }
@@ -70,10 +71,10 @@ namespace CodeChief.Net
         {
             // Validate
             if (mac == null || mac.Length != 6)
-                throw new ArgumentOutOfRangeException("mac");
+                throw new ArgumentOutOfRangeException(nameof(mac));
 
             // Reverse and resize array without changing source
-            var valueBytes = new byte[8];
+            byte[]? valueBytes = new byte[8];
             for (int sourceIndex = mac.Length - 1, targetIndex = 0; sourceIndex >= 0; sourceIndex--, targetIndex++)
                 valueBytes[targetIndex] = mac[sourceIndex];
 
@@ -192,26 +193,26 @@ namespace CodeChief.Net
         /// <para>b[2|4]: The numeric format but the bytes(2), words(4) are separated by spaces like 01 23 45 67 89 AB or 0123 4567 89AB in Bit-reversed order.</para>
         /// </param>
         /// <param name="formatProvider">Not used, required by IFormattable. MAC strings are always invariant culture.</param>
-        public string ToString(string format, IFormatProvider formatProvider)
+        public string ToString(string? format, IFormatProvider? formatProvider)
         {
             // Set default format when null
-            if (String.IsNullOrEmpty(format))
+            if (string.IsNullOrEmpty(format))
                 format = "N";
 
             // Validate format
             if (!Regex.IsMatch(format, StringFormatExpression))
-                throw new ArgumentOutOfRangeException("format");
+                throw new ArgumentOutOfRangeException(nameof(format));
 
             // Get format style
-            var style = format.ToUpperInvariant()[0];
-            var reverse = Char.IsLower(style);
-            var group = format.Length == 2 ? Int32.Parse(format[1].ToString(), CultureInfo.InvariantCulture) : 0;
+            char style = format.ToUpperInvariant()[0];
+            bool reverse = char.IsLower(style);
+            int group = format.Length == 2 ? int.Parse(format[1].ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture) : 0;
 
             // Get byte value to format, in reversed order when lowercase style
-            var bytes = ToByteArray(reverse);
+            byte[]? bytes = ToByteArray(reverse);
 
             // Decide which separator to use (if any)
-            var separator = "";
+            string? separator = "";
             switch (style)
             {
                 case 'C':
@@ -228,27 +229,16 @@ namespace CodeChief.Net
             }
 
             // Format string based on specified style
-            switch (group)
+            return group switch
             {
-                case 0:
-                    // Format without separators
-                    return String.Format(CultureInfo.InvariantCulture, "{0:X2}{1:X2}{2:X2}{3:X2}{4:X2}{5:X2}",
-                        bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5]);
-
-                case 2:
-                    // Format with separators at every byte
-                    return String.Format(CultureInfo.InvariantCulture, "{0:X2}{6}{1:X2}{6}{2:X2}{6}{3:X2}{6}{4:X2}{6}{5:X2}",
-                        bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], separator);
-
-                case 4:
-                    // Format with separators at every 2nd byte
-                    return String.Format(CultureInfo.InvariantCulture, "{0:X2}{1:X2}{6}{2:X2}{3:X2}{6}{4:X2}{5:X2}",
-                        bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], separator);
-
-                default:
-                    // Future proof
-                    throw new InvalidOperationException();
-            }
+                0 => string.Format(CultureInfo.InvariantCulture, "{0:X2}{1:X2}{2:X2}{3:X2}{4:X2}{5:X2}",
+                                       bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5]),// Format without separators
+                2 => string.Format(CultureInfo.InvariantCulture, "{0:X2}{6}{1:X2}{6}{2:X2}{6}{3:X2}{6}{4:X2}{6}{5:X2}",
+                                        bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], separator),// Format with separators at every byte
+                4 => string.Format(CultureInfo.InvariantCulture, "{0:X2}{1:X2}{6}{2:X2}{3:X2}{6}{4:X2}{5:X2}",
+                                        bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], separator),// Format with separators at every 2nd byte
+                _ => throw new InvalidOperationException(),// Future proof
+            };
         }
 
         /// <summary>
@@ -256,7 +246,7 @@ namespace CodeChief.Net
         /// </summary>
         public static MacAddress Parse(string mac)
         {
-            var value = TryParseInt64(mac, true);
+            long? value = TryParseInt64(mac, true);
             Debug.Assert(value != null);
             return new MacAddress(value.Value);
         }
@@ -267,7 +257,7 @@ namespace CodeChief.Net
         /// <returns>True when conversion was possible, otherwise false.</returns>
         public static bool TryParse(string mac, out MacAddress macAddress)
         {
-            var macAsInt64 = TryParseInt64(mac, false);
+            long? macAsInt64 = TryParseInt64(mac, false);
 
             if (macAsInt64.HasValue)
             {
@@ -282,16 +272,15 @@ namespace CodeChief.Net
         /// <summary>
         /// Compares the current object <see cref="MacAddress"/>, <see cref="long"/> or <see cref="byte"/>[].
         /// </summary>
-        public Int32 CompareTo(object obj)
+        public int CompareTo(object other)
         {
-            if (obj is MacAddress)
-                return CompareTo(((MacAddress)obj).ToInt64());
+            if (other is MacAddress address)
+                return CompareTo(address.ToInt64());
 
-            if (obj is long)
-                return ToInt64().CompareTo((long)obj);
+            if (other is long longValue)
+                return ToInt64().CompareTo(longValue);
 
-            var bytes = obj as byte[];
-            if (bytes != null)
+            if (other is byte[] bytes)
                 return CompareTo(new MacAddress(bytes));
 
             throw new NotSupportedException();
@@ -300,7 +289,7 @@ namespace CodeChief.Net
         /// <summary>
         /// Compares the current object with another object of the same type.
         /// </summary>
-        public Int32 CompareTo(MacAddress other)
+        public int CompareTo(MacAddress other)
         {
             return ToInt64().CompareTo(other.ToInt64());
         }
@@ -308,16 +297,15 @@ namespace CodeChief.Net
         /// <summary>
         /// Returns a value that indicates whether this instance is equal to a specified object.
         /// </summary>
-        public override bool Equals(object obj)
+        public override bool Equals(object other)
         {
-            if (obj is MacAddress)
-                return Equals(((MacAddress)obj));
+            if (other is MacAddress address)
+                return Equals(address);
 
-            if (obj is long)
-                return ToInt64().Equals((long)obj);
+            if (other is long longValue)
+                return ToInt64().Equals(longValue);
 
-            var bytes = obj as byte[];
-            if (bytes != null)
+            if (other is byte[] bytes)
                 return Equals(new MacAddress(bytes));
 
             return false;
@@ -336,11 +324,11 @@ namespace CodeChief.Net
         /// </summary>
         public override int GetHashCode()
         {
-            return _value.GetHashCode();
+            return HashCode.Combine(_value);
         }
 
         /// <summary>
-        /// Returns the MAC address as an <see cref="Int64"/>.
+        /// Returns the MAC address as an <see cref="long"/>.
         /// </summary>
         public long ToInt64()
         {
@@ -362,7 +350,7 @@ namespace CodeChief.Net
         public byte[] ToByteArray(bool reversed)
         {
             // Get bytes for MAC address (48 bits = 6 in total)
-            var bytes = BitConverter.GetBytes(_value);
+            byte[]? bytes = BitConverter.GetBytes(_value);
             Array.Resize(ref bytes, 6);
             Array.Reverse(bytes);
 
@@ -389,9 +377,9 @@ namespace CodeChief.Net
         private static long? TryParseInt64(string mac, bool throwExceptions)
         {
             // Validate
-            if (String.IsNullOrEmpty(mac))
+            if (string.IsNullOrEmpty(mac))
                 if (throwExceptions)
-                    throw new ArgumentNullException("mac");
+                    throw new ArgumentNullException(nameof(mac));
                 else
                     return null;
 
@@ -403,11 +391,13 @@ namespace CodeChief.Net
                     return null;
 
             // Remove separators
-            mac = mac.Replace(":", "").Replace("-", "").Replace(" ", "");
+            mac = mac
+                .Replace(":", "", StringComparison.OrdinalIgnoreCase)
+                .Replace("-", "", StringComparison.OrdinalIgnoreCase)
+                .Replace(" ", "", StringComparison.OrdinalIgnoreCase);
 
             // Try to parse MAC as number
-            long result;
-            if (!Int64.TryParse(mac, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out result))
+            if (!long.TryParse(mac, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out long result))
                 if (throwExceptions)
                     throw new FormatException();
                 else
@@ -415,6 +405,22 @@ namespace CodeChief.Net
 
             // Return parsed result when sucessfull
             return result;
+        }
+
+        /// <summary>
+        /// Comparison operator for less than or equal to.
+        /// </summary>
+        public static bool operator <=(MacAddress left, MacAddress right)
+        {
+            return left.CompareTo(right) <= 0;
+        }
+
+        /// <summary>
+        /// Comparison operator for greater or equal to.
+        /// </summary>
+        public static bool operator >=(MacAddress left, MacAddress right)
+        {
+            return left.CompareTo(right) >= 0;
         }
 
         #endregion
