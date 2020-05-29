@@ -9,7 +9,6 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
 	/// <summary>
 	/// Text box with masking and key filters to make it easier for the user to edit numbers. Supports multiple bases, e.g. decimal, hexadecimal, binary.
 	/// </summary>
-	[CLSCompliant(false)]
 	public class NumericTextBox : DynamicTextBox
 	{
 		#region Public Fields

@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -53,15 +54,16 @@ namespace CodeForDotNet.UI.Models
 		/// </summary>
 		public TaskFactory UITaskFactory { get; private set; }
 
-		#endregion Public Properties
+        #endregion Public Properties
 
-		#region Protected Methods
+        #region Protected Methods
 
-		/// <summary>
-		/// Frees resources owned by this instance.
-		/// </summary>
-		/// <param name="disposing">True when called via <see cref="IDisposable.Dispose()"/>, false when called during finalization.</param>
-		protected override void Dispose(bool disposing)
+        /// <summary>
+        /// Frees resources owned by this instance.
+        /// </summary>
+        /// <param name="disposing">True when called via <see cref="IDisposable.Dispose()"/>, false when called during finalization.</param>
+        [SuppressMessage("Usage", "CA2215:Dispose methods should call base class dispose", Justification = "It is correct, base class is abstract.")]
+        protected override void Dispose(bool disposing)
 		{
 			// Implemented to allow inheritors to reduce code when not necessary
 		}

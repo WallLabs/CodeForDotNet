@@ -181,7 +181,6 @@ namespace CodeForDotNet.ComponentModel
 		/// <param name="sender">Event initiator.</param>
 		/// <param name="arguments">Event arguments.</param>
 		/// <remarks>Inheritors must call this base class method first.</remarks>
-		[CLSCompliant(false)]
 		public virtual void OnChildPropertyChanged(object sender, PropertyStoreChangeEventArgs arguments)
 		{
 			// Currently empty but still required to call for future base code support

@@ -422,8 +422,12 @@ namespace CodeForDotNet.Data
 		public override int GetHashCode()
 		{
 			return
-				(TimeZoneId?.GetHashCode() ?? 0) ^
-				Start.GetHashCode() ^
+#if !NETSTANDARD2_0
+				(TimeZoneId?.GetHashCode(StringComparison.OrdinalIgnoreCase) ?? 0) ^
+#else
+                (TimeZoneId?.GetHashCode() ?? 0) ^
+#endif
+                Start.GetHashCode() ^
 				Duration.GetHashCode() ^
 				Recurrence.GetHashCode() ^
 				Interval.GetHashCode() ^
@@ -665,6 +669,6 @@ namespace CodeForDotNet.Data
 			}
 		}
 
-		#endregion Public Methods
+#endregion Public Methods
 	}
 }

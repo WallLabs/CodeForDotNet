@@ -276,15 +276,19 @@ namespace CodeForDotNet.Xml
 		/// Returns a hash-code based on the current value of this object.
 		/// </summary>
 		public override int GetHashCode()
-		{
-			return Xml.GetHashCode();
-		}
+        {
+#if !NETSTANDARD2_0
+            return HashCode.Combine(Xml);
+#else
+            return Xml.GetHashCode();
+#endif
+        }
 
-		/// <summary>
-		/// Called by the binary serializer to get object data.
-		/// </summary>
-		/// <remarks>We need to control serialization because the <see cref="XmlDocumentFragment"/> class is not serializable.</remarks>
-		[SecurityCritical]
+        /// <summary>
+        /// Called by the binary serializer to get object data.
+        /// </summary>
+        /// <remarks>We need to control serialization because the <see cref="XmlDocumentFragment"/> class is not serializable.</remarks>
+        [SecurityCritical]
 		public void GetObjectData(SerializationInfo info, StreamingContext context)
 		{
 			// Validate
@@ -335,8 +339,12 @@ namespace CodeForDotNet.Xml
 						if (child == null)
 						{
 							// Return null when path includes filter (cannot automatically create conditional content)
+#if !NETSTANDARD2_0
+							if (pathPart.IndexOf('[', StringComparison.OrdinalIgnoreCase) >= 0)
+#else
 							if (pathPart.IndexOf('[') >= 0)
-								return null;
+#endif
+                                return null;
 
 							// Create path parts which do not exist
 							result.AppendChildElement("", pathPart, "", null);
@@ -402,9 +410,9 @@ namespace CodeForDotNet.Xml
 			GetRoot().WriteSubtree(writer);
 		}
 
-		#endregion Public Methods
+#endregion Public Methods
 
-		#region Private Methods
+#region Private Methods
 
 		/// <summary>
 		/// Frees resources owned by this object.
@@ -417,6 +425,6 @@ namespace CodeForDotNet.Xml
 				Clear();
 		}
 
-		#endregion Private Methods
+#endregion Private Methods
 	}
 }

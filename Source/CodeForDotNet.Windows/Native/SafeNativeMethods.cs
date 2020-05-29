@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
@@ -9,6 +10,8 @@ namespace CodeForDotNet.Windows.Native
     /// Native method calls which are safe to call without a stack walk.
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
+    [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Native code naming standards.")]
+    [SuppressMessage("Microsoft.Performance", "CA1812", Justification = "Native code place holder.")]
     internal abstract class SafeNativeMethods
     {
         #region User32.dll clipboard functions

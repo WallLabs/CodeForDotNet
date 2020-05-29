@@ -2,8 +2,6 @@ using System;
 using System.Runtime.InteropServices;
 using Wia = Interop.Wia;
 
-#nullable enable
-
 namespace CodeForDotNet.Windows.Imaging
 {
 	/// <summary>

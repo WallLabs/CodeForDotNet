@@ -9,7 +9,6 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
 	/// <summary>
 	/// Control implementing <see cref="IEventCache"/> for efficient event handling, thread safety and increased performance.
 	/// </summary>
-	[CLSCompliant(false)]
 	public abstract class EventControl : Control, IEventCache
 	{
 		#region Private Fields

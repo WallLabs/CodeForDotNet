@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Windows.UI.Xaml.Controls;
 
 namespace CodeForDotNet.WindowsUniversal.UI
@@ -8,7 +8,6 @@ namespace CodeForDotNet.WindowsUniversal.UI
     /// strongly typed model and session state persistence when used in
     /// a <see cref="ApplicationBase"/> based application.
     /// </summary>
-    [CLSCompliant(false)]
     public class PageApplicationBase<TApplication> : PageBase
         where TApplication : ApplicationBase
     {

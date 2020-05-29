@@ -1,10 +1,13 @@
-﻿namespace CodeForDotNet.UI.Input
+using System.Diagnostics.CodeAnalysis;
+
+namespace CodeForDotNet.UI.Input
 {
     /// <summary>
     /// Complete set of keyboard virtual key definitions, an expanded version of the XAML
     /// "Windows.System.VirtualKey" like the Windows Forms "Keys" enumeration, which is not currently
     /// available in WinRT.
     /// </summary>
+    [SuppressMessage("Design", "CA1069:Enums values should not be duplicated", Justification = "Defined by system.")]
     public enum KeyboardKey
     {
         /// <summary>

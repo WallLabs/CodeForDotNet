@@ -1,5 +1,10 @@
 # Code for .NET - Release Notes
 
+## Version 4.9.2020.28### (2020.05.28)
+* Upgraded .NET Standard 2.1/Core 3.1 framework.
+* Legacy support for .NET Standard 2.0 via ".Legacy" assemblies.
+* UWP is still supported via the legacy assemblies.
+
 ## Version 4.8.1911.13### (2019.11.13)
 * Renamed Vector2 to AngleVector2 to avoid conflict with new Vector2 system class.
 * Moved AngleVector2 and Quadrant to Numerics namespace to follow similar system class grouping.

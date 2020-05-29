@@ -58,7 +58,6 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
 		/// </summary>
 		/// <param name="frame">An instance whose navigation history should be managed by <see cref="SuspensionManager"/></param>
 		/// <param name="sessionStateKey">A unique key into <see cref="SessionState"/> used to store navigation-related information.</param>
-		[CLSCompliant(false)]
 		public static void RegisterFrame(Frame frame, string sessionStateKey)
 		{
 			// Validate
@@ -159,7 +158,6 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
 		/// </summary>
 		/// <param name="frame">The instance for which session state is desired.</param>
 		/// <returns>A collection of state subject to the same serialization mechanism as <see cref="SessionState"/>.</returns>
-		[CLSCompliant(false)]
 		public static Dictionary<string, object> SessionStateForFrame(Frame frame)
 		{
 			// Validate
@@ -194,7 +192,6 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
 		/// previously captured will be removed.
 		/// </summary>
 		/// <param name="frame">An instance whose navigation history should no longer be managed.</param>
-		[CLSCompliant(false)]
 		public static void UnregisterFrame(Frame frame)
 		{
 			// Validate.

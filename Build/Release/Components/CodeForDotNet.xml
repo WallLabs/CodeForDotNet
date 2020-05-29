@@ -268,7 +268,7 @@
         </member>
         <member name="T:CodeForDotNet.Collections.ObservableDictionary`2">
             <summary>
-            Implementation of IObservableMap that supports re-entrance for use as a default view model.
+            Implementation of <see cref="T:System.Collections.Generic.IDictionary`2"/> which supports re-entrance for use as a default view model.
             </summary>
         </member>
         <member name="F:CodeForDotNet.Collections.ObservableDictionary`2._dictionary">

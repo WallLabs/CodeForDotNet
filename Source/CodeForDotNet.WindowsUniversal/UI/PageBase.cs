@@ -3,15 +3,12 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-#nullable enable
-
 namespace CodeForDotNet.WindowsUniversal.UI
 {
 	/// <summary>
 	/// Windows Store <see cref="Page"/> with common features including a standard model property and session state persistence when used in a
 	/// <see cref="Application"/> based application.
 	/// </summary>
-	[CLSCompliant(false)]
 	public class PageBase : Page
 	{
 		#region Public Fields

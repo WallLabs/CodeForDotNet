@@ -1,4 +1,5 @@
-﻿using CodeForDotNet.Collections;
+using CodeForDotNet.Collections;
+using Interop.Wia;
 using System;
 using Wia = Interop.Wia;
 
@@ -21,15 +22,14 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Creates an instance to wrap the specified unmanaged object.
         /// </summary>
-        [CLSCompliant(false)]
         public WiaFormatCollection(Wia.Formats interopCollection)
         {
             // Validate
             if (interopCollection == null) throw new ArgumentNullException(nameof(interopCollection));
 
             // Add unmanaged collection items with managed wrappers
-            foreach (var interopItem in interopCollection)
-                Add(interopItem);
+            foreach (object? interopItem in interopCollection)
+                Add(interopItem!);
         }
 
         #endregion Lifetime

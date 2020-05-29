@@ -3,8 +3,6 @@ using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using Wia = Interop.Wia;
 
-#nullable enable
-
 namespace CodeForDotNet.Windows.Imaging
 {
 	/// <summary>
@@ -82,7 +80,7 @@ namespace CodeForDotNet.Windows.Imaging
 		/// </summary>
 		/// <param name="index">Zero based index</param>
 		/// <returns>Item value at the specified index.</returns>
-		public object this[int index]
+		public object? this[int index]
 		{
 			get
 			{
@@ -105,7 +103,7 @@ namespace CodeForDotNet.Windows.Imaging
 		/// <summary>
 		/// Adds an item to the end of the vector data.
 		/// </summary>
-		public int Add(object value)
+		public int Add(object? value)
 		{
 			_wiaVector.Add(value);
 			return _wiaVector.Count - 1;
@@ -123,7 +121,7 @@ namespace CodeForDotNet.Windows.Imaging
 		/// <summary>
 		/// Checks if the member exists.
 		/// </summary>
-		public bool Contains(object value)
+		public bool Contains(object? value)
 		{
 			// Search all items (1 based array)
 			for (var i = 1; i <= _wiaVector.Count; i++)
@@ -256,15 +254,15 @@ namespace CodeForDotNet.Windows.Imaging
 		/// </summary>
 		/// <param name="value">Value to find.</param>
 		/// <returns>Index or -1 when it doesn't exist.</returns>
-		public int IndexOf(object value)
+		public int IndexOf(object? value)
 		{
 			// Search all items (1 based array)
-			for (var i = 1; i <= _wiaVector.Count; i++)
+			for (var index = 1; index <= _wiaVector.Count; index++)
 			{
 				object? existingItem = null;
-				_wiaVector.let_Item(i, ref existingItem);
+				_wiaVector.let_Item(index, ref existingItem);
 				if (existingItem == value)
-					return i;
+					return index;
 			}
 
 			// Not found
@@ -276,7 +274,7 @@ namespace CodeForDotNet.Windows.Imaging
 		/// </summary>
 		/// <param name="index">Index to insert at, zero based.</param>
 		/// <param name="value">Value to insert.</param>
-		public void Insert(int index, object value)
+		public void Insert(int index, object? value)
 		{
 			_wiaVector.Add(value, index + 1);
 		}
@@ -285,7 +283,7 @@ namespace CodeForDotNet.Windows.Imaging
 		/// Removes an item.
 		/// </summary>
 		/// <param name="value">Item to remove.</param>
-		public void Remove(object value)
+		public void Remove(object? value)
 		{
 			// Get index of item
 			var index = IndexOf(value);

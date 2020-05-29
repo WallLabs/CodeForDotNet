@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 
 // Information
 [assembly: AssemblyTitle("CodeForDotNet.WindowsUniversal")]

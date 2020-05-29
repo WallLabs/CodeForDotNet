@@ -46,8 +46,14 @@ Write-Host ("New Version: " + $newVersion.ToString());
 Set-VersionFile -File $versionFilePath -Version $newVersion;
 
 # Set version in Visual Studio project and source files...
-Set-VersionInXmlProject -File "$PSScriptRoot\CodeForDotNet\CodeForDotNet.csproj" -Version $newVersion;
 Set-VersionInAssemblyInfo -File "$PSScriptRoot\Common\AssemblyInfoGlobal.cs" -Version $newVersion;
+Set-VersionInXmlProject -File "$PSScriptRoot\CodeForDotNet\CodeForDotNet.csproj" -Version $newVersion;
+Set-VersionInXmlProject -File "$PSScriptRoot\CodeForDotNet.Legacy\CodeForDotNet.Legacy.csproj" -Version $newVersion;
+Set-VersionInXmlProject -File "$PSScriptRoot\CodeForDotNet.Data.Sql\CodeForDotNet.Data.Sql.csproj" -Version $newVersion;
+Set-VersionInXmlProject -File "$PSScriptRoot\CodeForDotNet.Data.Sql.Legacy\CodeForDotNet.Data.Sql.Legacy.csproj" -Version $newVersion;
+Set-VersionInXmlProject -File "$PSScriptRoot\CodeForDotNet.UI\CodeForDotNet.UI.csproj" -Version $newVersion;
+Set-VersionInXmlProject -File "$PSScriptRoot\CodeForDotNet.UI.Legacy\CodeForDotNet.UI.Legacy.csproj" -Version $newVersion;
+Set-VersionInXmlProject -File "$PSScriptRoot\CodeForDotNet.Windows\CodeForDotNet.Windows.csproj" -Version $newVersion;
 Set-VersionInAppXManifest -File "$PSScriptRoot\CodeForDotNet.WindowsUniversal.Tests\Package.appxmanifest" -Version $newVersion;
 
 # Exit successful

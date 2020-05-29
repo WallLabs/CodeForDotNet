@@ -16,7 +16,6 @@ namespace CodeForDotNet.WindowsUniversal.UI.Models
 	/// <summary>
 	/// Base class for all XAML applications which support the UI model framework.
 	/// </summary>
-	[CLSCompliant(false)]
 	public abstract partial class UIModelApplication<TApplicationUIModel> : Application
 	   where TApplicationUIModel : ApplicationUIModel
 	{

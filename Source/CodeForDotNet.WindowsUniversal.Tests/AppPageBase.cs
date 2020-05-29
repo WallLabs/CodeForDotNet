@@ -1,5 +1,4 @@
-﻿using CodeForDotNet.WindowsUniversal.UI;
-using System;
+using CodeForDotNet.WindowsUniversal.UI;
 
 namespace CodeForDotNet.WindowsUniversal.Tests
 {
@@ -10,7 +9,6 @@ namespace CodeForDotNet.WindowsUniversal.Tests
     /// Necessary workaround as Visual Studio does not support (and/or has designer issues) with
     /// generic XAML pages in Windows Store applications (it only works properly in WPF).
     /// </remarks>
-    [CLSCompliant(false)]
     public class AppPageBase : PageApplicationBase<App>
     {
     }

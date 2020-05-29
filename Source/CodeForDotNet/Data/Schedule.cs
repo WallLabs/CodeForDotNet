@@ -132,7 +132,11 @@ namespace CodeForDotNet.Data
         public override int GetHashCode()
         {
             return
+#if !NETSTANDARD2_0
+                (Description?.GetHashCode(StringComparison.OrdinalIgnoreCase) ?? 0) ^
+#else
                 (Description?.GetHashCode() ?? 0) ^
+#endif
                 Includes.GetHashCode() ^
                 Excludes.GetHashCode();
         }
@@ -218,6 +222,6 @@ namespace CodeForDotNet.Data
             return string.Format(culture, Properties.Resources.ScheduleToStringFormatNone);
         }
 
-        #endregion Public Methods
+#endregion Public Methods
     }
 }

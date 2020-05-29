@@ -15,8 +15,8 @@ namespace CodeForDotNet
 		/// Gets the first custom attribute of the specified type, if present.
 		/// </summary>
 		/// <returns>Typed attribute else null when not declared.</returns>
-		public static T GetAttribute<T>(this MemberInfo info, bool inherit = false)
-			where T : Attribute?
+		public static T? GetAttribute<T>(this MemberInfo info, bool inherit = false)
+			where T : Attribute
 		{
 			// Validate
 			if (info == null) throw new ArgumentNullException(nameof(info));

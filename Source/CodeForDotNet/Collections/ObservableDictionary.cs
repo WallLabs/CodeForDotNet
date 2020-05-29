@@ -10,7 +10,7 @@ using System.Security.Permissions;
 namespace CodeForDotNet.Collections
 {
 	/// <summary>
-	/// Implementation of IObservableMap that supports re-entrance for use as a default view model.
+	/// Implementation of <see cref="IDictionary{TKey, TValue}"/> which supports re-entrance for use as a default view model.
 	/// </summary>
 	[Serializable]
 	public class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>,

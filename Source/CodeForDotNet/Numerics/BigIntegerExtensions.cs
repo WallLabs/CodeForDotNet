@@ -175,8 +175,12 @@ namespace CodeForDotNet.Numerics
 
 				// Get next character value (return false when invalid)
 				var indexChar = value[index];
-				BigInteger indexValue = NumberDigits.IndexOf(indexChar);
-				if (indexValue < 0)
+#if !NETSTANDARD2_0
+				BigInteger indexValue = NumberDigits.IndexOf(indexChar, StringComparison.OrdinalIgnoreCase);
+#else
+                BigInteger indexValue = NumberDigits.IndexOf(indexChar);
+#endif
+                if (indexValue < 0)
 					return false;
 
 				// Detect sign bit at first character when relevant
@@ -207,6 +211,6 @@ namespace CodeForDotNet.Numerics
 			return true;
 		}
 
-		#endregion Public Methods
+#endregion Public Methods
 	}
 }

@@ -377,30 +377,35 @@ namespace CodeForDotNet.Data
 			}
 
 			// Build selection expression
-			for (var i = 0; i < table.PrimaryKey.Length; i++)
+			for (var index = 0; index < table.PrimaryKey.Length; index++)
 			{
-				var keyColumn = table.PrimaryKey[i];
-				if (i > 0)
+                // Add logical AND operator when multiple.
+				if (index > 0)
 					result += " AND ";
-				result += "[" + keyColumn.ColumnName + "] = ";
 
-				// TODO: Replace with parameters (if supported) - at least screen text for SQL injection attack
-				if ((keyColumn.DataType == typeof(string)) || (keyColumn.DataType == typeof(Guid)))
-				{
-					result += "'" + Convert.ToString(row[keyColumn.Ordinal], CultureInfo.InvariantCulture)
-						.Replace("'", "''") + "'";
-				}
-				else
-				{
-					result += Convert.ToString(row[keyColumn.Ordinal], CultureInfo.InvariantCulture);
-				}
+                // Add column name.
+                var keyColumn = table.PrimaryKey[index];
+                result += "[" + keyColumn.ColumnName + "] = ";
+
+                // Add value with any quotes escaped.
+                var value = row[keyColumn.Ordinal];
+                var valueText = Convert.ToString(value, CultureInfo.InvariantCulture);
+                if ((keyColumn.DataType == typeof(string)) || (keyColumn.DataType == typeof(Guid)))
+                {
+#if !NETSTANDARD2_0
+                    valueText = $"'{valueText.Replace("'", "''", StringComparison.OrdinalIgnoreCase)}'";
+#else
+                    valueText = $"'{valueText.Replace("'", "''")}'";
+#endif
+                }
+                result += valueText;
 			}
 
 			// Return result
 			return result;
 		}
 
-		#endregion Private Methods
+#endregion Private Methods
 	}
 
 	/// <summary>
@@ -408,7 +413,7 @@ namespace CodeForDotNet.Data
 	/// </summary>
 	public class DataSetChangeLogEntry : DisposableObject
 	{
-		#region Public Constructors
+#region Public Constructors
 
 		/// <summary>
 		/// Creates a new instance of this structure containing the specified data.
@@ -420,9 +425,9 @@ namespace CodeForDotNet.Data
 			Changes = changes;
 		}
 
-		#endregion Public Constructors
+#endregion Public Constructors
 
-		#region Public Properties
+#region Public Properties
 
 		/// <summary>
 		/// Snapshot of the changes, including DataRowVersion.Original data needed to Rollback, and DataRowVersion.Current needed to roll-forward.
@@ -439,9 +444,9 @@ namespace CodeForDotNet.Data
 		/// </summary>
 		public DateTime TimeStamp { get; private set; }
 
-		#endregion Public Properties
+#endregion Public Properties
 
-		#region Protected Methods
+#region Protected Methods
 
 		/// <summary>
 		/// Frees resources used by this object.
@@ -463,6 +468,6 @@ namespace CodeForDotNet.Data
 			}
 		}
 
-		#endregion Protected Methods
+#endregion Protected Methods
 	}
 }

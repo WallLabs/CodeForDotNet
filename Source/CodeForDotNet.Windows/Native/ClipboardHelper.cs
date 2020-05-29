@@ -3,8 +3,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-#nullable enable
-
 namespace CodeForDotNet.Windows.Native
 {
 	/// <summary>

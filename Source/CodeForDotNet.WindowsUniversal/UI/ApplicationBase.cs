@@ -16,14 +16,11 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-#nullable enable
-
 namespace CodeForDotNet.WindowsUniversal.UI
 {
     /// <summary>
     /// Windows Store application with common features including a strongly typed application model, session state persistence and error reporting.
     /// </summary>
-    [CLSCompliant(false)]
     public abstract class ApplicationBase : Application
     {
         #region Protected Constructors

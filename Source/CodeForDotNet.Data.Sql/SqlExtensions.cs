@@ -72,9 +72,14 @@ namespace CodeForDotNet.Data.Sql
 			cmd.CommandType = CommandType.StoredProcedure;
 			cmd.CommandText = procedureName;
 
-			// Get parameter set with caching
-			var cacheKey = connection.ConnectionString.GetHashCode() ^ procedureName.GetHashCode();
-			var cached = true;
+            // Get parameter set with caching
+#if !NETSTANDARD2_0
+            var cacheKey = HashCode.Combine(connection.ConnectionString.GetHashCode(StringComparison.OrdinalIgnoreCase),
+            procedureName.GetHashCode(StringComparison.OrdinalIgnoreCase));
+#else
+            var cacheKey = connection.ConnectionString.GetHashCode() ^ procedureName.GetHashCode();
+#endif
+            var cached = true;
 			if (!ParameterCache.ContainsKey(cacheKey))
 			{
 				lock (ParameterCache)
@@ -136,6 +141,6 @@ namespace CodeForDotNet.Data.Sql
 			return cmd;
 		}
 
-		#endregion Public Methods
+#endregion Public Methods
 	}
 }

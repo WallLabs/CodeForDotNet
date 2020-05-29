@@ -7,8 +7,6 @@ using System.Linq;
 using Windows.Storage;
 using Windows.UI.Xaml;
 
-#nullable enable
-
 namespace CodeForDotNet.WindowsUniversal.Storage
 {
 	/// <summary>

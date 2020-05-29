@@ -1,5 +1,6 @@
 using CodeForDotNet.Collections;
 using CodeForDotNet.Properties;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -84,10 +85,10 @@ namespace CodeForDotNet.Data
 		/// </summary>
 		public override int GetHashCode() => ArrayExtensions.GetHashCode(this);
 
-		/// <summary>
-		/// Returns a string describing the schedule items, using the <see cref="CultureInfo.CurrentCulture"/>.
-		/// </summary>
-		public override string? ToString()
+        /// <summary>
+        /// Returns a string describing the schedule items, using the <see cref="CultureInfo.CurrentCulture"/>.
+        /// </summary>
+        public override string? ToString()
 		{
 			return ToString(CultureInfo.CurrentCulture);
 		}

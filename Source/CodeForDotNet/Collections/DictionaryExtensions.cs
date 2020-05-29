@@ -166,7 +166,7 @@ namespace CodeForDotNet.Collections
 				throw new ArgumentNullException(nameof(dictionary));
 
 			// Call overloaded method
-			return dictionary.ContainsKey(key) ? dictionary[key] : default;
+			return dictionary.ContainsKey(key) ? dictionary[key] : default!;
 		}
 
 		#endregion Public Methods

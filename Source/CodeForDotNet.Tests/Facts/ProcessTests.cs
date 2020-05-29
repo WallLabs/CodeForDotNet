@@ -1,8 +1,6 @@
 using CodeForDotNet.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-#nullable enable
-
 namespace CodeForDotNet.Tests.Facts
 {
 	/// <summary>

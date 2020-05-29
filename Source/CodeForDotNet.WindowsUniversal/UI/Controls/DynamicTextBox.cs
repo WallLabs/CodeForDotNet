@@ -18,7 +18,6 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
 	/// <summary>
 	/// Enhanced <see cref="TextBox"/> control supporting multiple key-down tracking and group navigational functionality.
 	/// </summary>
-	[CLSCompliant(false)]
 	public class DynamicTextBox : TextBox
 	{
 		#region Public Fields

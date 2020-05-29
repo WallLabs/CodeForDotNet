@@ -69,16 +69,23 @@ namespace CodeForDotNet.Xml
 			var options = RegexOptions.None;
 			if (flags != null)
 			{
-				if (flags.Contains("s")) options |= RegexOptions.Singleline;
-				if (flags.Contains("m")) options |= RegexOptions.Multiline;
-				if (flags.Contains("i")) options |= RegexOptions.IgnoreCase;
-				if (flags.Contains("x")) options |= RegexOptions.IgnorePatternWhitespace;
-			}
+#if !NETSTANDARD2_0
+				if (flags.Contains("s", StringComparison.OrdinalIgnoreCase)) options |= RegexOptions.Singleline;
+				if (flags.Contains("m", StringComparison.OrdinalIgnoreCase)) options |= RegexOptions.Multiline;
+				if (flags.Contains("i", StringComparison.OrdinalIgnoreCase)) options |= RegexOptions.IgnoreCase;
+				if (flags.Contains("x", StringComparison.OrdinalIgnoreCase)) options |= RegexOptions.IgnorePatternWhitespace;
+#else
+                if (flags.Contains("s")) options |= RegexOptions.Singleline;
+                if (flags.Contains("m")) options |= RegexOptions.Multiline;
+                if (flags.Contains("i")) options |= RegexOptions.IgnoreCase;
+                if (flags.Contains("x")) options |= RegexOptions.IgnorePatternWhitespace;
+#endif
+            }
 
-			// Execute regular expression then return result
-			return Regex.Match(input.Trim(), pattern, options).Success;
+            // Execute regular expression then return result
+            return Regex.Match(input.Trim(), pattern, options).Success;
 		}
 
-		#endregion Public Methods
+#endregion Public Methods
 	}
 }

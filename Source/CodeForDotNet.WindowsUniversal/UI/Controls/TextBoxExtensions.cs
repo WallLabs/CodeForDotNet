@@ -6,7 +6,6 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
    /// <summary>
    /// Extensions for work with the XAML <see cref="TextBox"/> control.
    /// </summary>
-   [CLSCompliant(false)]
    public static class TextBoxExtensions
    {
       #region Public Methods

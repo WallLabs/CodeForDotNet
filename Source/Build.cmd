@@ -37,15 +37,19 @@ if %errorlevel% neq 0 goto Error
 
 echo.
 echo Copying components...
-robocopy "%~dp0CodeForDotNet\bin\%ConfigurationName%\netstandard2.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.*
+robocopy "%~dp0CodeForDotNet\bin\%ConfigurationName%\netstandard2.1" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.*
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.Data.Sql\bin\%ConfigurationName%\netstandard2.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Data.Sql.*
+robocopy "%~dp0CodeForDotNet.Legacy\bin\%ConfigurationName%\netstandard2.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Legacy.*
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.UI\bin\%ConfigurationName%\netstandard2.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.UI.*
+robocopy "%~dp0CodeForDotNet.Data.Sql\bin\%ConfigurationName%\netstandard2.1" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Data.Sql.*
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.Full\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Full.* /xf *CodeAnalysisLog.xml /xf *.lastcodeanalysissucceeded
+robocopy "%~dp0CodeForDotNet.Data.Sql.Legacy\bin\%ConfigurationName%\netstandard2.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Data.Sql.Legacy.*
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.Windows\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Windows.* /xf *CodeAnalysisLog.xml /xf *.lastcodeanalysissucceeded
+robocopy "%~dp0CodeForDotNet.UI\bin\%ConfigurationName%\netstandard2.1" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.UI.*
+if %errorlevel% gtr 7 goto Error
+robocopy "%~dp0CodeForDotNet.UI.Legacy\bin\%ConfigurationName%\netstandard2.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.UI.Legacy.*
+if %errorlevel% gtr 7 goto Error
+robocopy "%~dp0CodeForDotNet.Windows\bin\%ConfigurationName%\netcoreapp3.1" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Windows.* /xf *CodeAnalysisLog.xml /xf *.lastcodeanalysissucceeded
 if %errorlevel% gtr 7 goto Error
 robocopy "%~dp0CodeForDotNet.WindowsUniversal\bin\%ConfigurationName%" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.WindowsUniversal.* *.winmd /xf *.xr.xml /xf *CodeAnalysisLog.xml /xf *.lastcodeanalysissucceeded
 if %errorlevel% gtr 7 goto Error

@@ -93,13 +93,21 @@ namespace CodeForDotNet.Data
 		{
 			return base.GetHashCode() ^
 				   SourceId.GetHashCode() ^
-				   (SourceAssemblyName?.GetHashCode() ?? 0) ^
+#if !NETSTANDARD2_0
+				   (SourceAssemblyName?.GetHashCode(StringComparison.OrdinalIgnoreCase) ?? 0) ^
 				   EventDate.GetHashCode() ^
-				   (Message != null ? Message.GetHashCode() : 0) ^
-				   (ErrorTypeFullName?.GetHashCode() ?? 0) ^
-				   (StackTrace?.GetHashCode() ?? 0);
-		}
+				   (Message != null ? Message.GetHashCode(StringComparison.OrdinalIgnoreCase) : 0) ^
+				   (ErrorTypeFullName?.GetHashCode(StringComparison.OrdinalIgnoreCase) ?? 0) ^
+				   (StackTrace?.GetHashCode(StringComparison.OrdinalIgnoreCase) ?? 0);
+#else
+                   (SourceAssemblyName?.GetHashCode() ?? 0) ^
+                   EventDate.GetHashCode() ^
+                   (Message != null ? Message.GetHashCode() : 0) ^
+                   (ErrorTypeFullName?.GetHashCode() ?? 0) ^
+                   (StackTrace?.GetHashCode() ?? 0);
+#endif
+        }
 
-		#endregion Public Methods
-	}
+#endregion Public Methods
+    }
 }

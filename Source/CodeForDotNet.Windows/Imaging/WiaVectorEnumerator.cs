@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -67,8 +67,8 @@ namespace CodeForDotNet.Windows.Imaging
         {
             get
             {
-                var vector = (Wia.Vector)_wiaVectorEnumerator.Current;
-                return new WiaVector(vector);
+                var vector = (Wia.Vector?)_wiaVectorEnumerator.Current;
+                return new WiaVector(vector!);
             }
         }
 

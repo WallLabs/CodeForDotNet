@@ -1,4 +1,4 @@
-﻿using CodeForDotNet.WindowsUniversal.Tests.Models;
+using CodeForDotNet.WindowsUniversal.Tests.Models;
 using CodeForDotNet.WindowsUniversal.UI;
 using System;
 
@@ -11,7 +11,6 @@ namespace CodeForDotNet.WindowsUniversal.Tests.Views
     /// Necessary workaround as Visual Studio does not support (and/or has designer issues) with
     /// generic XAML pages in Windows Store applications (it only works properly in WPF).
     /// </remarks>
-    [CLSCompliant(false)]
     public partial class ControlTestPageBase : PageModelBase<App, ControlTestUIModel>
     {
         /// <summary>

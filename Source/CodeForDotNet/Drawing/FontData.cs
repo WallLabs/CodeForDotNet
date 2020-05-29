@@ -115,8 +115,12 @@ namespace CodeForDotNet.Drawing
 		public override int GetHashCode()
 		{
 			return
+#if !NETSTANDARD2_0
+				Family.GetHashCode(StringComparison.OrdinalIgnoreCase) ^
+#else
 				Family.GetHashCode() ^
-				Size.GetHashCode() ^
+#endif
+                Size.GetHashCode() ^
 				Style.GetHashCode();
 		}
 
@@ -128,6 +132,6 @@ namespace CodeForDotNet.Drawing
 			return this.SerializeXml();
 		}
 
-		#endregion Public Methods
+#endregion Public Methods
 	}
 }
