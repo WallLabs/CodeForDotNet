@@ -9,6 +9,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// Encapsulates a WIA source, e.g. scanner or camera.
     /// </summary>
     [SupportedOSPlatform("windows")]
+    [CLSCompliant(false)]
     public class WiaManager : DisposableObject
     {
         #region Private Fields

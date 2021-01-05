@@ -2,7 +2,6 @@ using CodeForDotNet.Data;
 using CodeForDotNet.WindowsUniversal.Storage;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -21,6 +20,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
     /// <summary>
     /// Windows Store application with common features including a strongly typed application model, session state persistence and error reporting.
     /// </summary>
+    [CLSCompliant(false)]
     public abstract class ApplicationBase : Application
     {
         #region Protected Constructors
@@ -171,7 +171,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
             if (@event == null) throw new ArgumentNullException(nameof(@event));
 
             // Do not repeat initialization when the Window already has content, just ensure that the window is active
-            if (!(Window.Current.Content is Frame rootFrame))
+            if (Window.Current.Content is not Frame rootFrame)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
@@ -202,7 +202,6 @@ namespace CodeForDotNet.WindowsUniversal.UI
         /// <summary>
         /// Loads state when the application is resumed.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031", Justification = "Errors are stored and do not prevent resume.")]
         protected void OnResuming(object sender, object @event)
         {
             try
@@ -220,7 +219,6 @@ namespace CodeForDotNet.WindowsUniversal.UI
         /// <summary>
         /// Saves state when the application is suspended.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031", Justification = "Errors are stored and do not prevent suspend.")]
         protected void OnSuspending(object sender, SuspendingEventArgs @event)
         {
             // Validate.

@@ -11,6 +11,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// Managed enumerator for <see cref="Wia.Vector" /> items.
     /// </summary>
     [SupportedOSPlatform("windows")]
+    [CLSCompliant(false)]
     public class WiaVectorEnumerator : DisposableObject, IEnumerator<WiaVector>
     {
         #region Lifetime

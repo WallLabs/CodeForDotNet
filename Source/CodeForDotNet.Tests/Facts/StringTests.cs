@@ -8,7 +8,6 @@ namespace CodeForDotNet.Tests.Facts
 	/// Tests the <see cref="StringExtensions"/> class.
 	/// </summary>
 	[TestClass]
-    [SuppressMessage("Microsoft.Globalization", "CA1303: Do not pass literals as localized parameters", Justification = "Test data.")]
     public class StringTests
     {
         #region Public Methods

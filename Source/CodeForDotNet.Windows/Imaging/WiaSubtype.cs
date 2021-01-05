@@ -26,7 +26,6 @@ namespace CodeForDotNet.Windows.Imaging
         /// <summary>
         /// Flag.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Flag")]
         Flag = 3,
     }
 }

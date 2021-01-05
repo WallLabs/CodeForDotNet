@@ -1,5 +1,4 @@
 using CodeForDotNet.Collections;
-using Interop.Wia;
 using System;
 using Wia = Interop.Wia;
 
@@ -8,6 +7,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Managed <see cref="Wia.Formats"/>.
     /// </summary>
+    [CLSCompliant(false)]
     public class WiaFormatCollection : DisposableCollection<object>
     {
         #region Lifetime

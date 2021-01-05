@@ -8,8 +8,7 @@ namespace CodeForDotNet.Drawing
 	/// Margins data.
 	/// </summary>
 	[Serializable]
-	[SuppressMessage("Microsoft.Usage", "CA2235", Justification = "Custom member types are serializable. Rest are false positive, e.g. built-in value types do not need to be marked serializable.")]
-	public class PageMarginsData : ICloneable
+    public class PageMarginsData : ICloneable
 	{
 		#region Public Constructors
 

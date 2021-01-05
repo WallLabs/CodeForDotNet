@@ -51,13 +51,12 @@ namespace CodeForDotNet.Data.Sql
 			return builder.ToString();
 		}
 
-		/// <summary>
-		/// Creates a command object for the specified stored procedure, automatically populating the parameters. Parameter sets are cached for performance.
-		/// </summary>
-		/// <param name="connection">Connection used to derive parameters (first time only) or create the command.</param>
-		/// <param name="procedureName">Name of the stored procedure for which to create the command and parameters.</param>
-		[SuppressMessage("Microsoft.Security", "CA2100", Justification = "String parameter is only used in isolation as a stored procedure name.")]
-		public static SqlCommand CreateCommandWithParameters(this SqlConnection connection, string procedureName)
+        /// <summary>
+        /// Creates a command object for the specified stored procedure, automatically populating the parameters. Parameter sets are cached for performance.
+        /// </summary>
+        /// <param name="connection">Connection used to derive parameters (first time only) or create the command.</param>
+        /// <param name="procedureName">Name of the stored procedure for which to create the command and parameters.</param>
+        public static SqlCommand CreateCommandWithParameters(this SqlConnection connection, string procedureName)
 		{
 			// Validate
 			if (connection is null) throw new ArgumentNullException(nameof(connection));

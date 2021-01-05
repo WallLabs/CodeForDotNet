@@ -13,7 +13,6 @@ namespace CodeForDotNet.ComponentModel
     /// <see cref="SerializableAttribute"/> must still be defined on your class.
     /// </remarks>
     [Serializable]
-    [SuppressMessage("Microsoft.Naming", "CA1710", Justification = "Should not end in \"Collection\" because it extends \"BindingList\" so is best named similarly.")]
     public abstract class GenericBindingList<T> : BindingList<T>
     {
         #region Private Fields

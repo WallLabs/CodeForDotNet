@@ -10,7 +10,6 @@ namespace CodeForDotNet.Data
     /// </summary>
     [XmlRoot(XmlRootName, Namespace = XmlNamespace)]
     [XmlType(XmlTypeName, Namespace = XmlNamespace)]
-    [SuppressMessage("Microsoft.Usage", "CA2227", Justification = "Settable reference properties which would normally be read-only must be allowed to support system XML serializer.")]
     public class Schedule
     {
         #region Public Fields

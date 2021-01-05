@@ -9,6 +9,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// Managed <see cref="Wia.DeviceCommands"/>.
     /// </summary>
     [SupportedOSPlatform("windows")]
+    [CLSCompliant(false)]
     public class WiaDeviceCommandCollection : DisposableCollection<WiaDeviceCommand>
     {
         #region Lifetime

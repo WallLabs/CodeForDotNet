@@ -476,8 +476,7 @@ namespace CodeForDotNet.Tests.Facts
 		/// Tests the <see cref="Numerics.Number.Divide(Numerics.Number, Numerics.Number, out Numerics.Number)"/> method and operator.
 		/// </summary>
 		[TestMethod]
-		[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "Test.")]
-		public void NumberTestDivide()
+        public void NumberTestDivide()
 		{
 			// Test simple division
 			var zero = Number.Zero;

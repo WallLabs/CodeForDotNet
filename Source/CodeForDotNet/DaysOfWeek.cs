@@ -9,8 +9,7 @@ namespace CodeForDotNet
 	/// </summary>
 	[XmlType(nameof(DaysOfWeek) + "Type", Namespace = Constants.XmlRootNamespace)]
 	[Flags]
-	[SuppressMessage("Microsoft.Naming", "CA1714", Justification = "The subject \"days\" (of the week) is already plural and grammatically correct. Could be renamed to \"WeekDays\" to satisfy this rule, but that is not preferred because we want to extend (be named like) the existing Microsoft \"DayOfWeek\" type and not conflict with the logical term and flags member \"weekdays\".")]
-	public enum DaysOfWeek
+    public enum DaysOfWeek
 	{
 		/// <summary>
 		/// None.

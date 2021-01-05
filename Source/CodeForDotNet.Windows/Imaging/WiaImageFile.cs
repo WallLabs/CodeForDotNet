@@ -9,6 +9,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// Managed <see cref="WiaImageFile"/>.
     /// </summary>
     [SupportedOSPlatform("windows")]
+    [CLSCompliant(false)]
     public class WiaImageFile : DisposableObject
     {
         #region Private Fields

@@ -7,8 +7,7 @@ namespace CodeForDotNet.Drawing.Printing
 	/// Printer page settings.
 	/// </summary>
 	[Serializable]
-	[SuppressMessage("Microsoft.Usage", "CA2235", Justification = "Custom member types are serializable. Rest are false positive, e.g. built-in value types do not need to be marked serializable.")]
-	public class PageSettingsData
+    public class PageSettingsData
 	{
 		#region Public Constructors
 

@@ -8,13 +8,12 @@ namespace CodeForDotNet.UI.Models
 	public abstract class PageUIModel<TApplicationUIModel> : UIModel
 		where TApplicationUIModel : ApplicationUIModel
 	{
-		#region Protected Constructors
+        #region Protected Constructors
 
-		/// <summary>
-		/// Creates an instance.
-		/// </summary>
-		[SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "")]
-		protected PageUIModel(TApplicationUIModel application)
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        protected PageUIModel(TApplicationUIModel application)
 			: base(application.UITaskFactory)
 		{
 			// Initialize members

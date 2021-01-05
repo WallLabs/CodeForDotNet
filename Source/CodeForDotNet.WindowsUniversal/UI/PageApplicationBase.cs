@@ -8,6 +8,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
     /// strongly typed model and session state persistence when used in
     /// a <see cref="ApplicationBase"/> based application.
     /// </summary>
+    [CLSCompliant(false)]
     public class PageApplicationBase<TApplication> : PageBase
         where TApplication : ApplicationBase
     {

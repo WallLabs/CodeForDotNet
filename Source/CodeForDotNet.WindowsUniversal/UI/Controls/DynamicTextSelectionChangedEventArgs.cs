@@ -9,6 +9,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
     /// with additional support for the concept of focus shifting to another control.
     /// Enables the sender to efficiently set the final changes once and avoid looping or conflicting change events.
     /// </summary>
+    [CLSCompliant(false)]
     public class DynamicTextSelectionChangedEventArgs : EventArgs
     {
         #region Lifetime

@@ -32,16 +32,14 @@ namespace CodeForDotNet.Collections
 		/// </summary>
 		public ObservableDictionary() => _dictionary = new Dictionary<TKey, TValue>();
 
-		#endregion Public Constructors
+        #endregion Public Constructors
 
-		#region Protected Constructors
+        #region Protected Constructors
 
-		/// <summary>
-		/// Serialization constructor.
-		/// </summary>
-		[SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Unused parameter required by interface.")]
-		[SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Provided by framework.")]
-		protected ObservableDictionary(SerializationInfo info, StreamingContext context)
+        /// <summary>
+        /// Serialization constructor.
+        /// </summary>
+        protected ObservableDictionary(SerializationInfo info, StreamingContext context)
 		{
 			_dictionary = (Dictionary<TKey, TValue>)info.GetValue(nameof(_dictionary), typeof(Dictionary<TKey, TValue>));
 		}
@@ -203,8 +201,7 @@ namespace CodeForDotNet.Collections
 		/// Serialization method.
 		/// </summary>
 		[SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-		[SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "Provided by framework.")]
-		public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
 		{
 			info.AddValue(nameof(_dictionary), _dictionary);
 		}

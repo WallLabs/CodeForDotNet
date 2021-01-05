@@ -3,6 +3,7 @@
 ## Version 5.0.2101.5### (2021.01.05)
 * Upgraded to .NET 5 framework.
 * Switched to new SDK/NetAnalyzers Code Analysis (FxCop depreciated).
+* Added CLS compliance attributes.
 
 ## Version 4.9.2005.28### (2020.05.28)
 * Upgraded .NET Standard 2.1/Core 3.1 framework.

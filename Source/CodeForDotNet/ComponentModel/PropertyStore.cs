@@ -10,7 +10,6 @@ namespace CodeForDotNet.ComponentModel
     /// <summary>
     /// Object containing uniquely identifiable properties, with intelligent change notification and event caching.
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1063", Justification = "This is the correct disposable implementation.")]
     public abstract class PropertyStore : EventCache, IPropertyStore
     {
         #region Private Fields

@@ -2,11 +2,10 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace CodeForDotNet.Windows.Imaging
 {
-	/// <summary>
-	/// Managed <see cref="WiaImageIntent"/>.
-	/// </summary>
-	[SuppressMessage("Microsoft.Usage", "CA1027", Justification = "Is not a flags enumeration.")]
-	public enum WiaImageIntent
+    /// <summary>
+    /// Managed <see cref="WiaImageIntent"/>.
+    /// </summary>
+    public enum WiaImageIntent
 	{
 		/// <summary>
 		/// Unspecified.

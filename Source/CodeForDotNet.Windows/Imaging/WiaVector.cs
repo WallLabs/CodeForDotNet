@@ -11,6 +11,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// </summary>
     [SuppressMessage("Microsoft.Design", "CA1010", Justification = "Extends unmanaged type which is a collection of different object types.")]
     [SupportedOSPlatform("windows")]
+    [CLSCompliant(false)]
     public class WiaVector : IList
     {
         #region Private Fields

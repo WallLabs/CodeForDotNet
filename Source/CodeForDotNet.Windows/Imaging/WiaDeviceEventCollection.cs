@@ -9,6 +9,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// Managed <see cref="Wia.DeviceEvents"/>.
     /// </summary>
     [SupportedOSPlatform("windows")]
+    [CLSCompliant(false)]
     public class WiaDeviceEventCollection : DisposableCollection<WiaDeviceEvent>
     {
         #region Lifetime

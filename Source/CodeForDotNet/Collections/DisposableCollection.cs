@@ -8,7 +8,6 @@ namespace CodeForDotNet.Collections
     /// <summary>
     /// Disposable collection of <typeparamref name="T"/> items. Also disposes items when removed or the collection is cleared.
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1063", Justification = "This is the correct disposable implementation.")]
     public class DisposableCollection<T> : Collection<T>, IDisposableObject where T : class
     {
         #region Public Constructors

@@ -10,18 +10,17 @@ namespace CodeForDotNet.Diagnostics
 	/// </summary>
 	public static class ProcessExtensions
 	{
-		#region Public Methods
+        #region Public Methods
 
-		/// <summary>
-		/// Creates and executes a process with timeout, capturing the results.
-		/// </summary>
-		/// <param name="program">Program to execute. Must not be null</param>
-		/// <param name="parameters">Parameters to pass. Can be null. Can contain environment variables</param>
-		/// <param name="workingDirectory">Working directory to use. Can be relative. Null or empty means current directory.</param>
-		/// <param name="timeout">Optional timeout in seconds.</param>
-		/// <returns><see cref="ProcessResult"/> with set ReturnCode, Output, Errors, TimedOut</returns>
-		[SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "General exception caught in controlled situation.")]
-		public static ProcessResult Run(string program, string? parameters = null, string? workingDirectory = null, int? timeout = null)
+        /// <summary>
+        /// Creates and executes a process with timeout, capturing the results.
+        /// </summary>
+        /// <param name="program">Program to execute. Must not be null</param>
+        /// <param name="parameters">Parameters to pass. Can be null. Can contain environment variables</param>
+        /// <param name="workingDirectory">Working directory to use. Can be relative. Null or empty means current directory.</param>
+        /// <param name="timeout">Optional timeout in seconds.</param>
+        /// <returns><see cref="ProcessResult"/> with set ReturnCode, Output, Errors, TimedOut</returns>
+        public static ProcessResult Run(string program, string? parameters = null, string? workingDirectory = null, int? timeout = null)
 		{
 			// Validate
 			if (string.IsNullOrEmpty(program)) throw new ArgumentNullException(nameof(program));
