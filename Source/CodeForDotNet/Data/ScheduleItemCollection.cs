@@ -3,6 +3,7 @@ using CodeForDotNet.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Serialization;
@@ -80,10 +81,11 @@ namespace CodeForDotNet.Data
 			return ArrayExtensions.AreEqual(this, otherCollection);
 		}
 
-		/// <summary>
-		/// Returns a hash-code based on the current value of this object.
-		/// </summary>
-		public override int GetHashCode() => ArrayExtensions.GetHashCode(this);
+        /// <summary>
+        /// Returns a hash-code based on the current value of this object.
+        /// </summary>
+        [SuppressMessage("MicrosoftCodeAnalysisCorrectness", "RS1024:Compare symbols correctly", Justification = "False positive.")]
+        public override int GetHashCode() => ArrayExtensions.GetHashCode(this);
 
         /// <summary>
         /// Returns a string describing the schedule items, using the <see cref="CultureInfo.CurrentCulture"/>.

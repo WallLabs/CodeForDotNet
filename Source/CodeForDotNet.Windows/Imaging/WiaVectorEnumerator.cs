@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
@@ -9,6 +10,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Managed enumerator for <see cref="Wia.Vector" /> items.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class WiaVectorEnumerator : DisposableObject, IEnumerator<WiaVector>
     {
         #region Lifetime

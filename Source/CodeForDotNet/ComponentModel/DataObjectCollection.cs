@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeForDotNet.ComponentModel
 {
@@ -146,16 +147,18 @@ namespace CodeForDotNet.ComponentModel
 			}
 		}
 
-		/// <summary>
-		/// Gets a hash code based on the current values of this object.
-		/// </summary>
-		public override int GetHashCode()
+
+        /// <summary>
+        /// Gets a hash code based on the current values of this object.
+        /// </summary>
+        [SuppressMessage("MicrosoftCodeAnalysisCorrectness", "RS1024:Compare symbols correctly", Justification = "False positive.")]
+        public override int GetHashCode()
 		{
 			// Lock changes
 			lock (_syncRoot)
 			{
-				// Return hash
-				return ArrayExtensions.GetHashCode(this);
+                // Return hash
+                return ArrayExtensions.GetHashCode(this);
 			}
 		}
 

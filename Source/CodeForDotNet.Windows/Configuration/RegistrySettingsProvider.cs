@@ -20,6 +20,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Reflection;
+using System.Runtime.Versioning;
 
 namespace CodeForDotNet.Configuration
 {
@@ -29,6 +30,7 @@ namespace CodeForDotNet.Configuration
     /// and optional RegistrySettingsProviderSubkeyAttribute.
     /// e.g. HKLM/HKCU then SOFTWARE\Company\Product\[Subkey\]Setting = Value.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class RegistrySettingsProvider : SettingsProvider
     {
         /// <summary>
@@ -53,6 +55,7 @@ namespace CodeForDotNet.Configuration
         {
             base.Initialize(ApplicationName, config);
         }
+
 
         /// <summary>
         /// SetPropertyValue is invoked when ApplicationSettingsBase.Save is called
@@ -97,8 +100,7 @@ namespace CodeForDotNet.Configuration
             // Iterate through the settings to be retrieved
             foreach (SettingsProperty? setting in collection)
             {
-                var value = new SettingsPropertyValue(setting)
-                {
+                var value = new SettingsPropertyValue(setting) {
                     IsDirty = false,
                     SerializedValue = GetRegKey(setting!).GetValue(setting!.Name)
                 };

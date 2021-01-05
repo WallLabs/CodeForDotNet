@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
@@ -7,6 +8,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Managed <see cref="Wia.DeviceEvent"/>.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class WiaDeviceEvent : DisposableObject
     {
         #region Lifetime

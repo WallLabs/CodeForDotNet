@@ -7,8 +7,8 @@ using System.Resources;
 [assembly: AssemblyCulture("")]
 
 // Version.
-[assembly: AssemblyVersion("4.9.2005.29001")]
-[assembly: AssemblyFileVersion("4.9.2005.29001")]
+[assembly: AssemblyVersion("5.0.2101.5000")]
+[assembly: AssemblyFileVersion("5.0.2101.5000")]
 
 // Resources.
 [assembly: NeutralResourcesLanguage("en-US")]

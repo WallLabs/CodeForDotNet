@@ -1,5 +1,6 @@
 using CodeForDotNet.Collections;
 using System;
+using System.Runtime.Versioning;
 using Wia = Interop.Wia;
 
 namespace CodeForDotNet.Windows.Imaging
@@ -7,6 +8,7 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Managed <see cref="Wia.DeviceCommands"/>.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class WiaDeviceCommandCollection : DisposableCollection<WiaDeviceCommand>
     {
         #region Lifetime

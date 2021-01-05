@@ -1,0 +1,3 @@
+using System.Diagnostics.CodeAnalysis;
+
+[assembly: SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "Assembly is Windows specific.")]

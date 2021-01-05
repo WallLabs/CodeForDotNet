@@ -1,6 +1,10 @@
 # Code for .NET - Release Notes
 
-## Version 4.9.2020.28### (2020.05.28)
+## Version 5.0.2101.5### (2021.01.05)
+* Upgraded to .NET 5 framework.
+* Switched to new SDK/NetAnalyzers Code Analysis (FxCop depreciated).
+
+## Version 4.9.2005.28### (2020.05.28)
 * Upgraded .NET Standard 2.1/Core 3.1 framework.
 * Legacy support for .NET Standard 2.0 via ".Legacy" assemblies.
 * UWP is still supported via the legacy assemblies.

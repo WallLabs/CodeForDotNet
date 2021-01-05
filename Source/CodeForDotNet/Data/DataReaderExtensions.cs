@@ -227,26 +227,29 @@ namespace CodeForDotNet.Data
 			return reader.GetInt64(ordinal);
 		}
 
-		/// <summary>
-		/// Reads a <see cref="Nullable&lt;T&gt;"/> from a record by column name.
-		/// </summary>
-		/// <param name="reader"><see cref="IDataRecord"/> to read from.</param>
-		/// <param name="column">Column name to read.</param>
-		/// <param name="defaultValue">
-		/// Value to return when the column is <see cref="System.DBNull"/>. When not specified returns the default type value, e.g. empty value such as zero for
-		/// int types, or null for reference types.
-		/// </param>
-		/// <returns>Value of the correct type or null when <see cref="System.DBNull"/>.</returns>
-		/// <remarks>The type must match or have a cast operator, because no explicit conversion is performed.</remarks>
-		public static T GetNullable<T>(this IDataRecord reader, string column, T defaultValue = default)
+        /// <summary>
+        /// Reads a <see cref="Nullable&lt;T&gt;"/> from a record by column name.
+        /// </summary>
+        /// <param name="reader"><see cref="IDataRecord"/> to read from.</param>
+        /// <param name="column">Column name to read.</param>
+        /// <param name="defaultValue">
+        /// Value to return when the column is <see cref="System.DBNull"/>. When not specified returns the default type value, e.g. empty value such as zero for
+        /// int types, or null for reference types.
+        /// </param>
+        /// <returns>Value of the correct type or null when <see cref="System.DBNull"/>.</returns>
+        /// <remarks>The type must match or have a cast operator, because no explicit conversion is performed.</remarks>
+        public static T GetNullable<T>(this IDataRecord reader, string column, T defaultValue = default)
+            where T : class?
 		{
 			// Validate.
 			if (reader is null) throw new ArgumentNullException(nameof(reader));
 
 			// Read and return value.
 			var ordinal = reader.GetOrdinal(column);
-			return reader.GetNullable(ordinal, defaultValue);
-		}
+#pragma warning disable CS8603 // Possible null reference return.
+            return reader.GetNullable(ordinal, defaultValue);
+#pragma warning restore CS8603 // Possible null reference return.
+        }
 
 		/// <summary>
 		/// Reads a <see cref="Nullable&lt;T&gt;"/> from a record.
@@ -260,13 +263,16 @@ namespace CodeForDotNet.Data
 		/// <returns>Value of the correct type or default when <see cref="System.DBNull"/>.</returns>
 		/// <remarks>The type must match or have a cast operator, because no explicit conversion is performed.</remarks>
 		public static T GetNullable<T>(this IDataRecord reader, int ordinal, T defaultValue = default)
-		{
-			// Validate.
-			if (reader is null) throw new ArgumentNullException(nameof(reader));
+           where T : class?
+        {
+            // Validate.
+            if (reader is null) throw new ArgumentNullException(nameof(reader));
 
-			// Read and return value.
-			return reader.IsDBNull(ordinal) ? defaultValue : (T)reader.GetValue(ordinal);
-		}
+            // Read and return value.
+#pragma warning disable CS8603 // Possible null reference return.
+            return reader.IsDBNull(ordinal) ? defaultValue : (T)reader.GetValue(ordinal);
+#pragma warning restore CS8603 // Possible null reference return.
+        }
 
 		/// <summary>
 		/// Reads a <see cref="Nullable&lt;Boolean&gt;"/> from a record by column name.

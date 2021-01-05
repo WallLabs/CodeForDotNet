@@ -65,15 +65,14 @@ namespace CodeForDotNet.Xml
 			_xml = new XmlDocument().CreateDocumentFragment();
 		}
 
-		#endregion Public Constructors
+        #endregion Public Constructors
 
-		#region Private Constructors
+        #region Private Constructors
 
-		/// <summary>
-		/// Serialization constructor.
-		/// </summary>
-		[SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Unused parameter required by serialization.")]
-		private XmlAnyDocument(SerializationInfo info, StreamingContext context)
+        /// <summary>
+        /// Serialization constructor.
+        /// </summary>
+        private XmlAnyDocument(SerializationInfo info, StreamingContext context)
 		{
 			if (info == null) throw new ArgumentNullException(nameof(info));
 			_xml = new XmlDocument().CreateDocumentFragment();
@@ -109,15 +108,14 @@ namespace CodeForDotNet.Xml
 		/// </summary>
 		public IXPathNavigable Xml { get { return _xml; } }
 
-		#endregion Public Properties
+        #endregion Public Properties
 
-		#region Public Methods
+        #region Public Methods
 
-		/// <summary>
-		/// Gets the schema and XML type of this class.
-		/// </summary>
-		[SuppressMessage("Microsoft.Usage", "CA1801", Justification = "Unused parameter required by interface.")]
-		[SuppressMessage("Microsoft.Usage", "IDE0060", Justification = "Unused parameter required by interface.")]
+        /// <summary>
+        /// Gets the schema and XML type of this class.
+        /// </summary>
+        [SuppressMessage("Microsoft.Usage", "IDE0060", Justification = "Unused parameter required by interface.")]
 		public static XmlQualifiedName GetSchema(XmlSchemaSet schemaSet)
 		{
 			return new XmlQualifiedName(XmlTypeName, XmlNamespace);
@@ -340,7 +338,7 @@ namespace CodeForDotNet.Xml
 						{
 							// Return null when path includes filter (cannot automatically create conditional content)
 #if !NETSTANDARD2_0
-							if (pathPart.IndexOf('[', StringComparison.OrdinalIgnoreCase) >= 0)
+							if (pathPart.Contains('[', StringComparison.OrdinalIgnoreCase))
 #else
 							if (pathPart.IndexOf('[') >= 0)
 #endif
