@@ -14,6 +14,9 @@ using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
+
+#nullable enable
 
 namespace CodeForDotNet.WindowsUniversal.UI
 {
@@ -100,7 +103,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
             // TODO: Detect which pages were loaded and re-create them
 
             // Load page data
-            if (!(Pages is null))
+            if (Pages is not null)
             {
                 foreach (var page in Pages)
                     page.LoadState(localSettings);
@@ -118,7 +121,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
             // TODO: Save application data (e.g. list of loaded page types and keys/names)
 
             // Save page data
-            if (!(Pages is null))
+            if (Pages is not null)
             {
                 foreach (var page in Pages)
                     page.SaveState(localSettings);
@@ -175,6 +178,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
+                rootFrame.NavigationFailed += OnNavigationFailed;
 
                 if (@event.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -200,20 +204,13 @@ namespace CodeForDotNet.WindowsUniversal.UI
         }
 
         /// <summary>
-        /// Loads state when the application is resumed.
+        /// Invoked when Navigation to a certain page fails
         /// </summary>
-        protected void OnResuming(object sender, object @event)
+        /// <param name="sender">The Frame which failed navigation</param>
+        /// <param name="e">Details about the navigation failure</param>
+        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            try
-            {
-                // Load state
-                LoadState();
-            }
-            catch (Exception error)
-            {
-                // Log error restoring state then create new model
-                LocalErrorStore.Add(error);
-            }
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
         /// <summary>
@@ -240,6 +237,23 @@ namespace CodeForDotNet.WindowsUniversal.UI
             {
                 // End delay
                 deferral.Complete();
+            }
+        }
+
+        /// <summary>
+        /// Loads state when the application is resumed.
+        /// </summary>
+        protected void OnResuming(object sender, object @event)
+        {
+            try
+            {
+                // Load state
+                LoadState();
+            }
+            catch (Exception error)
+            {
+                // Log error restoring state then create new model
+                LocalErrorStore.Add(error);
             }
         }
 

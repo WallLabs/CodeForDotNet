@@ -22,7 +22,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             // Validate
-            if (!(value is byte byteValue)) throw new ArgumentOutOfRangeException(nameof(value));
+            if (value is not byte byteValue) throw new ArgumentOutOfRangeException(nameof(value));
 
             // Convert to hexadecimal byte string
             return string.Format(CultureInfo.InvariantCulture, "{0:X2}", byteValue);
@@ -35,7 +35,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
             // Validate
-            if (!(value is string stringValue) || stringValue is null)
+            if (value is not string stringValue || stringValue is null)
                 throw new ArgumentNullException(nameof(value));
 
             // Convert hexadecimal string to byte

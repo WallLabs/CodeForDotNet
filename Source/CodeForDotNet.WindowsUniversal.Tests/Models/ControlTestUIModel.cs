@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CodeForDotNet.ComponentModel;
 
 namespace CodeForDotNet.WindowsUniversal.Tests.Models
@@ -29,7 +29,7 @@ namespace CodeForDotNet.WindowsUniversal.Tests.Models
         /// <summary>
         /// ID of the <see cref="TextBoxText"/> property.
         /// </summary>
-        public static readonly Guid TextBoxTextPropertyId = new Guid("{E3965AB2-D624-4713-B556-8AA21802F707}");
+        public static readonly Guid TextBoxTextPropertyId = new("{E3965AB2-D624-4713-B556-8AA21802F707}");
 
         /// <summary>
         /// Text displayed and edited in a normal text box.
@@ -60,7 +60,7 @@ namespace CodeForDotNet.WindowsUniversal.Tests.Models
         /// <summary>
         /// ID of the <see cref="TextBoxTextChangedDate"/> property.
         /// </summary>
-        public static readonly Guid TextBoxTextChangedDatePropertyId = new Guid("{14BF29E9-BCB6-447E-A5EF-B3C8A634667F}");
+        public static readonly Guid TextBoxTextChangedDatePropertyId = new("{14BF29E9-BCB6-447E-A5EF-B3C8A634667F}");
 
         /// <summary>
         /// Date the <see cref="TextBoxText"/> was last changed.
@@ -74,7 +74,7 @@ namespace CodeForDotNet.WindowsUniversal.Tests.Models
         /// <summary>
         /// ID of the <see cref="DynamicTextBoxText"/> property.
         /// </summary>
-        public static readonly Guid DynamicTextBoxTextPropertyId = new Guid("{B204D917-ACCC-4CAD-9B45-5C3E4FC2A2CE}");
+        public static readonly Guid DynamicTextBoxTextPropertyId = new("{B204D917-ACCC-4CAD-9B45-5C3E4FC2A2CE}");
 
         /// <summary>
         /// Text displayed and edited in a normal text box.
@@ -105,7 +105,7 @@ namespace CodeForDotNet.WindowsUniversal.Tests.Models
         /// <summary>
         /// ID of the <see cref="DynamicTextBoxTextChangedDate"/> property.
         /// </summary>
-        public static readonly Guid DynamicTextBoxTextChangedDatePropertyId = new Guid("{86C79A70-5056-42AF-A4B3-2129FC72B85F}");
+        public static readonly Guid DynamicTextBoxTextChangedDatePropertyId = new("{86C79A70-5056-42AF-A4B3-2129FC72B85F}");
 
         /// <summary>
         /// Date the <see cref="DynamicTextBoxText"/> was last changed.

@@ -3,6 +3,7 @@ using CodeForDotNet.Drawing;
 using CodeForDotNet.Numerics;
 using CodeForDotNet.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -12,6 +13,7 @@ namespace CodeForDotNet.Tests.Facts
     /// Tests classes in the drawing namespace.
     /// </summary>
     [TestClass]
+    [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
     public class DrawingTests
     {
         /// <summary>

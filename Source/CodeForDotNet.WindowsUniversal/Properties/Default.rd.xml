@@ -28,6 +28,6 @@
   <Library Name="CodeForDotNet.WindowsUniversal">
 
   	<!-- add directives for your library here -->
-    
+
   </Library>
 </Directives>

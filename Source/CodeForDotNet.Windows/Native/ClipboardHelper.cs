@@ -1,22 +1,24 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
 namespace CodeForDotNet.Windows.Native
 {
-	/// <summary>
-	/// Provides helper functions for the Windows clipboard. For metafile functions, see source article: http://www.dotnet247.com/247reference/msgs/23/118514.aspx
-	/// </summary>
-	public static class ClipboardHelper
+    /// <summary>
+    /// Provides helper functions for the Windows clipboard. For metafile functions, see source article: http://www.dotnet247.com/247reference/msgs/23/118514.aspx
+    /// </summary>
+    [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility", Justification = "<Pending>")]
+    public static class ClipboardHelper
 	{
-		#region Public Methods
+        #region Public Methods
 
-		/// <summary>
-		/// Retrieves a .NET <see cref="Metafile"/> from the clipboard correctly.
-		/// </summary>
-		/// <returns>.NET <see cref="Metafile"/> or null when no EMF is on the clipboard.</returns>
-		public static Metafile? GetMetafileFromClipboard(IntPtr windowHandle)
+        /// <summary>
+        /// Retrieves a .NET <see cref="Metafile"/> from the clipboard correctly.
+        /// </summary>
+        /// <returns>.NET <see cref="Metafile"/> or null when no EMF is on the clipboard.</returns>
+        public static Metafile? GetMetafileFromClipboard(IntPtr windowHandle)
 		{
 			Metafile? metafile = null;
 			if (SafeNativeMethods.OpenClipboard(windowHandle))

@@ -3,6 +3,8 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
+#nullable enable
+
 namespace CodeForDotNet.WindowsUniversal.UI
 {
     /// <summary>
@@ -65,7 +67,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
 
             // Load state.
             // TODO: Use model key from UI model based class
-            if (!(Model is null))
+            if (Model is not null)
             {
                 var modelKey = Model.GetType().FullName + "." + Name;
                 Model = container.Values[modelKey];
@@ -82,7 +84,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
 
             // Save state.
             // TODO: Use model key from UI model based class
-            if (!(Model is null))
+            if (Model is not null)
             {
                 var modelKey = Model.GetType().FullName + "." + Name;
                 container.Values[modelKey] = Model;
