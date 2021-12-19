@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Configuration;
 
-namespace CodeForDotNet.Configuration
+namespace CodeForDotNet.Windows.Configuration
 {
     /// <summary>
     /// Interface representation of the system <see cref="ApplicationSettingsBase"/>.
@@ -30,7 +30,7 @@ namespace CodeForDotNet.Configuration
         /// A System.Configuration.SettingsPropertyCollection containing all the System.Configuration.SettingsProperty
         /// objects used in the current wrapper.
         /// </returns>
-        /// <exception cref="System.Configuration.ConfigurationErrorsException">
+        /// <exception cref="ConfigurationErrorsException">
         /// The associated settings provider could not be found or its instantiation failed.
         /// </exception>
         [Browsable(false)]
@@ -69,14 +69,14 @@ namespace CodeForDotNet.Configuration
         /// </summary>
         /// <param name="propertyName">A System.String containing the name of the property to access.</param>
         /// <returns>If found, the value of the named settings property; otherwise, null.</returns>
-        /// <exception cref="System.Configuration.SettingsPropertyNotFoundException">
+        /// <exception cref="SettingsPropertyNotFoundException">
         /// There are no properties associated with the current wrapper or the specified
         /// property could not be found.
         /// </exception>
-        /// <exception cref="System.Configuration.SettingsPropertyIsReadOnlyException">
+        /// <exception cref="SettingsPropertyIsReadOnlyException">
         /// An attempt was made to set a read-only property.
         /// </exception>
-        /// <exception cref="System.Configuration.SettingsPropertyWrongTypeException">
+        /// <exception cref="SettingsPropertyWrongTypeException">
         /// The value supplied is of a type incompatible with the settings property,
         /// during a set operation.
         /// </exception>
@@ -117,7 +117,7 @@ namespace CodeForDotNet.Configuration
         /// An System.Object containing the value of the specified System.Configuration.SettingsProperty
         /// if found; otherwise, null.
         /// </returns>
-        /// <exception cref="System.Configuration.SettingsPropertyNotFoundException">
+        /// <exception cref="SettingsPropertyNotFoundException">
         /// The property does not exist. The property count is zero or the property cannot
         /// be found in the data store.
         /// </exception>

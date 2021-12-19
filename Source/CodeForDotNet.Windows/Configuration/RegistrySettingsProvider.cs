@@ -22,7 +22,7 @@ using System.Configuration;
 using System.Reflection;
 using System.Runtime.Versioning;
 
-namespace CodeForDotNet.Configuration
+namespace CodeForDotNet.Windows.Configuration
 {
     /// <summary>
     /// Settings provider which stores settings in the HKLM or HKCU registry.
@@ -72,15 +72,11 @@ namespace CodeForDotNet.Configuration
             {
                 var key = GetRegKey(property!.Property);
                 if (property.SerializedValue != null)
-                {
                     // Set value when non-default
                     key.SetValue(property.Name, property.SerializedValue);
-                }
                 else
-                {
                     // Delete value when default or null (if exists)
                     key.DeleteValue(property.Name, false);
-                }
             }
         }
 
@@ -132,10 +128,8 @@ namespace CodeForDotNet.Configuration
         private static bool IsUserScoped(SettingsProperty property)
         {
             foreach (DictionaryEntry? settingsAttribute in property.Attributes)
-            {
                 if (settingsAttribute?.Value is UserScopedSettingAttribute)
                     return true;
-            }
             return false;
         }
 
