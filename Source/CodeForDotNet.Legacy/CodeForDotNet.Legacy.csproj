@@ -1,1 +1,160 @@
-<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><TargetFramework>netstandard2.0</TargetFramework><SignAssembly>true</SignAssembly><AssemblyOriginatorKeyFile>C:\Users\tony\Source\Repos\WallLabs\CodeForDotNet\Source\Common\Code for .NET.snk</AssemblyOriginatorKeyFile><RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild><LangVersion>8</LangVersion><Nullable>Enable</Nullable><Authors>Wall Labs</Authors><Product>Code for .NET</Product><Description>Global cross-platform definitions and extensions.</Description><Copyright>Copyright © Wall Labs. All Rights Reserved.</Copyright><NeutralLanguage>en-US</NeutralLanguage><AssemblyVersion>5.0.2106.29000</AssemblyVersion><FileVersion>5.0.2106.29000</FileVersion><EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild><EnableNETAnalyzers>true</EnableNETAnalyzers></PropertyGroup><PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'"><TreatWarningsAsErrors>true</TreatWarningsAsErrors><DocumentationFile>C:\Users\tony\Source\Repos\WallLabs\CodeForDotNet\Source\CodeForDotNet.Legacy\CodeForDotNet.Legacy.xml</DocumentationFile></PropertyGroup><PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'"><TreatWarningsAsErrors>true</TreatWarningsAsErrors><DocumentationFile>C:\Users\tony\Source\Repos\WallLabs\CodeForDotNet\Source\CodeForDotNet.Legacy\CodeForDotNet.Legacy.xml</DocumentationFile></PropertyGroup><ItemGroup><CodeAnalysisDictionary Include="..\Common\Dictionary.xml" Link="Dictionary.xml" /></ItemGroup><ItemGroup><Compile Include="..\CodeForDotNet\ByteExtensions.cs" Link="ByteExtensions.cs" /><Compile Include="..\CodeForDotNet\CodeForDotNetXsd.cs" Link="CodeForDotNetXsd.cs" /><Compile Include="..\CodeForDotNet\Collections\ArrayExtensions.cs" Link="Collections\ArrayExtensions.cs" /><Compile Include="..\CodeForDotNet\Collections\DictionaryExtensions.cs" Link="Collections\DictionaryExtensions.cs" /><Compile Include="..\CodeForDotNet\Collections\DisposableCollection.cs" Link="Collections\DisposableCollection.cs" /><Compile Include="..\CodeForDotNet\Collections\INotifyDictionaryChanged.cs" Link="Collections\INotifyDictionaryChanged.cs" /><Compile Include="..\CodeForDotNet\Collections\NotifyDictionaryChangedEventArgs.cs" Link="Collections\NotifyDictionaryChangedEventArgs.cs" /><Compile Include="..\CodeForDotNet\Collections\ObservableDictionary.cs" Link="Collections\ObservableDictionary.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\BigIntegerConverter.cs" Link="ComponentModel\BigIntegerConverter.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\DataObject.cs" Link="ComponentModel\DataObject.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\DataObjectChangeAction.cs" Link="ComponentModel\DataObjectChangeAction.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\DataObjectChangeEventArgs.cs" Link="ComponentModel\DataObjectChangeEventArgs.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\DataObjectCollection.cs" Link="ComponentModel\DataObjectCollection.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\DataObjectState.cs" Link="ComponentModel\DataObjectState.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\EventCache.cs" Link="ComponentModel\EventCache.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\GenericBindingList.cs" Link="ComponentModel\GenericBindingList.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\IDataObject.cs" Link="ComponentModel\IDataObject.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\IEventCache.cs" Link="ComponentModel\IEventCache.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\IPropertyStore.cs" Link="ComponentModel\IPropertyStore.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\IUndoable.cs" Link="ComponentModel\IUndoable.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\IViewObject.cs" Link="ComponentModel\IViewObject.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\NotifyPropertyChangedBase.cs" Link="ComponentModel\NotifyPropertyChangedBase.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\PropertyStore.cs" Link="ComponentModel\PropertyStore.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\PropertyStoreChangeEventArgs.cs" Link="ComponentModel\PropertyStoreChangeEventArgs.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\ViewObject.cs" Link="ComponentModel\ViewObject.cs" /><Compile Include="..\CodeForDotNet\ComponentModel\ViewObjectParentChangedEventArgs.cs" Link="ComponentModel\ViewObjectParentChangedEventArgs.cs" /><Compile Include="..\CodeForDotNet\Constants.cs" Link="Constants.cs" /><Compile Include="..\CodeForDotNet\Data\DataReaderExtensions.cs" Link="Data\DataReaderExtensions.cs" /><Compile Include="..\CodeForDotNet\Data\DataSetChangeLog.cs" Link="Data\DataSetChangeLog.cs" /><Compile Include="..\CodeForDotNet\Data\DataSetExtensions.cs" Link="Data\DataSetExtensions.cs" /><Compile Include="..\CodeForDotNet\Data\ErrorReportData.cs" Link="Data\ErrorReportData.cs" /><Compile Include="..\CodeForDotNet\Data\GuidDataKey.cs" Link="Data\GuidDataKey.cs" /><Compile Include="..\CodeForDotNet\Data\Schedule.cs" Link="Data\Schedule.cs" /><Compile Include="..\CodeForDotNet\Data\ScheduleItem.cs" Link="Data\ScheduleItem.cs" /><Compile Include="..\CodeForDotNet\Data\ScheduleItemCollection.cs" Link="Data\ScheduleItemCollection.cs" /><Compile Include="..\CodeForDotNet\Data\ScheduleItemOffset.cs" Link="Data\ScheduleItemOffset.cs" /><Compile Include="..\CodeForDotNet\Data\ScheduleItemRecurrence.cs" Link="Data\ScheduleItemRecurrence.cs" /><Compile Include="..\CodeForDotNet\DateTimeExtensions.cs" Link="DateTimeExtensions.cs" /><Compile Include="..\CodeForDotNet\DaysOfWeek.cs" Link="DaysOfWeek.cs" /><Compile Include="..\CodeForDotNet\DaysOfWeekExtensions.cs" Link="DaysOfWeekExtensions.cs" /><Compile Include="..\CodeForDotNet\Diagnostics\ActivityIdTraceFilter.cs" Link="Diagnostics\ActivityIdTraceFilter.cs" /><Compile Include="..\CodeForDotNet\Diagnostics\FileWriterTraceListener.cs" Link="Diagnostics\FileWriterTraceListener.cs" /><Compile Include="..\CodeForDotNet\Diagnostics\ProcessExtensions.cs" Link="Diagnostics\ProcessExtensions.cs" /><Compile Include="..\CodeForDotNet\Diagnostics\ProcessResult.cs" Link="Diagnostics\ProcessResult.cs" /><Compile Include="..\CodeForDotNet\Diagnostics\StopwatchExtensions.cs" Link="Diagnostics\StopwatchExtensions.cs" /><Compile Include="..\CodeForDotNet\DisposableObject.cs" Link="DisposableObject.cs" /><Compile Include="..\CodeForDotNet\Drawing\BrushData.cs" Link="Drawing\BrushData.cs" /><Compile Include="..\CodeForDotNet\Drawing\BrushExtensions.cs" Link="Drawing\BrushExtensions.cs" /><Compile Include="..\CodeForDotNet\Drawing\BrushFillType.cs" Link="Drawing\BrushFillType.cs" /><Compile Include="..\CodeForDotNet\Drawing\BrushFillWrapMode.cs" Link="Drawing\BrushFillWrapMode.cs" /><Compile Include="..\CodeForDotNet\Drawing\ColorCollection.cs" Link="Drawing\ColorCollection.cs" /><Compile Include="..\CodeForDotNet\Drawing\ColorExtensions.cs" Link="Drawing\ColorExtensions.cs" /><Compile Include="..\CodeForDotNet\Drawing\FontData.cs" Link="Drawing\FontData.cs" /><Compile Include="..\CodeForDotNet\Drawing\FontExtensions.cs" Link="Drawing\FontExtensions.cs" /><Compile Include="..\CodeForDotNet\Drawing\FontStyle.cs" Link="Drawing\FontStyle.cs" /><Compile Include="..\CodeForDotNet\Drawing\ImageExtensions.cs" Link="Drawing\ImageExtensions.cs" /><Compile Include="..\CodeForDotNet\Drawing\PointExtensions.cs" Link="Drawing\PointExtensions.cs" /><Compile Include="..\CodeForDotNet\Drawing\Printing\MarginsExtensions.cs" Link="Drawing\Printing\MarginsExtensions.cs" /><Compile Include="..\CodeForDotNet\Drawing\Printing\PageMarginsData.cs" Link="Drawing\Printing\PageMarginsData.cs" /><Compile Include="..\CodeForDotNet\Drawing\Printing\PageSettingsData.cs" Link="Drawing\Printing\PageSettingsData.cs" /><Compile Include="..\CodeForDotNet\Drawing\Printing\PrinterSettingsData.cs" Link="Drawing\Printing\PrinterSettingsData.cs" /><Compile Include="..\CodeForDotNet\Drawing\Printing\PrinterSettingsDuplex.cs" Link="Drawing\Printing\PrinterSettingsDuplex.cs" /><Compile Include="..\CodeForDotNet\Drawing\Printing\PrintingExtensions.cs" Link="Drawing\Printing\PrintingExtensions.cs" /><Compile Include="..\CodeForDotNet\Drawing\StringHorizontalAlignment.cs" Link="Drawing\StringHorizontalAlignment.cs" /><Compile Include="..\CodeForDotNet\ExceptionExtensions.cs" Link="ExceptionExtensions.cs" /><Compile Include="..\CodeForDotNet\GuidExtensions.cs" Link="GuidExtensions.cs" /><Compile Include="..\CodeForDotNet\IDisposableObject.cs" Link="IDisposableObject.cs" /><Compile Include="..\CodeForDotNet\IO\FileSystemExtensions.cs" Link="IO\FileSystemExtensions.cs" /><Compile Include="..\CodeForDotNet\IO\FileSystemExtensionsProgressEventArgs.cs" Link="IO\FileSystemExtensionsProgressEventArgs.cs" /><Compile Include="..\CodeForDotNet\MonthOfYear.cs" Link="MonthOfYear.cs" /><Compile Include="..\CodeForDotNet\Network\MimeExtensions.cs" Link="Network\MimeExtensions.cs" /><Compile Include="..\CodeForDotNet\Network\NetworkExtensions.cs" Link="Network\NetworkExtensions.cs" /><Compile Include="..\CodeForDotNet\Numerics\AngleVector2.cs" Link="Numerics\AngleVector2.cs" /><Compile Include="..\CodeForDotNet\Numerics\BigIntegerExtensions.cs" Link="Numerics\BigIntegerExtensions.cs" /><Compile Include="..\CodeForDotNet\Numerics\Number.cs" Link="Numerics\Number.cs" /><Compile Include="..\CodeForDotNet\Numerics\NumberExtensions.cs" Link="Numerics\NumberExtensions.cs" /><Compile Include="..\CodeForDotNet\Numerics\Quadrant.cs" Link="Numerics\Quadrant.cs" /><Compile Include="..\CodeForDotNet\Properties\Resources.Designer.cs" Link="Properties\Resources.Designer.cs" /><Compile Include="..\CodeForDotNet\Runtime\Serialization\DataContractJsonSerializerExtensions.cs" Link="Runtime\Serialization\DataContractJsonSerializerExtensions.cs" /><Compile Include="..\CodeForDotNet\StringExtensions.cs" Link="StringExtensions.cs" /><Compile Include="..\CodeForDotNet\Threading\AsyncResult.cs" Link="Threading\AsyncResult.cs" /><Compile Include="..\CodeForDotNet\Threading\CompletedAsyncResult.cs" Link="Threading\CompletedAsyncResult.cs" /><Compile Include="..\CodeForDotNet\Threading\IThreadSafe.cs" Link="Threading\IThreadSafe.cs" /><Compile Include="..\CodeForDotNet\TimeSpanExtensions.cs" Link="TimeSpanExtensions.cs" /><Compile Include="..\CodeForDotNet\TypeExtensions.cs" Link="TypeExtensions.cs" /><Compile Include="..\CodeForDotNet\ValueChangedEventArgs.cs" Link="ValueChangedEventArgs.cs" /><Compile Include="..\CodeForDotNet\ValueEventArgs.cs" Link="ValueEventArgs.cs" /><Compile Include="..\CodeForDotNet\Xml\PrivateXPathFunctions.cs" Link="Xml\PrivateXPathFunctions.cs" /><Compile Include="..\CodeForDotNet\Xml\W3cXPathFunctions.cs" Link="Xml\W3cXPathFunctions.cs" /><Compile Include="..\CodeForDotNet\Xml\XmlAnyDocument.cs" Link="Xml\XmlAnyDocument.cs" /><Compile Include="..\CodeForDotNet\Xml\XmlExtensions.cs" Link="Xml\XmlExtensions.cs" /><Compile Include="..\CodeForDotNet\Xml\XmlFormatOptions.cs" Link="Xml\XmlFormatOptions.cs" /><Compile Include="..\CodeForDotNet\Xml\XmlFullExtensions.cs" Link="Xml\XmlFullExtensions.cs" /><Compile Include="..\CodeForDotNet\Xml\XmlSerializerExtensions.cs" Link="Xml\XmlSerializerExtensions.cs" /><Compile Include="..\CodeForDotNet\Xml\XmlSerializerNamespacesExtensions.cs" Link="Xml\XmlSerializerNamespacesExtensions.cs" /><Compile Include="..\Common\AssemblyInfoGlobal.cs" Link="Properties\AssemblyInfoGlobal.cs" /></ItemGroup><ItemGroup><Folder Include="Data\" /><Folder Include="Collections\" /><Folder Include="ComponentModel\" /><Folder Include="Diagnostics\" /><Folder Include="Drawing\Printing\" /><Folder Include="IO\" /><Folder Include="Network\" /><Folder Include="Numerics\" /><Folder Include="Threading\" /><Folder Include="Properties\" /><Folder Include="Runtime\Serialization\" /><Folder Include="Xml\" /></ItemGroup><ItemGroup><EmbeddedResource Include="..\CodeForDotNet\CodeForDotNet.xsd" Link="CodeForDotNet.xsd" /><EmbeddedResource Include="..\CodeForDotNet\Properties\Resources.resx" Link="Properties\Resources.resx"><Generator></Generator></EmbeddedResource><None Include="..\Common\Code for .NET.snk" Link="Code for .NET.snk" /></ItemGroup><ItemGroup><PackageReference Include="Microsoft.CodeAnalysis" Version="4.0.1" /><PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3"><PrivateAssets>all</PrivateAssets><IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets></PackageReference><PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.0.1" /><PackageReference Include="Microsoft.CSharp" Version="4.7.0" /><PackageReference Include="System.Drawing.Common" Version="6.0.0" /></ItemGroup></Project>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\Common\Code for .NET.snk</AssemblyOriginatorKeyFile>
+        <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+        <LangVersion>8</LangVersion>
+
+        <Authors>Wall Labs</Authors>
+        <Product>Code for .NET</Product>
+        <Description>Global cross-platform definitions and extensions.</Description>
+        <Copyright>Copyright © Wall Labs. All Rights Reserved.</Copyright>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <AssemblyVersion>5.0.2106.29000</AssemblyVersion>
+        <FileVersion>5.0.2106.29000</FileVersion>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <DocumentationFile>
+            C:\Users\tony\Source\Repos\WallLabs\CodeForDotNet\Source\CodeForDotNet.Legacy\CodeForDotNet.Legacy.xml</DocumentationFile>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <DocumentationFile>
+            C:\Users\tony\Source\Repos\WallLabs\CodeForDotNet\Source\CodeForDotNet.Legacy\CodeForDotNet.Legacy.xml</DocumentationFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <CodeAnalysisDictionary Include="..\Common\Dictionary.xml" Link="Dictionary.xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="..\CodeForDotNet\ByteExtensions.cs" Link="ByteExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\CodeForDotNetXsd.cs" Link="CodeForDotNetXsd.cs" />
+        <Compile Include="..\CodeForDotNet\Collections\ArrayExtensions.cs" Link="Collections\ArrayExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Collections\DictionaryExtensions.cs" Link="Collections\DictionaryExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Collections\DisposableCollection.cs" Link="Collections\DisposableCollection.cs" />
+        <Compile Include="..\CodeForDotNet\Collections\INotifyDictionaryChanged.cs" Link="Collections\INotifyDictionaryChanged.cs" />
+        <Compile Include="..\CodeForDotNet\Collections\NotifyDictionaryChangedEventArgs.cs" Link="Collections\NotifyDictionaryChangedEventArgs.cs" />
+        <Compile Include="..\CodeForDotNet\Collections\ObservableDictionary.cs" Link="Collections\ObservableDictionary.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\BigIntegerConverter.cs" Link="ComponentModel\BigIntegerConverter.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\DataObject.cs" Link="ComponentModel\DataObject.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\DataObjectChangeAction.cs" Link="ComponentModel\DataObjectChangeAction.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\DataObjectChangeEventArgs.cs" Link="ComponentModel\DataObjectChangeEventArgs.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\DataObjectCollection.cs" Link="ComponentModel\DataObjectCollection.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\DataObjectState.cs" Link="ComponentModel\DataObjectState.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\EventCache.cs" Link="ComponentModel\EventCache.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\GenericBindingList.cs" Link="ComponentModel\GenericBindingList.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\IDataObject.cs" Link="ComponentModel\IDataObject.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\IEventCache.cs" Link="ComponentModel\IEventCache.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\IPropertyStore.cs" Link="ComponentModel\IPropertyStore.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\IUndoable.cs" Link="ComponentModel\IUndoable.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\IViewObject.cs" Link="ComponentModel\IViewObject.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\NotifyPropertyChangedBase.cs" Link="ComponentModel\NotifyPropertyChangedBase.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\PropertyStore.cs" Link="ComponentModel\PropertyStore.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\PropertyStoreChangeEventArgs.cs" Link="ComponentModel\PropertyStoreChangeEventArgs.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\ViewObject.cs" Link="ComponentModel\ViewObject.cs" />
+        <Compile Include="..\CodeForDotNet\ComponentModel\ViewObjectParentChangedEventArgs.cs" Link="ComponentModel\ViewObjectParentChangedEventArgs.cs" />
+        <Compile Include="..\CodeForDotNet\Constants.cs" Link="Constants.cs" />
+        <Compile Include="..\CodeForDotNet\Data\DataReaderExtensions.cs" Link="Data\DataReaderExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Data\DataSetChangeLog.cs" Link="Data\DataSetChangeLog.cs" />
+        <Compile Include="..\CodeForDotNet\Data\DataSetExtensions.cs" Link="Data\DataSetExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Data\ErrorReportData.cs" Link="Data\ErrorReportData.cs" />
+        <Compile Include="..\CodeForDotNet\Data\GuidDataKey.cs" Link="Data\GuidDataKey.cs" />
+        <Compile Include="..\CodeForDotNet\Data\Schedule.cs" Link="Data\Schedule.cs" />
+        <Compile Include="..\CodeForDotNet\Data\ScheduleItem.cs" Link="Data\ScheduleItem.cs" />
+        <Compile Include="..\CodeForDotNet\Data\ScheduleItemCollection.cs" Link="Data\ScheduleItemCollection.cs" />
+        <Compile Include="..\CodeForDotNet\Data\ScheduleItemOffset.cs" Link="Data\ScheduleItemOffset.cs" />
+        <Compile Include="..\CodeForDotNet\Data\ScheduleItemRecurrence.cs" Link="Data\ScheduleItemRecurrence.cs" />
+        <Compile Include="..\CodeForDotNet\DateTimeExtensions.cs" Link="DateTimeExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\DaysOfWeek.cs" Link="DaysOfWeek.cs" />
+        <Compile Include="..\CodeForDotNet\DaysOfWeekExtensions.cs" Link="DaysOfWeekExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Diagnostics\ActivityIdTraceFilter.cs" Link="Diagnostics\ActivityIdTraceFilter.cs" />
+        <Compile Include="..\CodeForDotNet\Diagnostics\FileWriterTraceListener.cs" Link="Diagnostics\FileWriterTraceListener.cs" />
+        <Compile Include="..\CodeForDotNet\Diagnostics\ProcessExtensions.cs" Link="Diagnostics\ProcessExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Diagnostics\ProcessResult.cs" Link="Diagnostics\ProcessResult.cs" />
+        <Compile Include="..\CodeForDotNet\Diagnostics\StopwatchExtensions.cs" Link="Diagnostics\StopwatchExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\DisposableObject.cs" Link="DisposableObject.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\BrushData.cs" Link="Drawing\BrushData.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\BrushExtensions.cs" Link="Drawing\BrushExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\BrushFillType.cs" Link="Drawing\BrushFillType.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\BrushFillWrapMode.cs" Link="Drawing\BrushFillWrapMode.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\ColorCollection.cs" Link="Drawing\ColorCollection.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\ColorExtensions.cs" Link="Drawing\ColorExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\FontData.cs" Link="Drawing\FontData.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\FontExtensions.cs" Link="Drawing\FontExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\FontStyle.cs" Link="Drawing\FontStyle.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\ImageExtensions.cs" Link="Drawing\ImageExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\PointExtensions.cs" Link="Drawing\PointExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\Printing\MarginsExtensions.cs" Link="Drawing\Printing\MarginsExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\Printing\PageMarginsData.cs" Link="Drawing\Printing\PageMarginsData.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\Printing\PageSettingsData.cs" Link="Drawing\Printing\PageSettingsData.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\Printing\PrinterSettingsData.cs" Link="Drawing\Printing\PrinterSettingsData.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\Printing\PrinterSettingsDuplex.cs" Link="Drawing\Printing\PrinterSettingsDuplex.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\Printing\PrintingExtensions.cs" Link="Drawing\Printing\PrintingExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Drawing\StringHorizontalAlignment.cs" Link="Drawing\StringHorizontalAlignment.cs" />
+        <Compile Include="..\CodeForDotNet\ExceptionExtensions.cs" Link="ExceptionExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\GuidExtensions.cs" Link="GuidExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\IDisposableObject.cs" Link="IDisposableObject.cs" />
+        <Compile Include="..\CodeForDotNet\IO\FileSystemExtensions.cs" Link="IO\FileSystemExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\IO\FileSystemExtensionsProgressEventArgs.cs" Link="IO\FileSystemExtensionsProgressEventArgs.cs" />
+        <Compile Include="..\CodeForDotNet\MonthOfYear.cs" Link="MonthOfYear.cs" />
+        <Compile Include="..\CodeForDotNet\Network\MimeExtensions.cs" Link="Network\MimeExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Network\NetworkExtensions.cs" Link="Network\NetworkExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Numerics\AngleVector2.cs" Link="Numerics\AngleVector2.cs" />
+        <Compile Include="..\CodeForDotNet\Numerics\BigIntegerExtensions.cs" Link="Numerics\BigIntegerExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Numerics\Number.cs" Link="Numerics\Number.cs" />
+        <Compile Include="..\CodeForDotNet\Numerics\NumberExtensions.cs" Link="Numerics\NumberExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Numerics\Quadrant.cs" Link="Numerics\Quadrant.cs" />
+        <Compile Include="..\CodeForDotNet\Properties\Resources.Designer.cs" Link="Properties\Resources.Designer.cs" />
+        <Compile Include="..\CodeForDotNet\Runtime\Serialization\DataContractJsonSerializerExtensions.cs" Link="Runtime\Serialization\DataContractJsonSerializerExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\StringExtensions.cs" Link="StringExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Threading\AsyncResult.cs" Link="Threading\AsyncResult.cs" />
+        <Compile Include="..\CodeForDotNet\Threading\CompletedAsyncResult.cs" Link="Threading\CompletedAsyncResult.cs" />
+        <Compile Include="..\CodeForDotNet\Threading\IThreadSafe.cs" Link="Threading\IThreadSafe.cs" />
+        <Compile Include="..\CodeForDotNet\TimeSpanExtensions.cs" Link="TimeSpanExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\TypeExtensions.cs" Link="TypeExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\ValueChangedEventArgs.cs" Link="ValueChangedEventArgs.cs" />
+        <Compile Include="..\CodeForDotNet\ValueEventArgs.cs" Link="ValueEventArgs.cs" />
+        <Compile Include="..\CodeForDotNet\Xml\PrivateXPathFunctions.cs" Link="Xml\PrivateXPathFunctions.cs" />
+        <Compile Include="..\CodeForDotNet\Xml\W3cXPathFunctions.cs" Link="Xml\W3cXPathFunctions.cs" />
+        <Compile Include="..\CodeForDotNet\Xml\XmlAnyDocument.cs" Link="Xml\XmlAnyDocument.cs" />
+        <Compile Include="..\CodeForDotNet\Xml\XmlExtensions.cs" Link="Xml\XmlExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Xml\XmlFormatOptions.cs" Link="Xml\XmlFormatOptions.cs" />
+        <Compile Include="..\CodeForDotNet\Xml\XmlFullExtensions.cs" Link="Xml\XmlFullExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Xml\XmlSerializerExtensions.cs" Link="Xml\XmlSerializerExtensions.cs" />
+        <Compile Include="..\CodeForDotNet\Xml\XmlSerializerNamespacesExtensions.cs" Link="Xml\XmlSerializerNamespacesExtensions.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Data\" />
+        <Folder Include="Collections\" />
+        <Folder Include="ComponentModel\" />
+        <Folder Include="Diagnostics\" />
+        <Folder Include="Drawing\Printing\" />
+        <Folder Include="IO\" />
+        <Folder Include="Network\" />
+        <Folder Include="Numerics\" />
+        <Folder Include="Threading\" />
+        <Folder Include="Properties\" />
+        <Folder Include="Runtime\Serialization\" />
+        <Folder Include="Xml\" />
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="..\CodeForDotNet\CodeForDotNet.xsd" Link="CodeForDotNet.xsd" />
+        <EmbeddedResource Include="..\CodeForDotNet\Properties\Resources.resx" Link="Properties\Resources.resx">
+            <Generator></Generator>
+        </EmbeddedResource>
+        <None Include="..\Common\Code for .NET.snk" Link="Code for .NET.snk" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis" Version="5.0.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" />
+        <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+        <PackageReference Include="System.Drawing.Common" Version="10.0.0" />
+    </ItemGroup>
+</Project>

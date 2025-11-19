@@ -9,7 +9,6 @@ namespace CodeForDotNet.Windows.Imaging
     /// Managed <see cref="Wia.Items"/>.
     /// </summary>
     [SupportedOSPlatform("windows")]
-    [CLSCompliant(false)]
     public class WiaItemCollection : DisposableCollection<WiaItem>
     {
         #region Lifetime

@@ -9,7 +9,6 @@ namespace CodeForDotNet.WindowsUniversal.UI.Models
     /// <summary>
     /// Base class for all XAML pages which support the UI model framework.
     /// </summary>
-    [CLSCompliant(false)]
     public abstract partial class UIModelPage<TApplicationUIModel, TPageUIModel> : Page
         where TApplicationUIModel : ApplicationUIModel
         where TPageUIModel : PageUIModel<TApplicationUIModel>

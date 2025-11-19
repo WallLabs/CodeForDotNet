@@ -10,7 +10,6 @@ namespace CodeForDotNet.Windows.Imaging
     /// Encapsulates a <see cref="Wia.DeviceInfo"/> in managed code.
     /// </summary>
     [SupportedOSPlatform("windows")]
-    [CLSCompliant(false)]
     public class WiaDeviceInfo : DisposableObject
     {
         #region Private Fields

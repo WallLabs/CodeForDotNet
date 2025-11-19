@@ -84,10 +84,10 @@ namespace CodeForDotNet.Tests.Facts
 			Assert.AreEqual(0, Number.MinusOne.CompareTo(Number.MinusOne));
 
 			// Test most significant bytes used for comparison
-			var number123Signed = new Number(new byte[] { 3, 2, 1 }, true);
-			var number321Signed = new Number(new byte[] { 1, 2, 3 }, true);
-			var number123Unsigned = new Number(new byte[] { 3, 2, 1 }, false);
-			var number321Unsigned = new Number(new byte[] { 1, 2, 3 }, false);
+			var number123Signed = new Number([3, 2, 1], true);
+			var number321Signed = new Number([1, 2, 3], true);
+			var number123Unsigned = new Number([3, 2, 1], false);
+			var number321Unsigned = new Number([1, 2, 3], false);
 			Assert.AreEqual(0, number123Signed.CompareTo(number123Signed));
 			Assert.AreEqual(0, number123Signed.CompareTo(number123Unsigned));
 			Assert.AreEqual(0, number321Signed.CompareTo(number321Signed));
@@ -98,10 +98,10 @@ namespace CodeForDotNet.Tests.Facts
 			Assert.AreEqual(1, number321Signed.CompareTo(number123Unsigned));
 
 			// Test comparison of different length values
-			var number123SignedLong = new Number(new byte[] { 3, 2, 1, 0, 0, 0, 0 }, true);
-			var number123UnsignedLong = new Number(new byte[] { 3, 2, 1, 0, 0, 0, 0 }, false);
-			var number321SignedLong = new Number(new byte[] { 1, 2, 3, 0, 0, 0, 0 }, true);
-			var number321UnsignedLong = new Number(new byte[] { 1, 2, 3, 0, 0, 0, 0 }, false);
+			var number123SignedLong = new Number([3, 2, 1, 0, 0, 0, 0], true);
+			var number123UnsignedLong = new Number([3, 2, 1, 0, 0, 0, 0], false);
+			var number321SignedLong = new Number([1, 2, 3, 0, 0, 0, 0], true);
+			var number321UnsignedLong = new Number([1, 2, 3, 0, 0, 0, 0], false);
 			Assert.AreEqual(0, number123SignedLong.CompareTo(number123Signed));
 			Assert.AreEqual(0, number123SignedLong.CompareTo(number123Unsigned));
 			Assert.AreEqual(0, number123UnsignedLong.CompareTo(number123Signed));
@@ -168,23 +168,23 @@ namespace CodeForDotNet.Tests.Facts
 			Assert.AreEqual(0, number.ByteSize);
 
 			// Byte array constructor
-			number = new Number(new byte[] { 1 }, true);
+			number = new Number([1], true);
 			Assert.IsFalse(number.IsZero);
 			Assert.IsTrue(number.Signed);
 			Assert.IsTrue(number.Sign);
 			Assert.AreEqual(1, number.ByteSize);
-			Assert.AreEqual(number[0], 1);
-			number = new Number(new byte[] { 0xff }, true);
+			Assert.AreEqual(1, number[0]);
+			number = new Number([0xff], true);
 			Assert.IsFalse(number.IsZero);
 			Assert.IsTrue(number.Signed);
 			Assert.IsFalse(number.Sign);
 			Assert.AreEqual(1, number.ByteSize);
-			Assert.AreEqual(number[0], 0xff);
-			number = new Number(new byte[] { 0xff }, false);
+			Assert.AreEqual(0xff, number[0]);
+			number = new Number([0xff], false);
 			Assert.IsFalse(number.IsZero);
 			Assert.IsFalse(number.Signed);
 			Assert.AreEqual(1, number.ByteSize);
-			Assert.AreEqual(number[0], 0xff);
+			Assert.AreEqual(0xff, number[0]);
 
 			// Decimal constructor
 			number = new Number(1m);
@@ -192,43 +192,43 @@ namespace CodeForDotNet.Tests.Facts
 			Assert.IsTrue(number.Signed);
 			Assert.IsTrue(number.Sign);
 			Assert.AreEqual(16, number.ByteSize);
-			Assert.AreEqual(number[0], 1);
-			Assert.AreEqual(number[1], 0);
-			Assert.AreEqual(number[2], 0);
-			Assert.AreEqual(number[3], 0);
-			Assert.AreEqual(number[4], 0);
-			Assert.AreEqual(number[5], 0);
-			Assert.AreEqual(number[6], 0);
-			Assert.AreEqual(number[7], 0);
-			Assert.AreEqual(number[8], 0);
-			Assert.AreEqual(number[9], 0);
-			Assert.AreEqual(number[10], 0);
-			Assert.AreEqual(number[11], 0);
-			Assert.AreEqual(number[12], 0);
-			Assert.AreEqual(number[13], 0);
-			Assert.AreEqual(number[14], 0);
-			Assert.AreEqual(number[15], 0);
+			Assert.AreEqual(1, number[0]);
+			Assert.AreEqual(0, number[1]);
+			Assert.AreEqual(0, number[2]);
+			Assert.AreEqual(0, number[3]);
+			Assert.AreEqual(0, number[4]);
+			Assert.AreEqual(0, number[5]);
+			Assert.AreEqual(0, number[6]);
+			Assert.AreEqual(0, number[7]);
+			Assert.AreEqual(0, number[8]);
+			Assert.AreEqual(0, number[9]);
+			Assert.AreEqual(0, number[10]);
+			Assert.AreEqual(0, number[11]);
+			Assert.AreEqual(0, number[12]);
+			Assert.AreEqual(0, number[13]);
+			Assert.AreEqual(0, number[14]);
+			Assert.AreEqual(0, number[15]);
 			number = new Number(-1m);
 			Assert.IsFalse(number.IsZero);
 			Assert.IsTrue(number.Signed);
 			Assert.IsFalse(number.Sign);
 			Assert.AreEqual(16, number.ByteSize);
-			Assert.AreEqual(number[0], 0xff);
-			Assert.AreEqual(number[1], 0xff);
-			Assert.AreEqual(number[2], 0xff);
-			Assert.AreEqual(number[3], 0xff);
-			Assert.AreEqual(number[4], 0xff);
-			Assert.AreEqual(number[5], 0xff);
-			Assert.AreEqual(number[6], 0xff);
-			Assert.AreEqual(number[7], 0xff);
-			Assert.AreEqual(number[8], 0xff);
-			Assert.AreEqual(number[9], 0xff);
-			Assert.AreEqual(number[10], 0xff);
-			Assert.AreEqual(number[11], 0xff);
-			Assert.AreEqual(number[12], 0xff);
-			Assert.AreEqual(number[13], 0xff);
-			Assert.AreEqual(number[14], 0xff);
-			Assert.AreEqual(number[15], 0xff);
+			Assert.AreEqual(0xff, number[0]);
+			Assert.AreEqual(0xff, number[1]);
+			Assert.AreEqual(0xff, number[2]);
+			Assert.AreEqual(0xff, number[3]);
+			Assert.AreEqual(0xff, number[4]);
+			Assert.AreEqual(0xff, number[5]);
+			Assert.AreEqual(0xff, number[6]);
+			Assert.AreEqual(0xff, number[7]);
+			Assert.AreEqual(0xff, number[8]);
+			Assert.AreEqual(0xff, number[9]);
+			Assert.AreEqual(0xff, number[10]);
+			Assert.AreEqual(0xff, number[11]);
+			Assert.AreEqual(0xff, number[12]);
+			Assert.AreEqual(0xff, number[13]);
+			Assert.AreEqual(0xff, number[14]);
+			Assert.AreEqual(0xff, number[15]);
 
 			// Double constructor
 			number = new Number((double)1);
@@ -236,27 +236,27 @@ namespace CodeForDotNet.Tests.Facts
 			Assert.IsTrue(number.Signed);
 			Assert.IsTrue(number.Sign);
 			Assert.AreEqual(8, number.ByteSize);
-			Assert.AreEqual(number[0], 1);
-			Assert.AreEqual(number[1], 0);
-			Assert.AreEqual(number[2], 0);
-			Assert.AreEqual(number[3], 0);
-			Assert.AreEqual(number[4], 0);
-			Assert.AreEqual(number[5], 0);
-			Assert.AreEqual(number[6], 0);
-			Assert.AreEqual(number[7], 0);
+			Assert.AreEqual(1, number[0]);
+			Assert.AreEqual(0, number[1]);
+			Assert.AreEqual(0, number[2]);
+			Assert.AreEqual(0, number[3]);
+			Assert.AreEqual(0, number[4]);
+			Assert.AreEqual(0, number[5]);
+			Assert.AreEqual(0, number[6]);
+			Assert.AreEqual(0, number[7]);
 			number = new Number((double)-1);
 			Assert.IsFalse(number.IsZero);
 			Assert.IsTrue(number.Signed);
 			Assert.IsFalse(number.Sign);
 			Assert.AreEqual(8, number.ByteSize);
-			Assert.AreEqual(number[0], 0xff);
-			Assert.AreEqual(number[1], 0xff);
-			Assert.AreEqual(number[2], 0xff);
-			Assert.AreEqual(number[3], 0xff);
-			Assert.AreEqual(number[4], 0xff);
-			Assert.AreEqual(number[5], 0xff);
-			Assert.AreEqual(number[6], 0xff);
-			Assert.AreEqual(number[7], 0xff);
+			Assert.AreEqual(0xff, number[0]);
+			Assert.AreEqual(0xff, number[1]);
+			Assert.AreEqual(0xff, number[2]);
+			Assert.AreEqual(0xff, number[3]);
+			Assert.AreEqual(0xff, number[4]);
+			Assert.AreEqual(0xff, number[5]);
+			Assert.AreEqual(0xff, number[6]);
+			Assert.AreEqual(0xff, number[7]);
 
 			// Single constructor
 			number = new Number(1f);
@@ -264,19 +264,19 @@ namespace CodeForDotNet.Tests.Facts
 			Assert.IsTrue(number.Signed);
 			Assert.IsTrue(number.Sign);
 			Assert.AreEqual(4, number.ByteSize);
-			Assert.AreEqual(number[0], 1);
-			Assert.AreEqual(number[1], 0);
-			Assert.AreEqual(number[2], 0);
-			Assert.AreEqual(number[3], 0);
+			Assert.AreEqual(1, number[0]);
+			Assert.AreEqual(0, number[1]);
+			Assert.AreEqual(0, number[2]);
+			Assert.AreEqual(0, number[3]);
 			number = new Number(-1f);
 			Assert.IsFalse(number.IsZero);
 			Assert.IsTrue(number.Signed);
 			Assert.IsFalse(number.Sign);
 			Assert.AreEqual(4, number.ByteSize);
-			Assert.AreEqual(number[0], 0xff);
-			Assert.AreEqual(number[1], 0xff);
-			Assert.AreEqual(number[2], 0xff);
-			Assert.AreEqual(number[3], 0xff);
+			Assert.AreEqual(0xff, number[0]);
+			Assert.AreEqual(0xff, number[1]);
+			Assert.AreEqual(0xff, number[2]);
+			Assert.AreEqual(0xff, number[3]);
 
 			// Int64 constructor
 			number = new Number((long)1);
@@ -284,27 +284,27 @@ namespace CodeForDotNet.Tests.Facts
 			Assert.IsTrue(number.Signed);
 			Assert.IsTrue(number.Sign);
 			Assert.AreEqual(8, number.ByteSize);
-			Assert.AreEqual(number[0], 1);
-			Assert.AreEqual(number[1], 0);
-			Assert.AreEqual(number[2], 0);
-			Assert.AreEqual(number[3], 0);
-			Assert.AreEqual(number[4], 0);
-			Assert.AreEqual(number[5], 0);
-			Assert.AreEqual(number[6], 0);
-			Assert.AreEqual(number[7], 0);
+			Assert.AreEqual(1, number[0]);
+			Assert.AreEqual(0, number[1]);
+			Assert.AreEqual(0, number[2]);
+			Assert.AreEqual(0, number[3]);
+			Assert.AreEqual(0, number[4]);
+			Assert.AreEqual(0, number[5]);
+			Assert.AreEqual(0, number[6]);
+			Assert.AreEqual(0, number[7]);
 			number = new Number((long)-1);
 			Assert.IsFalse(number.IsZero);
 			Assert.IsTrue(number.Signed);
 			Assert.IsFalse(number.Sign);
 			Assert.AreEqual(8, number.ByteSize);
-			Assert.AreEqual(number[0], 0xff);
-			Assert.AreEqual(number[1], 0xff);
-			Assert.AreEqual(number[2], 0xff);
-			Assert.AreEqual(number[3], 0xff);
-			Assert.AreEqual(number[4], 0xff);
-			Assert.AreEqual(number[5], 0xff);
-			Assert.AreEqual(number[6], 0xff);
-			Assert.AreEqual(number[7], 0xff);
+			Assert.AreEqual(0xff, number[0]);
+			Assert.AreEqual(0xff, number[1]);
+			Assert.AreEqual(0xff, number[2]);
+			Assert.AreEqual(0xff, number[3]);
+			Assert.AreEqual(0xff, number[4]);
+			Assert.AreEqual(0xff, number[5]);
+			Assert.AreEqual(0xff, number[6]);
+			Assert.AreEqual(0xff, number[7]);
 
 			// Int32 constructor
 			number = new Number(1);
@@ -312,19 +312,19 @@ namespace CodeForDotNet.Tests.Facts
 			Assert.IsTrue(number.Signed);
 			Assert.IsTrue(number.Sign);
 			Assert.AreEqual(4, number.ByteSize);
-			Assert.AreEqual(number[0], 1);
-			Assert.AreEqual(number[1], 0);
-			Assert.AreEqual(number[2], 0);
-			Assert.AreEqual(number[3], 0);
+			Assert.AreEqual(1, number[0]);
+			Assert.AreEqual(0, number[1]);
+			Assert.AreEqual(0, number[2]);
+			Assert.AreEqual(0, number[3]);
 			number = new Number(-1);
 			Assert.IsFalse(number.IsZero);
 			Assert.IsTrue(number.Signed);
 			Assert.IsFalse(number.Sign);
 			Assert.AreEqual(4, number.ByteSize);
-			Assert.AreEqual(number[0], 0xff);
-			Assert.AreEqual(number[1], 0xff);
-			Assert.AreEqual(number[2], 0xff);
-			Assert.AreEqual(number[3], 0xff);
+			Assert.AreEqual(0xff, number[0]);
+			Assert.AreEqual(0xff, number[1]);
+			Assert.AreEqual(0xff, number[2]);
+			Assert.AreEqual(0xff, number[3]);
 
 			// Int16 constructor
 			number = new Number((short)1);
@@ -332,47 +332,47 @@ namespace CodeForDotNet.Tests.Facts
 			Assert.IsTrue(number.Signed);
 			Assert.IsTrue(number.Sign);
 			Assert.AreEqual(2, number.ByteSize);
-			Assert.AreEqual(number[0], 1);
-			Assert.AreEqual(number[1], 0);
+			Assert.AreEqual(1, number[0]);
+			Assert.AreEqual(0, number[1]);
 			number = new Number((short)-1);
 			Assert.IsFalse(number.IsZero);
 			Assert.IsTrue(number.Signed);
 			Assert.IsFalse(number.Sign);
 			Assert.AreEqual(2, number.ByteSize);
-			Assert.AreEqual(number[0], 0xff);
-			Assert.AreEqual(number[1], 0xff);
+			Assert.AreEqual(0xff, number[0]);
+			Assert.AreEqual(0xff, number[1]);
 
 			// UInt64 constructor
 			number = new Number((ulong)1);
 			Assert.IsFalse(number.IsZero);
 			Assert.IsFalse(number.Signed);
 			Assert.AreEqual(8, number.ByteSize);
-			Assert.AreEqual(number[0], 1);
-			Assert.AreEqual(number[1], 0);
-			Assert.AreEqual(number[2], 0);
-			Assert.AreEqual(number[3], 0);
-			Assert.AreEqual(number[4], 0);
-			Assert.AreEqual(number[5], 0);
-			Assert.AreEqual(number[6], 0);
-			Assert.AreEqual(number[7], 0);
+			Assert.AreEqual(1, number[0]);
+			Assert.AreEqual(0, number[1]);
+			Assert.AreEqual(0, number[2]);
+			Assert.AreEqual(0, number[3]);
+			Assert.AreEqual(0, number[4]);
+			Assert.AreEqual(0, number[5]);
+			Assert.AreEqual(0, number[6]);
+			Assert.AreEqual(0, number[7]);
 
 			// UInt32 constructor
 			number = new Number((uint)1);
 			Assert.IsFalse(number.IsZero);
 			Assert.IsFalse(number.Signed);
 			Assert.AreEqual(4, number.ByteSize);
-			Assert.AreEqual(number[0], 1);
-			Assert.AreEqual(number[1], 0);
-			Assert.AreEqual(number[2], 0);
-			Assert.AreEqual(number[3], 0);
+			Assert.AreEqual(1, number[0]);
+			Assert.AreEqual(0, number[1]);
+			Assert.AreEqual(0, number[2]);
+			Assert.AreEqual(0, number[3]);
 
 			// Int16 constructor
 			number = new Number((ushort)1);
 			Assert.IsFalse(number.IsZero);
 			Assert.IsFalse(number.Signed);
 			Assert.AreEqual(2, number.ByteSize);
-			Assert.AreEqual(number[0], 1);
-			Assert.AreEqual(number[1], 0);
+			Assert.AreEqual(1, number[0]);
+			Assert.AreEqual(0, number[1]);
 		}
 
 		/// <summary>
@@ -653,8 +653,8 @@ namespace CodeForDotNet.Tests.Facts
 		public void NumberTestSign()
 		{
 			// Test comparison of signed and unsigned
-			var signedMin = new Number(new byte[] { 0xff, 0xff, 0xff, 0xff }, true);
-			var unsignedMax = new Number(new byte[] { 0xff, 0xff, 0xff, 0xff }, false);
+			var signedMin = new Number([0xff, 0xff, 0xff, 0xff], true);
+			var unsignedMax = new Number([0xff, 0xff, 0xff, 0xff], false);
 			Assert.IsFalse(signedMin == unsignedMax);
 			Assert.IsTrue(unsignedMax > signedMin);
 		}

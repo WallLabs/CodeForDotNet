@@ -23,7 +23,6 @@ namespace CodeForDotNet.WindowsUniversal.UI
     /// <summary>
     /// Windows Store application with common features including a strongly typed application model, session state persistence and error reporting.
     /// </summary>
-    [CLSCompliant(false)]
     public abstract class ApplicationBase : Application
     {
         #region Protected Constructors

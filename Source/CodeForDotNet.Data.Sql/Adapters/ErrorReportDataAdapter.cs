@@ -1,5 +1,5 @@
 using System;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace CodeForDotNet.Data.Sql.Adapters
 {
@@ -13,7 +13,7 @@ namespace CodeForDotNet.Data.Sql.Adapters
 		/// <summary>
 		/// Reads properties of a <see cref="ErrorReportData"/> from a data reader.
 		/// </summary>
-		public static void Read(this ErrorReportData entity, SqlDataReader reader)
+		public static void Read(this ErrorReportData entity, Microsoft.Data.SqlClient.SqlDataReader reader)
 		{
 			Read(entity, reader, false);
 		}
@@ -21,7 +21,7 @@ namespace CodeForDotNet.Data.Sql.Adapters
 		/// <summary>
 		/// Reads properties of a <see cref="ErrorReportData"/> from a data reader.
 		/// </summary>
-		public static void Read(this ErrorReportData entity, SqlDataReader reader, bool skipKeys)
+		public static void Read(this ErrorReportData entity, Microsoft.Data.SqlClient.SqlDataReader reader, bool skipKeys)
 		{
 			// Validate.
 			if (entity is null) throw new ArgumentNullException(nameof(entity));

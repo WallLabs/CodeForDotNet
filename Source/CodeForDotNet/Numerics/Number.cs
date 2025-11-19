@@ -57,7 +57,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Creates a value based on an existing <see cref="sbyte"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public Number(sbyte value)
             : this()
         {
@@ -81,7 +80,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Creates a value based on an existing <see cref="ushort"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public Number(ushort value)
             : this()
         {
@@ -102,7 +100,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Creates a value based on an existing <see cref="uint"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public Number(uint value)
             : this()
         {
@@ -123,7 +120,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Creates a value based on an existing <see cref="ulong"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public Number(ulong value)
             : this()
         {
@@ -573,7 +569,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Explicitly converts a <see cref="Number"/> to a <see cref="sbyte"/> (signed).
         /// </summary>
-        [CLSCompliant(false)]
         public static explicit operator sbyte(Number value)
         {
             var byteLength = value.ByteSize;
@@ -601,7 +596,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Explicitly converts a <see cref="Number"/> to a <see cref="uint"/> (unsigned).
         /// </summary>
-        [CLSCompliant(false)]
         public static explicit operator uint(Number value)
         {
             var byteLength = value.ByteSize;
@@ -617,7 +611,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Explicitly converts a <see cref="Number"/> to a <see cref="ulong"/> (unsigned).
         /// </summary>
-        [CLSCompliant(false)]
         public static explicit operator ulong(Number value)
         {
             var byteLength = value.ByteSize;
@@ -633,7 +626,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Explicitly converts a <see cref="Number"/> to a <see cref="ushort"/> (unsigned).
         /// </summary>
-        [CLSCompliant(false)]
         public static explicit operator ushort(Number value)
         {
             var byteLength = value.ByteSize;
@@ -697,7 +689,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Converts an (signed) <see cref="sbyte"/> to a <see cref="Number"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public static Number FromSByte(sbyte value)
         {
             return new Number(value);
@@ -714,7 +705,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Converts an (unsigned) <see cref="ushort"/> to a <see cref="Number"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public static Number FromUInt16(ushort value)
         {
             return new Number(value);
@@ -723,7 +713,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Converts an (unsigned) <see cref="uint"/> to a <see cref="Number"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public static Number FromUInt32(uint value)
         {
             return new Number(value);
@@ -732,7 +721,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Converts an (unsigned) <see cref="ulong"/> to a <see cref="Number"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public static Number FromUInt64(ulong value)
         {
             return new Number(value);
@@ -749,7 +737,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Implicitly converts an (signed) <see cref="sbyte"/> to a <see cref="Number"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public static implicit operator Number(sbyte value)
         {
             return new Number(value);
@@ -758,7 +745,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Implicitly converts an (unsigned) <see cref="ushort"/> to a <see cref="Number"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public static implicit operator Number(ushort value)
         {
             return new Number(value);
@@ -775,7 +761,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Implicitly converts an (unsigned) <see cref="uint"/> to a <see cref="Number"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public static implicit operator Number(uint value)
         {
             return new Number(value);
@@ -792,7 +777,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Implicitly converts an (unsigned) <see cref="ulong"/> to a <see cref="Number"/>.
         /// </summary>
-        [CLSCompliant(false)]
         public static implicit operator Number(ulong value)
         {
             return new Number(value);
@@ -1670,7 +1654,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Converts the current value to a <see cref="sbyte"/> (signed).
         /// </summary>
-        [CLSCompliant(false)]
         public sbyte ToSByte()
         {
             var byteLength = ByteSize;
@@ -1841,7 +1824,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Converts the current value to a <see cref="ushort"/> (unsigned).
         /// </summary>
-        [CLSCompliant(false)]
         public ushort ToUInt16()
         {
             var byteLength = ByteSize;
@@ -1857,7 +1839,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Converts the current value to a <see cref="uint"/> (unsigned).
         /// </summary>
-        [CLSCompliant(false)]
         public uint ToUInt32()
         {
             var byteLength = ByteSize;
@@ -1873,7 +1854,6 @@ namespace CodeForDotNet.Numerics
         /// <summary>
         /// Converts the current value to a <see cref="ulong"/> (unsigned).
         /// </summary>
-        [CLSCompliant(false)]
         public ulong ToUInt64()
         {
             var byteLength = ByteSize;

@@ -7,7 +7,6 @@ namespace CodeForDotNet.Windows.Imaging
     /// <summary>
     /// Managed <see cref="Wia.Formats"/>.
     /// </summary>
-    [CLSCompliant(false)]
     public class WiaFormatCollection : DisposableCollection<object>
     {
         #region Lifetime

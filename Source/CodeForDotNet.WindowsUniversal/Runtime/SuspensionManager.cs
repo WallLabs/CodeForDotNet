@@ -14,7 +14,6 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
     /// cleared under a variety of conditions and should only be used to store information that would be convenient to carry across sessions, but that should be
     /// discarded when an application crashes or is upgraded.
     /// </summary>
-    [CLSCompliant(false)]
     public static class SuspensionManager
     {
         #region Private Fields

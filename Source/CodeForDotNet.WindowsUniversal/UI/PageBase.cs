@@ -11,7 +11,6 @@ namespace CodeForDotNet.WindowsUniversal.UI
     /// Windows Store <see cref="Page"/> with common features including a standard model property and session state persistence when used in a
     /// <see cref="Application"/> based application.
     /// </summary>
-    [CLSCompliant(false)]
     public class PageBase : Page
     {
         #region Public Fields

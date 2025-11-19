@@ -25,12 +25,12 @@ namespace CodeForDotNet.Tests.Facts
         {
             using var manager = new WiaManager();
             var devicesInfo = manager.GetDevices();
-            Assert.IsTrue(devicesInfo.Count > 0);
+            Assert.IsNotEmpty(devicesInfo);
             foreach (var deviceInfo in devicesInfo)
             {
                 var device = deviceInfo.Connect();
                 var commands = device.Commands;
-                Assert.IsTrue(commands.Count > 0);
+                Assert.IsNotEmpty(commands);
 
                 // Scan
                 // TODO: Make this more intuitive... var imageFile = device.Items[0].Transfer();

@@ -9,7 +9,6 @@ namespace CodeForDotNet.Windows.Imaging
     /// Encapsulates a <see cref="Item"/> in managed code.
     /// </summary>
     [SupportedOSPlatform("windows")]
-    [CLSCompliant(false)]
     public class WiaItem : DisposableObject
     {
         #region Private Fields

@@ -7,7 +7,6 @@ namespace CodeForDotNet.WindowsUniversal.Storage
     /// <summary>
     /// Extends the <see cref="StorageFolder"/> class.
     /// </summary>
-    [CLSCompliant(false)]
     public static class StorageExtensions
     {
         #region Public Methods

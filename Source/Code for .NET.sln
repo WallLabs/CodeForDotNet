@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.31903.286
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11206.111 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{32956BD0-6695-47DF-9D51-0CB6603E8467}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		Build.cmd = Build.cmd
+		Directory.Build.props = Directory.Build.props
 		Local Test.runsettings = Local Test.runsettings
 		NuGet.config = NuGet.config
 		Release.cmd = Release.cmd
@@ -51,7 +52,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WIA", "WIA", "{B2BC6A86-797
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5D5DAECE-0E2E-4E09-8D28-6D8CD3A6C3C8}"
 	ProjectSection(SolutionItems) = preProject
-		Common\AssemblyInfoGlobal.cs = Common\AssemblyInfoGlobal.cs
 		Common\Code for .NET.snk = Common\Code for .NET.snk
 		Common\Dictionary.xml = Common\Dictionary.xml
 	EndProjectSection
@@ -71,10 +71,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Version", "Version", "{FA10
 		Dependencies\Version\CodeForPowerShell.Version.txt = Dependencies\Version\CodeForPowerShell.Version.txt
 		Dependencies\Version\CodeForWindows.Version.txt = Dependencies\Version\CodeForWindows.Version.txt
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeForDotNet.WindowsUniversal", "CodeForDotNet.WindowsUniversal\CodeForDotNet.WindowsUniversal.csproj", "{1473E99D-67EB-483B-B766-292FD9A73D8B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeForDotNet.WindowsUniversal.Tests", "CodeForDotNet.WindowsUniversal.Tests\CodeForDotNet.WindowsUniversal.Tests.csproj", "{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeForDotNet.Legacy", "CodeForDotNet.Legacy\CodeForDotNet.Legacy.csproj", "{16940169-7909-4563-8622-EA46CBDF0C99}"
 EndProject
@@ -196,54 +192,6 @@ Global
 		{378E9B01-B3BD-4887-AF40-C22D94281F74}.Release|x64.Build.0 = Release|Any CPU
 		{378E9B01-B3BD-4887-AF40-C22D94281F74}.Release|x86.ActiveCfg = Release|Any CPU
 		{378E9B01-B3BD-4887-AF40-C22D94281F74}.Release|x86.Build.0 = Release|Any CPU
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Debug|ARM.ActiveCfg = Debug|ARM
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Debug|ARM.Build.0 = Debug|ARM
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Debug|ARM64.Build.0 = Debug|ARM64
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Debug|x64.ActiveCfg = Debug|x64
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Debug|x64.Build.0 = Debug|x64
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Debug|x86.ActiveCfg = Debug|x86
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Debug|x86.Build.0 = Debug|x86
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Release|ARM.ActiveCfg = Release|ARM
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Release|ARM.Build.0 = Release|ARM
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Release|ARM64.ActiveCfg = Release|ARM64
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Release|ARM64.Build.0 = Release|ARM64
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Release|x64.ActiveCfg = Release|x64
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Release|x64.Build.0 = Release|x64
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Release|x86.ActiveCfg = Release|x86
-		{1473E99D-67EB-483B-B766-292FD9A73D8B}.Release|x86.Build.0 = Release|x86
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|Any CPU.Build.0 = Debug|x64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|ARM.ActiveCfg = Debug|ARM
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|ARM.Build.0 = Debug|ARM
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|ARM.Deploy.0 = Debug|ARM
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|ARM64.Build.0 = Debug|ARM64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|ARM64.Deploy.0 = Debug|ARM64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|x64.ActiveCfg = Debug|x64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|x64.Build.0 = Debug|x64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|x64.Deploy.0 = Debug|x64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|x86.ActiveCfg = Debug|x86
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|x86.Build.0 = Debug|x86
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Debug|x86.Deploy.0 = Debug|x86
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|Any CPU.ActiveCfg = Release|x64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|Any CPU.Build.0 = Release|x64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|ARM.ActiveCfg = Release|ARM
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|ARM.Build.0 = Release|ARM
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|ARM.Deploy.0 = Release|ARM
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|ARM64.ActiveCfg = Release|ARM64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|ARM64.Build.0 = Release|ARM64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|ARM64.Deploy.0 = Release|ARM64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|x64.ActiveCfg = Release|x64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|x64.Build.0 = Release|x64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|x64.Deploy.0 = Release|x64
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|x86.ActiveCfg = Release|x86
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|x86.Build.0 = Release|x86
-		{B09BE339-5B86-46A8-9E0D-1EAE4265D7DF}.Release|x86.Deploy.0 = Release|x86
 		{16940169-7909-4563-8622-EA46CBDF0C99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{16940169-7909-4563-8622-EA46CBDF0C99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16940169-7909-4563-8622-EA46CBDF0C99}.Debug|ARM.ActiveCfg = Debug|Any CPU

@@ -71,14 +71,14 @@ namespace CodeForDotNet.Diagnostics
 				{
 					// Try to close windows programs normally first
 					if (process.CloseMainWindow())
-						process.WaitForExit(1000);
-
-					// Kill process when still running
-					if (!process.HasExited)
-					{
-						process.Kill();
 						process.WaitForExit();
-					}
+
+                    // Kill process when still running
+                    if (!process.HasExited)
+                    {
+                        process.Kill();
+                        process.WaitForExit();
+                    }
 
 					// Flag timeout
 					output.TimedOut = true;

@@ -1,5 +1,5 @@
 using System;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace CodeForDotNet.Data.Sql.Adapters
 {
@@ -13,7 +13,7 @@ namespace CodeForDotNet.Data.Sql.Adapters
 		/// <summary>
 		/// Reads properties of a <see cref="GuidDataKey"/> from a data reader.
 		/// </summary>
-		public static void Read(this GuidDataKey entity, SqlDataReader reader)
+		public static void Read(this GuidDataKey entity, Microsoft.Data.SqlClient.SqlDataReader reader)
 		{
 			// Validate.
 			if (entity is null) throw new ArgumentNullException(nameof(entity));
@@ -25,7 +25,7 @@ namespace CodeForDotNet.Data.Sql.Adapters
 		/// <summary>
 		/// Sets data command parameter values for a <see cref="GuidDataKey"/>.
 		/// </summary>
-		public static void Set(this GuidDataKey entity, SqlParameterCollection parameters)
+		public static void Set(this GuidDataKey entity, Microsoft.Data.SqlClient.SqlParameterCollection parameters)
 		{
 			// Validate.
 			if (entity is null) throw new ArgumentNullException(nameof(entity));

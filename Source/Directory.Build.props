@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+    <PropertyGroup>
+        <LangVersion>latest</LangVersion>
+        <Nullable>annotations</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <NoWarn>CA1416;SYSLIB0003</NoWarn>
+        <!-- Optionally, disable treating warnings as errors for nullability -->
+        <WarningsNotAsErrors>CS8632;CS8627</WarningsNotAsErrors>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\Common\Code for .NET.snk</AssemblyOriginatorKeyFile>
+        <Platforms>AnyCPU</Platforms>
+        <Authors>Wall Labs</Authors>
+        <Company>Wall Labs</Company>
+        <Product>Code for .NET</Product>
+        <Description>Common project description.</Description>
+        <Copyright>Copyright © Wall Labs. All Rights Reserved.</Copyright>
+        <AssemblyVersion>5.0.2106.29000</AssemblyVersion>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <Authors>Wall Labs</Authors>
+        <Copyright>Copyright Wall Labs, All Rights Reserved</Copyright>
+        <Company>Wall Labs</Company>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <AssemblyVersion>5.0.2106.29000</AssemblyVersion>
+        <FileVersion>5.0.2106.29000</FileVersion>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    </PropertyGroup>
+</Project>

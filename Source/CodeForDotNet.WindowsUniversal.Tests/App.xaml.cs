@@ -8,7 +8,6 @@ namespace CodeForDotNet.WindowsUniversal.Tests
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    [CLSCompliant(false)]
     public sealed partial class App
     {
         #region Lifetime
