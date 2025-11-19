@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using Windows.UI.Xaml.Data;
 
@@ -12,7 +12,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
     /// prefix, i.e. exactly two characters "00" to "FF". Converts a string of any supported (
     /// <see cref="NumberStyles.HexNumber"/>) format to an unsigned byte.
     /// </remarks>
-    public class ByteToHexStringValueConverter : IValueConverter
+    public partial class ByteToHexStringValueConverter : IValueConverter
     {
         #region Public Methods
 

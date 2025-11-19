@@ -39,7 +39,7 @@ namespace CodeForDotNet.ComponentModel
 		/// </summary>
 		protected NotifyPropertyChangedBase(SynchronizationContext synchronization)
 		{
-			_pendingPropertyChangeEvents = new List<string>();
+			_pendingPropertyChangeEvents = [];
 			_synchronization = synchronization;
 		}
 

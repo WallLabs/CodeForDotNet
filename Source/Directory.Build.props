@@ -15,7 +15,8 @@
         <Product>Code for .NET</Product>
         <Description>Common project description.</Description>
         <Copyright>Copyright © Wall Labs. All Rights Reserved.</Copyright>
-        <AssemblyVersion>5.0.2106.29000</AssemblyVersion>
+        <AssemblyVersion>10.0.2511.19002</AssemblyVersion>
+        <FileVersion>10.0.2511.19002</FileVersion>
         <NeutralLanguage>en-US</NeutralLanguage>
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -23,8 +24,6 @@
         <Copyright>Copyright Wall Labs, All Rights Reserved</Copyright>
         <Company>Wall Labs</Company>
         <NeutralLanguage>en-US</NeutralLanguage>
-        <AssemblyVersion>5.0.2106.29000</AssemblyVersion>
-        <FileVersion>5.0.2106.29000</FileVersion>
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
         <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>

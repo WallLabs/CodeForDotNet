@@ -35,7 +35,7 @@ namespace CodeForDotNet.Data
 		public DataSetChangeLog(DataSet data)
 		{
 			Data = data;
-			_changeLog = new Collection<DataSetChangeLogEntry>();
+			_changeLog = [];
 			_logIndex = -1;
 		}
 

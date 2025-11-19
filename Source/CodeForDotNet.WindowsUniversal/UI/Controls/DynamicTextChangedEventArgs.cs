@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Windows.UI.Xaml.Controls;
 
 namespace CodeForDotNet.WindowsUniversal.UI.Controls
@@ -18,8 +18,8 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         public DynamicTextChangedEventArgs(string text, string originalText)
         {
             // Validate
-            if (text is null) throw new ArgumentNullException(nameof(text));
-            if (originalText is null) throw new ArgumentNullException(nameof(originalText));
+            ArgumentNullException.ThrowIfNull(text);
+            ArgumentNullException.ThrowIfNull(originalText);
 
             // Initialize member
             Text = text;

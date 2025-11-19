@@ -16,7 +16,7 @@ namespace CodeForDotNet.Data.Sql
         /// <summary>
         /// Cache of <see cref="SqlParameter"/> items for a given command hash-code.
         /// </summary>
-        private static readonly Dictionary<int, Microsoft.Data.SqlClient.SqlParameter[]> ParameterCache = new Dictionary<int, Microsoft.Data.SqlClient.SqlParameter[]>();
+        private static readonly Dictionary<int, Microsoft.Data.SqlClient.SqlParameter[]> ParameterCache = [];
 
         #endregion Private Fields
 

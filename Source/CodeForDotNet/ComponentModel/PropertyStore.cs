@@ -44,10 +44,10 @@ namespace CodeForDotNet.ComponentModel
         protected PropertyStore()
         {
             // Initialize members
-            _properties = new Dictionary<Guid, object>();
-            _propertyNames = new Dictionary<Guid, string>();
-            _changedProperties = new List<Guid>();
-            _disposePropertyIDs = new List<Guid>();
+            _properties = [];
+            _propertyNames = [];
+            _changedProperties = [];
+            _disposePropertyIDs = [];
         }
 
         #endregion Protected Constructors

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using Windows.UI.Xaml.Data;
 
@@ -11,7 +11,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
     /// Enables values to be used in data binding which are already convertible
     /// via <see cref="System.Convert"/>.
     /// </remarks>
-    public class ConvertibleValueConverter : IValueConverter
+    public partial class ConvertibleValueConverter : IValueConverter
     {
         /// <summary>
         /// Modifies the source data before passing it to the target for display in the UI.

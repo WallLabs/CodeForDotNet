@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Windows.UI.Xaml.Data;
 
 namespace CodeForDotNet.WindowsUniversal.UI.Converters
@@ -6,14 +6,14 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
     /// <summary>
     /// Value converter that translates true to false and vice versa.
     /// </summary>
-    public sealed class BooleanNegationConverter : IValueConverter
+    public sealed partial class BooleanNegationConverter : IValueConverter
     {
         /// <summary>
         /// Converts a <see cref="bool"/> by negating it.
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return !(value is bool && (bool)value);
+            return !(value is bool result && result);
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
         /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            return !(value is bool && (bool)value);
+            return !(value is bool result && result);
         }
     }
 }

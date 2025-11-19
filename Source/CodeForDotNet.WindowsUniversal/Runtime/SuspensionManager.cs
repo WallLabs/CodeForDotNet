@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
 
         private const string SessionStateFilename = "_sessionState.xml";
 
-        private static readonly List<WeakReference<Frame>> _registeredFrames = new List<WeakReference<Frame>>();
+        private static readonly List<WeakReference<Frame>> _registeredFrames = [];
 
         private static readonly DependencyProperty FrameSessionStateKeyProperty =
                           DependencyProperty.RegisterAttached("_FrameSessionStateKey", typeof(string), typeof(SuspensionManager), null);
@@ -36,14 +37,14 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
         /// List of custom types provided to the <see cref="DataContractSerializer"/> when reading and writing session state. Initially empty, additional types
         /// may be added to customize the serialization process.
         /// </summary>
-        public static List<Type> KnownTypes { get; } = new List<Type>();
+        public static List<Type> KnownTypes { get; } = [];
 
         /// <summary>
         /// Provides access to global session state for the current session. This state is serialized by <see cref="SaveAsync"/> and restored by
         /// <see cref="RestoreAsync"/>, so values must be serializable by <see cref="DataContractSerializer"/> and should be as compact as possible. Strings and
         /// other self-contained data types are strongly recommended.
         /// </summary>
-        public static Dictionary<string, object> SessionState { get; private set; } = new Dictionary<string, object>();
+        public static Dictionary<string, object> SessionState { get; private set; } = [];
 
         #endregion Public Properties
 
@@ -60,8 +61,8 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
         public static void RegisterFrame(Frame frame, string sessionStateKey)
         {
             // Validate
-            if (frame == null) throw new ArgumentNullException(nameof(frame));
-            if (sessionStateKey == null) throw new ArgumentNullException(nameof(sessionStateKey));
+            ArgumentNullException.ThrowIfNull(frame);
+            ArgumentNullException.ThrowIfNull(sessionStateKey);
             if (frame.GetValue(FrameSessionStateKeyProperty) != null)
                 throw new InvalidOperationException(AssemblyResources.SuspensionManagerRegisterFrameErrorSessionExists);
             if (frame.GetValue(FrameSessionStateProperty) != null)
@@ -83,19 +84,24 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
         /// An asynchronous task that reflects when session state has been read. The content of <see cref="SessionState"/> should not be relied upon until this
         /// task completes.
         /// </returns>
+        [UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "Required by serialization.")]
+        [UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "Required by serialization.")]
         public static async Task RestoreAsync()
         {
-            SessionState = new Dictionary<string, object>();
-
             try
             {
+                // Clear any existing state.
+                SessionState = [];
+
                 // Get the input stream for the SessionState file
                 var file = await ApplicationData.Current.LocalFolder.GetFileAsync(SessionStateFilename);
                 using (var inStream = await file.OpenSequentialReadAsync())
                 {
                     // Deserialize the Session State
                     var serializer = new DataContractSerializer(typeof(Dictionary<string, object>), KnownTypes);
-                    SessionState = (Dictionary<string, object>)serializer.ReadObject(inStream.AsStreamForRead());
+                    var savedState = serializer.ReadObject(inStream.AsStreamForRead());
+                    if (savedState is Dictionary<string, object> sessionState)
+                        SessionState = sessionState;
                 }
 
                 // Restore any registered frames to their saved state
@@ -119,6 +125,8 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
         /// current navigation stack, which in turn gives their active <see cref="Page"/> an opportunity to save its state.
         /// </summary>
         /// <returns>An asynchronous task that reflects when session state has been saved.</returns>
+        [UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "Required by serialization.")]
+        [UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "Required by serialization.")]
         public static async Task SaveAsync()
         {
             try
@@ -158,7 +166,7 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
         public static Dictionary<string, object> SessionStateForFrame(Frame frame)
         {
             // Validate
-            if (frame == null) throw new ArgumentNullException(nameof(frame));
+            ArgumentNullException.ThrowIfNull(frame);
 
             var frameState = (Dictionary<string, object>)frame.GetValue(FrameSessionStateProperty);
 
@@ -168,16 +176,17 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
                 if (frameSessionKey != null)
                 {
                     // Registered frames reflect the corresponding session state
-                    if (!SessionState.ContainsKey(frameSessionKey))
+                    if (!SessionState.TryGetValue(frameSessionKey, out object? value))
                     {
-                        SessionState[frameSessionKey] = new Dictionary<string, object>();
+                        value = new Dictionary<string, object>();
+                        SessionState[frameSessionKey] = value;
                     }
-                    frameState = (Dictionary<string, object>)SessionState[frameSessionKey];
+                    frameState = (Dictionary<string, object>)value;
                 }
                 else
                 {
                     // Frames that aren't registered have transient state
-                    frameState = new Dictionary<string, object>();
+                    frameState = [];
                 }
                 frame.SetValue(FrameSessionStateProperty, frameState);
             }
@@ -192,7 +201,7 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
         public static void UnregisterFrame(Frame frame)
         {
             // Validate.
-            if (frame is null) throw new ArgumentNullException(nameof(frame));
+            ArgumentNullException.ThrowIfNull(frame);
 
             // Remove session state and remove the frame from the list of frames whose navigation state will be saved (along with any weak references that are no
             // longer reachable)
@@ -210,9 +219,9 @@ namespace CodeForDotNet.WindowsUniversal.Runtime
         private static void RestoreFrameNavigationState(Frame frame)
         {
             var frameState = SessionStateForFrame(frame);
-            if (frameState.ContainsKey("Navigation"))
+            if (frameState.TryGetValue("Navigation", out object? value))
             {
-                frame.SetNavigationState((string)frameState["Navigation"]);
+                frame.SetNavigationState((string)value);
             }
         }
 

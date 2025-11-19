@@ -47,10 +47,10 @@ namespace CodeForDotNet.ComponentModel
 		protected DataObject()
 		{
 			// Initialize members
-			_originalProperties = new Dictionary<Guid, object>();
-			_changedProperties = new Dictionary<Guid, object>();
-			_committedPropertiesChanged = new List<Guid>();
-			_instancePropertiesChanged = new List<Guid>();
+			_originalProperties = [];
+			_changedProperties = [];
+			_committedPropertiesChanged = [];
+			_instancePropertiesChanged = [];
 		}
 
 		#endregion Protected Constructors
@@ -96,7 +96,7 @@ namespace CodeForDotNet.ComponentModel
 				{
 					// Call implementor method to create object with current properties
 					_originalProperties = OnCreate(_changedProperties);
-					_changedProperties = new Dictionary<Guid, object>();
+					_changedProperties = [];
 
 					// Update state
 					DataState = DataObjectState.Current;
@@ -134,8 +134,8 @@ namespace CodeForDotNet.ComponentModel
 
 					// Call implementor method to delete object
 					OnDelete(_originalProperties);
-					_originalProperties = new Dictionary<Guid, object>();
-					_changedProperties = new Dictionary<Guid, object>();
+					_originalProperties = [];
+					_changedProperties = [];
 
 					// Update state
 					DataState = DataObjectState.Deleted;
@@ -196,7 +196,7 @@ namespace CodeForDotNet.ComponentModel
 
 					// Call implementor method to read properties
 					_originalProperties = OnRead(_originalProperties);
-					_changedProperties = new Dictionary<Guid, object>();
+					_changedProperties = [];
 
 					// Update state
 					DataState = DataObjectState.Current;
@@ -233,7 +233,7 @@ namespace CodeForDotNet.ComponentModel
 
 					// Call implementor method to update properties
 					_originalProperties = OnUpdate(_changedProperties, _originalProperties);
-					_changedProperties = new Dictionary<Guid, object>();
+					_changedProperties = [];
 
 					// Update state
 					DataState = DataObjectState.Current;

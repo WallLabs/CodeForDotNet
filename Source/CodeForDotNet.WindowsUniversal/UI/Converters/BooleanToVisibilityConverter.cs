@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
@@ -8,14 +8,14 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
     /// Value converter that translates true to <see cref="Visibility.Visible"/> and false to
     /// <see cref="Visibility.Collapsed"/>.
     /// </summary>
-    public sealed class BooleanToVisibilityConverter : IValueConverter
+    public sealed partial class BooleanToVisibilityConverter : IValueConverter
     {
         /// <summary>
         /// Converts from a <see cref="bool"/> to a <see cref="Visibility"/>.
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return (value is bool && (bool)value) ? Visibility.Visible : Visibility.Collapsed;
+            return (value is bool result && result) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
         /// </summary>
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            return value is Visibility && (Visibility)value == Visibility.Visible;
+            return value is Visibility result && result == Visibility.Visible;
         }
     }
 }

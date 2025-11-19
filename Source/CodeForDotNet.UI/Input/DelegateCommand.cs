@@ -43,7 +43,7 @@ namespace CodeForDotNet.UI.Input
 		{
 			_executeMethod = executeMethod;
 			_canExecuteMethod = canExecuteMethod;
-			_commandStatus = new Dictionary<object, bool>();
+			_commandStatus = [];
 		}
 
 		#endregion Public Constructors

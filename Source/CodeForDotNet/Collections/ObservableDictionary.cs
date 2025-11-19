@@ -30,7 +30,7 @@ namespace CodeForDotNet.Collections
 		/// <summary>
 		/// Creates an instance.
 		/// </summary>
-		public ObservableDictionary() => _dictionary = new Dictionary<TKey, TValue>();
+		public ObservableDictionary() => _dictionary = [];
 
         #endregion Public Constructors
 

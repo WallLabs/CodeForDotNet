@@ -10,7 +10,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
     /// Windows Store <see cref="Page"/> with common features including a strongly typed model and session state persistence when used in a
     /// <see cref="ApplicationBase"/> based application.
     /// </summary>
-    public class PageModelBase<TApplication, TModel> : PageApplicationBase<TApplication>
+    public partial class PageModelBase<TApplication, TModel> : PageApplicationBase<TApplication>
         where TApplication : ApplicationBase
         where TModel : class
     {

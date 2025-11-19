@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <SignAssembly>true</SignAssembly>
         <AssemblyOriginatorKeyFile>..\Common\Code for .NET.snk</AssemblyOriginatorKeyFile>
         <RootNamespace>CodeForDotNet.Data.Sql</RootNamespace>
@@ -25,6 +25,11 @@
         <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     </PropertyGroup>
     <ItemGroup>
+      <Compile Remove="Properties\**" />
+      <EmbeddedResource Remove="Properties\**" />
+      <None Remove="Properties\**" />
+    </ItemGroup>
+    <ItemGroup>
         <AdditionalFiles Include="..\Common\Dictionary.xml" Link="Dictionary.xml" />
     </ItemGroup>
     <ItemGroup>
@@ -34,13 +39,9 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" />
-        <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
         <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.3" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\CodeForDotNet\CodeForDotNet.csproj" />
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="Properties\" />
     </ItemGroup>
 </Project>

@@ -66,7 +66,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Models
         protected virtual async void OnError(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs arguments)
         {
             // Validate.
-            if (arguments is null) throw new ArgumentNullException(nameof(arguments));
+            ArgumentNullException.ThrowIfNull(arguments);
 
             // Show error dialog
             var dialog = new MessageDialog(arguments.Message, "Runtime Error");
@@ -87,7 +87,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Models
         protected override async void OnLaunched(LaunchActivatedEventArgs arguments)
         {
             // Validate.
-            if (arguments is null) throw new ArgumentNullException(nameof(arguments));
+            ArgumentNullException.ThrowIfNull(arguments);
 
             // Handle launch.
             try
@@ -154,7 +154,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Models
         protected virtual void OnNavigationFailed(object sender, NavigationFailedEventArgs arguments)
         {
             // Validate.
-            if (arguments is null) throw new ArgumentNullException(nameof(arguments));
+            ArgumentNullException.ThrowIfNull(arguments);
 
             // Throw descriptive error message.
             arguments.Handled = true;

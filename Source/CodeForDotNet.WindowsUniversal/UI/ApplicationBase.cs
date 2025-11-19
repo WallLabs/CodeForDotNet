@@ -2,6 +2,7 @@ using CodeForDotNet.Data;
 using CodeForDotNet.WindowsUniversal.Storage;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -44,7 +45,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
         {
             // Initialize members
             StartPageType = startPageType;
-            Pages = new Collection<PageBase>();
+            Pages = [];
 
             // Hook events
             Suspending += OnSuspending;
@@ -156,7 +157,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
         protected static void OnError(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs @event)
         {
             // Validate.
-            if (@event is null) throw new ArgumentNullException(nameof(@event));
+            ArgumentNullException.ThrowIfNull(@event);
 
             // Store error to send later
             LocalErrorStore.Add(@event.Exception);
@@ -170,7 +171,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
         protected override void OnLaunched(LaunchActivatedEventArgs @event)
         {
             // Validate
-            if (@event == null) throw new ArgumentNullException(nameof(@event));
+            ArgumentNullException.ThrowIfNull(@event);
 
             // Do not repeat initialization when the Window already has content, just ensure that the window is active
             if (Window.Current.Content is not Frame rootFrame)
@@ -218,7 +219,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
         protected void OnSuspending(object sender, SuspendingEventArgs @event)
         {
             // Validate.
-            if (@event is null) throw new ArgumentNullException(nameof(@event));
+            ArgumentNullException.ThrowIfNull(@event);
 
             // Delay
             var deferral = @event.SuspendingOperation.GetDeferral();
@@ -242,7 +243,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
         /// <summary>
         /// Loads state when the application is resumed.
         /// </summary>
-        protected void OnResuming(object sender, object @event)
+        protected void OnResuming(object? sender, object @event)
         {
             try
             {
@@ -259,6 +260,8 @@ namespace CodeForDotNet.WindowsUniversal.UI
         /// <summary>
         /// Reports outstanding errors to the web service.
         /// </summary>
+        [UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "Required by serialization.")]
+        [UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "Required by serialization.")]
         protected void SendErrors()
         {
             // Check for errors (do nothing when none)

@@ -9,7 +9,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
     /// <summary>
     /// Text box with masking and key filters to make it easier for the user to edit numbers. Supports multiple bases, e.g. decimal, hexadecimal, binary.
     /// </summary>
-    public class NumericTextBox : DynamicTextBox
+    public partial class NumericTextBox : DynamicTextBox
     {
         #region Public Fields
 
@@ -104,7 +104,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         protected override void OnBeforeKeyDown(global::Windows.UI.Xaml.Input.KeyRoutedEventArgs args)
         {
             // Validate.
-            if (args is null) throw new ArgumentNullException(nameof(args));
+            ArgumentNullException.ThrowIfNull(args);
 
             // Call base class method to process cursor keys, do nothing more when handled
             base.OnBeforeKeyDown(args);
@@ -136,7 +136,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         protected override void OnBeforeSelectionChanged(object sender, DynamicTextSelectionChangedEventArgs args)
         {
             // Validate.
-            if (args is null) throw new ArgumentNullException(nameof(args));
+            ArgumentNullException.ThrowIfNull(args);
 
             // Never select the sign
             bool? sign = null;
@@ -167,7 +167,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         protected override void OnBeforeTextChanged(object sender, DynamicTextChangedEventArgs args)
         {
             // Validate.
-            if (args is null) throw new ArgumentNullException(nameof(args));
+            ArgumentNullException.ThrowIfNull(args);
 
             // Apply decimal sign rules
             var originalText = args.OriginalText;
@@ -215,7 +215,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
                 else
                 {
                     // Allow only valid number characters for rest of string.
-                    if (validChars.IndexOf(textChar.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase) >= 0)
+                    if (validChars.Contains(textChar.ToString(CultureInfo.InvariantCulture), StringComparison.OrdinalIgnoreCase))
                     {
                         // Add valid char with uppercase correction if necessary.
                         if (char.IsLetter(textChar) && !char.IsUpper(textChar))

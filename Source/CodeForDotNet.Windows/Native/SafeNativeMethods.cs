@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.Marshalling;
 using System.Security;
 using System.Text;
 
@@ -12,38 +13,38 @@ namespace CodeForDotNet.Windows.Native
     [SuppressUnmanagedCodeSecurity]
     [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "Native code naming standards.")]
     [SuppressMessage("Microsoft.Performance", "CA1812", Justification = "Native code place holder.")]
-    internal abstract class SafeNativeMethods
+    internal abstract partial class SafeNativeMethods
     {
         #region User32.dll clipboard functions
 
-        [DllImport("user32.dll")]
+        [LibraryImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool OpenClipboard(IntPtr windowHandleNewOwner);
+        internal static partial bool OpenClipboard(IntPtr windowHandleNewOwner);
 
-        [DllImport("user32.dll")]
+        [LibraryImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool EmptyClipboard();
+        internal static partial bool EmptyClipboard();
 
-        [DllImport("user32.dll")]
-        internal static extern IntPtr GetClipboardData(uint uFormat);
+        [LibraryImport("user32.dll")]
+        internal static partial IntPtr GetClipboardData(uint uFormat);
 
-        [DllImport("user32.dll")]
-        internal static extern IntPtr SetClipboardData(uint uFormat, IntPtr hMem);
+        [LibraryImport("user32.dll")]
+        internal static partial IntPtr SetClipboardData(uint uFormat, IntPtr hMem);
 
-        [DllImport("user32.dll")]
+        [LibraryImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool CloseClipboard();
+        internal static partial bool CloseClipboard();
 
         #endregion
 
         #region GDI32.dll graphics functions
 
-        [DllImport("gdi32.dll")]
-        internal static extern IntPtr CopyEnhMetaFile(IntPtr hemetafileSrc, IntPtr hNULL);
+        [LibraryImport("gdi32.dll")]
+        internal static partial IntPtr CopyEnhMetaFile(IntPtr hemetafileSrc, IntPtr hNULL);
 
-        [DllImport("gdi32.dll")]
+        [LibraryImport("gdi32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool DeleteEnhMetaFile(IntPtr hemetafile);
+        internal static partial bool DeleteEnhMetaFile(IntPtr hemetafile);
 
         #endregion
 
@@ -216,10 +217,10 @@ namespace CodeForDotNet.Windows.Native
         /// Managed interface to the Windows shell IPersistFile COM interface.
         /// Provided by: http://www.vbaccelerator.com/home/NET/Code/Libraries/Shell_Projects/Creating_and_Modifying_Shortcuts/article.asp
         /// </summary>
-        [ComImport()]
+        [GeneratedComInterface]
         [Guid("0000010B-0000-0000-C000-000000000046")]
         [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-        internal interface IPersistFile
+        internal partial interface IPersistFile
         {
             /// <summary>
             /// Can't get this to go if I extend IPersist, so put it here.

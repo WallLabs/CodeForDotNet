@@ -18,7 +18,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
     /// <summary>
     /// Enhanced <see cref="TextBox"/> control supporting multiple key-down tracking and group navigational functionality.
     /// </summary>
-    public class DynamicTextBox : TextBox
+    public partial class DynamicTextBox : TextBox
     {
         #region Public Fields
 
@@ -114,7 +114,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             DefaultStyleKey = typeof(DynamicTextBox);
 
             // Initialize members
-            _keysDown = new List<VirtualKey>();
+            _keysDown = [];
             _originalText = Text;
             _originalSelectionStart = SelectionStart;
 
@@ -219,7 +219,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         /// Currently pressed keys. Set during the <see cref="OnKeyDown"/> even handler, after <see cref="OnBeforeKeyDown"/> but before
         /// <see cref="OnAfterKeyDown"/> to supporting repeat detection.
         /// </summary>
-        protected ReadOnlyCollection<VirtualKey> KeysDown => new ReadOnlyCollection<VirtualKey>(_keysDown);
+        protected ReadOnlyCollection<VirtualKey> KeysDown => new(_keysDown);
 
         #endregion Protected Properties
 
@@ -478,7 +478,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         protected virtual void OnBeforeKeyDown(KeyRoutedEventArgs args)
         {
             // Validate.
-            if (args is null) throw new ArgumentNullException(nameof(args));
+            ArgumentNullException.ThrowIfNull(args);
 
             // Handle specific key presses
             var selectIndex = SelectionStart;
@@ -604,7 +604,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         protected virtual void OnBeforeSelectionChanged(object sender, DynamicTextSelectionChangedEventArgs args)
         {
             // Validate.
-            if (args is null) throw new ArgumentNullException(nameof(args));
+            ArgumentNullException.ThrowIfNull(args);
 
             // Move to next control (if any) when at edge...
             var nextControl = GroupNext;
@@ -648,7 +648,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         protected virtual void OnBeforeTextChanged(object sender, DynamicTextChangedEventArgs args)
         {
             // Validate.
-            if (args is null) throw new ArgumentNullException(nameof(args));
+            ArgumentNullException.ThrowIfNull(args);
 
             // Trim text when too long
             var text = args.Text;
@@ -656,7 +656,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
             if (maxLength > 0 && text.Length > maxLength)
             {
                 // Trim text
-                text = text.Substring(0, maxLength);
+                text = text[..maxLength];
             }
 
             // Pad text when enabled and too short
@@ -723,7 +723,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         protected override void OnKeyUp(KeyRoutedEventArgs args)
         {
             // Validate.
-            if (args is null) throw new ArgumentNullException(nameof(args));
+            ArgumentNullException.ThrowIfNull(args);
 
             // Call before event handler
             OnBeforeKeyUp(args);

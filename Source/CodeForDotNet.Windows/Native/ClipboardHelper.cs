@@ -42,11 +42,10 @@ namespace CodeForDotNet.Windows.Native
 		/// <returns>TRUE when successful.</returns>
 		public static bool PutMetafileOnClipboard(IntPtr windowHandle, Metafile metafile)
 		{
-			// Validate arguments
-			if (metafile == null)
-				throw new ArgumentNullException(nameof(metafile));
+            // Validate arguments
+            ArgumentNullException.ThrowIfNull(metafile);
 
-			var success = false;
+            var success = false;
 			using (var gfx = Graphics.FromHwnd(IntPtr.Zero))
 			{
 				var hdc = gfx.GetHdc();

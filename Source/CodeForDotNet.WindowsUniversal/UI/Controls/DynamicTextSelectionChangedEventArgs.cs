@@ -19,7 +19,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         public DynamicTextSelectionChangedEventArgs(Control focus, int selectionStart, int selectionLength)
         {
             // Validate
-            if (focus == null) throw new ArgumentNullException(nameof(focus));
+            ArgumentNullException.ThrowIfNull(focus);
             if (selectionStart < 0) throw new ArgumentOutOfRangeException(nameof(selectionStart));
             if (selectionLength < 0) throw new ArgumentOutOfRangeException(nameof(selectionLength));
 

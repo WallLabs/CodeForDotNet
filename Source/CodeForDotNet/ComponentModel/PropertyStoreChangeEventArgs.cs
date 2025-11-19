@@ -15,7 +15,7 @@ namespace CodeForDotNet.ComponentModel
 		/// </summary>
 		public PropertyStoreChangeEventArgs()
 		{
-			Keys = new Collection<Guid>();
+			Keys = [];
 		}
 
 		/// <summary>

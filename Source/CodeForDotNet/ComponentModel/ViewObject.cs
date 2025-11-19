@@ -29,7 +29,7 @@ namespace CodeForDotNet.ComponentModel
 		{
 			_parent = null!;
 			_parentChangeEventCache = null!;
-			_children = new ObservableCollection<IViewObject>();
+			_children = [];
 			_children.CollectionChanged += OnChildrenChanged;
 		}
 

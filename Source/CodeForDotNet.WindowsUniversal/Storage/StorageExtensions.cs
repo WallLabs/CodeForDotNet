@@ -22,10 +22,7 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static IStorageFile CreateFile(this IStorageFolder parentFolder, string fileName)
         {
             // Validate
-            if (parentFolder == null)
-            {
-                throw new ArgumentNullException(nameof(parentFolder));
-            }
+            ArgumentNullException.ThrowIfNull(parentFolder);
 
             // Call overloaded method
             return parentFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists).GetAwaiter().GetResult();
@@ -41,10 +38,7 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static IStorageFolder CreateFolder(this IStorageFolder parentFolder, string folderName)
         {
             // Validate
-            if (parentFolder == null)
-            {
-                throw new ArgumentNullException(nameof(parentFolder));
-            }
+            ArgumentNullException.ThrowIfNull(parentFolder);
 
             // Call overloaded method
             return parentFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists).GetAwaiter().GetResult();
@@ -71,10 +65,7 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static void Delete(this IStorageFile file, bool permanent)
         {
             // Validate
-            if (file == null)
-            {
-                throw new ArgumentNullException(nameof(file));
-            }
+            ArgumentNullException.ThrowIfNull(file);
 
             // Call overloaded method with appropriate delete option
             file.DeleteAsync(permanent
@@ -89,13 +80,10 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         /// <param name="parentFolder">Folder to query, usually specified via extension.</param>
         /// <param name="fileName">Name of the file to query, case insensitive.</param>
         /// <returns>A <see cref="StorageFile"/> representing the file or null when not found.</returns>
-        public static IStorageFile OpenFile(this IStorageFolder parentFolder, string fileName)
+        public static IStorageFile? OpenFile(this IStorageFolder parentFolder, string fileName)
         {
             // Validate
-            if (parentFolder == null)
-            {
-                throw new ArgumentNullException(nameof(parentFolder));
-            }
+            ArgumentNullException.ThrowIfNull(parentFolder);
 
             // Search for file and return result or null
             return (from file in parentFolder.GetFilesAsync().GetAwaiter().GetResult()
@@ -110,13 +98,10 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         /// <param name="parentFolder">Folder to query, usually specified via extension.</param>
         /// <param name="subfolderName">Name of the subfolder to query, case insensitive.</param>
         /// <returns>A <see cref="StorageFolder"/> representing the folder or null when not found.</returns>
-        public static IStorageFolder OpenFolder(this IStorageFolder parentFolder, string subfolderName)
+        public static IStorageFolder? OpenFolder(this IStorageFolder parentFolder, string subfolderName)
         {
             // Validate
-            if (parentFolder == null)
-            {
-                throw new ArgumentNullException(nameof(parentFolder));
-            }
+            ArgumentNullException.ThrowIfNull(parentFolder);
 
             // Search for folder and return result or null
             return (from subfolder in parentFolder.GetFoldersAsync().GetAwaiter().GetResult()
@@ -132,10 +117,7 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static string ReadAllText(this IStorageFile file)
         {
             // Validate
-            if (file == null)
-            {
-                throw new ArgumentNullException(nameof(file));
-            }
+            ArgumentNullException.ThrowIfNull(file);
 
             // Call overloaded method
             return FileIO.ReadTextAsync(file).GetAwaiter().GetResult();
@@ -149,10 +131,7 @@ namespace CodeForDotNet.WindowsUniversal.Storage
         public static void WriteAllText(this IStorageFile file, string contents)
         {
             // Validate
-            if (file == null)
-            {
-                throw new ArgumentNullException(nameof(file));
-            }
+            ArgumentNullException.ThrowIfNull(file);
 
             // Call overloaded method
             FileIO.WriteTextAsync(file, contents).GetAwaiter().GetResult();

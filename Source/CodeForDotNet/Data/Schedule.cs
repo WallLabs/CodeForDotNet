@@ -44,8 +44,8 @@ namespace CodeForDotNet.Data
         /// </summary>
         public Schedule()
         {
-            Includes = new ScheduleItemCollection();
-            Excludes = new ScheduleItemCollection();
+            Includes = [];
+            Excludes = [];
         }
 
         #endregion Public Constructors

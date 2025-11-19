@@ -80,14 +80,11 @@ namespace CodeForDotNet.WindowsUniversal.Storage
 		/// <returns>File contents.</returns>
 		public static ErrorReportData GenerateReport(Exception error)
 		{
-			// Validate
-			if (error == null)
-			{
-				throw new ArgumentNullException(nameof(error));
-			}
+            // Validate
+            ArgumentNullException.ThrowIfNull(error);
 
-			// Write application and version information at top
-			var application = Application.Current;
+            // Write application and version information at top
+            var application = Application.Current;
 			var applicationType = application.GetType();
 			var report = new ErrorReportData
 			{

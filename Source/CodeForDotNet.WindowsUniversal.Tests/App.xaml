@@ -5,6 +5,6 @@
     xmlns:base="using:CodeForDotNet.WindowsUniversal.UI"
     RequestedTheme="Dark">
     <Application.Resources>
-        <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+        <!--<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />-->
     </Application.Resources>
 </base:ApplicationBase>

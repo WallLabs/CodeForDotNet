@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Windows.UI.Xaml.Data;
 
 namespace CodeForDotNet.WindowsUniversal.UI.Converters
@@ -7,7 +7,7 @@ namespace CodeForDotNet.WindowsUniversal.UI.Converters
     /// Null test to boolean one-way value converter.
     /// </summary>
     /// <remarks>Converts null to false and non-null to true, any object type.</remarks>
-    public class IsNullToBooleanValueConverter : IValueConverter
+    public partial class IsNullToBooleanValueConverter : IValueConverter
     {
         #region Public Methods
 

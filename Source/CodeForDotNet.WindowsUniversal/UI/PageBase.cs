@@ -11,7 +11,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
     /// Windows Store <see cref="Page"/> with common features including a standard model property and session state persistence when used in a
     /// <see cref="Application"/> based application.
     /// </summary>
-    public class PageBase : Page
+    public partial class PageBase : Page
     {
         #region Public Fields
 
@@ -62,7 +62,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
         public void LoadState(ApplicationDataContainer container)
         {
             // Validate.
-            if (container is null) throw new ArgumentNullException(nameof(container));
+            ArgumentNullException.ThrowIfNull(container);
 
             // Load state.
             // TODO: Use model key from UI model based class
@@ -79,7 +79,7 @@ namespace CodeForDotNet.WindowsUniversal.UI
         public void SaveState(ApplicationDataContainer container)
         {
             // Validate.
-            if (container is null) throw new ArgumentNullException(nameof(container));
+            ArgumentNullException.ThrowIfNull(container);
 
             // Save state.
             // TODO: Use model key from UI model based class
