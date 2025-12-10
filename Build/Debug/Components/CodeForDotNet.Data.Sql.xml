@@ -9,22 +9,22 @@
             Data adapter for the <see cref="T:CodeForDotNet.Data.ErrorReportData"/> entity.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Data.Sql.Adapters.ErrorReportDataAdapter.Read(CodeForDotNet.Data.ErrorReportData,System.Data.SqlClient.SqlDataReader)">
+        <member name="M:CodeForDotNet.Data.Sql.Adapters.ErrorReportDataAdapter.Read(CodeForDotNet.Data.ErrorReportData,Microsoft.Data.SqlClient.SqlDataReader)">
             <summary>
             Reads properties of a <see cref="T:CodeForDotNet.Data.ErrorReportData"/> from a data reader.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Data.Sql.Adapters.ErrorReportDataAdapter.Read(CodeForDotNet.Data.ErrorReportData,System.Data.SqlClient.SqlDataReader,System.Boolean)">
+        <member name="M:CodeForDotNet.Data.Sql.Adapters.ErrorReportDataAdapter.Read(CodeForDotNet.Data.ErrorReportData,Microsoft.Data.SqlClient.SqlDataReader,System.Boolean)">
             <summary>
             Reads properties of a <see cref="T:CodeForDotNet.Data.ErrorReportData"/> from a data reader.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Data.Sql.Adapters.ErrorReportDataAdapter.Set(CodeForDotNet.Data.ErrorReportData,System.Data.SqlClient.SqlParameterCollection)">
+        <member name="M:CodeForDotNet.Data.Sql.Adapters.ErrorReportDataAdapter.Set(CodeForDotNet.Data.ErrorReportData,Microsoft.Data.SqlClient.SqlParameterCollection)">
             <summary>
             Sets data command parameter values for a <see cref="T:CodeForDotNet.Data.ErrorReportData"/>.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Data.Sql.Adapters.ErrorReportDataAdapter.Set(CodeForDotNet.Data.ErrorReportData,System.Data.SqlClient.SqlParameterCollection,System.Boolean)">
+        <member name="M:CodeForDotNet.Data.Sql.Adapters.ErrorReportDataAdapter.Set(CodeForDotNet.Data.ErrorReportData,Microsoft.Data.SqlClient.SqlParameterCollection,System.Boolean)">
             <summary>
             Sets data command parameter values for a <see cref="T:CodeForDotNet.Data.ErrorReportData"/>.
             </summary>
@@ -34,12 +34,12 @@
             Data adapter for the <see cref="T:CodeForDotNet.Data.GuidDataKey"/> entity.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Data.Sql.Adapters.GuidDataKeyAdapter.Read(CodeForDotNet.Data.GuidDataKey,System.Data.SqlClient.SqlDataReader)">
+        <member name="M:CodeForDotNet.Data.Sql.Adapters.GuidDataKeyAdapter.Read(CodeForDotNet.Data.GuidDataKey,Microsoft.Data.SqlClient.SqlDataReader)">
             <summary>
             Reads properties of a <see cref="T:CodeForDotNet.Data.GuidDataKey"/> from a data reader.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Data.Sql.Adapters.GuidDataKeyAdapter.Set(CodeForDotNet.Data.GuidDataKey,System.Data.SqlClient.SqlParameterCollection)">
+        <member name="M:CodeForDotNet.Data.Sql.Adapters.GuidDataKeyAdapter.Set(CodeForDotNet.Data.GuidDataKey,Microsoft.Data.SqlClient.SqlParameterCollection)">
             <summary>
             Sets data command parameter values for a <see cref="T:CodeForDotNet.Data.GuidDataKey"/>.
             </summary>
@@ -82,7 +82,7 @@
         </member>
         <member name="F:CodeForDotNet.Data.Sql.SqlExtensions.ParameterCache">
             <summary>
-            Cache of <see cref="T:System.Data.SqlClient.SqlParameter"/> items for a given command hash-code.
+            Cache of <see cref="T:Microsoft.Data.SqlClient.SqlParameter"/> items for a given command hash-code.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Data.Sql.SqlExtensions.BuildConnectionString(System.String,System.String,System.String,System.String)">
@@ -95,7 +95,7 @@
             <param name="password">Password or null/empty for Windows integrated security.</param>
             <returns>SQL connection string.</returns>
         </member>
-        <member name="M:CodeForDotNet.Data.Sql.SqlExtensions.CreateCommandWithParameters(System.Data.SqlClient.SqlConnection,System.String)">
+        <member name="M:CodeForDotNet.Data.Sql.SqlExtensions.CreateCommandWithParameters(Microsoft.Data.SqlClient.SqlConnection,System.String)">
             <summary>
             Creates a command object for the specified stored procedure, automatically populating the parameters. Parameter sets are cached for performance.
             </summary>

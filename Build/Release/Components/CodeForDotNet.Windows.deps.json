@@ -6,14 +6,27 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "CodeForDotNet/1.0.0": {
+      "CodeForDotNet.Windows/1.0.0": {
         "dependencies": {
+          "CodeForDotNet": "1.0.0",
           "Microsoft.CodeAnalysis": "5.0.0",
           "Microsoft.CodeAnalysis.CSharp": "5.0.0",
-          "System.Drawing.Common": "10.0.1"
+          "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.26100.57"
         },
         "runtime": {
-          "CodeForDotNet.dll": {}
+          "CodeForDotNet.Windows.dll": {}
+        }
+      },
+      "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.26100.57": {
+        "runtime": {
+          "Microsoft.Windows.SDK.NET.dll": {
+            "assemblyVersion": "10.0.26100.38",
+            "fileVersion": "10.0.26100.55"
+          },
+          "WinRT.Runtime.dll": {
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.48161"
+          }
         }
       },
       "Humanizer.Core/2.14.1": {
@@ -360,22 +373,6 @@
           }
         }
       },
-      "Microsoft.Win32.SystemEvents/10.0.1": {
-        "runtime": {
-          "lib/net10.0/Microsoft.Win32.SystemEvents.dll": {
-            "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.125.57005"
-          }
-        },
-        "runtimeTargets": {
-          "runtimes/win/lib/net10.0/Microsoft.Win32.SystemEvents.dll": {
-            "rid": "win",
-            "assetType": "runtime",
-            "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.125.57005"
-          }
-        }
-      },
       "System.Composition/9.0.0": {
         "dependencies": {
           "System.Composition.AttributedModel": "9.0.0",
@@ -436,30 +433,28 @@
           }
         }
       },
-      "System.Drawing.Common/10.0.1": {
+      "CodeForDotNet/1.0.0": {
         "dependencies": {
-          "Microsoft.Win32.SystemEvents": "10.0.1"
+          "Microsoft.CodeAnalysis": "5.0.0",
+          "Microsoft.CodeAnalysis.CSharp": "5.0.0"
         },
         "runtime": {
-          "lib/net10.0/System.Drawing.Common.dll": {
-            "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.125.57005"
-          },
-          "lib/net10.0/System.Private.Windows.Core.dll": {
-            "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.125.57005"
-          },
-          "lib/net10.0/System.Private.Windows.GdiPlus.dll": {
-            "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.125.57005"
+          "CodeForDotNet.dll": {
+            "assemblyVersion": "5.0.2106.29000",
+            "fileVersion": "5.0.2106.29000"
           }
         }
       }
     }
   },
   "libraries": {
-    "CodeForDotNet/1.0.0": {
+    "CodeForDotNet.Windows/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "runtimepack.Microsoft.Windows.SDK.NET.Ref/10.0.26100.57": {
+      "type": "runtimepack",
       "serviceable": false,
       "sha512": ""
     },
@@ -526,13 +521,6 @@
       "path": "microsoft.codeanalysis.workspaces.common/5.0.0",
       "hashPath": "microsoft.codeanalysis.workspaces.common.5.0.0.nupkg.sha512"
     },
-    "Microsoft.Win32.SystemEvents/10.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-trU4LN2C04nj5qnl8HqoX0NJGPCFg9h2f5o+jjp3Xm8c8fQtu6Ga1/fNFMf3AapoHyLP1WlP21XnL2ij/TLKlg==",
-      "path": "microsoft.win32.systemevents/10.0.1",
-      "hashPath": "microsoft.win32.systemevents.10.0.1.nupkg.sha512"
-    },
     "System.Composition/9.0.0": {
       "type": "package",
       "serviceable": true,
@@ -575,12 +563,10 @@
       "path": "system.composition.typedparts/9.0.0",
       "hashPath": "system.composition.typedparts.9.0.0.nupkg.sha512"
     },
-    "System.Drawing.Common/10.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-cmkIduwyVPfuO8kNehu3xNcjo26nMgUoJyfso9S/zTO85YovvPPG0/AFLjanx1iVgQ80OpJVnLb1jU3aIKNLdg==",
-      "path": "system.drawing.common/10.0.1",
-      "hashPath": "system.drawing.common.10.0.1.nupkg.sha512"
+    "CodeForDotNet/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

@@ -1,5 +1,8 @@
 # Code for .NET - Release Notes
 
+## Version 10.0.2512.??### (2025.12.??)
+* Upgraded to .NET 10 framework and complete migration from legacy .NET projects.
+
 ## Version 5.0.2101.5### (2021.01.05)
 * Upgraded to .NET 5 framework.
 * Switched to new SDK/NetAnalyzers Code Analysis (FxCop depreciated).

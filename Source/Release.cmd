@@ -8,10 +8,6 @@ echo to the central build directory for check-in and use by other
 echo components or release.
 
 echo.
-echo Close Visual Studio now to avoid errors with locked files.
-pause
-
-echo.
 echo Initializing Visual Studio environment...
 call "%~dp0Dependencies\Variables.cmd"
 if %errorlevel% neq 0 goto Error
@@ -59,7 +55,5 @@ exit /b 0
 
 :Error
 echo Error %errorlevel%!
-echo.
-echo Note: Visual Studio must be closed before running this script to prevent build errors from locked files and caches.
 endlocal
 exit /b 1
