@@ -1,0 +1,73 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="ARM" />
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Common/">
+    <File Path="Common/Code for .NET.snk" />
+    <File Path="Common/Dictionary.xml" />
+  </Folder>
+  <Folder Name="/Dependencies/">
+    <File Path="Dependencies/.gitignore" />
+    <File Path="Dependencies/Update.cmd" />
+    <File Path="Dependencies/Variables.cmd" />
+  </Folder>
+  <Folder Name="/Dependencies/Documentation/">
+    <File Path="Dependencies/Documentation/Code for PowerShell Release Notes.md" />
+    <File Path="Dependencies/Documentation/Code for Windows Release Notes.md" />
+  </Folder>
+  <Folder Name="/Dependencies/PowerShell/" />
+  <Folder Name="/Dependencies/PowerShell/CodeForPowerShell.VisualStudio/">
+    <File Path="Dependencies/PowerShell/CodeForPowerShell.VisualStudio/CodeForPowerShell.VisualStudio.psd1" />
+    <File Path="Dependencies/PowerShell/CodeForPowerShell.VisualStudio/CodeForPowerShell.VisualStudio.Version.psm1" />
+  </Folder>
+  <Folder Name="/Dependencies/Version/">
+    <File Path="Dependencies/Version/CodeForPowerShell.Version.txt" />
+    <File Path="Dependencies/Version/CodeForWindows.Version.txt" />
+  </Folder>
+  <Folder Name="/Dependencies/WIA/">
+    <File Path="Dependencies/WIA/Interop.Wia.dll" />
+    <File Path="Dependencies/WIA/Interop.Wia.ScanProfiles.dll" />
+    <File Path="Dependencies/WIA/MakeInterop.cmd" />
+  </Folder>
+  <Folder Name="/Documentation/">
+    <File Path="Documentation/Release Notes.md" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Build.cmd" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Local Test.runsettings" />
+    <File Path="NuGet.config" />
+    <File Path="Release.cmd" />
+    <File Path="Setup.cmd" />
+    <File Path="Setup.ps1" />
+    <File Path="Version.cmd" />
+    <File Path="Version.ps1" />
+    <File Path="Version.txt" />
+  </Folder>
+  <Project Path="CodeForDotNet.Data.Sql/CodeForDotNet.Data.Sql.csproj" />
+  <Project Path="CodeForDotNet.Tests/CodeForDotNet.Tests.csproj" />
+  <Project Path="CodeForDotNet.UI/CodeForDotNet.UI.csproj" />
+  <Project Path="CodeForDotNet.Windows/CodeForDotNet.Windows.csproj" />
+  <Project Path="CodeForDotNet.WindowsUniversal.Tests/CodeForDotNet.WindowsUniversal.Tests.csproj">
+    <Platform Solution="*|Any CPU" Project="x64" />
+    <Platform Solution="*|ARM" Project="ARM" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+    <Deploy />
+  </Project>
+  <Project Path="CodeForDotNet.WindowsUniversal/CodeForDotNet.WindowsUniversal.csproj">
+    <Platform Solution="*|ARM" Project="ARM" />
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+  </Project>
+  <Project Path="CodeForDotNet/CodeForDotNet.csproj" />
+</Solution>
