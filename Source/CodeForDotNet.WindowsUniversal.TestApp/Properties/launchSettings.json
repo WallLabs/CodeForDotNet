@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "TestApp": {
+      "commandName": "MsixPackage",
+      "nativeDebugging": true,
+      "hotReloadEnabled": false
+    }
+  }
+}

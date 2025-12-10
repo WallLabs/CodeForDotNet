@@ -1,7 +1,0 @@
-{
-  "profiles": {
-    "NewUwpTest": {
-      "commandName": "MsixPackage"
-    }
-  }
-}

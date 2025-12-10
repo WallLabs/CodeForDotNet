@@ -201,6 +201,144 @@
             Sub-Key path in which to store the setting. e.g. "Preferences\Display".
             </summary>
         </member>
+        <member name="T:CodeForDotNet.Windows.Drawing.BrushExtensions">
+            <summary>
+            Extensions for work with <see cref="T:System.Drawing.Brush"/> types.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.BrushExtensions.MakeBrush(CodeForDotNet.Drawing.BrushData,System.Drawing.Rectangle)">
+            <summary>
+            Creates a .NET brush based on the current brush specification.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.BrushExtensions.MakeBrush(CodeForDotNet.Drawing.BrushData,System.Drawing.Rectangle,System.Boolean)">
+            <summary>
+            Creates a .NET brush based on the current brush specification, optionally flipping the start and end colors.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Drawing.FontExtensions">
+            <summary>
+            Extensions for work with <see cref="T:System.Drawing.Font"/> types.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.FontExtensions.ToData(System.Drawing.Font)">
+            <summary>
+            Creates a <see cref="T:CodeForDotNet.Drawing.FontData"/> based on the parameters of an existing <see cref="T:System.Drawing.Font"/>.
+            </summary>
+            <remarks>The font is not touched by this instance other than to read it's properties and must be disposed as usual by the caller or other owner.</remarks>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.FontExtensions.ToFont(CodeForDotNet.Drawing.FontData)">
+            <summary>
+            Creates a <see cref="T:System.Drawing.Font"/> with the current properties.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Drawing.ImageExtensions">
+            <summary>
+            Extensions for working with image classes.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Drawing.ImageExtensions.BmpContentType">
+            <summary>
+            BMP file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Drawing.ImageExtensions.EmfContentType">
+            <summary>
+            EMF file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Drawing.ImageExtensions.GifContentType">
+            <summary>
+            GIF file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Drawing.ImageExtensions.IcoContentType">
+            <summary>
+            ICO file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Drawing.ImageExtensions.JpgContentType">
+            <summary>
+            JPG file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Drawing.ImageExtensions.PngContentType">
+            <summary>
+            PNG file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Drawing.ImageExtensions.TifContentType">
+            <summary>
+            TIF file content type.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Windows.Drawing.ImageExtensions.WmfContentType">
+            <summary>
+            WMF file content type.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.ImageExtensions.GetContentType(System.Drawing.Imaging.ImageFormat)">
+            <summary>
+            Gets the MIME content type of an <see cref="T:System.Drawing.Imaging.ImageFormat"/>.
+            </summary>
+            <param name="format">Image format.</param>
+            <returns>Content type or null when not supported.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.ImageExtensions.GetContentType(System.Guid)">
+            <summary>
+            Gets the MIME content type of an <see cref="P:System.Drawing.Imaging.ImageFormat.Guid"/>.
+            </summary>
+            <param name="formatId">Image format Id.</param>
+            <returns>Content type or null when not supported.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.ImageExtensions.GetFormat(System.String)">
+            <summary>
+            Gets the <see cref="T:System.Drawing.Imaging.ImageFormat"/> for a MIME content type.
+            </summary>
+            <param name="contentType">MIME content type.</param>
+            <returns>Image format or null when unsupported.</returns>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Drawing.Printing.MarginsExtensions">
+            <summary>
+            Extensions for work with <see cref="T:System.Drawing.Printing.Margins"/> types.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.Printing.MarginsExtensions.ToData(System.Drawing.Printing.Margins)">
+            <summary>
+            Creates a <see cref="T:CodeForDotNet.Drawing.Printing.PageMarginsData"/> based on the parameters of an existing <see cref="T:System.Drawing.Printing.Margins"/>.
+            </summary>
+            <remarks>The font is not touched by this instance other than to read it's properties and must be disposed as usual by the caller or other owner.</remarks>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.Printing.MarginsExtensions.ToMargins(CodeForDotNet.Drawing.Printing.PageMarginsData)">
+            <summary>
+            Creates a <see cref="T:System.Drawing.Printing.Margins"/> with the current properties.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Drawing.Printing.PrintingExtensions">
+            <summary>
+            Extensions for work with types in the <see cref="N:System.Drawing.Printing"/> namespace.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.Printing.PrintingExtensions.ToData(System.Drawing.Printing.PrinterSettings)">
+            <summary>
+            Converts a .NET PrinterSettings class to a data structure of this type.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.Printing.PrintingExtensions.ToData(System.Drawing.Printing.PageSettings)">
+            <summary>
+            Creates a data structure of this type from .NET PageSettings.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.Printing.PrintingExtensions.ToPageSettings(CodeForDotNet.Drawing.Printing.PageSettingsData)">
+            <summary>
+            Converts this data to a .NET PageSettings class.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.Printing.PrintingExtensions.ToPrinterSettings(CodeForDotNet.Drawing.Printing.PrinterSettingsData)">
+            <summary>
+            Converts this data to a .NET PrinterSettings class.
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.Windows.Imaging.WiaCommonDialog">
             <summary>
             Encapsulates a <see cref="T:Interop.Wia.CommonDialog"/> in managed code.
@@ -924,7 +1062,7 @@
         </member>
         <member name="T:CodeForDotNet.Windows.Imaging.WiaPropertyCollection">
             <summary>
-            Managed <see cref="N:CodeForDotNet.Properties"/>.
+            Managed <see cref="N:CodeForDotNet.Windows.Properties"/>.
             </summary>
         </member>
         <member name="M:CodeForDotNet.Windows.Imaging.WiaPropertyCollection.#ctor">
@@ -1345,13 +1483,134 @@
             Gets the current name of the file associated with the object.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.Shell32.SHGetSpecialFolderPath(System.IntPtr,System.Text.StringBuilder,System.Int32,System.Boolean)">
+        <member name="M:CodeForDotNet.Windows.Native.SafeNativeMethods.Shell32.SHGetSpecialFolderPath(System.IntPtr,System.Char*,System.Int32,System.Boolean)">
             <summary>
             BOOL SHGetSpecialFolderPath(          HWND hwndOwner,
             	LPTSTR lpszPath,
             	int nFolder,
             	BOOL fCreate
             );
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Windows.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.ErrorComPlusApplicationNameUnconfirmed">
+            <summary>
+              Looks up a localized string similar to COM Application Name {0} was not found after installation..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.ErrorMissingConditionProperty">
+            <summary>
+              Looks up a localized string similar to Please specify a unique {0}.ConditionArgument, it is required to store uninstall information in the saved state..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.PropertyRequired">
+            <summary>
+              Looks up a localized string similar to The property &quot;{0}&quot; is required..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusCommtitingChanges">
+            <summary>
+              Looks up a localized string similar to Committing changes....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusConfigureComPlusApplication">
+            <summary>
+              Looks up a localized string similar to Configuring COM+ application {0}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusDeletedService">
+            <summary>
+              Looks up a localized string similar to Deleted service..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusDeletingFile">
+            <summary>
+              Looks up a localized string similar to Deleting file {0}.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGacInstallComponent">
+            <summary>
+              Looks up a localized string similar to lnstalling component {0} into the GAC....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGaclnstallDependency">
+            <summary>
+              Looks up a localized string similar to lnstalling dependency {0} into the GAC....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGacRemoveComponent">
+            <summary>
+              Looks up a localized string similar to Removing component {0} from the GAC....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusGacRemoveDependency">
+            <summary>
+              Looks up a localized string similar to Removing dependency {0} from the GAC....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusInstall">
+            <summary>
+              Looks up a localized string similar to {0} installer performing install action for condition {1}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusLoadingFile">
+            <summary>
+              Looks up a localized string similar to Loading file {0}.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusMigratingDotNetConfigToLocalManifest">
+            <summary>
+              Looks up a localized string similar to Migrating local .NET application config to COM manifest (application.manifest and application.config)....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusRegisterComPlusComponent">
+            <summary>
+              Looks up a localized string similar to Registering COM+ component {0}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusRemovingComPlusApplication">
+            <summary>
+              Looks up a localized string similar to Removing COM+application {0}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusRemovingComPlusApplicationInstance">
+            <summary>
+              Looks up a localized string similar to Removing COM+ application {0} instance {1}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusShutdownServices">
+            <summary>
+              Looks up a localized string similar to Shutting down services....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusSkippingMissingFile">
+            <summary>
+              Looks up a localized string similar to Skipping missing file {0}.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusUninstall">
+            <summary>
+              Looks up a localized string similar to {0} installer performing uninstall action for condition {1}....
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Properties.Resources.StatusUnregisterComPlusComponent">
+            <summary>
+              Looks up a localized string similar to Unregistering COM+ component {0}....
             </summary>
         </member>
     </members>

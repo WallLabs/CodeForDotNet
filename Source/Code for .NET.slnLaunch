@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "TestApp",
+    "Projects": [
+      {
+        "Path": "CodeForDotNet.WindowsUniversal.TestApp\\CodeForDotNet.WindowsUniversal.TestApp.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

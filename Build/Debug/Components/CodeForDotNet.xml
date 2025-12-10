@@ -1107,6 +1107,19 @@
             <see cref="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetProperty``1(``0@,``0,System.String,CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0},CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0})"/> method in your property setters
             to automatically test for equality, then set the new value and fire the <see cref="E:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.PropertyChanged"/> event when changed.
             </summary>
+            <remarks>
+            Creates an empty instance with the specified synchronization context.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.#ctor(System.Threading.SynchronizationContext)">
+            <summary>
+            Base object which provides a compact <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> implementation. Use the
+            <see cref="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetProperty``1(``0@,``0,System.String,CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0},CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler{``0})"/> method in your property setters
+            to automatically test for equality, then set the new value and fire the <see cref="E:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.PropertyChanged"/> event when changed.
+            </summary>
+            <remarks>
+            Creates an empty instance with the specified synchronization context.
+            </remarks>
         </member>
         <member name="F:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase._pendingPropertyChangeEvents">
             <summary>
@@ -1121,11 +1134,6 @@
         <member name="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.#ctor">
             <summary>
             Creates an empty instance using the current synchronization context.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.#ctor(System.Threading.SynchronizationContext)">
-            <summary>
-            Creates an empty instance with the specified synchronization context.
             </summary>
         </member>
         <member name="T:CodeForDotNet.ComponentModel.NotifyPropertyChangedBase.SetPropertyEventHandler`1">
@@ -1852,6 +1860,18 @@
             DataSet change log - monitors DataSet changes to facilitate, roll-back and roll-forward functionality plus a descriptive change list, e.g. to support
             Undo/Redo capability.
             </summary>
+            <remarks>
+            Creates an instance to monitor the specified DataSet.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.Data.DataSetChangeLog.#ctor(System.Data.DataSet)">
+            <summary>
+            DataSet change log - monitors DataSet changes to facilitate, roll-back and roll-forward functionality plus a descriptive change list, e.g. to support
+            Undo/Redo capability.
+            </summary>
+            <remarks>
+            Creates an instance to monitor the specified DataSet.
+            </remarks>
         </member>
         <member name="F:CodeForDotNet.Data.DataSetChangeLog._changeLog">
             <summary>
@@ -1862,11 +1882,6 @@
             <summary>
             Current entry in the change log. Unless there are any redo actions available, this will always be the last entry in the array. When the change log is
             empty, the index is -1.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Data.DataSetChangeLog.#ctor(System.Data.DataSet)">
-            <summary>
-            Creates an instance to monitor the specified DataSet.
             </summary>
         </member>
         <member name="P:CodeForDotNet.Data.DataSetChangeLog.Data">
@@ -1928,11 +1943,17 @@
             <summary>
             Contains information about a change in the Change Log.
             </summary>
+            <remarks>
+            Creates a new instance of this structure containing the specified data.
+            </remarks>
         </member>
         <member name="M:CodeForDotNet.Data.DataSetChangeLogEntry.#ctor(System.DateTime,System.String,System.Data.DataSet)">
             <summary>
-            Creates a new instance of this structure containing the specified data.
+            Contains information about a change in the Change Log.
             </summary>
+            <remarks>
+            Creates a new instance of this structure containing the specified data.
+            </remarks>
         </member>
         <member name="P:CodeForDotNet.Data.DataSetChangeLogEntry.Changes">
             <summary>
@@ -2962,21 +2983,6 @@
             Converts the brush to an XML string.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Drawing.BrushExtensions">
-            <summary>
-            Extensions for work with <see cref="T:System.Drawing.Brush"/> types.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.BrushExtensions.MakeBrush(CodeForDotNet.Drawing.BrushData,System.Drawing.Rectangle)">
-            <summary>
-            Creates a .NET brush based on the current brush specification.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.BrushExtensions.MakeBrush(CodeForDotNet.Drawing.BrushData,System.Drawing.Rectangle,System.Boolean)">
-            <summary>
-            Creates a .NET brush based on the current brush specification, optionally flipping the start and end colors.
-            </summary>
-        </member>
         <member name="T:CodeForDotNet.Drawing.BrushFillType">
             <summary>
             Brush type.
@@ -3129,22 +3135,6 @@
             Converts the brush to an XML string.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Drawing.FontExtensions">
-            <summary>
-            Extensions for work with <see cref="T:System.Drawing.Font"/> types.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.FontExtensions.ToData(System.Drawing.Font)">
-            <summary>
-            Creates a <see cref="T:CodeForDotNet.Drawing.FontData"/> based on the parameters of an existing <see cref="T:System.Drawing.Font"/>.
-            </summary>
-            <remarks>The font is not touched by this instance other than to read it's properties and must be disposed as usual by the caller or other owner.</remarks>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.FontExtensions.ToFont(CodeForDotNet.Drawing.FontData)">
-            <summary>
-            Creates a <see cref="T:System.Drawing.Font"/> with the current properties.
-            </summary>
-        </member>
         <member name="T:CodeForDotNet.Drawing.FontStyle">
             <summary>
             Font style, defined separately from any API so it can be used in future proof data serialization and cross-platform applications.
@@ -3165,72 +3155,6 @@
             <summary>
             Italic.
             </summary>
-        </member>
-        <member name="T:CodeForDotNet.Drawing.ImageExtensions">
-            <summary>
-            Extensions for working with image classes.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.BmpContentType">
-            <summary>
-            BMP file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.EmfContentType">
-            <summary>
-            EMF file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.GifContentType">
-            <summary>
-            GIF file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.IcoContentType">
-            <summary>
-            ICO file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.JpgContentType">
-            <summary>
-            JPG file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.PngContentType">
-            <summary>
-            PNG file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.TifContentType">
-            <summary>
-            TIF file content type.
-            </summary>
-        </member>
-        <member name="F:CodeForDotNet.Drawing.ImageExtensions.WmfContentType">
-            <summary>
-            WMF file content type.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.ImageExtensions.GetContentType(System.Drawing.Imaging.ImageFormat)">
-            <summary>
-            Gets the MIME content type of an <see cref="T:System.Drawing.Imaging.ImageFormat"/>.
-            </summary>
-            <param name="format">Image format.</param>
-            <returns>Content type or null when not supported.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.ImageExtensions.GetContentType(System.Guid)">
-            <summary>
-            Gets the MIME content type of an <see cref="P:System.Drawing.Imaging.ImageFormat.Guid"/>.
-            </summary>
-            <param name="formatId">Image format Id.</param>
-            <returns>Content type or null when not supported.</returns>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.ImageExtensions.GetFormat(System.String)">
-            <summary>
-            Gets the <see cref="T:System.Drawing.Imaging.ImageFormat"/> for a MIME content type.
-            </summary>
-            <param name="contentType">MIME content type.</param>
-            <returns>Image format or null when unsupported.</returns>
         </member>
         <member name="T:CodeForDotNet.Drawing.PointExtensions">
             <summary>
@@ -3257,20 +3181,79 @@
             Subtracts a <see cref="T:System.Drawing.PointF"/> from a <see cref="T:System.Drawing.PointF"/>.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Drawing.Printing.MarginsExtensions">
+        <member name="T:CodeForDotNet.Drawing.Printing.PageMarginsData">
             <summary>
-            Extensions for work with <see cref="T:System.Drawing.Printing.Margins"/> types.
+            Margins data.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Drawing.Printing.MarginsExtensions.ToData(System.Drawing.Printing.Margins)">
+        <member name="M:CodeForDotNet.Drawing.Printing.PageMarginsData.#ctor">
             <summary>
-            Creates a <see cref="T:CodeForDotNet.Drawing.PageMarginsData"/> based on the parameters of an existing <see cref="T:System.Drawing.Printing.Margins"/>.
+            Creates the margins.
             </summary>
-            <remarks>The font is not touched by this instance other than to read it's properties and must be disposed as usual by the caller or other owner.</remarks>
         </member>
-        <member name="M:CodeForDotNet.Drawing.Printing.MarginsExtensions.ToMargins(CodeForDotNet.Drawing.PageMarginsData)">
+        <member name="M:CodeForDotNet.Drawing.Printing.PageMarginsData.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            Creates a <see cref="T:System.Drawing.Printing.Margins"/> with the current properties.
+            Creates the margins from specified values.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.Printing.PageMarginsData.Bottom">
+            <summary>
+            Gets or sets the bottom margin, in hundredths of an inch.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.Printing.PageMarginsData.Left">
+            <summary>
+            Gets or sets the left margin width, in hundredths of an inch.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.Printing.PageMarginsData.Right">
+            <summary>
+            Gets or sets the right margin width, in hundredths of an inch.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Drawing.Printing.PageMarginsData.Top">
+            <summary>
+            Gets or sets the top margin width, in hundredths of an inch.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PageMarginsData.op_Inequality(CodeForDotNet.Drawing.Printing.PageMarginsData,CodeForDotNet.Drawing.Printing.PageMarginsData)">
+            <summary>
+            Overrides the inequality operator to compare by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PageMarginsData.op_Equality(CodeForDotNet.Drawing.Printing.PageMarginsData,CodeForDotNet.Drawing.Printing.PageMarginsData)">
+            <summary>
+            Overrides the equality operator to compare by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PageMarginsData.Parse(System.String)">
+            <summary>
+            Creates an instance from a string.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PageMarginsData.Clone">
+            <summary>
+            Creates a copy of this object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PageMarginsData.Copy">
+            <summary>
+            Copies this margins.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PageMarginsData.Equals(System.Object)">
+            <summary>
+            Overrides the Equals method to compare by value,
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PageMarginsData.GetHashCode">
+            <summary>
+            Gets a hash-code for this object based on current values.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Drawing.Printing.PageMarginsData.ToString">
+            <summary>
+            Converts the margins to an XML string.
             </summary>
         </member>
         <member name="T:CodeForDotNet.Drawing.Printing.PageSettingsData">
@@ -3376,106 +3359,6 @@
         <member name="F:CodeForDotNet.Drawing.Printing.PrinterSettingsDuplex.Vertical">
             <summary>
             Double-sided, vertical printing.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Drawing.Printing.PrintingExtensions">
-            <summary>
-            Extensions for work with types in the <see cref="N:System.Drawing.Printing"/> namespace.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Printing.PrintingExtensions.ToData(System.Drawing.Printing.PrinterSettings)">
-            <summary>
-            Converts a .NET PrinterSettings class to a data structure of this type.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Printing.PrintingExtensions.ToData(System.Drawing.Printing.PageSettings)">
-            <summary>
-            Creates a data structure of this type from .NET PageSettings.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Printing.PrintingExtensions.ToPageSettings(CodeForDotNet.Drawing.Printing.PageSettingsData)">
-            <summary>
-            Converts this data to a .NET PageSettings class.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.Printing.PrintingExtensions.ToPrinterSettings(CodeForDotNet.Drawing.Printing.PrinterSettingsData)">
-            <summary>
-            Converts this data to a .NET PrinterSettings class.
-            </summary>
-        </member>
-        <member name="T:CodeForDotNet.Drawing.PageMarginsData">
-            <summary>
-            Margins data.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.PageMarginsData.#ctor">
-            <summary>
-            Creates the margins.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.PageMarginsData.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Creates the margins from specified values.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Drawing.PageMarginsData.Bottom">
-            <summary>
-            Gets or sets the bottom margin, in hundredths of an inch.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Drawing.PageMarginsData.Left">
-            <summary>
-            Gets or sets the left margin width, in hundredths of an inch.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Drawing.PageMarginsData.Right">
-            <summary>
-            Gets or sets the right margin width, in hundredths of an inch.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.Drawing.PageMarginsData.Top">
-            <summary>
-            Gets or sets the top margin width, in hundredths of an inch.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.PageMarginsData.op_Inequality(CodeForDotNet.Drawing.PageMarginsData,CodeForDotNet.Drawing.PageMarginsData)">
-            <summary>
-            Overrides the inequality operator to compare by value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.PageMarginsData.op_Equality(CodeForDotNet.Drawing.PageMarginsData,CodeForDotNet.Drawing.PageMarginsData)">
-            <summary>
-            Overrides the equality operator to compare by value.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.PageMarginsData.Parse(System.String)">
-            <summary>
-            Creates an instance from a string.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.PageMarginsData.Clone">
-            <summary>
-            Creates a copy of this object.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.PageMarginsData.Copy">
-            <summary>
-            Copies this margins.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.PageMarginsData.Equals(System.Object)">
-            <summary>
-            Overrides the Equals method to compare by value,
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.PageMarginsData.GetHashCode">
-            <summary>
-            Gets a hash-code for this object based on current values.
-            </summary>
-        </member>
-        <member name="M:CodeForDotNet.Drawing.PageMarginsData.ToString">
-            <summary>
-            Converts the margins to an XML string.
             </summary>
         </member>
         <member name="T:CodeForDotNet.Drawing.StringHorizontalAlignment">
@@ -3714,54 +3597,54 @@
             December.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Net.MimeExtensions">
+        <member name="T:CodeForDotNet.Network.MimeExtensions">
             <summary>
             Provides helper methods and constants useful for processing MIME data types and streams.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Net.MimeExtensions.FileUploadHttpMethod">
+        <member name="F:CodeForDotNet.Network.MimeExtensions.FileUploadHttpMethod">
             <summary>
             HTTP Method used for file upload post-backs.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Net.MimeExtensions.FileUploadMimeType">
+        <member name="F:CodeForDotNet.Network.MimeExtensions.FileUploadMimeType">
             <summary>
             Root MIME type for file uploads.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Net.MimeExtensions.HeaderContentDisposition">
+        <member name="F:CodeForDotNet.Network.MimeExtensions.HeaderContentDisposition">
             <summary>
             Content Disposition header name.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Net.MimeExtensions.HeaderContentDispositionAttachmentValueFormat">
+        <member name="F:CodeForDotNet.Network.MimeExtensions.HeaderContentDispositionAttachmentValueFormat">
             <summary>
             Content Disposition header value for an attached file (opened in a new browser window, prompts the user to open/save normally). Formatted string,
             only parameter is the filename without path.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Net.MimeExtensions.HeaderContentDispositionInlineValueFormat">
+        <member name="F:CodeForDotNet.Network.MimeExtensions.HeaderContentDispositionInlineValueFormat">
             <summary>
             Content Disposition header value for an in-line file (open within browser if supported, e.g. Adobe PDF viewed in browser via ActiveX). Formatted
             string, only parameter is the filename without path.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Net.MimeExtensions.HeaderContentLength">
+        <member name="F:CodeForDotNet.Network.MimeExtensions.HeaderContentLength">
             <summary>
             Content Length header name.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Net.MimeExtensions.HeaderContentType">
+        <member name="F:CodeForDotNet.Network.MimeExtensions.HeaderContentType">
             <summary>
             Content Type header name.
             </summary>
         </member>
-        <member name="F:CodeForDotNet.Net.MimeExtensions.MimeBoundaryPrefix">
+        <member name="F:CodeForDotNet.Network.MimeExtensions.MimeBoundaryPrefix">
             <summary>
             MIME boundary prefix characters, also used to end the entire MIME request.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Net.MimeExtensions.FindBoundary(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32@,System.Int32@)">
+        <member name="M:CodeForDotNet.Network.MimeExtensions.FindBoundary(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32@,System.Int32@)">
             <summary>
             Finds a MIME boundary.
             </summary>
@@ -3777,7 +3660,7 @@
             </param>
             <returns>True if the boundary was found, otherwise false.</returns>
         </member>
-        <member name="M:CodeForDotNet.Net.MimeExtensions.FindLine(System.Byte[],System.Int32,System.Int32,System.Int32@,System.Int32@)">
+        <member name="M:CodeForDotNet.Network.MimeExtensions.FindLine(System.Byte[],System.Int32,System.Int32,System.Int32@,System.Int32@)">
             <summary>
             Tests a MIME data buffer for a complete ASCII line. Returns the length of the current line without any CR and the LF, and the offset to the next line
             including any CR and the LF.
@@ -3789,23 +3672,23 @@
             <param name="nextLine">Returns the index of the next line including any CR and the LF, when found, else -1.</param>
             <returns>True when a complete line was found, otherwise false. Blank lines are also true but have a lineSize of 0.</returns>
         </member>
-        <member name="M:CodeForDotNet.Net.MimeExtensions.GetHeaderAttribute(System.String,System.String)">
+        <member name="M:CodeForDotNet.Network.MimeExtensions.GetHeaderAttribute(System.String,System.String)">
             <summary>
             Gets an attribute value from a header string. Attributes are appended after a semicolon at the end of header values. e.g. Content-type:
             multipart/mixed; boundary="BoundaryText"
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Net.MimeExtensions.GetHeaderValue(System.String)">
+        <member name="M:CodeForDotNet.Network.MimeExtensions.GetHeaderValue(System.String)">
             <summary>
             Gets the header value alone, without any attachments or white space.
             </summary>
         </member>
-        <member name="T:CodeForDotNet.Net.NetworkExtensions">
+        <member name="T:CodeForDotNet.Network.NetworkExtensions">
             <summary>
             Networking extensions.
             </summary>
         </member>
-        <member name="M:CodeForDotNet.Net.NetworkExtensions.GetFullHostName">
+        <member name="M:CodeForDotNet.Network.NetworkExtensions.GetFullHostName">
             <summary>
             Gets the host name and any domain (the FQDN) of the local computer.
             </summary>

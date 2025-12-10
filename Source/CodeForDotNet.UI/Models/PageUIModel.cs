@@ -1,34 +1,31 @@
-using System.Diagnostics.CodeAnalysis;
+namespace CodeForDotNet.UI.Models;
 
-namespace CodeForDotNet.UI.Models
+/// <summary>
+/// Base class for all page UI models
+/// </summary>
+public abstract class PageUIModel<TApplicationUIModel> : UIModel
+    where TApplicationUIModel : ApplicationUIModel
 {
-	/// <summary>
-	/// Base class for all page UI models
-	/// </summary>
-	public abstract class PageUIModel<TApplicationUIModel> : UIModel
-		where TApplicationUIModel : ApplicationUIModel
-	{
-        #region Protected Constructors
+    #region Protected Constructors
 
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        protected PageUIModel(TApplicationUIModel application)
-			: base(application.UITaskFactory)
-		{
-			// Initialize members
-			Application = application;
-		}
+    /// <summary>
+    /// Creates an instance.
+    /// </summary>
+    protected PageUIModel(TApplicationUIModel application)
+            : base(application.UITaskFactory)
+    {
+        // Initialize members
+        Application = application;
+    }
 
-		#endregion Protected Constructors
+    #endregion Protected Constructors
 
-		#region Public Properties
+    #region Public Properties
 
-		/// <summary>
-		/// Application model.
-		/// </summary>
-		public TApplicationUIModel Application { get; private set; }
+    /// <summary>
+    /// Application model.
+    /// </summary>
+    public TApplicationUIModel Application { get; private set; }
 
-		#endregion Public Properties
-	}
+    #endregion Public Properties
 }

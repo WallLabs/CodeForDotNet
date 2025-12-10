@@ -38,9 +38,6 @@
       <None Remove="Properties\**" />
     </ItemGroup>
     <ItemGroup>
-        <AdditionalFiles Include="..\Common\Dictionary.xml" Link="Dictionary.xml" />
-    </ItemGroup>
-    <ItemGroup>
         <None Include="..\Common\Code for .NET.snk" Link="Code for .NET.snk" />
     </ItemGroup>
     <ItemGroup>
