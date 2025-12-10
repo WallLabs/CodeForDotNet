@@ -30,9 +30,6 @@
       <None Remove="Properties\**" />
     </ItemGroup>
     <ItemGroup>
-        <AdditionalFiles Include="..\Common\Dictionary.xml" Link="Dictionary.xml" />
-    </ItemGroup>
-    <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis" Version="5.0.0" />
         <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0">
             <PrivateAssets>all</PrivateAssets>

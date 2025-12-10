@@ -1,41 +1,39 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 
-namespace CodeForDotNet.Drawing.Printing
+namespace CodeForDotNet.Drawing.Printing;
+
+/// <summary>
+/// Printer settings data.
+/// </summary>
+[Serializable]
+public class PrinterSettingsData
 {
+    #region Public Properties
+
     /// <summary>
-    /// Printer settings data.
+    /// Default printer settings.
     /// </summary>
-    [Serializable]
-    public class PrinterSettingsData
-    {
-        #region Public Properties
+    public static PrinterSettingsData Default => new() { Collate = true, DuplexOutput = PrinterSettingsDuplex.Simplex, Copies = 1 };
 
-        /// <summary>
-        /// Default printer settings.
-        /// </summary>
-        public static PrinterSettingsData Default => new PrinterSettingsData { Collate = true, DuplexOutput = PrinterSettingsDuplex.Simplex, Copies = 1 };
+    /// <summary>
+    /// Collate option.
+    /// </summary>
+    public bool Collate { get; set; }
 
-        /// <summary>
-        /// Collate option.
-        /// </summary>
-        public bool Collate { get; set; }
+    /// <summary>
+    /// Number of copies.
+    /// </summary>
+    public short Copies { get; set; }
 
-        /// <summary>
-        /// Number of copies.
-        /// </summary>
-        public short Copies { get; set; }
+    /// <summary>
+    /// Duplex option.
+    /// </summary>
+    public PrinterSettingsDuplex DuplexOutput { get; set; }
 
-        /// <summary>
-        /// Duplex option.
-        /// </summary>
-        public PrinterSettingsDuplex DuplexOutput { get; set; }
+    /// <summary>
+    /// Printer name.
+    /// </summary>
+    public string? PrinterName { get; set; }
 
-        /// <summary>
-        /// Printer name.
-        /// </summary>
-        public string? PrinterName { get; set; }
-
-        #endregion Public Properties
-    }
+    #endregion Public Properties
 }

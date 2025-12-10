@@ -38,9 +38,6 @@
         <Compile Remove="Numerics\Quadrant.cs" />
     </ItemGroup>
     <ItemGroup>
-        <AdditionalFiles Include="..\Common\Dictionary.xml" Link="Dictionary.xml" />
-    </ItemGroup>
-    <ItemGroup>
         <Content Include="Xml\FormatXmlAnonymous.xslt" />
         <Content Include="Xml\FormatXmlCopy.xslt" />
         <Content Include="Xml\FormatXmlTrim.xslt" />

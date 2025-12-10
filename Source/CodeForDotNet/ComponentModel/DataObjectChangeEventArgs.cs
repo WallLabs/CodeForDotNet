@@ -1,39 +1,38 @@
 using System;
 
-namespace CodeForDotNet.ComponentModel
+namespace CodeForDotNet.ComponentModel;
+
+/// <summary>
+/// Event arguments for the <see cref="IDataObject.DataChanged"/> event.
+/// </summary>
+public class DataObjectChangeEventArgs : PropertyStoreChangeEventArgs
 {
-	/// <summary>
-	/// Event arguments for the <see cref="IDataObject.DataChanged"/> event.
-	/// </summary>
-	public class DataObjectChangeEventArgs : PropertyStoreChangeEventArgs
-	{
-		#region Public Constructors
+    #region Public Constructors
 
-		/// <summary>
-		/// Creates an empty instance.
-		/// </summary>
-		public DataObjectChangeEventArgs()
-		{
-		}
+    /// <summary>
+    /// Creates an empty instance.
+    /// </summary>
+    public DataObjectChangeEventArgs()
+    {
+    }
 
-		/// <summary>
-		/// Creates an instance with the specified values.
-		/// </summary>
-		public DataObjectChangeEventArgs(DataObjectChangeAction action, Guid[] keys)
-			: base(keys)
-		{
-			Action = action;
-		}
+    /// <summary>
+    /// Creates an instance with the specified values.
+    /// </summary>
+    public DataObjectChangeEventArgs(DataObjectChangeAction action, Guid[] keys)
+        : base(keys)
+    {
+        Action = action;
+    }
 
-		#endregion Public Constructors
+    #endregion Public Constructors
 
-		#region Public Properties
+    #region Public Properties
 
-		/// <summary>
-		/// Action which occurred.
-		/// </summary>
-		public DataObjectChangeAction Action { get; set; }
+    /// <summary>
+    /// Action which occurred.
+    /// </summary>
+    public DataObjectChangeAction Action { get; set; }
 
-		#endregion Public Properties
-	}
+    #endregion Public Properties
 }

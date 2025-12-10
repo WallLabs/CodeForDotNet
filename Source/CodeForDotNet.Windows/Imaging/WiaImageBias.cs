@@ -1,21 +1,19 @@
-using System.Diagnostics.CodeAnalysis;
 using Wia = Interop.Wia;
 
-namespace CodeForDotNet.Windows.Imaging
+namespace CodeForDotNet.Windows.Imaging;
+
+/// <summary>
+/// Managed <see cref="Wia.WiaImageBias"/>.
+/// </summary>
+public enum WiaImageBias
 {
     /// <summary>
-    /// Managed <see cref="Wia.WiaImageBias"/>.
+    /// Minimize size.
     /// </summary>
-    public enum WiaImageBias
-	{
-		/// <summary>
-		/// Minimize size.
-		/// </summary>
-		MinimizeSize = 65536,
+    MinimizeSize = 65536,
 
-		/// <summary>
-		/// Maximize quality.
-		/// </summary>
-		MaximizeQuality = 131072
-	}
+    /// <summary>
+    /// Maximize quality.
+    /// </summary>
+    MaximizeQuality = 131072
 }

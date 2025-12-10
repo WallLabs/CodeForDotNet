@@ -1,44 +1,43 @@
 using System;
 using System.Diagnostics;
 
-namespace CodeForDotNet.Diagnostics
+namespace CodeForDotNet.Diagnostics;
+
+/// <summary>
+/// Extensions to the <see cref="Stopwatch"/> class.
+/// </summary>
+public static class StopwatchExtensions
 {
-	/// <summary>
-	/// Extensions to the <see cref="Stopwatch"/> class.
-	/// </summary>
-	public static class StopwatchExtensions
-	{
-		#region Public Fields
+    #region Public Fields
 
-		/// <summary>
-		/// Number of <see cref="Stopwatch.ElapsedTicks"/> in a microsecond.
-		/// </summary>
-		public static readonly double TicksPerMicrosecond = Stopwatch.Frequency / 1000000D;
+    /// <summary>
+    /// Number of <see cref="Stopwatch.ElapsedTicks"/> in a microsecond.
+    /// </summary>
+    public static readonly double TicksPerMicrosecond = Stopwatch.Frequency / 1000000D;
 
-		#endregion Public Fields
+    #endregion Public Fields
 
-		#region Public Methods
+    #region Public Methods
 
-		/// <summary>
-		/// Gets the total elapsed time in microseconds.
-		/// </summary>
-		public static long ElapsedMicroseconds(this Stopwatch timer)
-		{
-			// Validate.
-			if (timer is null) throw new ArgumentNullException(nameof(timer));
+    /// <summary>
+    /// Gets the total elapsed time in microseconds.
+    /// </summary>
+    public static long ElapsedMicroseconds(this Stopwatch timer)
+    {
+        // Validate.
+        ArgumentNullException.ThrowIfNull(timer);
 
-			// Calculate and return value.
-			return (long)(timer.ElapsedTicks / TicksPerMicrosecond);
-		}
+        // Calculate and return value.
+        return (long)(timer.ElapsedTicks / TicksPerMicrosecond);
+    }
 
-		/// <summary>
-		/// Gets the total elapsed time in microseconds.
-		/// </summary>
-		public static long GetTimestampInMicroseconds()
-		{
-			return (long)(Stopwatch.GetTimestamp() / TicksPerMicrosecond);
-		}
+    /// <summary>
+    /// Gets the total elapsed time in microseconds.
+    /// </summary>
+    public static long GetTimestampInMicroseconds()
+    {
+        return (long)(Stopwatch.GetTimestamp() / TicksPerMicrosecond);
+    }
 
-		#endregion Public Methods
-	}
+    #endregion Public Methods
 }

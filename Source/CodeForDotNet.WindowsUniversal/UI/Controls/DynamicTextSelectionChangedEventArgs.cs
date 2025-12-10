@@ -20,8 +20,8 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls
         {
             // Validate
             ArgumentNullException.ThrowIfNull(focus);
-            if (selectionStart < 0) throw new ArgumentOutOfRangeException(nameof(selectionStart));
-            if (selectionLength < 0) throw new ArgumentOutOfRangeException(nameof(selectionLength));
+            ArgumentOutOfRangeException.ThrowIfNegative(selectionStart);
+            ArgumentOutOfRangeException.ThrowIfNegative(selectionLength);
 
             // Initialize members
             Focus = OriginalFocus = focus;
