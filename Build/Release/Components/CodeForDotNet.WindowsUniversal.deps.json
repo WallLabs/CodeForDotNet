@@ -6,10 +6,10 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "CodeForDotNet.WindowsUniversal/10.0.2512.11000": {
+      "CodeForDotNet.WindowsUniversal/10.0.2512.11002": {
         "dependencies": {
-          "CodeForDotNet": "10.0.2512.11000",
-          "CodeForDotNet.UI": "10.0.2512.11000",
+          "CodeForDotNet": "10.0.2512.11001",
+          "CodeForDotNet.UI": "10.0.2512.11001",
           "runtimepack.Microsoft.Windows.SDK.NET.Ref": "10.0.26100.57"
         },
         "runtime": {
@@ -471,7 +471,7 @@
           }
         }
       },
-      "CodeForDotNet/10.0.2512.11000": {
+      "CodeForDotNet/10.0.2512.11001": {
         "dependencies": {
           "Microsoft.CodeAnalysis": "5.0.0",
           "Microsoft.CodeAnalysis.CSharp": "5.0.0",
@@ -484,9 +484,9 @@
           }
         }
       },
-      "CodeForDotNet.UI/10.0.2512.11000": {
+      "CodeForDotNet.UI/10.0.2512.11001": {
         "dependencies": {
-          "CodeForDotNet": "10.0.2512.11000",
+          "CodeForDotNet": "10.0.2512.11001",
           "Microsoft.CodeAnalysis": "5.0.0",
           "Microsoft.CodeAnalysis.CSharp": "5.0.0",
           "System.Drawing.Common": "10.0.1"
@@ -494,14 +494,14 @@
         "runtime": {
           "CodeForDotNet.UI.dll": {
             "assemblyVersion": "5.0.2106.29000",
-            "fileVersion": "10.0.2512.11000"
+            "fileVersion": "10.0.2512.11002"
           }
         }
       }
     }
   },
   "libraries": {
-    "CodeForDotNet.WindowsUniversal/10.0.2512.11000": {
+    "CodeForDotNet.WindowsUniversal/10.0.2512.11002": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -630,12 +630,12 @@
       "path": "system.drawing.common/10.0.1",
       "hashPath": "system.drawing.common.10.0.1.nupkg.sha512"
     },
-    "CodeForDotNet/10.0.2512.11000": {
+    "CodeForDotNet/10.0.2512.11001": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "CodeForDotNet.UI/10.0.2512.11000": {
+    "CodeForDotNet.UI/10.0.2512.11001": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

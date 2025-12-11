@@ -2,7 +2,7 @@ using System.Reflection;
 using System.Resources;
 
 // Identity.
-[assembly: AssemblyVersion("10.0.2512.11000")]
+[assembly: AssemblyVersion("10.0.2512.11002")]
 
 // Resources.
 [assembly: NeutralResourcesLanguage("en-US")]
