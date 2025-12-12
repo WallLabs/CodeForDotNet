@@ -59,8 +59,7 @@
     <Project Path="CodeForDotNet.WindowsUniversal.TestApp/CodeForDotNet.WindowsUniversal.TestApp.csproj">
         <Platform Solution="*|x64" Project="x64" />
         <Platform Solution="*|x86" Project="x86" />
-        <Platform Solution="Debug|ARM64" Project="x86" />
-        <Platform Solution="Release|ARM64" Project="ARM64" />
+        <Platform Solution="*|ARM64" Project="ARM64" />
         <Deploy />
     </Project>
     <Project Path="CodeForDotNet.WindowsUniversal/CodeForDotNet.WindowsUniversal.csproj" />
