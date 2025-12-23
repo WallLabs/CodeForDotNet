@@ -19,9 +19,14 @@ $WarningPreference = "Stop";      # All warnings stop program.
 #region Main script.
 
 # Display banner.
-Write-Output 'Development Setup';
-Write-Output '=================';
-Write-Output 'Installs and configures the system ready for development.';
+Write-Host 'Development Setup';
+Write-Host '=================';
+Write-Host 'Installs and configures the system ready for development.';
+
+# Set web proxy default credential (in case necessary).
+$proxy = [System.Net.WebRequest]::GetSystemWebProxy();
+$proxy.Credentials = [System.Net.CredentialCache]::DefaultNetworkCredentials;
+[System.Net.WebRequest]::DefaultWebProxy = $proxy;
 
 # Ensure default .NET development certificates are installed.
 Write-Host "Installing default .NET development certificates...";

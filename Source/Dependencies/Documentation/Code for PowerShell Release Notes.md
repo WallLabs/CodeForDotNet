@@ -1,5 +1,10 @@
 # Code for PowerShell - Release Notes
 
+## Version 1.0.2512.23### (2025.12.23)
+* Fix XML truncation when setting version in XML project.
+* Preserve XML formatting when saving file.
+* Improve tests which modify XML files by verifying a complete document has been written. 
+
 ## Version 1.0.1904.10### (2019.04.10)
 * Improved documentation of Visual Studio version module commands.
 

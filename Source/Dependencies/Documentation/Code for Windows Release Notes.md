@@ -1,5 +1,8 @@
 # Code for Windows - Release Notes
 
+## Version 1.0.2512.13### (2025.12.13)
+* Update to Visual Studio 2026 with SLNX solution format.
+
 ## Version 1.0.1912.25### (2019.12.25)
 * Replace CodeMaid with EditorConfig support for code styles and clean-up (requires "Code Cleanup on Save" Visual Studio extension).
 

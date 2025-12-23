@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "CodeForDotNet/10.0.2512.11002": {
+      "CodeForDotNet/10.0.2512.23006": {
         "dependencies": {
           "Microsoft.CodeAnalysis": "5.0.0",
           "Microsoft.CodeAnalysis.CSharp": "5.0.0",
@@ -458,7 +458,7 @@
     }
   },
   "libraries": {
-    "CodeForDotNet/10.0.2512.11002": {
+    "CodeForDotNet/10.0.2512.23006": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

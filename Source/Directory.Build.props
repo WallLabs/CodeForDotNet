@@ -1,1 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?><Project><!-- Common Properties --><PropertyGroup><!-- Identity --><Product>Code for .NET</Product><Authors>Wall Labs</Authors><Company>Wall Labs</Company><Copyright>Copyright © Wall Labs. All Rights Reserved.</Copyright><AssemblyCopyright>Copyright © Wall Labs.</AssemblyCopyright><AssemblyTrademark>All Rights Reserved.</AssemblyTrademark><Version>10.0.2512.11002</Version><AssemblyVersion>10.0.2512.11002</AssemblyVersion><FileVersion>10.0.2512.11002</FileVersion><!-- Language --><TargetFramework>net10.0</TargetFramework><LangVersion>14</LangVersion><ImplicitUsings>disable</ImplicitUsings><Nullable>annotations</Nullable><NeutralLanguage>en-US</NeutralLanguage><DefaultLanguage>en-US</DefaultLanguage><!-- Compilation --><AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio><GenerateAssemblyInfo>true</GenerateAssemblyInfo><GenerateDocumentationFile>true</GenerateDocumentationFile><SignAssembly>true</SignAssembly><AssemblyOriginatorKeyFile>..\Common\Code for .NET.snk</AssemblyOriginatorKeyFile><!-- Warnings --><WarningLevel>9999</WarningLevel><WarningsAsErrors /><TreatWarningsAsErrors>true</TreatWarningsAsErrors><!-- Code Analysis --><EnableNETAnalyzers>true</EnableNETAnalyzers><AnalysisMode>all</AnalysisMode><AnalysisLevel>latest-Recommended</AnalysisLevel><CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode><EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild><!-- Packaging --><IsPackable>false</IsPackable><PackageProjectUrl>http://wall-labs.com/Links/CodeForDotNet</PackageProjectUrl><PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance></PropertyGroup><!-- Configuration Specific Properties --><PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' "><CheckForOverflowUnderflow>true</CheckForOverflowUnderflow></PropertyGroup><PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' "><DebugType>none</DebugType></PropertyGroup></Project>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+    <!-- Common Properties -->
+    <PropertyGroup>
+        
+        <!-- Identity -->
+        <Product>Code for .NET</Product>
+        <Authors>Wall Labs</Authors>
+        <Company>Wall Labs</Company>
+        <Copyright>Copyright © Wall Labs. All Rights Reserved.</Copyright>
+        <AssemblyCopyright>Copyright © Wall Labs.</AssemblyCopyright>
+        <AssemblyTrademark>All Rights Reserved.</AssemblyTrademark>
+        <Version>10.0.2512.23006</Version>
+        <AssemblyVersion>10.0.2512.23006</AssemblyVersion>
+        <FileVersion>10.0.2512.23006</FileVersion>
+        
+        <!-- Language -->
+        <TargetFramework>net10.0</TargetFramework>
+        <LangVersion>14</LangVersion>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>annotations</Nullable>
+        <NeutralLanguage>en-US</NeutralLanguage>
+        <DefaultLanguage>en-US</DefaultLanguage>
+        
+        <!-- Compilation -->
+        <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>..\Common\Code for .NET.snk</AssemblyOriginatorKeyFile>
+        
+        <!-- Warnings -->
+        <WarningLevel>9999</WarningLevel>
+        <WarningsAsErrors />
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        
+        <!-- Code Analysis -->
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisMode>all</AnalysisMode>
+        <AnalysisLevel>latest-Recommended</AnalysisLevel>
+        <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        
+        <!-- Packaging -->
+        <IsPackable>false</IsPackable>
+        <PackageProjectUrl>http://wall-labs.com/Links/CodeForDotNet</PackageProjectUrl>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        
+    </PropertyGroup>
+    
+    <!-- Configuration Specific Properties -->
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <DebugType>none</DebugType>
+    </PropertyGroup>
+</Project>

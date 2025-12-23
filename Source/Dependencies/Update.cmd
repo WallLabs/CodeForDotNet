@@ -6,10 +6,6 @@ echo.
 echo Updates dependencies with the current checked-in build version.
 
 echo.
-echo Close Visual Studio now to avoid errors with locked files.
-pause
-
-echo.
 echo Initializing Visual Studio environment...
 call "%~dp0Variables.cmd"
 if %errorlevel% neq 0 goto Error
@@ -27,23 +23,19 @@ if %errorlevel% neq 0 goto Error
 
 echo.
 echo Removing any read-only attributes.
-cd "%~dp0"
+attrib "%~dp0Temp\*" -r /s
+if %errorlevel% neq 0 goto Error
 
 echo.
 echo Copying dependencies...
-
-echo * CodeForWindows...
 robocopy "%~dp0Temp\CodeForWindows\Build\Visual Studio" "%~dp0." Variables.cmd
 if %errorlevel% gtr 7 goto Error
-rem TODO: Update EditorConfg in master repository. Remove or re-enable CodeMaid or other tool to fill gap of proactive formatting.
-rem robocopy "%~dp0Temp\CodeForWindows\Build\Visual Studio" "%~dp0.." .editorconfig CodeMaid.config
-rem if %errorlevel% gtr 7 goto Error
+robocopy "%~dp0Temp\CodeForWindows\Build\Visual Studio" "%~dp0.." .editorconfig
+if %errorlevel% gtr 7 goto Error
 copy "%~dp0Temp\CodeForWindows\Build\Documentation\Release Notes.md" "%~dp0Documentation\Code for Windows Release Notes.md" /y
 if %errorlevel% neq 0 goto Error
 robocopy "%~dp0Temp\CodeForWindows\Build\Version" "%~dp0Version" *.Version.txt
 if %errorlevel% gtr 7 goto Error
-
-echo * CodeForPowerShell...
 robocopy "%~dp0Temp\CodeForPowerShell\Build\Modules\CodeForPowerShell.VisualStudio" "%~dp0PowerShell\CodeForPowerShell.VisualStudio" /s /purge
 if %errorlevel% gtr 7 goto Error
 copy "%~dp0Temp\CodeForPowerShell\Build\Documentation\Release Notes.md" "%~dp0Documentation\Code for PowerShell Release Notes.md" /y
@@ -61,7 +53,7 @@ if %errorlevel% neq 0 goto Error
 echo.
 echo Clean temporary files...
 rmdir "%~dp0Temp" /s /q
-if %errorlevel% gtr 1 goto Error
+if %errorlevel% neq 0 goto Error
 
 echo.
 echo Update successful.

@@ -6,9 +6,9 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "CodeForDotNet.UI/10.0.2512.11002": {
+      "CodeForDotNet.UI/10.0.2512.23006": {
         "dependencies": {
-          "CodeForDotNet": "10.0.2512.11001",
+          "CodeForDotNet": "10.0.2512.23005",
           "Microsoft.CodeAnalysis": "5.0.0",
           "Microsoft.CodeAnalysis.CSharp": "5.0.0",
           "System.Drawing.Common": "10.0.1"
@@ -456,7 +456,7 @@
           }
         }
       },
-      "CodeForDotNet/10.0.2512.11001": {
+      "CodeForDotNet/10.0.2512.23005": {
         "dependencies": {
           "Microsoft.CodeAnalysis": "5.0.0",
           "Microsoft.CodeAnalysis.CSharp": "5.0.0",
@@ -472,7 +472,7 @@
     }
   },
   "libraries": {
-    "CodeForDotNet.UI/10.0.2512.11002": {
+    "CodeForDotNet.UI/10.0.2512.23006": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -596,7 +596,7 @@
       "path": "system.drawing.common/10.0.1",
       "hashPath": "system.drawing.common.10.0.1.nupkg.sha512"
     },
-    "CodeForDotNet/10.0.2512.11001": {
+    "CodeForDotNet/10.0.2512.23005": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
