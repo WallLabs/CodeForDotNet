@@ -38,21 +38,21 @@ public static class DictionaryExtensions
     /// <param name="format">Format used to join the values. The first argument is the key and the second the value.</param>
     public static void AddKeysToValues(this IDictionary dictionary, string format)
     {
-        // Validate
+        // Validate.
         ArgumentNullException.ThrowIfNull(dictionary);
-
         ArgumentNullException.ThrowIfNull(format);
 
         // Get a fixed list of keys so we can modify the dictionary
+        // without causing an enumeration changed error.
         var keys = dictionary.Keys.Cast<object>().ToArray();
 
-        // Update dictionary
+        // Update dictionary (add/format keys onto values).
         foreach (var key in keys)
         {
-            // Get old value
+            // Get old value.
             var value = dictionary[key];
 
-            // Format and set new value with key added
+            // Format and set new value with key added.
             dictionary[key] = string.Format(CultureInfo.InvariantCulture, format, key, value);
         }
     }
