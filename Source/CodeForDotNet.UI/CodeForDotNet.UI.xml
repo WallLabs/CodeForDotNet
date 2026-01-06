@@ -4,30 +4,6 @@
         <name>CodeForDotNet.UI</name>
     </assembly>
     <members>
-        <member name="T:CodeForDotNet.UI.Drawing.PaintEventArgs">
-            <summary>
-            UI graphics paint event arguments.
-            </summary>
-            <remarks>
-            Portable version of the "System.Windows.Forms.PaintEventArgs" class. To be replaced when
-            available in the .NET Standard framework.
-            </remarks>
-        </member>
-        <member name="M:CodeForDotNet.UI.Drawing.PaintEventArgs.#ctor(System.Drawing.Graphics,System.Drawing.Rectangle)">
-            <summary>
-            Creates an instance with the specified values.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.UI.Drawing.PaintEventArgs.Graphics">
-            <summary>
-            Graphics interface to be used for drawing.
-            </summary>
-        </member>
-        <member name="P:CodeForDotNet.UI.Drawing.PaintEventArgs.Region">
-            <summary>
-            Region which has been invalidated and should be re-drawn.
-            </summary>
-        </member>
         <member name="T:CodeForDotNet.UI.Input.DelegateCommand">
             <summary>
             Generic command which calls delegate function(s) to execute or get the status.

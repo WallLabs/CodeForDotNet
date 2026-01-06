@@ -1,6 +1,9 @@
 # Code for .NET - Release Notes
 
-## Version 10.0.2512.??### (2025.12.??)
+## Version 10.0.2601.8### (2026.01.08)
+* Move Windows dependencies out of cross-platform assembly.
+
+## Version 10.0.2512.10### (2025.12.10)
 * Upgraded to .NET 10 framework and complete migration from legacy .NET projects.
 
 ## Version 5.0.2101.5### (2021.01.05)

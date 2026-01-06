@@ -10,9 +10,9 @@
         <Copyright>Copyright © Wall Labs. All Rights Reserved.</Copyright>
         <AssemblyCopyright>Copyright © Wall Labs.</AssemblyCopyright>
         <AssemblyTrademark>All Rights Reserved.</AssemblyTrademark>
-        <Version>10.0.2601.6000</Version>
-        <AssemblyVersion>10.0.2601.6000</AssemblyVersion>
-        <FileVersion>10.0.2601.6000</FileVersion>
+        <Version>10.0.2601.6001</Version>
+        <AssemblyVersion>10.0.2601.6001</AssemblyVersion>
+        <FileVersion>10.0.2601.6001</FileVersion>
         
         <!-- Language -->
         <TargetFramework>net10.0</TargetFramework>

@@ -298,6 +298,34 @@
             <param name="contentType">MIME content type.</param>
             <returns>Image format or null when unsupported.</returns>
         </member>
+        <member name="T:CodeForDotNet.Windows.Drawing.PaintEventArgs">
+            <summary>
+            UI graphics paint event arguments.
+            </summary>
+            <remarks>
+            Portable version of the "System.Windows.Forms.PaintEventArgs" class. To be replaced when
+            available in the .NET Standard framework.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.Windows.Drawing.PaintEventArgs.#ctor(System.Drawing.Graphics,System.Drawing.Rectangle)">
+            <summary>
+            UI graphics paint event arguments.
+            </summary>
+            <remarks>
+            Portable version of the "System.Windows.Forms.PaintEventArgs" class. To be replaced when
+            available in the .NET Standard framework.
+            </remarks>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Drawing.PaintEventArgs.Graphics">
+            <summary>
+            Graphics interface to be used for drawing.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Windows.Drawing.PaintEventArgs.Region">
+            <summary>
+            Region which has been invalidated and should be re-drawn.
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.Windows.Drawing.Printing.MarginsExtensions">
             <summary>
             Extensions for work with <see cref="T:System.Drawing.Printing.Margins"/> types.
