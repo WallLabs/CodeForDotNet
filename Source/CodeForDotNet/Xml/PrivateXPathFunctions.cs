@@ -14,16 +14,10 @@ namespace CodeForDotNet.Xml;
 [SuppressMessage("Microsoft.Performance", "CA1822", Justification = "Non-static member required by XPath function library support.")]
 public sealed class PrivateXPathFunctions
 {
-    #region Public Fields
-
     /// <summary>
     /// XPath function namespace.
     /// </summary>
     public const string XmlNamespace = "urn:PrivateXPathFunctions";
-
-    #endregion Public Fields
-
-    #region Public Methods
 
     /// <summary>
     /// Converts a date and time to a long format string.
@@ -64,6 +58,4 @@ public sealed class PrivateXPathFunctions
     {
         return value.ToUniversalTime();
     }
-
-    #endregion Public Methods
 }

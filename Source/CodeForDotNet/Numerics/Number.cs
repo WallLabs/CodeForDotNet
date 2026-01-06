@@ -14,8 +14,6 @@ namespace CodeForDotNet.Numerics;
 [SuppressMessage("Microsoft.Naming", "CA1720", Justification = "Use of the word \"signed\" is preferable for an intuitive interface.")]
 public struct Number : IComparable<Number>, IEquatable<Number>
 {
-    #region Private Fields
-
     /// <summary>
     /// Valid number digits in order of value starting at zero.
     /// </summary>
@@ -25,10 +23,6 @@ public struct Number : IComparable<Number>, IEquatable<Number>
     /// The internal numeric value, stored as a byte array ordered from least significant (LSB) to most significant (MSB), i.e. the LSB is at index 0.
     /// </summary>
     private readonly byte[] _bytes;
-
-    #endregion Private Fields
-
-    #region Public Constructors
 
     /// <summary>
     /// Creates a value based on an existing array of bytes (not copied).
@@ -208,10 +202,6 @@ public struct Number : IComparable<Number>, IEquatable<Number>
         }
     }
 
-    #endregion Public Constructors
-
-    #region Public Properties
-
     /// <summary>
     /// Minus-one signed value.
     /// </summary>
@@ -270,18 +260,10 @@ public struct Number : IComparable<Number>, IEquatable<Number>
     /// <remarks>The internal value is not changed, only its interpretation.</remarks>
     public bool Signed { get; private set; }
 
-    #endregion Public Properties
-
-    #region Public Indexers
-
     /// <summary>
     /// Gets the byte at the specified index.
     /// </summary>
     public readonly byte this[int index] => _bytes[index];
-
-    #endregion Public Indexers
-
-    #region Public Methods
 
     /// <summary>
     /// Gets the absolute value of the number, basically converting negative to positive when necessary.
@@ -1865,6 +1847,4 @@ public struct Number : IComparable<Number>, IEquatable<Number>
         // Return unsigned copy
         return new Number(_bytes, false);
     }
-
-    #endregion Public Methods
 }

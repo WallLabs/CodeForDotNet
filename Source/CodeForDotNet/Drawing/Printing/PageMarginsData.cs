@@ -10,8 +10,6 @@ namespace CodeForDotNet.Drawing.Printing;
 [Serializable]
 public class PageMarginsData : ICloneable
 {
-    #region Public Constructors
-
     /// <summary>
     /// Creates the margins.
     /// </summary>
@@ -29,10 +27,6 @@ public class PageMarginsData : ICloneable
         Top = top;
         Bottom = bottom;
     }
-
-    #endregion Public Constructors
-
-    #region Public Properties
 
     /// <summary>
     /// Gets or sets the bottom margin, in hundredths of an inch.
@@ -53,10 +47,6 @@ public class PageMarginsData : ICloneable
     /// Gets or sets the top margin width, in hundredths of an inch.
     /// </summary>
     public int Top { get; set; }
-
-    #endregion Public Properties
-
-    #region Public Methods
 
     /// <summary>
     /// Overrides the inequality operator to compare by value.
@@ -135,6 +125,4 @@ public class PageMarginsData : ICloneable
     {
         return this.SerializeXml();
     }
-
-    #endregion Public Methods
 }

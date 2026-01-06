@@ -9,8 +9,6 @@ namespace CodeForDotNet.Numerics;
 /// </summary>
 public struct AngleVector2 : IEquatable<AngleVector2>
 {
-    #region Public Constructors
-
     /// <summary>
     /// Creates an instance with the specified values.
     /// </summary>
@@ -29,10 +27,6 @@ public struct AngleVector2 : IEquatable<AngleVector2>
         this = From(point.X, point.Y);
     }
 
-    #endregion Public Constructors
-
-    #region Public Properties
-
     /// <summary>
     /// Angle.
     /// </summary>
@@ -43,13 +37,9 @@ public struct AngleVector2 : IEquatable<AngleVector2>
     /// </summary>
     public float Length { get; set; }
 
-    #endregion Public Properties
-
-    #region Public Methods
-
     /// <summary>
     /// Creates an angle based vector from a point based vector..
-    /// </summary>					  
+    /// </summary>                      
     public static AngleVector2 From(PointF point)
     {
         return From(point.X, point.Y);
@@ -57,7 +47,7 @@ public struct AngleVector2 : IEquatable<AngleVector2>
 
     /// <summary>
     /// Creates an angle based vector from a point based vector..
-    /// </summary>					  
+    /// </summary>                      
     public static AngleVector2 From(float x, float y)
     {
         // Translate vector to a zero-based quadrant number in order to determine angle offset.
@@ -240,6 +230,4 @@ public struct AngleVector2 : IEquatable<AngleVector2>
         // Return result
         return new PointF(Convert.ToSingle(x), Convert.ToSingle(y));
     }
-
-    #endregion Public Methods
 }

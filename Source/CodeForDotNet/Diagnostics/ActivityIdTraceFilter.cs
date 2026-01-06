@@ -6,30 +6,13 @@ namespace CodeForDotNet.Diagnostics;
 /// <summary>
 /// Filters trace events for a specific activity ID.
 /// </summary>
-public class ActivityIdTraceFilter : TraceFilter
+public class ActivityIdTraceFilter(Guid id) : TraceFilter
 {
-    #region Public Constructors
-
-    /// <summary>
-    /// Creates an instance to filter all events except the specified activity ID.
-    /// </summary>
-    public ActivityIdTraceFilter(Guid id)
-    {
-        ActivityId = id;
-    }
-
-    #endregion Public Constructors
-
-    #region Public Properties
 
     /// <summary>
     /// Activity ID to capture (all others are filtered).
     /// </summary>
-    public Guid ActivityId { get; set; }
-
-    #endregion Public Properties
-
-    #region Public Methods
+    public Guid ActivityId { get; set; } = id;
 
     /// <summary>
     /// Filters events.
@@ -38,6 +21,4 @@ public class ActivityIdTraceFilter : TraceFilter
     {
         return Trace.CorrelationManager.ActivityId == ActivityId;
     }
-
-    #endregion Public Methods
 }
