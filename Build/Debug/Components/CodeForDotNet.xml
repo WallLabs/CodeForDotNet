@@ -2672,7 +2672,7 @@
         </member>
         <member name="M:CodeForDotNet.Diagnostics.ActivityIdTraceFilter.#ctor(System.Guid)">
             <summary>
-            Creates an instance to filter all events except the specified activity ID.
+            Filters trace events for a specific activity ID.
             </summary>
         </member>
         <member name="P:CodeForDotNet.Diagnostics.ActivityIdTraceFilter.ActivityId">
@@ -3721,12 +3721,12 @@
         <member name="M:CodeForDotNet.Numerics.AngleVector2.From(System.Drawing.PointF)">
             <summary>
             Creates an angle based vector from a point based vector..
-            </summary>					  
+            </summary>                      
         </member>
         <member name="M:CodeForDotNet.Numerics.AngleVector2.From(System.Single,System.Single)">
             <summary>
             Creates an angle based vector from a point based vector..
-            </summary>					  
+            </summary>                      
         </member>
         <member name="M:CodeForDotNet.Numerics.AngleVector2.op_Subtraction(CodeForDotNet.Numerics.AngleVector2,CodeForDotNet.Numerics.AngleVector2)">
             <summary>
