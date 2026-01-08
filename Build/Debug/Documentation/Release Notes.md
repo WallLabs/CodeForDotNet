@@ -2,6 +2,7 @@
 
 ## Version 10.0.2601.8### (2026.01.08)
 * Move Windows dependencies out of cross-platform assembly.
+* Merge remaining CodeChief/Components functionality including network MAC address, Wake-on-LAN, UDP and old style worker group threading.
 
 ## Version 10.0.2512.10### (2025.12.10)
 * Upgraded to .NET 10 framework and complete migration from legacy .NET projects.

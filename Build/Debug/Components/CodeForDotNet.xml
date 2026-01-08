@@ -3597,6 +3597,251 @@
             December.
             </summary>
         </member>
+        <member name="T:CodeForDotNet.Network.MacAddress">
+            <summary>
+            Media Access Control (MAC) address. A 48bit unique identifier for LAN stations, e.g. a network adapter or router.
+            See IEEE RFC2469 (http://tools.ietf.org/html/rfc2469) for specifications.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Network.MacAddress.Size">
+            <summary>
+            Size of a <see cref="T:CodeForDotNet.Network.MacAddress"/> in bytes.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Network.MacAddress.Broadcast">
+            <summary>
+            Broadcast MAC address.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Network.MacAddress.StringValueExpression">
+            <summary>
+            Regular expression which matches any valid string value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.StringValueRegEx">
+            <remarks>
+            Pattern:<br/>
+            <code>^(([0-9a-fA-F]{12})|(([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2})|(([0-9a-fA-F]{2}-){5}[0-9a-fA-F]{2})|(([0-9a-fA-F]{2}\\s){5}[0-9a-fA-F]{2})|(([0-9a-fA-F]{4}:){2}[0-9a-fA-F]{4})|(([0-9a-fA-F]{4}-){2}[0-9a-fA-F]{4})|(([0-9a-fA-F]{4}\\s){2}[0-9a-fA-F]{4}))$</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Match if at the beginning of the string.<br/>
+            ○ 1st capture group.<br/>
+                ○ Match with 7 alternative expressions.<br/>
+                    ○ 2nd capture group.<br/>
+                        ○ Match a hexadecimal digit exactly 12 times.<br/>
+                    ○ 3rd capture group.<br/>
+                        ○ Loop exactly 5 times.<br/>
+                            ○ 4th capture group.<br/>
+                                ○ Match a hexadecimal digit exactly 2 times.<br/>
+                                ○ Match ':'.<br/>
+                        ○ Match a hexadecimal digit exactly 2 times.<br/>
+                    ○ 5th capture group.<br/>
+                        ○ Loop exactly 5 times.<br/>
+                            ○ 6th capture group.<br/>
+                                ○ Match a hexadecimal digit exactly 2 times.<br/>
+                                ○ Match '-'.<br/>
+                        ○ Match a hexadecimal digit exactly 2 times.<br/>
+                    ○ 7th capture group.<br/>
+                        ○ Loop exactly 5 times.<br/>
+                            ○ 8th capture group.<br/>
+                                ○ Match a hexadecimal digit exactly 2 times.<br/>
+                                ○ Match a whitespace character.<br/>
+                        ○ Match a hexadecimal digit exactly 2 times.<br/>
+                    ○ 9th capture group.<br/>
+                        ○ Loop exactly 2 times.<br/>
+                            ○ 10th capture group.<br/>
+                                ○ Match a hexadecimal digit exactly 4 times.<br/>
+                                ○ Match ':'.<br/>
+                        ○ Match a hexadecimal digit exactly 4 times.<br/>
+                    ○ 11th capture group.<br/>
+                        ○ Loop exactly 2 times.<br/>
+                            ○ 12th capture group.<br/>
+                                ○ Match a hexadecimal digit exactly 4 times.<br/>
+                                ○ Match '-'.<br/>
+                        ○ Match a hexadecimal digit exactly 4 times.<br/>
+                    ○ 13th capture group.<br/>
+                        ○ Loop exactly 2 times.<br/>
+                            ○ 14th capture group.<br/>
+                                ○ Match a hexadecimal digit exactly 4 times.<br/>
+                                ○ Match a whitespace character.<br/>
+                        ○ Match a hexadecimal digit exactly 4 times.<br/>
+            ○ Match if at the end of the string or if before an ending newline.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="F:CodeForDotNet.Network.MacAddress.StringFormatExpression">
+            <summary>
+            Regular expression which matches any valid string format name.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.StringFormatRegEx">
+            <remarks>
+            Pattern:<br/>
+            <code>^[NnCcHhBb]{1}[24]{0,1}$</code><br/>
+            Explanation:<br/>
+            <code>
+            ○ Match if at the beginning of the string.<br/>
+            ○ Match a character in the set [BCHNbchn].<br/>
+            ○ Match a character in the set [24] atomically, optionally.<br/>
+            ○ Match if at the end of the string or if before an ending newline.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.#ctor(System.Int64)">
+            <summary>
+            The constructor expecting an <see cref="T:System.Int64"/> represented MAC address.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.#ctor(System.String)">
+            <summary>
+            The constructor expecting an 12 character hexadecimal string representing a MAC address. The bytes or words might be separated by ':' or '-'.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.#ctor(System.Byte[])">
+            <summary>
+            Teh constructor expecting an <see cref="T:System.Byte"/>[6] represented MAC address.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.op_Equality(CodeForDotNet.Network.MacAddress,CodeForDotNet.Network.MacAddress)">
+            <summary>
+            Tests two objects of this type for equality by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.op_Inequality(CodeForDotNet.Network.MacAddress,CodeForDotNet.Network.MacAddress)">
+            <summary>
+            Tests two objects of this type for inequality by value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.op_LessThan(CodeForDotNet.Network.MacAddress,CodeForDotNet.Network.MacAddress)">
+            <summary>
+            Test two objects of this type if the left value is lower than the right value.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.op_GreaterThan(CodeForDotNet.Network.MacAddress,CodeForDotNet.Network.MacAddress)">
+            <summary>
+            Test two objects of this type if the left value is greater than the right value.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Network.MacAddress._value">
+            <summary>
+            The internal representation of the MAC address.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Network.MacAddress.ValueString">
+            <summary>
+            Returns the MAC address in the default string format for serialization.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Network.MacAddress.IsEmpty">
+            <summary>
+            Indicates if the address is currently empty (all zeros).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.ToString">
+            <summary>
+            <para>Returns the MAC address as a string in the default numeric format "N", e.g. 0123456789AB.</para>
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.ToString(System.String)">
+            <summary>
+            <para>Returns the MAC address as a string formatted like specified in <paramref name="format"/>.</para>
+            </summary>
+            <param name="format">
+            <para>N: The numeric format like 0123456789AB. (default)</para>
+            <para>n: The numeric format like 0123456789AB in Bit-reversed order.</para>
+            <para>C[2|4]: The numeric format but the bytes(2), words(4) are separated by colons like 01:23:45:67:89:AB or 0123:4567:89AB.</para>
+            <para>c[2|4]: The numeric format but the bytes(2), words(4) are separated by colons like 01:23:45:67:89:AB or 0123:4567:89AB in Bit-reversed order.</para>
+            <para>H[2|4]: The numeric format but the bytes(2), words(4) are separated by hyphens like 01-23-45-67-89-AB or 0123-4567-89AB.</para>
+            <para>h[2|4]: The numeric format but the bytes(2), words(4) are separated by hyphens like 01-23-45-67-89-AB or 0123-4567-89AB in Bit-reversed order.</para>
+            <para>B[2|4]: The numeric format but the bytes(2), words(4) are separated by spaces like 01 23 45 67 89 AB or 0123 4567 89AB.</para>
+            <para>b[2|4]: The numeric format but the bytes(2), words(4) are separated by spaces like 01 23 45 67 89 AB or 0123 4567 89AB in Bit-reversed order.</para>
+            </param>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.ToString(System.String,System.IFormatProvider)">
+            <summary>
+            <para>Returns the MAC address as a string formatted like specified in <paramref name="format"/>.</para>
+            </summary>
+            <param name="format">
+            <para>N: The numeric format like 0123456789AB. (default)</para>
+            <para>n: The numeric format like 0123456789AB in Bit-reversed order.</para>
+            <para>C[2|4]: The numeric format but the bytes(2), words(4) are separated by colons like 01:23:45:67:89:AB or 0123:4567:89AB.</para>
+            <para>c[2|4]: The numeric format but the bytes(2), words(4) are separated by colons like 01:23:45:67:89:AB or 0123:4567:89AB in Bit-reversed order.</para>
+            <para>H[2|4]: The numeric format but the bytes(2), words(4) are separated by hyphens like 01-23-45-67-89-AB or 0123-4567-89AB.</para>
+            <para>h[2|4]: The numeric format but the bytes(2), words(4) are separated by hyphens like 01-23-45-67-89-AB or 0123-4567-89AB in Bit-reversed order.</para>
+            <para>B[2|4]: The numeric format but the bytes(2), words(4) are separated by spaces like 01 23 45 67 89 AB or 0123 4567 89AB.</para>
+            <para>b[2|4]: The numeric format but the bytes(2), words(4) are separated by spaces like 01 23 45 67 89 AB or 0123 4567 89AB in Bit-reversed order.</para>
+            </param>
+            <param name="formatProvider">Not used, required by IFormattable. MAC strings are always invariant culture.</param>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.Parse(System.String)">
+            <summary>
+            Converts a <see cref="T:System.String"/> into a MacAddress.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.TryParse(System.String,CodeForDotNet.Network.MacAddress@)">
+            <summary>
+            Tries to convert a <see cref="T:System.String"/> into a MacAddress.
+            </summary>
+            <returns>True when conversion was possible, otherwise false.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.CompareTo(System.Object)">
+            <summary>
+            Compares the current object <see cref="T:CodeForDotNet.Network.MacAddress"/>, <see cref="T:System.Int64"/> or <see cref="T:System.Byte"/>[].
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.CompareTo(CodeForDotNet.Network.MacAddress)">
+            <summary>
+            Compares the current object with another object of the same type.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.Equals(System.Object)">
+            <summary>
+            Returns a value that indicates whether this instance is equal to a specified object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.Equals(CodeForDotNet.Network.MacAddress)">
+            <summary>
+            Returns a value that indicates whether this instance is equal to a specified object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.GetHashCode">
+            <summary>
+            Returns a hash code based on the current value of this object.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.ToInt64">
+            <summary>
+            Returns the MAC address as an <see cref="T:System.Int64"/>.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.ToByteArray">
+            <summary>
+            Returns the MAC address as a 6 byte array in transmission order (MSB first).
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.ToByteArray(System.Boolean)">
+            <summary>
+            Returns the MAC address as a 6 byte array in transmission order (MSB first), optionally in bit-reversed order.
+            </summary>
+            <param name="reversed">Optionally true to reverse all bits (not bytes). Default is false.</param>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.TryParseInt64(System.String,System.Boolean)">
+            <summary>
+            Tries to parse a long from a MAC address string.
+            Returns null or throws an exception when the value has an invalid format,
+            depending on the <paramref name="throwExceptions"/> parameter.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.op_LessThanOrEqual(CodeForDotNet.Network.MacAddress,CodeForDotNet.Network.MacAddress)">
+            <summary>
+            Comparison operator for less than or equal to.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.MacAddress.op_GreaterThanOrEqual(CodeForDotNet.Network.MacAddress,CodeForDotNet.Network.MacAddress)">
+            <summary>
+            Comparison operator for greater or equal to.
+            </summary>
+        </member>
         <member name="T:CodeForDotNet.Network.MimeExtensions">
             <summary>
             Provides helper methods and constants useful for processing MIME data types and streams.
@@ -3691,6 +3936,58 @@
         <member name="M:CodeForDotNet.Network.NetworkExtensions.GetFullHostName">
             <summary>
             Gets the host name and any domain (the FQDN) of the local computer.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Network.UdpExtensions">
+            <summary>
+            Extensions for work with the UDP network protocol.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.UdpExtensions.BroadcastPacket(System.Byte[],System.Int32)">
+            <summary>
+            Sends a UDP (broadcast) packet to the specified mac address and port.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Network.WakeOnLan">
+            <summary>
+            Contains helper methods and extensions for network operations.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Network.WakeOnLan.WakeOnLanPort1">
+            <summary>
+            First port on which the Wake-On-LAN broadcast is normally sent.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Network.WakeOnLan.WakeOnLanPort2">
+            <summary>
+            Second port on which the Wake-On-LAN broadcast is normally sent.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Network.WakeOnLan.WakeOnLanPort3">
+            <summary>
+            Third port on which the Wake-On-LAN broadcast is normally sent.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Network.WakeOnLan.WakeOnLanPacketSize">
+            <summary>
+            Size of a Wake-On-LAN "magic packet" in bytes.
+            Contains a broadcast MAC (6 bytes, all 0xFF) followed by
+            the target MAC address (6 bytes / 48 bits) repeatd 16 times.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Network.WakeOnLan.WakeOnLanPacketTargetMacCount">
+            <summary>
+            Number of times the target MAC address is repeated in the packet, excluding the prefix.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.WakeOnLan.Wake(CodeForDotNet.Network.MacAddress)">
+            <summary>
+            Broadcasts a Wake-On-LAN paket for the specified MAC address.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Network.WakeOnLan.CreateWakeOnLanPacket(CodeForDotNet.Network.MacAddress)">
+            <summary>
+            Creates a Wake-On-LAN packet for the specified MAC address.
             </summary>
         </member>
         <member name="T:CodeForDotNet.Numerics.AngleVector2">
@@ -4745,6 +5042,61 @@
               Looks up a localized string similar to Never..
             </summary>
         </member>
+        <member name="P:CodeForDotNet.Properties.Resources.WorkerGroupAbortedWorker">
+            <summary>
+              Looks up a localized string similar to Worker {0} in group {1} was aborted..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.WorkerGroupAborting">
+            <summary>
+              Looks up a localized string similar to Worker group {0} aborted..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.WorkerGroupAbortingWorker">
+            <summary>
+              Looks up a localized string similar to Aborting worker {0} in group {1}..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.WorkerGroupAlreadyRunning">
+            <summary>
+              Looks up a localized string similar to Worker group &quot;{0}&quot; is already running..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.WorkerGroupError">
+            <summary>
+              Looks up a localized string similar to Worker {0} ({1}) had an error: {2}..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.WorkerGroupStarting">
+            <summary>
+              Looks up a localized string similar to Starting worker group {0}..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.WorkerGroupStartingRunTimer">
+            <summary>
+              Looks up a localized string similar to Started run timer for worker {0} of group {1} with timeout of {2} seconds..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.WorkerGroupStartingStopTimer">
+            <summary>
+              Looks up a localized string similar to Started stop timer for worker {0} of group {1} with timeout of {2} seconds..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.WorkerGroupStartingWorker">
+            <summary>
+              Looks up a localized string similar to Starting worker {0} in group {1}..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.WorkerGroupStopping">
+            <summary>
+              Looks up a localized string similar to Stopping worker group {0}..
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Properties.Resources.WorkerGroupStoppingWorker">
+            <summary>
+              Looks up a localized string similar to Stopping worker {0} in group {1}..
+            </summary>
+        </member>
         <member name="P:CodeForDotNet.Properties.Resources.XmlValdiationError">
             <summary>
               Looks up a localized string similar to XML validation error at line {0} character {1}. {2}.
@@ -4998,6 +5350,237 @@
             Lock this object when you read or write properties of this object which must be complete as a batch before any other threads enter the section, e.g.
             during data load or save operations.
             </remarks>
+        </member>
+        <member name="T:CodeForDotNet.Threading.IWorkerHost">
+            <summary>
+            Worker host providing logging and cancellation.
+            </summary>
+            <remarks>
+            These classes were created before <see cref="T:System.Threading.Tasks.Task"/> and should be refactored or deprecated in the future.
+            </remarks>
+        </member>
+        <member name="P:CodeForDotNet.Threading.IWorkerHost.Log">
+            <summary>
+            Logging interface.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.IWorkerHost.Canceled">
+            <summary>
+            Gets a value indicating whether the worker should cancel its work.
+            </summary>
+        </member>
+        <member name="T:CodeForDotNet.Threading.WorkerGroup">
+            <summary>
+            Executes a sequence of worker functions in the background.
+            </summary>
+            <remarks>
+            These classes were created before <see cref="T:System.Threading.Tasks.Task"/> and should be refactored or deprecated in the future.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.Threading.WorkerGroup.#ctor(System.String,Microsoft.Extensions.Logging.ILogger,System.Boolean,System.Int32)">
+            <summary>
+            Initializes a new instance.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Threading.WorkerGroup.Dispose(System.Boolean)">
+            <summary>
+            Frees all resources belonging to this instance.
+            </summary>
+            <param name="disposing">True when called via <see cref="M:System.IDisposable.Dispose"/>, false when called via finalizer.</param>
+        </member>
+        <member name="F:CodeForDotNet.Threading.WorkerGroup._thread">
+            <summary>
+            Worker thread.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Threading.WorkerGroup._runTimer">
+            <summary>
+            Timer used to cancel the worker.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Threading.WorkerGroup._stopTimer">
+            <summary>
+            Timer used to abort the worker.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Threading.WorkerGroup._currentWorkerId">
+            <summary>
+            The id of the currently running worker.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Threading.WorkerGroup._currentWorker">
+            <summary>
+            The currently running worker.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.Threading.WorkerGroup._workers">
+            <summary>
+            Workers to execute (in sequence).
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerGroup.SyncRoot">
+            <summary>
+            Synchronization object.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerGroup.Name">
+            <summary>
+            Visual name of the worker group.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerGroup.Log">
+            <summary>
+            Gets or sets the trace source used for logging.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerGroup.PollEnabled">
+            <summary>
+            Enables iteration.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerGroup.PollInterval">
+            <summary>
+            Gets the time in seconds to wait between iterations of all workers in the group.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerGroup.Canceled">
+            <summary>
+            Gets a value that indicates whether the execution of the current worker should be canceled.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerGroup.Stopping">
+            <summary>
+            Gets a value that indicates whether the worker group is stopping.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerGroup.Running">
+            <summary>
+            Gets a value that indicates whether the worker is currently executing.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerGroup.Aborted">
+            <summary>
+            Gets a value that indicates whether the worker has been aborted.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Threading.WorkerGroup.Add(System.String,CodeForDotNet.Threading.WorkerMethod,System.Int32,System.Int32)">
+            <summary>
+            Adds a worker to the end of the execution group.
+            </summary>
+            <param name="name">Friendly name for logging.</param>
+            <param name="method">Worker method.</param>
+            <param name="runTimeout">Optional execution timeout in seconds. Set to zero for no timeout.</param>
+            <param name="stopTimeout">Optional stop timeout in seconds, after which the thread is aborted. Set to zero for no timeout.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when the group is running so cannot be changed.</exception>
+        </member>
+        <member name="M:CodeForDotNet.Threading.WorkerGroup.Start">
+            <summary>
+            Starts executing the worker group.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Thrown when the group is already running.</exception>
+        </member>
+        <member name="M:CodeForDotNet.Threading.WorkerGroup.Stop">
+            <summary>
+            Requests the worker group stops, any running task should exit normally
+            at the next opportunity and no new work will be started.
+            </summary>
+            <remarks>
+            Use <see cref="M:CodeForDotNet.Threading.WorkerGroup.Abort"/> to kill any running task.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.Threading.WorkerGroup.Abort">
+            <summary>
+            Stops the worker group, aborting any running work.
+            </summary>
+            <remarks>
+            Does nothing when not <see cref="P:CodeForDotNet.Threading.WorkerGroup.Running"/> or already <see cref="P:CodeForDotNet.Threading.WorkerGroup.Aborted"/>.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.Threading.WorkerGroup.Wait">
+            <summary>
+            Waits for execution to stop.
+            </summary>
+        </member>
+        <member name="M:CodeForDotNet.Threading.WorkerGroup.Wait(System.Int32)">
+            <summary>
+            Waits for execution to stop with a timeout.
+            </summary>
+            <remarks>
+            The thread is NOT aborted if the <paramref name="timeout"/> is exceeded.
+            </remarks>
+            <param name="timeout">Maximum time to wait in seconds. This does not affect the running thread.</param>
+            <returns>True when returned because the thread stopped within the <paramref name="timeout"/>, otherwise false.</returns>
+        </member>
+        <member name="M:CodeForDotNet.Threading.WorkerGroup.Pause(System.Int32)">
+            <summary>
+            Pauses between execution of workers, checking for the <see cref="P:CodeForDotNet.Threading.WorkerGroup.Stopping"/> signal.
+            </summary>
+            <param name="seconds">Time to wait in seconds.</param>
+        </member>
+        <member name="M:CodeForDotNet.Threading.WorkerGroup.RunWorker">
+            <summary>
+            Runs all workers in the group, with wait interval, until stopped.
+            </summary>
+            <remarks>
+            Invoked on a background thread.
+            </remarks>
+        </member>
+        <member name="M:CodeForDotNet.Threading.WorkerGroup.OnRunTimeout(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            Signals the thread to stop when the run timeout is exceeded.
+            </summary>
+            <param name="sender">Sender of this event.</param>
+            <param name="timeout">Event arguments.</param>
+        </member>
+        <member name="M:CodeForDotNet.Threading.WorkerGroup.OnStopTimeout(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            Aborts the thread when it was signaled to stop but exceeded the stop timeout.
+            Execution resumes with the next worker.
+            </summary>
+            <param name="sender">Sender of this event.</param>
+            <param name="stop">Event arguments.</param>
+        </member>
+        <member name="T:CodeForDotNet.Threading.WorkerMethod">
+            <summary>
+            Method to execute when the worker runs.
+            </summary>
+            <param name="host">Host in which the worker is running, should be used for all logging and checked frequently for cancellation.</param>
+        </member>
+        <member name="T:CodeForDotNet.Threading.WorkerTask">
+            <summary>
+            Individual worker task in a <see cref="T:CodeForDotNet.Threading.WorkerGroup"/>.
+            </summary>
+            <remarks>
+            These classes were created before <see cref="T:System.Threading.Tasks.Task"/> and should be refactored or deprecated in the future.
+            </remarks>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerTask.Name">
+            <summary>
+            Friendly name used for logging.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerTask.Method">
+            <summary>
+            Delegate to worker function that is be executed.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerTask.RunTimeout">
+            <summary>
+            Execution timeout in seconds, after which the cancel flag will be set.
+            Set to zero to disable.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerTask.StopTimeout">
+            <summary>
+            Additional time in seconds the thread is allowed to stop after receiving a cancellation request.
+            The thread will be aborted if it exceeds this timeout.
+            Set to zero to disable.
+            </summary>
+        </member>
+        <member name="P:CodeForDotNet.Threading.WorkerTask.Cancel">
+            <summary>
+            Cancellation token used to abort the worker task.
+            </summary>
         </member>
         <member name="T:CodeForDotNet.TimeSpanExtensions">
             <summary>
@@ -5767,6 +6350,79 @@
             <summary>
             Merges namespaces.
             </summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.StringValueRegEx_0">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the StringValueRegEx method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.StringValueRegEx_0.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.StringValueRegEx_0.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.StringValueRegEx_0.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.StringValueRegEx_0.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.StringValueRegEx_0.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.StringValueRegEx_0.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.StringValueRegEx_0.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.StringValueRegEx_0.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.StringFormatRegEx_1">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the StringFormatRegEx method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.StringFormatRegEx_1.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.StringFormatRegEx_1.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.StringFormatRegEx_1.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.StringFormatRegEx_1.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.StringFormatRegEx_1.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.StringFormatRegEx_1.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.StringFormatRegEx_1.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.StringFormatRegEx_1.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Utilities">
+            <summary>Helper methods used by generated <see cref="T:System.Text.RegularExpressions.Regex"/>-derived implementations.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout">
+            <summary>Default timeout value set in <see cref="T:System.AppContext"/>, or <see cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout"/> if none was set.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
+            <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
         </member>
     </members>
 </doc>
