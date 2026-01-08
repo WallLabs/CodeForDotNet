@@ -318,4 +318,48 @@
     <value>XML validation error at line {0} character {1}. {2}</value>
     <comment>0 = line number, 1 = character number, 2 = error message.</comment>
   </data>
+    <data name="WorkerGroupAbortedWorker" xml:space="preserve">
+    <value>Worker {0} in group {1} was aborted.</value>
+    <comment>0 = worker name, 1 = group name.</comment>
+  </data>
+    <data name="WorkerGroupAborting" xml:space="preserve">
+    <value>Worker group {0} aborted.</value>
+    <comment>0 = group name.</comment>
+  </data>
+    <data name="WorkerGroupAbortingWorker" xml:space="preserve">
+    <value>Aborting worker {0} in group {1}.</value>
+    <comment>0 = worker name, 1 = group name.</comment>
+  </data>
+    <data name="WorkerGroupAlreadyRunning" xml:space="preserve">
+    <value>Worker group "{0}" is already running.</value>
+    <comment>0 = group name.</comment>
+  </data>
+    <data name="WorkerGroupError" xml:space="preserve">
+    <value>Worker {0} ({1}) had an error: {2}.</value>
+    <comment>0 = worker name, 1 = group name; 2 = error.</comment>
+  </data>
+    <data name="WorkerGroupStarting" xml:space="preserve">
+    <value>Starting worker group {0}.</value>
+    <comment>0 = group name.</comment>
+  </data>
+    <data name="WorkerGroupStartingRunTimer" xml:space="preserve">
+    <value>Started run timer for worker {0} of group {1} with timeout of {2} seconds.</value>
+    <comment>0 = worker name, 1 = group name; 2 = timeout.</comment>
+  </data>
+    <data name="WorkerGroupStartingStopTimer" xml:space="preserve">
+    <value>Started stop timer for worker {0} of group {1} with timeout of {2} seconds.</value>
+    <comment>0 = worker name, 1 = group name; 2 = timeout.</comment>
+  </data>
+    <data name="WorkerGroupStartingWorker" xml:space="preserve">
+    <value>Starting worker {0} in group {1}.</value>
+    <comment>0 = worker name, 1 = group name.</comment>
+  </data>
+    <data name="WorkerGroupStopping" xml:space="preserve">
+    <value>Stopping worker group {0}.</value>
+    <comment>0 = group name.</comment>
+  </data>
+    <data name="WorkerGroupStoppingWorker" xml:space="preserve">
+    <value>Stopping worker {0} in group {1}.</value>
+    <comment>0 = worker name, 1 = group name.</comment>
+  </data>
 </root>

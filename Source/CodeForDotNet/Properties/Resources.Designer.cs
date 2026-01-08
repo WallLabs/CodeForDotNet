@@ -19,7 +19,7 @@ namespace CodeForDotNet.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -579,6 +579,105 @@ namespace CodeForDotNet.Properties {
         internal static string ScheduleToStringFormatNone {
             get {
                 return ResourceManager.GetString("ScheduleToStringFormatNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Worker {0} in group {1} was aborted..
+        /// </summary>
+        internal static string WorkerGroupAbortedWorker {
+            get {
+                return ResourceManager.GetString("WorkerGroupAbortedWorker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Worker group {0} aborted..
+        /// </summary>
+        internal static string WorkerGroupAborting {
+            get {
+                return ResourceManager.GetString("WorkerGroupAborting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aborting worker {0} in group {1}..
+        /// </summary>
+        internal static string WorkerGroupAbortingWorker {
+            get {
+                return ResourceManager.GetString("WorkerGroupAbortingWorker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Worker group &quot;{0}&quot; is already running..
+        /// </summary>
+        internal static string WorkerGroupAlreadyRunning {
+            get {
+                return ResourceManager.GetString("WorkerGroupAlreadyRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Worker {0} ({1}) had an error: {2}..
+        /// </summary>
+        internal static string WorkerGroupError {
+            get {
+                return ResourceManager.GetString("WorkerGroupError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting worker group {0}..
+        /// </summary>
+        internal static string WorkerGroupStarting {
+            get {
+                return ResourceManager.GetString("WorkerGroupStarting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Started run timer for worker {0} of group {1} with timeout of {2} seconds..
+        /// </summary>
+        internal static string WorkerGroupStartingRunTimer {
+            get {
+                return ResourceManager.GetString("WorkerGroupStartingRunTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Started stop timer for worker {0} of group {1} with timeout of {2} seconds..
+        /// </summary>
+        internal static string WorkerGroupStartingStopTimer {
+            get {
+                return ResourceManager.GetString("WorkerGroupStartingStopTimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting worker {0} in group {1}..
+        /// </summary>
+        internal static string WorkerGroupStartingWorker {
+            get {
+                return ResourceManager.GetString("WorkerGroupStartingWorker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopping worker group {0}..
+        /// </summary>
+        internal static string WorkerGroupStopping {
+            get {
+                return ResourceManager.GetString("WorkerGroupStopping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopping worker {0} in group {1}..
+        /// </summary>
+        internal static string WorkerGroupStoppingWorker {
+            get {
+                return ResourceManager.GetString("WorkerGroupStoppingWorker", resourceCulture);
             }
         }
         
