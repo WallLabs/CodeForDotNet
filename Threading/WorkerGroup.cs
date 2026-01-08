@@ -1,4 +1,4 @@
-﻿using CodeChief.Windows.Properties;
+﻿using CodeChief.Properties;
 using CodeForDotNet;
 using CodeForDotNet.Threading;
 using System;
@@ -28,7 +28,7 @@ namespace CodeChief.Threading
             Log = log;
             PollEnabled = pollEnabled;
             PollInterval = pollInterval;
-            _workers = new List<WorkerInfo>();
+            _workers = [];
             _runTimer = new System.Timers.Timer { AutoReset = false };
             _runTimer.Elapsed += OnRunTimeout;
             _stopTimer = new System.Timers.Timer { AutoReset = false };
@@ -49,10 +49,8 @@ namespace CodeChief.Threading
                 // Dispose managed resources during dispose
                 if (disposing)
                 {
-                    if (_runTimer != null)
-                        _runTimer.Dispose();
-                    if (_stopTimer != null)
-                        _stopTimer.Dispose();
+                    _runTimer?.Dispose();
+                    _stopTimer?.Dispose();
                 }
             }
             finally
@@ -128,8 +126,7 @@ namespace CodeChief.Threading
             get { return _pollInterval; }
             set
             {
-                if (value < 0)
-                    throw new ArgumentOutOfRangeException(nameof(value));
+                ArgumentOutOfRangeException.ThrowIfNegative(value);
                 _pollInterval = value;
             }
         }
@@ -419,7 +416,7 @@ namespace CodeChief.Threading
         /// </summary>
         /// <param name="sender">Sender of this event.</param>
         /// <param name="e">Event arguments.</param>
-        private void OnRunTimeout(Object sender, System.Timers.ElapsedEventArgs e)
+        private void OnRunTimeout(object? sender, System.Timers.ElapsedEventArgs e)
         {
             lock (SyncRoot)
             {
@@ -445,7 +442,7 @@ namespace CodeChief.Threading
         /// </summary>
         /// <param name="sender">Sender of this event.</param>
         /// <param name="e">Event arguments.</param>
-        private void OnStopTimeout(Object sender, System.Timers.ElapsedEventArgs e)
+        private void OnStopTimeout(object? sender, System.Timers.ElapsedEventArgs e)
         {
             lock (SyncRoot)
             {

@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
-namespace CodeChief.Net
+namespace CodeChief.Network
 {
     /// <summary>
     /// Media Access Control (MAC) address. A 48bit unique identifier for LAN stations, e.g. a network adapter or router.
@@ -147,7 +147,7 @@ namespace CodeChief.Net
         /// Indicates if the address is currently empty (all zeros).
         /// </summary>
         [XmlIgnore]
-        public bool IsEmpty { get { return _value == 0; } }
+        public readonly bool IsEmpty { get { return _value == 0; } }
 
         #endregion
 
@@ -272,7 +272,7 @@ namespace CodeChief.Net
         /// <summary>
         /// Compares the current object <see cref="MacAddress"/>, <see cref="long"/> or <see cref="byte"/>[].
         /// </summary>
-        public int CompareTo(object other)
+        public int CompareTo(object? other)
         {
             if (other is MacAddress address)
                 return CompareTo(address.ToInt64());
@@ -297,7 +297,7 @@ namespace CodeChief.Net
         /// <summary>
         /// Returns a value that indicates whether this instance is equal to a specified object.
         /// </summary>
-        public override bool Equals(object other)
+        public override bool Equals(object? other)
         {
             if (other is MacAddress address)
                 return Equals(address);

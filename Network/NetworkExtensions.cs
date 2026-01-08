@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace CodeChief.Net
+namespace CodeChief.Network
 {
     /// <summary>
     /// Contains helper methods and extensions for network operations.
@@ -87,8 +87,8 @@ namespace CodeChief.Net
         public static void BroadcastPacket(byte[] packet, int port)
         {
             // Validate
-            if (packet == null) throw new ArgumentNullException(nameof(packet));
-            if (port <= 0) throw new ArgumentOutOfRangeException(nameof(port));
+            ArgumentNullException.ThrowIfNull(packet);
+            ArgumentOutOfRangeException.ThrowIfNegativeOrZero(port);
 
             // Initialize a UDP client for broadcast on the specified port
             using var client = new UdpClient();
