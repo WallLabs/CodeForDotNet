@@ -5,3 +5,6 @@
 # Ignore repository source control cache/options directories for Git and editors.
 .git/
 .vs/
+
+# TODO: VSCode compatibility verification and full integration.
+.vscode/
