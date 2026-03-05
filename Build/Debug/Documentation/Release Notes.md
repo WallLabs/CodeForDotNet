@@ -1,5 +1,9 @@
 # Code for .NET - Release Notes
 
+## Version 10.0.2603.5### (2026.03.05)
+* Quality improvement with extended unit tests, behavioural verification and documentation.
+* Merge additional components functionality including data annotations, XML and testing extensions including tests.
+
 ## Version 10.0.2601.8### (2026.01.08)
 * Move Windows dependencies out of cross-platform assembly.
 * Merge remaining CodeChief/Components functionality including network MAC address, Wake-on-LAN, UDP and old style worker group threading.

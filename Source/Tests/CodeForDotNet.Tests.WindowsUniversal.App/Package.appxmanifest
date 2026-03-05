@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-    <Identity Name="72f4f208-d107-4f70-97bf-513d7224fa63" Publisher="CN=CodeForDotNet" Version="10.0.2603.5002" />
+    <Identity Name="72f4f208-d107-4f70-97bf-513d7224fa63" Publisher="CN=CodeForDotNet" Version="10.0.2603.5003" />
     <mp:PhoneIdentity PhoneProductId="72f4f208-d107-4f70-97bf-513d7224fa63" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
     <Properties>
         <DisplayName>CodeForDotNet.Tests.WindowsUniversal.App</DisplayName>

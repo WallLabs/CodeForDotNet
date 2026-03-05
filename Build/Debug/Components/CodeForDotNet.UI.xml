@@ -8,10 +8,40 @@
             <summary>
             Generic command which calls delegate function(s) to execute or get the status.
             </summary>
+            <remarks>
+            Creates an instance which calls the specified <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> and <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)"/> delegates when executed.
+            </remarks>
+            <param name="executeMethod">Method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> to perform the command action.</param>
+            <param name="canExecuteMethod">Optional method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)"/> to test whether the command is currently available for execution.</param>
+        </member>
+        <member name="M:CodeForDotNet.UI.Input.DelegateCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean})">
+            <summary>
+            Generic command which calls delegate function(s) to execute or get the status.
+            </summary>
+            <remarks>
+            Creates an instance which calls the specified <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> and <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)"/> delegates when executed.
+            </remarks>
+            <param name="executeMethod">Method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> to perform the command action.</param>
+            <param name="canExecuteMethod">Optional method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)"/> to test whether the command is currently available for execution.</param>
         </member>
         <member name="F:CodeForDotNet.UI.Input.DelegateCommand.DefaultId">
             <summary>
             Used to identify the status of the command when it has no parameter.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.DelegateCommand._canExecuteMethod">
+            <summary>
+            Exection status delegate.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.DelegateCommand._commandStatus">
+            <summary>
+            Stpres the last known execution status for each command.
+            </summary>
+        </member>
+        <member name="F:CodeForDotNet.UI.Input.DelegateCommand._executeMethod">
+            <summary>
+            Execute delegate.
             </summary>
         </member>
         <member name="M:CodeForDotNet.UI.Input.DelegateCommand.#ctor(System.Action{System.Object})">
@@ -19,13 +49,6 @@
             Creates an instance which calls the specified <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> delegate when executed.
             </summary>
             <param name="executeMethod">Method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> to perform the command action.</param>
-        </member>
-        <member name="M:CodeForDotNet.UI.Input.DelegateCommand.#ctor(System.Action{System.Object},System.Func{System.Object,System.Boolean})">
-            <summary>
-            Creates an instance which calls the specified <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> and <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)"/> delegates when executed.
-            </summary>
-            <param name="executeMethod">Method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.Execute(System.Object)"/> to perform the command action.</param>
-            <param name="canExecuteMethod">Optional method invoked by <see cref="M:CodeForDotNet.UI.Input.DelegateCommand.CanExecute(System.Object)"/> to test whether the command is currently available for execution.</param>
         </member>
         <member name="E:CodeForDotNet.UI.Input.DelegateCommand.CanExecuteChanged">
             <summary>
