@@ -9,8 +9,6 @@ namespace CodeForDotNet.ComponentModel;
 /// </summary>
 public interface IEventCache : IThreadSafe
 {
-    #region Public Events
-
     /// <summary>
     /// Fired when events are suspended the first time, i.e. is not fired when nested.
     /// </summary>
@@ -21,19 +19,11 @@ public interface IEventCache : IThreadSafe
     /// </summary>
     event EventHandler? EventsSuspended;
 
-    #endregion Public Events
-
-    #region Public Properties
-
     /// <summary>
     /// Flags that events are current enabled, and will be fired immediately. This can be used by inheriting classes to determine whether to cache or fire
     /// events immediately, in conjunction with the ResumeEvents() override.
     /// </summary>
     bool EventsAreEnabled { get; }
-
-    #endregion Public Properties
-
-    #region Public Methods
 
     /// <summary>
     /// Resumes all events after SuspendEvents. Automatically fires any pending events when appropriate. Implements reference counting to detect when to
@@ -46,6 +36,4 @@ public interface IEventCache : IThreadSafe
     /// preventing un-necessary event handling.
     /// </summary>
     void SuspendEvents();
-
-    #endregion Public Methods
 }

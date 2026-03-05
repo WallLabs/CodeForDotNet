@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CodeForDotNet.Tests.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TestFormatXmlInputFilePath" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\Xml\FormatXmlTestInput.xml</Value>
+    </Setting>
+    <Setting Name="TestFormatXmlOutputIndentTrimFilePath" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\Xml\FormatXmlTestOutputIndentTrim.xml</Value>
+    </Setting>
+    <Setting Name="TestFormatXmlOutputIndentOmitCommentsTrimFilePath" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\Xml\FormatXmlTestOutputIndentOmitCommentsTrim.xml</Value>
+    </Setting>
+    <Setting Name="TestFormatXmlOutputIndentOmitCommentsFilePath" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\Xml\FormatXmlTestOutputIndentOmitComments.xml</Value>
+    </Setting>
+    <Setting Name="TestFormatXmlOutputIndentFilePath" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\Xml\FormatXmlTestOutputIndent.xml</Value>
+    </Setting>
+    <Setting Name="TestFormatXmlOutputTrimUtf16FilePath" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\Xml\FormatXmlTestOutputTrimUtf16.xml</Value>
+    </Setting>
+    <Setting Name="TestFormatXmlInputFragmentFilePath" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\Xml\FormatXmlTestInputFragment.xml</Value>
+    </Setting>
+    <Setting Name="TestFormatXmlOutputFragmentFilePath" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\Xml\FormatXmlTestOutputFragment.xml</Value>
+    </Setting>
+    <Setting Name="TestXmlValidationSchemaFilePath" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\Xml\TestValidation.xsd</Value>
+    </Setting>
+    <Setting Name="TestXPathFunctionsInputFilePath" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\Xml\XPathFunctionsTestInput.xml</Value>
+    </Setting>
+    <Setting Name="TestXPathFunctionsExecuteFilePath" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\Xml\XPathFunctionsTestExecute.xslt</Value>
+    </Setting>
+    <Setting Name="TestXPathFunctionsOutputFilePath" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Data\Xml\XPathFunctionsTestOutput.xml</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,4 +1,4 @@
-namespace CodeForDotNet.WindowsUniversal.TestApp.Views;
+namespace CodeForDotNet.Tests.WindowsUniversal.App.Views;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.

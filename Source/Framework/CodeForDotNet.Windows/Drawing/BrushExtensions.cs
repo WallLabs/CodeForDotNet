@@ -28,6 +28,7 @@ public static class BrushExtensions
     /// Creates a .NET brush based on the current brush specification, optionally flipping the start and end colors.
     /// </summary>
     [SuppressMessage("Performance", "CA1863:Use 'CompositeFormat'", Justification = "Older style of resource usage needs upgrade consideration.")]
+    [SuppressMessage("Usage", "CA2208:Instantiate argument exceptions correctly", Justification = "Re-use of standard execption type and readability.")]
     public static Brush MakeBrush(this BrushData data, Rectangle bounds, bool reverse)
     {
         // Validate.
@@ -78,6 +79,7 @@ public static class BrushExtensions
                         string.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.WrapMode)));
                     if (!data.Scale.HasValue) throw new ArgumentNullException(
                         string.Format(CultureInfo.CurrentCulture, Resources.PropertyRequired, nameof(BrushData.Scale)));
+                    if (data.Texture is null) throw new ArgumentNullException(nameof(data.Texture));
 
                     // Make texture
                     Image image;

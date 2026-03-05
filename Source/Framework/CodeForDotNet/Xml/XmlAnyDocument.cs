@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.Serialization;
@@ -13,61 +12,104 @@ using System.Xml.XPath;
 namespace CodeForDotNet.Xml;
 
 /// <summary>
-/// Container for unqualified arbitrary XML data which is serializable as child element of a qualified type, i.e. an "xs:any" container.
+/// Container for unqualified arbitrary XML data which is serializable as child element of a
+/// qualified type, i.e. an "xs:any" container.
 /// </summary>
 /// <remarks>
-/// The default root element is "root" when serialized standalone. Normally this is a property of another serializable type, in which case the root is set by
-/// the XML serialization attributes of the parent property or in the custom serialization code of the parent class if implemented.
+/// A default root element is still required when serialized standalone, i.e. as a document.
+/// Normally this is a property of another serializable type, in which case the root is set by
+/// the XML serialization attributes of the parent property or in the custom serialization code
+/// of the parent class when implemented.
 /// </remarks>
 [Serializable]
-[XmlRoot(XmlRootName, Namespace = XmlNamespace)]
-[XmlSchemaProvider("GetSchema")]
-public sealed class XmlAnyDocument : ISerializable, IXmlSerializable, IDisposable
+[XmlRoot(XmlRootName, Namespace = "")]
+[XmlSchemaProvider(nameof(GetSchema))]
+public sealed class XmlAnyDocument : ISerializable, IXmlSerializable
 {
-    #region Public Fields
-
     /// <summary>
     /// XML namespace.
     /// </summary>
-    [NonSerialized]
-    public const string XmlNamespace = "";
+    public const string XmlNamespace = CodeXsd.XmlNamespace;
 
     /// <summary>
     /// XML root element name.
     /// </summary>
-    [NonSerialized]
-    public const string XmlRootName = "xml";
+    public const string XmlRootName = nameof(XmlAnyDocument);
 
     /// <summary>
     /// XML type name.
     /// </summary>
-    [NonSerialized]
-    public const string XmlTypeName = "xmlAnyDocumentType";
+    public const string XmlTypeName = nameof(XmlAnyDocument) + "Type";
 
-    #endregion Public Fields
-
-    /* unqualified/anonymous type when serialized as document */
-
-    #region Private Fields
-
-    [NonSerialized]
-    private readonly XmlDocumentFragment _xml;
-
-    #endregion Private Fields
-
-    #region Public Constructors
+    /// <summary>
+    /// Field behind the <see cref="Data"/> property.
+    /// </summary>
+    private readonly XmlDocumentFragment _data;
 
     /// <summary>
     /// Creates an empty instance.
     /// </summary>
     public XmlAnyDocument()
     {
-        _xml = new XmlDocument().CreateDocumentFragment();
+        var document = new XmlDocument { XmlResolver = null };
+        _data = document.CreateDocumentFragment();
     }
 
-    #endregion Public Constructors
+    /// <summary>
+    /// Creates an instance with the specified XML content.
+    /// </summary>
+    public XmlAnyDocument(string xml)
+        : this()
+    {
+        // Validate
+        if (string.IsNullOrWhiteSpace(xml))
+        {
+            throw new ArgumentNullException(nameof(xml));
+        }
 
-    #region Private Constructors
+        // Load XML
+        _data.InnerXml = xml;
+    }
+
+    /// <summary>
+    /// Creates an instance with the specified XML content.
+    /// </summary>
+    public XmlAnyDocument(TextReader xml)
+        : this()
+    {
+        // Validate
+        ArgumentNullException.ThrowIfNull(xml);
+
+        // Load XML
+        _data.InnerXml = xml.ReadToEnd();
+    }
+
+    /// <summary>
+    /// Creates an instance with the specified XML content.
+    /// </summary>
+    public XmlAnyDocument(Stream xml)
+        : this()
+    {
+        // Validate
+        ArgumentNullException.ThrowIfNull(xml);
+
+        // Load XML
+        using var reader = new StreamReader(xml);
+        _data.InnerXml = reader.ReadToEnd();
+    }
+
+    /// <summary>
+    /// Creates an instance with the specified XML content.
+    /// </summary>
+    public XmlAnyDocument(XmlReader xml)
+        : this()
+    {
+        // Validate
+        ArgumentNullException.ThrowIfNull(xml);
+
+        // Load XML
+        _data.InnerXml = xml.ReadOuterXml();
+    }
 
     /// <summary>
     /// Serialization constructor.
@@ -75,66 +117,54 @@ public sealed class XmlAnyDocument : ISerializable, IXmlSerializable, IDisposabl
     private XmlAnyDocument(SerializationInfo info, StreamingContext context)
     {
         ArgumentNullException.ThrowIfNull(info);
-        _xml = new XmlDocument().CreateDocumentFragment();
-        var xml = info.GetString("Xml");
+
+        _data = new XmlDocument { XmlResolver = null /* Prohibit DTD secure default (CA3075). */ }.CreateDocumentFragment();
+        var xml = info.GetString(XmlRootName);
         if (!string.IsNullOrEmpty(xml))
-            Add(info.GetString("Xml"), null, null);
+        {
+            Add(xml, null, null);
+        }
     }
-
-    #endregion Private Constructors
-
-    #region Private Destructors
-
-    /// <summary>
-    /// Calls <see cref="Dispose(bool)"/> during finalization to free resources in case it was forgotten.
-    /// </summary>
-    ~XmlAnyDocument()
-    {
-        // Partial dispose
-        Dispose(false);
-    }
-
-    #endregion Private Destructors
-
-    #region Public Properties
 
     /// <summary>
     /// Indicates whether the XML is currently empty.
     /// </summary>
-    public bool IsEmpty => _xml == null || _xml.ChildNodes.Count == 0;
+    public bool IsEmpty => _data is null || _data.ChildNodes.Count == 0;
 
     /// <summary>
     /// XML data.
     /// </summary>
-    public IXPathNavigable Xml => _xml;
-
-    #endregion Public Properties
-
-    #region Public Methods
-
-    /// <summary>
-    /// Gets the schema and XML type of this class.
-    /// </summary>
-    [SuppressMessage("Microsoft.Usage", "IDE0060", Justification = "Unused parameter required by interface.")]
-    public static XmlQualifiedName GetSchema(XmlSchemaSet schemaSet)
-    {
-        return new XmlQualifiedName(XmlTypeName, XmlNamespace);
-    }
+    public IXPathNavigable Data => _data;
 
     /// <summary>
     /// Tests two objects of this type for inequality by value.
     /// </summary>
-    public static bool operator !=(XmlAnyDocument data1, XmlAnyDocument data2)
+    public static bool operator !=(XmlAnyDocument left, XmlAnyDocument right)
     {
-        return !(data1?.Equals(data2) ?? (data2 is null));
+        return left is not null ? !left.Equals(right) : right is not null;
     }
 
     /// <summary>
     /// Tests two objects of this type for equality by value.
     /// </summary>
-    public static bool operator ==(XmlAnyDocument data1, XmlAnyDocument data2)
+    public static bool operator ==(XmlAnyDocument left, XmlAnyDocument right)
     {
-        return data1?.Equals(data2) ?? (data2 is null);
+        return left is not null
+            ? left.Equals(right)
+            : right is null;
+    }
+
+    /// <summary>
+    /// Gets the schema and XML type of this class.
+    /// </summary>
+    public static XmlQualifiedName GetSchema(XmlSchemaSet schemaSet)
+    {
+        // Validate.
+        ArgumentNullException.ThrowIfNull(schemaSet);
+
+        // Add schema and return qualified name.
+        schemaSet.Add(CodeXsd.GetSchema());
+        return new XmlQualifiedName(XmlTypeName, XmlNamespace);
     }
 
     /// <summary>
@@ -146,7 +176,7 @@ public sealed class XmlAnyDocument : ISerializable, IXmlSerializable, IDisposabl
     public void Add(string sourceXml, string? sourcePath, string? targetPath)
     {
         // Call overloaded method
-        Add(sourceXml, sourcePath, targetPath, false);
+        Set(sourceXml.CreateXPathDocument().CreateNavigator(), sourcePath, targetPath, false);
     }
 
     /// <summary>
@@ -155,69 +185,10 @@ public sealed class XmlAnyDocument : ISerializable, IXmlSerializable, IDisposabl
     /// <param name="sourceXml">XML to add at the path.</param>
     /// <param name="sourcePath">Source XPath, or null for root.</param>
     /// <param name="targetPath">Target XPath, or null for root.</param>
-    /// <param name="overwrite">Set true to delete data first.</param>
-    public void Add(string sourceXml, string? sourcePath, string? targetPath, bool overwrite)
-    {
-        // Validate
-        if (string.IsNullOrEmpty(sourceXml))
-            throw new ArgumentNullException(nameof(sourceXml));
-
-        // Call overloaded method
-        Add(sourceXml.CreateXPathDocument(), sourcePath, targetPath, overwrite);
-    }
-
-    /// <summary>
-    /// Adds XML to the specified data path.
-    /// </summary>
-    /// <param name="sourceXml">XML to add at the path.</param>
-    /// <param name="sourcePath">Source XPath, or null for root.</param>
-    /// <param name="targetPath">Target XPath, or null for root.</param>
-    public void Add(IXPathNavigable sourceXml, string? sourcePath, string? targetPath)
+    public void Add(XPathNavigator sourceXml, string? sourcePath, string? targetPath)
     {
         // Call overloaded method
-        Add(sourceXml, sourcePath, targetPath, false);
-    }
-
-    /// <summary>
-    /// Adds XML to the specified data path.
-    /// </summary>
-    /// <param name="sourceXml">XML to add at the path.</param>
-    /// <param name="sourcePath">Source XPath, or null for root.</param>
-    /// <param name="targetPath">Target XPath, or null for root.</param>
-    /// <param name="overwrite">Set true to delete data first.</param>
-    public void Add(IXPathNavigable sourceXml, string? sourcePath, string? targetPath, bool overwrite)
-    {
-        // Validate
-        ArgumentNullException.ThrowIfNull(sourceXml);
-
-        // Use root elements as source when null or root
-        if (string.IsNullOrEmpty(sourcePath) || sourcePath == "/") sourcePath = "/*";
-
-        // Read source XML and make anonymous
-        var buffer = new StringBuilder();
-        var readSettings = new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Fragment };
-        var writeSettings = new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Fragment };
-        using (var reader = XmlReader.Create(sourceXml.CreateNavigator().ReadSubtree(), readSettings))
-        using (var writer = XmlWriter.Create(buffer, writeSettings))
-            XmlFullExtensions.FormatXmlAnyTransform.Transform(reader, writer);
-
-        // Find or create target path
-        var target = GetPath(targetPath, true)
-            ?? throw new ArgumentOutOfRangeException(nameof(targetPath));
-
-        // Append or replace source XML depending on overwrite option
-        using (var reader = XmlReader.Create(new StringReader(buffer.ToString()), readSettings))
-        {
-            var sourceNodes = new XPathDocument(reader).CreateNavigator().Select(sourcePath);
-            while (sourceNodes.MoveNext())
-            {
-                Debug.Assert(sourceNodes.Current != null);
-                if (overwrite)
-                    target.ReplaceSelf(sourceNodes.Current);
-                else
-                    target.AppendChild(sourceNodes.Current);
-            }
-        }
+        Set(sourceXml, sourcePath, targetPath, false);
     }
 
     /// <summary>
@@ -225,7 +196,7 @@ public sealed class XmlAnyDocument : ISerializable, IXmlSerializable, IDisposabl
     /// </summary>
     public void Clear()
     {
-        _xml.RemoveAll();
+        _data.RemoveAll();
     }
 
     /// <summary>
@@ -234,22 +205,18 @@ public sealed class XmlAnyDocument : ISerializable, IXmlSerializable, IDisposabl
     /// <param name="path">XPath target path, null for root.</param>
     public void Delete(string? path)
     {
-        // Find or create target path
-        var target = GetPath(path, false);
-        // Delete
-        target?.DeleteSelf();
-    }
+        // Delete entire document when null or root specified
+        if (string.IsNullOrEmpty(path) || path == "/")
+        {
+            _data.RemoveAll();
+            return;
+        }
 
-    /// <summary>
-    /// Proactively frees resources.
-    /// </summary>
-    public void Dispose()
-    {
-        // Full dispose
-        Dispose(true);
-
-        // Suppress finalization as no longer needed
-        GC.SuppressFinalize(this);
+        // Select and delete individual nodes when path specified
+        foreach (XPathNavigator node in _data.CreateNavigator()!.Select(path))
+        {
+            node.DeleteSelf();
+        }
     }
 
     /// <summary>
@@ -258,14 +225,17 @@ public sealed class XmlAnyDocument : ISerializable, IXmlSerializable, IDisposabl
     [SuppressMessage("Naming", "CA1725:Parameter names should match base declaration", Justification = "Readability.")]
     public override bool Equals(object? other)
     {
-        // Compare nullability and type
-        if (other is not XmlAnyDocument otherXml || (otherXml is null))
-            return false;
+        // Check for null and type
+        if (other is not XmlAnyDocument xml)
+        {
+            // Try comparing as string
+            return other is string otherString && otherString == ToString();
+        }
 
         // Compare values
         return
-            Xml != null && otherXml.Xml != null &&
-            Xml.CreateNavigator().OuterXml == otherXml.Xml.CreateNavigator().OuterXml;
+            _data != null && xml.Data != null &&
+            _data.GetOuterXml() == xml.Data.GetOuterXml();
     }
 
     /// <summary>
@@ -273,80 +243,72 @@ public sealed class XmlAnyDocument : ISerializable, IXmlSerializable, IDisposabl
     /// </summary>
     public override int GetHashCode()
     {
-        return HashCode.Combine(Xml);
+        return _data?.GetOuterXml()?.GetHashCode() ?? 0;
     }
 
     /// <summary>
     /// Called by the binary serializer to get object data.
     /// </summary>
-    /// <remarks>We need to control serialization because the <see cref="XmlDocumentFragment"/> class is not serializable.</remarks>
+    /// <remarks>
+    /// We need to control serialization because the <see cref="XmlDocumentFragment"/> class is
+    /// not serializable.
+    /// </remarks>
     [SecurityCritical]
     public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        // Validate
+        // Validate.
         ArgumentNullException.ThrowIfNull(info);
 
-        // Add properties
+        // Add data for serialization.
         info.AddValue("Xml", GetRoot().OuterXml);
     }
 
     /// <summary>
     /// Returns an <see cref="XPathNavigator"/> positioned within the data. The path is not created.
     /// </summary>
-    /// <remarks>Even if this instance was serialized standalone the default "root" element is not part of the path because it is stripped during de-serialization.</remarks>
-    /// <param name="path">Optional XPath expression to select the sub-path. Set null to select the root element.</param>
+    /// <remarks>
+    /// Even if this instance was serialized standalone the default "root" element is not part
+    /// of the path because it is stripped during de-serialization.
+    /// </remarks>
+    /// <param name="path">
+    /// Optional XPath expression to select the sub-path. Set null to select the root element.
+    /// </param>
     /// <returns><see cref="XPathNavigator"/> positioned at the path or null when not found.</returns>
-    public XPathNavigator? GetPath(string path)
+    public XPathNavigator? GetPath(string? path)
     {
         // Call overloaded method
         return GetPath(path, false);
     }
 
     /// <summary>
-    /// Returns an <see cref="XPathNavigator"/> positioned within the data. Parent elements in the path without filters will be created if the
-    /// <paramref name="create"/> option is set. (up to the first filter).
+    /// Returns an <see cref="XPathNavigator"/> positioned within the data. Parent elements in
+    /// the path without filters will be created if the <paramref name="create"/> option is set.
     /// </summary>
-    /// <remarks>Even if this instance was serialized standalone the default "root" element is not part of the path because it is stripped during de-serialization.</remarks>
-    /// <param name="path">Optional XPath expression to select the sub-path. Set null to select the root element.</param>
+    /// <remarks>
+    /// Even if this instance was serialized standalone the default "root" element is not part
+    /// of the path because it is stripped during de-serialization.
+    /// </remarks>
+    /// <param name="path">
+    /// Optional XPath expression to select the sub-path. Set null to select the root element.
+    /// </param>
     /// <param name="create">Create the path if it doesn't exist.</param>
-    /// <returns><see cref="XPathNavigator"/> positioned at the path or null when not found and <paramref name="create"/> was not set true.</returns>
+    /// <returns>
+    /// <see cref="XPathNavigator"/> positioned at the path or null when not found and
+    /// <paramref name="create"/> was not set true.
+    /// </returns>
     public XPathNavigator? GetPath(string? path, bool create)
     {
         // Return document root when no path
         if (string.IsNullOrEmpty(path))
-            return Xml.CreateNavigator();
+            return _data.CreateNavigator();
 
         // Attempt to get path
-        var result = Xml.CreateNavigator().SelectSingleNode(path);
-        if (create && result == null)
-        {
-            // Create path when not found and requested
-            result = Xml.CreateNavigator();
-            foreach (var pathPart in path!.Split(['/'], StringSplitOptions.RemoveEmptyEntries))
-            {
-                // Check if next part exists
-                if (result != null)
-                {
-                    var child = result.SelectSingleNode(pathPart);
-                    if (child == null)
-                    {
-                        // Return null when path includes filter (cannot automatically create conditional content)
-                        if (pathPart.Contains('[', StringComparison.OrdinalIgnoreCase))
-                            return null;
+        var existing = _data.SelectSingleNode(path);
+        if (existing != null)
+            return existing.CreateNavigator();
 
-                        // Create path parts which do not exist
-                        result.AppendChildElement("", pathPart, "", null);
-                        child = result.SelectSingleNode(pathPart);
-                    }
-
-                    // Next/last part
-                    result = child;
-                }
-            }
-        }
-
-        // Return result
-        return result;
+        // Create when missing and option specified, else return not found (null)
+        return create ? _data.CreatePath(path) : null;
     }
 
     /// <summary>
@@ -354,21 +316,43 @@ public sealed class XmlAnyDocument : ISerializable, IXmlSerializable, IDisposabl
     /// </summary>
     public XPathNavigator GetRoot()
     {
-        return Xml.CreateNavigator();
+        return _data.CreateNavigator()!;
     }
 
     /// <summary>
-    /// Returns the XML schema for this type.
+    /// This method is reserved and should not be used. When implementing the IXmlSerializable
+    /// interface, you should return null (Nothing in Visual Basic) from this method, and
+    /// instead, if specifying a custom schema is required, apply the
+    /// <see cref="XmlSchemaProviderAttribute"/> to the class.
     /// </summary>
-    public XmlSchema GetSchema()
+    /// <returns>
+    /// An <see cref="XmlSchema"/> that describes the XML representation of the object that is
+    /// produced by the <see cref="IXmlSerializable.WriteXml(XmlWriter)"/> method and consumed
+    /// by the <see cref="IXmlSerializable.ReadXml(XmlReader)"/> method.
+    /// </returns>
+    public XmlSchema? GetSchema()
     {
-        return new XmlSchema();
+        return null;
     }
 
     /// <summary>
-    /// Reads properties of this object from XML during de-serialization.
+    /// Populates this instance during XML de-serialization.
     /// </summary>
+    /// <remarks>
+    /// The root element is skipped according to normal XML de-serialization behavior because it
+    /// is defined by the parent object. When using this method for general purpose population
+    /// of XML content, use the <see cref="ReadXml(XmlReader, bool)"/> overload to read the
+    /// entire content (including the root element).
+    /// </remarks>
     public void ReadXml(XmlReader reader)
+    {
+        ReadXml(reader, false);
+    }
+
+    /// <summary>
+    /// Populates the XML content of this instance, optionally skipping the root element.
+    /// </summary>
+    public void ReadXml(XmlReader reader, bool includeRoot)
     {
         // Validate
         ArgumentNullException.ThrowIfNull(reader);
@@ -376,18 +360,62 @@ public sealed class XmlAnyDocument : ISerializable, IXmlSerializable, IDisposabl
         // Remove any existing content
         Clear();
 
-        // Skip any white space (possible when serialized stand-alone)
-        if (reader.NodeType != XmlNodeType.Element)
-            _ = reader.MoveToContent();
+        // Ensure we are positioned on a node
+        _ = reader.IsStartElement();
 
-        // Read root element
-        reader.ReadStartElement();
+        // Skip root element when not requested
+        var empty = reader.IsEmptyElement;
+        if (!includeRoot)
+        {
+            reader.ReadStartElement();
+        }
 
-        // Add inner XML
+        // Read new XML
         Add(new XPathDocument(reader).CreateNavigator(), null, null);
 
-        // Read root end
-        reader.ReadEndElement();
+        // Read past root end element when not specified and not empty
+        if (!includeRoot && !empty)
+            reader.ReadEndElement();
+    }
+
+    /// <summary>
+    /// Replaces XML at the specified data path.
+    /// </summary>
+    /// <param name="sourceXml">XML to add at the path.</param>
+    /// <param name="sourcePath">Source XPath, or null for root.</param>
+    /// <param name="targetPath">Target XPath, or null for root.</param>
+    public void Replace(string sourceXml, string? sourcePath, string? targetPath)
+    {
+        // Validate
+        if (string.IsNullOrEmpty(sourceXml))
+            throw new ArgumentNullException(nameof(sourceXml));
+
+        // Select source path when specified
+        if (!string.IsNullOrEmpty(sourcePath))
+            _ = sourceXml.CreateXPathDocument().CreateNavigator().Select(sourcePath);
+
+        // Call overloaded method
+        Set(sourceXml.CreateXPathDocument().CreateNavigator(), sourcePath, targetPath, true);
+    }
+
+    /// <summary>
+    /// Replaces XML at the specified data path.
+    /// </summary>
+    /// <param name="sourceXml">XML to replace at the path.</param>
+    /// <param name="sourcePath">Source XPath, or null for root.</param>
+    /// <param name="targetPath">Target XPath, or null for root.</param>
+    public void Replace(XPathNavigator sourceXml, string? sourcePath, string? targetPath)
+    {
+        // Call overloaded method
+        Set(sourceXml, sourcePath, targetPath, true);
+    }
+
+    /// <summary>
+    /// Returns the current XML content as a string.
+    /// </summary>
+    public override string ToString()
+    {
+        return _data != null ? _data.OuterXml : "";
     }
 
     /// <summary>
@@ -398,20 +426,62 @@ public sealed class XmlAnyDocument : ISerializable, IXmlSerializable, IDisposabl
         GetRoot().WriteSubtree(writer);
     }
 
-    #endregion Public Methods
-
-    #region Private Methods
-
     /// <summary>
-    /// Frees resources owned by this object.
+    /// Sets (adds or replaces) XML at the specified data path.
     /// </summary>
-    /// <param name="disposing">True when called proactively by <see cref="Dispose()"/>. False when called during finalization.</param>
-    private void Dispose(bool disposing)
+    /// <param name="sourceXml">XML to add at the path.</param>
+    /// <param name="sourcePath">Source XPath, or null for root.</param>
+    /// <param name="targetPath">Target XPath, or null for root.</param>
+    /// <param name="overwrite">Set true to delete data first.</param>
+    private void Set(XPathNavigator sourceXml, string? sourcePath, string? targetPath, bool overwrite)
     {
-        // Dispose managed resources during dispose
-        if (disposing)
-            Clear();
-    }
+        // Validate
+        ArgumentNullException.ThrowIfNull(sourceXml);
 
-    #endregion Private Methods
+        // Find or create target path
+        var targetXml = GetPath(targetPath, true)!;
+
+        // Remove existing XML when overwrite specified
+        if (overwrite)
+        {
+            if (string.IsNullOrEmpty(targetXml.Name))
+                targetXml.InnerXml = "";
+            else
+                targetXml.ReplaceSelf("<" + targetXml.Name + "/>");
+        }
+
+        // Write source XML to target
+        if (!string.IsNullOrEmpty(sourcePath) && sourcePath != "/")
+        {
+            // Select source XML matching path/filters when specified
+            var buffer = new StringBuilder();
+            using (var writer = XmlWriter.Create(buffer,
+                new XmlWriterSettings { ConformanceLevel = ConformanceLevel.Auto }))
+            {
+                sourceXml.Copy(sourcePath, writer);
+            }
+
+            // Write source XML to target
+            if (string.IsNullOrEmpty(targetXml.Name))
+            {
+                targetXml.InnerXml += buffer.ToString();
+            }
+            else
+            {
+                targetXml.AppendChild(buffer.ToString());
+            }
+        }
+        else
+        {
+            // Write entire source XML when no path or root specified
+            if (string.IsNullOrEmpty(targetXml.Name))
+            {
+                targetXml.InnerXml += sourceXml.OuterXml;
+            }
+            else
+            {
+                targetXml.AppendChild(sourceXml.ReadSubtree());
+            }
+        }
+    }
 }

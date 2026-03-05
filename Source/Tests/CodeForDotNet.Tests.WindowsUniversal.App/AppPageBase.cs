@@ -1,6 +1,6 @@
 using CodeForDotNet.WindowsUniversal.UI;
 
-namespace CodeForDotNet.WindowsUniversal.TestApp;
+namespace CodeForDotNet.Tests.WindowsUniversal.App;
 
 /// <summary>
 /// Generic wrapper for <see cref="PageApplicationBase{ApplicationBase}"/> for this <see cref="App"/> type.

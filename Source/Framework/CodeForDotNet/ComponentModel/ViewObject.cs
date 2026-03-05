@@ -10,17 +10,20 @@ namespace CodeForDotNet.ComponentModel;
 /// </summary>
 public class ViewObject : PropertyStore
 {
-    #region Private Fields
-
+    /// <summary>
+    /// Field behind the <see cref="Children"/> property.
+    /// </summary>
     private readonly ObservableCollection<IViewObject> _children;
 
+    /// <summary>
+    /// Field behind the <see cref="Parent"/> property.
+    /// </summary>
     private IViewObject _parent;
 
+    /// <summary>
+    /// Cached event arguments for the <see cref="ParentChanged"/> event.
+    /// </summary>
     private ViewObjectParentChangedEventArgs _parentChangeEventCache;
-
-    #endregion Private Fields
-
-    #region Public Constructors
 
     /// <summary>
     /// Creates an instance with no <see cref="Parent"/>.
@@ -43,18 +46,10 @@ public class ViewObject : PropertyStore
         _parent = parent;
     }
 
-    #endregion Public Constructors
-
-    #region Public Events
-
     /// <summary>
     /// Fired when the <see cref="Parent"/> is changed.
     /// </summary>
     public event EventHandler<ViewObjectParentChangedEventArgs>? ParentChanged;
-
-    #endregion Public Events
-
-    #region Public Properties
 
     /// <summary>
     /// Gets a collection of child objects.
@@ -111,10 +106,6 @@ public class ViewObject : PropertyStore
             }
         }
     }
-
-    #endregion Public Properties
-
-    #region Public Methods
 
     /// <summary>
     /// Invalidates the layout of this object, optionally cascading to child objects.
@@ -181,7 +172,7 @@ public class ViewObject : PropertyStore
     /// <param name="sender">Event initiator.</param>
     /// <param name="arguments">Event arguments.</param>
     /// <remarks>Inheritors must call this base class method first.</remarks>
-    public virtual void OnChildPropertyChanged(object sender, PropertyStoreChangeEventArgs arguments)
+    public virtual void OnChildPropertyChanged(object? sender, PropertyStoreChangeEventArgs arguments)
     {
         // Currently empty but still required to call for future base code support
     }
@@ -190,22 +181,23 @@ public class ViewObject : PropertyStore
     /// Hooks events and performs initialization when <see cref="Children"/> are added or removed.
     /// </summary>
     /// <param name="sender">Event initiator.</param>
-    /// <param name="args">Event arguments.</param>
+    /// <param name="arguments">Event arguments.</param>
     /// <remarks>Inheritors must call this base class method first.</remarks>
-    public virtual void OnChildrenChanged(object sender, NotifyCollectionChangedEventArgs args)
+    public virtual void OnChildrenChanged(object? sender, NotifyCollectionChangedEventArgs arguments)
     {
         // Validate.
-        ArgumentNullException.ThrowIfNull(args);
+        ArgumentNullException.ThrowIfNull(arguments);
 
         // Handle specific cases
         lock (SyncRoot)
         {
-            switch (args.Action)
+            switch (arguments.Action)
             {
                 case NotifyCollectionChangedAction.Add:
 
                     // Hook events of new items
-                    foreach (var newChild in args.NewItems.Cast<IViewObject>())
+                    ArgumentNullException.ThrowIfNull(arguments.NewItems);
+                    foreach (var newChild in arguments.NewItems.Cast<IViewObject>())
                     {
                         newChild.PropertyStoreChanged += OnChildPropertyChanged;
                         newChild.Disposed += OnChildDisposed;
@@ -216,7 +208,8 @@ public class ViewObject : PropertyStore
                 case NotifyCollectionChangedAction.Remove:
 
                     // Un-hook events of old items
-                    foreach (var oldChild in args.OldItems.Cast<IViewObject>())
+                    ArgumentNullException.ThrowIfNull(arguments.OldItems);
+                    foreach (var oldChild in arguments.OldItems.Cast<IViewObject>())
                     {
                         oldChild.PropertyStoreChanged -= OnChildPropertyChanged;
                         oldChild.Disposed -= OnChildDisposed;
@@ -228,14 +221,16 @@ public class ViewObject : PropertyStore
                 case NotifyCollectionChangedAction.Reset:
 
                     // Un-hook events of old items
-                    foreach (var oldChild in args.OldItems.Cast<IViewObject>())
+                    ArgumentNullException.ThrowIfNull(arguments.OldItems);
+                    foreach (var oldChild in arguments.OldItems.Cast<IViewObject>())
                     {
                         oldChild.PropertyStoreChanged -= OnChildPropertyChanged;
                         oldChild.Disposed -= OnChildDisposed;
                     }
 
                     // Hook events of new items
-                    foreach (var newChild in args.NewItems.Cast<IViewObject>())
+                    ArgumentNullException.ThrowIfNull(arguments.NewItems);
+                    foreach (var newChild in arguments.NewItems.Cast<IViewObject>())
                     {
                         newChild.PropertyStoreChanged += OnChildPropertyChanged;
                         newChild.Disposed += OnChildDisposed;
@@ -254,21 +249,17 @@ public class ViewObject : PropertyStore
         InvalidateLayout(true);
     }
 
-    #endregion Public Methods
-
-    #region Protected Methods
-
     /// <summary>
     /// Removes children when they are disposed.
     /// </summary>
-    protected virtual void OnChildDisposed(object sender, EventArgs e)
+    protected virtual void OnChildDisposed(object? sender, EventArgs arguments)
     {
         // Suspend events
         SuspendEvents();
         try
         {
             // Remove from child list (if present)
-            var child = (IViewObject)sender;
+            var child = (IViewObject)sender!;
             _ = _children.Remove(child);
         }
         finally
@@ -299,6 +290,4 @@ public class ViewObject : PropertyStore
             ParentChanged?.Invoke(this, args);
         }
     }
-
-    #endregion Protected Methods
 }

@@ -10,8 +10,6 @@ namespace CodeForDotNet.ComponentModel;
 /// </summary>
 public abstract class PropertyStore : EventCache, IPropertyStore
 {
-    #region Private Fields
-
     /// <summary>
     /// List of all property IDs which changed during <see cref="IEventCache.SuspendEvents"/>.
     /// </summary>
@@ -32,10 +30,6 @@ public abstract class PropertyStore : EventCache, IPropertyStore
     /// </summary>
     private readonly Dictionary<Guid, string> _propertyNames;
 
-    #endregion Private Fields
-
-    #region Protected Constructors
-
     /// <summary>
     /// Creates an instance.
     /// </summary>
@@ -47,10 +41,6 @@ public abstract class PropertyStore : EventCache, IPropertyStore
         _changedProperties = [];
         _disposePropertyIDs = [];
     }
-
-    #endregion Protected Constructors
-
-    #region Private Destructors
 
     /// <summary>
     /// Overrides the finalizer to ensure any available dispose logic is called.
@@ -65,10 +55,6 @@ public abstract class PropertyStore : EventCache, IPropertyStore
         // Dispose only un-managed resources
         Dispose(false);
     }
-
-    #endregion Private Destructors
-
-    #region Public Events
 
     /// <summary>
     /// Fires after this object has been Disposed. Use this event to ensure all references are invalidated and any dependent objects are also Disposed or released.
@@ -90,10 +76,6 @@ public abstract class PropertyStore : EventCache, IPropertyStore
     /// </summary>
     public event EventHandler<PropertyStoreChangeEventArgs>? PropertyStoreChanged;
 
-    #endregion Public Events
-
-    #region Public Properties
-
     /// <summary>
     /// Indicated that this object has been disposed. When this flag is TRUE, do not use this object in any way.
     /// </summary>
@@ -103,10 +85,6 @@ public abstract class PropertyStore : EventCache, IPropertyStore
     /// Indicates that this object is committed to the process of disposing. When this flag is TRUE, do not pass any references or queue it for processing.
     /// </summary>
     public bool IsDisposing { get; private set; }
-
-    #endregion Public Properties
-
-    #region Public Methods
 
     /// <summary>
     /// Clears a property value if it exists, disposing any current value when flagged.
@@ -312,10 +290,6 @@ public abstract class PropertyStore : EventCache, IPropertyStore
         }
     }
 
-    #endregion Public Methods
-
-    #region Protected Methods
-
     /// <summary>
     /// Inheritors implement the <see cref="Dispose(bool)"/> method to dispose resources accordingly, depending on whether they have been called proactively
     /// or automatically via the finalizer.
@@ -437,10 +411,6 @@ public abstract class PropertyStore : EventCache, IPropertyStore
         }
     }
 
-    #endregion Protected Methods
-
-    #region Private Methods
-
     /// <summary>
     /// Disposes and clears property if flagged.
     /// </summary>
@@ -480,6 +450,4 @@ public abstract class PropertyStore : EventCache, IPropertyStore
             }
         }
     }
-
-    #endregion Private Methods
 }

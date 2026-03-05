@@ -10,8 +10,6 @@ namespace CodeForDotNet.ComponentModel;
 /// </summary>
 public abstract class DataObject : PropertyStore, IDataObject
 {
-    #region Private Fields
-
     /// <summary>
     /// List of all committed (i.e. <see cref="Create"/> or <see cref="Update"/>) property names which changed during <see cref="IEventCache.SuspendEvents"/>.
     /// </summary>
@@ -37,10 +35,6 @@ public abstract class DataObject : PropertyStore, IDataObject
     /// </summary>
     private Dictionary<Guid, object> _originalProperties;
 
-    #endregion Private Fields
-
-    #region Protected Constructors
-
     /// <summary>
     /// Creates an instance.
     /// </summary>
@@ -53,27 +47,15 @@ public abstract class DataObject : PropertyStore, IDataObject
         _instancePropertiesChanged = [];
     }
 
-    #endregion Protected Constructors
-
-    #region Public Events
-
     /// <summary>
     /// Fired when data for this object has changed.
     /// </summary>
     public event EventHandler<DataObjectChangeEventArgs>? DataChanged;
 
-    #endregion Public Events
-
-    #region Public Properties
-
     /// <summary>
     /// Indicates the current state of the data represented by this instance.
     /// </summary>
     public DataObjectState DataState { get; private set; }
-
-    #endregion Public Properties
-
-    #region Public Methods
 
     /// <summary>
     /// Creates the object in storage.
@@ -248,10 +230,6 @@ public abstract class DataObject : PropertyStore, IDataObject
             }
         }
     }
-
-    #endregion Public Methods
-
-    #region Protected Methods
 
     /// <summary>
     /// Fires or caches the DataChanged event.
@@ -436,6 +414,4 @@ public abstract class DataObject : PropertyStore, IDataObject
     /// <param name="originalProperties">Original properties.</param>
     /// <returns>Updated properties.</returns>
     protected abstract Dictionary<Guid, object> OnUpdate(Dictionary<Guid, object> changedProperties, Dictionary<Guid, object> originalProperties);
-
-    #endregion Protected Methods
 }

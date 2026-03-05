@@ -1470,7 +1470,7 @@ public struct Number : IComparable<Number>, IEquatable<Number>
     /// Compares this object with another.
     /// </summary>
     [SuppressMessage("Naming", "CA1725:Parameter names should match base declaration", Justification = "Readability.")]
-    public override readonly bool Equals(object other)
+    public override readonly bool Equals(object? other)
     {
         return other is Number number && Equals(number);
     }

@@ -1,9 +1,9 @@
 [
   {
-    "Name": "TestApp",
+    "Name": "UWP Test",
     "Projects": [
       {
-        "Path": "CodeForDotNet.WindowsUniversal.TestApp\\CodeForDotNet.WindowsUniversal.TestApp.csproj",
+        "Path": "Tests\\CodeForDotNet.Tests.WindowsUniversal.App\\CodeForDotNet.Tests.WindowsUniversal.App.csproj",
         "Action": "Start"
       }
     ]

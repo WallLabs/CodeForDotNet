@@ -682,6 +682,42 @@ namespace CodeForDotNet.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to XML entry key of type &quot;{1}&quot; missing in dictionary type &quot;{0}&quot;..
+        /// </summary>
+        internal static string XmlDictionaryMissingKey {
+            get {
+                return ResourceManager.GetString("XmlDictionaryMissingKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to XML entry value of type &quot;{1}&quot; missing in dictionary type &quot;{0}&quot;..
+        /// </summary>
+        internal static string XmlDictionaryMissingValue {
+            get {
+                return ResourceManager.GetString("XmlDictionaryMissingValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot create XML content for missing part of path with filter specified: {0}.
+        /// </summary>
+        internal static string XmlExtensionsCreatePathCannotCreateMissingPartWithFilter {
+            get {
+                return ResourceManager.GetString("XmlExtensionsCreatePathCannotCreateMissingPartWithFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot flush the built-in type &quot;{0}&quot; from the XML serializer cache..
+        /// </summary>
+        internal static string XmlSerializerCacheErrorFlushBuiltInType {
+            get {
+                return ResourceManager.GetString("XmlSerializerCacheErrorFlushBuiltInType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to XML validation error at line {0} character {1}. {2}.
         /// </summary>
         internal static string XmlValdiationError {

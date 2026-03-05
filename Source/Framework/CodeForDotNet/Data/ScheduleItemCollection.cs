@@ -87,7 +87,7 @@ public class ScheduleItemCollection : Collection<ScheduleItem>
     [SuppressMessage("MicrosoftCodeAnalysisCorrectness", "RS1024:Compare symbols correctly", Justification = "False positive.")]
     public override int GetHashCode()
     {
-        return ArrayExtensions.GetHashCode(this);
+        return ArrayExtensions.GetHashCodeOfItems(this);
     }
 
     /// <summary>

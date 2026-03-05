@@ -146,7 +146,7 @@ public struct AngleVector2 : IEquatable<AngleVector2>
     /// Compares this object with another.
     /// </summary>
     [SuppressMessage("Naming", "CA1725:Parameter names should match base declaration", Justification = "Readability.")]
-    public override readonly bool Equals(object other)
+    public override readonly bool Equals(object? other)
     {
         return other is AngleVector2 angleVector && Equals(angleVector);
     }

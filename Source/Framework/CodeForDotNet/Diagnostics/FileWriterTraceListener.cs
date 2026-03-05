@@ -7,36 +7,17 @@ namespace CodeForDotNet.Diagnostics;
 /// <summary>
 /// Writes trace output to a file, supporting environment variables in the filename and lazy open of the file.
 /// </summary>
-public class FileWriterTraceListener : TraceListener
+public class FileWriterTraceListener(string fileName) : TraceListener
 {
-    #region Private Fields
-
     /// <summary>
     /// Filename to write to.
     /// </summary>
-    private readonly string _fileName;
+    private readonly string _fileName = Environment.ExpandEnvironmentVariables(fileName);
 
     /// <summary>
     /// Output file stream.
     /// </summary>
     private StreamWriter? _stream;
-
-    #endregion Private Fields
-
-    #region Public Constructors
-
-    /// <summary>
-    /// Creates the object.
-    /// </summary>
-    public FileWriterTraceListener(string fileName)
-    {
-        // Expand any variables in the filename
-        _fileName = Environment.ExpandEnvironmentVariables(fileName);
-    }
-
-    #endregion Public Constructors
-
-    #region Public Methods
 
     /// <summary>
     /// Closes the output stream (if open).
@@ -57,30 +38,34 @@ public class FileWriterTraceListener : TraceListener
     /// <summary>
     /// Writes to the output stream.
     /// </summary>
-    public override void Write(string message)
+    public override void Write(string? message)
     {
-        // Lazy create/open file
+        // Do nothing when no message (questionable design but base class allows this).
+        if (string.IsNullOrWhiteSpace(message))
+            return;
+
+        // Lazy create/open file.
         OpenFile();
 
-        // Write to file
+        // Write to file.
         _stream?.Write(message);
     }
 
     /// <summary>
     /// Writes to the output stream followed by a new line.
     /// </summary>
-    public override void WriteLine(string message)
+    public override void WriteLine(string? message)
     {
-        // Lazy create/open file
+        // Do nothing when no message (questionable design but base class allows this).
+        if (string.IsNullOrWhiteSpace(message))
+            return;
+
+        // Lazy create/open file.
         OpenFile();
 
-        // Write to file
+        // Write to file.
         _stream?.WriteLine(message);
     }
-
-    #endregion Public Methods
-
-    #region Protected Methods
 
     /// <summary>
     /// Cleans-up resources.
@@ -99,10 +84,6 @@ public class FileWriterTraceListener : TraceListener
         }
     }
 
-    #endregion Protected Methods
-
-    #region Private Methods
-
     /// <summary>
     /// Opens the stream when it is needed (lazy open).
     /// </summary>
@@ -116,6 +97,4 @@ public class FileWriterTraceListener : TraceListener
         // Create or open file
         _stream ??= new StreamWriter(_fileName, true);
     }
-
-    #endregion Private Methods
 }

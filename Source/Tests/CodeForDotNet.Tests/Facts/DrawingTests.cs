@@ -28,6 +28,7 @@ public class DrawingTests
 
         // De-serialize the brush and check contents match
         var brush2 = XmlSerializerExtensions.DeserializeXml<BrushData>(brush1Xml);
+        Assert.IsNotNull(brush2);
         Assert.AreEqual(brush1, brush2);
 
         // Serialize again and check the XML matches
@@ -66,6 +67,7 @@ public class DrawingTests
 
         // De-serialize the font and check contents match
         var font2 = XmlSerializerExtensions.DeserializeXml<FontData>(font1Xml);
+        Assert.IsNotNull(font2);
         Assert.AreEqual(font1, font2);
 
         // Serialize again and check the XML matches

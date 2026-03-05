@@ -37,7 +37,7 @@ public class WorkerGroup : DisposableObject, IWorkerHost, IThreadSafe
         _stopTimer.Elapsed += OnStopTimeout;
         _currentWorkerId = -1;
         _thread = new Thread(RunWorker);
-        SyncRoot = new object();
+        SyncRoot = new();
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ public class WorkerGroup : DisposableObject, IWorkerHost, IThreadSafe
     /// <summary>
     /// Synchronization object.
     /// </summary>
-    public object SyncRoot { get; private set; }
+    public Lock SyncRoot { get; private set; }
 
     /// <summary>
     /// Visual name of the worker group.
@@ -144,8 +144,8 @@ public class WorkerGroup : DisposableObject, IWorkerHost, IThreadSafe
     /// Gets a value that indicates whether the worker has been aborted.
     /// </summary>
     public bool Aborted => _thread != null &&
-                (_thread.ThreadState == System.Threading.ThreadState.AbortRequested ||
-                _thread.ThreadState == System.Threading.ThreadState.Aborted);
+                (_thread.ThreadState == ThreadState.AbortRequested ||
+                _thread.ThreadState == ThreadState.Aborted);
 
     /// <summary>
     /// Adds a worker to the end of the execution group.
@@ -172,7 +172,8 @@ public class WorkerGroup : DisposableObject, IWorkerHost, IThreadSafe
                 Method = method,
                 Name = name,
                 RunTimeout = runTimeout,
-                StopTimeout = stopTimeout
+                StopTimeout = stopTimeout,
+                Cancel = new()
             });
         }
     }
@@ -258,7 +259,8 @@ public class WorkerGroup : DisposableObject, IWorkerHost, IThreadSafe
                 _stopTimer.Stop();
 
             // Abort any running thread
-            if (Running && !_currentWorker.Cancel.IsCancellationRequested)
+            if (Running && _currentWorker is not null &&
+                !_currentWorker.Cancel.IsCancellationRequested)
                 _currentWorker.Cancel.Cancel();
         }
     }

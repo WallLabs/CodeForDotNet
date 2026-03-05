@@ -3,7 +3,7 @@ using System;
 namespace CodeForDotNet.Xml;
 
 /// <summary>
-/// Formatting options for the <see cref="XmlFullExtensions.FormatXml"/> method.
+/// Formatting options for the <see cref="XmlExtensions.FormatXml(string, System.Text.Encoding, XmlFormatOptions)"/> method.
 /// </summary>
 [Flags]
 public enum XmlFormatOptions

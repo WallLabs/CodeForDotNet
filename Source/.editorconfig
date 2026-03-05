@@ -15,6 +15,7 @@ root = true
 # -------------------------------------------------------------------------------------------------
 # Common settings.
 # -------------------------------------------------------------------------------------------------
+
 [*]
 
 # Normalize tabs to spaces.
@@ -22,14 +23,23 @@ indent_style = space
 indent_size = 4
 tab_width = 4
 
+# Default to UTF-8 without BOM.
+charset = utf-8
+
+# Line endings default to local operating system (Windows CRLF, Linux/MacOS LF).
+end_of_line = auto
+
+# Trim lines.
 trim_trailing_whitespace = true
 insert_final_newline = true
+
+# Do not wrap by default (overridde for specific document, code and data file types).
 max_line_length = off
 
-# Spelling (EditorConfig).
+# Spelling (EditorConfig standard).
 spelling_language = en-US
 
-# Spelling (Visual Studio).
+# Spelling (Visual Studio specific).
 # See: https://learn.microsoft.com/en-us/visualstudio/ide/text-spell-checker
 spelling_languages = en-us
 spelling_checkable_types = strings,indentifiers,comments
@@ -38,30 +48,17 @@ spelling_exclusion_path = .\Spelling.dic
 spelling_use_default_exclusion_dictionary = true
 
 # -------------------------------------------------------------------------------------------------
-# All non-binary editable files, e.g. code, data, protocols, settings, documentation.
+# XML files, including XSD and XSL.
 # -------------------------------------------------------------------------------------------------
-[*.{cs,vb,js,htm,html,css,xml,xsd,xsl,xslt,yml,yaml,json,proto,md,txt,ps1,cmd,dic,config,editorconfig,git*,docker*}]
 
-# Default to UTF-8 without BOM.
-charset = utf-8
-
-# Windows line endings by default.
-end_of_line = crlf
-
-# Trim lines.
-trim_trailing_whitespace = true
-insert_final_newline = false
-
-# -------------------------------------------------------------------------------------------------
-# XML files.
-# -------------------------------------------------------------------------------------------------
-[*.{xml,slnx,csproj,pssproj}]
+[*.{xml,xsd,xslt}]
 indent_size = 2
 tab_width = 2
 
 # -------------------------------------------------------------------------------------------------
 # JSON files.
 # -------------------------------------------------------------------------------------------------
+
 [*.{json,slnLaunch}]
 indent_size = 2
 tab_width = 2
@@ -69,13 +66,24 @@ tab_width = 2
 # -------------------------------------------------------------------------------------------------
 # YAML files
 # -------------------------------------------------------------------------------------------------
+
 [*.{yaml,yml}]
+indent_size = 2
+tab_width = 2
+
+# -------------------------------------------------------------------------------------------------
+# Visual Studio files.
+# -------------------------------------------------------------------------------------------------
+
+[*.{sln,slnx,csproj,pssproj,resx}]
 indent_size = 2
 tab_width = 2
 
 # -------------------------------------------------------------------------------------------------
 # .NET files.
 # -------------------------------------------------------------------------------------------------
+
+# Code files...
 [*.{cs,vb}]
 
 # Organize usings.
@@ -137,9 +145,16 @@ dotnet_style_allow_multiple_blank_lines_experimental = false:silent
 dotnet_style_allow_statement_immediately_after_block_experimental = true:silent
 dotnet_code_quality_unused_parameters = all:suggestion
 
+# Configuration files...
+[*.{config}]
+
+indent_size = 2
+tab_width = 2
+
 # -------------------------------------------------------------------------------------------------
 # C# files.
 # -------------------------------------------------------------------------------------------------
+
 [*.cs]
 
 # Namespace and usings.

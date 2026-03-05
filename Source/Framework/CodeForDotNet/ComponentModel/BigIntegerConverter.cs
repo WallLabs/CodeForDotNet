@@ -9,12 +9,10 @@ namespace CodeForDotNet.ComponentModel;
 /// </summary>
 public class BigIntegerConverter : TypeConverter
 {
-    #region Public Methods
-
     /// <summary>
     /// Tests if conversion is possible from a source type.
     /// </summary>
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
     {
         return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
     }
@@ -22,7 +20,7 @@ public class BigIntegerConverter : TypeConverter
     /// <summary>
     /// Tests if conversion is possible to a destination type.
     /// </summary>
-    public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+    public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
     {
         return destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
     }
@@ -30,7 +28,7 @@ public class BigIntegerConverter : TypeConverter
     /// <summary>
     /// Converts a value from a source type.
     /// </summary>
-    public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, System.Globalization.CultureInfo? culture, object value)
     {
         // Convert from string
         if (value is string stringValue)
@@ -43,10 +41,11 @@ public class BigIntegerConverter : TypeConverter
     /// <summary>
     /// Converts the current value to the target type.
     /// </summary>
-    public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+    public override object? ConvertTo(ITypeDescriptorContext? context, System.Globalization.CultureInfo? culture, object? value, Type destinationType)
     {
-        // Get value
-        var bigValue = (BigInteger)value;
+        // Get typed value, return null when incompatible or null.
+        if (value is not BigInteger bigValue)
+            return null;
 
         // Convert to string
         if (destinationType == typeof(string))
@@ -55,6 +54,4 @@ public class BigIntegerConverter : TypeConverter
         // Convert to other types
         return base.ConvertTo(context, culture, value, destinationType);
     }
-
-    #endregion Public Methods
 }

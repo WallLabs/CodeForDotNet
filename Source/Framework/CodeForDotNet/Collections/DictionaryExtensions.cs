@@ -11,48 +11,33 @@ namespace CodeForDotNet.Collections;
 /// </summary>
 public static class DictionaryExtensions
 {
-    #region Private Fields
-
     /// <summary>
     /// Default format string used prefix the key of a dictionary to it's values.
     /// </summary>
     private const string AddKeysToValuesDefaultFormat = "{0} - {1}";
 
-    #endregion Private Fields
-
-    #region Public Methods
-
-    /// <summary>
-    /// Prefixes the key to all values in a dictionary using the <see cref="AddKeysToValuesDefaultFormat"/>.
-    /// </summary>
-    /// <param name="dictionary">Dictionary to update.</param>
-    public static void AddKeysToValues(this IDictionary dictionary)
-    {
-        AddKeysToValues(dictionary, AddKeysToValuesDefaultFormat);
-    }
-
     /// <summary>
     /// Prefixes the key to all values in a dictionary using a specific format.
     /// </summary>
     /// <param name="dictionary">Dictionary to update.</param>
-    /// <param name="format">Format used to join the values. The first argument is the key and the second the value.</param>
-    public static void AddKeysToValues(this IDictionary dictionary, string format)
+    /// <param name="format">
+    /// Format used to join the values. The first argument is the key and the second the value.
+    /// </param>
+    public static void AddKeysToValues(this IDictionary dictionary, string format = AddKeysToValuesDefaultFormat)
     {
         // Validate.
         ArgumentNullException.ThrowIfNull(dictionary);
-        ArgumentNullException.ThrowIfNull(format);
 
         // Get a fixed list of keys so we can modify the dictionary
-        // without causing an enumeration changed error.
         var keys = dictionary.Keys.Cast<object>().ToArray();
 
-        // Update dictionary (add/format keys onto values).
+        // Update dictionary
         foreach (var key in keys)
         {
-            // Get old value.
+            // Get old value
             var value = dictionary[key];
 
-            // Format and set new value with key added.
+            // Format and set new value with key added
             dictionary[key] = string.Format(CultureInfo.InvariantCulture, format, key, value);
         }
     }
@@ -60,26 +45,27 @@ public static class DictionaryExtensions
     /// <summary>
     /// Compares two dictionaries by value.
     /// </summary>
-    public static bool AreEqual<TKey, TValue>(IDictionary<TKey, TValue> dictionary1, IDictionary<TKey, TValue> dictionary2)
+    public static bool AreEqual<TKey, TValue>(IDictionary<TKey, TValue> left, IDictionary<TKey, TValue> right)
     {
         // Compare nullability only when either is null
-        if (dictionary1 == null)
-            return dictionary2 == null;
-        if (dictionary2 == null)
+        if (left is null)
+            return right is null;
+        if (right is null)
             return false;
 
         // Compare length
-        if (dictionary1.Count != dictionary2.Count)
+        if (left.Count != right.Count)
             return false;
 
         // Compare values
-        var dictionary1Enumerator = dictionary1.GetEnumerator();
-        var dictionary2Enumerator = dictionary2.GetEnumerator();
+        var dictionary1Enumerator = left.GetEnumerator();
+        var dictionary2Enumerator = right.GetEnumerator();
         while (dictionary1Enumerator.MoveNext() & dictionary2Enumerator.MoveNext())
         {
             var item1 = dictionary1Enumerator.Current;
             var item2 = dictionary2Enumerator.Current;
-            if (!(item1.Key?.Equals(item2.Key) ?? false) || !(item1.Value?.Equals(item2.Value) ?? (item2.Value == null)))
+            if (!(item1.Key?.Equals(item2.Key) ?? item2.Key is not null) ||
+                !(item1.Value?.Equals(item2.Value) ?? item2.Value is not null))
             {
                 return false;
             }
@@ -92,76 +78,59 @@ public static class DictionaryExtensions
     /// <summary>
     /// Disposes all members implementing <see cref="IDisposable"/>.
     /// </summary>
-    /// <param name="dictionary">Dictionary of items to dispose.</param>
     public static void Dispose(this IDictionary dictionary)
     {
-        // Validate
+        // Validate.
         ArgumentNullException.ThrowIfNull(dictionary);
 
-        // Dispose members
+        // Search for and dispose members which are disposable.
         foreach (var disposable in dictionary.Values.Cast<IDisposable>().ToArray())
-        {
-            dictionary.Remove(disposable);
             disposable.Dispose();
-        }
-    }
-
-    /// <summary>
-    /// Disposes all members implementing <see cref="IDisposable"/>.
-    /// </summary>
-    /// <param name="dictionary">Dictionary of items to dispose.</param>
-    public static void Dispose<TKey, TValue>(this IDictionary<TKey, TValue> dictionary)
-    {
-        // Validate
-        ArgumentNullException.ThrowIfNull(dictionary);
-
-        // Dispose members
-        foreach (var pair in dictionary)
-        {
-            if (pair.Value is IDisposable disposable)
-            {
-                _ = dictionary.Remove(pair.Key);
-                disposable?.Dispose();
-            }
-        }
     }
 
     /// <summary>
     /// Gets the hash code of the keys and values of all items in the dictionary, or zero when null.
     /// </summary>
-    public static int GetHashCode(IDictionary dictionary)
-    {
-        return dictionary?.GetHashCodeOfItems() ?? 0;
-    }
-
-    /// <summary>
-    /// Gets the hash code of the keys and values of all items in the dictionary.
-    /// </summary>
     public static int GetHashCodeOfItems(this IDictionary dictionary)
     {
-        // Validate
-        ArgumentNullException.ThrowIfNull(dictionary);
+        // Return zero when null
+        if (dictionary is null)
+            return 0;
 
         // Calculate hash code
         var hash = 0;
         foreach (var item in dictionary.Keys)
-            hash ^= item?.GetHashCode() ?? 0;
+            hash ^= item is not null ? item.GetHashCode() : 0;
         foreach (var item in dictionary.Values)
-            hash ^= item?.GetHashCode() ?? 0;
+            hash ^= item is not null ? item.GetHashCode() : 0;
         return hash;
     }
 
     /// <summary>
     /// Returns the item in the dictionary if it exists, otherwise null.
     /// </summary>
-    public static TValue GetIfExists<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
+    public static TValue GetIfExists<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
+        where TKey : notnull
+        where TValue : struct
+    {
+        // Validate.
+        ArgumentNullException.ThrowIfNull(dictionary);
+
+        // Return default value when not found.
+        return !dictionary.TryGetValue(key, out var value) ? defaultValue : value;
+    }
+
+    /// <summary>
+    /// Returns the item in the dictionary if it exists, otherwise null.
+    /// </summary>
+    public static TValue? GetIfExists<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key)
+        where TKey : notnull
+        where TValue : class
     {
         // Validate
         ArgumentNullException.ThrowIfNull(dictionary);
 
         // Call overloaded method
-        return dictionary.TryGetValue(key, out var value) ? value : default!;
+        return !dictionary.TryGetValue(key, out var value) ? default : value;
     }
-
-    #endregion Public Methods
 }

@@ -1,7 +1,7 @@
-using CodeForDotNet.WindowsUniversal.TestApp.Models;
+using CodeForDotNet.Tests.WindowsUniversal.App.Models;
 using CodeForDotNet.WindowsUniversal.UI;
 
-namespace CodeForDotNet.WindowsUniversal.TestApp.Views;
+namespace CodeForDotNet.Tests.WindowsUniversal.App.Views;
 
 /// <summary>
 /// Generic base class of the <see cref="ControlTestPage"/>.

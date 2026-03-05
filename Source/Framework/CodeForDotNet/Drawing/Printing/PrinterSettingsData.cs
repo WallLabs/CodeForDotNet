@@ -8,12 +8,20 @@ namespace CodeForDotNet.Drawing.Printing;
 [Serializable]
 public class PrinterSettingsData
 {
-    #region Public Properties
+    /// <summary>
+    /// Default <see cref="PrinterName"/>.
+    /// </summary>
+    public const string DefaultPrinterName = "Printer";
 
     /// <summary>
     /// Default printer settings.
     /// </summary>
-    public static PrinterSettingsData Default => new() { Collate = true, DuplexOutput = PrinterSettingsDuplex.Simplex, Copies = 1 };
+    public static PrinterSettingsData Default => new() {
+        PrinterName = DefaultPrinterName,
+        Collate = true,
+        DuplexOutput = PrinterSettingsDuplex.Simplex,
+        Copies = 1
+    };
 
     /// <summary>
     /// Collate option.
@@ -33,7 +41,5 @@ public class PrinterSettingsData
     /// <summary>
     /// Printer name.
     /// </summary>
-    public string? PrinterName { get; set; }
-
-    #endregion Public Properties
+    public required string PrinterName { get; set; }
 }

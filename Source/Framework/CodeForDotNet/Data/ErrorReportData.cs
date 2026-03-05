@@ -9,8 +9,6 @@ namespace CodeForDotNet.Data;
 [DataContract]
 public class ErrorReportData : GuidDataKey
 {
-    #region Public Properties
-
     /// <summary>
     /// Optional full type name of the exception which occurred.
     /// </summary>
@@ -47,10 +45,6 @@ public class ErrorReportData : GuidDataKey
     [DataMember]
     public string? StackTrace { get; set; }
 
-    #endregion Public Properties
-
-    #region Public Methods
-
     /// <summary>
     /// Tests two objects of this type for in-equality by value.
     /// </summary>
@@ -70,10 +64,14 @@ public class ErrorReportData : GuidDataKey
     /// <summary>
     /// Compares this object with another by value.
     /// </summary>
-    public override bool Equals(object other)
+    public override bool Equals(object? other)
     {
-        // Compare null and type
-        return other is ErrorReportData report && report is not null && base.Equals(report) &&
+        // Compare nullability and type.
+        if (other is not ErrorReportData report || report is null)
+            return false;
+
+        // Compare properties.
+        return base.Equals(report) &&
             report.SourceId == SourceId &&
             report.SourceAssemblyName == SourceAssemblyName &&
             report.EventDate == EventDate &&
@@ -95,6 +93,4 @@ public class ErrorReportData : GuidDataKey
                (ErrorTypeFullName?.GetHashCode(StringComparison.OrdinalIgnoreCase) ?? 0) ^
                (StackTrace?.GetHashCode(StringComparison.OrdinalIgnoreCase) ?? 0);
     }
-
-    #endregion Public Methods
 }

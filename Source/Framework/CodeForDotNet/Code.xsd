@@ -1,71 +1,276 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="CodeForDotNet.xsd"
-    elementFormDefault="qualified"
-    targetNamespace="urn:CodeForDotNet"
-    xmlns:tns="urn:CodeForDotNet"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Code.xsd"
+    xmlns="urn:Code:Code.xsd"
+    targetNamespace="urn:Code:Code.xsd"
+    elementFormDefault="qualified" attributeFormDefault="unqualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:code="urn:Code:Code.xsd">
 
-  <!-- Root Elements -->
-  <xs:element name="Schedule" type="tns:ScheduleType" />
-  <xs:element name="ScheduleItem" type="tns:ScheduleItemType" />
-  <xs:element name="ScheduleItems" type="tns:ScheduleItemsType" />
+    <!-- DataQueryCondition -->
+    <xs:complexType name="DataQueryConditionType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="DataSource" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Operator" type="code:DataQueryOperatorType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Value1" type="xs:anyType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Value2" type="xs:anyType" minOccurs="0" maxOccurs="1" />
+        </xs:choice>
+    </xs:complexType>
 
-  <!-- GUID Type -->
-  <xs:simpleType name="Guid">
-    <xs:restriction base="xs:string">
-      <xs:pattern value="^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$" />
-    </xs:restriction>
-  </xs:simpleType>
+    <!-- DataQueryOperator -->
+    <xs:simpleType name="DataQueryOperatorType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EqualTo" />
+            <xs:enumeration value="Like" />
+            <xs:enumeration value="GreaterThan" />
+            <xs:enumeration value="GreaterThanOrEqualTo" />
+            <xs:enumeration value="LessThan" />
+            <xs:enumeration value="LessThanOrEqualTo" />
+            <xs:enumeration value="Between" />
+        </xs:restriction>
+    </xs:simpleType>
 
-  <!-- Schedule Type -->
-  <xs:complexType name="ScheduleType">
-    <xs:sequence>
-      <xs:element name="Description" type="xs:string" />
-      <xs:element name="Includes" type="tns:ScheduleItemsType" minOccurs="0" />
-      <xs:element name="Excludes" type="tns:ScheduleItemsType" minOccurs="0" />
-    </xs:sequence>
-  </xs:complexType>
+    <!-- DataQueryOptions -->
+    <xs:element name="DataQueryOptions" type="code:DataQueryOptionsType" />
+    <xs:complexType name="DataQueryOptionsType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="Filter" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element minOccurs="0" maxOccurs="unbounded" name="Condition" type="code:DataQueryConditionType" />
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Sort" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element minOccurs="1" maxOccurs="unbounded" name="OrderBy" type="DataSortConditionType" />
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
 
-  <!-- Schedule Item Type -->
-  <xs:complexType name="ScheduleItemType">
-    <xs:sequence>
-      <xs:element name="TimeZone" type="xs:string" />
-      <xs:element name="Start" type="xs:dateTime" />
-      <xs:element name="Duration" type="xs:int" />
-      <xs:element name="Recurrence" type="tns:ScheduleItemRecurrence" minOccurs="0" />
-      <xs:element name="Interval" type="xs:int" minOccurs="0" />
-      <xs:element name="Offset" type="tns:ScheduleItemOffset" minOccurs="0" />
-      <xs:element name="Days" type="xs:int" minOccurs="0" />
-      <xs:element name="Occurrences" type="xs:int" minOccurs="0" />
-    </xs:sequence>
-  </xs:complexType>
+    <!-- DataSortCondition -->
+    <xs:complexType name="DataSortConditionType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="DataSource" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Direction" type="code:DataSortDirectionType" minOccurs="1" maxOccurs="1" />
+        </xs:choice>
+    </xs:complexType>
 
-  <!-- Schedule Items Collection -->
-  <xs:complexType name="ScheduleItemsType">
-    <xs:sequence>
-      <xs:element name="ScheduleItem" type="tns:ScheduleItemType" minOccurs="0" />
-    </xs:sequence>
-  </xs:complexType>
+    <!-- DataSortDirection -->
+    <xs:simpleType name="DataSortDirectionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Ascending" />
+            <xs:enumeration value="Descending" />
+        </xs:restriction>
+    </xs:simpleType>
 
-  <!-- Schedule Item Offset Enumeration -->
-  <xs:simpleType name="ScheduleItemOffset">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="None" />
-      <xs:enumeration value="Monthly" />
-      <xs:enumeration value="Yearly" />
-    </xs:restriction>
-  </xs:simpleType>
+    <!-- DataSet -->
+    <xs:element name="DataSet" type="code:DataSetType" />
+    <xs:complexType name="DataSetType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="Tables" type="DataTableCollectionType" minOccurs="1" maxOccurs="1" />
+        </xs:choice>
+        <xs:attribute name="Name" type="xs:string" />
+    </xs:complexType>
 
-  <!-- Schedule Item Recurrence Enumeration -->
-  <xs:simpleType name="ScheduleItemRecurrence">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="None" />
-      <xs:enumeration value="Hourly" />
-      <xs:enumeration value="Daily" />
-      <xs:enumeration value="Weekly" />
-      <xs:enumeration value="Monthly" />
-      <xs:enumeration value="Yearly" />
-    </xs:restriction>
-  </xs:simpleType>
+    <!-- DataTableCollection -->
+    <xs:element name="DataTableCollection" type="code:DataTableCollectionType" />
+    <xs:complexType name="DataTableCollectionType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="Table" type="code:DataTableType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:choice>
+        <xs:attribute name="Count" type="xs:int" />
+    </xs:complexType>
+
+    <!-- DataTable -->
+    <xs:element name="DataTable" type="code:DataTableType" />
+    <xs:complexType name="DataTableType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="Columns">
+                <xs:complexType>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="Column" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:attribute name="Ordinal" type="xs:int" use="required" />
+                                <xs:attribute name="Name" type="xs:string" use="required" />
+                                <xs:attribute name="Type" type="xs:string" use="required" />
+                                <xs:attribute name="Nullable" type="xs:boolean" use="required" />
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:attribute name="Count" type="xs:int" />
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Rows">
+                <xs:complexType>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="Row" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:choice maxOccurs="unbounded">
+                                    <xs:element name="Value" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+                                </xs:choice>
+                                <xs:attribute name="Number" type="xs:int" />
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:choice>
+                    <xs:attribute name="Count" type="xs:int" />
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+        <xs:attribute name="Name" type="xs:string" />
+        <xs:attribute name="Ordinal" type="xs:int" />
+    </xs:complexType>
+
+    <!-- DaysOfWeek -->
+    <xs:simpleType name="DaysOfWeek">
+        <xs:list>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="None" />
+                    <xs:enumeration value="Sunday" />
+                    <xs:enumeration value="Monday" />
+                    <xs:enumeration value="Tuesday" />
+                    <xs:enumeration value="Wednesday" />
+                    <xs:enumeration value="Thursday" />
+                    <xs:enumeration value="Friday" />
+                    <xs:enumeration value="Saturday" />
+                    <xs:enumeration value="Everyday" />
+                    <xs:enumeration value="Weekdays" />
+                    <xs:enumeration value="Weekend" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:list>
+    </xs:simpleType>
+
+    <!-- GUID -->
+    <xs:simpleType name="GuidType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- IPAddress -->
+    <xs:simpleType name="IPAddressType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- IPAddressRange -->
+    <xs:element name="IPAddressRange" type="code:IPAddressRangeType" />
+    <xs:complexType name="IPAddressRangeType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="StartAddress" type="code:IPAddressType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="EndAddress" type="code:IPAddressType" minOccurs="0" maxOccurs="1" />
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- Schedule -->
+    <xs:complexType name="ScheduleType">
+        <xs:sequence>
+            <xs:element name="Description" type="xs:string" />
+            <xs:element name="Includes" type="code:ScheduleItemsType" minOccurs="0" />
+            <xs:element name="Excludes" type="code:ScheduleItemsType" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ScheduleItem -->
+    <xs:complexType name="ScheduleItemType">
+        <xs:sequence>
+            <xs:element name="TimeZone" type="xs:string" />
+            <xs:element name="Start" type="xs:dateTime" />
+            <xs:element name="Duration" type="xs:int" />
+            <xs:element name="Recurrence" type="code:ScheduleItemRecurrence" minOccurs="0" />
+            <xs:element name="Interval" type="xs:int" minOccurs="0" />
+            <xs:element name="Offset" type="code:ScheduleItemOffset" minOccurs="0" />
+            <xs:element name="Days" type="xs:int" minOccurs="0" />
+            <xs:element name="Occurrences" type="xs:int" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ScheduleItemsCollection -->
+    <xs:complexType name="ScheduleItemsType">
+        <xs:sequence>
+            <xs:element name="ScheduleItem" type="code:ScheduleItemType" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- ScheduleItemOffset Enumeration -->
+    <xs:simpleType name="ScheduleItemOffset">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None" />
+            <xs:enumeration value="Monthly" />
+            <xs:enumeration value="Yearly" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ScheduleItemRecurrence Enumeration -->
+    <xs:simpleType name="ScheduleItemRecurrence">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="None" />
+            <xs:enumeration value="Hourly" />
+            <xs:enumeration value="Daily" />
+            <xs:enumeration value="Weekly" />
+            <xs:enumeration value="Monthly" />
+            <xs:enumeration value="Yearly" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- UnixFilePermissions -->
+    <xs:element name="UnixFilePermissions" type="code:UnixFilePermissionsType" />
+    <xs:simpleType name="UnixFilePermissionsType">
+        <xs:list>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="None" />
+                    <xs:enumeration value="OthersExecute" />
+                    <xs:enumeration value="OthersWrite" />
+                    <xs:enumeration value="OthersRead" />
+                    <xs:enumeration value="GroupExecute" />
+                    <xs:enumeration value="GroupWrite" />
+                    <xs:enumeration value="GroupRead" />
+                    <xs:enumeration value="UserExecute" />
+                    <xs:enumeration value="UserWrite" />
+                    <xs:enumeration value="UserRead" />
+                    <xs:enumeration value="Sticky" />
+                    <xs:enumeration value="SetGroupId" />
+                    <xs:enumeration value="SetUserId" />
+                    <xs:enumeration value="All" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:list>
+    </xs:simpleType>
+
+    <!-- XmlAnyDocument -->
+    <xs:element name="XmlAnyDocument" type="code:XmlAnyDocumentType" />
+    <xs:complexType name="XmlAnyDocumentType" mixed="true">
+        <xs:choice maxOccurs="unbounded">
+            <xs:any namespace="##any" minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+        </xs:choice>
+        <xs:anyAttribute namespace="##any" processContents="lax" />
+    </xs:complexType>
+
+    <!-- XmlCollection -->
+    <xs:complexType name="XmlCollectionType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:any minOccurs="0" maxOccurs="unbounded" />
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- XmlDictionary -->
+    <xs:complexType name="XmlDictionaryType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="Entry" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element name="Key" type="xs:anyType" minOccurs="1" maxOccurs="1" />
+                        <xs:element name="Value" type="xs:anyType" minOccurs="1" maxOccurs="1" />
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
 
 </xs:schema>

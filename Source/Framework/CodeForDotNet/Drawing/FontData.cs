@@ -9,8 +9,6 @@ namespace CodeForDotNet.Drawing;
 /// </summary>
 public class FontData : ICloneable
 {
-    #region Public Constructors
-
     /// <summary>
     /// Creates an empty instance.
     /// </summary>
@@ -30,10 +28,6 @@ public class FontData : ICloneable
         Style = style;
     }
 
-    #endregion Public Constructors
-
-    #region Public Properties
-
     /// <summary>
     /// Font family.
     /// </summary>
@@ -48,10 +42,6 @@ public class FontData : ICloneable
     /// Font style.
     /// </summary>
     public FontStyle Style { get; set; }
-
-    #endregion Public Properties
-
-    #region Public Methods
 
     /// <summary>
     /// Overrides the inequality operator to compare by value.
@@ -72,7 +62,7 @@ public class FontData : ICloneable
     /// <summary>
     /// Creates an instance from a string.
     /// </summary>
-    public static FontData Parse(string value)
+    public static FontData? Parse(string value)
     {
         return XmlSerializerExtensions.DeserializeXml<FontData>(value);
     }
@@ -98,10 +88,10 @@ public class FontData : ICloneable
     /// </summary>
     /// <returns></returns>
     [SuppressMessage("Naming", "CA1725:Parameter names should match base declaration", Justification = "Readability.")]
-    public override bool Equals(object other)
+    public override bool Equals(object? other)
     {
-        // Check type and nullability without operator (would cause endless loop).
-        if (other is not FontData font)
+        // Check type and nullability.
+        if (other is not FontData font || font is null)
             return false;
 
         // Compare values.
@@ -129,6 +119,4 @@ public class FontData : ICloneable
     {
         return this.SerializeXml();
     }
-
-    #endregion Public Methods
 }

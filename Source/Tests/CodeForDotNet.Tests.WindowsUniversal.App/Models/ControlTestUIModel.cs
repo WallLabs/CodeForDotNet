@@ -1,7 +1,7 @@
 using System;
 using CodeForDotNet.ComponentModel;
 
-namespace CodeForDotNet.WindowsUniversal.TestApp.Models;
+namespace CodeForDotNet.Tests.WindowsUniversal.App.Models;
 
     /// <summary>
     /// Model behind the "Control Test" view.

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A start comment. -->
+<a>
+  <!-- B start comment. -->
+  <b>
+    <c1>
+        C1 text.
+          </c1>
+    <c2 attribute="C2 attribute.">C2 text.
+   </c2>
+    <!-- C end comment. -->
+  </b>
+  <!-- B end comment. -->
+</a>
+<!--  A end comment. -->

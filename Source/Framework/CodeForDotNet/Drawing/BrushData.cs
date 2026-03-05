@@ -13,16 +13,13 @@ namespace CodeForDotNet.Drawing;
 [Serializable]
 public class BrushData : ICloneable
 {
-    #region Private Fields
-
+    /// <summary>
+    /// Field behind the <see cref="BrushType"/> property.
+    /// </summary>
     private BrushFillType _brushType;
 
-    #endregion Private Fields
-
-    #region Public Constructors
-
     /// <summary>
-    /// Creates the brush.
+    /// Creates an empty brush.
     /// </summary>
     public BrushData()
     {
@@ -59,10 +56,6 @@ public class BrushData : ICloneable
         WrapMode = wrapMode;
         Scale = scale;
     }
-
-    #endregion Public Constructors
-
-    #region Public Properties
 
     /// <summary>
     /// Angle, when relevant for the type.
@@ -174,10 +167,6 @@ public class BrushData : ICloneable
     [XmlIgnore]
     public bool WrapModeSpecified => WrapMode.HasValue;
 
-    #endregion Public Properties
-
-    #region Public Methods
-
     /// <summary>
     /// Overrides the inequality operator to compare by value.
     /// </summary>
@@ -197,7 +186,7 @@ public class BrushData : ICloneable
     /// <summary>
     /// Creates an instance from a string.
     /// </summary>
-    public static BrushData Parse(string value)
+    public static BrushData? Parse(string value)
     {
         return XmlSerializerExtensions.DeserializeXml<BrushData>(value);
     }
@@ -232,8 +221,8 @@ public class BrushData : ICloneable
     [SuppressMessage("Naming", "CA1725:Parameter names should match base declaration", Justification = "Readability.")]
     public override bool Equals(object? other)
     {
-        // Check type and nullability
-        if (other is not BrushData brush || (brush is null))
+        // Check type and nullability.
+        if (other is not BrushData brush || brush is null)
             return false;
 
         // Compare values
@@ -268,6 +257,4 @@ public class BrushData : ICloneable
     {
         return this.SerializeXml();
     }
-
-    #endregion Public Methods
 }

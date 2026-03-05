@@ -1,8 +1,8 @@
-using CodeForDotNet.WindowsUniversal.TestApp.Views;
+using CodeForDotNet.Tests.WindowsUniversal.App.Views;
 using Microsoft.VisualStudio.TestPlatform.TestExecutor;
 using Windows.ApplicationModel.Activation;
 
-namespace CodeForDotNet.WindowsUniversal.TestApp;
+namespace CodeForDotNet.Tests.WindowsUniversal.App;
 
 /// <summary>
 /// Provides application-specific behavior to supplement the default Application class.

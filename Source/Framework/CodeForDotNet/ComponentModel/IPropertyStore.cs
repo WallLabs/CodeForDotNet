@@ -10,16 +10,10 @@ namespace CodeForDotNet.ComponentModel;
 /// </summary>
 public interface IPropertyStore : IEventCache, IDisposableObject, INotifyPropertyChanged
 {
-    #region Public Events
-
     /// <summary>
     /// Fired when properties of this object are changed.
     /// </summary>
     event EventHandler<PropertyStoreChangeEventArgs>? PropertyStoreChanged;
-
-    #endregion Public Events
-
-    #region Public Methods
 
     /// <summary>
     /// Clears a property value if it exists, disposing any current value when flagged.
@@ -81,6 +75,4 @@ public interface IPropertyStore : IEventCache, IDisposableObject, INotifyPropert
     /// <param name="id">Property ID.</param>
     /// <param name="value">Property value.</param>
     void SetProperty<T>(Guid id, T value);
-
-    #endregion Public Methods
 }

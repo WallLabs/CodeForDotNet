@@ -1,0 +1,11 @@
+<Project>
+    
+  <!-- Import main settings file (this file contains only overrides). -->
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)..\'))"/>
+
+  <!-- Testing -->
+  <PropertyGroup>
+    <RunSettingsFilePath>$(MSBuildThisFileDirectory)Local.runsettings</RunSettingsFilePath>
+  </PropertyGroup>
+  
+</Project>

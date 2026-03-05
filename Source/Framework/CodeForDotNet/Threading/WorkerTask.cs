@@ -36,5 +36,5 @@ public class WorkerTask
     /// <summary>
     /// Cancellation token used to abort the worker task.
     /// </summary>
-    public CancellationTokenSource Cancel { get; set; }
+    public required CancellationTokenSource Cancel { get; set; }
 }

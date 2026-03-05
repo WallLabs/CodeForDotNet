@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Common application, service and data model base classes and interfaces.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeForDotNet\CodeForDotNet.csproj" />
+  </ItemGroup>
+
+</Project>

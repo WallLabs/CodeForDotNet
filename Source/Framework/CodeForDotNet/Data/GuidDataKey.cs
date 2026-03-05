@@ -10,17 +10,11 @@ namespace CodeForDotNet.Data;
 [DataContract]
 public class GuidDataKey
 {
-    #region Public Properties
-
     /// <summary>
     /// Unique identifier used to group reports from the same source.
     /// </summary>
     [DataMember(IsRequired = true)]
     public Guid Id { get; set; }
-
-    #endregion Public Properties
-
-    #region Public Methods
 
     /// <summary>
     /// Tests two objects of this type for in-equality by value.
@@ -42,7 +36,7 @@ public class GuidDataKey
     /// Compares this object with another by value.
     /// </summary>
     [SuppressMessage("Naming", "CA1725:Parameter names should match base declaration", Justification = "Readability.")]
-    public override bool Equals([MaybeNull] object other)
+    public override bool Equals(object? other)
     {
         // Compare null and type
         return other is GuidDataKey key && key is not null && key.Id == Id;
@@ -55,6 +49,4 @@ public class GuidDataKey
     {
         return Id.GetHashCode();
     }
-
-    #endregion Public Methods
 }

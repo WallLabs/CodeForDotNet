@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tests>
+  <functions>
+    <!-- Matches function tests.-->
+    <matches>
+      <!-- Test matches function without flags (default behaviour). -->
+      <test id="MatchesDefault">
+        <input>ABCCBAABCCBAABCCBAcbaabccbaabccba</input>
+        <patterns>
+          <!-- Does not start and end with same case. -->
+          <pattern id="1" value="^a.*a$" expected="false" />
+          <!-- Starts with upper-case and ends with lower-case. -->
+          <pattern id="2" value="^A.*a$" expected="true" />
+          <!-- Contains upper-case sequence. -->
+          <pattern id="3" value="BCCB" expected="true" />
+          <!-- Contains lower-case sequence. -->
+          <pattern id="4" value="bccb" expected="true" />
+          <!-- Does not start in lower-case. -->
+          <pattern id="5" value="^abc" expected="false" />
+          <!-- Does not end in upper-case. -->
+          <pattern id="6" value="CBA$" expected="false" />
+        </patterns>
+      </test>
+      <!-- Test matches function with empty flags (also default behaviour). -->
+      <test id="MatchesEmptyFlags">
+        <input>ABCCBAABCCBAABCCBAcbaabccbaabccba</input>
+        <patterns>
+          <!-- Does not start and end with same case. -->
+          <pattern id="1" value="^a.*a$" flags="" expected="false" />
+          <!-- Starts with upper-case and ends with lower-case. -->
+          <pattern id="2" value="^A.*a$" flags="" expected="true" />
+          <!-- Contains upper-case sequence. -->
+          <pattern id="3" value="BCCB" flags="" expected="true" />
+          <!-- Contains lower-case sequence. -->
+          <pattern id="4" value="bccb" flags="" expected="true" />
+          <!-- Does not start in lower-case. -->
+          <pattern id="5" value="^abc" flags="" expected="false" />
+          <!-- Does not end in upper-case. -->
+          <pattern id="6" value="CBA$" flags="" expected="false" />
+        </patterns>
+      </test>
+      <!-- Test matches function with "i" flag (ignore case). -->
+      <test id="MatchesFlagsI">
+        <input>UPPER lower Title enduP</input>
+        <patterns>
+          <!-- Flag is not default. -->
+          <pattern id="1" value="upper" expected="false" />
+          <!-- Flag matches ignoring case... -->
+          <pattern id="2" value="upper" flags="i" expected="true" />
+          <pattern id="3" value="LOWER" flags="i" expected="true" />
+          <pattern id="4" value="title" flags="i" expected="true" />
+          <pattern id="5" value="endup" flags="i" expected="true" />
+        </patterns>
+      </test>
+      <!-- Test matches function with "s" flag ("dotall" means "." matches across new lines). -->
+      <test id="MatchesFlagsS">
+        <input>
+          Line1
+          Line2
+        </input>
+        <patterns>
+          <!-- Flag is not default. -->
+          <pattern id="1" value="Line1.*Line2" expected="false" />
+          <!-- Flag matches start and end anchors of each line when set. -->
+          <pattern id="2" value="Line1.*Line2" flags="s" expected="true" />
+        </patterns>
+      </test>
+      <!-- Test matches function with "m" flag (multi-line mode means the "^" start and "$" end anchors match each line not the whole string). -->
+      <test id="MatchesFlagsM">
+        <input>
+          Line1
+          Line2
+        </input>
+        <!-- The "\r?" prefix is added to the "$" line end anchor in case the input file is written with Windows line endings. -->
+        <!-- The "\s" suffix is added to the "^" line start anchor because output is indented and white-space should not be a concern. -->
+        <patterns>
+          <!-- Flag is not default. -->
+          <pattern id="1" value="^\s*Line1\r?$" expected="false" />
+          <pattern id="2" value="^\s*Line2\r?$" expected="false" />
+          <!-- Flag changes start and end anchros to every line when set. -->
+          <pattern id="3" value="^\s*Line1\r?$" flags="m" expected="true" />
+          <pattern id="4" value="^\s*Line2\r?$" flags="m" expected="true" />
+        </patterns>
+      </test>
+      <!-- Test matches function with "x" flag (ignore spaces in pattern except when explicit character). -->
+      <test id="MatchesFlagsX">
+        <input>
+          JoinedWords
+          Spaced Words
+        </input>
+        <patterns>
+          <!-- Pattern with ignored space does not match case insensitive when that flag is not set. -->
+          <pattern id="1" value="joinedwords" flags="x" expected="false" />
+          <!-- Pattern with ignored space still matches content with no space. -->
+          <pattern id="2" value="Joined Words" flags="x" expected="true" />
+          <!-- Pattern with space character is not ignored so does not match as no space in content. -->
+          <pattern id="3" value="Joined[ ]Words" flags="x" expected="false" />
+          <!-- Pattern with space character is not ignored so matches content with space. -->
+          <pattern id="4" value="Spaced\sWords" flags="x" expected="true" />
+          <!-- Pattern with ignored space does not match content with space. -->
+          <pattern id="5" value="Spaced Words" flags="x" expected="false" />
+        </patterns>
+      </test>
+    </matches>
+  </functions>
+</tests>

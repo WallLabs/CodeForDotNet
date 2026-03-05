@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CodeTestsMocks.xsd"
+    targetNamespace="urn:Code:CodeTestsMocks.xsd"
+    elementFormDefault="qualified"
+    xmlns="urn:Code:CodeTestsMocks.xsd"
+    xmlns:test="urn:Code:CodeTestsMocks.xsd"
+    xmlns:code="urn:Code:Code.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Imports -->
+    <xs:import id="Code.xsd" namespace="urn:Code:Code.xsd" />
+
+    <!-- CsvTestData -->
+    <xs:element name="CsvTestData">
+        <xs:complexType>
+            <xs:choice minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1" />
+                <xs:element name="Value" type="xs:unsignedShort" minOccurs="0" maxOccurs="1" />
+                <xs:element name="Remarks" type="xs:string" minOccurs="0" maxOccurs="1" />
+                <xs:element name="NotRequiredValue" type="xs:unsignedByte" minOccurs="0" maxOccurs="1" />
+                <xs:element name="NullableValue" type="xs:unsignedShort" minOccurs="0" maxOccurs="1" />
+                <xs:element name="SpecialDateValue" type="xs:dateTime" minOccurs="0" maxOccurs="1" />
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- TestXmlCollection -->
+    <xs:element name="TestXmlCollection" type="test:TestXmlCollectionType" />
+    <xs:complexType name="TestXmlCollectionType">
+        <xs:sequence>
+            <xs:element name="TestItem" type="test:TestXmlDataSmallType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- TestXmlCollectionInherited -->
+    <xs:element name="TestXmlCollectionInherited" type="test:TestXmlCollectionInheritedType" />
+    <xs:complexType name="TestXmlCollectionInheritedType">
+        <xs:sequence>
+            <xs:element name="TestItem" type="test:TestXmlDataInheritedType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- TestXmlCollectionWithNamespaces -->
+    <xs:element name="TestXmlCollectionWithNamespaces" type="test:TestXmlCollectionWithNamespacesType" />
+    <xs:complexType name="TestXmlCollectionWithNamespacesType">
+        <xs:sequence>
+            <xs:element name="TestItem" type="test:TestXmlDataNamespaceType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- TestXmlData -->
+    <xs:element name="TestXmlData" type="test:TestXmlDataType" />
+    <xs:complexType name="TestXmlDataType">
+        <xs:choice maxOccurs="unbounded">
+            <!-- DateTimeOffset -->
+            <xs:element name="XmlDateTime" type="xs:dateTime" minOccurs="1" maxOccurs="1" />
+            <!-- Collections -->
+            <xs:element name="StandardCollection" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Small" type="test:TestXmlDataSmallType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="AfterTheXmlCollection" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="ATypedXmlCollection" type="test:TestXmlCollectionType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="AfterTheTypedXmlCollection" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="AnInheritedXmlCollection" type="test:TestXmlCollectionInheritedType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="AfterTheInheritedXmlCollection" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <!-- Dictionaries -->
+            <xs:element name="ATypedXmlSerializableDictionary" type="test:TestXmlDictionaryType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="AfterTheTypedXmlSerializableDictionary" type="xs:string" minOccurs="1" maxOccurs="1" />
+            <xs:element name="AnInheritedXmlSerializableDictionary" type="test:TestXmlDictionaryInheritedType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="AfterTheInheritedXmlSerializableDictionary" type="xs:string" minOccurs="1" maxOccurs="1" />
+        </xs:choice>
+    </xs:complexType>
+
+    <!-- TestXmlDataAbstractBase -->
+    <xs:complexType name="TestXmlDataAbstractBaseType" abstract="true">
+        <xs:sequence>
+            <xs:element name="BaseProperty" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- TestXmlDataAbstractInherited -->
+    <xs:element name="TestXmlDataAbstractInherited" type="test:TestXmlDataAbstractInheritedType" />
+    <xs:complexType name="TestXmlDataAbstractInheritedType" abstract="false">
+        <xs:complexContent>
+            <xs:extension base="test:TestXmlDataAbstractBaseType">
+                <xs:sequence>
+                    <xs:element name="Description" type="xs:string" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- TestXmlDataInherited -->
+    <xs:element name="TestXmlDataInherited" type="test:TestXmlDataInheritedType" />
+    <xs:complexType name="TestXmlDataInheritedType">
+        <xs:complexContent>
+            <xs:extension base="test:TestXmlDataSmallType">
+                <xs:sequence>
+                    <xs:element name="Description" type="xs:string" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- TestXmlDataSmall -->
+    <xs:element name="TestXmlDataSmall" type="test:TestXmlDataSmallType" />
+    <xs:complexType name="TestXmlDataSmallType">
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="Id" type="code:GuidType" use="required" />
+    </xs:complexType>
+
+    <!-- TestXmlDataNamespace -->
+    <xs:element name="TestXmlDataNamespace" type="test:TestXmlDataNamespaceType" />
+    <xs:complexType name="TestXmlDataNamespaceType">
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="Id" type="code:GuidType" use="required" />
+    </xs:complexType>
+
+    <!-- TestXmlDataNamespaceInherited -->
+    <xs:complexType name="TestXmlDataNamespaceInheritedType">
+        <xs:complexContent>
+            <xs:extension base="test:TestXmlDataNamespaceType">
+                <xs:sequence>
+                    <xs:element name="Description" type="xs:string" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- TestXmlDictionary -->
+    <xs:element name="TestXmlDictionary" type="test:TestXmlDictionaryType" />
+    <xs:complexType name="TestXmlDictionaryType">
+        <xs:sequence>
+            <xs:element name="TestEntry" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="TestKey" type="code:GuidType" />
+                        <xs:element name="TestValue" type="test:TestXmlDataSmallType" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- TestXmlDictionaryInherited -->
+    <xs:element name="TestXmlDictionaryInherited" type="test:TestXmlDictionaryInheritedType" />
+    <xs:complexType name="TestXmlDictionaryInheritedType">
+        <xs:sequence>
+            <xs:element name="TestEntry" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="TestKey" type="code:GuidType" />
+                        <xs:element name="TestValue" type="test:TestXmlDataInheritedType" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

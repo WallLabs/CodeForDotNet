@@ -8,8 +8,6 @@ namespace CodeForDotNet.Drawing.Printing;
 [Serializable]
 public class PageSettingsData
 {
-    #region Public Constructors
-
     /// <summary>
     /// Initializes an empty instance.
     /// </summary>
@@ -18,10 +16,6 @@ public class PageSettingsData
         Color = true;
         Margins = new PageMarginsData();
     }
-
-    #endregion Public Constructors
-
-    #region Public Properties
 
     /// <summary>
     /// Page color, defaults to true.
@@ -61,7 +55,5 @@ public class PageSettingsData
     /// <summary>
     /// Printer name.
     /// </summary>
-    public string? PrinterName { get; set; }
-
-    #endregion Public Properties
+    public required string PrinterName { get; set; }
 }

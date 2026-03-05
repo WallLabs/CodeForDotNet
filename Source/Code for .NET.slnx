@@ -34,6 +34,16 @@
     <Folder Name="/Documentation/">
         <File Path="Documentation/Release Notes.md" />
     </Folder>
+    <Folder Name="/Framework/">
+        <Project Path="Framework/CodeForDotNet.Data.Sql/CodeForDotNet.Data.Sql.csproj" />
+        <Project Path="Framework/CodeForDotNet.GenericHost/CodeForDotNet.GenericHost.csproj" Id="46b62e29-a88e-4d51-8bf7-32a4b3165b51" />
+        <Project Path="Framework/CodeForDotNet.GenericModel/CodeForDotNet.GenericModel.csproj" />
+        <Project Path="Framework/CodeForDotNet.Testing/CodeForDotNet.Testing.csproj" Id="6d071dbe-9dc7-47a9-a25c-3a4bc8431fdb" />
+        <Project Path="Framework/CodeForDotNet.UI/CodeForDotNet.UI.csproj" />
+        <Project Path="Framework/CodeForDotNet.Windows/CodeForDotNet.Windows.csproj" />
+        <Project Path="Framework/CodeForDotNet.WindowsUniversal/CodeForDotNet.WindowsUniversal.csproj" />
+        <Project Path="Framework/CodeForDotNet/CodeForDotNet.csproj" />
+    </Folder>
     <Folder Name="/Solution Items/">
         <File Path=".editorconfig" />
         <File Path=".gitignore" />
@@ -42,7 +52,6 @@
         <File Path="Code for .NET.slnLaunch" />
         <File Path="Directory.Build.props" />
         <File Path="Directory.Build.targets" />
-        <File Path="Local Test.runsettings" />
         <File Path="NuGet.config" />
         <File Path="Release.cmd" />
         <File Path="Setup.cmd" />
@@ -52,16 +61,16 @@
         <File Path="Version.ps1" />
         <File Path="Version.txt" />
     </Folder>
-    <Project Path="CodeForDotNet.Data.Sql/CodeForDotNet.Data.Sql.csproj" />
-    <Project Path="CodeForDotNet.Tests/CodeForDotNet.Tests.csproj" />
-    <Project Path="CodeForDotNet.UI/CodeForDotNet.UI.csproj" />
-    <Project Path="CodeForDotNet.Windows/CodeForDotNet.Windows.csproj" />
-    <Project Path="CodeForDotNet.WindowsUniversal.TestApp/CodeForDotNet.WindowsUniversal.TestApp.csproj">
-        <Platform Solution="*|x64" Project="x64" />
-        <Platform Solution="*|x86" Project="x86" />
-        <Platform Solution="*|ARM64" Project="ARM64" />
-        <Deploy />
-    </Project>
-    <Project Path="CodeForDotNet.WindowsUniversal/CodeForDotNet.WindowsUniversal.csproj" />
-    <Project Path="CodeForDotNet/CodeForDotNet.csproj" />
+    <Folder Name="/Tests/">
+        <File Path="Tests/Directory.Build.props" />
+        <File Path="Tests/Local.runsettings" />
+        <Project Path="Tests/CodeForDotNet.Tests.Mocks/CodeForDotNet.Tests.Mocks.csproj" Id="323acf0a-65ee-4f6e-83e2-f73234a4bbae" />
+        <Project Path="Tests/CodeForDotNet.Tests.WindowsUniversal.App/CodeForDotNet.Tests.WindowsUniversal.App.csproj">
+            <Platform Solution="*|ARM64" Project="ARM64" />
+            <Platform Solution="*|x64" Project="x64" />
+            <Platform Solution="*|x86" Project="x86" />
+            <Deploy />
+        </Project>
+        <Project Path="Tests/CodeForDotNet.Tests/CodeForDotNet.Tests.csproj" />
+    </Folder>
 </Solution>

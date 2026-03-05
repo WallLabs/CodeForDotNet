@@ -1,53 +1,73 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <Description>Unit tests.</Description>
-        <EnableMSTestRunner>true</EnableMSTestRunner>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
-        <SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
-    </PropertyGroup>
+  <PropertyGroup>
+    <Description>Unit tests.</Description>
+    <EnableMSTestRunner>true</EnableMSTestRunner>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Data\Xml\FormatXmlTestInput.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Xml\FormatXmlTestInputFragment.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Xml\FormatXmlTestOutputFragment.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Xml\FormatXmlTestOutputIndent.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Xml\FormatXmlTestOutputIndentOmitComments.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Xml\FormatXmlTestOutputIndentOmitCommentsTrim.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Xml\FormatXmlTestOutputIndentTrim.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Xml\FormatXmlTestOutputTrimUtf16.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Xml\TestValidation.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Xml\XPathFunctionsTestExecute.xslt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Xml\XPathFunctionsTestInput.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="MSTest" Version="4.0.2" />
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MSTest" Version="4.1.0" />
+  </ItemGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-        <DefineConstants>CODE_ANALYSIS;DEBUG;TRACE</DefineConstants>
-        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-        <DocumentationFile>bin\Debug\CodeForDotNet.Tests.xml</DocumentationFile>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-        <DefineConstants>CODE_ANALYSIS;DEBUG;TRACE</DefineConstants>
-        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-        <DocumentationFile>bin\Debug\CodeForDotNet.Tests.xml</DocumentationFile>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
-        <DefineConstants>CODE_ANALYSIS;DEBUG;TRACE</DefineConstants>
-        <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-        <DocumentationFile>bin\Debug\CodeForDotNet.Tests.xml</DocumentationFile>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-        <DefineConstants>CODE_ANALYSIS;TRACE</DefineConstants>
-        <DocumentationFile>bin\Release\CodeForDotNet.Tests.xml</DocumentationFile>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-        <DefineConstants>CODE_ANALYSIS;TRACE</DefineConstants>
-        <DocumentationFile>bin\Release\CodeForDotNet.Tests.xml</DocumentationFile>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
-        <DefineConstants>CODE_ANALYSIS;TRACE</DefineConstants>
-        <DocumentationFile>bin\Release\CodeForDotNet.Tests.xml</DocumentationFile>
-    </PropertyGroup>
-    <ItemGroup>
-        <None Include="..\Common\Code for .NET.snk">
-            <Link>Code for .NET.snk</Link>
-        </None>
-    </ItemGroup>
-    <ItemGroup>
-        <ProjectReference Include="..\CodeForDotNet.Data.Sql\CodeForDotNet.Data.Sql.csproj" />
-        <ProjectReference Include="..\CodeForDotNet.UI\CodeForDotNet.UI.csproj" />
-        <ProjectReference Include="..\CodeForDotNet.Windows\CodeForDotNet.Windows.csproj" />
-        <ProjectReference Include="..\CodeForDotNet\CodeForDotNet.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\CodeForDotNet\CodeForDotNet.csproj" />
+    <ProjectReference Include="..\..\Framework\CodeForDotNet.Data.Sql\CodeForDotNet.Data.Sql.csproj" />
+    <ProjectReference Include="..\..\Framework\CodeForDotNet.UI\CodeForDotNet.UI.csproj" />
+    <ProjectReference Include="..\..\Framework\CodeForDotNet.Testing\CodeForDotNet.Testing.csproj" />
+    <ProjectReference Include="..\..\Framework\CodeForDotNet.Windows\CodeForDotNet.Windows.csproj" />
+    <ProjectReference Include="..\CodeForDotNet.Tests.Mocks\CodeForDotNet.Tests.Mocks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
 
 </Project>

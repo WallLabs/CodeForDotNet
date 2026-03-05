@@ -37,17 +37,17 @@ if %errorlevel% neq 0 goto Error
 
 echo.
 echo Copying components...
-robocopy "%~dp0CodeForDotNet\bin\%ConfigurationName%\net10.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.*
+robocopy "%~dp0Framework\CodeForDotNet\bin\%ConfigurationName%\net10.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.*
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.Data.Sql\bin\%ConfigurationName%\net10.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Data.Sql.*
+robocopy "%~dp0Framework\CodeForDotNet.Data.Sql\bin\%ConfigurationName%\net10.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Data.Sql.*
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.UI\bin\%ConfigurationName%\net10.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.UI.*
+robocopy "%~dp0Framework\CodeForDotNet.UI\bin\%ConfigurationName%\net10.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.UI.*
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.Windows\bin\%ConfigurationName%\net10.0-windows10.0.26100.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Windows.*
+robocopy "%~dp0Framework\CodeForDotNet.Windows\bin\%ConfigurationName%\net10.0-windows10.0.26100.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.Windows.*
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.WindowsUniversal\bin\%ConfigurationName%\net10.0-windows10.0.26100.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.WindowsUniversal.*
+robocopy "%~dp0Framework\CodeForDotNet.WindowsUniversal\bin\%ConfigurationName%\net10.0-windows10.0.26100.0" "%~dp0Temp\Build\%ConfigurationName%\Components" CodeForDotNet.WindowsUniversal.*
 if %errorlevel% gtr 7 goto Error
-robocopy "%~dp0CodeForDotNet.WindowsUniversal\bin\%ConfigurationName%\net10.0-windows10.0.26100.0\CodeForDotNet.WindowsUniversal" "%~dp0Temp\Build\%ConfigurationName%\Components\CodeForDotNet.WindowsUniversal" /s
+robocopy "%~dp0Framework\CodeForDotNet.WindowsUniversal\bin\%ConfigurationName%\net10.0-windows10.0.26100.0\CodeForDotNet.WindowsUniversal" "%~dp0Temp\Build\%ConfigurationName%\Components\CodeForDotNet.WindowsUniversal" /s
 if %errorlevel% gtr 7 goto Error
 
 echo.

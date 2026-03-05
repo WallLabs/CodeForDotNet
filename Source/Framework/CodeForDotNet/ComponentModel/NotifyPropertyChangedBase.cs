@@ -13,10 +13,8 @@ namespace CodeForDotNet.ComponentModel;
 /// <remarks>
 /// Creates an empty instance with the specified synchronization context.
 /// </remarks>
-public abstract class NotifyPropertyChangedBase(SynchronizationContext synchronization) : EventCache, INotifyPropertyChanged
+public abstract class NotifyPropertyChangedBase(SynchronizationContext? synchronization) : EventCache, INotifyPropertyChanged
 {
-    #region Private Fields
-
     /// <summary>
     /// Pending events which will be fired then cleared when events are resumed.
     /// </summary>
@@ -25,11 +23,7 @@ public abstract class NotifyPropertyChangedBase(SynchronizationContext synchroni
     /// <summary>
     /// Synchronization context under which this object was created, e.g. parent UI dispatcher such as a DependencyObject context in XAML.
     /// </summary>
-    private readonly SynchronizationContext _synchronization = synchronization;
-
-    #endregion Private Fields
-
-    #region Protected Constructors
+    private readonly SynchronizationContext _synchronization = synchronization ?? new();
 
     /// <summary>
     /// Creates an empty instance using the current synchronization context.
@@ -37,10 +31,6 @@ public abstract class NotifyPropertyChangedBase(SynchronizationContext synchroni
     protected NotifyPropertyChangedBase() : this(SynchronizationContext.Current)
     {
     }
-
-    #endregion Protected Constructors
-
-    #region Protected Delegates
 
     /// <summary>
     /// Method signature used to call
@@ -50,18 +40,10 @@ public abstract class NotifyPropertyChangedBase(SynchronizationContext synchroni
     protected delegate void SetPropertyEventHandler<T>(INotifyPropertyChanged sender, ref T target,
       T oldValue, T newValue, string propertyName);
 
-    #endregion Protected Delegates
-
-    #region Public Events
-
     /// <summary>
     /// Fired when a property changes.
     /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    #endregion Public Events
-
-    #region Protected Methods
 
     /// <summary>
     /// Fires the <see cref="PropertyChanged"/> event or caches it when events are suspended.
@@ -169,6 +151,4 @@ public abstract class NotifyPropertyChangedBase(SynchronizationContext synchroni
         // Return changed
         return true;
     }
-
-    #endregion Protected Methods
 }

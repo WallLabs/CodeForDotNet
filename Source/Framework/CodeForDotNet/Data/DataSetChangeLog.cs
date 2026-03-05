@@ -16,8 +16,6 @@ namespace CodeForDotNet.Data;
 /// </remarks>
 public class DataSetChangeLog(DataSet data) : DisposableObject
 {
-    #region Private Fields
-
     /// <summary>
     /// The change log. Contains the details of all previous actions, available for Rollback, and any future action, available for roll-forward.
     /// </summary>
@@ -29,10 +27,6 @@ public class DataSetChangeLog(DataSet data) : DisposableObject
     /// </summary>
     private int _logIndex = -1;
 
-    #endregion Private Fields
-
-    #region Public Properties
-
     /// <summary>
     /// DataSet which this change log belongs to.
     /// </summary>
@@ -42,10 +36,6 @@ public class DataSetChangeLog(DataSet data) : DisposableObject
     /// Thread synchronization object.
     /// </summary>
     public object SyncRoot { get; } = new object();
-
-    #endregion Public Properties
-
-    #region Public Methods
 
     /// <summary>
     /// Commits the current changes since the last checkpoint to the ChangeLog, making it available for Rollback as a unit.
@@ -150,7 +140,7 @@ public class DataSetChangeLog(DataSet data) : DisposableObject
                                     // Re-apply INSERT...
 
                                     // Insert the changed row
-                                    _ = Data.Tables[changedTable.TableName].Rows.Add(changedRow.ItemArray);
+                                    _ = Data.Tables[changedTable.TableName]!.Rows.Add(changedRow.ItemArray);
                                     break;
                                 }
 
@@ -160,7 +150,7 @@ public class DataSetChangeLog(DataSet data) : DisposableObject
 
                                     // Find the original row
                                     var primaryKeyStatement = GetPrimaryKeyFilterExpression(changedRow);
-                                    var existingRows = Data.Tables[changedTable.TableName].Select(primaryKeyStatement);
+                                    var existingRows = Data.Tables[changedTable.TableName]!.Select(primaryKeyStatement);
                                     if (existingRows.Length == 0)
                                         throw new InvalidOperationException(Resources.DataSetChangeLogRedoUpdateError);
                                     var row = existingRows[0];
@@ -179,7 +169,7 @@ public class DataSetChangeLog(DataSet data) : DisposableObject
 
                                     // Find the original row
                                     var primaryKeyStatement = GetPrimaryKeyFilterExpression(changedRow);
-                                    var existingRows = Data.Tables[changedTable.TableName].Select(primaryKeyStatement);
+                                    var existingRows = Data.Tables[changedTable.TableName]!.Select(primaryKeyStatement);
                                     if (existingRows.Length == 0)
                                         throw new InvalidOperationException(Resources.DataSetChangeLogRedoDeleteError);
                                     var row = existingRows[0];
@@ -257,7 +247,7 @@ public class DataSetChangeLog(DataSet data) : DisposableObject
 
                                     // Find the original row
                                     var primaryKeyStatement = GetPrimaryKeyFilterExpression(changedRow);
-                                    var existingRows = Data.Tables[changedTable.TableName].Select(primaryKeyStatement);
+                                    var existingRows = Data.Tables[changedTable.TableName]!.Select(primaryKeyStatement);
                                     if (existingRows.Length == 0)
                                         throw new InvalidOperationException(Resources.DataSetChangeLogUndoInsertError);
                                     var row = existingRows[0];
@@ -273,7 +263,7 @@ public class DataSetChangeLog(DataSet data) : DisposableObject
 
                                     // Find the original row
                                     var primaryKeyStatement = GetPrimaryKeyFilterExpression(changedRow);
-                                    var existingRows = Data.Tables[changedTable.TableName].Select(primaryKeyStatement);
+                                    var existingRows = Data.Tables[changedTable.TableName]!.Select(primaryKeyStatement);
                                     if (existingRows.Length == 0)
                                         throw new InvalidOperationException(Resources.DataSetChangeLogUndoUpdateError);
                                     var row = existingRows[0];
@@ -289,7 +279,7 @@ public class DataSetChangeLog(DataSet data) : DisposableObject
                                     // Reverse DELETE...
 
                                     // Insert the original row
-                                    var table = Data.Tables[changedTable.TableName];
+                                    var table = Data.Tables[changedTable.TableName]!;
                                     var row = table.NewRow();
                                     for (var i = 0; i < changedTable.Columns.Count; i++)
                                         row[i] = changedRow[i, DataRowVersion.Original];
@@ -312,10 +302,6 @@ public class DataSetChangeLog(DataSet data) : DisposableObject
                 Data.EnforceConstraints = true;
         }
     }
-
-    #endregion Public Methods
-
-    #region Protected Methods
 
     /// <summary>
     /// Frees resources used by this object.
@@ -342,10 +328,6 @@ public class DataSetChangeLog(DataSet data) : DisposableObject
             base.Dispose(disposing);
         }
     }
-
-    #endregion Protected Methods
-
-    #region Private Methods
 
     /// <summary>
     /// Builds a DataRow filter expression statement that can be used to Select() the row uniquely within it's DataTable. Requires a primary key to be
@@ -380,7 +362,7 @@ public class DataSetChangeLog(DataSet data) : DisposableObject
 
             // Add value with any quotes escaped.
             var value = row[keyColumn.Ordinal];
-            var valueText = Convert.ToString(value, CultureInfo.InvariantCulture);
+            var valueText = Convert.ToString(value, CultureInfo.InvariantCulture)!;
             if ((keyColumn.DataType == typeof(string)) || (keyColumn.DataType == typeof(Guid)))
             {
                 valueText = $"'{valueText.Replace("'", "''", StringComparison.OrdinalIgnoreCase)}'";
@@ -391,58 +373,4 @@ public class DataSetChangeLog(DataSet data) : DisposableObject
         // Return result
         return result;
     }
-
-    #endregion Private Methods
-}
-
-/// <summary>
-/// Contains information about a change in the Change Log.
-/// </summary>
-/// <remarks>
-/// Creates a new instance of this structure containing the specified data.
-/// </remarks>
-public class DataSetChangeLogEntry(DateTime timeStamp, string name, DataSet changes) : DisposableObject
-{
-    #region Public Properties
-
-    /// <summary>
-    /// Snapshot of the changes, including DataRowVersion.Original data needed to Rollback, and DataRowVersion.Current needed to roll-forward.
-    /// </summary>
-    public DataSet Changes { get; private set; } = changes;
-
-    /// <summary>
-    /// Short name of the action.
-    /// </summary>
-    public string Name { get; private set; } = name;
-
-    /// <summary>
-    /// Time-stamp at which the action occurred.
-    /// </summary>
-    public DateTime TimeStamp { get; private set; } = timeStamp;
-
-    #endregion Public Properties
-
-    #region Protected Methods
-
-    /// <summary>
-    /// Frees resources used by this object.
-    /// </summary>
-    protected override void Dispose(bool disposing)
-    {
-        try
-        {
-            // Disposed managed resources during dispose
-            if (disposing)
-            {
-                Changes?.Dispose();
-            }
-        }
-        finally
-        {
-            // Dispose base class
-            base.Dispose(disposing);
-        }
-    }
-
-    #endregion Protected Methods
 }

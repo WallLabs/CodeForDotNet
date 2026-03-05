@@ -17,7 +17,7 @@ public class ActivityIdTraceFilter(Guid id) : TraceFilter
     /// <summary>
     /// Filters events.
     /// </summary>
-    public override bool ShouldTrace(TraceEventCache cache, string source, TraceEventType eventType, int id, string formatOrMessage, object[] args, object data1, object[] data)
+    public override bool ShouldTrace(TraceEventCache? cache, string source, TraceEventType eventType, int id, string? formatOrMessage, object?[]? args, object? data1, object?[]? data)
     {
         return Trace.CorrelationManager.ActivityId == ActivityId;
     }

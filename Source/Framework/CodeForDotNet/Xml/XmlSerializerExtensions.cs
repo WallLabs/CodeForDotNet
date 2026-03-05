@@ -1,10 +1,10 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using CodeForDotNet.Collections;
 
 namespace CodeForDotNet.Xml;
 
@@ -13,12 +13,10 @@ namespace CodeForDotNet.Xml;
 /// </summary>
 public static class XmlSerializerExtensions
 {
-    #region Public Methods
-
     /// <summary>
     /// De-serializes an object from a string using the <see cref="XmlSerializer"/>.
     /// </summary>
-    public static T DeserializeXml<T>(string xml)
+    public static T? DeserializeXml<T>(string xml)
     {
         // Call overloaded method
         return DeserializeXml<T>(xml, null);
@@ -27,7 +25,7 @@ public static class XmlSerializerExtensions
     /// <summary>
     /// De-serializes an object from a string using the <see cref="XmlSerializer"/>.
     /// </summary>
-    public static T DeserializeXml<T>(string xml, Type[]? extraTypes)
+    public static T? DeserializeXml<T>(string xml, Type[]? extraTypes)
     {
         // Create XML reader for string
         using var reader = new StringReader(xml);
@@ -40,7 +38,7 @@ public static class XmlSerializerExtensions
     /// <summary>
     /// De-serializes an object from an <see cref="XmlReader"/> using the <see cref="XmlSerializer"/>.
     /// </summary>
-    public static T DeserializeXml<T>(XmlReader xml)
+    public static T? DeserializeXml<T>(XmlReader xml)
     {
         // Call overloaded method
         return DeserializeXml<T>(xml, null);
@@ -49,16 +47,16 @@ public static class XmlSerializerExtensions
     /// <summary>
     /// De-serializes an object from an <see cref="XmlReader"/> using the <see cref="XmlSerializer"/>.
     /// </summary>
-    public static T DeserializeXml<T>(XmlReader xmlReader, Type[]? extraTypes)
+    public static T? DeserializeXml<T>(XmlReader xmlReader, Type[]? extraTypes)
     {
         // Call overloaded method
-        return (T)DeserializeXml(typeof(T), xmlReader, extraTypes);
+        return (T?)DeserializeXml(typeof(T), xmlReader, extraTypes);
     }
 
     /// <summary>
     /// De-serializes an object from a string using the <see cref="XmlSerializer"/>.
     /// </summary>
-    public static object DeserializeXml(Type type, string xml)
+    public static object? DeserializeXml(Type type, string xml)
     {
         // Create XML reader for string
         using var reader = new StringReader(xml);
@@ -71,7 +69,7 @@ public static class XmlSerializerExtensions
     /// <summary>
     /// De-serializes an object from an <see cref="XmlReader"/> using the <see cref="XmlSerializer"/>.
     /// </summary>
-    public static object DeserializeXml(Type type, XmlReader xmlReader)
+    public static object? DeserializeXml(Type type, XmlReader xmlReader)
     {
         // Call overloaded method
         return DeserializeXml(type, xmlReader, null);
@@ -80,7 +78,7 @@ public static class XmlSerializerExtensions
     /// <summary>
     /// De-serializes an object from an <see cref="XmlReader"/> using the <see cref="XmlSerializer"/>.
     /// </summary>
-    public static object DeserializeXml(Type type, XmlReader xmlReader, Type[]? extraTypes)
+    public static object? DeserializeXml(Type type, XmlReader xmlReader, Type[]? extraTypes)
     {
         // Validate
         ArgumentNullException.ThrowIfNull(xmlReader);
@@ -160,10 +158,7 @@ public static class XmlSerializerExtensions
     /// <param name="format">Set true to format the XML by indenting each parent-child element on new lines.</param>
     public static string SerializeXml(this object value, Type[]? extraTypes, bool format)
     {
-        // Use consistent line endings so that serialize/de-serialize round-trips In testing it was proven that the .NET framework uses Unix line endings (CR
-        // without LF) mostly and when replace is not specified certain circumstances (combination of IXmlSerialiable and other serializer attributes) would
-        // not round trip because in other places the CR and LF would be used by default. Hence we fix the Unix style line endings. Source solution with
-        // issues was Reaction Server v1.5. Possibly re-test with newer version or when more time to investigate.
+        // Use consistent line endings so that serialize/de-serialize round-trips.
         var settings = new XmlWriterSettings {
             Indent = format,
             NewLineHandling = format ? NewLineHandling.Replace : NewLineHandling.Entitize
@@ -211,6 +206,4 @@ public static class XmlSerializerExtensions
         // Serialize to writer
         serializer.Serialize(writer, value);
     }
-
-    #endregion Public Methods
 }

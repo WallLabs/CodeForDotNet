@@ -117,10 +117,10 @@ public class Schedule
     /// Compares this object with another by value.
     /// </summary>
     [SuppressMessage("Naming", "CA1725:Parameter names should match base declaration", Justification = "Readability.")]
-    public override bool Equals([MaybeNull] object other)
+    public override bool Equals(object? other)
     {
         // Compare nullability and type
-        if (other is not Schedule schedule)
+        if (other is not Schedule schedule || schedule is null)
             return false;
 
         // Compare values

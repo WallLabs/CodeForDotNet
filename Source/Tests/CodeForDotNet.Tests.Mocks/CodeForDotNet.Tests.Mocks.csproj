@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Mock code and data for testing.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="CodeTestsMocks.xsd" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="CodeTestsMocks.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\CodeForDotNet\CodeForDotNet.csproj" />
+  </ItemGroup>
+
+</Project>

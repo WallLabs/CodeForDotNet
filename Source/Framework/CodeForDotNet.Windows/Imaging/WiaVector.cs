@@ -13,18 +13,10 @@ namespace CodeForDotNet.Windows.Imaging;
 [SupportedOSPlatform("windows")]
 public class WiaVector : IList
 {
-    #region Private Fields
-
-    private static readonly object _syncRoot = new();
-
     /// <summary>
     /// Unmanaged <see cref="Wia.Vector"/>.
     /// </summary>
     private readonly Wia.Vector _wiaVector;
-
-    #endregion Private Fields
-
-    #region Internal Constructors
 
     /// <summary>
     /// Creates an instance to wrap the specified unmanaged object.
@@ -33,10 +25,6 @@ public class WiaVector : IList
     {
         _wiaVector = vector;
     }
-
-    #endregion Internal Constructors
-
-    #region Public Properties
 
     /// <summary>
     /// Number of items in the collection.
@@ -69,11 +57,7 @@ public class WiaVector : IList
     /// <summary>
     /// Thread synchronization object.
     /// </summary>
-    public object SyncRoot => _syncRoot;
-
-    #endregion Public Properties
-
-    #region Public Indexers
+    public object SyncRoot { get; } = new();
 
     /// <summary>
     /// Gets or sets an item at the specified index.
@@ -95,10 +79,6 @@ public class WiaVector : IList
             Insert(index, value);
         }
     }
-
-    #endregion Public Indexers
-
-    #region Public Methods
 
     /// <summary>
     /// Adds an item to the end of the vector data.
@@ -330,6 +310,4 @@ public class WiaVector : IList
     {
         _wiaVector.SetFromString(value, resizable, unicode);
     }
-
-    #endregion Public Methods
 }

@@ -67,7 +67,7 @@ public class PageMarginsData : ICloneable
     /// <summary>
     /// Creates an instance from a string.
     /// </summary>
-    public static PageMarginsData Parse(string value)
+    public static PageMarginsData? Parse(string value)
     {
         return XmlSerializerExtensions.DeserializeXml<PageMarginsData>(value);
     }
@@ -92,10 +92,10 @@ public class PageMarginsData : ICloneable
     /// Overrides the Equals method to compare by value,
     /// </summary>
     [SuppressMessage("Naming", "CA1725:Parameter names should match base declaration", Justification = "Readability.")]
-    public override bool Equals(object other)
+    public override bool Equals(object? other)
     {
         // Check type and nullability
-        if (other is not PageMarginsData margins)
+        if (other is not PageMarginsData margins || margins is null)
             return false;
 
         // Compare values

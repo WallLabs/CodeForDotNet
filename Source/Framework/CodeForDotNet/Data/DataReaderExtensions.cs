@@ -19,7 +19,7 @@ public static class DataReaderExtensions
     /// <param name="column">Column name to read.</param>
     /// <returns>Value of the correct type.</returns>
     /// <remarks>The type must match or have a cast operator, because no explicit conversion is performed.</remarks>
-    public static T Get<T>(this IDataRecord reader, string column)
+    public static T? Get<T>(this IDataRecord reader, string column)
     {
         // Validate.
         ArgumentNullException.ThrowIfNull(reader);
@@ -40,7 +40,7 @@ public static class DataReaderExtensions
     /// </param>
     /// <returns>Value of the correct type.</returns>
     /// <remarks>The type must match or have a cast operator, because no explicit conversion is performed.</remarks>
-    public static T Get<T>(this IDataRecord reader, int ordinal, CultureInfo? conversionLocale = null)
+    public static T? Get<T>(this IDataRecord reader, int ordinal, CultureInfo? conversionLocale = null)
     {
         // Validate.
         ArgumentNullException.ThrowIfNull(reader);
@@ -54,9 +54,9 @@ public static class DataReaderExtensions
 
         // Try to convert type when different
         var converter = TypeDescriptor.GetConverter(returnType);
-        return conversionLocale != null
-            ? (T)converter.ConvertFrom(null, conversionLocale, value)
-            : (T)converter.ConvertFrom(value);
+        return conversionLocale is not null
+            ? (T?)converter.ConvertFrom(null, conversionLocale, value)
+            : (T?)converter.ConvertFrom(value);
     }
 
     /// <summary>

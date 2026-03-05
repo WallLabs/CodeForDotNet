@@ -8,8 +8,6 @@ namespace CodeForDotNet.Xml;
 /// </summary>
 public static class XmlSerializerNamespacesExtensions
 {
-    #region Public Methods
-
     /// <summary>
     /// Merges namespaces.
     /// </summary>
@@ -23,6 +21,4 @@ public static class XmlSerializerNamespacesExtensions
         foreach (var qname in other.ToArray())
             xmlns.Add(qname.Name, qname.Namespace);
     }
-
-    #endregion Public Methods
 }

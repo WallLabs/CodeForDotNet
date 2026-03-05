@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- A1 start comment. -->
+<a1>
+  <!-- B start comment. -->
+  <b>
+    <c1>
+      C1 text.
+    </c1>
+    <c2 attribute="C2 attribute.">
+      C2 text.
+    </c2>
+    <!-- C end comment. -->
+
+  </b>
+  <!-- B end comment. -->
+</a1>
+
+<!--  A1 end comment. -->
+
+<!-- A2 start comment. -->
+<a2>
+  <!-- B start comment. -->
+  <b>
+    <c1>
+      C1 text.
+    </c1>
+    <c2 attribute="C2 attribute.">
+      C2 text.
+    </c2>
+    <!-- C end comment. -->
+
+  </b>
+  <!-- B end comment. -->
+</a2>
+
+<!--  A2 end comment. -->
+
+<!-- A3 start comment. -->
+<a3>
+  <!-- B start comment. -->
+  <b>
+    <c1>
+      C1 text.
+    </c1>
+    <c2 attribute="C2 attribute.">
+      C2 text.
+    </c2>
+    <!-- C end comment. -->
+
+  </b>
+  <!-- B end comment. -->
+</a3>
+
+<!--  A3 end comment. -->

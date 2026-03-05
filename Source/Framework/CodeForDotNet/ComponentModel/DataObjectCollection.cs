@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using CodeForDotNet.Collections;
 
 namespace CodeForDotNet.ComponentModel;
@@ -13,19 +14,11 @@ namespace CodeForDotNet.ComponentModel;
 public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDisposable
     where T : DataObject
 {
-    #region Private Fields
-
-    private static readonly object _syncRoot = new();
-
     /// <summary>
     /// Counts the number of times the <see cref="SuspendEvents"/> method was called to decide whether events are currently suspended, when greater than
     /// zero. The value is decremented on each call to <see cref="ResumeEvents"/>.
     /// </summary>
     private int _suspendEventsCount;
-
-    #endregion Private Fields
-
-    #region Public Constructors
 
     /// <summary>
     /// Creates an empty instance.
@@ -50,10 +43,6 @@ public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDi
     {
     }
 
-    #endregion Public Constructors
-
-    #region Private Destructors
-
     /// <summary>
     /// Frees unmanaged resources during finalization.
     /// </summary>
@@ -62,10 +51,6 @@ public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDi
         // Unmanaged dispose
         Dispose(false);
     }
-
-    #endregion Private Destructors
-
-    #region Public Events
 
     /// <summary>
     /// Fired when events are suspended the first time, i.e. is not fired when nested.
@@ -82,24 +67,17 @@ public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDi
     /// </summary>
     public event EventHandler<DataObjectChangeEventArgs>? ItemDataChanged;
 
-    #endregion Public Events
-
-    #region Public Properties
-
     /// <summary>
     /// Flags that events are current enabled, and will be fired immediately. This can be used by inheriting classes to determine whether to cache or fire
     /// events immediately, in conjunction with the ResumeEvents() override.
     /// </summary>
+
     public bool EventsAreEnabled => _suspendEventsCount <= 0;
 
     /// <summary>
-    /// Thread synchronization object.
+    /// Thread synchronization target.
     /// </summary>
-    public object SyncRoot => _syncRoot;
-
-    #endregion Public Properties
-
-    #region Public Methods
+    public Lock SyncRoot { get; private set; } = new();
 
     /// <summary>
     /// Compares two instances of this type for equality by value.
@@ -132,18 +110,19 @@ public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDi
     /// <summary>
     /// Compares this instance with another object by value.
     /// </summary>
-    public override bool Equals(object obj)
+    [SuppressMessage("Naming", "CA1725:Parameter names should match base declaration", Justification = "Readability.")]
+    public override bool Equals(object? other)
     {
         // Lock changes to this object
-        lock (_syncRoot)
+        lock (SyncRoot)
         {
             // Compare type and nullability
-            if (obj is not DataObjectCollection<T> other)
+            if (other is not DataObjectCollection<T> data)
                 return false;
 
             // Compare values (with lock against changes)
-            lock (other.SyncRoot)
-                return ArrayExtensions.AreEqual(this, other);
+            lock (data.SyncRoot)
+                return ArrayExtensions.AreEqual(this, data);
         }
     }
 
@@ -154,10 +133,10 @@ public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDi
     public override int GetHashCode()
     {
         // Lock changes
-        lock (_syncRoot)
+        lock (SyncRoot)
         {
             // Return hash
-            return ArrayExtensions.GetHashCode(this);
+            return ArrayExtensions.GetHashCodeOfItems(this);
         }
     }
 
@@ -168,7 +147,7 @@ public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDi
     public void ResumeEvents()
     {
         // Lock changes
-        lock (_syncRoot)
+        lock (SyncRoot)
         {
             // Decrement counter, do nothing when still suspended
             if (--_suspendEventsCount > 0)
@@ -190,7 +169,7 @@ public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDi
     public void SuspendEvents()
     {
         // Lock changes
-        lock (_syncRoot)
+        lock (SyncRoot)
         {
             // Increment counter, do nothing when already suspended
             if (_suspendEventsCount++ > 0)
@@ -204,10 +183,6 @@ public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDi
             EventsSuspended?.Invoke(this, EventArgs.Empty);
         }
     }
-
-    #endregion Public Methods
-
-    #region Protected Methods
 
     /// <summary>
     /// Proactively frees resources owned by this object.
@@ -254,6 +229,7 @@ public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDi
             case NotifyCollectionChangedAction.Remove:
             case NotifyCollectionChangedAction.Reset:
             case NotifyCollectionChangedAction.Replace:
+                ArgumentNullException.ThrowIfNull(change.OldItems);
                 foreach (T item in change.OldItems)
                     UnhookEvents(item);
                 break;
@@ -264,6 +240,7 @@ public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDi
         {
             case NotifyCollectionChangedAction.Add:
             case NotifyCollectionChangedAction.Replace:
+                ArgumentNullException.ThrowIfNull(change.NewItems);
                 foreach (T item in change.NewItems)
                     HookEvents(item);
                 break;
@@ -274,7 +251,7 @@ public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDi
     /// Bubbles the <see cref="DataObject.DataChanged"/> event of an item in this collection.
     /// </summary>
     [SuppressMessage("Naming", "CA1725:Parameter names should match base declaration", Justification = "Readability.")]
-    protected virtual void OnItemDataChanged(object sender, DataObjectChangeEventArgs change)
+    protected virtual void OnItemDataChanged(object? sender, DataObjectChangeEventArgs change)
     {
         // Fire event
         ItemDataChanged?.Invoke(sender, change);
@@ -291,6 +268,4 @@ public class DataObjectCollection<T> : ObservableCollection<T>, IEventCache, IDi
         // Un-hook event.
         item.DataChanged -= OnItemDataChanged;
     }
-
-    #endregion Protected Methods
 }

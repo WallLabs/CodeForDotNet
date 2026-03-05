@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace CodeForDotNet.Collections;
@@ -13,17 +15,12 @@ namespace CodeForDotNet.Collections;
 [Serializable]
 public class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>,
      INotifyDictionaryChanged<TKey, TValue>, INotifyPropertyChanged, ISerializable
+    where TKey : notnull
 {
-    #region Private Fields
-
     /// <summary>
     /// Underlying dictionary which this class makes observable.
     /// </summary>
     private readonly Dictionary<TKey, TValue> _dictionary;
-
-    #endregion Private Fields
-
-    #region Public Constructors
 
     /// <summary>
     /// Creates an instance.
@@ -33,21 +30,13 @@ public class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>,
         _dictionary = [];
     }
 
-    #endregion Public Constructors
-
-    #region Protected Constructors
-
     /// <summary>
     /// Serialization constructor.
     /// </summary>
     protected ObservableDictionary(SerializationInfo info, StreamingContext context)
     {
-        _dictionary = (Dictionary<TKey, TValue>)info.GetValue(nameof(_dictionary), typeof(Dictionary<TKey, TValue>));
+        _dictionary = (Dictionary<TKey, TValue>)info.GetValue(nameof(_dictionary), typeof(Dictionary<TKey, TValue>))!;
     }
-
-    #endregion Protected Constructors
-
-    #region Public Events
 
     /// <summary>
     /// Fired when a change occurs with arguments containing details about the change.
@@ -58,10 +47,6 @@ public class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>,
     /// Fired when a change occurs.
     /// </summary>
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    #endregion Public Events
-
-    #region Public Properties
 
     /// <summary>
     /// Number of entries.
@@ -82,10 +67,6 @@ public class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>,
     /// Entry values.
     /// </summary>
     public ICollection<TValue> Values => _dictionary.Values;
-
-    #endregion Public Properties
-
-    #region Public Indexers
 
     /// <summary>
     /// Looks-up an entry by key.
@@ -111,10 +92,6 @@ public class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>,
             OnDictionaryChanged(NotifyCollectionChangedAction.Replace, key, value);
         }
     }
-
-    #endregion Public Indexers
-
-    #region Public Methods
 
     /// <summary>
     /// Adds a new entry using the specified key and value.
@@ -243,14 +220,10 @@ public class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>,
     /// <summary>
     /// Gets an entry's value by key if it exists.
     /// </summary>
-    public bool TryGetValue(TKey key, out TValue value)
+    public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
     {
         return _dictionary.TryGetValue(key, out value);
     }
-
-    #endregion Public Methods
-
-    #region Protected Methods
 
     /// <summary>
     /// Fires the <see cref="DictionaryChanged"/> event.
@@ -268,6 +241,4 @@ public class ObservableDictionary<TKey, TValue> : IDictionary<TKey, TValue>,
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
-
-    #endregion Protected Methods
 }

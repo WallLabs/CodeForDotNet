@@ -141,19 +141,20 @@ public class DisposableCollection<T> : Collection<T>, IDisposableObject where T 
     /// </param>
     protected virtual void Dispose(bool disposing)
     {
-        // Set second flag to indicate Disposed state
+        // Flag disposed.
         IsDisposed = true;
         try
         {
-            // Dispose or release references according to dispose type.
+            // Free managed resources during dispose.
             if (disposing)
                 ClearItems();
-            else
-                base.ClearItems();
         }
         finally
         {
-            // Fire Disposed event
+            // Dispose base class.
+            base.ClearItems();
+
+            // Fire event.
             Disposed?.Invoke(this, EventArgs.Empty);
         }
     }

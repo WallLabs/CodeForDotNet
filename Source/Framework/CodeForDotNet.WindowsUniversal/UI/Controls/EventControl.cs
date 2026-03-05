@@ -1,8 +1,7 @@
 using System;
+using System.Threading;
 using CodeForDotNet.ComponentModel;
 using Windows.UI.Xaml.Controls;
-
-#nullable enable
 
 namespace CodeForDotNet.WindowsUniversal.UI.Controls;
 
@@ -11,16 +10,10 @@ namespace CodeForDotNet.WindowsUniversal.UI.Controls;
 /// </summary>
 public abstract class EventControl : Control, IEventCache
 {
-    #region Private Fields
-
     /// <summary>
     /// Reference counter for Suspend/Resume events.
     /// </summary>
     private int _suspendEventsCount;
-
-    #endregion Private Fields
-
-    #region Protected Constructors
 
     /// <summary>
     /// Creates a stand-alone instance.
@@ -28,13 +21,9 @@ public abstract class EventControl : Control, IEventCache
     protected EventControl()
     {
         // Initialize members
-        SyncRoot = new object();
+        SyncRoot = new();
         EventsAreEnabled = true;
     }
-
-    #endregion Protected Constructors
-
-    #region Public Events
 
     /// <summary>
     /// Fired when events are suspended the first time, i.e. is not fired when nested.
@@ -45,10 +34,6 @@ public abstract class EventControl : Control, IEventCache
     /// Fired when events are suspended the first time, i.e. is not fired when nested.
     /// </summary>
     public event EventHandler? EventsSuspended;
-
-    #endregion Public Events
-
-    #region Public Properties
 
     /// <summary>
     /// Flags that events are current enabled, and will be fired immediately. This can be used by inheriting classes to determine whether to cache or fire
@@ -63,11 +48,7 @@ public abstract class EventControl : Control, IEventCache
     /// Lock this object when you read or write properties of this object which must be complete as a batch before any other threads enter the section, e.g.
     /// during data load or save operations.
     /// </remarks>
-    public object SyncRoot { get; private set; }
-
-    #endregion Public Properties
-
-    #region Public Methods
+    public Lock SyncRoot { get; private set; }
 
     /// <summary>
     /// Resumes all events after SuspendEvents. Automatically fires any pending events.
@@ -111,10 +92,6 @@ public abstract class EventControl : Control, IEventCache
         }
     }
 
-    #endregion Public Methods
-
-    #region Protected Methods
-
     /// <summary>
     /// Called when events are resumed the last time, i.e. is not fired when nested. Fires the <see cref="EventsResumed"/> event.
     /// </summary>
@@ -132,6 +109,4 @@ public abstract class EventControl : Control, IEventCache
         // Fire event
         EventsSuspended?.Invoke(this, EventArgs.Empty);
     }
-
-    #endregion Protected Methods
 }

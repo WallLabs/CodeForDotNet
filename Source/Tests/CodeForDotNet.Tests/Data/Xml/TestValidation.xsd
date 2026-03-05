@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="A"
+    elementFormDefault="unqualified"
+    xmlns="http://tempuri.org/A.xsd"
+    xmlns:mstns="http://tempuri.org/A.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="A">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="B" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
