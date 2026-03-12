@@ -5,7 +5,6 @@
         <Platform Name="x64" />
     </Configurations>
     <Folder Name="/Common/">
-        <File Path="Common/AssemblyInfoGlobal.cs" />
         <File Path="Common/Code for .NET.snk" />
     </Folder>
     <Folder Name="/Dependencies/">

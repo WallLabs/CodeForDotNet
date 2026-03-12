@@ -47,7 +47,6 @@ Set-VersionFile -File $versionFilePath -Version $newVersion;
 
 # Set version in Visual Studio project and source files...
 Set-VersionInXmlProject -File "$PSScriptRoot\Directory.Build.props" -Version $newVersion;
-Set-VersionInAssemblyInfo -File "$PSScriptRoot\Common\AssemblyInfoGlobal.cs" -Version $newVersion;
 Set-VersionInAppXManifest -File "$PSScriptRoot\Tests\CodeForDotNet.Tests.WindowsUniversal.App\Package.appxmanifest" -Version $newVersion;
 
 # Exit successful

@@ -9,8 +9,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-#nullable enable
-
 namespace CodeForDotNet.WindowsUniversal.UI.Models;
 
 /// <summary>

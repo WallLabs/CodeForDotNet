@@ -1,5 +1,9 @@
 # Code for .NET - Release Notes
 
+## Version 10.0.2603.12### (2026.03.12)
+* CLS Compliance attributes added to all assemblies except Windows/Windows Unviersal which commonly have non-compliant APIs.
+* Updated dependencies.
+
 ## Version 10.0.2603.5### (2026.03.05)
 * Quality improvement with extended unit tests, behavioural verification and documentation.
 * Merge additional components functionality including data annotations, XML and testing extensions including tests.

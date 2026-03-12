@@ -14,12 +14,12 @@
         <Product>Code for .NET</Product>
         <Authors>Wall Labs</Authors>
         <Company>Wall Labs</Company>
-        <Copyright>Copyright © Wall Labs. All Rights Reserved.</Copyright>
+        <Copyright>Copyright © $([System.DateTime]::Now.Year) Wall Labs. All Rights Reserved.</Copyright>
         <AssemblyCopyright>Copyright © Wall Labs.</AssemblyCopyright>
         <AssemblyTrademark>All Rights Reserved.</AssemblyTrademark>
-        <Version>10.0.2603.5003</Version>
-        <AssemblyVersion>10.0.2603.5003</AssemblyVersion>
-        <FileVersion>10.0.2603.5003</FileVersion>
+        <Version>10.0.2603.12002</Version>
+        <AssemblyVersion>10.0.2603.12002</AssemblyVersion>
+        <FileVersion>10.0.2603.12002</FileVersion>
         
         <!-- Language -->
         <TargetFramework>net10.0</TargetFramework>
@@ -56,15 +56,29 @@
     </PropertyGroup>
     
     <!-- Configuration Specific Properties -->
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
         <DebugType>full</DebugType>
         <DebugSymbols>true</DebugSymbols>
         <DefineConstants>DEBUG</DefineConstants>
         <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
         <DebugType>none</DebugType>
         <DebugSymbols>false</DebugSymbols>
     </PropertyGroup>
-    
+
+    <!-- AssemblyInfo -->
+    <ItemGroup Condition="'$(TargetPlatformIdentifier)' != 'UAP' And '$(TargetPlatformIdentifier)' != 'Windows'">
+        <AssemblyAttribute Include="System.CLSCompliant">
+            <_Parameter1>(System.Boolean)true</_Parameter1>
+            <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>
+        </AssemblyAttribute>
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'UAP' Or '$(TargetPlatformIdentifier)' == 'Windows'">
+        <AssemblyAttribute Include="System.CLSCompliant">
+            <_Parameter1>(System.Boolean)false</_Parameter1>
+            <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>
+        </AssemblyAttribute>
+    </ItemGroup>
+
 </Project>

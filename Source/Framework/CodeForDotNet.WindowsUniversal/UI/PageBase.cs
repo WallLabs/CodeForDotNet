@@ -3,8 +3,6 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-#nullable enable
-
 namespace CodeForDotNet.WindowsUniversal.UI;
 
 /// <summary>

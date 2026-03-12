@@ -12,8 +12,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 
-#nullable enable
-
 namespace CodeForDotNet.WindowsUniversal.UI.Controls;
 
 /// <summary>
