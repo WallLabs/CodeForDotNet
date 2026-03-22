@@ -4,9 +4,6 @@
         <Platform Name="x86" />
         <Platform Name="x64" />
     </Configurations>
-    <Folder Name="/Common/">
-        <File Path="Common/Code for .NET.snk" />
-    </Folder>
     <Folder Name="/Dependencies/">
         <File Path="Dependencies/.gitignore" />
         <File Path="Dependencies/Update.cmd" />

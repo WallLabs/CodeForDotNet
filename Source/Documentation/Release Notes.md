@@ -1,5 +1,9 @@
 # Code for .NET - Release Notes
 
+## Version 10.0.2603.??### (2026.03.??)
+* Remove strong naming and private key.
+* Configure NuGet packaging for all externally used components.
+
 ## Version 10.0.2603.12### (2026.03.12)
 * CLS Compliance attributes added to all assemblies except Windows/Windows Unviersal which commonly have non-compliant APIs.
 * Updated dependencies.

@@ -1,4 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Description>Root package with common functionality of the Code for .NET open source component suite.</Description>
+    <RepositoryUrl>https://github.com/walllabs/codefordotnet</RepositoryUrl>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="Code.xsd" />
     <None Remove="Xml\Xml.xsd" />
